@@ -12,20 +12,23 @@ namespace SuperScrollView
 
 		// Use this for initialization
 		void Start () {
-			AddItem();
+			StartCoroutine(AddItem());
 		}
 
-		public void AddItem() {
+		public IEnumerator AddItem() {
+			GetComponent<RectTransform>().anchoredPosition = new Vector2(GetComponent<RectTransform>().anchoredPosition.x, 0);
+
 			Balloon item = Instantiate(items[0], transform);
 			item.Init();
 			item.SetItemData(null, itemIndex);
 			itemIndex++;
+			yield return new WaitForSeconds(item.GetComponent<DoTweenHelper>().duration);
 		}
 
 		void Update() {
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
-				AddItem();
+				StartCoroutine(AddItem());
 			}
 		}
 	}
