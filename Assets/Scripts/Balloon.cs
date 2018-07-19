@@ -16,7 +16,12 @@ namespace SuperScrollView
 			transform.DOScale(1, 0.5f).SetEase(Ease.OutExpo);
 		}
 
-		public void SetItemData(ItemData itemData, int itemIndex)
+		public void SetBalloonData(string str)
+		{
+			mDialogueText.text = str;
+		}
+
+		public void SetBalloonData(ItemData itemData, int itemIndex)
 		{
 			mItemDataIndex = itemIndex;
 			mDialogueText.text = LoadText(itemIndex);

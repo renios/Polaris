@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Enums
 {
-	public enum CharactorName
+	public enum CharacterName
 	{
 		멜리크,
 		아케르,

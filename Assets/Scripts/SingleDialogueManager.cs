@@ -2,33 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Sirenix.OdinInspector.Demos;
 
 namespace SuperScrollView
 {
 	public class SingleDialogueManager : MonoBehaviour {
 
-		public List<Balloon> items;
-		int itemIndex = 0;
+		public List<Balloon> balloons;
+		int balloonIndex = 0;
+		List<string> dialogues = new List<string>();
 
 		// Use this for initialization
 		void Start () {
-			StartCoroutine(AddItem());
+			if (FindObjectOfType<DialogueSelector>() != null)
+				dialogues = FindObjectOfType<DialogueSelector>().GetTestDialogues();
+
+			StartCoroutine(AddBalloon());
 		}
 
-		public IEnumerator AddItem() {
+		public IEnumerator AddBalloon() {
 			GetComponent<RectTransform>().anchoredPosition = new Vector2(GetComponent<RectTransform>().anchoredPosition.x, 0);
 
-			Balloon item = Instantiate(items[0], transform);
-			item.Init();
-			item.SetItemData(null, itemIndex);
-			itemIndex++;
-			yield return new WaitForSeconds(item.GetComponent<DoTweenHelper>().duration);
+			if (balloonIndex >= dialogues.Count) yield break;
+
+			Balloon newBalloon = Instantiate(balloons[0], transform);
+			newBalloon.Init();
+			// TODO: balloonData를 제대로 끼워넣어야 함
+			newBalloon.SetBalloonData(dialogues[balloonIndex]);
+			// newBalloon.SetBalloonData(null, balloonIndex);
+			balloonIndex++;
+			yield return new WaitForSeconds(newBalloon.GetComponent<DoTweenHelper>().duration);
 		}
 
 		void Update() {
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
-				StartCoroutine(AddItem());
+				StartCoroutine(AddBalloon());
 			}
 		}
 	}
