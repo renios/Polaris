@@ -429,7 +429,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -0.00003172194}
+  m_AnchoredPosition: {x: 0, y: -0.000018462231}
   m_SizeDelta: {x: 556, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &395387779
@@ -465,6 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3cdeb5b32454c518e08d6478d27bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: {fileID: 1233980677}
   balloons:
   - {fileID: 114465629395678578, guid: 42bdcd372c5934494aa6a9718f11346f, type: 2}
 --- !u!114 &395387781
@@ -559,7 +560,7 @@ GameObject:
   - component: {fileID: 578788953}
   - component: {fileID: 578788952}
   m_Layer: 5
-  m_Name: Title
+  m_Name: CharactorNamePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -706,7 +707,7 @@ GameObject:
   - component: {fileID: 1233980678}
   - component: {fileID: 1233980677}
   m_Layer: 5
-  m_Name: Text
+  m_Name: CharacterNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

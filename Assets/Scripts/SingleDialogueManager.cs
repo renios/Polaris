@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector.Demos;
+using UnityEngine.UI;
 
 namespace SuperScrollView
 {
 	public class SingleDialogueManager : MonoBehaviour {
 
+		public Text characterName;
 		public List<Balloon> balloons;
 		int balloonIndex = 0;
 		List<string> dialogues = new List<string>();
@@ -15,7 +17,11 @@ namespace SuperScrollView
 		// Use this for initialization
 		void Start () {
 			if (FindObjectOfType<DialogueSelector>() != null)
-				dialogues = FindObjectOfType<DialogueSelector>().GetTestDialogues();
+			{
+				DialogueSelector dialogueSelector = FindObjectOfType<DialogueSelector>();
+				characterName.text = dialogueSelector.GetCharacterName();
+				dialogues = dialogueSelector.GetTestDialogues();
+			}
 
 			StartCoroutine(AddBalloon());
 		}

@@ -39,7 +39,8 @@ public class DialogueSelector : MonoBehaviour
 			"테스트하려는 1:1 대화를 선택하세요");
 	}
 #endif
-	
+
+	[HideLabel]
 	[HorizontalGroup("Split")]
 	public CharacterName characterName;
 
@@ -47,32 +48,51 @@ public class DialogueSelector : MonoBehaviour
 	[VerticalGroup("Split/Right")]
 	public int level;
 
-	public List<string> GetTestDialogues()
+	Data selectedData;
+
+	void Awake()
 	{
 		TextAsset jsonText = Resources.Load<TextAsset>("Dialogue");
 		DataList characterData = JsonUtility.FromJson<DataList>(jsonText.text);
-		
-		Data selectedData = characterData.dataList.Find(x => x.name == characterName.ToString());
-		List<string> selectedDialogue = GetDialogueByLevel(selectedData);
-		
-		return selectedDialogue;
+		selectedData = characterData.dataList.Find(x => x.name == characterName.ToString());
+	}
+
+	public List<string> GetTestDialogues()
+	{
+		return GetDialogueByLevel(selectedData);
+	}
+
+	public string GetCharacterName()
+	{
+		return selectedData.name;
 	}
 
 	public List<string> GetDialogueByLevel(Data data)
 	{
+		List<string> dialogue;
 		switch (level)
 		{
 			case 0:
-				return data.dialogues.join;
+				dialogue = data.dialogues.join;
+				break;
 			case 1:
-				return data.dialogues.first;
+				dialogue = data.dialogues.first;
+				break;
 			case 2:
-				return data.dialogues.second;
+				dialogue = data.dialogues.second;
+				break;
 			case 3:
-				return data.dialogues.third;
+				dialogue = data.dialogues.third;
+				break;
 			default:
-				return data.dialogues.join;
+				dialogue = new List<string>{ "*해당하는 대화가 없어요" };
+				break;
 		}
+
+		if (dialogue.Count < 1)
+			dialogue = new List<string>{ "*해당하는 대화가 없어요" };
+
+		return dialogue;
 	}
 }
 }
