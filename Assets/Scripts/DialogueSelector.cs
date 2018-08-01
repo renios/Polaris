@@ -25,6 +25,8 @@ public class Dialogues
 	public List<string> first;
 	public List<string> second;
 	public List<string> third;
+	public List<string> fourth;
+	public List<string> fifth;
 	public List<string> final;
 }
 
@@ -52,7 +54,7 @@ public class DialogueSelector : MonoBehaviour
 
 	void Awake()
 	{
-		TextAsset jsonText = Resources.Load<TextAsset>("Dialogue");
+		TextAsset jsonText = Resources.Load<TextAsset>("SingleDialogue");
 		DataList characterData = JsonUtility.FromJson<DataList>(jsonText.text);
 		selectedData = characterData.dataList.Find(x => x.name == characterName.ToString());
 	}
@@ -83,6 +85,15 @@ public class DialogueSelector : MonoBehaviour
 				break;
 			case 3:
 				dialogue = data.dialogues.third;
+				break;
+			case 4:
+				dialogue = data.dialogues.fourth;
+				break;
+			case 5:
+				dialogue = data.dialogues.fifth;
+				break;
+			case 6:
+				dialogue = data.dialogues.final;
 				break;
 			default:
 				dialogue = new List<string>{ "*해당하는 대화가 없어요" };
