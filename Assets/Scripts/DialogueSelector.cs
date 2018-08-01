@@ -38,7 +38,10 @@ public class DialogueSelector : MonoBehaviour
 	public void DrawInfo()
 	{
 		Sirenix.Utilities.Editor.SirenixEditorGUI.InfoMessageBox(
-			"테스트하려는 1:1 대화를 선택하세요");
+			"테스트하려는 1:1 대화를 선택하세요" + '\n' +
+			"0: 첫 만남 대사" + '\n' +
+			"1~5: 호감도 레벨 1~5단계 달성시 잠금해제" + '\n' +
+			"6: 최대 호감도 달성시 개별 엔딩");
 	}
 #endif
 
