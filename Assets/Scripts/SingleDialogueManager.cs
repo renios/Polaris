@@ -11,9 +11,8 @@ public class SingleDialogueManager : MonoBehaviour {
 	public List<Balloon> balloons;
 	int balloonIndex = 0;
 	List<string> dialogues = new List<string>();
+	public bool Selecting = false;
 	
-	public string Answer = null; 
-
 	// Use this for initialization
 	void Start () {
 		if (FindObjectOfType<DialogueSelector>() != null)
@@ -26,10 +25,15 @@ public class SingleDialogueManager : MonoBehaviour {
 		StartCoroutine(AddBalloon());
 	}
 
-	public IEnumerator AddBalloon(string answer = null) {
+	public void CallAddBalloon(string answer = null) {
+		StartCoroutine(AddBalloon(answer));
+	}
+
+	IEnumerator AddBalloon(string answer = null) {
 		GetComponent<RectTransform>().anchoredPosition = new Vector2(GetComponent<RectTransform>().anchoredPosition.x, 0);
 
 		if (balloonIndex >= dialogues.Count) yield break;
+		if (Selecting) yield break;
 
 		Balloon newBalloon;
 		// 일반 대화
@@ -51,6 +55,7 @@ public class SingleDialogueManager : MonoBehaviour {
 			newBalloon = Instantiate(balloons[2], transform);
 			newBalloon.Init();
 			newBalloon.SetBalloonData(dialogues[balloonIndex]);
+			Selecting = true;
 		}
 		yield return new WaitForSeconds(newBalloon.GetComponent<DoTweenHelper>().duration);
 	}
