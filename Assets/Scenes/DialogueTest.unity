@@ -431,7 +431,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.0000047978397}
+  m_AnchoredPosition: {x: 0, y: -0.00000398789}
   m_SizeDelta: {x: 556, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &395387779
@@ -473,6 +473,8 @@ MonoBehaviour:
   - {fileID: 114320605199793794, guid: f108166de958b4e2a8dc36d3cc84b58e, type: 2}
   - {fileID: 114497472231054706, guid: 9ef96521966e64d129547e8a70c48643, type: 2}
   Selecting: 0
+  dialogueIndex: 0
+  dialogueSubIndex: 0
 --- !u!114 &395387781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -805,16 +807,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 224317241008652600, guid: 9ef96521966e64d129547e8a70c48643,
         type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224317241008652600, guid: 9ef96521966e64d129547e8a70c48643,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224317241008652600, guid: 9ef96521966e64d129547e8a70c48643,
-        type: 2}
       propertyPath: m_AnchoredPosition.x
       value: 490
       objectReference: {fileID: 0}
@@ -822,6 +814,16 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.x
       value: 440
+      objectReference: {fileID: 0}
+    - target: {fileID: 224317241008652600, guid: 9ef96521966e64d129547e8a70c48643,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224317241008652600, guid: 9ef96521966e64d129547e8a70c48643,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224317241008652600, guid: 9ef96521966e64d129547e8a70c48643,
         type: 2}
@@ -837,8 +839,7 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114918086342774608, guid: 9ef96521966e64d129547e8a70c48643, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ef96521966e64d129547e8a70c48643, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1233980675
@@ -1391,7 +1392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd3b667e283149faa0b027f6a9b9737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: 1
+  characterName: 2
   level: 2
 --- !u!4 &1560730366
 Transform:

@@ -12,8 +12,8 @@ public class SingleDialogueManager : MonoBehaviour {
 	int balloonIndex = 0;
 	List<DialoguePiece> dialogues = new List<DialoguePiece>();
 	public bool Selecting = false;
-	int dialogueIndex = 0;
-	int dialogueSubIndex = 0;
+	public int dialogueIndex = 0;
+	public int dialogueSubIndex = 0;
 	List<string> texts = new List<string>();
 	
 	// Use this for initialization
@@ -47,6 +47,8 @@ public class SingleDialogueManager : MonoBehaviour {
 			newBalloon.Init();
 			newBalloon.SetBalloonData(texts[balloonIndex]);
 			balloonIndex++;
+			if (balloonIndex == texts.Count)
+				LoadNextTexts();
 		}
 		// 유저의 대답을 출력
 		else if (answer != null) {
@@ -54,6 +56,7 @@ public class SingleDialogueManager : MonoBehaviour {
 			newBalloon.Init();
 			newBalloon.SetBalloonData(answer);
 			balloonIndex++; // 선택지가 뜰 때는 카운트가 오르지 않고, 선택을 했을때 카운트가 오른다
+			LoadNextTexts(); // 선택을 할 경우 무조건 다음 대화 묶음으로 넘어간다
 		}
 		// 유저가 대답 선택
 		else {
@@ -63,6 +66,24 @@ public class SingleDialogueManager : MonoBehaviour {
 			Selecting = true;
 		}
 		yield return new WaitForSeconds(newBalloon.GetComponent<DoTweenHelper>().duration);
+	}
+
+	void LoadNextTexts() {
+		dialogueIndex++;
+
+		var newIndex = dialogueIndex.ToString();
+		if (dialogueSubIndex != 0)
+			newIndex = newIndex + "-" + dialogueSubIndex.ToString();
+
+		var newTexts = dialogues.Find(x => x.index == newIndex);
+		if (newTexts != null) {
+			texts = dialogues.Find(x => x.index == newIndex).text;
+			balloonIndex = 0; 
+		}
+		else
+			Debug.LogWarning("next dialogue is null");
+
+		dialogueSubIndex = 0;
 	}
 
 	void Update() {

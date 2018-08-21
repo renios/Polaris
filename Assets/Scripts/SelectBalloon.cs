@@ -33,6 +33,7 @@ public class SelectBalloon : Balloon
 		
 		var index = Int32.Parse(button.name);
 		var answerText = button.GetComponentInChildren<Text>().text;
+		singleDialogueManager.dialogueSubIndex = index;
 		singleDialogueManager.CallAddBalloon(answerText);
 		this.gameObject.SetActive(false);
 	}
