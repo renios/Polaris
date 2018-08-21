@@ -10,8 +10,11 @@ public class SingleDialogueManager : MonoBehaviour {
 	public Text characterName;
 	public List<Balloon> balloons;
 	int balloonIndex = 0;
-	List<string> dialogues = new List<string>();
+	List<DialoguePiece> dialogues = new List<DialoguePiece>();
 	public bool Selecting = false;
+	int dialogueIndex = 0;
+	int dialogueSubIndex = 0;
+	List<string> texts = new List<string>();
 	
 	// Use this for initialization
 	void Start () {
@@ -21,6 +24,8 @@ public class SingleDialogueManager : MonoBehaviour {
 			characterName.text = dialogueSelector.GetCharacterName();
 			dialogues = dialogueSelector.GetTestDialogues();
 		}
+
+		texts = dialogues.Find(x => x.index == "0").text;
 
 		StartCoroutine(AddBalloon());
 	}
@@ -32,15 +37,15 @@ public class SingleDialogueManager : MonoBehaviour {
 	IEnumerator AddBalloon(string answer = null) {
 		GetComponent<RectTransform>().anchoredPosition = new Vector2(GetComponent<RectTransform>().anchoredPosition.x, 0);
 
-		if (balloonIndex >= dialogues.Count) yield break;
+		if (balloonIndex >= texts.Count) yield break;
 		if (Selecting) yield break;
 
 		Balloon newBalloon;
 		// 일반 대화
-		if (dialogues[balloonIndex][0] != '#') {
+		if (texts[balloonIndex][0] != '#') {
 			newBalloon = Instantiate(balloons[0], transform);
 			newBalloon.Init();
-			newBalloon.SetBalloonData(dialogues[balloonIndex]);
+			newBalloon.SetBalloonData(texts[balloonIndex]);
 			balloonIndex++;
 		}
 		// 유저의 대답을 출력
@@ -54,7 +59,7 @@ public class SingleDialogueManager : MonoBehaviour {
 		else {
 			newBalloon = Instantiate(balloons[2], transform);
 			newBalloon.Init();
-			newBalloon.SetBalloonData(dialogues[balloonIndex]);
+			newBalloon.SetBalloonData(texts[balloonIndex]);
 			Selecting = true;
 		}
 		yield return new WaitForSeconds(newBalloon.GetComponent<DoTweenHelper>().duration);

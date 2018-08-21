@@ -21,13 +21,25 @@ public class Data
 [Serializable]
 public class Dialogues
 {
-	public List<string> join;
-	public List<string> first;
-	public List<string> second;
-	public List<string> third;
-	public List<string> fourth;
-	public List<string> fifth;
-	public List<string> final;
+	public List<DialoguePiece> join;
+	public List<DialoguePiece> first;
+	public List<DialoguePiece> second;
+	public List<DialoguePiece> third;
+	public List<DialoguePiece> fourth;
+	public List<DialoguePiece> fifth;
+	public List<DialoguePiece> final;
+}
+
+[Serializable]
+public class DialoguePiece
+{
+	public string index;
+	public List<string> text;
+
+	public DialoguePiece() {
+		index = "0";
+		text = new List<string>() { "* 해당하는 대화가 없어요" };
+	}
 }
 
 public class DialogueSelector : MonoBehaviour
@@ -62,7 +74,7 @@ public class DialogueSelector : MonoBehaviour
 		selectedData = characterData.dataList.Find(x => x.name == characterName.ToString());
 	}
 
-	public List<string> GetTestDialogues()
+	public List<DialoguePiece> GetTestDialogues()
 	{
 		return GetDialogueByLevel(selectedData);
 	}
@@ -72,9 +84,9 @@ public class DialogueSelector : MonoBehaviour
 		return selectedData.name;
 	}
 
-	public List<string> GetDialogueByLevel(Data data)
+	public List<DialoguePiece> GetDialogueByLevel(Data data)
 	{
-		List<string> dialogue;
+		List<DialoguePiece> dialogue;
 		switch (level)
 		{
 			case 0:
@@ -99,12 +111,14 @@ public class DialogueSelector : MonoBehaviour
 				dialogue = data.dialogues.final;
 				break;
 			default:
-				dialogue = new List<string>{ "*해당하는 대화가 없어요" };
+				dialogue = data.dialogues.join;
+				// dialogue = new List<DialoguePiece>{ new DialoguePiece() };
 				break;
 		}
 
 		if (dialogue.Count < 1)
-			dialogue = new List<string>{ "*해당하는 대화가 없어요" };
+			dialogue = data.dialogues.join;
+			// dialogue = new List<DialoguePiece>{ new DialoguePiece() };
 
 		return dialogue;
 	}
