@@ -9,7 +9,7 @@ public class DoTweenHelper : MonoBehaviour {
 	{
 		None,
 		DoMove,
-		DOScale
+		DoScale
 	}
 
 	public TweenFunction tween;
@@ -20,7 +20,7 @@ public class DoTweenHelper : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if (tween == TweenFunction.DOScale)
+		if (tween == TweenFunction.DoScale)
 			transform.DOScale(floatValue, duration).SetEase(easeType);
 	}
 	
