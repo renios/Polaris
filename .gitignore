@@ -5,6 +5,10 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 
+# Rider cache directory & etc
+.idea/
+Assets/Plugins/Editor/JetBrains*
+
 # Visual Studio cache directory
 .vs/
 .vscode/
