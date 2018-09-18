@@ -1,11 +1,8 @@
-﻿using UnityEngine;
-using Enums;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System;
+using Sirenix.OdinInspector;
+using UnityEngine;
 
-namespace Sirenix.OdinInspector.Demos
-{
 [Serializable]
 public class DataList {
 	public List<Data> dataList;
@@ -59,35 +56,35 @@ public class DialogueSelector : MonoBehaviour
 
 	[HideLabel]
 	[HorizontalGroup("Split")]
-	public CharacterName characterName;
+	public CharacterName CharacterName;
 
 	[HideLabel]
 	[VerticalGroup("Split/Right")]
-	public int level;
+	public int Level;
 
-	Data selectedData;
+	Data _selectedData;
 
 	void Awake()
 	{
-		TextAsset jsonText = Resources.Load<TextAsset>("SingleDialogue");
-		DataList characterData = JsonUtility.FromJson<DataList>(jsonText.text);
-		selectedData = characterData.dataList.Find(x => x.name == characterName.ToString());
+		var jsonText = Resources.Load<TextAsset>("SingleDialogue");
+		var characterData = JsonUtility.FromJson<DataList>(jsonText.text);
+		_selectedData = characterData.dataList.Find(x => x.name == CharacterName.ToString());
 	}
 
 	public List<DialoguePiece> GetTestDialogues()
 	{
-		return GetDialogueByLevel(selectedData);
+		return GetDialogueByLevel(_selectedData);
 	}
 
 	public string GetCharacterName()
 	{
-		return selectedData.name;
+		return _selectedData.name;
 	}
 
 	public List<DialoguePiece> GetDialogueByLevel(Data data)
 	{
 		List<DialoguePiece> dialogue;
-		switch (level)
+		switch (Level)
 		{
 			case 0:
 				dialogue = data.dialogues.join;
@@ -112,15 +109,12 @@ public class DialogueSelector : MonoBehaviour
 				break;
 			default:
 				dialogue = data.dialogues.join;
-				// dialogue = new List<DialoguePiece>{ new DialoguePiece() };
 				break;
 		}
 
 		if (dialogue.Count < 1)
 			dialogue = data.dialogues.join;
-			// dialogue = new List<DialoguePiece>{ new DialoguePiece() };
 
 		return dialogue;
 	}
-}
 }

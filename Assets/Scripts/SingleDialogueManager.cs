@@ -7,25 +7,25 @@ using UnityEngine.UI;
 
 public class SingleDialogueManager : MonoBehaviour {
 
-	public Text characterName;
-	public List<Balloon> balloons;
-	int balloonIndex = 0;
-	List<DialoguePiece> dialogues = new List<DialoguePiece>();
+	public Text CharacterName;
+	public List<Balloon> Balloons;
+	int _balloonIndex = 0;
+	List<DialoguePiece> _dialogues = new List<DialoguePiece>();
 	public bool Selecting = false;
-	public int dialogueIndex = 0;
-	public int dialogueSubIndex = 0;
-	List<string> texts = new List<string>();
+	public int DialogueIndex = 0;
+	public int DialogueSubIndex = 0;
+	List<string> _texts = new List<string>();
 	
 	// Use this for initialization
 	void Start () {
 		if (FindObjectOfType<DialogueSelector>() != null)
 		{
-			DialogueSelector dialogueSelector = FindObjectOfType<DialogueSelector>();
-			characterName.text = dialogueSelector.GetCharacterName();
-			dialogues = dialogueSelector.GetTestDialogues();
+			var dialogueSelector = FindObjectOfType<DialogueSelector>();
+			CharacterName.text = dialogueSelector.GetCharacterName();
+			_dialogues = dialogueSelector.GetTestDialogues();
 		}
 
-		texts = dialogues.Find(x => x.index == "0").text;
+		_texts = _dialogues.Find(x => x.index == "0").text;
 
 		StartCoroutine(AddBalloon());
 	}
@@ -37,57 +37,57 @@ public class SingleDialogueManager : MonoBehaviour {
 	IEnumerator AddBalloon(string answer = null) {
 		GetComponent<RectTransform>().anchoredPosition = new Vector2(GetComponent<RectTransform>().anchoredPosition.x, 0);
 
-		if (balloonIndex >= texts.Count) yield break;
+		if (_balloonIndex >= _texts.Count) yield break;
 		if (Selecting) yield break;
 
 		Balloon newBalloon;
 		// 일반 대화
-		if (texts[balloonIndex][0] != '#') {
-			newBalloon = Instantiate(balloons[0], transform);
+		if (_texts[_balloonIndex][0] != '#') {
+			newBalloon = Instantiate(Balloons[0], transform);
 			newBalloon.Init();
-			newBalloon.SetBalloonData(texts[balloonIndex]);
-			balloonIndex++;
-			if (balloonIndex == texts.Count)
+			newBalloon.SetBalloonData(_texts[_balloonIndex]);
+			_balloonIndex++;
+			if (_balloonIndex == _texts.Count)
 				LoadNextTexts();
 		}
 		// 유저의 대답을 출력
 		else if (answer != null) {
-			newBalloon = Instantiate(balloons[1], transform);
+			newBalloon = Instantiate(Balloons[1], transform);
 			newBalloon.Init();
 			newBalloon.SetBalloonData(answer);
-			balloonIndex++; // 선택지가 뜰 때는 카운트가 오르지 않고, 선택을 했을때 카운트가 오른다
+			_balloonIndex++; // 선택지가 뜰 때는 카운트가 오르지 않고, 선택을 했을때 카운트가 오른다
 			LoadNextTexts(); // 선택을 할 경우 무조건 다음 대화 묶음으로 넘어간다
 			
-			yield return new WaitForSeconds(newBalloon.GetComponent<DoTweenHelper>().duration);
+			yield return new WaitForSeconds(newBalloon.GetComponent<DoTweenHelper>().Duration);
 			
 			StartCoroutine(AddBalloon()); // 다음 대화 묶음의 첫번째 텍스트를 자동으로 로드한다
 		}
 		// 유저가 대답 선택
 		else {
-			newBalloon = Instantiate(balloons[2], transform);
+			newBalloon = Instantiate(Balloons[2], transform);
 			newBalloon.Init();
-			newBalloon.SetBalloonData(texts[balloonIndex]);
+			newBalloon.SetBalloonData(_texts[_balloonIndex]);
 			Selecting = true;
 		}
-		yield return new WaitForSeconds(newBalloon.GetComponent<DoTweenHelper>().duration);
+		yield return new WaitForSeconds(newBalloon.GetComponent<DoTweenHelper>().Duration);
 	}
 
 	void LoadNextTexts() {
-		dialogueIndex++;
+		DialogueIndex++;
 
-		var newIndex = dialogueIndex.ToString();
-		if (dialogueSubIndex != 0)
-			newIndex = newIndex + "-" + dialogueSubIndex.ToString();
+		var newIndex = DialogueIndex.ToString();
+		if (DialogueSubIndex != 0)
+			newIndex = newIndex + "-" + DialogueSubIndex.ToString();
 
-		var newTexts = dialogues.Find(x => x.index == newIndex);
+		var newTexts = _dialogues.Find(x => x.index == newIndex);
 		if (newTexts != null) {
-			texts = dialogues.Find(x => x.index == newIndex).text;
-			balloonIndex = 0; 
+			_texts = _dialogues.Find(x => x.index == newIndex).text;
+			_balloonIndex = 0; 
 		}
 		else
 			Debug.LogWarning("next dialogue is null");
 
-		dialogueSubIndex = 0;
+		DialogueSubIndex = 0;
 	}
 
 	void Update() {
