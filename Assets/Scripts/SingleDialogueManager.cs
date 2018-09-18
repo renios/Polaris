@@ -57,6 +57,10 @@ public class SingleDialogueManager : MonoBehaviour {
 			newBalloon.SetBalloonData(answer);
 			balloonIndex++; // 선택지가 뜰 때는 카운트가 오르지 않고, 선택을 했을때 카운트가 오른다
 			LoadNextTexts(); // 선택을 할 경우 무조건 다음 대화 묶음으로 넘어간다
+			
+			yield return new WaitForSeconds(newBalloon.GetComponent<DoTweenHelper>().duration);
+			
+			StartCoroutine(AddBalloon()); // 다음 대화 묶음의 첫번째 텍스트를 자동으로 로드한다
 		}
 		// 유저가 대답 선택
 		else {
