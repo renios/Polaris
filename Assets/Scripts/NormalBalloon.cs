@@ -7,7 +7,6 @@ using DG.Tweening;
 public class NormalBalloon : Balloon
 {
 	public Text DialogueText;
-	// int mItemDataIndex = -1;
 
 	public override void Init()
 	{
@@ -18,18 +17,4 @@ public class NormalBalloon : Balloon
 	{
 		DialogueText.text = str;
 	}
-
-	// public void SetBalloonData(ItemData itemData, int itemIndex)
-	// {
-	// 	mItemDataIndex = itemIndex;
-	// 	DialogueText.text = LoadText(itemIndex);
-	// }
-
-	// string LoadText(int itemIndex)
-	// {
-	// 	if (itemIndex < global::DialogueText.Text.Length)
-	// 		return global::DialogueText.Text[itemIndex];
-	// 	else 
-	// 		return "";
-	// }
 }

@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector.Demos;
@@ -11,9 +13,10 @@ public class SingleDialogueManager : MonoBehaviour {
 	public List<Balloon> Balloons;
 	int _balloonIndex = 0;
 	List<DialoguePiece> _dialogues = new List<DialoguePiece>();
-	public bool Selecting = false;
+	public bool Selecting;
 	public int DialogueIndex = 0;
 	public int DialogueSubIndex = 0;
+	public string NextDialogueAddress = "";
 	List<string> _texts = new List<string>();
 	
 	// Use this for initialization
@@ -25,16 +28,17 @@ public class SingleDialogueManager : MonoBehaviour {
 			_dialogues = dialogueSelector.GetTestDialogues();
 		}
 
+//		NextDialogueAddress = null;
 		_texts = _dialogues.Find(x => x.index == "0").text;
 
 		StartCoroutine(AddBalloon());
 	}
 
-	public void CallAddBalloon(string answer = null) {
-		StartCoroutine(AddBalloon(answer));
+	public void CallAddBalloon(string data = null) {
+		StartCoroutine(AddBalloon(data));
 	}
 
-	IEnumerator AddBalloon(string answer = null) {
+	IEnumerator AddBalloon(string data = null) {
 		GetComponent<RectTransform>().anchoredPosition = new Vector2(GetComponent<RectTransform>().anchoredPosition.x, 0);
 
 		if (_balloonIndex >= _texts.Count) yield break;
@@ -51,10 +55,10 @@ public class SingleDialogueManager : MonoBehaviour {
 				LoadNextTexts();
 		}
 		// 유저의 대답을 출력
-		else if (answer != null) {
+		else if (data != null) {
 			newBalloon = Instantiate(Balloons[1], transform);
 			newBalloon.Init();
-			newBalloon.SetBalloonData(answer);
+			newBalloon.SetBalloonData(data);
 			_balloonIndex++; // 선택지가 뜰 때는 카운트가 오르지 않고, 선택을 했을때 카운트가 오른다
 			LoadNextTexts(); // 선택을 할 경우 무조건 다음 대화 묶음으로 넘어간다
 			
@@ -72,22 +76,36 @@ public class SingleDialogueManager : MonoBehaviour {
 		yield return new WaitForSeconds(newBalloon.GetComponent<DoTweenHelper>().Duration);
 	}
 
-	void LoadNextTexts() {
-		DialogueIndex++;
+	void LoadNextTexts() {Debug.Log("<"+NextDialogueAddress+">");
+		if (string.IsNullOrEmpty(NextDialogueAddress))
+		{
+			DialogueIndex++;
+		}
+		else
+		{
+			var splitedAddress = NextDialogueAddress.Split(new char[] {'-'}, StringSplitOptions.RemoveEmptyEntries).ToList();
+			DialogueIndex = int.Parse(splitedAddress[0]);
+			if (splitedAddress.Count > 1)
+				DialogueSubIndex = int.Parse(splitedAddress[1]);
+			else
+				DialogueSubIndex = 0;
+		}
 
 		var newIndex = DialogueIndex.ToString();
 		if (DialogueSubIndex != 0)
 			newIndex = newIndex + "-" + DialogueSubIndex.ToString();
 
 		var newTexts = _dialogues.Find(x => x.index == newIndex);
-		if (newTexts != null) {
+		if (newTexts != null)
+		{
 			_texts = _dialogues.Find(x => x.index == newIndex).text;
-			_balloonIndex = 0; 
+			_balloonIndex = 0;
 		}
 		else
 			Debug.LogWarning("next dialogue is null");
 
 		DialogueSubIndex = 0;
+		NextDialogueAddress = ""; // 한번 쓰고난 이후 초기화
 	}
 
 	void Update() {
