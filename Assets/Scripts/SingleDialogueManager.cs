@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using DG.Tweening;
-using Sirenix.OdinInspector.Demos;
 using UnityEngine.UI;
 
 public class SingleDialogueManager : MonoBehaviour {
@@ -15,6 +13,7 @@ public class SingleDialogueManager : MonoBehaviour {
 	List<DialoguePiece> _dialogues = new List<DialoguePiece>();
 	public bool Selecting;
 	public int DialogueIndex = 0;
+	int _maxDialogueIndex = 20;
 	public int DialogueSubIndex = 0;
 	public string NextDialogueAddress = "";
 	List<string> _texts = new List<string>();
@@ -28,7 +27,6 @@ public class SingleDialogueManager : MonoBehaviour {
 			_dialogues = dialogueSelector.GetTestDialogues();
 		}
 
-//		NextDialogueAddress = null;
 		_texts = _dialogues.Find(x => x.index == "0").text;
 
 		StartCoroutine(AddBalloon());
@@ -76,26 +74,39 @@ public class SingleDialogueManager : MonoBehaviour {
 		yield return new WaitForSeconds(newBalloon.GetComponent<DoTweenHelper>().Duration);
 	}
 
-	void LoadNextTexts() {Debug.Log("<"+NextDialogueAddress+">");
-		if (string.IsNullOrEmpty(NextDialogueAddress))
+	void LoadNextTexts() {
+		if (!string.IsNullOrEmpty(NextDialogueAddress))
 		{
-			DialogueIndex++;
-		}
-		else
-		{
-			var splitedAddress = NextDialogueAddress.Split(new char[] {'-'}, StringSplitOptions.RemoveEmptyEntries).ToList();
+			var splitedAddress = NextDialogueAddress.Split(new[] {'-'}, StringSplitOptions.RemoveEmptyEntries).ToList();
 			DialogueIndex = int.Parse(splitedAddress[0]);
 			if (splitedAddress.Count > 1)
 				DialogueSubIndex = int.Parse(splitedAddress[1]);
 			else
 				DialogueSubIndex = 0;
 		}
+		else
+		{
+			DialogueIndex++;
+		}
+
+		Debug.Log("CurrentIndexes: " + DialogueIndex + ", " + DialogueSubIndex);
 
 		var newIndex = DialogueIndex.ToString();
 		if (DialogueSubIndex != 0)
-			newIndex = newIndex + "-" + DialogueSubIndex.ToString();
+			newIndex = newIndex + "-" + DialogueSubIndex;
 
 		var newTexts = _dialogues.Find(x => x.index == newIndex);
+		while (DialogueIndex < _maxDialogueIndex && newTexts == null)
+		{
+			DialogueIndex++;
+			
+			newIndex = DialogueIndex.ToString();
+			if (DialogueSubIndex != 0)
+				newIndex = newIndex + "-" + DialogueSubIndex;
+			
+			newTexts = _dialogues.Find(x => x.index == newIndex);
+		}
+
 		if (newTexts != null)
 		{
 			_texts = _dialogues.Find(x => x.index == newIndex).text;
@@ -109,7 +120,7 @@ public class SingleDialogueManager : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (!Selecting && Input.anyKeyDown)
 		{
 			StartCoroutine(AddBalloon());
 		}
