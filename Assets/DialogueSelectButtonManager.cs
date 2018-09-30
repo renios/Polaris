@@ -12,14 +12,24 @@ public class DialogueSelectButtonManager : MonoBehaviour
 	public Button LeftArrowButton;
 	public Button RightArrowButton;
 	public Text PageText;
+	public GameObject DialogueLevelSelectPanel;
+	public List<Button> DialogueLevelSelectButtons;
+	
 	private List<CharacterName> characterNameList;
 	private int maxPage;
 	private int currentPage = 0;
 	private int numberOfButtons;
+
+	void Awake()
+	{
+		
+	}
 	
 	// Use this for initialization
 	void Start ()
 	{
+		DialogueLevelSelectPanel.GetComponent<Button>().onClick.AddListener(delegate { DialogueLevelSelectPanel.SetActive(false); });
+		
 		numberOfButtons = DialogueSelectButtons.Count;
 		maxPage = Mathf.CeilToInt(Enum.GetNames(typeof(CharacterName)).Length / (float) numberOfButtons);
 		LoadDialogueData();
@@ -60,7 +70,9 @@ public class DialogueSelectButtonManager : MonoBehaviour
 
 	void ClickNameButton(CharacterName name)
 	{
+		// TODO: 클릭한 캐릭터 이름 저장
 		
+		DialogueLevelSelectPanel.SetActive(true);
 	}
 
 	void ClickArrowButton(int change)
