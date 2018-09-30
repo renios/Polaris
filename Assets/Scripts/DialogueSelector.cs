@@ -65,10 +65,12 @@ public class DialogueSelector : MonoBehaviour
 	Data _selectedData;
 
 	void Awake()
-	{
+	{Debug.Log(SelectedDialogueData.SelectedCharacterName);
 		var jsonText = Resources.Load<TextAsset>("SingleDialogue");
 		var characterData = JsonUtility.FromJson<DataList>(jsonText.text);
-		_selectedData = characterData.dataList.Find(x => x.name == CharacterName.ToString());
+//		_selectedData = characterData.dataList.Find(x => x.name == CharacterName.ToString());
+		_selectedData = characterData.dataList.Find(x => x.name == SelectedDialogueData.SelectedCharacterName.ToString());
+		Debug.Log(_selectedData.name);
 	}
 
 	public List<DialoguePiece> GetTestDialogues()
@@ -84,7 +86,8 @@ public class DialogueSelector : MonoBehaviour
 	public List<DialoguePiece> GetDialogueByLevel(Data data)
 	{
 		List<DialoguePiece> dialogue;
-		switch (Level)
+//		switch (Level)
+		switch (SelectedDialogueData.SelectedDialogueLevel)
 		{
 			case 0:
 				dialogue = data.dialogues.join;

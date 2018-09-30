@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/DialogueSelect.unity
+    guid: 844c94a377fb14e5c857808985b56294
+  - enabled: 1
+    path: Assets/Scenes/SingleDialogue.unity
+    guid: b1934bab85c0a46f99e3deb70950fdc4

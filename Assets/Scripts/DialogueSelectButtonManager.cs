@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class DialogueSelectButtonManager : MonoBehaviour
 {
-
 	public List<Button> DialogueSelectButtons;
 	public Button LeftArrowButton;
 	public Button RightArrowButton;
@@ -22,13 +22,15 @@ public class DialogueSelectButtonManager : MonoBehaviour
 
 	void Awake()
 	{
-		
+		SelectedDialogueData.SelectedCharacterName = 0;
+		SelectedDialogueData.SelectedDialogueLevel = 0;
 	}
 	
 	// Use this for initialization
 	void Start ()
 	{
 		DialogueLevelSelectPanel.GetComponent<Button>().onClick.AddListener(delegate { DialogueLevelSelectPanel.SetActive(false); });
+		InitializeLevelSelectButton();
 		
 		numberOfButtons = DialogueSelectButtons.Count;
 		maxPage = Mathf.CeilToInt(Enum.GetNames(typeof(CharacterName)).Length / (float) numberOfButtons);
@@ -70,8 +72,7 @@ public class DialogueSelectButtonManager : MonoBehaviour
 
 	void ClickNameButton(CharacterName name)
 	{
-		// TODO: 클릭한 캐릭터 이름 저장
-		
+		SelectedDialogueData.SelectedCharacterName = name;
 		DialogueLevelSelectPanel.SetActive(true);
 	}
 
@@ -109,17 +110,25 @@ public class DialogueSelectButtonManager : MonoBehaviour
 		}
 	}
 
-//	for (int j = 0; j < 7; j++)
-//	{
-//		switch (j) {
-//			case 0: childItemData.mName = "만남"; break;
-//			case 1: childItemData.mName = "1단계"; break;
-//			case 2: childItemData.mName = "2단계"; break;
-//			case 3: childItemData.mName = "3단계"; break;
-//			case 4: childItemData.mName = "4단계"; break;
-//			case 5: childItemData.mName = "5단계"; break;
-//			case 6: childItemData.mName = "결말"; break;
-//			default: childItemData.mName = "--"; break;
-//		}
-//	}
+	void SetDialogueLevel(int level)
+	{
+		SelectedDialogueData.SelectedDialogueLevel = level;
+		Debug.Log(SelectedDialogueData.SelectedCharacterName + " " + level + "단계");
+
+		GoToSingleDialogueScene();
+	}
+
+	void InitializeLevelSelectButton()
+	{
+		for (int i = 0; i < DialogueLevelSelectButtons.Count; i++)
+		{
+			var level = i;
+			DialogueLevelSelectButtons[i].onClick.AddListener(delegate { SetDialogueLevel(level); });
+		}
+	}
+
+	void GoToSingleDialogueScene()
+	{
+		SceneManager.LoadScene("SingleDialogue");
+	}
 }
