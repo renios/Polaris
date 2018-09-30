@@ -431,7 +431,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -0.00001429184}
+  m_AnchoredPosition: {x: 0, y: 0.00000679604}
   m_SizeDelta: {x: 556, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &395387779
@@ -467,6 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3cdeb5b32454c518e08d6478d27bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BackToSelectSceneButton: {fileID: 205187323}
   CharacterName: {fileID: 1233980677}
   Balloons:
   - {fileID: 114971516082948802, guid: 6ab30947878cd4f2a93095e2f0dac88f, type: 2}

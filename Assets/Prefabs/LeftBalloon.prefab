@@ -104,11 +104,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd78d853f25d4a51bb74033f21ae0f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tween: 2
-  floatValue: 1
-  vectorValue: {x: 0, y: 0, z: 0}
-  duration: 0.5
-  easeType: 18
+  Tween: 2
+  FloatValue: 1
+  VectorValue: {x: 0, y: 0, z: 0}
+  Duration: 1
+  EaseType: 18
 --- !u!114 &114599847602164466
 MonoBehaviour:
   m_ObjectHideFlags: 1

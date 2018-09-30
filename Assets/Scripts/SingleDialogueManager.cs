@@ -3,10 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SingleDialogueManager : MonoBehaviour {
+public class SingleDialogueManager : MonoBehaviour
+{
 
+	public Button BackToSelectSceneButton;
+	
 	public Text CharacterName;
 	public List<Balloon> Balloons;
 	int _balloonIndex = 0;
@@ -20,6 +24,8 @@ public class SingleDialogueManager : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		BackToSelectSceneButton.onClick.AddListener(delegate { SceneManager.LoadScene("DialogueSelect"); });
+		
 		if (FindObjectOfType<DialogueSelector>() != null)
 		{
 			var dialogueSelector = FindObjectOfType<DialogueSelector>();
