@@ -66,10 +66,12 @@ public class DialogueSelector : MonoBehaviour
 
 	void Awake()
 	{
-		var jsonText = Resources.Load<TextAsset>("SingleDialogue");
-		var characterData = JsonUtility.FromJson<DataList>(jsonText.text);
-//		_selectedData = characterData.dataList.Find(x => x.name == CharacterName.ToString());
-		_selectedData = characterData.dataList.Find(x => x.name == SelectedDialogueData.SelectedCharacterName.ToString());
+		var nameString = EnumToString(SelectedDialogueData.SelectedCharacterName);
+		var jsonText = Resources.Load<TextAsset>("SingleDialogue" + "_" + nameString);
+		var characterData = JsonUtility.FromJson<Data>(jsonText.text);
+		_selectedData = characterData;
+//		var characterData = JsonUtility.FromJson<DataList>(jsonText.text);
+//		_selectedData = characterData.dataList.Find(x => x.name == SelectedDialogueData.SelectedCharacterName.ToString());
 	}
 
 	public List<DialoguePiece> GetTestDialogues()
@@ -85,7 +87,6 @@ public class DialogueSelector : MonoBehaviour
 	public List<DialoguePiece> GetDialogueByLevel(Data data)
 	{
 		List<DialoguePiece> dialogue;
-//		switch (Level)
 		switch (SelectedDialogueData.SelectedDialogueLevel)
 		{
 			case 0:
@@ -118,5 +119,20 @@ public class DialogueSelector : MonoBehaviour
 			dialogue = data.dialogues.join;
 
 		return dialogue;
+	}
+
+	string EnumToString(CharacterName name)
+	{
+		switch (name)
+		{
+			case CharacterName.멜리크: return "ml";
+			case CharacterName.베가: return "bg";
+			case CharacterName.아케르: return "ac";
+			case CharacterName.안카: return "ak";
+			case CharacterName.안타레스: return "at";
+			case CharacterName.에니프: return "en";
+			case CharacterName.폴라리스: return "pl";
+			default: return "pl";
+		}
 	}
 }
