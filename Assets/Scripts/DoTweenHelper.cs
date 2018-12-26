@@ -9,23 +9,18 @@ public class DoTweenHelper : MonoBehaviour {
 	{
 		None,
 		DoMove,
-		DOScale
+		DoScale
 	}
 
-	public TweenFunction tween;
-	public float floatValue;
-	public Vector3 vectorValue;
-	public float duration;
-	public Ease easeType = Ease.Linear;
+	public TweenFunction Tween;
+	public float FloatValue;
+	public Vector3 VectorValue;
+	public float Duration;
+	public Ease EaseType = Ease.Linear;
 
 	// Use this for initialization
 	void Start () {
-		if (tween == TweenFunction.DOScale)
-			transform.DOScale(floatValue, duration).SetEase(easeType);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+		if (Tween == TweenFunction.DoScale)
+			transform.DOScale(FloatValue, Duration).SetEase(EaseType);
 	}
 }

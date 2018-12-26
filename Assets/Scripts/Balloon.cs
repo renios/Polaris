@@ -4,35 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-namespace SuperScrollView
+public abstract class Balloon : MonoBehaviour
 {
-	public class Balloon : MonoBehaviour
-	{
-		public Text mDialogueText;
-		int mItemDataIndex = -1;
-
-		public void Init()
-		{
-			transform.DOScale(1, 0.5f).SetEase(Ease.OutExpo);
-		}
-
-		public void SetBalloonData(string str)
-		{
-			mDialogueText.text = str;
-		}
-
-		public void SetBalloonData(ItemData itemData, int itemIndex)
-		{
-			mItemDataIndex = itemIndex;
-			mDialogueText.text = LoadText(itemIndex);
-		}
-
-		string LoadText(int itemIndex)
-		{
-			if (itemIndex < DialogueText.Text.Length)
-				return DialogueText.Text[itemIndex];
-			else 
-				return "";
-		}
-	}
+	public abstract void Init();
+	
+	public abstract void SetBalloonData(string str);
 }

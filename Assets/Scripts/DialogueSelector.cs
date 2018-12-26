@@ -1,11 +1,8 @@
-﻿using UnityEngine;
-using Enums;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System;
+using Sirenix.OdinInspector;
+using UnityEngine;
 
-namespace Sirenix.OdinInspector.Demos
-{
 [Serializable]
 public class DataList {
 	public List<Data> dataList;
@@ -21,13 +18,25 @@ public class Data
 [Serializable]
 public class Dialogues
 {
-	public List<string> join;
-	public List<string> first;
-	public List<string> second;
-	public List<string> third;
-	public List<string> fourth;
-	public List<string> fifth;
-	public List<string> final;
+	public List<DialoguePiece> join;
+	public List<DialoguePiece> first;
+	public List<DialoguePiece> second;
+	public List<DialoguePiece> third;
+	public List<DialoguePiece> fourth;
+	public List<DialoguePiece> fifth;
+	public List<DialoguePiece> final;
+}
+
+[Serializable]
+public class DialoguePiece
+{
+	public string index;
+	public List<string> text;
+
+	public DialoguePiece() {
+		index = "0";
+		text = new List<string>() { "* 해당하는 대화가 없어요" };
+	}
 }
 
 public class DialogueSelector : MonoBehaviour
@@ -47,35 +56,38 @@ public class DialogueSelector : MonoBehaviour
 
 	[HideLabel]
 	[HorizontalGroup("Split")]
-	public CharacterName characterName;
+	public CharacterName CharacterName;
 
 	[HideLabel]
 	[VerticalGroup("Split/Right")]
-	public int level;
+	public int Level;
 
-	Data selectedData;
+	Data _selectedData;
 
 	void Awake()
 	{
-		TextAsset jsonText = Resources.Load<TextAsset>("SingleDialogue");
-		DataList characterData = JsonUtility.FromJson<DataList>(jsonText.text);
-		selectedData = characterData.dataList.Find(x => x.name == characterName.ToString());
+		var nameString = EnumToString(SelectedDialogueData.SelectedCharacterName);
+		var jsonText = Resources.Load<TextAsset>("SingleDialogue" + "_" + nameString);
+		var characterData = JsonUtility.FromJson<Data>(jsonText.text);
+		_selectedData = characterData;
+//		var characterData = JsonUtility.FromJson<DataList>(jsonText.text);
+//		_selectedData = characterData.dataList.Find(x => x.name == SelectedDialogueData.SelectedCharacterName.ToString());
 	}
 
-	public List<string> GetTestDialogues()
+	public List<DialoguePiece> GetTestDialogues()
 	{
-		return GetDialogueByLevel(selectedData);
+		return GetDialogueByLevel(_selectedData);
 	}
 
 	public string GetCharacterName()
 	{
-		return selectedData.name;
+		return _selectedData.name;
 	}
 
-	public List<string> GetDialogueByLevel(Data data)
+	public List<DialoguePiece> GetDialogueByLevel(Data data)
 	{
-		List<string> dialogue;
-		switch (level)
+		List<DialoguePiece> dialogue;
+		switch (SelectedDialogueData.SelectedDialogueLevel)
 		{
 			case 0:
 				dialogue = data.dialogues.join;
@@ -99,14 +111,28 @@ public class DialogueSelector : MonoBehaviour
 				dialogue = data.dialogues.final;
 				break;
 			default:
-				dialogue = new List<string>{ "*해당하는 대화가 없어요" };
+				dialogue = data.dialogues.join;
 				break;
 		}
 
 		if (dialogue.Count < 1)
-			dialogue = new List<string>{ "*해당하는 대화가 없어요" };
+			dialogue = data.dialogues.join;
 
 		return dialogue;
 	}
-}
+
+	string EnumToString(CharacterName name)
+	{
+		switch (name)
+		{
+			case CharacterName.멜리크: return "ml";
+			case CharacterName.베가: return "bg";
+			case CharacterName.아케르: return "ac";
+			case CharacterName.안카: return "ak";
+			case CharacterName.안타레스: return "at";
+			case CharacterName.에니프: return "en";
+			case CharacterName.폴라리스: return "pl";
+			default: return "pl";
+		}
+	}
 }
