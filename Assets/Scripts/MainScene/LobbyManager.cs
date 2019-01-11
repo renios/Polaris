@@ -27,6 +27,6 @@ public class LobbyManager : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
-        SceneChanger.ChangeScene(sceneName);
+        //SceneChanger.ChangeScene(sceneName);
     }
 }
