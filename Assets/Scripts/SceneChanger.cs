@@ -15,9 +15,14 @@ public class SceneChanger : MonoBehaviour
         Instance = this;
     }
 
-    public static void ChangeScene(string sceneName, string motionName = "SceneFadeIn", float motionTime = 0.5f)
+    public static void ChangeScene(string sceneName, string motionName = "SceneFadeOut", float motionTime = 0.5f)
     {
         Instance.StartCoroutine(Instance.ChangeSceneSub(sceneName, motionName, motionTime));
+    }
+
+    public void ChangeScene(string sceneName)
+    {
+        StartCoroutine(Instance.ChangeSceneSub(sceneName, "SceneFadeOut", 0.5f));
     }
 
     public IEnumerator ChangeSceneSub(string sceneName, string motionName, float motionTime)
