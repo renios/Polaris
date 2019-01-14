@@ -15,28 +15,34 @@ public class SceneChanger : MonoBehaviour
         Instance = this;
     }
 
-    public static void ChangeScene(string sceneName, string motionName = "SceneFadeOut", float motionTime = 0.5f)
+    public static void ChangeScene(string sceneName, int camera, string motionName = "SceneFadeOut", float motionTime = 0.5f)
     {
-        Instance.StartCoroutine(Instance.ChangeSceneSub(sceneName, motionName, motionTime));
+        Instance.StartCoroutine(Instance.ChangeSceneSub(sceneName, motionName, motionTime, camera));
     }
 
-    public void ChangeScene(string sceneName)
+    public void ChangeScene(string sceneName, int camera)
     {
-        StartCoroutine(Instance.ChangeSceneSub(sceneName, "SceneFadeOut", 0.5f));
+        StartCoroutine(Instance.ChangeSceneSub(sceneName, "SceneFadeOut", 0.5f, camera));
     }
 
-    public IEnumerator ChangeSceneSub(string sceneName, string motionName, float motionTime)
+    public IEnumerator ChangeSceneSub(string sceneName, string motionName, float motionTime, int camera)
     {
         Motion.Play(motionName);
         yield return new WaitForSeconds(motionTime);
 
         AsyncOperation loading = SceneManager.LoadSceneAsync(sceneName);
         loading.allowSceneActivation = false;
-        while(!loading.isDone)
+        while (!loading.isDone)
         {
             Bar.SetValue(loading.progress);
             if (loading.progress >= 0.9f)
+            {
+                //0 for Myroom, 1 for Attic, 2 for else
+                if (camera == 0) Camera.main.transform.position = new Vector3(0, -5.0119f, -10);
+                else if (camera == 1) Camera.main.transform.position = new Vector3(0, 5.0119f, -10);
+                else Camera.main.transform.position = new Vector3(0, 0, -10);
                 loading.allowSceneActivation = true;
+            }
             yield return null;
         }
     }
