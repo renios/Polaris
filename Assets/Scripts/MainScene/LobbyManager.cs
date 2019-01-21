@@ -16,7 +16,15 @@ public class LobbyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SwipeManager.Instance.IsSwiping(SwipeManager.SwipeDirection.Up))
+        {
+            Camera.main.transform.DOMove(new Vector3(0, 5.0119f, -10), 0.75f);
+        }
 
+        if (SwipeManager.Instance.IsSwiping(SwipeManager.SwipeDirection.Down))
+        {
+            Camera.main.transform.DOMove(new Vector3(0, -5.0119f, -10), 0.75f);
+        }
     }
 
     public void MoveCamera()
