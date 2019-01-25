@@ -7,10 +7,34 @@ using UnityEngine;
 /// </summary>
 public struct CardData
 {
-    public int Character;
-    public string DisplayName;
-    public string InternalName;
+    public string Subname;
+    public string InternalSubname;
     public int Rarity;
-    public string[] ProgressDesc;
-    public string[] LobbyDialog;
+    public string[] ChapterDesc;
+
+    public bool Observed;
+    public int Favority;
+    public int StoryProgress;
+}
+
+public struct CardDataCore
+{
+    public string Subname;
+    public string InternalSubname;
+    public int Rarity;
+    public string[] ChapterDesc;
+
+    public static implicit operator CardData(CardDataCore c)
+    {
+        return new CardData
+        {
+            Subname = c.Subname,
+            InternalSubname = c.InternalSubname,
+            Rarity = c.Rarity,
+            ChapterDesc = c.ChapterDesc.Clone() as string[],
+            Observed = false,
+            Favority = 0,
+            StoryProgress = 0
+        };
+    }
 }
