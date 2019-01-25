@@ -19,6 +19,8 @@ public class AlbumPage : MonoBehaviour
     {
         var newObj = Instantiate(ElementTemplate);
         var newElement = newObj.GetComponent<AlbumPageElement>();
+        newElement.CharIndex = charIndex;
+        newElement.CardIndex = cardIndex;
 
         var cardData = Variables.Characters[charIndex].Cards[cardIndex];
         if (cardData.Observed)
@@ -29,5 +31,7 @@ public class AlbumPage : MonoBehaviour
         }
         else
             newElement.MaskObject.SetActive(true);
+        newObj.transform.SetParent(ElementParent);
+        newObj.SetActive(true);
     }
 }

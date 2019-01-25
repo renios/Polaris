@@ -5,12 +5,7 @@ using UnityEngine;
 /// <summary>
 /// '캐릭터'의 데이터입니다. (개별 카드 데이터와는 다릅니다)
 /// </summary>
-public class CharacterData : CharacterDataCore
-{
-    public bool Observed;
-}
-
-public class CharacterDataCore
+public class CharacterData
 {
     public int CharNumber;
     public string Name;
@@ -18,12 +13,42 @@ public class CharacterDataCore
     public string Lux;
     public string LYDistance;
     public string Description;
+
+    public bool Observed;
     public List<CardData> Cards;
 }
 
+public struct CharacterDataCore
+{
+    public int CharNumber;
+    public string Name;
+    public string InternalName;
+    public string Lux;
+    public string LYDistance;
+    public string Description;
+    public CardDataCore[] Cards;
 
-public class CharacterDataGroup
+    public static implicit operator CharacterData(CharacterDataCore c)
+    {
+        var d = new CharacterData()
+        {
+            CharNumber = c.CharNumber,
+            Name = c.Name,
+            InternalName = c.InternalName,
+            Lux = c.Lux,
+            LYDistance = c.LYDistance,
+            Description = c.Description
+        };
+        d.Cards = new List<CardData>();
+        for(int i = 0; i < c.Cards.Length; i++)
+            d.Cards.Add(c.Cards[0]);
+        return d;
+    }
+}
+
+
+public struct CharacterDataGroup
 {
     public int Version;
-    public List<CharacterDataCore> Characters;
+    public CharacterDataCore[] Characters;
 }

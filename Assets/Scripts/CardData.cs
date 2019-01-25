@@ -32,9 +32,9 @@ public struct CardDataCore
             InternalSubname = c.InternalSubname,
             Rarity = c.Rarity,
             ChapterDesc = c.ChapterDesc.Clone() as string[],
-            Observed = false,
+            Observed = true,
             Favority = 0,
-            StoryProgress = 0
+            StoryProgress = 0,
         };
     }
 }
