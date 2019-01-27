@@ -14,14 +14,18 @@ public class AlbumPageElement : MonoBehaviour
 
     public void CheckNewStory()
     {
-        int maxAvailable = 0;
-        for(int fullThr = 0; maxAvailable < 5; maxAvailable++)
+        int maxAvailable = 1;
+        for(; maxAvailable <= 5; maxAvailable++)
         {
-            fullThr += Variables.FavorityThreshold[maxAvailable];
-            if (Variables.Characters[CharIndex].Cards[CardIndex].Favority < fullThr)
+            if (Variables.Characters[CharIndex].Cards[CardIndex].Favority < Variables.FavorityThreshold[maxAvailable - 1])
                 break;
         }
         if (maxAvailable >= Variables.Characters[CharIndex].Cards[CardIndex].StoryProgress)
             NewFlag.SetActive(true);
+    }
+
+    public void Clicked()
+    {
+        AlbumManager.Instance.CharPopup.Show(CharIndex, CardIndex);
     }
 }

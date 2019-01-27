@@ -6,12 +6,17 @@ using LitJson;
 
 public class AlbumManager : MonoBehaviour
 {
+    public static AlbumManager Instance { get; private set; }
+
     public GameObject PageParent;
+    public AlbumCharInfo CharPopup;
 
     private readonly int maxPageElement = 6;
 
     private void Awake()
     {
+        Instance = this;
+
         // Debug and test only
         LoadCharacter();
 
