@@ -2,36 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AlbumPage : MonoBehaviour
+namespace Album
 {
-    public RectTransform ElementParent;
-    public GameObject ElementTemplate;
-
-    public void CreateElement(int charIndex)
+    public class AlbumPage : MonoBehaviour
     {
-        var newObj = Instantiate(ElementTemplate);
-        var newElement = newObj.GetComponent<AlbumPageElement>();
+        public RectTransform ElementParent;
+        public GameObject ElementTemplate;
 
-
-    }
-
-    public void CreateElement(int charIndex, int cardIndex)
-    {
-        var newObj = Instantiate(ElementTemplate);
-        var newElement = newObj.GetComponent<AlbumPageElement>();
-        newElement.CharIndex = charIndex;
-        newElement.CardIndex = cardIndex;
-
-        var cardData = Variables.Characters[charIndex].Cards[cardIndex];
-        if (cardData.Observed)
+        public void CreateElement(int charIndex)
         {
-            newElement.Name.text = Variables.Characters[charIndex].Name;
-            newElement.Subname.text = cardData.Subname;
-            newElement.RarityBar.value = cardData.Rarity;
+            var newObj = Instantiate(ElementTemplate);
+            var newElement = newObj.GetComponent<AlbumPageElement>();
+
+
         }
-        else
-            newElement.MaskObject.SetActive(true);
-        newObj.transform.SetParent(ElementParent);
-        newObj.SetActive(true);
+
+        public void CreateElement(int charIndex, int cardIndex)
+        {
+            var newObj = Instantiate(ElementTemplate);
+            var newElement = newObj.GetComponent<AlbumPageElement>();
+            newElement.CharIndex = charIndex;
+            newElement.CardIndex = cardIndex;
+
+            var cardData = Variables.Characters[charIndex].Cards[cardIndex];
+            if (cardData.Observed)
+            {
+                newElement.Name.text = Variables.Characters[charIndex].Name;
+                newElement.Subname.text = cardData.Subname;
+                newElement.RarityBar.value = cardData.Rarity;
+            }
+            else
+                newElement.MaskObject.SetActive(true);
+            newObj.transform.SetParent(ElementParent);
+            newObj.SetActive(true);
+        }
     }
 }

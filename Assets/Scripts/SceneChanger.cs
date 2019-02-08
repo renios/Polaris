@@ -46,4 +46,9 @@ public class SceneChanger : MonoBehaviour
             yield return null;
         }
     }
+
+    public static string GetCurrentScene()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
 }

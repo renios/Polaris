@@ -1,0 +1,57 @@
+{
+    "Dialogues":
+    [
+        {
+            "Phase":0,
+            "Contents":
+            [
+                {"Type":0, "DialogText":"어머… 너는 누구니…?"},
+                {"Type":0, "DialogText":"흠... 설마 또 중력장이 휘었나...?"},
+                {"Type":2, "JuncTexts":["(설명해준다)"], "Directions":[-1]},
+                {"Type":0, "DialogText":"…아아, 그렇게 된 거야? 역시 예상에서 크게 벗어나지 않네."},
+                {"Type":1, "DialogText":"예... 에상이라니? 갑자기 그게 무슨 소리인ㄱ..."},
+                {"Type":0, "DialogText":"그치만, 이렇게 강한 이끌림이라니, 분명히 연구해볼 만한 가치가 있겠는데?"},
+                {"Type":0, "DialogText":"아, 어쩌면 저번에 생각해 놨던 공식이 적용될지도...? 그렇게 되면..."},
+                {"Type":0, "DialogText":"... ... ... ..."},
+                {"Type":1, "DialogText":"... ... ... ..."},
+                {"Type":2, "JuncTexts":["(툭툭 건드려 본다)", "(조금 더 기다려 본다)"], "Directions":[-1, 1]},
+                {"Type":0, "DialogText":"아, 미안. 한창 생각하니까 네가 있는 것까지 까먹을 뻔했지 뭐야. 후후..."},
+                {"Type":0, "DialogText":"아 맞다, 혹시 내가 누군지 아니?"},
+                {"Type":1, "DialogText":"... ... ... ..."},
+                {"Type":0, "DialogText":"역시, 모를 확률이 매우 높다고 생각은 했지만 말이야."},
+                {"Type":-1, "NextPhase":2}
+            ]
+        },
+        {
+            "Phase":1,
+            "Contents":
+            [
+                {"Type":0, "DialogText":"... ... ... ..."},
+                {"Type":1, "DialogText":"... ... ... ..."},
+                {"Type":0, "DialogText":"... ... ... ..."},
+                {"Type":1, "DialogText":"... ... ... ..."},
+                {"Type":0, "DialogText":"...그럴 리가 없겠구나. 그래, 이제 알겠어."},
+                {"Type":0, "DialogText":"... 아, 이런. 사람을 옆에 두고 이게 무슨 꼴이람. 후후."},
+                {"Type":0, "DialogText":"가끔씩 이렇게 생각하다 보면 주변이 완전히 깜깜해진다니까."},
+                {"Type":0, "DialogText":"그나저나, 넌 내가 누군지 알려나...?"},
+                {"Type":1, "DialogText":"... ... ... ..."},
+                {"Type":0, "DialogText":"후후, 역시 그렇구나. 뭐, 처음 보는데 모르는 건 어찌 보면 당연하겠지."},
+                {"Type":-1, "NextPhase":2}
+            ]
+        },
+        {
+            "Phase":2,
+            "Contents":
+            [
+                {"Type":0, "DialogText":"그러면 우선 여기서는 자기소개를 하는 것이 정석이려나."},
+                {"Type":0, "DialogText":"만나서 반가워. 난 투반이라고 해."},
+                {"Type":0, "DialogText":"우리 귀여운 꼬마 아가씨, 어때? 내 연구 이야기를 들어보는 거."},
+                {"Type":0, "DialogText":"물론 여기서 다 풀기에는 너무나 많은 양이지만 말이지. 후후."},
+                {"Type":0, "DialogText":"아, 맞다. 너는 하늘에서 벌어지는 적색 편이 현상에 대해 관심이 있니?"},
+                {"Type":0, "DialogText":"내가 얼마든지 이야기해줄 수 있는데 말이야. 후후후..."},
+                {"Type":1, "DialogText":"... ... ... ..."},
+                {"Type":-1, "NextPhase":-1}
+            ]
+        }
+    ]
+}
