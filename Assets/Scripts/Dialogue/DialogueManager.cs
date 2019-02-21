@@ -44,6 +44,12 @@ namespace Dialogue
         {
             if(!isInSelectMode)
             {
+                if(CurrentIndex >= CurrentDialogue.Dialogues[CurrentPhase].Contents.Length)
+                {
+                    SceneChanger.Instance.ChangeScene(Variables.DialogAfterScene, 2);
+                    return;
+                }
+
                 var curDialogData = CurrentDialogue.Dialogues[CurrentPhase].Contents[CurrentIndex];
 
                 if(curDialogData.Type <= -1)
