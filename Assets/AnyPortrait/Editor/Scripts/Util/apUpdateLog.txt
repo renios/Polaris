@@ -1,0 +1,320 @@
+﻿(영어)
+<size=16>AnyPortrait Update Log v1.1.4/v1.1.5</size>
+(Build December 24, 2018)
+
+
+<size=13>Improvements</size>
+
+- <color=blue>Extra Option</color> added
+    Added Extra option that can be controlled by "Morph", "Transform" Modifiers
+    Added ability to change Rendering Order in real time
+    Added ability to change Image of meshes in real time
+    <color=red>(For more information of the Extra option, please visit our homepage)</color>
+
+- If the characters use the same Shader and Texture, they are merged into one material to reduce the Draw Call.
+- Added "Refresh Meshes" button to refresh mesh in Inspector UI.
+- Added functions to control the material of the mesh.
+- In the upper UI, "Object Information UI unnecessary for the current situation" does not appear.
+
+
+
+<size=13>Fixed issues</size>
+
+- Fixed an issue where Draw Call Batching does not work normally.
+- Fixed an issue where the draw call became too large when using a script function to control the material in batch.
+- Fixed an issue where the parent mesh group would appear in the list of dialogs when adding a sub-mesh group to the mesh group.
+- Fixed an issue where the default depth of mesh does not change on Unity 2018 (v1.1.5)
+
+
+-----------------------------------------
+(한국어)
+<size=16>AnyPortrait 업데이트 로그 v1.1.4/v1.1.5</size>
+(2018년 12월 24일 빌드)
+
+
+<size=13>개선된 사항</size>
+
+- <color=blue>Extra 설정</color> 추가
+    Morph, Transform 모디파이어로 제어할 수 있는 Extra 기능 추가
+    렌더링 순서를 실시간으로 변경 가능
+    메시의 이미지를 실시간으로 변경 가능
+    <color=red>(Extra 설정 사용 방법은 홈페이지를 확인하세요)</color>
+
+- 서로 다른 캐릭터가 동일한 쉐이더, 텍스쳐를 사용할 경우 재질을 공유하여 드로우콜을 최적화
+- Inspector UI에서 메시를 갱신하는 "Refresh Meshes" 버튼 추가
+- 메시의 재질을 제어하는 함수 3종 추가
+- 상단의 UI에서 불필요한 객체 정보 UI가 출력되지 않도록 변경
+
+
+
+<size=13>수정된 문제점</size>
+
+- 드로우콜 배치(Drawcall Batch)가 정상적으로 수행되지 않는 문제가 수정됨
+- 캐릭터의 모든 재질을 일괄적으로 제어하는 함수를 호출할 때, 드로우콜이 지나치게 증가하는 문제가 수정됨
+- 하위 메시 그룹을 추가하는 다이얼로그에서 부모 메시 그룹이 보여지는 문제가 수정됨
+- Unity 2018에서 메시의 기본 Depth를 수정할 수 없는 문제가 수정됨 (v1.1.5)
+
+
+-----------------------------------------
+(프랑스어)
+<size=16>Fichier de mise à jour AnyPortrait v1.1.4/v1.1.5</size>
+(Construit le 24 décembre 2018)
+
+
+<size=13>Améliorations</size>
+
+- <color=blue>Extra Option</color> ajoutée
+    Ajout d'une option supplémentaire pouvant être contrôlée par les modificateurs "Morph", "Transform"
+    Ajout de la possibilité de modifier l'ordre de rendu en temps réel
+    Ajout de la possibilité de changer l'image des mailles en temps réel
+    <color=red>(Pour plus d'informations sur l'option Extra, visitez notre page d'accueil.)</color>
+
+- Si les personnages utilisent les mêmes Shader et Texture, ils sont fusionnés en un seul matériau pour réduire l'appel de dessin.
+- Ajout du bouton "Refresh Meshes" pour actualiser les mailles dans l'interface utilisateur de l'inspecteur
+- Ajout de fonctions pour contrôler le matériau du maillage.
+- Dans l'interface utilisateur supérieure, "Interface utilisateur d'informations sur les objets non nécessaire pour la situation actuelle" n'apparaît pas.
+
+
+
+<size=13>Problème résolu</size>
+
+- Correction d'un problème où le traitement d'appels d'appels Draw ne fonctionnait pas normalement.
+- Correction d'un problème en raison duquel l'appel de tirage devenait trop volumineux lors de l'utilisation d'une fonction de script pour contrôler le matériau par lot.
+- Correction du problème suivant: le groupe de mailles parent apparaît dans la liste des boîtes de dialogue lors de l'ajout d'un groupe de sous-maillages au groupe de maillages.
+- Correction d'un problème où la profondeur de maillage par défaut ne change pas sous Unity 2018. (v1.1.5)
+
+
+-----------------------------------------
+(독일어)
+<size=16>AnyPortrait-Aktualisierungsprotokoll v1.1.4/v1.1.5</size>
+(Build 24. Dezember 2018)
+
+
+<size=13>Verbesserungen</size>
+
+- <color=blue>Option "Extra"</color> hinzugefügt
+    Zusätzliche Option hinzugefügt, die mit den Modifizierern "Morph" und "Transform" gesteuert werden kann
+    Möglichkeit hinzugefügt, die Render-Reihenfolge in Echtzeit zu ändern
+    Möglichkeit hinzugefügt, das Bild der Maschen in Echtzeit zu ändern
+    <color=red>(Für weitere Informationen zur Option Extra besuchen Sie bitte unsere Homepage)</color>
+
+- Wenn die Charaktere denselben Shader und dieselbe Textur verwenden, werden sie zu einem Material zusammengefügt, um den Draw Call zu reduzieren.
+- Schaltfläche "Refresh Meshes" hinzugefügt, um das Mesh in der Inspector-Benutzeroberfläche zu aktualisieren.
+- Funktionen hinzugefügt, um das Material des Netzes zu steuern.
+- In der oberen Benutzeroberfläche wird "Objektinformations-Benutzeroberfläche nicht für die aktuelle Situation unnötig" angezeigt.
+
+
+
+<size=13>Problem behoben</size>
+
+- Es wurde ein Problem behoben, durch das die Funktion zum Zeichnen von Anrufen nicht normal funktioniert.
+- Es wurde ein Problem behoben, bei dem der Zeichnungsaufruf zu groß wurde, wenn eine Skriptfunktion verwendet wurde, um das Material im Stapel zu steuern.
+- Ein Problem wurde behoben, durch das die übergeordnete Maschengruppe in der Liste der Dialogfelder angezeigt wurde, wenn eine Maschengruppe zur Maschengruppe hinzugefügt wurde.
+- Ein Problem wurde behoben, bei dem die Standard-Maschentiefe bei Unity 2018 nicht geändert wurde. (v1.1.5)
+
+
+-----------------------------------------
+(스페인어)
+<size=16>AnyPortrait Update Log v1.1.4/v1.1.5</size>
+(Construir el 24 de diciembre de 2018)
+
+
+<size=13>Mejoras</size>
+
+- <color=blue>opción "Extra"</color> agregada
+    Opción Extra agregada que puede ser controlada por Modificadores "Morph", "Transform"
+    Mayor capacidad para cambiar el orden de renderizado en tiempo real
+    Mayor capacidad para cambiar la imagen de las mallas en tiempo real.
+    <color=red>(Para obtener más información sobre la opción Extra, visite nuestra página de inicio)</color>
+
+- Si los personajes usan el mismo Sombreador y Textura, se fusionan en un material para reducir la Llamada de dibujo.
+- Se agregó el botón "Refresh Meshes" para actualizar la malla en la interfaz de usuario del Inspector.
+- Funciones añadidas para controlar el material de la malla.
+- En la IU superior, la "IU de información del objeto innecesaria para la situación actual" no aparece.
+
+
+
+<size=13>Problema solucionado</size>
+
+- Se solucionó un problema por el que el Draw Call Batching no funciona normalmente.
+- Se solucionó un problema por el cual la llamada al sorteo se hacía demasiado grande al usar una función de script para controlar el material por lotes.
+- Se solucionó un problema por el cual el grupo de malla principal aparecería en la lista de diálogos al agregar un grupo de sub-malla al grupo de malla.
+- Se solucionó un problema por el cual la profundidad de malla predeterminada no cambia en Unity 2018. (v1.1.5)
+
+
+-----------------------------------------
+(이탈리아어)
+<size=16>Registro aggiornamenti AnyPortrait v1.1.4/v1.1.5</size>
+(Build 24 dicembre 2018)
+
+
+<size=13>Miglioramenti</size>
+
+- Aggiunta <color=blue>l'opzione "Extra"</color>
+    Aggiunta l'opzione Extra che può essere controllata dai modificatori "Morph", "Transform"
+    Aggiunta la possibilità di modificare l'ordine di rendering in tempo reale
+    Aggiunta la possibilità di cambiare l'immagine delle mesh in tempo reale
+	<color=red>(Per ulteriori informazioni sull'opzione Extra, visita la nostra homepage)</color>
+
+- Se i personaggi usano lo stesso Shader e Texture, vengono uniti in un unico materiale per ridurre il Draw Call.
+- Aggiunto il pulsante "Refresh Meshes" per aggiornare la mesh nell'interfaccia utente di Inspector.
+- Aggiunte funzioni per controllare il materiale della mesh.
+- Nell'interfaccia utente superiore, "UI Informazioni oggetto non necessario per la situazione attuale" non viene visualizzato.
+
+
+
+<size=13>Risolto il problema</size>
+
+- Risolto un problema in cui Draw Call Batching non funziona normalmente.
+- Risolto un problema in cui la chiamata di disegno diventava troppo grande quando si utilizzava una funzione di script per controllare il materiale in batch.
+- Risolto un problema in cui il gruppo mesh padre veniva visualizzato nell'elenco di finestre di dialogo quando si aggiungeva un gruppo di mesh secondaria al gruppo mesh.
+- Risolto un problema per cui la profondità di mesh predefinita non cambia su Unity 2018. (v1.1.5)
+
+
+-----------------------------------------
+(덴마크어)
+<size=16>AnyPortrait Update Log v1.1.4/v1.1.5</size>
+(Byg den 24. december 2018)
+
+
+<size=13>Forbedringer</size>
+
+- <color=blue>"Ekstra" option</color> tilføjet
+    Tilføjet ekstra mulighed, som kan styres af "Morph", "Transform" Modifiers
+    Tilføjet evne til at ændre Gendannelsesordre i realtid
+    Tilføjet evne til at ændre Billede af masker i realtid
+    <color=red>(For flere oplysninger om ekstra-mulighederne, besøg venligst vores hjemmeside)</color>
+
+- Hvis tegnene bruger samme Shader og Texture, slås de sammen til et materiale for at reducere Draw Call.
+- Tilføjet "Refresh Meshes" knappen for at opdatere mesh i Inspector UI.
+- Tilføjede funktioner til styring af meshets materiale.
+- I det øverste brugergrænseflade vises "Objektinformations-brugergrænsefladen unødvendig for den aktuelle situation" ikke.
+
+
+
+<size=13>Faste problem</size>
+
+- Løst et problem, hvor Draw Call Batching ikke fungerer normalt.
+- Løst et problem, hvor tegneopkaldet blev for stort, når du bruger en scriptfunktion til at styre materialet i batch.
+- Løst et problem, hvor den overordnede maskegruppe ville blive vist i listen over dialoger, når der tilføjes en sub-mesh-gruppe til maskegruppen.
+- Løst et problem, hvor standarddypen på net ikke ændres på Unity 2018. (v1.1.5)
+
+
+-----------------------------------------
+(일본어)
+<size=16> AnyPortrait更新ログv1.1.4/v1.1.5</size>
+（2018年12月24日ビルド）
+
+
+<size=13>改善点</size>
+
+- <color=blue>Extra設定</color>追加
+    「Morph」、「Transform」モディファイヤで制御することができる「Extra設定」が追加されました。
+    レンダリング順序をリアルタイムで変更することができます。
+    メッシュの画像をリアルタイムで変更することができます。
+    <color=red>（Extra設定の使用方法は、ホームページをご確認ください）</color>
+
+- 異なるキャラクターであっても、同じ「Shader、Texture」を利用すれば、1つの 「Material」に統合されて「Draw Call」を軽減します。
+- Inspector UIでメッシュをリフレッシュするための「Refresh Meshes」ボタンが追加されました。
+- メッシュの 「Material」を制御するいくつかの関数が追加されました。 (関連ページ)
+- 上部のUIで「現在の状況について、不必要なオブジェクトの情報UI」は表示されません。
+
+
+
+<size=13>修正された問題</size>
+
+- 「Draw Call Batch」が正常に実行されない問題が修正されました。
+- キャラクターのすべての「Material」を一括して制御するスクリプト関数を使用する際、「Draw Call」が過度に増える問題が修正されました。
+- サブメッシュグループを追加するときに、ダイアログのリストに「親メッシュグループ」が出力される問題が修正されました。
+-  Unity 2018でデフォルトのメッシュ深度が変わらない問題を修正しました。 (v1.1.5)
+
+
+-----------------------------------------
+(중국어-번체)
+<size=16>AnyPortrait更新日誌v1.1.4/v1.1.5</size>
+（建立2018年12月24日）
+
+
+<size=13>改進</size>
+
+- 添加了<color=blue>額外(Extra)選項</color>
+    添加了可由“Morph”，“Transform”修改器控制的額外選項
+    添加了實時更改渲染順序的功能
+    添加了實時更改網格圖像的功能
+    <color=red>（有關Extra選項的更多信息，請訪問我們的主頁）</color>
+
+- 如果角色使用相同的著色器和紋理，它們將合併為一個材質以減少繪製調用。
+- 添加了“Refresh Meshes”按鈕以在Inspector UI中刷新網格。
+- 添加了控製網格材質的功能。
+- 在上部UI中，不顯示“當前情況不需要的對象信息UI”。
+
+
+
+<size=13>修復了問題</size>
+
+- 修正了Draw Call Batching無法正常工作的問題。
+- 修正了使用腳本函數批量控製材質時繪製調用變得過大的問題。
+- 修復了在將子網格組添加到網格組時，父網格組將出現在對話框列表中的問題。
+- 修正了Unity 2018上默認網格深度沒有變化的問題。 (v1.1.5)
+
+
+-----------------------------------------
+(중국어-간체)
+<size=16>AnyPortrait更新日志v1.1.4/v1.1.5</size>
+（建立2018年12月24日）
+
+
+<size=13>改进</size>
+
+- 添加了<color=blue>额外(Extra)选项</color>改进了
+    添加了可由“Morph”，“Transform”修改器控制的额外选项
+    添加了实时更改渲染顺序的功能
+    添加了实时更改网格图像的功能
+    <color=red>（有关Extra选项的更多信息，请访问我们的主页）</color>
+
+- 如果角色使用相同的着色器和纹理，它们将合并为一个材质以减少绘制调用。
+- 添加了“Refresh Meshes”按钮以在Inspector UI中刷新网格。
+- 添加了控制网格材质的功能。
+- 在上部UI中，不显示“当前情况不需要的对象信息UI”。
+
+
+
+<size=13>修复了问题</size>
+
+- 修正了Draw Call Batching无法正常工作的问题。
+- 修正了使用脚本函数批量控制材质时绘制调用变得过大的问题。
+- 修复了在将子网格组添加到网格组时，父网格组将出现在对话框列表中的问题。
+- 修正了Unity 2018上默认网格深度没有变化的问题。 (v1.1.5)
+
+
+-----------------------------------------
+(폴란드어)
+<size=16>Dziennik aktualizacji AnyPortret v1.1.4/v1.1.5</size>
+(Build 24 grudnia 2018 r.)
+
+
+<size=13>Ulepszenia</size>
+
+- Dodano <color=blue>opcję "Extra"</color>
+    Dodano opcję "Ekstra", którą można kontrolować za pomocą modyfikatorów "Morph" i "Transform"
+    Dodano możliwość zmiany zlecenia Rendering w czasie rzeczywistym
+    Dodano możliwość zmiany obrazu siatki w czasie rzeczywistym
+    <color=red>(Aby uzyskać więcej informacji o opcji "Extra", odwiedź naszą stronę główną)</color>
+	
+- Jeśli postacie używają tego samego Shadera i Tekstury, są scalane w jeden materiał, aby zmniejszyć Draw Call.
+- Dodano przycisk "Refresh Meshes", aby odświeżyć siatkę w interfejsie użytkownika Inspector.
+- Dodano funkcje kontrolujące materiał siatki.
+- W górnym interfejsie nie pojawia się "Object Information UI niepotrzebny dla bieżącej sytuacji".
+
+
+
+<size=13>Naprawiono problem</size>
+
+- Naprawiono błąd, w wyniku którego funkcja Draw Call Batching nie działa normalnie.
+- Naprawiono błąd, w wyniku którego wezwanie do losowania stało się zbyt duże, gdy używano funkcji skryptu do kontrolowania materiału wsadowego.
+- Usunięto problem, w którym nadrzędna grupa siatki pojawiłaby się na liście dialogów podczas dodawania grupy podsieci do grupy siatki.
+- Naprawiono błąd, w którym domyślna głębokość siatki nie zmienia się w Unity 2018. (v1.1.5)
+
+
+
+-----------------------------------------
