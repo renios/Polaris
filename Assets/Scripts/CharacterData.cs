@@ -8,6 +8,8 @@ using UnityEngine;
 public class CharacterData
 {
     public int CharNumber;
+    public string[] ConstelKey;
+    public float[] ConstelWeight;
     public string Name;
     public string InternalName;
     public string Lux;
@@ -21,6 +23,8 @@ public class CharacterData
 public struct CharacterDataCore
 {
     public int CharNumber;
+    public string[] ConstelKey;
+    public float[] ConstelWeight;
     public string Name;
     public string InternalName;
     public string Lux;
@@ -33,6 +37,8 @@ public struct CharacterDataCore
         var d = new CharacterData()
         {
             CharNumber = c.CharNumber,
+            ConstelKey = c.ConstelKey,
+            ConstelWeight = c.ConstelWeight,
             Name = c.Name,
             InternalName = c.InternalName,
             Lux = c.Lux,
