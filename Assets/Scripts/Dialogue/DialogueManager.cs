@@ -72,6 +72,7 @@ namespace Dialogue
                     newObject.SetActive(true);
                     newDialogObj.Set(curDialogData);
                     newObject.transform.SetParent(ObjectParent);
+                    newObject.transform.localScale = Vector3.one;
                     CurrentIndex++;
                     LayoutRebuilder.MarkLayoutForRebuild(newObject.transform as RectTransform);
                     LayoutRebuilder.ForceRebuildLayoutImmediate(newObject.transform as RectTransform);
@@ -90,6 +91,7 @@ namespace Dialogue
             newObject.transform.SetParent(ObjectParent);
             newObject.SetActive(true);
             newDialogObj.Set(content);
+            newObject.transform.localScale = Vector3.one;
             isInSelectMode = false;
             LayoutRebuilder.MarkLayoutForRebuild(newObject.transform as RectTransform);
             LayoutRebuilder.ForceRebuildLayoutImmediate(newObject.transform as RectTransform);

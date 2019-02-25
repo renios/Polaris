@@ -24,7 +24,7 @@ public struct CharacterDataCore
 {
     public int CharNumber;
     public string[] ConstelKey;
-    public float[] ConstelWeight;
+    public double[] ConstelWeight;
     public string Name;
     public string InternalName;
     public string Lux;
@@ -38,7 +38,7 @@ public struct CharacterDataCore
         {
             CharNumber = c.CharNumber,
             ConstelKey = c.ConstelKey,
-            ConstelWeight = c.ConstelWeight,
+            ConstelWeight = c.ConstelWeight.Clone() as float[],
             Name = c.Name,
             InternalName = c.InternalName,
             Lux = c.Lux,

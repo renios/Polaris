@@ -163,6 +163,33 @@
                     ]
                 }
             ]
+        },
+        {
+            "CharNumber":7,
+            "ConstelKey":["Sagittarius"],
+            "ConstelWeight":[0.2],
+            "Name":"명왕성",
+            "InternalName":"pluto",
+            "Lux":"-",
+            "LYDistance":"평균 38.5 AU",
+            "Description":"태양계를 구성하는 왜행성이다. 처음 발견된 이래 계속 태양계의 행성으로 인정받아 왔으나, 학계의 계속된 연구를 통해 2006년에 왜행성으로 그 지위가 격하되었다.",
+            "Cards":
+            [
+                {
+                    "Subname":"[별의 정령]",
+                    "InternalSubname":"default",
+                    "Rarity":2,
+                    "ChapterHeader":["제목 0", "제목 1", "제목 2", "제목 3", "제목 4", "제목 5"],
+                    "ChapterDesc":[
+                        "임시 텍스트 0",
+                        "임시 텍스트 1",
+                        "임시 텍스트 2",
+                        "임시 텍스트 3",
+                        "임시 텍스트 4",
+                        "임시 텍스트 5"
+                    ]
+                }
+            ]
         }
     ]
 }

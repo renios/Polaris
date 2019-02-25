@@ -31,6 +31,7 @@ namespace Album
 
             var character = Variables.Characters[charIndex];
             // TODO: Action for ShortImage & ConstelImage & ConstelName
+            ShortImage.sprite = Resources.Load<Sprite>("Characters/" + character.InternalName + "/" + character.Cards[cardIndex].InternalSubname + "/image_album");
             Name.text = character.Name;
             Subname.text = character.Cards[cardIndex].Subname;
             RarityBar.value = character.Cards[cardIndex].Rarity;
