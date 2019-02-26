@@ -10,6 +10,8 @@ namespace Album
         [Header("Character/Card Status")]
         public Image ShortImage;
         public Image ConstelImage;
+        public Image FullImage;
+        public GameObject FullIllust;
         public Text Name, Subname, ConstelName;
         public Slider RarityBar;
 
@@ -25,6 +27,8 @@ namespace Album
         [Header("Frame Panel")]
         public Scrollbar VerticalBar;
 
+        public Button[] BasicUI;
+
         public void Show(int charIndex, int cardIndex)
         {
             gameObject.SetActive(true);
@@ -32,6 +36,7 @@ namespace Album
             var character = Variables.Characters[charIndex];
             // TODO: Action for ShortImage & ConstelImage & ConstelName
             ShortImage.sprite = Resources.Load<Sprite>("Characters/" + character.InternalName + "/" + character.Cards[cardIndex].InternalSubname + "/image_album");
+            FullImage.sprite = Resources.Load<Sprite>("Characters/" + character.InternalName + "/" + character.Cards[cardIndex].InternalSubname + "/image_full");
             Name.text = character.Name;
             Subname.text = character.Cards[cardIndex].Subname;
             RarityBar.value = character.Cards[cardIndex].Rarity;
@@ -65,13 +70,52 @@ namespace Album
                 else
                     StoryElement[i].SetActive(false);
             }
-
+            ActivateUI(false);
             VerticalBar.value = 1;
         }
 
         public void Hide()
         {
             gameObject.SetActive(false);
+            ActivateUI(true);
+        }
+
+        public void ShowFullImage()
+        {
+            FullIllust.gameObject.SetActive(true);
+        }
+
+        public void HideFullImage()
+        {
+            FullIllust.gameObject.SetActive(false);
+        }
+
+        public void Awake()
+        {
+            GameObject obj = GameObject.Find("UI Canvas");
+            if(obj!=null) BasicUI = obj.GetComponentsInChildren<Button>();
+        }
+
+        public void ActivateUI(bool activate)
+        {
+            if(BasicUI == null)
+            {
+                return;
+            }
+            if (activate)
+            {
+                foreach (Button btn in BasicUI)
+                {
+                    btn.interactable = true;
+                }
+            }
+            else
+            {
+                foreach (Button btn in BasicUI)
+                {
+                    btn.interactable = false;
+                }
+            }
         }
     }
 }

@@ -7,9 +7,21 @@ public class ClickableObject : MonoBehaviour
 {
     public UnityEvent Pressed;
     public UnityEvent Clicked;
+    private bool enable;
+
+    private void Start()
+    {
+        SetEnable(true);
+    }
+
+    public void SetEnable(bool enable)
+    {
+        this.enable = enable;
+    }
 
     public void OnMouseDown()
     {
-        Clicked.Invoke();
+        if(enable)
+            Clicked.Invoke();
     }
 }
