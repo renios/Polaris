@@ -7,9 +7,10 @@ namespace Album
 {
     public class AlbumPageElement : MonoBehaviour
     {
-        public Text Name, Subname;
+        public Text Name, Subname, ConstelName;
         public Image Thumbnail;
-        public Slider RarityBar;
+        public Slider RarityBar, FavorityGage;
+        public Text FavorLevel, FavorityLeft;
         public GameObject MaskObject, NewFlag;
 
         public int CharIndex, CardIndex;
@@ -24,6 +25,45 @@ namespace Album
             }
             if (maxAvailable >= Variables.Characters[CharIndex].Cards[CardIndex].StoryProgress)
                 NewFlag.SetActive(true);
+        }
+
+        public void Set(CharacterData data)
+        {
+            Name.text = data.Name;
+            Subname.text = data.Cards[CardIndex].Subname;
+            ConstelName.text = "";
+            for (int i = 0; i < data.ConstelKey.Length; i++)
+            {
+                if (i > 0)
+                    ConstelName.text += ", ";
+                ConstelName.text += Variables.Constels[data.ConstelKey[i]].Name;
+            }
+            RarityBar.value = data.Cards[CardIndex].Rarity;
+
+            // Check favority
+            var favority = data.Cards[CardIndex].Favority;
+            int cnt = 0, clrdFavority = 0;
+            for(; cnt < Variables.FavorityThreshold.Length; cnt++)
+            {
+                if (favority < Variables.FavorityThreshold[cnt])
+                    break;
+                clrdFavority += Variables.FavorityThreshold[cnt];
+            }
+            FavorLevel.text = cnt.ToString();
+            if (cnt >= Variables.FavorityThreshold.Length)
+            {
+                FavorityLeft.text = "FULL";
+                FavorityGage.maxValue = 1;
+                FavorityGage.value = 1;
+            }
+            else
+            {
+                FavorityLeft.text = (favority - clrdFavority).ToString() + "/" + Variables.FavorityThreshold[cnt].ToString();
+                FavorityGage.maxValue = Variables.FavorityThreshold[cnt];
+                FavorityGage.value = favority - clrdFavority;
+            }
+
+            CheckNewStory();
         }
 
         public void Clicked()
