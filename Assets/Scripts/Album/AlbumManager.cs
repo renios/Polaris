@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
 using LitJson;
 
@@ -12,6 +13,8 @@ namespace Album
 
         public GameObject PageParent;
         public AlbumCharInfo CharPopup;
+        public HorizontalScrollSnap AlbumSnap;
+        public Text PageNumber;
 
         private readonly int maxPageElement = 6;
 
@@ -30,11 +33,20 @@ namespace Album
         {
             var raw = Resources.Load<TextAsset>("Data/Characters");
             var charGroup = JsonMapper.ToObject<CharacterDataGroup>(raw.text);
+            var constelRaw = Resources.Load<TextAsset>("Data/Constels");
+            var constelGroup = JsonMapper.ToObject(constelRaw.text);
 
             Variables.Characters = new Dictionary<int, CharacterData>();
             foreach (CharacterDataCore data in charGroup.Characters)
             {
                 Variables.Characters.Add(data.CharNumber, data);
+            }
+
+            Variables.Constels = new Dictionary<string, ConstelData>();
+            foreach (JsonData data in constelGroup["constels"])
+            {
+                var newConstel = new ConstelData((string)data["key"], (string)data["name"]);
+                Variables.Constels.Add(newConstel.InternalName, newConstel);
             }
         }
 
@@ -58,6 +70,12 @@ namespace Album
                     iCnt++;
                 }
             }
+            ChangePageIndex();
+        }
+
+        public void ChangePageIndex()
+        {
+            PageNumber.text = (AlbumSnap.CurrentPage + 1).ToString() + " / " + PageParent.transform.childCount.ToString();
         }
 
         // Use this for initialization
