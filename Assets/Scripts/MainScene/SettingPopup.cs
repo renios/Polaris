@@ -1,32 +1,57 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SettingPopup : MonoBehaviour {
 
     public ClickableObject[] clickables;
-    public GameObject obj;
+    public Button[] buttons;
 
-    public void show()
+    public void Show()
     {
-        obj = GameObject.Find("Room");
-        if(obj!=null) clickables = obj.GetComponentsInChildren<ClickableObject>();
         gameObject.SetActive(true);
-        if (clickables == null) return;
-        foreach (ClickableObject obj in clickables)
+        if (clickables != null)
         {
-            obj.SetEnable(false);
+            foreach (ClickableObject obj in clickables)
+            {
+                obj.SetEnable(false);
+            }
+        }
+        if(buttons != null)
+        {
+            foreach (Button obj in buttons)
+            {
+                obj.interactable = false;
+            }
         }
     }
 
-    public void hide()
+    public void Hide()
     {
         gameObject.SetActive(false);
-        if (clickables == null) return;
-        foreach (ClickableObject obj in clickables)
+        if (clickables != null)
         {
-            obj.SetEnable(true);
+            foreach (ClickableObject obj in clickables)
+            {
+                obj.SetEnable(true);
+            }
         }
-        clickables = null;
+        if (buttons != null)
+        {
+            foreach (Button obj in buttons)
+            {
+                obj.interactable = true;
+            }
+        }
     }
+
+    public void Awake()
+    {
+        GameObject obj = GameObject.Find("Main UI Canvas").transform.Find("Navigate Panel").gameObject;
+        if (obj != null) buttons = obj.GetComponentsInChildren<Button>();
+        GameObject obj2 = GameObject.Find("Room");
+        if (obj2 != null) clickables = obj2.GetComponentsInChildren<ClickableObject>();
+    }
+
 }
