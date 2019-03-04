@@ -1,32 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SettingPopup : MonoBehaviour {
 
     public ClickableObject[] clickables;
-    public GameObject obj;
 
-    public void show()
+    public void Show()
     {
-        obj = GameObject.Find("Room");
-        if(obj!=null) clickables = obj.GetComponentsInChildren<ClickableObject>();
         gameObject.SetActive(true);
-        if (clickables == null) return;
-        foreach (ClickableObject obj in clickables)
+        if (clickables != null)
         {
-            obj.SetEnable(false);
+            foreach (ClickableObject obj in clickables)
+            {
+                obj.SetEnable(false);
+            }
         }
     }
 
-    public void hide()
+    public void Hide()
     {
         gameObject.SetActive(false);
-        if (clickables == null) return;
-        foreach (ClickableObject obj in clickables)
+        if (clickables != null)
         {
-            obj.SetEnable(true);
+            foreach (ClickableObject obj in clickables)
+            {
+                obj.SetEnable(true);
+            }
         }
-        clickables = null;
     }
+
+    public void Awake()
+    {
+        GameObject obj2 = GameObject.Find("Room");
+        if (obj2 != null) clickables = obj2.GetComponentsInChildren<ClickableObject>();
+    }
+
 }
