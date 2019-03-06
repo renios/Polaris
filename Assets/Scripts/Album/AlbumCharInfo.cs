@@ -22,32 +22,64 @@ namespace Album
         [Header("Story Informations")]
         public Text FavorityLevel;
         public Text RequiredFavority;
+        public Slider FavorityGage;
         public GameObject[] StoryElement;
+        public GameObject StoryMsgBox;
 
         [Header("Frame Panel")]
         public Scrollbar VerticalBar;
+        public GameObject UpArrow, DownArrow;
 
         public Button[] BasicUI;
+
+        private void Update()
+        {
+            if (UpArrow.activeSelf && VerticalBar.value >= 1)
+                UpArrow.SetActive(false);
+            if (!UpArrow.activeSelf && VerticalBar.value < 1)
+                UpArrow.SetActive(true);
+            if (DownArrow.activeSelf && VerticalBar.value <= 0)
+                DownArrow.SetActive(false);
+            if (!DownArrow.activeSelf && VerticalBar.value > 0)
+                DownArrow.SetActive(true);
+        }
 
         public void Show(int charIndex, int cardIndex)
         {
             gameObject.SetActive(true);
 
             var character = Variables.Characters[charIndex];
-            // TODO: Action for ShortImage & ConstelImage & ConstelName
             ShortImage.sprite = Resources.Load<Sprite>("Characters/" + character.InternalName + "/" + character.Cards[cardIndex].InternalSubname + "/image_album");
             FullImage.sprite = Resources.Load<Sprite>("Characters/" + character.InternalName + "/" + character.Cards[cardIndex].InternalSubname + "/image_full");
             Name.text = character.Name;
             Subname.text = character.Cards[cardIndex].Subname;
+            ConstelName.text = Variables.Constels[character.ConstelKey[0]].Name;
             RarityBar.value = character.Cards[cardIndex].Rarity;
             Lux.text = character.Lux;
             Distance.text = character.LYDistance;
             CharDescription.text = character.Description;
-            FavorityLevel.text = character.Cards[cardIndex].StoryProgress.ToString();
-            if (character.Cards[cardIndex].StoryProgress >= character.Cards[cardIndex].Rarity)
-                RequiredFavority.text = "-";
+
+            var favority = character.Cards[cardIndex].Favority;
+            int cnt = 0, clrdFavority = 0;
+            for (; cnt < Variables.FavorityThreshold.Length; cnt++)
+            {
+                if (favority < Variables.FavorityThreshold[cnt])
+                    break;
+                clrdFavority += Variables.FavorityThreshold[cnt];
+            }
+            FavorityLevel.text = cnt.ToString();
+            if (cnt >= Variables.FavorityThreshold.Length)
+            {
+                RequiredFavority.text = "FULL";
+                FavorityGage.maxValue = 1;
+                FavorityGage.value = 1;
+            }
             else
-                RequiredFavority.text = (Variables.FavorityThreshold[character.Cards[cardIndex].StoryProgress] - character.Cards[cardIndex].Favority).ToString();
+            {
+                RequiredFavority.text = (favority - clrdFavority).ToString() + "/" + Variables.FavorityThreshold[cnt].ToString();
+                FavorityGage.maxValue = Variables.FavorityThreshold[cnt];
+                FavorityGage.value = favority - clrdFavority;
+            }
 
             int maxAvailable = 0;
             for (; maxAvailable < 5; maxAvailable++)
@@ -72,6 +104,8 @@ namespace Album
             }
             ActivateUI(false);
             VerticalBar.value = 1;
+            LayoutRebuilder.MarkLayoutForRebuild(StoryElement[0].transform.parent as RectTransform);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(StoryElement[0].transform.parent as RectTransform);
         }
 
         public void Hide()
@@ -88,6 +122,24 @@ namespace Album
         public void HideFullImage()
         {
             FullIllust.gameObject.SetActive(false);
+        }
+
+        int curStoryIndex = -1;
+
+        public void AskToRunStory(int index)
+        {
+            curStoryIndex = index;
+            StoryMsgBox.SetActive(true);
+            StoryMsgBox.GetComponentInChildren<Text>().text = "'" + StoryElement[index].GetComponent<AlbumStoryElement>().StoryHeader.text + "'\n대화를 다시 보시겠어요?";
+        }
+
+        public void RunStory()
+        {
+            Variables.DialogAfterScene = SceneChanger.GetCurrentScene();
+            Variables.DialogCharIndex = StoryElement[curStoryIndex].GetComponent<AlbumStoryElement>().charIndex;
+            Variables.DialogCardIndex = StoryElement[curStoryIndex].GetComponent<AlbumStoryElement>().cardIndex;
+            Variables.DialogChapterIndex = StoryElement[curStoryIndex].GetComponent<AlbumStoryElement>().storyIndex;
+            SceneChanger.Instance.ChangeScene("NewDialogScene", 2);
         }
 
         public void Awake()
