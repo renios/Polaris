@@ -137,8 +137,6 @@ namespace Album
 
         public void RunStory()
         {
-            // TODO: 약간 쉬어야 함
-            SoundManager.Play(SoundType.ClickImportant);
             Variables.DialogAfterScene = SceneChanger.GetCurrentScene();
             Variables.DialogCharIndex = StoryElement[curStoryIndex].GetComponent<AlbumStoryElement>().charIndex;
             Variables.DialogCardIndex = StoryElement[curStoryIndex].GetComponent<AlbumStoryElement>().cardIndex;
