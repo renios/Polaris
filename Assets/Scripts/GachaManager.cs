@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 public class GachaManager : MonoBehaviour {
-
+    
     GameObject skyImage = null;
     GameObject uiCircle = null;
 
@@ -96,12 +96,14 @@ public class GachaManager : MonoBehaviour {
         */
         //@
 
+        /*
         if(uiCircle.transform.position != prevPos)
         {
             Constellation = Constellation.ToDictionary(p => p.Key, p => 0f); // Reset
             prevPos = uiCircle.transform.position;
             shotRay();
         }
+        */
 	}
 
     public void shotRay()
@@ -201,5 +203,4 @@ public class GachaManager : MonoBehaviour {
     {
         skyImage.transform.position += new Vector3(0, moveLength, 0);
     }
-
 }
