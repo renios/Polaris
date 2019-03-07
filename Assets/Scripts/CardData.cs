@@ -10,8 +10,8 @@ public struct CardData
     public string Subname;
     public string InternalSubname;
     public int Rarity;
-    public string[] ChapterHeader;
-    public string[] ChapterDesc;
+    public bool Observable;
+    public CardStoryData[] ChapterInfo;
 
     public bool Observed;
     public int Favority;
@@ -23,8 +23,8 @@ public struct CardDataCore
     public string Subname;
     public string InternalSubname;
     public int Rarity;
-    public string[] ChapterHeader;
-    public string[] ChapterDesc;
+    public bool Observable;
+    public CardStoryData[] ChapterInfo;
 
     public static implicit operator CardData(CardDataCore c)
     {
@@ -33,11 +33,18 @@ public struct CardDataCore
             Subname = c.Subname,
             InternalSubname = c.InternalSubname,
             Rarity = c.Rarity,
-            ChapterHeader = c.ChapterHeader.Clone() as string[],
-            ChapterDesc = c.ChapterDesc.Clone() as string[],
-            Observed = true,
+            Observable = c.Observable,
+            ChapterInfo = c.ChapterInfo.Clone() as CardStoryData[],
+            Observed = c.Observable,
             Favority = 0,
             StoryProgress = 0,
         };
     }
+}
+
+public struct CardStoryData
+{
+    public string Header;
+    public string Description;
+    public string[] Additional;
 }
