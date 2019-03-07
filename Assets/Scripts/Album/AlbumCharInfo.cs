@@ -109,7 +109,7 @@ namespace Album
 
         public void Hide()
         {
-            SoundManager.Play(SoundType.ClickNormal);
+            SoundManager.Play(SoundType.ClickDialogue);
             gameObject.SetActive(false);
         }
 
@@ -121,7 +121,7 @@ namespace Album
 
         public void HideFullImage()
         {
-            SoundManager.Play(SoundType.ClickNormal);
+            SoundManager.Play(SoundType.ClickDialogue);
             FullIllust.gameObject.SetActive(false);
         }
 
