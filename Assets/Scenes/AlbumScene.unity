@@ -1490,6 +1490,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StoryHeader: {fileID: 274461560}
   StoryDescription: {fileID: 561136042}
+  AddiInfoTemplate: {fileID: 0}
+  AddiInfoParent: {fileID: 0}
   charIndex: 0
   cardIndex: 0
   storyIndex: 0
@@ -2770,6 +2772,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1188340392}
   - {fileID: 1753703450}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -3462,7 +3465,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 984, y: 1560}
+  m_SizeDelta: {x: 900, y: 1600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &402583923
 CanvasRenderer:
@@ -3713,27 +3716,67 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 442791668}
+  - component: {fileID: 442791670}
+  - component: {fileID: 442791669}
   m_Layer: 5
   m_Name: Full Illust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &442791668
-Transform:
+  m_IsActive: 0
+--- !u!224 &442791668
+RectTransform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 442791667}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 996779704}
   m_Father: {fileID: 1188340392}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &442791669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 442791667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.39215687}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &442791670
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 442791667}
 --- !u!1 &454518116
 GameObject:
   m_ObjectHideFlags: 0
@@ -5783,6 +5826,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StoryHeader: {fileID: 44955054}
   StoryDescription: {fileID: 642806619}
+  AddiInfoTemplate: {fileID: 0}
+  AddiInfoParent: {fileID: 0}
   charIndex: 0
   cardIndex: 0
   storyIndex: 0
@@ -8055,7 +8100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &996779704
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8072,8 +8117,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -20, y: -30}
-  m_SizeDelta: {x: 1024, y: 1600}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 950, y: 1650}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &996779705
 MonoBehaviour:
@@ -9488,8 +9533,8 @@ RectTransform:
   m_Children:
   - {fileID: 2120147178}
   - {fileID: 442791668}
-  m_Father: {fileID: 2055628157}
-  m_RootOrder: 2
+  m_Father: {fileID: 293818594}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -9543,7 +9588,7 @@ MonoBehaviour:
   ShortImage: {fileID: 1339543234}
   ConstelImage: {fileID: 977104607}
   FullImage: {fileID: 402583924}
-  FullIllust: {fileID: 996779703}
+  FullIllust: {fileID: 442791667}
   Name: {fileID: 1004324533}
   Subname: {fileID: 2091803260}
   ConstelName: {fileID: 1406250050}
@@ -10313,6 +10358,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StoryHeader: {fileID: 1188745921}
   StoryDescription: {fileID: 261169420}
+  AddiInfoTemplate: {fileID: 0}
+  AddiInfoParent: {fileID: 0}
   charIndex: 0
   cardIndex: 0
   storyIndex: 0
@@ -13426,6 +13473,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StoryHeader: {fileID: 1827135134}
   StoryDescription: {fileID: 945439506}
+  AddiInfoTemplate: {fileID: 0}
+  AddiInfoParent: {fileID: 0}
   charIndex: 0
   cardIndex: 0
   storyIndex: 0
@@ -13552,6 +13601,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StoryHeader: {fileID: 1623698858}
   StoryDescription: {fileID: 1315792551}
+  AddiInfoTemplate: {fileID: 0}
+  AddiInfoParent: {fileID: 0}
   charIndex: 0
   cardIndex: 0
   storyIndex: 0
@@ -14130,7 +14181,7 @@ RectTransform:
   m_Children:
   - {fileID: 1810754114}
   m_Father: {fileID: 293818594}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -15614,6 +15665,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StoryHeader: {fileID: 1924367638}
   StoryDescription: {fileID: 737049539}
+  AddiInfoTemplate: {fileID: 0}
+  AddiInfoParent: {fileID: 0}
   charIndex: 0
   cardIndex: 0
   storyIndex: 0
@@ -16596,7 +16649,6 @@ RectTransform:
   m_Children:
   - {fileID: 599450995}
   - {fileID: 1763591278}
-  - {fileID: 1188340392}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

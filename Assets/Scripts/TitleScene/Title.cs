@@ -10,6 +10,7 @@ public class Title : MonoBehaviour {
     private SpriteRenderer TouchToScreen;
     private bool Finish;
     private bool Stop;
+    private bool SceneChanging;
     float TextEffect;
 
     void Awake()
@@ -23,8 +24,11 @@ public class Title : MonoBehaviour {
         speed = -1.0f; TextEffect = 0.0f;
         Finish = false;
         Stop = false;
+        SceneChanging = false;
         TitleLogo.color = new Color(1, 1, 1, 0);
         TouchToScreen.color = new Color(1, 1, 1, 0);
+
+        SoundManager.Play(SoundType.BgmTitle);
     }
 
     void Update () {
@@ -64,11 +68,19 @@ public class Title : MonoBehaviour {
 
     public void SkipAnimation()
     {
+        if (SceneChanging) return;
+
         if (!Finish) Finish = true;
         else
         {
-            SceneChanger.Instance.ChangeScene("MainScene", 0);
+            SceneChanging = true;
+            StartCoroutine(ChangeScene());
         }
     }
 
+    IEnumerator ChangeScene() {
+        SoundManager.Play(SoundType.ClickImportant);
+        yield return new WaitForSeconds(0.5f);
+        SceneChanger.Instance.ChangeScene("MainScene", 0);
+    }
 }

@@ -102,7 +102,6 @@ namespace Album
                 else
                     StoryElement[i].SetActive(false);
             }
-            ActivateUI(false);
             VerticalBar.value = 1;
             LayoutRebuilder.MarkLayoutForRebuild(StoryElement[0].transform.parent as RectTransform);
             LayoutRebuilder.ForceRebuildLayoutImmediate(StoryElement[0].transform.parent as RectTransform);
@@ -111,7 +110,6 @@ namespace Album
         public void Hide()
         {
             gameObject.SetActive(false);
-            ActivateUI(true);
         }
 
         public void ShowFullImage()
@@ -142,32 +140,6 @@ namespace Album
             SceneChanger.Instance.ChangeScene("NewDialogScene", 2);
         }
 
-        public void Awake()
-        {
-            GameObject obj = GameObject.Find("UI Canvas");
-            if(obj!=null) BasicUI = obj.GetComponentsInChildren<Button>();
-        }
-
-        public void ActivateUI(bool activate)
-        {
-            if(BasicUI == null)
-            {
-                return;
-            }
-            if (activate)
-            {
-                foreach (Button btn in BasicUI)
-                {
-                    btn.interactable = true;
-                }
-            }
-            else
-            {
-                foreach (Button btn in BasicUI)
-                {
-                    btn.interactable = false;
-                }
-            }
-        }
+        
     }
 }
