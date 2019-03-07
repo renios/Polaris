@@ -122,14 +122,16 @@ public class TouchManager : MonoBehaviour {
             }
         }
 
-        var Char_Prob = ();
+        // Memo: 컴파일 에러로 임시 주석처리
+        // var Char_Prob = ();
 
         // var Constellation_desc = Constellation.OrderByDescending(p => p.Value);
 
         for (int i = 0; i < 4; i++)
         {
             //@
-            KeyValuePair<string, float> conRank = Constellation_desc.ElementAt(i);
+            // Memo: 컴파일 에러로 임시 주석처리
+            // KeyValuePair<string, float> conRank = Constellation_desc.ElementAt(i);
             //@
             //Debug.Log(conRank.Key + ": " + Mathf.Round(conRank.Value / all * 10000) / 100 + "% (" + conRank.Value + ")");
         }
