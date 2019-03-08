@@ -23,7 +23,7 @@ namespace Album
             Instance = this;
 
             // Debug and test only
-            LoadCharacter();
+            //LoadCharacter();
 
             ConstructAlbum();
         }
