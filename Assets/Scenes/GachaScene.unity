@@ -3967,7 +3967,7 @@ GameObject:
   - component: {fileID: 637710971}
   - component: {fileID: 637710970}
   m_Layer: 5
-  m_Name: Loading Canvas (1)
+  m_Name: Loading Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3984,8 +3984,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5afa3a7514948c84bbcec425378cb3ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Motion: {fileID: 0}
-  Bar: {fileID: 0}
+  Motion: {fileID: 637710971}
+  Bar: {fileID: 1655594148}
 --- !u!95 &637710971
 Animator:
   serializedVersion: 3
@@ -8403,7 +8403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e584424252f354e9b4d10ac4e4d58d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FillBody: {fileID: 0}
+  FillBody: {fileID: 1548000715}
 --- !u!224 &1655594149
 RectTransform:
   m_ObjectHideFlags: 0
