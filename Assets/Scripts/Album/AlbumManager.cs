@@ -81,7 +81,7 @@ namespace Album
         // Use this for initialization
         void Start()
         {
-            SoundManager.Play(SoundType.BgmMain);
+
         }
 
         // Update is called once per frame

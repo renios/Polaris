@@ -14,7 +14,6 @@ public class MouseEffectManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetMouseButtonDown(0)) {
-			// SoundManager.Play(SoundType.ClickDialogue);
 			var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			Instantiate(Effect, new Vector3(mousePosition.x, mousePosition.y, 0), Quaternion.identity);
 		}
