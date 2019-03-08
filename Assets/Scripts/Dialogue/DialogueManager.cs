@@ -67,6 +67,7 @@ namespace Dialogue
                 else
                 {
                     Debug.Log("Good!");
+                    SoundManager.Play(SoundType.ClickDialogue);
                     var newObject = Instantiate(ObjectTemplate[curDialogData.Type]);
                     var newDialogObj = newObject.GetComponentInChildren<DialogueObject>();
 

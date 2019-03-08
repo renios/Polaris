@@ -2463,7 +2463,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2101109946}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -2828,7 +2828,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2101109946}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -8048,7 +8048,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 81.9, y: 76}
+  m_AnchoredPosition: {x: 81.899994, y: 76}
   m_SizeDelta: {x: 99, y: 87}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &982532827
@@ -8495,7 +8495,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2101109946}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -9056,7 +9056,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 81.9, y: 76}
+  m_AnchoredPosition: {x: 81.899994, y: 76}
   m_SizeDelta: {x: 99, y: 87}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1119548013
@@ -11124,7 +11124,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 81.9, y: 76}
+  m_AnchoredPosition: {x: 81.899994, y: 76}
   m_SizeDelta: {x: 99, y: 87}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1412953510
@@ -12063,7 +12063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 81.9, y: 76}
+  m_AnchoredPosition: {x: 81.899994, y: 76}
   m_SizeDelta: {x: 99, y: 87}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1531998141
@@ -15490,7 +15490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 81.9, y: 76}
+  m_AnchoredPosition: {x: 81.899994, y: 76}
   m_SizeDelta: {x: 99, y: 87}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1880444956
@@ -16467,7 +16467,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 81.9, y: 76}
+  m_AnchoredPosition: {x: 81.899994, y: 76}
   m_SizeDelta: {x: 99, y: 87}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1983568705
@@ -16601,7 +16601,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2055628153
@@ -16668,7 +16668,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2101109946}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -17072,7 +17072,6 @@ GameObject:
   - component: {fileID: 2101109946}
   - component: {fileID: 2101109945}
   - component: {fileID: 2101109944}
-  - component: {fileID: 2101109948}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -17143,17 +17142,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2101109948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2101109943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90f5f74af414a414a89f408c9e49f50b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2103672531
 GameObject:
   m_ObjectHideFlags: 0
