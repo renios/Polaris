@@ -121,7 +121,7 @@ public class TouchManager : MonoBehaviour {
                 CastRay(pos);
             }
         }
-
+        
         Dictionary<string, float> charProb = new Dictionary<string, float>();
 
         foreach (var key in Character.Keys)
@@ -140,6 +140,8 @@ public class TouchManager : MonoBehaviour {
             Debug.Log(charRank.Key + ": " + charRank.Value);
             //@
             //KeyValuePair<string, float> conRank = Constellation_desc.ElementAt(i);
+            // Memo: 컴파일 에러로 임시 주석처리
+            // KeyValuePair<string, float> conRank = Constellation_desc.ElementAt(i);
             //@
             //Debug.Log(conRank.Key + ": " + Mathf.Round(conRank.Value / all * 10000) / 100 + "% (" + conRank.Value + ")");
         }
