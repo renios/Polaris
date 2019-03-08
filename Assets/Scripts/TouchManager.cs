@@ -122,14 +122,24 @@ public class TouchManager : MonoBehaviour {
             }
         }
 
-        var Char_Prob = ();
+        Dictionary<string, float> charProb = new Dictionary<string, float>();
 
-        // var Constellation_desc = Constellation.OrderByDescending(p => p.Value);
+        foreach (var key in Character.Keys)
+        {
+            if(key != "CatsEye")
+                charProb.Add(key, Constellation[Character[key]]);
+            else
+                charProb.Add(key, Constellation[Character[key]] * 0.4f);
+        }
 
+        var Char_desc = charProb.OrderByDescending(p => p.Value);
+        
         for (int i = 0; i < 4; i++)
         {
+            KeyValuePair<string, float> charRank = Char_desc.ElementAt(i);
+            Debug.Log(charRank.Key + ": " + charRank.Value);
             //@
-            KeyValuePair<string, float> conRank = Constellation_desc.ElementAt(i);
+            //KeyValuePair<string, float> conRank = Constellation_desc.ElementAt(i);
             //@
             //Debug.Log(conRank.Key + ": " + Mathf.Round(conRank.Value / all * 10000) / 100 + "% (" + conRank.Value + ")");
         }
