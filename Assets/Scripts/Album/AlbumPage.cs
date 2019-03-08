@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Album
 {
@@ -21,12 +20,8 @@ namespace Album
             if (cardData.Observed)
                 newElement.Set(Variables.Characters[charIndex]);
             else
-            {
                 newElement.MaskObject.SetActive(true);
-                newElement.GetComponent<Button>().interactable = false;
-            }
             newObj.transform.SetParent(ElementParent);
-            newObj.transform.localScale = Vector3.one;
             newObj.SetActive(true);
         }
     }

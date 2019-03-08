@@ -121,15 +121,25 @@ public class TouchManager : MonoBehaviour {
                 CastRay(pos);
             }
         }
+        
+        Dictionary<string, float> charProb = new Dictionary<string, float>();
 
-        // Memo: 컴파일 에러로 임시 주석처리
-        // var Char_Prob = ();
+        foreach (var key in Character.Keys)
+        {
+            if(key != "CatsEye")
+                charProb.Add(key, Constellation[Character[key]]);
+            else
+                charProb.Add(key, Constellation[Character[key]] * 0.4f);
+        }
 
-        // var Constellation_desc = Constellation.OrderByDescending(p => p.Value);
-
+        var Char_desc = charProb.OrderByDescending(p => p.Value);
+        
         for (int i = 0; i < 4; i++)
         {
+            KeyValuePair<string, float> charRank = Char_desc.ElementAt(i);
+            Debug.Log(charRank.Key + ": " + charRank.Value);
             //@
+            //KeyValuePair<string, float> conRank = Constellation_desc.ElementAt(i);
             // Memo: 컴파일 에러로 임시 주석처리
             // KeyValuePair<string, float> conRank = Constellation_desc.ElementAt(i);
             //@
