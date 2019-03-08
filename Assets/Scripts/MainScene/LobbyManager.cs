@@ -15,7 +15,6 @@ public class LobbyManager : MonoBehaviour
 
     void Start()
     {
-        SoundManager.Play(SoundType.BgmMain);
         currentCamera = -1;
     }
 
@@ -42,7 +41,6 @@ public class LobbyManager : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
-        SoundManager.Play(SoundType.ClickImportant);
         SceneChanger.Instance.ChangeScene(sceneName, 2);
     }
 

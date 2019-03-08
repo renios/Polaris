@@ -37,7 +37,6 @@ namespace Dialogue
 
         private void Start()
         {
-            SoundManager.Play(SoundType.BgmMain);
             ShowDialogue();
         }
 
@@ -100,7 +99,6 @@ namespace Dialogue
 
         public IEnumerator GetButtonInput(DialogueObject dialog, string text, int nextPhase)
         {
-            SoundManager.Play(SoundType.ClickNormal);
             yield return dialog.Delete();
             ShowDialogue(new DialogueContent() { Type = 1, DialogText = text });
             if (nextPhase > -1)

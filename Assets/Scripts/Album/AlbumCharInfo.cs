@@ -109,19 +109,16 @@ namespace Album
 
         public void Hide()
         {
-            SoundManager.Play(SoundType.ClickDialogue);
             gameObject.SetActive(false);
         }
 
         public void ShowFullImage()
         {
-            SoundManager.Play(SoundType.ClickNormal);
             FullIllust.gameObject.SetActive(true);
         }
 
         public void HideFullImage()
         {
-            SoundManager.Play(SoundType.ClickDialogue);
             FullIllust.gameObject.SetActive(false);
         }
 
@@ -129,7 +126,6 @@ namespace Album
 
         public void AskToRunStory(int index)
         {
-            SoundManager.Play(SoundType.ClickNormal);
             curStoryIndex = index;
             StoryMsgBox.SetActive(true);
             StoryMsgBox.GetComponentInChildren<Text>().text = "'" + StoryElement[index].GetComponent<AlbumStoryElement>().StoryHeader.text + "'\n대화를 다시 보시겠어요?";
