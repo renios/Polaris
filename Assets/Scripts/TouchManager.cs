@@ -1,13 +1,11 @@
-﻿using System.Collections;
+﻿using LitJson;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class TouchManager : MonoBehaviour {
-
-    // 1. Scope Moving as Touch
-    // 2. Shot Ray -> Choose Top 4
-
+    
     GameObject Scope = null;
 
     private float skyRadius = 4.6f;
@@ -16,9 +14,11 @@ public class TouchManager : MonoBehaviour {
 
     private bool touchOn = false;
     private Touch tempTouchs;
+    private int divideCount = 20;
     
     Dictionary<string, float> Constellation = new Dictionary<string, float>();
     Dictionary<string, string> Character = new Dictionary<string, string>(); // 캐릭터이름, 별자리이름
+    Dictionary<string, float> charProb = new Dictionary<string, float>();
 
     // Use this for initialization
     void Start () {
@@ -32,14 +32,25 @@ public class TouchManager : MonoBehaviour {
         Constellation.Add("Eridanus", 0f);
         Constellation.Add("CanisMajor", 0f);
 
-        Character.Add("Acher", "Eridanus");
-        Character.Add("CatsEye", "Draco");
-        Character.Add("Melik", "Aquarius");
-        Character.Add("Pluto", "Sagittarius");
-        Character.Add("Polaris", "UrsaMinor");
-        Character.Add("Sirius", "CanisMajor");
-        Character.Add("Thuvan", "Draco");
-        Character.Add("Vega", "Lyra");
+        Character.Add("acher", "Eridanus");
+        Character.Add("catseye", "Draco");
+        Character.Add("melik", "Aquarius");
+        Character.Add("pluto", "Sagittarius");
+        Character.Add("polaris", "UrsaMinor");
+        Character.Add("sirius", "CanisMajor");
+        Character.Add("thuban", "Draco");
+        Character.Add("vega", "Lyra");
+
+        Variables.Constels = new Dictionary<string, ConstelData>();
+
+        var constelRaw = Resources.Load<TextAsset>("Data/Constels");
+        var constelGroup = JsonMapper.ToObject(constelRaw.text);
+
+        foreach (JsonData data in constelGroup["constels"])
+        {
+            var newConstel = new ConstelData((string)data["key"], (string)data["name"]);
+            Variables.Constels.Add(newConstel.InternalName, newConstel);
+        }
     }
 	
 	// Update is called once per frame
@@ -51,7 +62,7 @@ public class TouchManager : MonoBehaviour {
 
     public void ScopeMove()
     {
-        Vector2 center = new Vector2(-0.17f, 3.79f);
+        Vector2 center = new Vector2(0f, 3.78f);
         
         touchOn = false;
         if (Input.touchCount > 0)
@@ -85,7 +96,6 @@ public class TouchManager : MonoBehaviour {
 
         if(Input.GetMouseButton(0))
         {
-            Debug.Log(Input.mousePosition);
             Vector3 mos = (Input.mousePosition / 100f) + new Vector3(-5.4f, -9.6f, -1f);
             
             if (Vector3.Distance(mos, centerT) < skyRadius)
@@ -99,11 +109,22 @@ public class TouchManager : MonoBehaviour {
                     Scope.transform.localPosition = mos;
                 }
             }
+            shotRay();
         }
     }
 
     public void shotRay()
     {
+        charProb.Clear();
+
+        Constellation["Draco"] = 0f;
+        Constellation["UrsaMinor"] = 0f;
+        Constellation["Lyra"] = 0f;
+        Constellation["Sagittarius"] = 0f;
+        Constellation["Aquarius"] = 0f;
+        Constellation["Eridanus"] = 0f;
+        Constellation["CanisMajor"] = 0f;
+
         Vector3 pos = Scope.transform.position;
 
         CastRay(pos);
@@ -111,39 +132,38 @@ public class TouchManager : MonoBehaviour {
         CastRay(pos);
         CastRay(pos);
 
-        for (float i = 1; i <= 200; i++)
+        for (float i = 1; i <= divideCount; i++)
         {
             for (float j = 0; j < i * 18f; j++)
             {
-                float r = scopeRadius * 1f / 200f * i;
-                float theta = 2f * Mathf.PI * (j / (18f * i)) + (2f * Mathf.PI / 18 / 200 * (i - 1));
+                float r = scopeRadius * 1f / divideCount * i;
+                float theta = 2f * Mathf.PI * (j / (18f * i)) + (2f * Mathf.PI / 18 / divideCount * (i - 1));
                 pos = Scope.transform.position + new Vector3(r * Mathf.Cos(theta), r * Mathf.Sin(theta), 0);
                 CastRay(pos);
             }
         }
-        
-        Dictionary<string, float> charProb = new Dictionary<string, float>();
 
         foreach (var key in Character.Keys)
         {
-            if(key != "CatsEye")
-                charProb.Add(key, Constellation[Character[key]]);
-            else
+            if(key == "catseye")
                 charProb.Add(key, Constellation[Character[key]] * 0.4f);
+            else
+                charProb.Add(key, Constellation[Character[key]]);
         }
 
         var Char_desc = charProb.OrderByDescending(p => p.Value);
-        
-        for (int i = 0; i < 4; i++)
+
+        GameObject CharSprite = null;
+        GameObject ConstellSprite = GameObject.Find("Constell_Sprite");
+        ConstellSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Constellations/Observation/" + Character[Char_desc.ElementAt(0).Key]);
+        GameObject nowConstell = GameObject.Find("Now_Constell");
+        nowConstell.GetComponent<TextMesh>().text = Variables.Constels[Character[Char_desc.ElementAt(0).Key]].Name;
+
+        for (int i = 1; i <= 4; i++)
         {
-            KeyValuePair<string, float> charRank = Char_desc.ElementAt(i);
-            Debug.Log(charRank.Key + ": " + charRank.Value);
-            //@
-            //KeyValuePair<string, float> conRank = Constellation_desc.ElementAt(i);
-            // Memo: 컴파일 에러로 임시 주석처리
-            // KeyValuePair<string, float> conRank = Constellation_desc.ElementAt(i);
-            //@
-            //Debug.Log(conRank.Key + ": " + Mathf.Round(conRank.Value / all * 10000) / 100 + "% (" + conRank.Value + ")");
+            KeyValuePair<string, float> charRank = Char_desc.ElementAt(i-1);
+            CharSprite = GameObject.Find("Character_" + i.ToString());
+            CharSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Characters/" + charRank.Key + "/default/image_obs");
         }
     }
 

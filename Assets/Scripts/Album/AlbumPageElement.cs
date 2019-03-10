@@ -68,6 +68,7 @@ namespace Album
 
         public void Clicked()
         {
+            SoundManager.Play(SoundType.ClickNormal);
             AlbumManager.Instance.CharPopup.Show(CharIndex, CardIndex);
         }
     }
