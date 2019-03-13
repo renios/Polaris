@@ -11,6 +11,10 @@ public class LobbyManager : MonoBehaviour
     void Awake()
     {
         popup = GameObject.Find("Setting").transform.Find("Setting Panel").gameObject;
+        if (Variables.CameraMove == true)
+        {
+            Camera.main.transform.position = new Vector3(0, 5.0119f, -10);
+        }
     }
 
     void Start()
@@ -43,7 +47,7 @@ public class LobbyManager : MonoBehaviour
     public void ChangeScene(string sceneName)
     {
         SoundManager.Play(SoundType.ClickImportant);
-        SceneChanger.Instance.ChangeScene(sceneName, 2);
+        SceneChanger.Instance.ChangeScene(sceneName);
     }
 
 }

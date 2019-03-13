@@ -48,7 +48,7 @@ namespace Album
             Variables.DialogCharIndex = charIndex;
             Variables.DialogCardIndex = cardIndex;
             Variables.DialogChapterIndex = storyIndex;
-            SceneChanger.Instance.ChangeScene("NewDialogScene", 2);
+            SceneChanger.Instance.ChangeScene("NewDialogScene");
         }
     }
 }

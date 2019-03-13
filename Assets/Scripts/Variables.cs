@@ -9,6 +9,8 @@ public static class Variables
 
     public static readonly int[] FavorityThreshold = { 30, 70, 120, 180, 250 };     // 캐릭터 호감도 문턱에 관한 배열
 
+    public static bool CameraMove;
+
     #region Variables for dialogue scene
     public static int DialogCharIndex;          // 대화 씬에서 참조할 캐릭터 번호
     public static int DialogCardIndex;          // 대화 씬에서 참조할 캐릭터 내 종류 번호

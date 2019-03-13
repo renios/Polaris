@@ -81,6 +81,6 @@ public class Title : MonoBehaviour {
     IEnumerator ChangeScene() {
         SoundManager.Play(SoundType.ClickImportant);
         yield return new WaitForSeconds(0.5f);
-        SceneChanger.Instance.ChangeScene("MainScene", 0);
+        SceneChanger.Instance.ChangeScene("MainScene");
     }
 }
