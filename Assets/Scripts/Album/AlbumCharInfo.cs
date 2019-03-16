@@ -141,7 +141,7 @@ namespace Album
             Variables.DialogCharIndex = StoryElement[curStoryIndex].GetComponent<AlbumStoryElement>().charIndex;
             Variables.DialogCardIndex = StoryElement[curStoryIndex].GetComponent<AlbumStoryElement>().cardIndex;
             Variables.DialogChapterIndex = StoryElement[curStoryIndex].GetComponent<AlbumStoryElement>().storyIndex;
-            SceneChanger.Instance.ChangeScene("NewDialogScene", 2);
+            SceneChanger.Instance.ChangeScene("NewDialogScene");
         }
 
         

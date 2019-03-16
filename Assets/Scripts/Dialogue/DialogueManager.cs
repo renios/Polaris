@@ -47,7 +47,7 @@ namespace Dialogue
             {
                 if(CurrentIndex >= CurrentDialogue.Dialogues[CurrentPhase].Contents.Length)
                 {
-                    SceneChanger.Instance.ChangeScene(Variables.DialogAfterScene, 2);
+                    SceneChanger.Instance.ChangeScene(Variables.DialogAfterScene);
                     return;
                 }
 
@@ -62,7 +62,7 @@ namespace Dialogue
                         ShowDialogue();
                     }
                     else
-                        SceneChanger.Instance.ChangeScene(Variables.DialogAfterScene, 2);
+                        SceneChanger.Instance.ChangeScene(Variables.DialogAfterScene);
                 }
                 else
                 {

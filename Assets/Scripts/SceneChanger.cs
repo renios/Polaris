@@ -15,17 +15,17 @@ public class SceneChanger : MonoBehaviour
         Instance = this;
     }
 
-    public static void ChangeScene(string sceneName, int camera, string motionName = "SceneFadeOut", float motionTime = 0.5f)
+    public static void ChangeScene(string sceneName, string motionName = "SceneFadeOut", float motionTime = 0.5f)
     {
-        Instance.StartCoroutine(Instance.ChangeSceneSub(sceneName, motionName, motionTime, camera));
+        Instance.StartCoroutine(Instance.ChangeSceneSub(sceneName, motionName, motionTime));
     }
 
-    public void ChangeScene(string sceneName, int camera)
+    public void ChangeScene(string sceneName)
     {
-        StartCoroutine(Instance.ChangeSceneSub(sceneName, "SceneFadeOut", 0.5f, camera));
+        StartCoroutine(Instance.ChangeSceneSub(sceneName, "SceneFadeOut", 0.5f));
     }
 
-    public IEnumerator ChangeSceneSub(string sceneName, string motionName, float motionTime, int camera)
+    public IEnumerator ChangeSceneSub(string sceneName, string motionName, float motionTime)
     {
         SoundManager.Play(SoundType.ClickImportant);
         Motion.Play(motionName);
@@ -38,10 +38,6 @@ public class SceneChanger : MonoBehaviour
             Bar.SetValue(loading.progress);
             if (loading.progress >= 0.9f)
             {
-                //0 for Myroom, 1 for Attic, 2 for else
-                if (camera == 0) Camera.main.transform.position = new Vector3(0, -5.0119f, -10);
-                else if (camera == 1) Camera.main.transform.position = new Vector3(0, 5.0119f, -10);
-                else Camera.main.transform.position = new Vector3(0, 0, -10);
                 loading.allowSceneActivation = true;
             }
             yield return null;

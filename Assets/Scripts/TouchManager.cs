@@ -15,6 +15,8 @@ public class TouchManager : MonoBehaviour {
     private bool touchOn = false;
     private Touch tempTouchs;
     private int divideCount = 20;
+
+    public static bool moveAble = true;
     
     Dictionary<string, float> Constellation = new Dictionary<string, float>();
     Dictionary<string, string> Character = new Dictionary<string, string>(); // 캐릭터이름, 별자리이름
@@ -51,12 +53,15 @@ public class TouchManager : MonoBehaviour {
             var newConstel = new ConstelData((string)data["key"], (string)data["name"]);
             Variables.Constels.Add(newConstel.InternalName, newConstel);
         }
+
+        shotRay();
     }
 	
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        ScopeMove();
+        if(moveAble)
+            ScopeMove();
     }
 
 
@@ -152,12 +157,18 @@ public class TouchManager : MonoBehaviour {
         }
 
         var Char_desc = charProb.OrderByDescending(p => p.Value);
-
         GameObject CharSprite = null;
+        string nowConstellName = CastRayCenter(Scope.transform.position);
+
         GameObject ConstellSprite = GameObject.Find("Constell_Sprite");
-        ConstellSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Constellations/Observation/" + Character[Char_desc.ElementAt(0).Key]);
+        ConstellSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Constellations/Observation/" + nowConstellName);
+        //ConstellSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Constellations/Observation/" + Character[Char_desc.ElementAt(0).Key]);
         GameObject nowConstell = GameObject.Find("Now_Constell");
-        nowConstell.GetComponent<TextMesh>().text = Variables.Constels[Character[Char_desc.ElementAt(0).Key]].Name;
+        if(nowConstellName != "null")
+            nowConstell.GetComponent<TextMesh>().text = Variables.Constels[nowConstellName].Name;
+        else
+            nowConstell.GetComponent<TextMesh>().text = "-";
+        //nowConstell.GetComponent<TextMesh>().text = Variables.Constels[Character[Char_desc.ElementAt(0).Key]].Name;
 
         for (int i = 1; i <= 4; i++)
         {
@@ -171,9 +182,20 @@ public class TouchManager : MonoBehaviour {
     {
         RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 0f);
 
-        if (hit.collider != null)
+        if(hit.collider != null)
         {
-            Constellation[hit.collider.name]++;
+            if (Constellation.ContainsKey(hit.collider.name))
+                Constellation[hit.collider.name]++;
         }
+    }
+
+    string CastRayCenter(Vector3 pos)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 0f);
+
+        if (hit.collider == null)
+            return "null";
+        else
+            return hit.collider.name;
     }
 }

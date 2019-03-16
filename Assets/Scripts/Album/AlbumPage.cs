@@ -20,8 +20,12 @@ namespace Album
             if (cardData.Observed)
                 newElement.Set(Variables.Characters[charIndex]);
             else
+            {
+                newObj.GetComponent<UnityEngine.UI.Button>().interactable = false;
                 newElement.MaskObject.SetActive(true);
+            }
             newObj.transform.SetParent(ElementParent);
+            newObj.transform.localScale = Vector3.one;
             newObj.SetActive(true);
         }
     }
