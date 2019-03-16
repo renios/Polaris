@@ -20,7 +20,7 @@ public class TouchManager : MonoBehaviour {
     
     Dictionary<string, float> Constellation = new Dictionary<string, float>();
     Dictionary<string, string> Character = new Dictionary<string, string>(); // 캐릭터이름, 별자리이름
-    Dictionary<string, float> charProb = new Dictionary<string, float>();
+    public static Dictionary<string, float> charProb = new Dictionary<string, float>();
 
     // Use this for initialization
     void Start () {
@@ -45,9 +45,18 @@ public class TouchManager : MonoBehaviour {
 
         Variables.Constels = new Dictionary<string, ConstelData>();
 
+        var raw = Resources.Load<TextAsset>("Data/Characters");
+        var charGroup = JsonMapper.ToObject<CharacterDataGroup>(raw.text);
         var constelRaw = Resources.Load<TextAsset>("Data/Constels");
         var constelGroup = JsonMapper.ToObject(constelRaw.text);
 
+        Variables.Characters = new Dictionary<int, CharacterData>();
+        foreach (CharacterDataCore data in charGroup.Characters)
+        {
+            Variables.Characters.Add(data.CharNumber, data);
+        }
+
+        Variables.Constels = new Dictionary<string, ConstelData>();
         foreach (JsonData data in constelGroup["constels"])
         {
             var newConstel = new ConstelData((string)data["key"], (string)data["name"]);
@@ -162,19 +171,69 @@ public class TouchManager : MonoBehaviour {
 
         GameObject ConstellSprite = GameObject.Find("Constell_Sprite");
         ConstellSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Constellations/Observation/" + nowConstellName);
-        //ConstellSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Constellations/Observation/" + Character[Char_desc.ElementAt(0).Key]);
         GameObject nowConstell = GameObject.Find("Now_Constell");
         if(nowConstellName != "null")
             nowConstell.GetComponent<TextMesh>().text = Variables.Constels[nowConstellName].Name;
         else
             nowConstell.GetComponent<TextMesh>().text = "-";
-        //nowConstell.GetComponent<TextMesh>().text = Variables.Constels[Character[Char_desc.ElementAt(0).Key]].Name;
+
+        int charIndex = 0;
+        //int cardIndex = 0;
 
         for (int i = 1; i <= 4; i++)
         {
             KeyValuePair<string, float> charRank = Char_desc.ElementAt(i-1);
+            
+            charIndex = 0;
+            foreach(var value in Variables.Characters.Values)
+            {
+                if (charRank.Key == value.InternalName)
+                    charIndex = value.CharNumber;
+            }
+
+            var rankCharacter = Variables.Characters[charIndex];
+
+            int favority = rankCharacter.Cards[0].Favority;
+            int cnt = 0, clrdFavority = 0;
+
             CharSprite = GameObject.Find("Character_" + i.ToString());
-            CharSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Characters/" + charRank.Key + "/default/image_obs");
+            GameObject heartBarUI = GameObject.Find("HeartBarUI_" + i.ToString());
+            GameObject heart = heartBarUI.transform.FindChild("Heart_" + i.ToString()).gameObject;
+            GameObject heartBar = heartBarUI.transform.FindChild("HeartBar_" + i.ToString()).gameObject;
+            GameObject nowFav = heartBar.transform.FindChild("Now_" + i.ToString()).gameObject;
+            GameObject totalFav = heartBar.transform.FindChild("Total_" + i.ToString()).gameObject;
+            GameObject favLevel = heart.transform.FindChild("Fav_Level_" + i.ToString()).gameObject;
+            GameObject charName = GameObject.Find("Name_" + i.ToString());
+
+            if (favority != 0)
+            //if (favority == 0)
+            {
+                heart.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha/obs_heart");
+                heartBarUI.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha/obs_heartbarbackground");
+                favLevel.SetActive(true);
+                heartBar.SetActive(true);
+                for (; cnt < Variables.FavorityThreshold.Length; cnt++)
+                {
+                    if (favority < Variables.FavorityThreshold[cnt])
+                        break;
+                    clrdFavority += Variables.FavorityThreshold[cnt];
+                }
+
+                CharSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Characters/" + charRank.Key + "/default/image_obs");
+                nowFav.GetComponent<TextMesh>().text = (favority - clrdFavority).ToString();
+                totalFav.GetComponent<TextMesh>().text = Variables.FavorityThreshold[cnt].ToString();
+                favLevel.GetComponent<TextMesh>().text = cnt.ToString();
+                charName.GetComponent<TextMesh>().text = rankCharacter.Name;
+            }
+            else
+            {
+                heart.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha/obs_heartgray");
+                heartBarUI.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha/obs_heartgraybar");
+                favLevel.SetActive(false);
+                heartBar.SetActive(false);
+                CharSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("obs_character_unknown");
+                charName.GetComponent<TextMesh>().text = "???";
+            }
         }
     }
 

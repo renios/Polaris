@@ -23,11 +23,14 @@ public class GachaManager : MonoBehaviour {
     public GameObject _mn, _sc;
     public GameObject obStart, obText, obFinish;
     public GameObject obsEff_1, obsEff_2, obsEff_3;
+    public GameObject fader;
 
     // Use this for initialization
     private void Start()
     {
-
+        Color tempColor = fader.GetComponent<SpriteRenderer>().color;
+        tempColor.a = 0f;
+        fader.GetComponent<SpriteRenderer>().color = tempColor;
     }
 
     private void FixedUpdate()
@@ -47,7 +50,7 @@ public class GachaManager : MonoBehaviour {
                     mos = (Input.mousePosition / 100f) + new Vector3(-5.4f, -9.6f, 0f);
                     if(Vector3.Distance(mos, new Vector3(3.5f, -1.3f, 0)) <= 1.3f)
                     {
-                        _meetingTime = DateTime.Now.AddSeconds(16);
+                        _meetingTime = DateTime.Now.AddSeconds(1);
                         Variables.btnState = 1;
                         TouchManager.moveAble = false;
                     }
@@ -69,19 +72,42 @@ public class GachaManager : MonoBehaviour {
                 obStart.SetActive(false);
                 obText.SetActive(false);
                 obFinish.SetActive(true);
-                obsEff_1.SetActive(false);
-                obsEff_2.SetActive(true);
-                obsEff_3.SetActive(false);
+                // Effect는 아래쪽 else문에 있습니다.
 
                 if (Input.GetMouseButtonDown(0))
                 {
                     mos = (Input.mousePosition / 100f) + new Vector3(-5.4f, -9.6f, 0f);
                     if (Vector3.Distance(mos, new Vector3(3.5f, -1.3f, 0)) <= 1.3f)
                     {
-                        Variables.btnState = 0;
-                        TouchManager.moveAble = true;
+
+                        int probSum = 0;
+                        foreach(var key in TouchManager.charProb)
+                        {
+                            probSum += (int)key.Value;
+                        }
+                        int gachaNo = UnityEngine.Random.Range(1, probSum + 1);
+
+                        string gachaResult = null; // Character Name
+                        var Char_desc = TouchManager.charProb.OrderByDescending(p => p.Value);
+                        int countProb = 0, i = 0;
+                        while(countProb < gachaNo)
+                        {
+                            countProb += (int)(Char_desc.ElementAt(i).Value);
+                            gachaResult = Char_desc.ElementAt(i).Key;
+                            i++;
+                        }
+                        Debug.Log(gachaResult);
+                        Variables.btnState = 3;
                     }
                 }
+                break;
+
+            case 3:
+                obStart.SetActive(false);
+                obText.SetActive(false);
+                obFinish.SetActive(true);
+
+                StartCoroutine(GachaFadeOut(1.5f));
                 break;
 
             default:
@@ -89,13 +115,48 @@ public class GachaManager : MonoBehaviour {
         }
     }
 
+    IEnumerator GachaFadeOut(float fadeOutTime)
+    {
+        SpriteRenderer sr = fader.GetComponent<SpriteRenderer>();
+        Color tempColor = sr.color;
+
+        obsEff_1.SetActive(false);
+        obsEff_2.SetActive(false);
+        obsEff_3.SetActive(true);
+
+        while (tempColor.a < 1f)
+        {
+            tempColor.a += Time.deltaTime / fadeOutTime;
+            sr.color = tempColor;
+
+            if (tempColor.a >= 1f)
+                tempColor.a = 1f;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
+        // 앨범에 등록 (+1)
+        // 이름을 Tag로 하여 가챠등장 씬으로 넘김. 끝나고는 (대화/뽑기 씬으로 돌아올 것), Threshold 관련한 조건도 추가해야함.
+        // 정황상 Threshold는 총 호감도. 그러니까 1, 2, 3, 4, 5로 해야 단계당 1, 1, 1, 1, 1이 되는 식.
+
+        Variables.btnState = 0;
+        TouchManager.moveAble = true;
+    }
+
+
+
+
     public void Timer()
     {
         _nowTime = DateTime.Now;
         _diff = _meetingTime - _nowTime;
 
         if (_diff.Seconds <= 0f)
+        {
+            obsEff_1.SetActive(false);
+            obsEff_2.SetActive(true);
+            obsEff_3.SetActive(false);
             Variables.btnState = 2;
+        }
 
         if (_diff.Minutes / 10 != 0)
             _mn.GetComponent<TextMesh>().text = _diff.Minutes.ToString();
