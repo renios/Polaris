@@ -31,13 +31,18 @@ namespace Dialogue
             var jsonAsset = Resources.Load<TextAsset>(dialogPath);
             CurrentDialogue = JsonMapper.ToObject<DialogueData>(jsonAsset.text);
             CharName.text = Variables.Characters[Variables.DialogCharIndex].Name;
-            // TODO: 스탠딩 이미지 로드. 경로: "Characters/" + character + "/" + card + "/image_???" <- 이게 확실히 정해져야...
+            StandingImage.sprite = Resources.Load<Sprite>("Characters/" + character + "/" + card + "/image_dialogue");
             // TODO: 배경 이미지 로드...? 아니면 배경 이미지 바꾸는 커맨드 JSON에 넣을 것인지...?
         }
 
         private void Start()
         {
             SoundManager.Play(SoundType.BgmMain);
+            if (Variables.Characters[Variables.DialogCharIndex].Cards[Variables.DialogCardIndex].StoryProgress <= Variables.DialogChapterIndex)
+            {
+                Variables.Characters[Variables.DialogCharIndex].Cards[Variables.DialogCardIndex].StoryProgress = Variables.DialogChapterIndex + 1;
+                GameManager.Instance.SaveGame();
+            }
             ShowDialogue();
         }
 

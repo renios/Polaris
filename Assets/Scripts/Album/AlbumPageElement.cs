@@ -23,14 +23,17 @@ namespace Album
                 if (Variables.Characters[CharIndex].Cards[CardIndex].Favority < Variables.FavorityThreshold[maxAvailable - 1])
                     break;
             }
-            if (maxAvailable >= Variables.Characters[CharIndex].Cards[CardIndex].StoryProgress)
+            if (maxAvailable > Variables.Characters[CharIndex].Cards[CardIndex].StoryProgress)
                 NewFlag.SetActive(true);
+            else
+                NewFlag.SetActive(false);
         }
 
         public void Set(CharacterData data)
         {
             Name.text = data.Name;
             Subname.text = data.Cards[CardIndex].Subname;
+            Thumbnail.sprite = Resources.Load<Sprite>("Characters/" + data.InternalName + "/" + data.Cards[CardIndex].InternalSubname + "/image_albumbutton");
             ConstelName.text = "";
             for (int i = 0; i < data.ConstelKey.Length; i++)
             {

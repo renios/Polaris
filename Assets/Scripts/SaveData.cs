@@ -15,9 +15,10 @@ public class SaveData
         var raw = Resources.Load<TextAsset>("Data/Characters");
         var charGroup = JsonMapper.ToObject<CharacterDataGroup>(raw.text);
         Variables.CharacterVersion = charGroup.Version;
+        Variables.isFirst = false;
 
         Variables.Characters = new Dictionary<int, CharacterData>();
-        if (Variables.CharacterVersion >= CharVersion) // 만약 현재 세이브 파일의 버전이 낮다면 == 캐릭터 목록이 업데이트 되었었다면...
+        if (Variables.CharacterVersion > CharVersion) // 만약 현재 세이브 파일의 버전이 낮다면 == 캐릭터 목록이 업데이트 되었었다면...
         {
             // 읽어온 캐릭터 데이터를 통해 Variables.Characters를 구성한 뒤, 이 객체가 가지고 있는 데이터를 반복문으로 적용시킵니다.
             // 적용시킬 때, 캐릭터나 카드의 삭제 또는 위치 변경은 이루어지지 않았다고 가정하였습니다.
@@ -38,7 +39,7 @@ public class SaveData
         {
             // 이 객체가 가지고 있는 데이터를 통해 Variables.Characters를 구성합니다.
             foreach (var data in Characters)
-                Variables.Characters.Add(data.CharNumber, data);
+            { Variables.Characters.Add(data.CharNumber, data); }
         }
     }
 
@@ -51,6 +52,8 @@ public class SaveData
         Variables.Characters = new Dictionary<int, CharacterData>();
         foreach (var data in charGroup.Characters)
             Variables.Characters.Add(data.CharNumber, data);
+
+        Variables.isFirst = true;
     }
 
     public void Save()

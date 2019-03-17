@@ -55,7 +55,7 @@ public class GachaManager : MonoBehaviour {
                     mos = (Input.mousePosition / 100f) + new Vector3(-5.4f, -9.6f, 0f);
                     if(Vector3.Distance(mos, new Vector3(3.5f, -1.3f, 0)) <= 1.3f)
                     {
-                        _meetingTime = DateTime.Now.AddSeconds(1);
+                        _meetingTime = DateTime.Now.AddSeconds(16);
                         Variables.btnState = 1;
                         TouchManager.moveAble = false;
                     }
@@ -130,9 +130,10 @@ public class GachaManager : MonoBehaviour {
                 var rankCharacter = Variables.Characters[charIndex];
                 if (!whyTwotime)
                 {
-                    int fav = rankCharacter.Cards[0].Favority + 1;
-                    rankCharacter.Cards[0] = new CardData { Favority = fav };
+                    rankCharacter.Cards[0].Favority += 1;
+                    rankCharacter.Cards[0].Observed = true;
                     whyTwotime = true;
+                    GameManager.Instance.SaveGame();
                 }
 
                 break;

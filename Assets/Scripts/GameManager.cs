@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
     {
         curSaveData.Save();
 
-        var writer = new FileStream(Application.persistentDataPath + "/save", FileMode.CreateNew);
+        var writer = new FileStream(Application.persistentDataPath + "/save", FileMode.Create);
         var formatter = new BinaryFormatter();
         formatter.Serialize(writer, curSaveData);
         writer.Close();
