@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GachaManager : MonoBehaviour {
@@ -24,6 +25,10 @@ public class GachaManager : MonoBehaviour {
     public GameObject obStart, obText, obFinish;
     public GameObject obsEff_1, obsEff_2, obsEff_3;
     public GameObject fader;
+
+    private int charIndex = 0;
+    public static string gachaResult = null; // Character Name
+    private bool whyTwotime = false;
 
     // Use this for initialization
     private void Start()
@@ -87,7 +92,6 @@ public class GachaManager : MonoBehaviour {
                         }
                         int gachaNo = UnityEngine.Random.Range(1, probSum + 1);
 
-                        string gachaResult = null; // Character Name
                         var Char_desc = TouchManager.charProb.OrderByDescending(p => p.Value);
                         int countProb = 0, i = 0;
                         while(countProb < gachaNo)
@@ -97,6 +101,7 @@ public class GachaManager : MonoBehaviour {
                             i++;
                         }
                         Debug.Log(gachaResult);
+                        whyTwotime = false;
                         Variables.btnState = 3;
                     }
                 }
@@ -107,7 +112,23 @@ public class GachaManager : MonoBehaviour {
                 obText.SetActive(false);
                 obFinish.SetActive(true);
 
-                StartCoroutine(GachaFadeOut(1.5f));
+                StartCoroutine(GachaFadeOut(1.5f)); // 1.5f
+
+                charIndex = 0;
+                foreach (var value in Variables.Characters.Values)
+                {
+                    if (gachaResult == value.InternalName)
+                        charIndex = value.CharNumber;
+                }
+
+                var rankCharacter = Variables.Characters[charIndex];
+                if (!whyTwotime)
+                {
+                    int fav = rankCharacter.Cards[0].Favority + 1;
+                    rankCharacter.Cards[0] = new CardData { Favority = fav };
+                    whyTwotime = true;
+                }
+
                 break;
 
             default:
@@ -134,12 +155,9 @@ public class GachaManager : MonoBehaviour {
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
-        // 앨범에 등록 (+1)
         // 이름을 Tag로 하여 가챠등장 씬으로 넘김. 끝나고는 (대화/뽑기 씬으로 돌아올 것), Threshold 관련한 조건도 추가해야함.
-        // 정황상 Threshold는 총 호감도. 그러니까 1, 2, 3, 4, 5로 해야 단계당 1, 1, 1, 1, 1이 되는 식.
-
-        Variables.btnState = 0;
-        TouchManager.moveAble = true;
+        
+        SceneManager.LoadScene("GachaResult");
     }
 
 

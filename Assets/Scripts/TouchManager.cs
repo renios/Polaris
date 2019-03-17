@@ -24,6 +24,9 @@ public class TouchManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
+        // LoadCharacter();
+
         Scope = GameObject.Find("Scope");
 
         Constellation.Add("Draco", 0f);
@@ -42,9 +45,19 @@ public class TouchManager : MonoBehaviour {
         Character.Add("sirius", "CanisMajor");
         Character.Add("thuban", "Draco");
         Character.Add("vega", "Lyra");
+        
+        shotRay();
+    }
+	
+	// Update is called once per frame
+	void FixedUpdate ()
+    {
+        if(moveAble)
+            ScopeMove();
+    }
 
-        Variables.Constels = new Dictionary<string, ConstelData>();
-
+    void LoadCharacter()
+    {
         var raw = Resources.Load<TextAsset>("Data/Characters");
         var charGroup = JsonMapper.ToObject<CharacterDataGroup>(raw.text);
         var constelRaw = Resources.Load<TextAsset>("Data/Constels");
@@ -62,17 +75,7 @@ public class TouchManager : MonoBehaviour {
             var newConstel = new ConstelData((string)data["key"], (string)data["name"]);
             Variables.Constels.Add(newConstel.InternalName, newConstel);
         }
-
-        shotRay();
     }
-	
-	// Update is called once per frame
-	void FixedUpdate ()
-    {
-        if(moveAble)
-            ScopeMove();
-    }
-
 
     public void ScopeMove()
     {
@@ -178,7 +181,6 @@ public class TouchManager : MonoBehaviour {
             nowConstell.GetComponent<TextMesh>().text = "-";
 
         int charIndex = 0;
-        //int cardIndex = 0;
 
         for (int i = 1; i <= 4; i++)
         {
@@ -222,7 +224,7 @@ public class TouchManager : MonoBehaviour {
                 CharSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Characters/" + charRank.Key + "/default/image_obs");
                 nowFav.GetComponent<TextMesh>().text = (favority - clrdFavority).ToString();
                 totalFav.GetComponent<TextMesh>().text = Variables.FavorityThreshold[cnt].ToString();
-                favLevel.GetComponent<TextMesh>().text = cnt.ToString();
+                favLevel.GetComponent<TextMesh>().text = (cnt + 1).ToString();
                 charName.GetComponent<TextMesh>().text = rankCharacter.Name;
             }
             else
