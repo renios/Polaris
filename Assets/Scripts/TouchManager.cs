@@ -25,7 +25,7 @@ public class TouchManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        // LoadCharacter();
+        //LoadCharacter();
 
         Scope = GameObject.Find("Scope");
 
@@ -162,8 +162,10 @@ public class TouchManager : MonoBehaviour {
 
         foreach (var key in Character.Keys)
         {
-            if(key == "catseye")
+            if (key == "catseye")
                 charProb.Add(key, Constellation[Character[key]] * 0.4f);
+            else if (key == "polaris")
+                charProb.Add(key, 0);
             else
                 charProb.Add(key, Constellation[Character[key]]);
         }
@@ -208,7 +210,6 @@ public class TouchManager : MonoBehaviour {
             GameObject charName = GameObject.Find("Name_" + i.ToString());
 
             if (favority != 0)
-            //if (favority == 0)
             {
                 heart.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha/obs_heart");
                 heartBarUI.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha/obs_heartbarbackground");

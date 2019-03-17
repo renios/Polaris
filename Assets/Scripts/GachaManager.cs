@@ -84,23 +84,29 @@ public class GachaManager : MonoBehaviour {
                     mos = (Input.mousePosition / 100f) + new Vector3(-5.4f, -9.6f, 0f);
                     if (Vector3.Distance(mos, new Vector3(3.5f, -1.3f, 0)) <= 1.3f)
                     {
-
-                        int probSum = 0;
-                        foreach(var key in TouchManager.charProb)
+                        if (Variables.isFirst)
                         {
-                            probSum += (int)key.Value;
+                            gachaResult = "polaris";
+                            Variables.isFirst = false;
                         }
-                        int gachaNo = UnityEngine.Random.Range(1, probSum + 1);
-
-                        var Char_desc = TouchManager.charProb.OrderByDescending(p => p.Value);
-                        int countProb = 0, i = 0;
-                        while(countProb < gachaNo)
+                        else
                         {
-                            countProb += (int)(Char_desc.ElementAt(i).Value);
-                            gachaResult = Char_desc.ElementAt(i).Key;
-                            i++;
+                            int probSum = 0;
+                            foreach (var key in TouchManager.charProb)
+                            {
+                                probSum += (int)key.Value;
+                            }
+
+                            var Char_desc = TouchManager.charProb.OrderByDescending(p => p.Value);
+                            int countProb = 0, i = 0;
+                            int gachaNo = UnityEngine.Random.Range(1, probSum + 1);
+                            while (countProb < gachaNo)
+                            {
+                                countProb += (int)(Char_desc.ElementAt(i).Value);
+                                gachaResult = Char_desc.ElementAt(i).Key;
+                                i++;
+                            }
                         }
-                        Debug.Log(gachaResult);
                         whyTwotime = false;
                         Variables.btnState = 3;
                     }
@@ -148,10 +154,11 @@ public class GachaManager : MonoBehaviour {
         while (tempColor.a < 1f)
         {
             tempColor.a += Time.deltaTime / fadeOutTime;
-            sr.color = tempColor;
 
             if (tempColor.a >= 1f)
                 tempColor.a = 1f;
+
+            sr.color = tempColor;
             yield return new WaitForSeconds(Time.deltaTime);
         }
 

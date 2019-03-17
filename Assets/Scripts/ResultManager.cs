@@ -52,18 +52,24 @@ public class ResultManager : MonoBehaviour {
         srFader.color = tempColor;
 
         SpriteRenderer srnT = nameTag.GetComponent<SpriteRenderer>();
+        TextMesh tmnT = nameText.GetComponent<TextMesh>();
+
         Color tC = srnT.color;
+        Color textColor = tmnT.color;
         tC.a = 0f;
+        textColor.a = 0f;
         srnT.color = tC;
+        tmnT.color = textColor;
 
         // 화면 FadeIn
         while (tempColor.a > 0f)
         {
             tempColor.a -= Time.deltaTime / fadeInTime;
-            srFader.color = tempColor;
 
             if (tempColor.a < 0f)
                 tempColor.a = 0f;
+            srFader.color = tempColor;
+
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
@@ -71,10 +77,12 @@ public class ResultManager : MonoBehaviour {
         while (tC.a < 1f)
         {
             tC.a += Time.deltaTime;
-            srnT.color = tC;
-
             if (tC.a >= 1f)
                 tC.a = 1f;
+            textColor.a = tC.a;
+
+            srnT.color = tC;
+            tmnT.color = textColor;
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
