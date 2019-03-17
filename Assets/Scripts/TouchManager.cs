@@ -82,39 +82,41 @@ public class TouchManager : MonoBehaviour {
         Vector2 center = new Vector2(0f, 3.78f);
         
         touchOn = false;
-        if (Input.touchCount > 0)
-        {
-            for (int i = 0; i < Input.touchCount; i++)
-            {
-                tempTouchs = Input.GetTouch(i);
-                if (tempTouchs.phase == TouchPhase.Began || tempTouchs.phase == TouchPhase.Moved)
-                {
-                    if(Vector3.Distance(tempTouchs.position, center) < skyRadius)
-                    {
-                        if (Vector3.Distance(tempTouchs.position, center) >= touchBound)
-                        {
-                            Scope.transform.position = center + touchBound * ((tempTouchs.position - center / Vector3.Distance(tempTouchs.position, center)));
-                        }
-                        else
-                        {
-                            Scope.transform.position = tempTouchs.position;
-                        }
-                    }
+        //if (Input.touchCount > 0)
+        //{
+        //    for (int i = 0; i < Input.touchCount; i++)
+        //    {
+        //        tempTouchs = Input.GetTouch(i);
+        //        if (tempTouchs.phase == TouchPhase.Began || tempTouchs.phase == TouchPhase.Moved)
+        //        {
+        //            if(Vector3.Distance(tempTouchs.position, center) < skyRadius)
+        //            {
+        //                if (Vector3.Distance(tempTouchs.position, center) >= touchBound)
+        //                {
+        //                    Scope.transform.position = center + touchBound * ((tempTouchs.position - center / Vector3.Distance(tempTouchs.position, center)));
+        //                }
+        //                else
+        //                {
+        //                    Scope.transform.position = tempTouchs.position;
+        //                }
+        //            }
 
-                    touchOn = true;
-                    shotRay();
-                    break;
-                }
-            }
-        }
+        //            touchOn = true;
+        //            shotRay();
+        //            break;
+        //        }
+        //    }
+        //}
 
         // Click for Test
         Vector3 centerT = new Vector3(0f, 3.78f, -1f);
 
         if(Input.GetMouseButton(0))
         {
-            Vector3 mos = (Input.mousePosition / 100f) + new Vector3(-5.4f, -9.6f, -1f);
-            
+            //Vector3 mos = (Input.mousePosition / 100f) + new Vector3(-5.4f, -9.6f, -1f);
+            Vector3 mos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 9f)) * (1 / 0.522f);
+            Debug.Log(mos);
+
             if (Vector3.Distance(mos, centerT) < skyRadius)
             {
                 if (Vector3.Distance(mos, centerT) >= touchBound)
