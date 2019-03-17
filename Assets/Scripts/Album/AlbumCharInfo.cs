@@ -54,6 +54,7 @@ namespace Album
             Name.text = character.Name;
             Subname.text = character.Cards[cardIndex].Subname;
             ConstelName.text = Variables.Constels[character.ConstelKey[0]].Name;
+            ConstelImage.sprite = Resources.Load<Sprite>("Constellations/Album/" + character.ConstelKey[0]);
             RarityBar.value = character.Cards[cardIndex].Rarity;
             Lux.text = character.Lux;
             Distance.text = character.LYDistance;
