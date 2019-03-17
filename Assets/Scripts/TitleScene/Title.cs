@@ -81,6 +81,21 @@ public class Title : MonoBehaviour {
     IEnumerator ChangeScene() {
         SoundManager.Play(SoundType.ClickImportant);
         yield return new WaitForSeconds(0.5f);
-        SceneChanger.Instance.ChangeScene("MainScene");
+        if(Variables.HasSave)
+        {
+            GameManager.Instance.LoadGame();
+            SceneChanger.Instance.ChangeScene("MainScene");
+        }
+        else
+        {
+            GameManager.Instance.CreateGame();
+            SceneChanger.Instance.ChangeScene("Prologue");
+        }
+    }
+
+    public void DeleteSave()
+    {
+        GameManager.Instance.DeleteGame();
+        Debug.Log("Save deleted.");
     }
 }

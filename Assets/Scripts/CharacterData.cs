@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// '캐릭터'의 데이터입니다. (개별 카드 데이터와는 다릅니다)
 /// </summary>
+[System.Serializable]
 public class CharacterData
 {
     public int CharNumber;

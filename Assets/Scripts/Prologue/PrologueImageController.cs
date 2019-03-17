@@ -36,6 +36,7 @@ namespace Prologue
                     time += 4.0f;
                 }
             }
+            Invoke("End", 60f);
         }
         void BackgroundChange()
         {
@@ -48,6 +49,13 @@ namespace Prologue
         void FadeOut()
         {
             controller.StartFadeOut();
+        }
+
+        void End()
+        {
+            GameManager.Instance.SaveGame();
+            SoundManager.Play(SoundType.BgmMain);
+            SceneChanger.Instance.ChangeScene("GachaScene");
         }
     }
 }
