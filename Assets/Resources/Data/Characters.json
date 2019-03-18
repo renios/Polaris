@@ -75,7 +75,7 @@
             "ConstelKey":["Draco"],
             "ConstelWeight":[0.4],
             "Name":"고양이 눈 성운",
-            "InternalName":"**d3",
+            "InternalName":"catseye",
             "Lux":"--",
             "LYDistance":"--",
             "Description":"--",
@@ -944,6 +944,40 @@
                     "InternalSubname":"default",
                     "Rarity":4,
                     "Observable":false,
+                    "ChapterInfo":
+                    [
+                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                            "Additional":[]},
+                        {"Header":"제목 1", "Description":"임시 텍스트 1", 
+                            "Additional":[]},
+                        {"Header":"제목 2", "Description":"임시 텍스트 2", 
+                            "Additional":[]},
+                        {"Header":"제목 3", "Description":"임시 텍스트 3", 
+                            "Additional":[]},
+                        {"Header":"제목 4", "Description":"임시 텍스트 4", 
+                            "Additional":[]},
+                        {"Header":"제목 5", "Description":"임시 텍스트 5", 
+                            "Additional":[]}
+                    ]
+                }
+            ]
+        },
+        {
+            "CharNumber":34,
+            "ConstelKey":["Lyra"],
+            "ConstelWeight":[1],
+            "Name":"베가",
+            "InternalName":"vega",
+            "Lux":"--",
+            "LYDistance":"--",
+            "Description":"--",
+            "Cards":
+            [
+                {
+                    "Subname":"[별의 정령]",
+                    "InternalSubname":"default",
+                    "Rarity":4,
+                    "Observable":true,
                     "ChapterInfo":
                     [
                         {"Header":"제목 0", "Description":"임시 텍스트 0", 

@@ -5,7 +5,8 @@ using UnityEngine;
 /// <summary>
 /// 개별 카드의 데이터입니다.
 /// </summary>
-public struct CardData
+[System.Serializable]
+public class CardData
 {
     public string Subname;
     public string InternalSubname;
@@ -18,7 +19,7 @@ public struct CardData
     public int StoryProgress;
 }
 
-public struct CardDataCore
+public class CardDataCore
 {
     public string Subname;
     public string InternalSubname;
@@ -35,14 +36,16 @@ public struct CardDataCore
             Rarity = c.Rarity,
             Observable = c.Observable,
             ChapterInfo = c.ChapterInfo.Clone() as CardStoryData[],
-            Observed = c.Observable,
+            //Observed = c.Observable,
+            Observed = false,
             Favority = 0,
             StoryProgress = 0,
         };
     }
 }
 
-public struct CardStoryData
+[System.Serializable]
+public class CardStoryData
 {
     public string Header;
     public string Description;
