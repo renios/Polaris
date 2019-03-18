@@ -18,7 +18,6 @@ public class GachaManager : MonoBehaviour {
     private double _diffMillisecs = 0d;
     private double _maxDiff = 15000d;
     private bool _useLocal = false;
-    private DateTime _meetingTime;
     private Vector3 mos = Vector3.zero;
 
     public GameObject _mn, _sc;
@@ -26,6 +25,7 @@ public class GachaManager : MonoBehaviour {
     public GameObject obsEff_1, obsEff_2, obsEff_3;
     public GameObject fader;
 
+    private int gachaTime = 16;
     private int charIndex = 0;
     public static string gachaResult = null; // Character Name
     private bool whyTwotime = false;
@@ -56,7 +56,7 @@ public class GachaManager : MonoBehaviour {
                     mos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) * (1 / 0.522f);
                     if (Vector3.Distance(mos, new Vector3(3.5f, -1.3f, 0)) <= 1.3f)
                     {
-                        _meetingTime = DateTime.Now.AddSeconds(16);
+                        Variables._meetingTime = DateTime.Now.AddSeconds(gachaTime);
                         Variables.btnState = 1;
                         TouchManager.moveAble = false;
                     }
@@ -121,23 +121,7 @@ public class GachaManager : MonoBehaviour {
                 obFinish.SetActive(true);
 
                 StartCoroutine(GachaFadeOut(1.5f)); // 1.5f
-
-                charIndex = 0;
-                foreach (var value in Variables.Characters.Values)
-                {
-                    if (gachaResult == value.InternalName)
-                        charIndex = value.CharNumber;
-                }
-
-                var rankCharacter = Variables.Characters[charIndex];
-                if (!whyTwotime)
-                {
-                    rankCharacter.Cards[0].Favority += 1;
-                    rankCharacter.Cards[0].Observed = true;
-                    whyTwotime = true;
-                    GameManager.Instance.SaveGame();
-                }
-
+                
                 break;
 
             default:
@@ -165,18 +149,13 @@ public class GachaManager : MonoBehaviour {
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
-        // 이름을 Tag로 하여 가챠등장 씬으로 넘김. 끝나고는 (대화/뽑기 씬으로 돌아올 것), Threshold 관련한 조건도 추가해야함.
-        
         SceneManager.LoadScene("GachaResult");
     }
-
-
-
 
     public void Timer()
     {
         _nowTime = DateTime.Now;
-        _diff = _meetingTime - _nowTime;
+        _diff = Variables._meetingTime - _nowTime;
 
         if (_diff.Seconds <= 0f)
         {

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -14,12 +15,14 @@ public static class Variables
     public static Dictionary<int, CharacterData> Characters;    // 캐릭터에 대한 데이터
     public static int CharacterVersion;
 
-    public static readonly int[] FavorityThreshold = { 30, 70, 120, 180, 250 };     // 캐릭터 호감도 문턱에 관한 배열
+    public static readonly int[] FavorityThreshold = { 30, 70, 120, 180, 250 };     // 캐릭터 호감도 문턱에 관한 배열 30 70 120 180 250
 
     public static bool CameraMove;
 
     public static int btnState = 0; // 0: 관측시작, 1: 관측중, 2: 관측완료, 3: 가챠결과 확인
     public static bool isFirst = true;
+    public static DateTime _meetingTime;
+    public static Vector3 scopePos = new Vector3(1.97f, 4.27f, -1f);
 
     #region Variables for dialogue scene
     public static int DialogCharIndex;          // 대화 씬에서 참조할 캐릭터 번호

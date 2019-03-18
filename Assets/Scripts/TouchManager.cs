@@ -28,6 +28,7 @@ public class TouchManager : MonoBehaviour {
         //LoadCharacter();
 
         Scope = GameObject.Find("Scope");
+        Scope.transform.localPosition = Variables.scopePos;
 
         Constellation.Add("Draco", 0f);
         Constellation.Add("UrsaMinor", 0f);
@@ -115,7 +116,7 @@ public class TouchManager : MonoBehaviour {
         {
             //Vector3 mos = (Input.mousePosition / 100f) + new Vector3(-5.4f, -9.6f, -1f);
             Vector3 mos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 9f)) * (1 / 0.522f);
-            Debug.Log(mos);
+            // Debug.Log(mos);
 
             if (Vector3.Distance(mos, centerT) < skyRadius)
             {
@@ -128,6 +129,7 @@ public class TouchManager : MonoBehaviour {
                     Scope.transform.localPosition = mos;
                 }
             }
+            Variables.scopePos = Scope.transform.localPosition;
             shotRay();
         }
     }

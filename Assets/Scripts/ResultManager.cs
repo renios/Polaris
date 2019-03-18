@@ -8,9 +8,10 @@ public class ResultManager : MonoBehaviour {
     public GameObject resultCharacter, nameTag, nameText, TtS, fader, effect;
     private bool isEnd = false;
     private string gachaResult = null;
-    
-	// Use this for initialization
-	void Start () {
+    private int charIndex = 0;
+
+    // Use this for initialization
+    void Start () {
         fader.SetActive(true);
         StartCoroutine(gachaFadeIn(3f));
     }
@@ -23,7 +24,39 @@ public class ResultManager : MonoBehaviour {
             {
                 TouchManager.moveAble = true;
                 Variables.btnState = 0;
-                SceneManager.LoadScene("GachaScene");
+                foreach (var value in Variables.Characters.Values)
+                {
+                    if (gachaResult == value.InternalName)
+                        charIndex = value.CharNumber;
+                }
+
+                var rankCharacter = Variables.Characters[charIndex];
+                bool isUp = false;
+                int nextFav = 0;
+                
+                rankCharacter.Cards[0].Favority += 1;
+                GameManager.Instance.SaveGame();
+
+                if (rankCharacter.Cards[0].Observed == false) // 첫 획득
+                {
+                    rankCharacter.Cards[0].Observed = true;
+                    StartStory("GachaScene", 0);
+                }
+
+                for (int i = 0; i < 5; i++)
+                {
+                    if (rankCharacter.Cards[0].Favority == Variables.FavorityThreshold[i])
+                    {
+                        isUp = true;
+                        nextFav = i;
+                    }
+                }
+
+                if(isUp) // 호감도 Up!
+                    StartStory("GachaScene", nextFav + 1);
+
+                else
+                    SceneManager.LoadScene("GachaScene");
             }
         }
 	}
@@ -90,5 +123,15 @@ public class ResultManager : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         TtS.SetActive(true);
         isEnd = true;
+    }
+
+    public void StartStory(string nextScene, int storyIndex)
+    {
+        Variables.DialogAfterScene = nextScene;
+        Variables.DialogCharIndex = charIndex;
+        Variables.DialogCardIndex = 0;
+        Variables.DialogChapterIndex = storyIndex;
+        SceneManager.LoadScene("NewDialogScene");
+        //SceneChanger.Instance.ChangeScene("NewDialogScene");
     }
 }
