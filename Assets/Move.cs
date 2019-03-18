@@ -10,7 +10,7 @@ public class Move : MonoBehaviour {
 	public LayerMask GroundLayer;
 	public Transform CharacterTransform;
 	public apPortrait Portrait;
-	enum State {Idle, Walk, Fly}
+	enum State {Idle, Walk, Fly, Grab, Touched}
 	State state = State.Idle;
 	bool isFirstFrame = true;
 	float timer = 0;
@@ -115,6 +115,30 @@ public class Move : MonoBehaviour {
 		isFirstFrame = true;
 	}
 
+	void UpdateGrab() {
+		if (isFirstFrame) {
+			GetComponent<Rigidbody2D>().gravityScale = 0;
+			gameObject.layer = LayerMask.NameToLayer("FlyingCharacter");
+			Portrait.CrossFade("Fly");
+			isFirstFrame = false;
+		}
+
+		// 마우스(손가락) 위치 따라다니도록
+
+		// 그랩 풀리면 fly 상태로
+	}
+
+	void UpdateTouched() {
+		if (isFirstFrame) {
+			GetComponent<Rigidbody2D>().gravityScale = 0;
+			gameObject.layer = LayerMask.NameToLayer("FlyingCharacter");
+			Portrait.CrossFade("Fly");
+			isFirstFrame = false;
+		}
+
+		// 한번 움직이고 state 변경. Grounded면 idle로 아니면 fly로
+	}
+
 	// Use this for initialization
 	void Start () {
 		originalGravity = GetComponent<Rigidbody2D>().gravityScale;
@@ -136,6 +160,12 @@ public class Move : MonoBehaviour {
 				break;
 			case State.Fly:
 				UpdateFly();
+				break;
+			case State.Grab:
+				UpdateGrab();
+				break;
+			case State.Touched:
+				UpdateTouched();
 				break;
 		}
 	}
