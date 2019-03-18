@@ -41,6 +41,7 @@ public class ResultManager : MonoBehaviour {
                 {
                     rankCharacter.Cards[0].Observed = true;
                     StartStory("GachaScene", 0);
+                    return;
                 }
 
                 for (int i = 0; i < 5; i++)
