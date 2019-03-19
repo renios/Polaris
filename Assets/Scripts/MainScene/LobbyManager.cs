@@ -6,15 +6,44 @@ using DG.Tweening;
 public class LobbyManager : MonoBehaviour
 {
     private int currentCamera;
+    private GameObject sdchara;
     public GameObject popup;
 
     void Awake()
     {
+        sdchara = GameObject.Find("Characters").gameObject; 
         popup = GameObject.Find("Setting").transform.Find("Setting Panel").gameObject;
         //다락방 이동 시.
         if (Variables.CameraMove == true)
         {
             Camera.main.transform.position = new Vector3(0, 5.0119f, -10);
+        }
+        ShowCharacter();
+    }
+
+    void ShowCharacter()
+    {
+        float PositionZ = 0f;
+        foreach (KeyValuePair<int, CharacterData> c in Variables.Characters)
+        {
+            var chrData = Variables.Characters[c.Key];
+            for (int i = 0; i < c.Value.Cards.Count; i++)
+            {
+                var cardData = chrData.Cards[i];
+                if (cardData.Observed && (c.Key != 1))
+                {
+                    Debug.Log(chrData.InternalName);
+                    string name = chrData.InternalName.Substring(0, 1).ToUpper() + chrData.InternalName.Substring(1);
+                    Debug.Log(name);
+                    var chr = Instantiate(Resources.Load<GameObject>("Prefabs/"+name));
+                    chr.transform.SetParent(sdchara.transform);
+                    chr.transform.localScale = new Vector3(0.25f, 0.25f, 1);
+                    float PositionX = Random.Range(-1.0f, 1.0f);
+                    float PositionY = Random.Range(-3.5f, 0.2f);
+                    chr.transform.localPosition = new Vector3(PositionX, PositionY, PositionZ);
+                    PositionZ += 0.1f;
+                }
+            }
         }
     }
 
