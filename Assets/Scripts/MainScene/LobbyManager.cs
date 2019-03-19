@@ -33,7 +33,6 @@ public class LobbyManager : MonoBehaviour
                 if (cardData.Observed && cardData.Observable)
                 {
                     string name = chrData.InternalName.Substring(0, 1).ToUpper() + chrData.InternalName.Substring(1);
-                    Debug.Log(name);
                     GameObject sd = Resources.Load<GameObject>("Prefabs/" + name);
                     if (sd != null)
                     {
