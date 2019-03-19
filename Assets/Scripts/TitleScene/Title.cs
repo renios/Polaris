@@ -93,9 +93,28 @@ public class Title : MonoBehaviour {
         }
     }
 
+    // Debug Function
     public void DeleteSave()
     {
         GameManager.Instance.DeleteGame();
         Debug.Log("Save deleted.");
+    }
+
+    // Debug Function
+    public void BlackSheepWall()
+    {
+        GameManager.Instance.CreateGame();
+
+        foreach(var data in Variables.Characters)
+        {
+            foreach(var card in data.Value.Cards)
+            {
+                if (card.Observable)
+                    card.Observed = true;
+            }
+        }
+        GameManager.Instance.SaveGame();
+
+        StartCoroutine(ChangeScene());
     }
 }

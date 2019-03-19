@@ -60,16 +60,10 @@ namespace Album
             Distance.text = character.LYDistance;
             CharDescription.text = character.Description;
 
-            var favority = character.Cards[cardIndex].Favority;
-            int cnt = 0, clrdFavority = 0;
-            for (; cnt < Variables.FavorityThreshold.Length; cnt++)
-            {
-                if (favority < Variables.FavorityThreshold[cnt])
-                    break;
-                clrdFavority += Variables.FavorityThreshold[cnt];
-            }
-            FavorityLevel.text = cnt.ToString();
-            if (cnt >= Variables.FavorityThreshold.Length)
+            int curProgress, nextRequired;
+            var favorLevel = GameManager.Instance.CheckFavority(character.CharNumber, cardIndex, out curProgress, out nextRequired);
+            FavorityLevel.text = favorLevel.ToString();
+            if (favorLevel >= Variables.FavorityThreshold.Length)
             {
                 RequiredFavority.text = "FULL";
                 FavorityGage.maxValue = 1;
@@ -77,9 +71,9 @@ namespace Album
             }
             else
             {
-                RequiredFavority.text = (favority - clrdFavority).ToString() + "/" + Variables.FavorityThreshold[cnt].ToString();
-                FavorityGage.maxValue = Variables.FavorityThreshold[cnt];
-                FavorityGage.value = favority - clrdFavority;
+                RequiredFavority.text = curProgress.ToString() + "/" + nextRequired.ToString();
+                FavorityGage.maxValue = nextRequired;
+                FavorityGage.value = curProgress;
             }
 
             int maxAvailable = 0;
