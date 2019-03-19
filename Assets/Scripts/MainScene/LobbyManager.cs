@@ -32,9 +32,7 @@ public class LobbyManager : MonoBehaviour
                 var cardData = chrData.Cards[i];
                 if (cardData.Observed && (c.Key != 1))
                 {
-                    Debug.Log(chrData.InternalName);
                     string name = chrData.InternalName.Substring(0, 1).ToUpper() + chrData.InternalName.Substring(1);
-                    Debug.Log(name);
                     var chr = Instantiate(Resources.Load<GameObject>("Prefabs/"+name));
                     chr.transform.SetParent(sdchara.transform);
                     chr.transform.localScale = new Vector3(0.25f, 0.25f, 1);
