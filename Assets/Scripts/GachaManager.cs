@@ -46,7 +46,7 @@ public class GachaManager : MonoBehaviour {
                 obStart.SetActive(true);
                 obText.SetActive(false);
                 obFinish.SetActive(false);
-                obsEff_1.SetActive(true);
+                obsEff_1.SetActive(false);
                 obsEff_2.SetActive(false);
                 obsEff_3.SetActive(false);
 
@@ -67,9 +67,12 @@ public class GachaManager : MonoBehaviour {
                 obStart.SetActive(false);
                 obText.SetActive(true);
                 obFinish.SetActive(false);
-                obsEff_1.SetActive(false);
-                obsEff_2.SetActive(true);
+                obsEff_1.SetActive(true);
+                obsEff_2.SetActive(false);
                 obsEff_3.SetActive(false);
+
+                if(Input.GetKeyDown(KeyCode.Space))
+                    Variables._meetingTime = DateTime.Now.AddSeconds(1);
 
                 Timer();
                 break;
@@ -78,7 +81,9 @@ public class GachaManager : MonoBehaviour {
                 obStart.SetActive(false);
                 obText.SetActive(false);
                 obFinish.SetActive(true);
-                // Effect는 아래쪽 else문에 있습니다.
+                obsEff_1.SetActive(false);
+                obsEff_2.SetActive(true);
+                obsEff_3.SetActive(false);
 
                 if (Input.GetMouseButtonDown(0))
                 {

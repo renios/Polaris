@@ -14,7 +14,7 @@ public class TouchManager : MonoBehaviour {
 
     private bool touchOn = false;
     private Touch tempTouchs;
-    private int divideCount = 20;
+    private int divideCount = 10; // divideCount만큼의 동심원 둘레에 ray를 쏩니다.
 
     public static bool moveAble = true;
     
