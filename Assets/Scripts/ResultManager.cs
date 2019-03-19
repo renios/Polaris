@@ -40,6 +40,7 @@ public class ResultManager : MonoBehaviour {
                 if (rankCharacter.Cards[0].Observed == false) // 첫 획득
                 {
                     rankCharacter.Cards[0].Observed = true;
+                    GameManager.Instance.SaveGame();
                     StartStory("GachaScene", 0);
                     return;
                 }
