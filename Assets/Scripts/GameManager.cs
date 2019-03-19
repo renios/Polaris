@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// 친밀도를 체크하는 함수입니다.
-    /// 직접적으로는 친밀도 레벨을 반환하며, 간접적으로 현재 친밀도 진행 정도와 다음 레벨까지의 요구 친밀도를 반환합니다.
+    /// 직접적으로는 친밀도 레벨을 반환하며 (1 ~ 6), 간접적으로 현재 친밀도 진행 정도와 다음 레벨까지의 요구 친밀도를 반환합니다.
     /// </summary>
     /// <param name="charNumber">캐릭터 번호입니다.</param>
     /// <param name="cardIndex">캐릭터 내부 인덱스입니다. (Cards 배열)</param>
@@ -101,6 +101,6 @@ public class GameManager : MonoBehaviour
             progress = favority - (cnt > 0 ? Variables.FavorityThreshold[cnt - 1] : 0);
             required = Variables.FavorityThreshold[cnt] - (cnt > 0 ? Variables.FavorityThreshold[cnt - 1] : 0);
         }
-        return cnt;
+        return cnt + 1;
     }
 }
