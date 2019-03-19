@@ -26,7 +26,11 @@ public class SwipeManager : MonoBehaviour
     public SwipeDirection Direction { get; private set; }
 
     private Vector3 firstPosition;
+    //이 길이보다 짧게 스와이프하면 스와이프로 인정되지 않습니다.
     private float m_swipeResistanceY = 100f;
+    private float startTime;
+    //이 시간보다 짧게 스와이프하면 스와이프로 인정되지 않습니다.
+    private float SwipeTime = 0.5f;
 
     private void Start()
     {
@@ -39,12 +43,13 @@ public class SwipeManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             firstPosition = Input.mousePosition;
+            startTime = Time.time;
         }
         if (Input.GetMouseButtonUp(0))
         {
+            float duration = Time.time - startTime; startTime = 0f;
             Vector2 deltaSwipe = firstPosition - Input.mousePosition;
-            //Debug.Log(deltaSwipe.y);
-            if (Mathf.Abs(deltaSwipe.y) > m_swipeResistanceY)
+            if (Mathf.Abs(deltaSwipe.y) > m_swipeResistanceY && (duration < SwipeTime))
             {
                 Direction |= (deltaSwipe.y < 0) ? SwipeDirection.Up : SwipeDirection.Down;
             }

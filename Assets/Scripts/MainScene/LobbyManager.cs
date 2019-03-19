@@ -36,8 +36,8 @@ public class LobbyManager : MonoBehaviour
                     var chr = Instantiate(Resources.Load<GameObject>("Prefabs/"+name));
                     chr.transform.SetParent(sdchara.transform);
                     chr.transform.localScale = new Vector3(0.25f, 0.25f, 1);
-                    float PositionX = Random.Range(-1.0f, 1.0f);
-                    float PositionY = Random.Range(-3.5f, 0.2f);
+                    float PositionX = Random.Range(-0.8f, 0.8f);
+                    float PositionY = Random.Range(-2.8f, 0.2f);
                     chr.transform.localPosition = new Vector3(PositionX, PositionY, PositionZ);
                     PositionZ += 0.1f;
                 }
