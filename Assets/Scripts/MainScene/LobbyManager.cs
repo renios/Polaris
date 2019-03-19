@@ -30,16 +30,21 @@ public class LobbyManager : MonoBehaviour
             for (int i = 0; i < c.Value.Cards.Count; i++)
             {
                 var cardData = chrData.Cards[i];
-                if (cardData.Observed && (c.Key != 1))
+                if (cardData.Observed && cardData.Observable)
                 {
                     string name = chrData.InternalName.Substring(0, 1).ToUpper() + chrData.InternalName.Substring(1);
-                    var chr = Instantiate(Resources.Load<GameObject>("Prefabs/"+name));
-                    chr.transform.SetParent(sdchara.transform);
-                    chr.transform.localScale = new Vector3(0.25f, 0.25f, 1);
-                    float PositionX = Random.Range(-0.8f, 0.8f);
-                    float PositionY = Random.Range(-2.8f, 0.2f);
-                    chr.transform.localPosition = new Vector3(PositionX, PositionY, PositionZ);
-                    PositionZ += 0.1f;
+                    Debug.Log(name);
+                    GameObject sd = Resources.Load<GameObject>("Prefabs/" + name);
+                    if (sd != null)
+                    {
+                        var chr = Instantiate(sd);
+                        chr.transform.SetParent(sdchara.transform);
+                        chr.transform.localScale = new Vector3(0.25f, 0.25f, 1);
+                        float PositionX = Random.Range(-0.8f, 0.8f);
+                        float PositionY = Random.Range(-2.8f, 0.2f);
+                        chr.transform.localPosition = new Vector3(PositionX, PositionY, PositionZ);
+                        PositionZ += 0.1f;
+                    }
                 }
             }
         }
