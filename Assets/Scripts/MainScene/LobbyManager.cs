@@ -39,8 +39,12 @@ public class LobbyManager : MonoBehaviour
                         var chr = Instantiate(sd);
                         chr.transform.SetParent(sdchara.transform);
                         chr.transform.localScale = new Vector3(0.25f, 0.25f, 1);
-                        float PositionX = Random.Range(-0.8f, 0.8f);
-                        float PositionY = Random.Range(-2.8f, 0.2f);
+                        float PositionX = Random.Range(-0.9f, 0.9f);
+                        float PositionY;
+                        int floor = Random.Range(0, 3);
+                        if (floor == 0) PositionY = -3.25f;
+                        else if (floor == 1) PositionY = -1.5f;
+                        else PositionY = PositionY = -0.15f;
                         chr.transform.localPosition = new Vector3(PositionX, PositionY, PositionZ);
                         PositionZ += 0.1f;
                     }
