@@ -26,13 +26,22 @@ public class Move : MonoBehaviour {
 		else return false;
 	}
 
-	void Walk () {
-		// if (direction.x < 0)
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.name == "wall")
+        {
+            direction.x *= -1;
+        }
+        else if (collision.collider.name == "ceiling")
+        {
+            direction.y *= -1;
+        }
+    }
 
+    void Walk () {
 		if (direction.x < 0) transform.localScale = new Vector3(-0.25f, 0.25f, 1);
-		else transform.localScale = new Vector3(0.25f, 0.25f, 1); 
-
-		transform.position += Time.deltaTime * speed * (Vector3)direction;
+		else transform.localScale = new Vector3(0.25f, 0.25f, 1);
+        transform.position += Time.deltaTime * speed * (Vector3)direction;
 	}
 
 	void Fly () {
@@ -49,7 +58,7 @@ public class Move : MonoBehaviour {
 			Portrait.CrossFade("Idle");
 			isFirstFrame = false;
 
-			delay = Random.Range(0.5f, 3f);
+			delay = Random.Range(2.0f, 4f);
 			timer = 0;
 		}
 
@@ -75,7 +84,7 @@ public class Move : MonoBehaviour {
 			direction = new Vector2(Random.Range(-1f, 1f), 0).normalized;
 			speed = Random.Range(0.1f, 0.5f);
 
-			delay = Random.Range(1f, 5f);
+			delay = Random.Range(3f, 7f);
 			timer = 0;
 		}
 
@@ -101,16 +110,19 @@ public class Move : MonoBehaviour {
 			isFirstFrame = false;
 
 			direction = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
-			speed = Random.Range(0.1f, 0.5f);
-
-			delay = Random.Range(3f, 5f);
+            speed = Random.Range(0.3f, 0.5f);
+			delay = Random.Range(8f, 10f);
 			timer = 0;
 		}
 
 		Fly();
 
 		if (timer < delay) return;
-
+        else
+        {
+            if (transform.localPosition.y > -3.2f && transform.localPosition.y < -2.0f) return;
+            if (transform.localPosition.y > -1.5f && transform.localPosition.y < -0.5f) return;
+        }
 		state = State.Idle;
 		isFirstFrame = true;
 	}
