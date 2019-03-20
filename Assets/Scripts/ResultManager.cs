@@ -109,12 +109,12 @@ public class ResultManager : MonoBehaviour {
         }
 
         //NameTag FadeIn
-        while (tC.a < 1f)
+        while (tC.a < 0.5f)
         {
             tC.a += Time.deltaTime;
-            if (tC.a >= 1f)
-                tC.a = 1f;
-            textColor.a = tC.a;
+            if (tC.a >= 0.5f)
+                tC.a = 0.5f;
+            textColor.a = tC.a * 2;
 
             srnT.color = tC;
             tmnT.color = textColor;
