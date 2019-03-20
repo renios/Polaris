@@ -1139,7 +1139,7 @@ GameObject:
   - component: {fileID: 114841861554026866}
   - component: {fileID: 95000527452040432}
   m_Layer: 0
-  m_Name: Tuvan
+  m_Name: Thuban
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52768,7 +52768,7 @@ MonoBehaviour:
             _m22: 1
     _isEnabled: 1
     _layerIndex: 30
-    _layerWeight: 1
+    _layerWeight: 0
     _blendMethod: 0
     _isColorPropertyEnabled: 1
     _calculatedWeightedVertexList: []
@@ -53350,7 +53350,7 @@ MonoBehaviour:
             _m22: 1
     _isEnabled: 1
     _layerIndex: 31
-    _layerWeight: 1
+    _layerWeight: 0
     _blendMethod: 0
     _isColorPropertyEnabled: 1
     _calculatedWeightedVertexList: []
@@ -53476,7 +53476,7 @@ MonoBehaviour:
             _m22: 1
     _isEnabled: 1
     _layerIndex: 32
-    _layerWeight: 1
+    _layerWeight: 0
     _blendMethod: 0
     _isColorPropertyEnabled: 1
     _calculatedWeightedVertexList: []
@@ -53716,7 +53716,7 @@ MonoBehaviour:
             _m22: 1
     _isEnabled: 1
     _layerIndex: 33
-    _layerWeight: 1
+    _layerWeight: 0
     _blendMethod: 0
     _isColorPropertyEnabled: 1
     _calculatedWeightedVertexList: []
@@ -53956,7 +53956,7 @@ MonoBehaviour:
             _m22: 1
     _isEnabled: 1
     _layerIndex: 34
-    _layerWeight: 1
+    _layerWeight: 0
     _blendMethod: 0
     _isColorPropertyEnabled: 1
     _calculatedWeightedVertexList: []
@@ -54196,7 +54196,7 @@ MonoBehaviour:
             _m22: 1
     _isEnabled: 1
     _layerIndex: 35
-    _layerWeight: 1
+    _layerWeight: 0
     _blendMethod: 0
     _isColorPropertyEnabled: 1
     _calculatedWeightedVertexList: []
@@ -54436,7 +54436,7 @@ MonoBehaviour:
             _m22: 1
     _isEnabled: 1
     _layerIndex: 36
-    _layerWeight: 1
+    _layerWeight: 0
     _blendMethod: 0
     _isColorPropertyEnabled: 1
     _calculatedWeightedVertexList: []
@@ -54676,7 +54676,7 @@ MonoBehaviour:
             _m22: 1
     _isEnabled: 1
     _layerIndex: 37
-    _layerWeight: 1
+    _layerWeight: 0
     _blendMethod: 0
     _isColorPropertyEnabled: 1
     _calculatedWeightedVertexList: []
@@ -54916,7 +54916,7 @@ MonoBehaviour:
             _m22: 1
     _isEnabled: 1
     _layerIndex: 38
-    _layerWeight: 1
+    _layerWeight: 0
     _blendMethod: 0
     _isColorPropertyEnabled: 1
     _calculatedWeightedVertexList: []
@@ -55042,7 +55042,7 @@ MonoBehaviour:
             _m22: 1
     _isEnabled: 1
     _layerIndex: 39
-    _layerWeight: 1
+    _layerWeight: 0
     _blendMethod: 0
     _isColorPropertyEnabled: 1
     _calculatedWeightedVertexList: []
@@ -55168,7 +55168,7 @@ MonoBehaviour:
             _m22: 1
     _isEnabled: 1
     _layerIndex: 40
-    _layerWeight: 1
+    _layerWeight: 0
     _blendMethod: 0
     _isColorPropertyEnabled: 1
     _calculatedWeightedVertexList: []
@@ -58893,11 +58893,11 @@ MonoBehaviour:
     _shapeLength: 41
     _shapeTaper: 10
     _shapeHelper: 0
-    _shapePoint_End: {x: 34.182137, y: -82.67523}
-    _shapePoint_Mid1: {x: 20.659336, y: -51.865753}
-    _shapePoint_Mid2: {x: 8.61352, y: -60.80434}
-    _shapePoint_End1: {x: 39.602753, y: -78.65286}
-    _shapePoint_End2: {x: 28.76152, y: -86.69759}
+    _shapePoint_End: {x: 50.75, y: -49.75}
+    _shapePoint_Mid1: {x: 17.95, y: -42.25}
+    _shapePoint_Mid2: {x: 17.949999, y: -57.25}
+    _shapePoint_End1: {x: 50.75, y: -43}
+    _shapePoint_End2: {x: 50.75, y: -56.5}
     _shapePoint_End_IK: {x: 50.75, y: -49.75}
     _shapePoint_Mid1_IK: {x: 17.95, y: -42.25}
     _shapePoint_Mid2_IK: {x: 17.949999, y: -57.25}
@@ -58981,11 +58981,11 @@ MonoBehaviour:
     _shapeLength: 62
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: -48.829174, y: -91.09449}
-    _shapePoint_Mid1: {x: -7.1464224, y: -63.184666}
-    _shapePoint_Mid2: {x: -17.261713, y: -52.108524}
-    _shapePoint_End1: {x: -48.829174, y: -91.09449}
-    _shapePoint_End2: {x: -48.829174, y: -91.09449}
+    _shapePoint_End: {x: -3.6536603, y: -121.51408}
+    _shapePoint_Mid1: {x: 8.140728, y: -72.756485}
+    _shapePoint_Mid2: {x: -6.8021927, y: -71.44915}
+    _shapePoint_End1: {x: -3.6536603, y: -121.51408}
+    _shapePoint_End2: {x: -3.6536603, y: -121.51408}
     _shapePoint_End_IK: {x: -3.6536603, y: -121.51408}
     _shapePoint_Mid1_IK: {x: 8.140728, y: -72.756485}
     _shapePoint_Mid2_IK: {x: -6.8021927, y: -71.44915}
@@ -59069,11 +59069,11 @@ MonoBehaviour:
     _shapeLength: 60
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: -20.511944, y: -113.639656}
-    _shapePoint_Mid1: {x: 6.0198717, y: -72.941826}
-    _shapePoint_Mid2: {x: -7.6597223, y: -66.78807}
-    _shapePoint_End1: {x: -20.511944, y: -113.639656}
-    _shapePoint_End2: {x: -20.511944, y: -113.639656}
+    _shapePoint_End: {x: 14.797148, y: -119.74086}
+    _shapePoint_Mid1: {x: 21.458288, y: -71.61728}
+    _shapePoint_Mid2: {x: 6.460572, y: -71.87907}
+    _shapePoint_End1: {x: 14.797148, y: -119.74086}
+    _shapePoint_End2: {x: 14.797148, y: -119.74086}
     _shapePoint_End_IK: {x: 14.797148, y: -119.74086}
     _shapePoint_Mid1_IK: {x: 21.458288, y: -71.61728}
     _shapePoint_Mid2_IK: {x: 6.460572, y: -71.87907}
@@ -59157,11 +59157,11 @@ MonoBehaviour:
     _shapeLength: 54
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: -16.666674, y: -98.43228}
-    _shapePoint_Mid1: {x: 9.494256, y: -63.2457}
-    _shapePoint_Mid2: {x: -3.896717, y: -56.486866}
-    _shapePoint_End1: {x: -16.666674, y: -98.43228}
-    _shapePoint_End2: {x: -16.666674, y: -98.43228}
+    _shapePoint_End: {x: 3.9000063, y: -105.47624}
+    _shapePoint_Mid1: {x: 15.359036, y: -63.1539}
+    _shapePoint_Mid2: {x: 0.42318878, y: -61.768097}
+    _shapePoint_End1: {x: 3.9000063, y: -105.47624}
+    _shapePoint_End2: {x: 3.9000063, y: -105.47624}
     _shapePoint_End_IK: {x: 3.9000063, y: -105.47624}
     _shapePoint_Mid1_IK: {x: 15.359036, y: -63.1539}
     _shapePoint_Mid2_IK: {x: 0.42318878, y: -61.768097}
@@ -59245,11 +59245,11 @@ MonoBehaviour:
     _shapeLength: 38
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: 50.109867, y: -18.555756}
-    _shapePoint_Mid1: {x: 21.227722, y: -30.64838}
-    _shapePoint_Mid2: {x: 30.166307, y: -42.6942}
-    _shapePoint_End1: {x: 50.109867, y: -18.555756}
-    _shapePoint_End2: {x: 50.109867, y: -18.555756}
+    _shapePoint_End: {x: 8.750001, y: 1.25}
+    _shapePoint_Mid1: {x: 1.250001, y: -29.15}
+    _shapePoint_Mid2: {x: 16.25, y: -29.15}
+    _shapePoint_End1: {x: 8.750001, y: 1.25}
+    _shapePoint_End2: {x: 8.750001, y: 1.25}
     _shapePoint_End_IK: {x: 8.750001, y: 1.25}
     _shapePoint_Mid1_IK: {x: 1.250001, y: -29.15}
     _shapePoint_Mid2_IK: {x: 16.25, y: -29.15}
@@ -59333,11 +59333,11 @@ MonoBehaviour:
     _shapeLength: 61
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: 36.05957, y: -80.175674}
-    _shapePoint_Mid1: {x: 37.45738, y: -30.822496}
-    _shapePoint_Mid2: {x: 22.572886, y: -32.68042}
-    _shapePoint_End1: {x: 36.05957, y: -80.175674}
-    _shapePoint_End2: {x: 36.05957, y: -80.175674}
+    _shapePoint_End: {x: -24.113232, y: -74.07125}
+    _shapePoint_Mid1: {x: -0.37495098, y: -30.779402}
+    _shapePoint_Mid2: {x: -14.47034, y: -25.649097}
+    _shapePoint_End1: {x: -24.113232, y: -74.07125}
+    _shapePoint_End2: {x: -24.113232, y: -74.07125}
     _shapePoint_End_IK: {x: -24.113232, y: -74.07125}
     _shapePoint_Mid1_IK: {x: -0.37495098, y: -30.779402}
     _shapePoint_Mid2_IK: {x: -14.47034, y: -25.649097}
@@ -59421,11 +59421,11 @@ MonoBehaviour:
     _shapeLength: 56
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: 87.76006, y: -63.85767}
-    _shapePoint_Mid1: {x: 53.290794, y: -34.274574}
-    _shapePoint_Mid2: {x: 45.5352, y: -47.113995}
-    _shapePoint_End1: {x: 87.76006, y: -63.85767}
-    _shapePoint_End2: {x: 87.76006, y: -63.85767}
+    _shapePoint_End: {x: 27.393051, y: -71.52627}
+    _shapePoint_Mid1: {x: 25.414719, y: -26.145916}
+    _shapePoint_Mid2: {x: 10.742504, y: -29.264591}
+    _shapePoint_End1: {x: 27.393051, y: -71.52627}
+    _shapePoint_End2: {x: 27.393051, y: -71.52627}
     _shapePoint_End_IK: {x: 27.393051, y: -71.52627}
     _shapePoint_Mid1_IK: {x: 25.414719, y: -26.145916}
     _shapePoint_Mid2_IK: {x: 10.742504, y: -29.264591}
@@ -59509,11 +59509,11 @@ MonoBehaviour:
     _shapeLength: 70
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: 101.59831, y: 15.997459}
-    _shapePoint_Mid1: {x: 51.055103, y: -9.253957}
-    _shapePoint_Mid2: {x: 59.480915, y: -21.663858}
-    _shapePoint_End1: {x: 101.59831, y: 15.997459}
-    _shapePoint_End2: {x: 101.59831, y: 15.997459}
+    _shapePoint_End: {x: 8.750001, y: 63.25}
+    _shapePoint_Mid1: {x: 1.250001, y: 7.25}
+    _shapePoint_Mid2: {x: 16.25, y: 7.25}
+    _shapePoint_End1: {x: 8.750001, y: 63.25}
+    _shapePoint_End2: {x: 8.750001, y: 63.25}
     _shapePoint_End_IK: {x: 8.750001, y: 63.25}
     _shapePoint_Mid1_IK: {x: 1.250001, y: 7.25}
     _shapePoint_Mid2_IK: {x: 16.25, y: 7.25}
@@ -59597,11 +59597,11 @@ MonoBehaviour:
     _shapeLength: 97
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: -49.445812, y: -23.17973}
-    _shapePoint_Mid1: {x: 19.883572, y: 12.477621}
-    _shapePoint_Mid2: {x: 11.771588, y: 25.0949}
-    _shapePoint_End1: {x: -49.445812, y: -23.17973}
-    _shapePoint_End2: {x: -49.445812, y: -23.17973}
+    _shapePoint_End: {x: -74.425964, y: -77.900185}
+    _shapePoint_Mid1: {x: -40.837498, y: -7.545188}
+    _shapePoint_Mid2: {x: -54.932888, y: -2.4148848}
+    _shapePoint_End1: {x: -74.425964, y: -77.900185}
+    _shapePoint_End2: {x: -74.425964, y: -77.900185}
     _shapePoint_End_IK: {x: -74.425964, y: -77.900185}
     _shapePoint_Mid1_IK: {x: -40.837498, y: -7.545188}
     _shapePoint_Mid2_IK: {x: -54.932888, y: -2.4148848}
@@ -59685,11 +59685,11 @@ MonoBehaviour:
     _shapeLength: 24
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: 18.328152, y: 2.5667849}
-    _shapePoint_Mid1: {x: 7.815896, y: -19.41349}
-    _shapePoint_Mid2: {x: 37.111687, y: -12.951552}
-    _shapePoint_End1: {x: 18.328152, y: 2.5667849}
-    _shapePoint_End2: {x: 18.328152, y: 2.5667849}
+    _shapePoint_End: {x: -29.25, y: -21.500002}
+    _shapePoint_Mid1: {x: -10.049998, y: -36.5}
+    _shapePoint_Mid2: {x: -10.05, y: -6.5}
+    _shapePoint_End1: {x: -29.25, y: -21.500002}
+    _shapePoint_End2: {x: -29.25, y: -21.500002}
     _shapePoint_End_IK: {x: -29.25, y: -21.500002}
     _shapePoint_Mid1_IK: {x: -10.049998, y: -36.5}
     _shapePoint_Mid2_IK: {x: -10.05, y: -6.5}
@@ -59773,11 +59773,11 @@ MonoBehaviour:
     _shapeLength: 12
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: 47.818935, y: -45.410606}
-    _shapePoint_Mid1: {x: 46.782974, y: -27.631777}
-    _shapePoint_Mid2: {x: 32.108616, y: -53.797848}
-    _shapePoint_End1: {x: 47.818935, y: -45.410606}
-    _shapePoint_End2: {x: 47.818935, y: -45.410606}
+    _shapePoint_End: {x: 30, y: -21.5}
+    _shapePoint_Mid1: {x: 20.400002, y: -6.5}
+    _shapePoint_Mid2: {x: 20.4, y: -36.5}
+    _shapePoint_End1: {x: 30, y: -21.5}
+    _shapePoint_End2: {x: 30, y: -21.5}
     _shapePoint_End_IK: {x: 30, y: -21.5}
     _shapePoint_Mid1_IK: {x: 20.400002, y: -6.5}
     _shapePoint_Mid2_IK: {x: 20.4, y: -36.5}
