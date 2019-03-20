@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//Unity Inspector를 통해서 받아오는 SoundType 변수가 다른 코드에 존재하므로,
+//새로운 enum 값을 추가할 땐 종류가 아닌 추가 순서에 따라 값을 적어둬야 함. - 19.03.21 SMZ
 public enum SoundType{
 	Default,
 	BgmTitle, BgmMain,
-	ClickImportant, ClickNormal, ClickDialogue
+	ClickImportant, ClickNormal, ClickDialogue,
+	BgmDark
 }
 public class SoundManager : MonoBehaviour {
 
