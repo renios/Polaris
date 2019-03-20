@@ -217,7 +217,7 @@ public class TouchManager : MonoBehaviour {
             GameObject favLevel = heart.transform.Find("Fav_Level_" + i.ToString()).gameObject;
             GameObject charName = GameObject.Find("Name_" + i.ToString());
 
-            if (favority != 0)
+            if (Variables.Characters[charIndex].Observed)
             {
                 heart.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha/obs_heart");
                 heartBarUI.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha/obs_heartbarbackground");

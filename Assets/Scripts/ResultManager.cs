@@ -54,8 +54,11 @@ public class ResultManager : MonoBehaviour {
                     }
                 }
 
-                if(isUp) // 호감도 Up!
+                if (isUp) // 호감도 Up!
+                {
                     StartStory("GachaScene", nextFav + 1);
+                    return;
+                }
 
                 else
                     SceneManager.LoadScene("GachaScene");
