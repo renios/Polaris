@@ -23,11 +23,13 @@ public class Move : MonoBehaviour {
 	public void Pick() {
 		picked = true;
 		state = State.Hold;
+		isFirstFrame = true;
 	}
 
 	public void Drop() {
 		picked = false;
 		state = State.Idle;
+		isFirstFrame = true;
 	}
 
 	bool IsGround() {
@@ -176,7 +178,7 @@ public class Move : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			Pick();
 		}
-		if (Input.GetKeyDown(KeyCode.Space)) {
+		if (Input.GetKeyUp(KeyCode.Space)) {
 			Drop();
 		}
 		timer += Time.deltaTime;
