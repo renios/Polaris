@@ -1,0 +1,161 @@
+{
+    "Dialogues": [
+        {
+            "Phase": 0,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "어서 와, 귀여운 꼬마 아가... 어머.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "얼굴이... 빨갛네? 무슨 일이라도 있었니?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 2,
+                    "JuncTexts": [
+                        "그... 그게... 아아... 으으으......",
+                        "아, 우우... 으으으... 히이..."
+                    ],
+                    "Directions": [
+                        -1,
+                        -1
+                    ],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "어머, 제대로 말을 해 줘야지. 그래야 내가 알 수 있잖니?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "그... 그 아이가... ㄱ... 고... 고백을...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "어머어머, 그랬어? 드디어 그 아이가 너에게 마음을 연 모양이네.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "그, 아무리 마음을 열었다 해도, 이렇게까지 빠르게 갈 건 아니잖아요!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그...래? 음......",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "... ... ...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "생각해보니까 그렇네. 저번에 나한테 상담하러 왔을 때가 그렇게 오래 전이 아닌데.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "흠, 아무래도 친밀해지는 간격이 상당히 짧았나 보네.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "이게 사실 되게 어려운 문제야. 사람 마음은 정말로 알기 어렵거든.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그만큼 구현하기도 힘든 문제이기도 하지. 그래서 테스트를 부탁했던 거고.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "그러면... 아무래도 기계로는 한계가 있다는 건가요?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그렇지. 다만 있잖아, 내가 한 가지 바라는 것은...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "언젠가 기계가 우리처럼 살아가는 날이 왔으면 좋겠다는 거야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "... ... ...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "뭐, 좀 어려운 이야기였을려나? 아무튼.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그 문제는 고쳐야 겠네. 음, 근데 어떻게 고치면 좋을까?...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "... ... ...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "... ... ...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                }
+            ]
+        }
+    ]
+}
