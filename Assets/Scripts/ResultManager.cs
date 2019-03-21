@@ -54,8 +54,11 @@ public class ResultManager : MonoBehaviour {
                     }
                 }
 
-                if(isUp) // 호감도 Up!
+                if (isUp) // 호감도 Up!
+                {
                     StartStory("GachaScene", nextFav + 1);
+                    return;
+                }
 
                 else
                     SceneManager.LoadScene("GachaScene");
@@ -109,12 +112,12 @@ public class ResultManager : MonoBehaviour {
         }
 
         //NameTag FadeIn
-        while (tC.a < 1f)
+        while (tC.a < 0.5f)
         {
             tC.a += Time.deltaTime;
-            if (tC.a >= 1f)
-                tC.a = 1f;
-            textColor.a = tC.a;
+            if (tC.a >= 0.5f)
+                tC.a = 0.5f;
+            textColor.a = tC.a * 2;
 
             srnT.color = tC;
             tmnT.color = textColor;
