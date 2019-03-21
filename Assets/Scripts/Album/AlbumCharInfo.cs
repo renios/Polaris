@@ -92,6 +92,7 @@ namespace Album
                 else if (i <= character.Cards[cardIndex].Rarity)
                 {
                     StoryElement[i].GetComponent<AlbumStoryElement>().Mask.SetActive(true);
+                    StoryElement[i].GetComponent<AlbumStoryElement>().InfoPanel.SetActive(false);
                     StoryElement[i].SetActive(true);
                 }
                 else

@@ -59,6 +59,11 @@ public class TouchManager : MonoBehaviour {
     {
         if(moveAble)
             ScopeMove();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneChanger.Instance.ChangeScene("MainScene");
+        }
     }
 
     void LoadCharacter()
