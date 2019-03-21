@@ -2113,7 +2113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1921605270374454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.314, y: -2.615, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children:
   - {fileID: 4539578632272902}
@@ -46649,7 +46649,7 @@ MonoBehaviour:
   _bakeSrcEditablePortrait: {fileID: 0}
   _sortingLayerID: 0
   _sortingOrder: 0
-  _isUsingMecanim: 1
+  _isUsingMecanim: 0
   _mecanimAnimClipResourcePath: C:/git/Polaris/Assets/Resources/Animation/Thuban
   _emptyAnimClipForMecanim: {fileID: 7400000, guid: f2a7aa3710d69c048a50abe14876d767,
     type: 2}

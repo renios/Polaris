@@ -1467,7 +1467,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1700425221451270}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.293, y: -1.24, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children:
   - {fileID: 4245632161536292}
@@ -7025,7 +7025,7 @@ MonoBehaviour:
   _bakeSrcEditablePortrait: {fileID: 0}
   _sortingLayerID: 0
   _sortingOrder: 0
-  _isUsingMecanim: 1
+  _isUsingMecanim: 0
   _mecanimAnimClipResourcePath: C:/git/Polaris/Assets/Resources/Animation/Melik
   _emptyAnimClipForMecanim: {fileID: 7400000, guid: 22c2b351b977b764e9ea4034ac2d923b,
     type: 2}
