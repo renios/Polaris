@@ -9,6 +9,8 @@ public class LobbyManager : MonoBehaviour
     private GameObject sdchara;
     public GameObject popup;
 
+    GameObject pickedCharacter;
+
     void Awake()
     {
         sdchara = GameObject.Find("Characters").gameObject; 
@@ -62,6 +64,22 @@ public class LobbyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 잡고있으면 움직인다
+        // 잡고있을때 떼면 떨어진다
+        if (pickedCharacter != null) {
+            if (Input.GetMouseButtonUp(0)) {
+                pickedCharacter.GetComponent<Move>().Drop();
+                pickedCharacter = null;
+            }
+            var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            pickedCharacter.transform.position = mousePosition;
+        }
+
+        // 안 잡고있을때 누르면 잡는다
+        if (Input.GetMouseButtonDown(0)) {
+            
+        }
+
         if (SwipeManager.Instance.IsSwiping(SwipeManager.SwipeDirection.Down))
         {
             if(!popup.activeSelf)

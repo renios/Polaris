@@ -10,7 +10,7 @@ public class Move : MonoBehaviour {
 	public LayerMask GroundLayer;
 	public Transform CharacterTransform;
 	public apPortrait Portrait;
-	enum State {Idle, Walk, Fly, Grab, Touched}
+	enum State {Idle, Walk, Fly, Hold, Touched}
 	State state = State.Idle;
 	bool isFirstFrame = true;
 	float timer = 0;
@@ -18,6 +18,17 @@ public class Move : MonoBehaviour {
 	float delay;
 	Vector2 direction;
 	float originalGravity;
+	bool picked;
+
+	public void Pick() {
+		picked = true;
+		state = State.Hold;
+	}
+
+	public void Drop() {
+		picked = false;
+		state = State.Idle;
+	}
 
 	bool IsGround() {
 		RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 1.8f, GroundLayer.value);
@@ -127,15 +138,15 @@ public class Move : MonoBehaviour {
 		isFirstFrame = true;
 	}
 
-	void UpdateGrab() {
+	void UpdateHold() {
 		if (isFirstFrame) {
 			GetComponent<Rigidbody2D>().gravityScale = 0;
 			gameObject.layer = LayerMask.NameToLayer("FlyingCharacter");
-			Portrait.CrossFade("Fly");
+			Portrait.CrossFade("Hold");
 			isFirstFrame = false;
 		}
 
-		// 마우스(손가락) 위치 따라다니도록
+		// 마우스(손가락) 위치 따라다니도록 -> LobbyManager에서 함
 
 		// 그랩 풀리면 fly 상태로
 	}
@@ -157,13 +168,26 @@ public class Move : MonoBehaviour {
 		state = State.Idle;
 		isFirstFrame = true;
 		timer = 0;
+		picked = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			Pick();
+		}
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			Drop();
+		}
 		timer += Time.deltaTime;
 
 		switch (state) {
+			case State.Hold:
+				UpdateHold();
+				break;
+			case State.Touched:
+				UpdateTouched();
+				break;
 			case State.Idle:
 				UpdateIdle();
 				break;
@@ -172,12 +196,6 @@ public class Move : MonoBehaviour {
 				break;
 			case State.Fly:
 				UpdateFly();
-				break;
-			case State.Grab:
-				UpdateGrab();
-				break;
-			case State.Touched:
-				UpdateTouched();
 				break;
 		}
 	}
