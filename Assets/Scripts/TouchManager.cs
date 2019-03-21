@@ -17,7 +17,7 @@ public class TouchManager : MonoBehaviour {
     private int divideCount = 10; // divideCount만큼의 동심원 둘레에 ray를 쏩니다.
 
     public static bool moveAble = true;
-    private string[] charList = new string[] { "acher", "catseye", "melik", "pluto", "polaris", "sirius", "thuban", "vega", "rescha", "sualocin", "rigeleuse" }; // 캐릭터 추가하면 별자리는 자동추가됩니다.
+    // private string[] charList = new string[] { "acher", "catseye", "melik", "pluto", "polaris", "sirius", "thuban", "vega", "rescha", "sualocin", "rigeleuse" }; // 캐릭터 추가하면 별자리는 자동추가됩니다.
     
     Dictionary<string, float> Constellation = new Dictionary<string, float>();
     Dictionary<string, string> Character = new Dictionary<string, string>(); // 캐릭터이름, 별자리이름
@@ -30,28 +30,31 @@ public class TouchManager : MonoBehaviour {
 
         Scope = GameObject.Find("Scope");
         Scope.transform.localPosition = Variables.scopePos;
-
-        for (int i = 0; i < charList.Length; i++)
-            characterAdd(charList[i]);
-
+        
+        characterAdd();
         shotRay();
     }
 	
-    void characterAdd(string charName)
+    void characterAdd()
     {
-        string constellName;
+        string charName = null, constellName = null;
         int charIndex = 0;
 
         foreach (var value in Variables.Characters.Values)
         {
-            if (charName == value.InternalName)
+            if (value.Cards[0].Observable)
+            {
                 charIndex = value.CharNumber;
+                charName = value.InternalName;
+
+                constellName = Variables.Characters[charIndex].ConstelKey[0];
+                if (!Constellation.ContainsKey(constellName))
+                    Constellation.Add(constellName, 0f);
+
+                if (!Character.ContainsKey(charName))
+                    Character.Add(charName, constellName);
+            }
         }
-        constellName = Variables.Characters[charIndex].ConstelKey[0];
-        if (!Constellation.ContainsKey(constellName))
-            Constellation.Add(constellName, 0f);
-        if (!Character.ContainsKey(charName))
-            Character.Add(charName, constellName);
     }
 
 	// Update is called once per frame
@@ -59,6 +62,11 @@ public class TouchManager : MonoBehaviour {
     {
         if(moveAble)
             ScopeMove();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneChanger.Instance.ChangeScene("MainScene");
+        }
     }
 
     void LoadCharacter()
@@ -141,14 +149,7 @@ public class TouchManager : MonoBehaviour {
     public void shotRay()
     {
         charProb.Clear();
-
-        Constellation["Draco"] = 0f;
-        Constellation["UrsaMinor"] = 0f;
-        Constellation["Lyra"] = 0f;
-        Constellation["Sagittarius"] = 0f;
-        Constellation["Aquarius"] = 0f;
-        Constellation["Eridanus"] = 0f;
-        Constellation["CanisMajor"] = 0f;
+        Constellation = Constellation.ToDictionary(p => p.Key, p => 0f);
 
         Vector3 pos = Scope.transform.position;
 
@@ -202,9 +203,8 @@ public class TouchManager : MonoBehaviour {
                 if (charRank.Key == value.InternalName)
                     charIndex = value.CharNumber;
             }
-
+            
             var rankCharacter = Variables.Characters[charIndex];
-
             int favority = rankCharacter.Cards[0].Favority;
             int cnt = 0, progress = 0, required = 0;
 
@@ -216,8 +216,8 @@ public class TouchManager : MonoBehaviour {
             GameObject totalFav = heartBar.transform.Find("Total_" + i.ToString()).gameObject;
             GameObject favLevel = heart.transform.Find("Fav_Level_" + i.ToString()).gameObject;
             GameObject charName = GameObject.Find("Name_" + i.ToString());
-
-            if (Variables.Characters[charIndex].Observed)
+            
+            if (rankCharacter.Cards[0].Observed)
             {
                 heart.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha/obs_heart");
                 heartBarUI.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha/obs_heartbarbackground");

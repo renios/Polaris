@@ -115,6 +115,9 @@ public class GachaManager : MonoBehaviour {
                             }
                         }
                         whyTwotime = false;
+                        
+                        SoundManager.Play(SoundType.ClickImportant);
+                        SoundManager.FadeMusicVolume(0, 1.5f);
                         Variables.btnState = 3;
                     }
                 }

@@ -71,7 +71,6 @@ namespace Dialogue
                 }
                 else
                 {
-                    Debug.Log("Good!");
                     var newObject = Instantiate(ObjectTemplate[curDialogData.Type]);
                     var newDialogObj = newObject.GetComponentInChildren<DialogueObject>();
 

@@ -14,6 +14,7 @@ public class ResultManager : MonoBehaviour {
     void Start () {
         fader.SetActive(true);
         StartCoroutine(gachaFadeIn(3f));
+        SoundManager.Play(SoundType.GachaResult);
     }
 	
 	// Update is called once per frame
@@ -36,8 +37,8 @@ public class ResultManager : MonoBehaviour {
                 
                 rankCharacter.Cards[0].Favority += 1;
                 GameManager.Instance.SaveGame();
-
-                if (rankCharacter.Cards[0].Observed == false) // 첫 획득
+                
+                if (rankCharacter.Cards[0].Observed == false || rankCharacter.Cards[0].Favority == 1) // 첫 획득
                 {
                     rankCharacter.Cards[0].Observed = true;
                     GameManager.Instance.SaveGame();
@@ -110,7 +111,8 @@ public class ResultManager : MonoBehaviour {
 
             yield return new WaitForSeconds(Time.deltaTime);
         }
-
+        
+        SoundManager.FadeMusicVolume(1, 1.5f);
         //NameTag FadeIn
         while (tC.a < 0.5f)
         {
