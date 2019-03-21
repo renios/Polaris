@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 
 //Unity Inspector를 통해서 받아오는 SoundType 변수가 다른 코드에 존재하므로,
@@ -9,7 +10,7 @@ public enum SoundType{
 	Default,
 	BgmTitle, BgmMain,
 	ClickImportant, ClickNormal, ClickDialogue,
-	BgmDark, AlbumPage
+	BgmDark, AlbumPage, GachaResult
 }
 public class SoundManager : MonoBehaviour {
 
@@ -49,9 +50,13 @@ public class SoundManager : MonoBehaviour {
 	}
 	public static void Play(SoundType type){
 		Debug.Log("Play : " + type.ToString());
-		Instance.PlayMusic(type);
+		Instance.PlaySound(type);
 	}
-	public void PlayMusic(SoundType type){
+	public static void FadeMusicVolume(float targetVolume, float duration)
+	{
+		Instance.musicPlayer.DOFade(targetVolume, duration);
+	}
+	public void PlaySound(SoundType type){
 		AudioClip clip;
 		if (soundDictionary.TryGetValue(type.ToString(), out clip)){
 			if (clip == null){
@@ -61,6 +66,7 @@ public class SoundManager : MonoBehaviour {
 			if (type.ToString().Contains("Bgm")){
 				if (musicPlayer.clip != clip){
 					musicPlayer.clip = clip;
+					musicPlayer.volume = 1;
 					musicPlayer.Play();
 				}
 			}
