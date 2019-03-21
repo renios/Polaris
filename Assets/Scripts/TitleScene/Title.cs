@@ -5,6 +5,10 @@ using DG.Tweening;
 
 public class Title : MonoBehaviour {
 
+    public TextMesh TitleText;
+    public TextMesh TitleSubText;
+    public TextMesh TouchText;
+
     private float speed;
     private SpriteRenderer TitleLogo;
     private SpriteRenderer TouchToScreen;
@@ -15,8 +19,8 @@ public class Title : MonoBehaviour {
 
     void Awake()
     {
-        TitleLogo = GameObject.Find("TitleLogo").GetComponent<SpriteRenderer>();
-        TouchToScreen = GameObject.Find("TouchToScreen").GetComponent<SpriteRenderer>();
+        // TitleLogo = GameObject.Find("TitleLogo").GetComponent<SpriteRenderer>();
+        // TouchToScreen = GameObject.Find("TouchToScreen").GetComponent<SpriteRenderer>();
     }
 
     void Start()
@@ -25,8 +29,9 @@ public class Title : MonoBehaviour {
         Finish = false;
         Stop = false;
         SceneChanging = false;
-        TitleLogo.color = new Color(1, 1, 1, 0);
-        TouchToScreen.color = new Color(1, 1, 1, 0);
+        TitleText.color = new Color(1, 1, 1, 0);
+        TitleSubText.color = new Color(1, 1, 1, 0);
+        TouchText.color = new Color(1, 1, 1, 0);
 
         SoundManager.Play(SoundType.BgmTitle);
     }
@@ -50,14 +55,16 @@ public class Title : MonoBehaviour {
             if (Finish)
             {
                 Camera.main.transform.position = new Vector3(0.0f, 0.0f, -10.0f);
-                TitleLogo.color = new Color(1, 1, 1, 1);
-                TouchToScreen.color = new Color(1, 1, 1, 1);
+                TitleText.color = new Color(1, 1, 1, 1);
+                TitleSubText.color = new Color(1, 1, 1, 1);
+                TouchText.color = new Color(1, 1, 1, 1);
             }
-            else if (TitleLogo.color.a < 1)
+            else if (TitleText.color.a < 1)
             {
                 TextEffect += 1.0f * Time.deltaTime;
-                TitleLogo.color = new Color(1, 1, 1, TextEffect);
-                TouchToScreen.color = new Color(1, 1, 1, TextEffect);
+                TitleText.color = new Color(1, 1, 1, TextEffect);
+                TitleSubText.color = new Color(1, 1, 1, TextEffect);
+                TouchText.color = new Color(1, 1, 1, TextEffect);
             }   
             else
             {
