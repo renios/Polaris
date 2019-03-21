@@ -21,17 +21,20 @@ public class SaveData
         if (Variables.CharacterVersion > CharVersion) // 만약 현재 세이브 파일의 버전이 낮다면 == 캐릭터 목록이 업데이트 되었었다면...
         {
             // 읽어온 캐릭터 데이터를 통해 Variables.Characters를 구성한 뒤, 이 객체가 가지고 있는 데이터를 반복문으로 적용시킵니다.
-            // 적용시킬 때, 캐릭터나 카드의 삭제 또는 위치 변경은 이루어지지 않았다고 가정하였습니다.
+            // 적용시킬 때, 캐릭터나 카드의 위치 변경은 이루어지지 않았다고 가정하였습니다.
             foreach (var data in charGroup.Characters)
                 Variables.Characters.Add(data.CharNumber, data);
             foreach(var curData in Characters)
             {
-                Variables.Characters[curData.CharNumber].Observed = curData.Observed;
-                for(int i = 0; i < curData.Cards.Count; i++)
+                if(Variables.Characters.ContainsKey(curData.CharNumber))
                 {
-                    Variables.Characters[curData.CharNumber].Cards[i].Observed = curData.Cards[i].Observed;
-                    Variables.Characters[curData.CharNumber].Cards[i].Favority = curData.Cards[i].Favority;
-                    Variables.Characters[curData.CharNumber].Cards[i].StoryProgress = curData.Cards[i].StoryProgress;
+                    Variables.Characters[curData.CharNumber].Observed = curData.Observed;
+                    for (int i = 0; i < curData.Cards.Count; i++)
+                    {
+                        Variables.Characters[curData.CharNumber].Cards[i].Observed = curData.Cards[i].Observed;
+                        Variables.Characters[curData.CharNumber].Cards[i].Favority = curData.Cards[i].Favority;
+                        Variables.Characters[curData.CharNumber].Cards[i].StoryProgress = curData.Cards[i].StoryProgress;
+                    }
                 }
             }
         }
