@@ -279,4 +279,13 @@ public class TouchManager : MonoBehaviour {
         else
             return hit.collider.name;
     }
+
+    //TODO : 씬 바꾸는 임시 코드 개선
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneChanger.Instance.ChangeScene("MainScene");
+        }
+    }
 }

@@ -72,6 +72,11 @@ public class LobbyManager : MonoBehaviour
             if(!popup.activeSelf)
                 Camera.main.transform.DOMove(new Vector3(0, -5.0119f, -10), 0.75f);
         }
+        //TODO : 씬 바꾸는 임시 코드 개선
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneChanger.Instance.ChangeScene("TitleScene");
+        }
     }
 
     public void MoveCamera()
