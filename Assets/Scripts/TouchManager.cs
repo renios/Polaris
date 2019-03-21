@@ -17,7 +17,7 @@ public class TouchManager : MonoBehaviour {
     private int divideCount = 10; // divideCount만큼의 동심원 둘레에 ray를 쏩니다.
 
     public static bool moveAble = true;
-    private string[] charList = new string[] { "acher", "catseye", "melik", "pluto", "polaris", "sirius", "thuban", "vega", "rescha", "sualocin", "rigeleuse" }; // 캐릭터 추가하면 별자리는 자동추가됩니다.
+    // private string[] charList = new string[] { "acher", "catseye", "melik", "pluto", "polaris", "sirius", "thuban", "vega", "rescha", "sualocin", "rigeleuse" }; // 캐릭터 추가하면 별자리는 자동추가됩니다.
     
     Dictionary<string, float> Constellation = new Dictionary<string, float>();
     Dictionary<string, string> Character = new Dictionary<string, string>(); // 캐릭터이름, 별자리이름
@@ -30,28 +30,31 @@ public class TouchManager : MonoBehaviour {
 
         Scope = GameObject.Find("Scope");
         Scope.transform.localPosition = Variables.scopePos;
-
-        for (int i = 0; i < charList.Length; i++)
-            characterAdd(charList[i]);
-
+        
+        characterAdd();
         shotRay();
     }
 	
-    void characterAdd(string charName)
+    void characterAdd()
     {
-        string constellName;
+        string charName = null, constellName = null;
         int charIndex = 0;
 
         foreach (var value in Variables.Characters.Values)
         {
-            if (charName == value.InternalName)
+            if (value.Cards[0].Observable)
+            {
                 charIndex = value.CharNumber;
+                charName = value.InternalName;
+
+                constellName = Variables.Characters[charIndex].ConstelKey[0];
+                if (!Constellation.ContainsKey(constellName))
+                    Constellation.Add(constellName, 0f);
+
+                if (!Character.ContainsKey(charName))
+                    Character.Add(charName, constellName);
+            }
         }
-        constellName = Variables.Characters[charIndex].ConstelKey[0];
-        if (!Constellation.ContainsKey(constellName))
-            Constellation.Add(constellName, 0f);
-        if (!Character.ContainsKey(charName))
-            Character.Add(charName, constellName);
     }
 
 	// Update is called once per frame
