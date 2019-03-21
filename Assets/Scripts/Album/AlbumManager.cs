@@ -76,6 +76,7 @@ namespace Album
         public void ChangePageIndex()
         {
             PageNumber.text = (AlbumSnap.CurrentPage + 1).ToString() + " / " + PageParent.transform.childCount.ToString();
+            SoundManager.Play(SoundType.AlbumPage);
         }
 
         // Use this for initialization

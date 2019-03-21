@@ -27,7 +27,11 @@ public class SceneChanger : MonoBehaviour
 
     public IEnumerator ChangeSceneSub(string sceneName, string motionName, float motionTime)
     {
-        SoundManager.Play(SoundType.ClickImportant);
+        if (SceneManager.GetActiveScene().name != "TitleScene")
+        {
+            SoundManager.Play(SoundType.ClickImportant);
+        }
+        
         Motion.Play(motionName);
         yield return new WaitForSeconds(motionTime);
 

@@ -80,6 +80,7 @@ namespace Dialogue
                     newObject.transform.SetParent(ObjectParent);
                     newObject.transform.localScale = Vector3.one;
                     CurrentIndex++;
+                    SoundManager.Play(SoundType.ClickDialogue);
                     LayoutRebuilder.MarkLayoutForRebuild(newObject.transform as RectTransform);
                     LayoutRebuilder.ForceRebuildLayoutImmediate(newObject.transform as RectTransform);
 
