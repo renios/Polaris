@@ -796,8 +796,8 @@
             "CharNumber":29,
             "ConstelKey":["Orion"],
             "ConstelWeight":[1.0],
-            "Name":"*베텔게우스",
-            "InternalName":"betelgeuse",
+            "Name":"*리겔루스",
+            "InternalName":"rigeleuse",
             "Lux":"--",
             "LYDistance":"--",
             "Description":"--",
@@ -828,40 +828,6 @@
         },
         {
             "CharNumber":30,
-            "ConstelKey":["Orion"],
-            "ConstelWeight":[0.4],
-            "Name":"*리겔",
-            "InternalName":"rigel",
-            "Lux":"--",
-            "LYDistance":"--",
-            "Description":"--",
-            "Cards":
-            [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":4,
-                    "Observable":false,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]},
-                        {"Header":"제목 1", "Description":"임시 텍스트 1", 
-                            "Additional":[]},
-                        {"Header":"제목 2", "Description":"임시 텍스트 2", 
-                            "Additional":[]},
-                        {"Header":"제목 3", "Description":"임시 텍스트 3", 
-                            "Additional":[]},
-                        {"Header":"제목 4", "Description":"임시 텍스트 4", 
-                            "Additional":[]},
-                        {"Header":"제목 5", "Description":"임시 텍스트 5", 
-                            "Additional":[]}
-                    ]
-                }
-            ]
-        },
-        {
-            "CharNumber":31,
             "ConstelKey":["Orion"],
             "ConstelWeight":[0.2],
             "Name":"*말머리 성운",
@@ -895,7 +861,7 @@
             ]
         },
         {
-            "CharNumber":32,
+            "CharNumber":31,
             "ConstelKey":["Monoceros"],
             "ConstelWeight":[1.0],
             "Name":"*로제",
@@ -929,7 +895,7 @@
             ]
         },
         {
-            "CharNumber":33,
+            "CharNumber":32,
             "ConstelKey":["CanisMajor"],
             "ConstelWeight":[1.0],
             "Name":"시리우스",
@@ -963,7 +929,7 @@
             ]
         },
         {
-            "CharNumber":34,
+            "CharNumber":33,
             "ConstelKey":["Lyra"],
             "ConstelWeight":[1],
             "Name":"베가",
