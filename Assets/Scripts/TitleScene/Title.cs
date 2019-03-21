@@ -71,6 +71,18 @@ public class Title : MonoBehaviour {
                 Finish = true;
             }
         }
+        //TODO : 씬 바꾸는 임시 코드 개선
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(!Finish)
+            {
+                SkipAnimation();
+            }
+            else
+            {
+                Application.Quit();
+            }
+        }
     }
 
     public void SkipAnimation()

@@ -17,7 +17,7 @@ public class TouchManager : MonoBehaviour {
     private int divideCount = 10; // divideCount만큼의 동심원 둘레에 ray를 쏩니다.
 
     public static bool moveAble = true;
-    private string[] charList = new string[] { "acher", "catseye", "melik", "pluto", "polaris", "sirius", "thuban", "vega", "rescha", "sualocin" }; // 캐릭터 추가하면 별자리는 자동추가됩니다.
+    private string[] charList = new string[] { "acher", "catseye", "melik", "pluto", "polaris", "sirius", "thuban", "vega", "rescha", "sualocin", "rigeleuse" }; // 캐릭터 추가하면 별자리는 자동추가됩니다.
     
     Dictionary<string, float> Constellation = new Dictionary<string, float>();
     Dictionary<string, string> Character = new Dictionary<string, string>(); // 캐릭터이름, 별자리이름
@@ -278,5 +278,14 @@ public class TouchManager : MonoBehaviour {
             return "null";
         else
             return hit.collider.name;
+    }
+
+    //TODO : 씬 바꾸는 임시 코드 개선
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneChanger.Instance.ChangeScene("MainScene");
+        }
     }
 }

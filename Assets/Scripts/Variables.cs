@@ -15,7 +15,7 @@ public static class Variables
     public static Dictionary<int, CharacterData> Characters;    // 캐릭터에 대한 데이터
     public static int CharacterVersion;
 
-    public static readonly int[] FavorityThreshold = { 30, 70, 120, 180, 250 };     // 캐릭터 호감도 문턱에 관한 배열 30 70 120 180 250
+    public static readonly int[] FavorityThreshold = { 2, 3, 4, 5, 6 };     // 캐릭터 호감도 문턱에 관한 배열 30 70 120 180 250
 
     public static bool CameraMove;
 

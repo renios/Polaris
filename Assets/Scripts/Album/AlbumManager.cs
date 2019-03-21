@@ -88,7 +88,11 @@ namespace Album
         // Update is called once per frame
         void Update()
         {
-
+            //TODO : 씬 바꾸는 임시 코드 개선
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneChanger.Instance.ChangeScene("MainScene");
+            }
         }
     }
 }
