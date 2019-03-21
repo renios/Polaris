@@ -739,7 +739,7 @@
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
                     "Rarity":1,
-                    "Observable":true,
+                    "Observable":false,
                     "ChapterInfo":
                     [
                         {"Header":"제목 0", "Description":"임시 텍스트 0", 
@@ -931,7 +931,7 @@
         {
             "CharNumber":33,
             "ConstelKey":["Lyra"],
-            "ConstelWeight":[1],
+            "ConstelWeight":[1.0],
             "Name":"베가",
             "InternalName":"vega",
             "Lux":"--",

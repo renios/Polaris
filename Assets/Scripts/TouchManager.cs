@@ -149,14 +149,7 @@ public class TouchManager : MonoBehaviour {
     public void shotRay()
     {
         charProb.Clear();
-
-        Constellation["Draco"] = 0f;
-        Constellation["UrsaMinor"] = 0f;
-        Constellation["Lyra"] = 0f;
-        Constellation["Sagittarius"] = 0f;
-        Constellation["Aquarius"] = 0f;
-        Constellation["Eridanus"] = 0f;
-        Constellation["CanisMajor"] = 0f;
+        Constellation = Constellation.ToDictionary(p => p.Key, p => 0f);
 
         Vector3 pos = Scope.transform.position;
 
@@ -210,9 +203,8 @@ public class TouchManager : MonoBehaviour {
                 if (charRank.Key == value.InternalName)
                     charIndex = value.CharNumber;
             }
-
+            
             var rankCharacter = Variables.Characters[charIndex];
-
             int favority = rankCharacter.Cards[0].Favority;
             int cnt = 0, progress = 0, required = 0;
 
@@ -224,8 +216,8 @@ public class TouchManager : MonoBehaviour {
             GameObject totalFav = heartBar.transform.Find("Total_" + i.ToString()).gameObject;
             GameObject favLevel = heart.transform.Find("Fav_Level_" + i.ToString()).gameObject;
             GameObject charName = GameObject.Find("Name_" + i.ToString());
-
-            if (Variables.Characters[charIndex].Observed)
+            
+            if (rankCharacter.Cards[0].Observed)
             {
                 heart.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha/obs_heart");
                 heartBarUI.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha/obs_heartbarbackground");

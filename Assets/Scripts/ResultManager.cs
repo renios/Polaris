@@ -37,8 +37,8 @@ public class ResultManager : MonoBehaviour {
                 
                 rankCharacter.Cards[0].Favority += 1;
                 GameManager.Instance.SaveGame();
-
-                if (rankCharacter.Cards[0].Observed == false) // 첫 획득
+                
+                if (rankCharacter.Cards[0].Observed == false || rankCharacter.Cards[0].Favority == 1) // 첫 획득
                 {
                     rankCharacter.Cards[0].Observed = true;
                     GameManager.Instance.SaveGame();
