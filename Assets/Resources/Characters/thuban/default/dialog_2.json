@@ -1,0 +1,217 @@
+{
+    "Dialogues": [
+        {
+            "Phase": 0,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "(... zzz ZZZ zzz ...)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 2,
+                    "JuncTexts": [
+                        "(가만히 지켜본다)",
+                        "(흔들어 깨운다)"
+                    ],
+                    "Directions": [
+                        -1,
+                        1
+                    ],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "(zzz ZZZ zzz ...)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "... 아, 으아아아아. 어어...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "아, 너구나. 꼬마 아가씨.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 2
+                }
+            ]
+        },
+        {
+            "Phase": 1,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "... 으으으... 으음...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "뭐야... 누구야... 졸리다고오...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "으으으음.... 어, 뭐야, 꼬마 아가씨였네.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 2
+                }
+            ]
+        },
+        {
+            "Phase": 2,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "그래… 좋은 <i>아침</i>. 너는 잘 잤니?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "지금은 밤인데요...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "아, 그랬니? 후후, 공식 하나를 붙들고 씨름하다가 깜빡 잠든 것 같은데, 아직 아침이 아니라니까 슬프네.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그나저나 있잖아, 혹시 기계에는 관심이 있니?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 2,
+                    "JuncTexts": [
+                        "네, 관심 있어요.",
+                        "아니요, 여기 기계들을 매일 보다 보니까요..."
+                    ],
+                    "Directions": [
+                        3,
+                        4
+                    ],
+                    "NextPhase": 0
+                }
+            ]
+        },
+        {
+            "Phase": 3,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "그렇지! 모름지기 올바르게 된 생물체들은 기계를 좋아하게 되어 있는 거라구.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "내가 또 한 기술 하거든, 그래서 멋진 기계를 하나 만들려고 생각하고 있지.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "어떤 기계인데요?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "음... 그건 확실하게 말을 못 해 주겠네, 후후.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "다만 확실한 거는 말야, 꼬마 아가씨, 그건 아주아주 멋질 거라는 거야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "후후후...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                }
+            ]
+        },
+        {
+            "Phase": 4,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "흐음... 정말로 그래? 가슴에 손을 얹고 다시 생각해 봐.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "분명히 네 자신이 진정 갈망하는 답을 얻을 수 있을 거야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "자. 그럼... 혹시, 기계에는 관심이 있니?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 2,
+                    "JuncTexts": [
+                        "네, 관심 있어요.",
+                        "아니요, 큰 관심은 없어요."
+                    ],
+                    "Directions": [
+                        3,
+                        4
+                    ],
+                    "NextPhase": 0
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,183 @@
+{
+    "Dialogues": [
+        {
+            "Phase": 0,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "어머, 어머, 우리 귀여운 꼬마 아가씨, 왔니?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "오늘은 있잖아… 너한테 보여줄 게 있단다!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "...뭔가 기뻐 보이시네요.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그럼 그럼! 당연하지. 그야 방금 기술력의 집약체가 완성됐거든!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "기술력의 집약체라면...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 2,
+                    "JuncTexts": [
+                        "저번에 말씀하셨던 그 기계인가요?",
+                        "새로운 최고 등급 별이라던가?"
+                    ],
+                    "Directions": [
+                        -1,
+                        1
+                    ],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "맞아, 맞아! 그 멋진 기계 말이야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 2
+                }
+            ]
+        },
+        {
+            "Phase": 1,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "설마 그럴 리가 있겠어~.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "저번에 이야기했던 '멋진 기계'에 대한 거야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 2
+                }
+            ]
+        },
+        {
+            "Phase": 2,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "마법공학에 딥러닝, 약간의 그 일종의 물리 에너지까지 들어가서… 후후, 최강의 작품이 탄생했어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그럼, 잠시만 기다려 보렴, 꼬마 아가씨. 금방 가지고 올 테니까.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "... ... ...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "... ... ...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "짜잔! 이거 보렴, 아가야!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "내 모든 걸 쏟아부은 <i>기술력의 집약체</i>, 「미니 투반」이란다!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "......?!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "궁금할 만도 하겠지. 이 아이는, 무려 나의 분신!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "가져다 두고 전원만 연결해 주면, 마치 인간같이 이야기하고 놀 수 있단다!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그런데 아직 이 아이에게는 필드 테스트가 필요하단다. 실제로 사용하면서 여러 가지 점검하는 거지.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그걸 너한테 부탁하고 싶어. 그럼 꼬마 아가씨, 받으려무나!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "... ... ...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                }
+            ]
+        }
+    ]
+}
