@@ -5,35 +5,42 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "DialogText": "안녕!",
+                    "DialogText": "넌 누구지? 난 샤르카로트의 황제. 베가. 적이 아니라면 네 이름을 밝혀라.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..?",
+                    "DialogText": "...??",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "여자애는 오랜만에 보네. 나랑 비슷해서 좋다.",
+                    "DialogText": "무슨 생각을 하고 있는지는 모르겠지만, 위해를 가할 것 처럼 보이지는 않는군.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "걱정하지 마라. 아무리 낯선 곳이라고 해도, 적의가 없는 어린아이에게 해를 입히는 불명예스러운 행동은 하지 않는다.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..반가워.",
+                    "DialogText": "...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "나는 아케르야. 방금 네가 보던 에리다누스자리에서 왔어. 막 심심해지고 있었는데 이런 새로운 곳을 볼 수 있다니 행운이네. 앞으로도 잘 부탁해!",
+                    "DialogText": "...뭐라? 무슨 뜻인지 모르겠다고?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

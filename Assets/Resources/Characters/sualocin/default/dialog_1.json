@@ -5,77 +5,42 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "DialogText": "혹시 간식 있어?",
+                    "DialogText": "밤에 잠이 안 왔던 적이 있어?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "난 가끔 그랬는데. 그래서 그 때마다 돌고래 친구들을 세면서 놀았어. 친구들이 많았거든.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "아..미안. 지금은 없어.",
+                    "DialogText": "좋겠다...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "흠, 아쉽다. 혹시 단 거 좋아해?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "응, 좋아해.",
+                    "DialogText": "여긴 돌고래 친구들이 없어? 엣, 그렇구나. 부럽게 만들려던 거라던가 그런건 아니었는데.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "나도! 단 게 먹고 싶은데 별이 되고 나서부터는 먹기 힘들어.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "별이 되기 전부터 좋아했던 거야?",
+                    "DialogText": "대신 여기 사람들은 양을 센다고 들었는데. 뭐? 이 근처엔 양도 없어?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "응! 그래서 아빠랑 오빠들이 어디 다녀올 때면 아빠가 간식 같은 거 많이 사 왔었어. ",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "..그때 만났으면 같이 간식 먹으면서 얘기했을 텐데,",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "간식이 없어도 얘기할 상대가 있는 것만으로도 즐거워.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "진짜? 헤헤.. 나랑 대화하는 게 다른 천체들과 비교했을 때는 어때?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "네가 재미있게 느꼈으면 좋겠다!",
+                    "DialogText": "...그럼 뭐가 있는거지. 해파리? 아냐? 그것도 없어? 엣, 뭐야.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

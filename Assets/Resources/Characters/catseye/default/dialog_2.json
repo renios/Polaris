@@ -4,176 +4,296 @@
             "Phase": 0,
             "Contents": [
                 {
+                    "Type": 1,
+                    "DialogText": "보통 별이 되면 뭐해?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
                     "Type": 0,
-                    "DialogText": "너는 별 보는 게 좋은 거야?",
+                    "DialogText": "음, 다 같지는 않은 것 같지만, 난 별로 하는 게 없어. 놀고, 주변을 돌아다니고, 널 보러오는 것 정도?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "응. 계속 좋아 해왔어.",
+                    "DialogText": "심심하진 않아? ",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그러고 보니, 하늘 위에 떠 있던 날 보고 있어서 내가 너와 만날 수 있었던 거였지. ",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "그러고 보니 날 보고 있었다면 주변 별자리들도 이미 봤으려나?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "내 주변에도 천체들이 많거든. 대부분 얼굴만 아는 사이긴 하지만, 멜리크는...",
+                    "DialogText": "크게는 아냐. 가끔 지루하긴 하지만.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "멜리크?",
+                    "DialogText": "혹시 별이 되고 싶지 않았던 건 아냐?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "내 친구 같은 천체야.",
+                    "DialogText": "아, 그건 아냐!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "예전에 친구가 그랬어. 사람이 죽으면 별이 된다고.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그래서 별이 되어보고 싶었어!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그랬더니 어느 순간 이렇게 하늘 위에 있더라고.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 2,
+                    "JuncTexts": [
+                        "..방금 잘못 들은 게 아니지?",
+                        "혹시 별이 되기 전에 안 좋은 일이 있었던 거야?"
+                    ],
+                    "Directions": [
+                        1,
+                        2
+                    ],
+                    "NextPhase": 0
+                }
+            ]
+        },
+        {
+            "Phase": 1,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "뭐가? 아, 별이 되어보고 싶었단 거? 죽고 싶었다는 건 아냐.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 3
+                }
+            ]
+        },
+        {
+            "Phase": 2,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "..아, 내가 죽고 싶어 했다고 생각한 거야?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 3
+                }
+            ]
+        },
+        {
+            "Phase": 3,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "그냥, 예쁘잖아? 빛나고, 하늘 가득 채워져 있고.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..그냥 친구가 아니라?",
+                    "DialogText": "별을 많이 좋아했어?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "아, 나 혼자 친구라고 생각하는 거일 수도 있으니까..",
+                    "DialogText": "음, 별로 보진 못했어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "..있잖아, 혹시, 진짜로 혹시 너는 내가 말을 거는 게 귀찮아?",
+                    "DialogText": "밤에는 밖에 나갈 일이 없으니까. 친구가 밖에 잘 안 나가기도 했고.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..전혀.",
+                    "DialogText": "(..친구가 밖에 잘 안 나가는 게 뭔 상관이지?)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그렇게 대답할 거라 생각은 했어.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "내가 이걸 물어본 이유는.. 내가 멜리크를 왜 친구 같은 천체로 생각하는지 설명하기 위해서야.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "어렸을 때 내 주변 사람들은 오빠들이랑 아빠가 전부였어. ",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "그런데.. 오빠들은 내가 말을 걸면 핑계를 대면서 피하기 바쁘더라고.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "사실 아빠가 있을 땐 그나마 괜찮았는데, 없을 때는 나를 쳐다보지도 않았어.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "아빠도 엄마를 잃고 나서는 나랑 대화하는 걸 피했고..",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "그래서 멜리크를 처음 만났을 때는.. 진짜 좋았어",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "내 말을 웃으면서 들어준 유일한 사람이니까.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "아니, 너한테 꼭 웃으면서 얘기를 들어달란 얘기는 아니라, 그냥 그렇다고...",
+                    "DialogText": "대신 집에서 매일 같이 놀았으니까, 원망하지 않아!",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "(아케르의 얼굴이 홍조를 띠고 있다.)",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "멜리크가 너한테는 소중한 사람인거구나",
+                    "DialogText": "(..같은 집?)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그렇지! 소중한 사람, 딱 좋은 표현이야. 헤헤..",
+                    "DialogText": "뭐, 나이가 들면서 자주 두고 나갔지만. 조금 슬프긴 하더라. 그래서 집에 있는 동안은 늘 쫓아다녔어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 2,
+                    "JuncTexts": [
+                        "잠깐. 내가 잘못 들은 게 아니라면, 두고 나가다니? 쫓아다녔다고?",
+                        "..혹시 좋아하는 음식이 뭐였어?"
+                    ],
+                    "Directions": [
+                        4,
+                        5
+                    ],
+                    "NextPhase": 0
+                }
+            ]
+        },
+        {
+            "Phase": 4,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "아, 그게. 어..",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "멜리크에게는 늘 고마워하고 있어. 민폐 끼치는 건 아닐지가 걱정이야.",
+                    "DialogText": "..혹시 눈치챘어?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 6
+                }
+            ]
+        },
+        {
+            "Phase": 5,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "소시지랑 츄르! 친구가 말 잘 들을 때마다 늘 줬...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "..아, 내가 뭐라고 말했지?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 6
+                }
+            ]
+        },
+        {
+            "Phase": 6,
+            "Contents": [
+                {
+                    "Type": 1,
+                    "DialogText": "..너, 정말로 사람이었던 거 맞아?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "(갑자기 표정이 굳어진 채 아랫입술을 문다.)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "(아케르의 표정이 급격하게 우울해졌다. 그렇게 대화가 끝났다.)",
+                    "DialogText": "설마, 너, 내 생각이 맞다면..",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그만.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "..혹시, 고양이였던 거야?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "..오늘은 너무 늦었지, 그렇지?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "나 이만 가볼게.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

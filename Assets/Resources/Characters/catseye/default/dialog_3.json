@@ -4,141 +4,362 @@
             "Phase": 0,
             "Contents": [
                 {
-                    "Type": 1,
-                    "DialogText": "아케르..?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
                     "Type": 0,
-                    "DialogText": "어? 오랜만이네.",
+                    "DialogText": "...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "무슨 일 있어? ",
+                    "DialogText": "..다신 안오는 줄 알았어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "무슨 일 없는데? 갑자기 왜?",
+                    "DialogText": "미안해. 갑자기 가버려서.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "내가 사람이 아니었단 걸 들키고 싶진 않았거든.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..손에 힘이 너무 들어갔어.",
+                    "DialogText": "그래서 처음 만난 날에도 둘러댄 거야?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "아. 치마 다 구겨졌다.",
+                    "DialogText": "뭐, 그렇지. 이 모습도 별이 되고 나서 갖게 된 거고.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 2,
+                    "JuncTexts": [
+                        "지금 모습은 어떻게 만들어진 거야?",
+                        "지금 모습은 주인을 닮은 거야?"
+                    ],
+                    "Directions": [
+                        1,
+                        2
+                    ],
+                    "NextPhase": 0
+                }
+            ]
+        },
+        {
+            "Phase": 1,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "..이건 주인님이 그리신 그림을 닮은 거야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 3
+                }
+            ]
+        },
+        {
+            "Phase": 2,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "아니. 우리 주인님은 지금 내 모습과는 전혀 반대셨어. 차분하고 내성적이고.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 3
+                }
+            ]
+        },
+        {
+            "Phase": 3,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "우리 주인은 어릴 적에 친구가 없으셨거든.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "생각보다는 눈치가 빠르네..",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "..전에 이야기할 때 잠깐 우울해 보이던데.",
+                    "DialogText": "그래서 학교가 끝나면 늘 나랑 같이 집에서 노셨어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "..갑자기 여기 오기 전 일이 떠올라서.",
+                    "DialogText": "어느 날, 학교에서 친구랑 같이 노는 장면을 그리라는 미술 숙제가 나왔다면서 나한테 말을 거셨어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "...사실 난 별이 되기 전날에 죽기로 예정되어 있었어. ",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "병이라도 있었던 거야?",
+                    "DialogText": "난 당연히 주인님이 그림 위에 나랑 주인님의 모습을 그릴 줄 알았지.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그건 아니야. 사실.. 나는 사형일을 하루 앞둔 사형수였어. ",
+                    "DialogText": "주인님한테는 내가 늘 같이 있는 존재였고, 부모님에게 하지 않는 얘기들도 다 나랑 나눴으니까.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "내 죄는 절도죄였어. 나라의 보물이나 다름없는 몹시 중요한 물건을 몰래 훔쳤거든.",
+                    "DialogText": "주인님한테는 내가 늘 같이 있는 존재였고, 부모님에게 하지 않는 얘기들도 다 나랑 나눴으니까.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "우리 아버지는 나라의 제사를 지내는 사람이었어. 우리 집 창고에는 나라에 중요한 일이 있을 때마다 사용하는, 제사용 술을 담기 위해 대대로 내려오는 술병이 있었지. ",
+                    "DialogText": "지금 내가 가진 모습처럼, 노란 머리에 화려한 눈을 가진, 누구보다도 활기찬 소녀였어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "나는 그게 어떤 물건인 줄 모르고 몰래 가져갔었어. 하지만 금방 필요가 없어져서 다시 돌려놓았지. ",
+                    "DialogText": "그래, 우리 주인님은 자기가 갖고 싶었던 친구를 그림으로 그린 거야.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그런데... 내가 잠시 그걸 가져갔단 걸 알아낸 오빠들이 내가 다른 나라에 술병을 몰래 팔아서 돈을 벌려고 했다는 소문을 주변에 냈어. ",
+                    "DialogText": "난 사람들에게 주인님의 친구가 될 수 없었어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그래서 아빠랑 오빠들은 나를 죽여서라도 국가에 용서를 빌려고 했대.",
+                    "DialogText": "생각해보면 주인님도 마찬가지였지.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "..생각보다 뻔해서 재미없었지?",
+                    "DialogText": "힘든 일이 있다고 털어놓으며 내 앞에서 울어도",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "생각해보면, 오빠들은 아마 그냥 내가 싫었던 것 같아. 아무래도 내가 늘 귀찮고 민폐만 끼치는 존재였으니까 그랬을 거야. ",
+                    "DialogText": "상처를 받아서 눈물을 흘려도 닦아줄 손조차 없어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "..너에게마저 그런 존재가 되고 싶진 않은데..",
+                    "DialogText": "어떤 생각도 전할 수 없었어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그냥 옆에 가만히 앉아있는 것 외에는 해줄 수 있는 게 없었어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "내 이야기 중 어떤 것도 전할 수 없었어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "난 고양이니까.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "난 사람이 아니었으니까.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그 순간 정말로 그 친구가 되고 싶었어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "정말로 사람이 되고 싶었어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "주인님에게 친구가 되고 싶었어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "애완동물이 아닌, 평생을 함께하는 친구가.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "난 내 수명이 주인님만큼 길지 않다는 걸 알고 있었어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "내가 죽을 즈음이면 이미 주인님 주변에는 멋진 친구들이 주변에 있어 줄 테지.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "아마 잠시는 내 죽음을 슬퍼해 주셨겠지.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "하지만 그건 그냥 주인님의 삶이 막 제대로 시작하려고 할 때 생긴 작은 사건이었을 거야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "난 몇 년밖에 살지 못하는 고양이고",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "주인님은 길면 백 년을 사는 사람이니까.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "...그래서 별이 된 내 모습을 볼 때 너무 행복했어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "사람의 모습을 갖췄다는 건 정말 엄청난 일이었으니까.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "뭐, 기쁜 것도 잠시였지.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "..이젠 주인님의 삶이 나에게 한순간이었으니까.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "시간이 갈수록 함께했던 기억들이 사라져 가고 있어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "절대 잊지 못하는 기억들도 언젠간 어렴풋이 형태만 떠오르는 일들이 되겠지.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "내가 얼마나 주인님을 좋아했는지 이제 기억조차 나지 않아.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "내가 사람이 아니었단 걸 아니까 어때?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "넌 내가 너와 친구가 될 수 있다고 생각해?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "(잠시 머리를 숙이더니 이내 고개를 들고 원래의 살짝 웃는 표정으로 돌아온다.)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "..그냥 물어본 거니까 신경 쓰지 마. 알았지?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
