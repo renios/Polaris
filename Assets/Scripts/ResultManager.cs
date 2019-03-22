@@ -23,6 +23,7 @@ public class ResultManager : MonoBehaviour {
         {
             if (Input.GetMouseButton(0))
             {
+                isEnd = false;
                 TouchManager.moveAble = true;
                 Variables.btnState = 0;
                 foreach (var value in Variables.Characters.Values)
