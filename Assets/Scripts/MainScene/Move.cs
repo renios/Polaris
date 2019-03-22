@@ -69,6 +69,7 @@ public class Move : MonoBehaviour {
 			GetComponent<Rigidbody2D>().gravityScale = originalGravity;
 			gameObject.layer = LayerMask.NameToLayer("GroundedCharacter");
 			Portrait.CrossFade("Idle");
+			Portrait.SetControlParamInt("Emotion", 0);
 			isFirstFrame = false;
 
 			delay = Random.Range(2.0f, 4f);
@@ -120,6 +121,7 @@ public class Move : MonoBehaviour {
 			GetComponent<Rigidbody2D>().gravityScale = 0;
 			gameObject.layer = LayerMask.NameToLayer("FlyingCharacter");
 			Portrait.CrossFade("Fly");
+			Portrait.SetControlParamInt("Emotion", 0);
 			isFirstFrame = false;
 
 			direction = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
@@ -145,6 +147,7 @@ public class Move : MonoBehaviour {
 			GetComponent<Rigidbody2D>().gravityScale = 0;
 			gameObject.layer = LayerMask.NameToLayer("FlyingCharacter");
 			Portrait.CrossFade("Hold");
+			Portrait.SetControlParamInt("Emotion", 1);
 			isFirstFrame = false;
 		}
 
