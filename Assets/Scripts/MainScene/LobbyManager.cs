@@ -67,17 +67,26 @@ public class LobbyManager : MonoBehaviour
         // 잡고있으면 움직인다
         // 잡고있을때 떼면 떨어진다
         if (pickedCharacter != null) {
+            var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            pickedCharacter.transform.position = new Vector3(mousePosition.x, mousePosition.y, pickedCharacter.transform.position.z) ;
+
             if (Input.GetMouseButtonUp(0)) {
                 pickedCharacter.GetComponent<Move>().Drop();
                 pickedCharacter = null;
             }
-            var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            pickedCharacter.transform.position = mousePosition;
         }
 
         // 안 잡고있을때 누르면 잡는다
         if (Input.GetMouseButtonDown(0)) {
-            
+            var mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float characterHeight = 0.6f;
+            int layermaskValue = (1 << 10) + (1 << 11); //10번 레이어와 11번 레이어를 체크
+
+            var tryPick = Physics2D.OverlapCircle(mousePosition - Vector2.up*characterHeight, characterHeight, layermaskValue);
+            if (tryPick != null) {
+                pickedCharacter = tryPick.gameObject;
+                pickedCharacter.GetComponent<Move>().Pick();
+            }
         }
 
         if (SwipeManager.Instance.IsSwiping(SwipeManager.SwipeDirection.Down))
