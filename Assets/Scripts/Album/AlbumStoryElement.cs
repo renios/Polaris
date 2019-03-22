@@ -36,6 +36,7 @@ namespace Album
                 var newObj = Instantiate(AddiInfoTemplate);
                 newObj.GetComponentInChildren<Text>().text = Variables.Characters[chI].Cards[caI].ChapterInfo[stI].Additional[i];
                 newObj.transform.SetParent(AddiInfoParent);
+                newObj.transform.localScale = Vector3.one;
                 newObj.SetActive(true);
                 addis.Add(newObj);
             }
