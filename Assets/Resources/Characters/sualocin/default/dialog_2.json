@@ -5,21 +5,21 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "DialogText": "오, 안녕! 또 보네!",
+                    "DialogText": "안녕! 또 보네!",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "좋아, 다시 만난 김에 특별히 자비를 베풀도록 하지!",
+                    "DialogText": "(수알로킨은 갑자기 무언가 생각난 듯 얼굴이 붉어집니다.)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "뭔가 먹고 싶은 거라도 있어?",
+                    "DialogText": "윽, 저번에 있었던 일은 잊어줘!",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -27,8 +27,8 @@
                 {
                     "Type": 2,
                     "JuncTexts": [
-                        "딱히… 괜찮아요.",
-                        "달달한 디저트라도 있으면 좋을 것 같아요."
+                        "무슨 일?",
+                        "네..."
                     ],
                     "Directions": [
                         1,
@@ -43,17 +43,16 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "DialogText": "어, 어? 의외로 욕심이 없구나?",
+                    "DialogText": "아, 아, 아무것도 아니야! 하하~",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
-                    "Type": 0,
-                    "DialogText": "예상치 못했어… 난 너를 그렇게 키우지 않았는데!",
+                    "Type": -1,
                     "JuncTexts": [],
                     "Directions": [],
-                    "NextPhase": 0
+                    "NextPhase": 3
                 }
             ]
         },
@@ -62,27 +61,6 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "DialogText": "좋아! 그럼 내가 당장…",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "(수알로킨은 자신만만한 표정으로 손을 내밀었다.)",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "(그리고 그 위에 있던 것은…)",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
                     "DialogText": "…….",
                     "JuncTexts": [],
                     "Directions": [],
@@ -90,42 +68,109 @@
                 },
                 {
                     "Type": 0,
-                    "DialogText": "…어라…",
+                    "DialogText": "고마워….",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 3
+                }
+            ]
+        },
+        {
+            "Phase": 3,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "맞아, 그러고 보니 친구들 소개를 못 했구나!",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "잘못, 잘못 가져왔나보네! 하하~",
+                    "DialogText": "이쪽은 한나, 이쪽은 토미, 이쪽은…",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "(수알로킨은 당황한 기색을 내비치며 덩어리를 멀리 던져버렸다.)",
+                    "DialogText": "(수알로킨은 주변의 고래들을 하나하나 쓰다듬으며 이름을 말했다.)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "뭐지, 뭐지! 원래 이렇게 실수하는 편이 아닌데~",
+                    "DialogText": "너는 작으니까 꼬마라고 불러주도록 하지!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "수알로킨도 작지 않아요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "(수알로킨은 머쓱한 표정을 짓더니 이내 사라져버렸다.)",
+                    "DialogText": "윽, 그런 비밀은 함부로 말하는 게 아냐, 꼬마!",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "덩어리는 확인 결과 초코였다… 초코 케이크를 만들려다 그만 실수를 해버렸다.",
+                    "DialogText": "(수알로킨이 머리를 슥슥 쓰다듬는 것이 느껴진다.)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "고래분들은, 수알로킨이 이름을 지어준 거예요?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "물론이지. 내가 얘네 엄마나 마찬가지인걸!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "수알로킨은, 누가 지은 이름이예요?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "뭐? 그거야 당연히 내가 지은 이름이지!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "뭐 아무튼, 다음에 보자고, 꼬마!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "(수알로킨이 떠나간 자리엔 초코 케이크가 든 작은 상자가 놓여있었다.)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
