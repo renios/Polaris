@@ -210,11 +210,11 @@ public class TouchManager : MonoBehaviour {
 
             CharSprite = GameObject.Find("Character_" + i.ToString());
             GameObject heartBarUI = GameObject.Find("HeartBarUI_" + i.ToString());
-            GameObject heart = heartBarUI.transform.Find("Heart_" + i.ToString()).gameObject;
-            GameObject heartBar = heartBarUI.transform.Find("HeartBar_" + i.ToString()).gameObject;
-            GameObject nowFav = heartBar.transform.Find("Now_" + i.ToString()).gameObject;
-            GameObject totalFav = heartBar.transform.Find("Total_" + i.ToString()).gameObject;
-            GameObject favLevel = heart.transform.Find("Fav_Level_" + i.ToString()).gameObject;
+            GameObject heart = heartBarUI.transform.FindChild("Heart_" + i.ToString()).gameObject;
+            GameObject heartBar = heartBarUI.transform.FindChild("HeartBar_" + i.ToString()).gameObject;
+            GameObject nowFav = heartBar.transform.FindChild("Now_" + i.ToString()).gameObject;
+            GameObject totalFav = heartBar.transform.FindChild("Total_" + i.ToString()).gameObject;
+            GameObject favLevel = heart.transform.FindChild("Fav_Level_" + i.ToString()).gameObject;
             GameObject charName = GameObject.Find("Name_" + i.ToString());
             
             if (rankCharacter.Cards[0].Observed)
