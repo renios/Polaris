@@ -2065,7 +2065,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1686605569527186}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.402, y: -1.098, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children:
   - {fileID: 4935958940988350}
@@ -16286,7 +16286,7 @@ MonoBehaviour:
   _bakeSrcEditablePortrait: {fileID: 0}
   _sortingLayerID: 0
   _sortingOrder: 0
-  _isUsingMecanim: 1
+  _isUsingMecanim: 0
   _mecanimAnimClipResourcePath: D:/git/Polaris/Assets/Resources/Animation/Pluto
   _emptyAnimClipForMecanim: {fileID: 7400000, guid: a44bc85b2cdb3954a98b7ccf80e092f6,
     type: 2}

@@ -1548,7 +1548,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1983273697957240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.484, y: 0.021, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children:
   - {fileID: 4462357565427192}
@@ -21316,7 +21316,7 @@ MonoBehaviour:
       _texture: {fileID: 2800000, guid: ec4178557bc0e4cf2a4ac1c39005aaae, type: 3}
       _textureID: 0
       _shader: {fileID: 4800000, guid: b3aee9f90da5b3247adc84e67cadd725, type: 3}
-  _optAnimEventListener: {fileID: 0}
+  _optAnimEventListener: {fileID: 114027718139191272}
   _subObjectGroup: {fileID: 1709224557807562}
   _subObjectGroup_Mesh: {fileID: 1377822687662162}
   _subObjectGroup_MeshGroup: {fileID: 1648503327076208}
@@ -21334,7 +21334,7 @@ MonoBehaviour:
   _bakeSrcEditablePortrait: {fileID: 0}
   _sortingLayerID: 0
   _sortingOrder: 0
-  _isUsingMecanim: 1
+  _isUsingMecanim: 0
   _mecanimAnimClipResourcePath: D:/git/Polaris/Assets/Resources/Animation/Acher
   _emptyAnimClipForMecanim: {fileID: 7400000, guid: 4e6514bfecf16c844b91c96a285467fb,
     type: 2}
