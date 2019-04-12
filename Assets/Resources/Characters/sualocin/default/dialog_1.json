@@ -5,77 +5,127 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "DialogText": "혹시 간식 있어?",
+                    "DialogText": "오, 안녕! 또 보네!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "좋아, 다시 만난 김에 특별히 자비를 베풀도록 하지!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "뭔가 먹고 싶은 거라도 있어?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 2,
+                    "JuncTexts": [
+                        "딱히… 괜찮아요.",
+                        "달달한 디저트라도 있으면 좋을 것 같아요."
+                    ],
+                    "Directions": [
+                        1,
+                        2
+                    ],
+                    "NextPhase": 0
+                }
+            ]
+        },
+        {
+            "Phase": 1,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "어, 어? 의외로 욕심이 없구나?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "예상치 못했어… 난 너를 그렇게 키우지 않았는데!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                }
+            ]
+        },
+        {
+            "Phase": 2,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "좋아! 그럼 내가 당장…",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "(수알로킨은 자신만만한 표정으로 손을 내밀었다.)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "(그리고 그 위에 있던 것은…)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "아..미안. 지금은 없어.",
+                    "DialogText": "…….",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "흠, 아쉽다. 혹시 단 거 좋아해?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "응, 좋아해.",
+                    "DialogText": "…어라…",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "나도! 단 게 먹고 싶은데 별이 되고 나서부터는 먹기 힘들어.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "별이 되기 전부터 좋아했던 거야?",
+                    "DialogText": "잘못, 잘못 가져왔나보네! 하하~",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "응! 그래서 아빠랑 오빠들이 어디 다녀올 때면 아빠가 간식 같은 거 많이 사 왔었어. ",
+                    "DialogText": "(수알로킨은 당황한 기색을 내비치며 덩어리를 멀리 던져버렸다.)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "..그때 만났으면 같이 간식 먹으면서 얘기했을 텐데,",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "간식이 없어도 얘기할 상대가 있는 것만으로도 즐거워.",
+                    "DialogText": "뭐지, 뭐지! 원래 이렇게 실수하는 편이 아닌데~",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "진짜? 헤헤.. 나랑 대화하는 게 다른 천체들과 비교했을 때는 어때?",
+                    "DialogText": "(수알로킨은 머쓱한 표정을 짓더니 이내 사라져버렸다.)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "네가 재미있게 느꼈으면 좋겠다!",
+                    "DialogText": "덩어리는 확인 결과 초코였다… 초코 케이크를 만들려다 그만 실수를 해버렸다.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

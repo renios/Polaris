@@ -4,141 +4,233 @@
             "Phase": 0,
             "Contents": [
                 {
-                    "Type": 1,
-                    "DialogText": "아케르..?",
+                    "Type": 0,
+                    "DialogText": "흐음.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "어? 오랜만이네.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "무슨 일 있어? ",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "무슨 일 없는데? 갑자기 왜?",
+                    "DialogText": "후우.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..손에 힘이 너무 들어갔어.",
+                    "DialogText": "...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "아. 치마 다 구겨졌다.",
+                    "DialogText": "(수알로킨은 노골적으로 한숨을 쉬어보인다.)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "생각보다는 눈치가 빠르네..",
+                    "DialogText": "(이쪽을… 힐끔힐끔 보고 있다.)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 2,
+                    "JuncTexts": [
+                        "무슨 일 있어요?",
+                        "……."
+                    ],
+                    "Directions": [
+                        1,
+                        2
+                    ],
+                    "NextPhase": 0
+                }
+            ]
+        },
+        {
+            "Phase": 1,
+            "Contents": [
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 3
+                }
+            ]
+        },
+        {
+            "Phase": 2,
+            "Contents": [
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 3
+                }
+            ]
+        },
+        {
+            "Phase": 3,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "아니, 들어봐 좀~",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "분명, 분명 예전에 자주 찾아오던 친구가 있었단 말이야?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그런데 연락이 뜸해진지 너무 오래 되어서, 이젠 친구인지도 잘 모르겠어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "먼저 찾아오지 않으면 연락할 방도도 없는데~",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "정말이지~ 어떻게 해야 좋담.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..전에 이야기할 때 잠깐 우울해 보이던데.",
+                    "DialogText": "친구분은 어떤 분이었어요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "..갑자기 여기 오기 전 일이 떠올라서.",
+                    "DialogText": "글쎄~ 되게 다정한 사람이었는데.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "...사실 난 별이 되기 전날에 죽기로 예정되어 있었어. ",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "병이라도 있었던 거야?",
+                    "DialogText": "이젠 얼굴도 잘 기억이 안 나네.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그건 아니야. 사실.. 나는 사형일을 하루 앞둔 사형수였어. ",
+                    "DialogText": "실제로 있기는 했던 건지도 잘 모르겠지만.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "내 죄는 절도죄였어. 나라의 보물이나 다름없는 몹시 중요한 물건을 몰래 훔쳤거든.",
+                    "DialogText": "꼬마, 너는 진짜야?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 2,
+                    "JuncTexts": [
+                        "당연히 진짜죠.",
+                        "수알로킨은 진짜예요?"
+                    ],
+                    "Directions": [
+                        4,
+                        5
+                    ],
+                    "NextPhase": 0
+                }
+            ]
+        },
+        {
+            "Phase": 4,
+            "Contents": [
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 6
+                }
+            ]
+        },
+        {
+            "Phase": 5,
+            "Contents": [
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 6
+                }
+            ]
+        },
+        {
+            "Phase": 6,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "(수알로킨은 갑자기 웃음을 터뜨립니다.)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "우리 아버지는 나라의 제사를 지내는 사람이었어. 우리 집 창고에는 나라에 중요한 일이 있을 때마다 사용하는, 제사용 술을 담기 위해 대대로 내려오는 술병이 있었지. ",
+                    "DialogText": "하하, 미안.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "나는 그게 어떤 물건인 줄 모르고 몰래 가져갔었어. 하지만 금방 필요가 없어져서 다시 돌려놓았지. ",
+                    "DialogText": "갑자기 내가 무슨 헛소릴 하는 거람.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그런데... 내가 잠시 그걸 가져갔단 걸 알아낸 오빠들이 내가 다른 나라에 술병을 몰래 팔아서 돈을 벌려고 했다는 소문을 주변에 냈어. ",
+                    "DialogText": "너는 진짜지.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그래서 아빠랑 오빠들은 나를 죽여서라도 국가에 용서를 빌려고 했대.",
+                    "DialogText": "그래, 그런 거지.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "..생각보다 뻔해서 재미없었지?",
+                    "DialogText": "(수알로킨은 조용히 생각에 빠졌습니다.)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "생각해보면, 오빠들은 아마 그냥 내가 싫었던 것 같아. 아무래도 내가 늘 귀찮고 민폐만 끼치는 존재였으니까 그랬을 거야. ",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "..너에게마저 그런 존재가 되고 싶진 않은데..",
+                    "DialogText": "(수알로킨이 떠나간 자리엔 케이크였던 것이 놓여있다… 아마도 고래 친구들이 먹어버린 모양이다.)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

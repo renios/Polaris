@@ -5,77 +5,56 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "DialogText": "혹시 간식 있어?",
+                    "DialogText": "내 이름을 들어본 적 있다고?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "아..미안. 지금은 없어.",
+                    "DialogText": "응. 책에서 읽은 적 있어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "흠, 아쉽다. 혹시 단 거 좋아해?",
+                    "DialogText": "그건...음.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그건 내가 아닌데. 하하.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "응, 좋아해.",
+                    "DialogText": "...? 시리우스가 아냐?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "나도! 단 게 먹고 싶은데 별이 되고 나서부터는 먹기 힘들어.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "별이 되기 전부터 좋아했던 거야?",
+                    "DialogText": "하하, 난 시리우스긴 한데...시리우스 베타. 사람들이 아는 그 엄청 크고 밝은 별의, 보잘것 없는 동생이지.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "응! 그래서 아빠랑 오빠들이 어디 다녀올 때면 아빠가 간식 같은 거 많이 사 왔었어. ",
+                    "DialogText": "그래. 잘 보이지도 않고. 희멀건.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "..그때 만났으면 같이 간식 먹으면서 얘기했을 텐데,",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "간식이 없어도 얘기할 상대가 있는 것만으로도 즐거워.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "진짜? 헤헤.. 나랑 대화하는 게 다른 천체들과 비교했을 때는 어때?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "네가 재미있게 느꼈으면 좋겠다!",
+                    "DialogText": "...아. 음. 분위기 깨서 미안.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

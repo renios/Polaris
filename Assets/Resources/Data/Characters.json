@@ -8,9 +8,9 @@
             "ConstelWeight":[1.0],
             "Name":"폴라리스",
             "InternalName":"polaris",
-            "Lux":"???",
-            "LYDistance":"약 325 ~ 425 광년",
-            "Description":"작은곰자리에서 가장 밝은 별이다. 천구에서 50번째로 밝은 별이며, 총 5개의 구성 요소를 가지는 다중성계이다. 현대 시대에서 북극성은 이 별을 가리킨다.",
+            "Lux":"2.0",
+            "LYDistance":"431 광년",
+            "Description":"작은곰자리에서 가장 밝은 별이다. 천구에서는 50번째로 밝은 별이며, 현대 시대에서 북극성은 이 별을 가리킨다.",
             "Cards":
             [
                 {
@@ -21,8 +21,8 @@
                     "ChapterInfo":
                     [
                         {"Header":"첫 만남", "Description":"아무 것도 보이지 않는 하늘, 그 가운데서 빛나던 유일한 별. 그 별을 보고 있을 때 하늘에서 사람이 내려왔다, 그 별의 기운과 함께.", 
-                            "Additional":[]},
-                        {"Header":"폴라리스의 이야기  I", "Description":"별들의 위치를 인도하는 역할을 하는 폴라리스는 별들이 그림자에 대해 이야기하지 않으려던 것을 말하며, 나에게 그림자에 대해 물었다.", 
+                            "Additional":["총 5개의 구성 요소를 가지는 다중성계이다"]},
+                        {"Header":"폴라리스의 이야기 I", "Description":"별들의 위치를 인도하는 역할을 하는 폴라리스는 별들이 그림자에 대해 이야기하지 않으려던 것을 말하며, 나에게 그림자에 대해 물었다.", 
                             "Additional":[]},
                         {"Header":"제목 2", "Description":"임시 텍스트 2", 
                             "Additional":[]},
@@ -42,8 +42,8 @@
             "ConstelWeight":[1.0],
             "Name":"투반",
             "InternalName":"thuban",
-            "Lux":"m 3.65, M -1.2",
-            "LYDistance":"약 300 광년",
+            "Lux":"3.7",
+            "LYDistance":"309 광년",
             "Description":"용자리 알파성이다. 약 4000년 전에는 이 별이 북극성의 역할을 하고 있었다. 지금은 주계열의 단계를 넘어 백색 거성으로 진화해, 태양의 120배가 넘는 광도로 빛나고 있다.",
             "Cards":
             [
@@ -76,15 +76,15 @@
             "ConstelWeight":[0.4],
             "Name":"고양이 눈 성운",
             "InternalName":"catseye",
-            "Lux":"--",
-            "LYDistance":"--",
+            "Lux":"9.8",
+            "LYDistance":"3262 광년",
             "Description":"--",
             "Cards":
             [
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":true,
                     "ChapterInfo":
                     [
@@ -118,7 +118,7 @@
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":false,
                     "ChapterInfo":
                     [
@@ -264,7 +264,7 @@
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":false,
                     "ChapterInfo":
                     [
@@ -298,7 +298,7 @@
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":2,
+                    "Rarity":1,
                     "Observable":true,
                     "ChapterInfo":
                     [
@@ -340,15 +340,15 @@
             "ConstelWeight":[1.0],
             "Name":"수알로킨",
             "InternalName":"sualocin",
-            "Lux":"--",
-            "LYDistance":"--",
+            "Lux":"3.8",
+            "LYDistance":"241 광년",
             "Description":"--",
             "Cards":
             [
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":true,
                     "ChapterInfo":
                     [
@@ -398,7 +398,7 @@
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":false,
                     "ChapterInfo":
                     [
@@ -432,7 +432,7 @@
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":false,
                     "ChapterInfo":
                     [
@@ -466,7 +466,7 @@
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":false,
                     "ChapterInfo":
                     [
@@ -492,8 +492,8 @@
             "ConstelWeight":[1.0],
             "Name":"레샤",
             "InternalName":"rescha",
-            "Lux":"m 4.33, M 0.5",
-            "LYDistance":"약 311 광년",
+            "Lux":"3.8",
+            "LYDistance":"139 광년",
             "Description":"모체가 된 별은 알레샤. 물고기자리 알파성이다. 이 별은 두 개의 항성으로 이루어진 다중성계이며, 서로 700년이 넘는 주기로 공전하는 형태를 취한다. 알레샤라는 명칭이 표준화된 것은 2016년의 일이다.",
             "Cards":
             [
@@ -534,7 +534,7 @@
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":false,
                     "ChapterInfo":
                     [
@@ -560,15 +560,15 @@
             "ConstelWeight":[1.0],
             "Name":"멜리크",
             "InternalName":"melik",
-            "Lux":"m 2.942, M -3.882",
-            "LYDistance":"약 760 광년",
+            "Lux":"3.0",
+            "LYDistance":"758 광년",
             "Description":"물병자리 알파성이다. 해당 별자리에서 가장 밝은 별이어야 하지만, 사실은 베타성인 사달수드에 이어 두 번째로 밝다. 사달멜리크라고도 불리며, 이 이름은 아랍어로 '왕의 축복'이라는 뜻이다.",
             "Cards":
             [
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":true,
                     "ChapterInfo":
                     [
@@ -602,7 +602,7 @@
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":false,
                     "ChapterInfo":
                     [
@@ -636,7 +636,7 @@
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":false,
                     "ChapterInfo":
                     [
@@ -670,7 +670,7 @@
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":false,
                     "ChapterInfo":
                     [
@@ -696,29 +696,29 @@
             "ConstelWeight":[1.0],
             "Name":"아케르",
             "InternalName":"acher",
-            "Lux":"m 0.46, M -2.77",
-            "LYDistance":"약 144 광년",
+            "Lux":"0.5",
+            "LYDistance":"144 광년",
             "Description":"모체가 된 별은 아케르나르. 에리다누스자리에서 가장 밝은 별이자 천구에서 아홉 번째로 밝은 별이다. 이름은 아랍어로 '강가의 끝'이라는 의미를 담고 있으며, 기원전 3000년 경에는 남극성의 위치에 있었다.",
             "Cards":
             [
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":2,
+                    "Rarity":5,
                     "Observable":true,
                     "ChapterInfo":
                     [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                        {"Header":"첫 만남", "Description":"아케르와 소녀의 첫 만남.", 
                             "Additional":[]},
-                        {"Header":"제목 1", "Description":"임시 텍스트 1", 
+                        {"Header":"가족", "Description":"아빠와 오빠에 대한 추억을 떠올리는 아케르.", 
                             "Additional":[]},
-                        {"Header":"제목 2", "Description":"임시 텍스트 2", 
+                        {"Header":"친구", "Description":"자신에게 특별했던 친구, 멜리크와의 이야기.", 
                             "Additional":[]},
-                        {"Header":"제목 3", "Description":"임시 텍스트 3", 
+                        {"Header":"과거", "Description":"별이 되기 전 일을 떠올리던 중, 우울한 기억을 마주하게 된 아케르.", 
                             "Additional":[]},
-                        {"Header":"제목 4", "Description":"임시 텍스트 4", 
+                        {"Header":"위로", "Description":"임시 텍스트 4", 
                             "Additional":[]},
-                        {"Header":"제목 5", "Description":"임시 텍스트 5", 
+                        {"Header":"이해", "Description":"임시 텍스트 5", 
                             "Additional":[]}
                     ]
                 }
@@ -739,7 +739,7 @@
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
                     "Rarity":1,
-                    "Observable":true,
+                    "Observable":false,
                     "ChapterInfo":
                     [
                         {"Header":"제목 0", "Description":"임시 텍스트 0", 
@@ -772,7 +772,7 @@
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":false,
                     "ChapterInfo":
                     [
@@ -798,29 +798,32 @@
             "ConstelWeight":[1.0],
             "Name":"리겔루스",
             "InternalName":"rigeleuse",
-            "Lux":"--",
-            "LYDistance":"--",
-            "Description":"--",
+            "Lux":"0.2",
+            "LYDistance":"773 광년",
+            "Description":"오리온자리 베타성. 베타성이지만 알파성인 베텔게우스보다 더 밝다. 리겔이라는 이름은 아랍어 '리즐 자우자 알 유스라(자우자의 왼발)'에서 왔다.",
             "Cards":
             [
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":true,
                     "ChapterInfo":
                     [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                        {"Header":"눈 먼 손님", "Description":"리겔루스라 자신을 소개한 별. 그러나 그는 앞이 안 보이는 것 같은데...", 
+                            "Additional":["리겔은 하늘에서 일곱번째로 밝은 별이며, 이는 1등성 이상 별들 중 데네브, 베텔게우스 다음으로 세 번째이다.",
+                                          "또한 천구의 적도 근처에 있어서 북위 82도 아래의 거의 모든 지역에서 보이는데, 이 때문에 항해사들에게 매우 중요한 별이었다."]},
+                        {"Header":"농담?", "Description":"친해지려고 하지만, 뭔가 무서운 단어를 쓰는 리겔루스...무슨 일이 있었던 걸까?", 
+                            "Additional":["관측의 용이성에 의해 리겔은 다양한 문화권에서 다양한 이름으로 불렸다. 어원이 된 아랍어에서는 오리온자리를 '자우자' 라고 불렀다. 이외에 '리글 알-갑바르(거대한 자의 발)'라는 명칭도 있는데, 리겔을 부르는 다른 명칭인 '알게바', 혹은 '엘게바'의 어원이 되었다.",
+                                          "북유럽 신화에서는 리겔을 '아우르반딜의 발가락'으로 불렀다.",
+                                          "과거 중국에서는 리겔을 '삼수칠(삼수에서 일곱 번째 별)'로 불렀다."]},
+                        {"Header":"과거", "Description":"자신을 비관하고 있는 리겔루스에게 위로의 말을 건네는 소녀.", 
+                            "Additional":["리겔은 지구에서 볼 때 하나로 보이지만 실제로는 삼중성계이다. 일반적으로 리겔이라 불리는 리겔 A는 태양 밝기의 12만배, 태양 반지름의 79배의 청백색 초거성이며, 그 옆에 리겔의 약 500분의 1에 해당하는 리겔 B 쌍성이 있다."]},
+                        {"Header":"인연", "Description":"리겔루스가 이렇게 된 것은 과거의 일 때문인 것 같다. 대체 어떤 일이 있었던걸까?", 
+                            "Additional":["리겔이 속한 오리온자리는 신화속의 유명한 사냥꾼에서 유래했다. 에우리알레의 딸이자 최고의 사냥꾼, 활 하나로 수많은 생명을 구하고 또 빼앗았던 전설의 영웅. 그러나 자만으로 인해 신의 벌을 받게 된다."]},
+                        {"Header":"달빛", "Description":"지금까지의 어두운 분위기에서 약간 벗어난듯한 모습을 보이는 리겔루스.", 
                             "Additional":[]},
-                        {"Header":"제목 1", "Description":"임시 텍스트 1", 
-                            "Additional":[]},
-                        {"Header":"제목 2", "Description":"임시 텍스트 2", 
-                            "Additional":[]},
-                        {"Header":"제목 3", "Description":"임시 텍스트 3", 
-                            "Additional":[]},
-                        {"Header":"제목 4", "Description":"임시 텍스트 4", 
-                            "Additional":[]},
-                        {"Header":"제목 5", "Description":"임시 텍스트 5", 
+                        {"Header":"좋아하는 일", "Description":"차분하게 과거 이야기를 해주는 리겔루스. 이전의 무서운 모습과는 사뭇 달라진 목소리로 소녀를 축복해주었다.", 
                             "Additional":[]}
                     ]
                 }
@@ -840,7 +843,7 @@
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":false,
                     "ChapterInfo":
                     [
@@ -874,7 +877,7 @@
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":5,
                     "Observable":false,
                     "ChapterInfo":
                     [
@@ -900,22 +903,25 @@
             "ConstelWeight":[1.0],
             "Name":"시리우스",
             "InternalName":"sirius",
-            "Lux":"--",
-            "LYDistance":"--",
-            "Description":"--",
+            "Lux":"-1.5",
+            "LYDistance":"8.6 광년",
+            "Description":"큰개자리 알파성. 하늘에서 가장 밝은 별로 알려져있다. 작은개자리의 프로키온, 오리온자리의 베텔게우스와 함께 겨울철의 대삼각형으로 유명하다.",
             "Cards":
             [
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
-                    "Observable":false,
+                    "Rarity":1,
+                    "Observable":true,
                     "ChapterInfo":
                     [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]},
-                        {"Header":"제목 1", "Description":"임시 텍스트 1", 
-                            "Additional":[]},
+                        {"Header":"첫 만남", "Description":"시리우스와의 첫 만남.", 
+                            "Additional":["시리우스에 관한 이야기는 여러 문명에서 전해져 내려온다. '시리우스(Sirius)'에는 '눈부시게 빛난다', '불태운다' 라는 뜻이 있다.",
+                                          "동양에서는 시리우스를 '천랑성'. 하늘의 늑대별이라 불렀는데, 푸르게 빛나는 시리우스가 늑대의 눈을 닮았기 때문이라 한다.",
+                                          "고대 이집트에서는 시리우스가 새벽녘 떠오르는 시기를 계산해 나일강의 범람을 예측했다. 그들은 시리우스를 '나일강의 별' 이라 부르며 숭배했다."]},
+                        {"Header":"쌍성", "Description":"자신을 시리우스라고 소개했을 때 느껴졌던 묘한 정적. 하지만 그는 굳이 숨길 생각 없이 말을 이어갔다.", 
+                            "Additional":["일반적으로 1등성이라 하면 밤하늘에서 가장 밝은 별이지만, 시리우스는 1등성보다 약 10배 밝다. 크기로는 태양보다 2배 크며, 맨눈으로 보이는 별 중 켄타우루스자리 알파성에 이어 두 번째로 가까이 있기 때문이다.",
+                                          "그러나 근래들어 시리우스는 2개의 별로 이루어진 쌍성계임이 밝혀졌다. 본래 시리우스라 알려진 밝은 별 옆에서 발견된 백색 왜성은 시리우스 B라 명명되었다."]},
                         {"Header":"제목 2", "Description":"임시 텍스트 2", 
                             "Additional":[]},
                         {"Header":"제목 3", "Description":"임시 텍스트 3", 
@@ -931,25 +937,26 @@
         {
             "CharNumber":33,
             "ConstelKey":["Lyra"],
-            "ConstelWeight":[1],
+            "ConstelWeight":[1.0],
             "Name":"베가",
             "InternalName":"vega",
-            "Lux":"--",
-            "LYDistance":"--",
-            "Description":"--",
+            "Lux":"0.0",
+            "LYDistance":"25 광년",
+            "Description":"거문고자리의 알파성이며, 여름철의 별 중 가장 밝게 빛난다. 우리나라에서는 '직녀성' 이라는 이름으로 더 유명하다. 백조자리의 데네브, 독수리자리의 알타이르와 더불어 여름철의 대삼각형이라 불린다.",
             "Cards":
             [
                 {
                     "Subname":"[별의 정령]",
                     "InternalSubname":"default",
-                    "Rarity":4,
+                    "Rarity":1,
                     "Observable":true,
                     "ChapterInfo":
                     [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]},
-                        {"Header":"제목 1", "Description":"임시 텍스트 1", 
-                            "Additional":[]},
+                        {"Header":"마지막 황제", "Description":"소녀의 앞에 나타난 푸른 머리의 전사. 그는 자신을 샤르카로트 제국의 황제라 소개했다.", 
+                            "Additional":["지구의 자전축이 움직이는 '세차 운동'에 의해 북극성은 종종 다른 별로 바뀌어간다. 베가는 기원전 1만 2천년 무렵까지 북극성이었으며, 서기 1만 4천년 경 다시 북극성이 된다."]},
+                        {"Header":"전쟁", "Description":"베가에게는 의지도, 능력도 충분했지만 그에게 닥친 시련은 너무나도 가혹했다.", 
+                            "Additional":["거문고자리에는 '고리 성운'이라 불리는 행성상성운이 있다. 메시에 번호 57번이 부여된 이 성운은 1779년 발견되었다.",
+                                          "베가의 남쪽, 거문고자리 베타성과 감마성 사이쯤에 위치하고 있으며 작은 망원경 정도로도 관측할 수 있다."]},
                         {"Header":"제목 2", "Description":"임시 텍스트 2", 
                             "Additional":[]},
                         {"Header":"제목 3", "Description":"임시 텍스트 3", 

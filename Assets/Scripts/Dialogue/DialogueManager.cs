@@ -27,6 +27,7 @@ namespace Dialogue
             var character = Variables.Characters[Variables.DialogCharIndex].InternalName;
             var card = Variables.Characters[Variables.DialogCharIndex].Cards[Variables.DialogCardIndex].InternalSubname;
             var dialogPath = "Characters/" + character + "/" + card + "/dialog_" + Variables.DialogChapterIndex;
+            Debug.Log(character + " " + Variables.DialogChapterIndex);
 
             var jsonAsset = Resources.Load<TextAsset>(dialogPath);
             CurrentDialogue = JsonMapper.ToObject<DialogueData>(jsonAsset.text);
@@ -71,7 +72,6 @@ namespace Dialogue
                 }
                 else
                 {
-                    Debug.Log("Good!");
                     var newObject = Instantiate(ObjectTemplate[curDialogData.Type]);
                     var newDialogObj = newObject.GetComponentInChildren<DialogueObject>();
 

@@ -57,6 +57,14 @@ namespace Prologue
             SoundManager.Play(SoundType.BgmMain);
             SceneChanger.Instance.ChangeScene("GachaScene");
         }
+        //TODO : 씬 바꾸는 임시 코드 개선
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                End();
+            }
+        }
     }
 }
 
