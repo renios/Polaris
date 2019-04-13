@@ -1,17 +1,35 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ResultManager : MonoBehaviour {
 
     public GameObject resultCharacter, nameTag, nameText, TtS, fader, effect;
-    private bool isEnd = false;
-    private string gachaResult = null;
-    private int charIndex = 0;
+    [SerializeField] private Image startStory;
+    [SerializeField] private Image favorityUp;
+    [SerializeField] private Image favUp;
+    [SerializeField] private Image favCharPicture;
+    [SerializeField] private Slider favBar;
+    [SerializeField] private Text favProgressText;
+    [SerializeField] private Text levelText;
+    [SerializeField] private Text storyText;
+    [SerializeField] private Text favConstellation;
+    [SerializeField] private Text favName;
+    private bool isEnd;
+    private bool levelUp;
+    private string gachaResult;
+    private int charIndex;
+    private int nextFav;
 
     // Use this for initialization
     void Start () {
+        isEnd = false;
+        levelUp = false;
+        gachaResult = null;
+        charIndex = 0;
+        nextFav = 0;
+
         fader.SetActive(true);
         StartCoroutine(gachaFadeIn(3f));
         SoundManager.Play(SoundType.GachaResult);
@@ -26,6 +44,7 @@ public class ResultManager : MonoBehaviour {
                 isEnd = false;
                 TouchManager.moveAble = true;
                 Variables.btnState = 0;
+
                 foreach (var value in Variables.Characters.Values)
                 {
                     if (gachaResult == value.InternalName)
@@ -34,11 +53,16 @@ public class ResultManager : MonoBehaviour {
 
                 var rankCharacter = Variables.Characters[charIndex];
                 bool isUp = false;
-                int nextFav = 0;
                 
+                int progress, required;
+                int beforeLevel = GameManager.Instance.CheckFavority(charIndex, 0, out progress, out required);
                 rankCharacter.Cards[0].Favority += 1;
+                int currentLevel = GameManager.Instance.CheckFavority(charIndex, 0, out progress, out required);
+                if (currentLevel > beforeLevel)
+                    levelUp = true;
+
                 GameManager.Instance.SaveGame();
-                
+
                 if (rankCharacter.Cards[0].Observed == false || rankCharacter.Cards[0].Favority == 1) // 첫 획득
                 {
                     rankCharacter.Cards[0].Observed = true;
@@ -46,7 +70,6 @@ public class ResultManager : MonoBehaviour {
                     StartStory("GachaScene", 0);
                     return;
                 }
-
                 for (int i = 0; i < 5; i++)
                 {
                     if (rankCharacter.Cards[0].Favority == Variables.FavorityThreshold[i])
@@ -55,18 +78,61 @@ public class ResultManager : MonoBehaviour {
                         nextFav = i;
                     }
                 }
-
                 if (isUp) // 호감도 Up!
                 {
-                    StartStory("GachaScene", nextFav + 1);
-                    return;
-                }
+                    favorityUp.gameObject.SetActive(true);
+                    favName.text = Variables.Characters[charIndex].Name;
+                    favBar.maxValue = progress + required;
+                    favBar.value = progress;
+                    levelText.text = currentLevel.ToString();
+                    favProgressText.text = progress + " / " + (progress + required);
+                    favCharPicture.sprite = Resources.Load<Sprite>("Characters/" + rankCharacter.InternalName + "/default/image_obspopup");
+                    if (levelUp)
+                        favUp.gameObject.SetActive(true);
 
+                    favConstellation.text = Variables.Constels[Variables.Characters[charIndex].ConstelKey[0]].Name;
+                    //캐릭터 thumbnail
+                }
                 else
                     SceneManager.LoadScene("GachaScene");
             }
         }
+        else
+        {
+            if(Input.GetMouseButton(0))
+            {
+                if(favorityUp.gameObject.activeSelf )
+                {
+                    favorityUp.gameObject.SetActive(false);
+                    if (levelUp)
+                    {
+                        startStory.gameObject.SetActive(true);
+                        storyText.text = Variables.Characters[charIndex].Name + "의 새로운 대화가 열렸어요!\n대화를 지금 볼까요?";
+                    }
+                    else
+                        SceneManager.LoadScene("GachaScene");
+                }
+            }
+        }
 	}
+
+    public void YesBtnDown() //Favority 오르고 나서 뜬 팝업창 Yes일 경우
+    {
+        StartStory("GachaScene", nextFav + 1);
+    }
+    public void NoBtnDown() //Favority 오르고 나서 뜬 팝업창 Yes일 경우
+    {
+        SceneManager.LoadScene("GachaScene");
+    }
+    public void StartStory(string nextScene, int storyIndex)
+    {
+        Variables.DialogAfterScene = nextScene;
+        Variables.DialogCharIndex = charIndex;
+        Variables.DialogCardIndex = 0;
+        Variables.DialogChapterIndex = storyIndex;
+        SceneManager.LoadScene("NewDialogScene");
+        //SceneChanger.Instance.ChangeScene("NewDialogScene");
+    }
 
     IEnumerator gachaFadeIn(float fadeInTime)
     {
@@ -133,13 +199,4 @@ public class ResultManager : MonoBehaviour {
         isEnd = true;
     }
 
-    public void StartStory(string nextScene, int storyIndex)
-    {
-        Variables.DialogAfterScene = nextScene;
-        Variables.DialogCharIndex = charIndex;
-        Variables.DialogCardIndex = 0;
-        Variables.DialogChapterIndex = storyIndex;
-        SceneManager.LoadScene("NewDialogScene");
-        //SceneChanger.Instance.ChangeScene("NewDialogScene");
-    }
 }
