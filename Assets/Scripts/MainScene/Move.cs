@@ -20,6 +20,9 @@ public class Move : MonoBehaviour {
 	float originalGravity;
 	bool picked;
 
+	public bool IsPicked() {
+		return state == State.Hold;
+	}
 	public void Pick() {
 		picked = true;
 		state = State.Hold;
@@ -31,9 +34,13 @@ public class Move : MonoBehaviour {
 		state = State.Idle;
 		isFirstFrame = true;
 	}
+	public void Touch() {
+		state = State.Touched;
+		isFirstFrame = true;
+	}
 
 	bool IsGround() {
-		RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up, 1.8f, GroundLayer.value);
+		RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position - Vector2.up * 1f, -Vector2.up, 0.1f, GroundLayer.value);
 		if (!hit) return false;
 		if (hit.collider.tag == "Ground") return true;
 		else return false;
@@ -160,11 +167,23 @@ public class Move : MonoBehaviour {
 		if (isFirstFrame) {
 			GetComponent<Rigidbody2D>().gravityScale = 0;
 			gameObject.layer = LayerMask.NameToLayer("FlyingCharacter");
-			Portrait.CrossFade("Fly");
+			speed = 0;
+			Portrait.CrossFade("Touch");
 			isFirstFrame = false;
 		}
 
 		// 한번 움직이고 state 변경. Grounded면 idle로 아니면 fly로
+	}
+
+	void TouchAnimEnd() {
+		if (IsGround()) {
+			state = State.Idle;
+			isFirstFrame = true;
+		}
+		else {
+			state = State.Fly;
+			isFirstFrame = true;
+		}
 	}
 
 	// Use this for initialization
@@ -183,6 +202,9 @@ public class Move : MonoBehaviour {
 		}
 		if (Input.GetKeyUp(KeyCode.Space)) {
 			Drop();
+		}
+		if (Input.GetKeyDown(KeyCode.T)) {
+			Touch();
 		}
 		timer += Time.deltaTime;
 
