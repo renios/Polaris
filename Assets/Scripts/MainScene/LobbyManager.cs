@@ -8,6 +8,9 @@ public class LobbyManager : MonoBehaviour
     private int currentCamera;
     private GameObject sdchara;
     public GameObject popup;
+    private float PositionX;
+    private float PositionY;
+
 
     GameObject pickedCharacter;
     Vector3 pickedPosition;
@@ -74,7 +77,13 @@ public class LobbyManager : MonoBehaviour
                 if (!pickedCharacter.GetComponent<Move>().IsPicked()) {
                     pickedCharacter.GetComponent<Move>().Pick();
                 }
-                pickedCharacter.transform.position = new Vector3(mousePosition.x, mousePosition.y, pickedCharacter.transform.position.z) ;
+                if (mousePosition.x < -2.5f) PositionX = -2.5f;
+                else if (mousePosition.x > 2.5f) PositionX = 2.5f;
+                else PositionX = mousePosition.x;
+                if (mousePosition.y > -0.5f) PositionY = -0.5f;
+                else if (mousePosition.y < -9.0f) PositionY = -9.0f;
+                else PositionY = mousePosition.y;
+                pickedCharacter.transform.position = new Vector3(PositionX, PositionY, pickedCharacter.transform.position.z) ;
             }
             else {
                 if (Time.time > pickedTime + 0.4f) {
@@ -82,6 +91,7 @@ public class LobbyManager : MonoBehaviour
                     pickedCharacter = null;
                 }
             }
+
 
             if (Input.GetMouseButtonUp(0) && pickedCharacter != null) {
                 if (pickedCharacter.GetComponent<Move>().IsPicked()) {
