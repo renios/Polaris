@@ -10,6 +10,8 @@ public class LobbyManager : MonoBehaviour
     public GameObject popup;
 
     GameObject pickedCharacter;
+    Vector3 pickedPosition;
+    float pickedTime;
 
     void Awake()
     {
@@ -68,24 +70,41 @@ public class LobbyManager : MonoBehaviour
         // 잡고있을때 떼면 떨어진다
         if (pickedCharacter != null) {
             var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            pickedCharacter.transform.position = new Vector3(mousePosition.x, mousePosition.y, pickedCharacter.transform.position.z) ;
+            if (Vector2.Distance(mousePosition, pickedPosition) >= 0.25f) {
+                if (!pickedCharacter.GetComponent<Move>().IsPicked()) {
+                    pickedCharacter.GetComponent<Move>().Pick();
+                }
+                pickedCharacter.transform.position = new Vector3(mousePosition.x, mousePosition.y, pickedCharacter.transform.position.z) ;
+            }
+            else {
+                if (Time.time > pickedTime + 0.4f) {
+                    pickedCharacter.GetComponent<Move>().Touch();
+                    pickedCharacter = null;
+                }
+            }
 
-            if (Input.GetMouseButtonUp(0)) {
-                pickedCharacter.GetComponent<Move>().Drop();
+            if (Input.GetMouseButtonUp(0) && pickedCharacter != null) {
+                if (pickedCharacter.GetComponent<Move>().IsPicked()) {
+                    pickedCharacter.GetComponent<Move>().Drop();
+                }
+                else {
+                    pickedCharacter.GetComponent<Move>().Touch();
+                }
                 pickedCharacter = null;
             }
         }
 
         // 안 잡고있을때 누르면 잡는다
         if (Input.GetMouseButtonDown(0)) {
-            var mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             float characterHeight = 0.6f;
             int layermaskValue = (1 << 10) + (1 << 11); //10번 레이어와 11번 레이어를 체크
 
-            var tryPick = Physics2D.OverlapCircle(mousePosition - Vector2.up*characterHeight, characterHeight, layermaskValue);
+            var tryPick = Physics2D.OverlapCircle((Vector2)mousePosition - Vector2.up*characterHeight, characterHeight, layermaskValue);
             if (tryPick != null) {
                 pickedCharacter = tryPick.gameObject;
-                pickedCharacter.GetComponent<Move>().Pick();
+                pickedPosition = mousePosition;
+                pickedTime = Time.time;
             }
         }
 
