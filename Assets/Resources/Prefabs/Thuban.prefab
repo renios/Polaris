@@ -2493,7 +2493,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1232946836474342}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2663,7 +2663,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1470150401170628}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2901,7 +2901,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1988296469959740}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2969,7 +2969,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1213198768516448}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -5033,10 +5033,10 @@ MonoBehaviour:
   - {x: -6.5, y: -495.5, z: 0}
   - {x: -6.5, y: -478.5, z: 0}
   _vertPositions_World:
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
+  - {x: -17, y: 25}
+  - {x: -17, y: 8}
+  - {x: 46, y: 8}
+  - {x: 46, y: 25}
   _transform: {fileID: 4148661319477000}
   _pivotPos: {x: -52.5, y: -503.5}
   _isVisibleDefault: 1
@@ -17176,10 +17176,10 @@ MonoBehaviour:
   - {x: -69.5, y: -492, z: 0}
   - {x: -69.5, y: -466, z: 0}
   _vertPositions_World:
-  - {x: -18, y: 33}
-  - {x: -18, y: 7}
-  - {x: 49, y: 7}
-  - {x: 49, y: 33}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
   _transform: {fileID: 4141178813255202}
   _pivotPos: {x: -118.5, y: -499}
   _isVisibleDefault: 1
@@ -21457,10 +21457,10 @@ MonoBehaviour:
   - {x: 175, y: -509.5, z: 0}
   - {x: 175, y: -496.5, z: 0}
   _vertPositions_World:
-  - {x: 2, y: 9}
-  - {x: 2, y: -4}
-  - {x: 32, y: -4}
-  - {x: 32, y: 9}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
   _transform: {fileID: 4069146740845990}
   _pivotPos: {x: 143, y: -505.5}
   _isVisibleDefault: 1
@@ -21858,10 +21858,10 @@ MonoBehaviour:
   - {x: -475.5, y: 405, z: 0}
   - {x: -475.5, y: 417, z: 0}
   _vertPositions_World:
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
+  - {x: 8, y: 7}
+  - {x: 8, y: -5}
+  - {x: 27, y: -5}
+  - {x: 27, y: 7}
   _transform: {fileID: 4380633390058552}
   _pivotPos: {x: -502.5, y: 410}
   _isVisibleDefault: 1
@@ -22899,7 +22899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GroundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   CharacterTransform: {fileID: 4744964243358088}
   Portrait: {fileID: 114841861554026866}
 --- !u!114 &114577330684933210
@@ -36687,6 +36687,2026 @@ MonoBehaviour:
         _blendMethod: 0
         _isColorPropertyEnabled: 1
         _calculatedWeightedVertexList: []
+      - _syncTarget: 2
+        _keyControlParamID: -1
+        _keyAnimClipID: 32235314
+        _keyAnimTimelineID: 31923981
+        _keyAnimTimelineLayerID: 84167669
+        _paramSetList:
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 91966110
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114404550453026028}
+            _boneID: 41841821
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 59824831
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114404550453026028}
+            _boneID: 41841821
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1.1, y: 0.8}
+              _mtrxToSpace:
+                _m00: 1.1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 0.8
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 53524226
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114404550453026028}
+            _boneID: 41841821
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 0.8, y: 1.1}
+              _mtrxToSpace:
+                _m00: 0.8
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1.1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 65860909
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114404550453026028}
+            _boneID: 41841821
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 5
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 0.9961947
+                _m01: -0.08715574
+                _m02: 0
+                _m10: 0.08715574
+                _m11: 0.9961947
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 0.9961947
+                _m01: -0.08715574
+                _m02: 0
+                _m10: 0.08715574
+                _m11: 0.9961947
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 85052346
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114404550453026028}
+            _boneID: 41841821
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        _isEnabled: 1
+        _layerIndex: -10
+        _layerWeight: 0
+        _blendMethod: 0
+        _isColorPropertyEnabled: 1
+        _calculatedWeightedVertexList: []
+      - _syncTarget: 2
+        _keyControlParamID: -1
+        _keyAnimClipID: 32235314
+        _keyAnimTimelineID: 31923981
+        _keyAnimTimelineLayerID: 90037958
+        _paramSetList:
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 80850954
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114842148807427308}
+            _boneID: 85346626
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        _isEnabled: 1
+        _layerIndex: -10
+        _layerWeight: 0
+        _blendMethod: 0
+        _isColorPropertyEnabled: 1
+        _calculatedWeightedVertexList: []
+      - _syncTarget: 2
+        _keyControlParamID: -1
+        _keyAnimClipID: 32235314
+        _keyAnimTimelineID: 31923981
+        _keyAnimTimelineLayerID: 99909351
+        _paramSetList:
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 62784395
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114693306208019618}
+            _boneID: 88517551
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 61233949
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114693306208019618}
+            _boneID: 88517551
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 4.591858
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 0.9967903
+                _m01: -0.08005728
+                _m02: 0
+                _m10: 0.08005728
+                _m11: 0.9967903
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 0.9967903
+                _m01: -0.08005728
+                _m02: 0
+                _m10: 0.08005728
+                _m11: 0.9967903
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 61270964
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114693306208019618}
+            _boneID: 88517551
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        _isEnabled: 1
+        _layerIndex: -10
+        _layerWeight: 0
+        _blendMethod: 0
+        _isColorPropertyEnabled: 1
+        _calculatedWeightedVertexList: []
+      - _syncTarget: 2
+        _keyControlParamID: -1
+        _keyAnimClipID: 32235314
+        _keyAnimTimelineID: 31923981
+        _keyAnimTimelineLayerID: 41978319
+        _paramSetList:
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 84238726
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114866179354667112}
+            _boneID: 99422514
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 44165611
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114866179354667112}
+            _boneID: 99422514
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: -91.41397
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: -0.024675889
+                _m01: 0.9996955
+                _m02: 0
+                _m10: -0.9996955
+                _m11: -0.024675889
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: -0.024675889
+                _m01: 0.9996955
+                _m02: 0
+                _m10: -0.9996955
+                _m11: -0.024675889
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 73972410
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114866179354667112}
+            _boneID: 99422514
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        _isEnabled: 1
+        _layerIndex: -10
+        _layerWeight: 0
+        _blendMethod: 0
+        _isColorPropertyEnabled: 1
+        _calculatedWeightedVertexList: []
+      - _syncTarget: 2
+        _keyControlParamID: -1
+        _keyAnimClipID: 32235314
+        _keyAnimTimelineID: 31923981
+        _keyAnimTimelineLayerID: 92453795
+        _paramSetList:
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 27606922
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114869399070768642}
+            _boneID: 96706302
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 11285300
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114869399070768642}
+            _boneID: 96706302
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 102.2391
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: -0.21199165
+                _m01: -0.9772715
+                _m02: 0
+                _m10: 0.9772715
+                _m11: -0.21199165
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: -0.21199165
+                _m01: -0.9772715
+                _m02: 0
+                _m10: 0.9772715
+                _m11: -0.21199165
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 81294881
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114869399070768642}
+            _boneID: 96706302
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        _isEnabled: 1
+        _layerIndex: -10
+        _layerWeight: 0
+        _blendMethod: 0
+        _isColorPropertyEnabled: 1
+        _calculatedWeightedVertexList: []
+      - _syncTarget: 2
+        _keyControlParamID: -1
+        _keyAnimClipID: 32235314
+        _keyAnimTimelineID: 31923981
+        _keyAnimTimelineLayerID: 3493903
+        _paramSetList:
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 97054084
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114751630394354210}
+            _boneID: 64720766
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 39955341
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114751630394354210}
+            _boneID: 64720766
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: -12.54259
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 0.97613484
+                _m01: 0.21716526
+                _m02: 0
+                _m10: -0.21716526
+                _m11: 0.97613484
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 0.97613484
+                _m01: 0.21716526
+                _m02: 0
+                _m10: -0.21716526
+                _m11: 0.97613484
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 5813035
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114751630394354210}
+            _boneID: 64720766
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 4.450645
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 0.99698454
+                _m01: -0.07760031
+                _m02: 0
+                _m10: 0.07760031
+                _m11: 0.99698454
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 0.99698454
+                _m01: -0.07760031
+                _m02: 0
+                _m10: 0.07760031
+                _m11: 0.99698454
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 43517721
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114751630394354210}
+            _boneID: 64720766
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        _isEnabled: 1
+        _layerIndex: -10
+        _layerWeight: 0
+        _blendMethod: 0
+        _isColorPropertyEnabled: 1
+        _calculatedWeightedVertexList: []
+      - _syncTarget: 2
+        _keyControlParamID: -1
+        _keyAnimClipID: 32235314
+        _keyAnimTimelineID: 31923981
+        _keyAnimTimelineLayerID: 5097920
+        _paramSetList:
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 36387406
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114297591926038944}
+            _boneID: 48993900
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        _isEnabled: 1
+        _layerIndex: -10
+        _layerWeight: 0
+        _blendMethod: 0
+        _isColorPropertyEnabled: 1
+        _calculatedWeightedVertexList: []
+      - _syncTarget: 2
+        _keyControlParamID: -1
+        _keyAnimClipID: 32235314
+        _keyAnimTimelineID: 31923981
+        _keyAnimTimelineLayerID: 69431555
+        _paramSetList:
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 26540951
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114104249225954232}
+            _boneID: 68548188
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 88805736
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114104249225954232}
+            _boneID: 68548188
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: -5
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 0.9961947
+                _m01: 0.08715574
+                _m02: 0
+                _m10: -0.08715574
+                _m11: 0.9961947
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 0.9961947
+                _m01: 0.08715574
+                _m02: 0
+                _m10: -0.08715574
+                _m11: 0.9961947
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 840459
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114104249225954232}
+            _boneID: 68548188
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        _isEnabled: 1
+        _layerIndex: -10
+        _layerWeight: 0
+        _blendMethod: 0
+        _isColorPropertyEnabled: 1
+        _calculatedWeightedVertexList: []
+      - _syncTarget: 2
+        _keyControlParamID: -1
+        _keyAnimClipID: 32235314
+        _keyAnimTimelineID: 31923981
+        _keyAnimTimelineLayerID: 19314566
+        _paramSetList:
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 63391096
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114086734560700078}
+            _boneID: 53494726
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 81298550
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114086734560700078}
+            _boneID: 53494726
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 10
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 0.9848077
+                _m01: -0.17364818
+                _m02: 0
+                _m10: 0.17364818
+                _m11: 0.9848077
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 0.9848077
+                _m01: -0.17364818
+                _m02: 0
+                _m10: 0.17364818
+                _m11: 0.9848077
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 78275341
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114086734560700078}
+            _boneID: 53494726
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        _isEnabled: 1
+        _layerIndex: -10
+        _layerWeight: 0
+        _blendMethod: 0
+        _isColorPropertyEnabled: 1
+        _calculatedWeightedVertexList: []
+      - _syncTarget: 2
+        _keyControlParamID: -1
+        _keyAnimClipID: 32235314
+        _keyAnimTimelineID: 31923981
+        _keyAnimTimelineLayerID: 67241790
+        _paramSetList:
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 36513575
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114492608067652924}
+            _boneID: 62399017
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 7530088
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114492608067652924}
+            _boneID: 62399017
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 87217526
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114492608067652924}
+            _boneID: 62399017
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 20
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 0.9396926
+                _m01: -0.34202012
+                _m02: 0
+                _m10: 0.34202012
+                _m11: 0.9396926
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 0.9396926
+                _m01: -0.34202012
+                _m02: 0
+                _m10: 0.34202012
+                _m11: 0.9396926
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        _isEnabled: 1
+        _layerIndex: -10
+        _layerWeight: 0
+        _blendMethod: 0
+        _isColorPropertyEnabled: 1
+        _calculatedWeightedVertexList: []
+      - _syncTarget: 2
+        _keyControlParamID: -1
+        _keyAnimClipID: 32235314
+        _keyAnimTimelineID: 31923981
+        _keyAnimTimelineLayerID: 79783783
+        _paramSetList:
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 7758582
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114544935600008804}
+            _boneID: 33831158
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 26985923
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114544935600008804}
+            _boneID: 33831158
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: 0
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 1
+                _m01: -0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        - _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+          _keyframeUniqueID: 27210703
+          _overlapWeight: 1
+          _nMeshData: 0
+          _nBoneData: 0
+          _meshData: []
+          _boneData:
+          - _meshGroupID_Bone: 99062942
+            _transformUniqueID: 52042615
+            _meshGroup_Bone: {fileID: 114689755849721250}
+            _bone: {fileID: 114544935600008804}
+            _boneID: 33831158
+            _portrait: {fileID: 114841861554026866}
+            _transformMatrix:
+              _pos: {x: 0, y: 0}
+              _angleDeg: -20
+              _scale: {x: 1, y: 1}
+              _mtrxToSpace:
+                _m00: 0.9396926
+                _m01: 0.34202012
+                _m02: 0
+                _m10: -0.34202012
+                _m11: 0.9396926
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxToLowerSpace:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotation:
+                _m00: 0.9396926
+                _m01: 0.34202012
+                _m02: 0
+                _m10: -0.34202012
+                _m11: 0.9396926
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+              _mtrxOnlyRotationInv:
+                _m00: 1
+                _m01: 0
+                _m02: 0
+                _m10: 0
+                _m11: 1
+                _m12: 0
+                _m20: 0
+                _m21: 0
+                _m22: 1
+        _isEnabled: 1
+        _layerIndex: -10
+        _layerWeight: 0
+        _blendMethod: 0
+        _isColorPropertyEnabled: 1
+        _calculatedWeightedVertexList: []
       _isColorPropertyEnabled: 1
       _isColorProperty: 1
       _isExtraPropertyEnabled: 0
@@ -46542,7 +48562,1708 @@ MonoBehaviour:
         _linkType: 0
       _guiTimelineFolded: 0
     _animEvents: []
-    _animationClipForMecanim: {fileID: 7400000, guid: f1dd852b7247a0541b3b36d736deba2e,
+    _animationClipForMecanim: {fileID: 7400000, guid: 34470d9761b5e1840b8a8cebbcbdb048,
+      type: 2}
+  - _uniqueID: 32235314
+    _name: Touch
+    _targetMeshGroupID: 99062942
+    _FPS: 30
+    _secPerFrame: 0.033333335
+    _startFrame: 0
+    _endFrame: 30
+    _isLoop: 0
+    _timelines:
+    - _uniqueID: 31923981
+      _guiColor: {r: 0.15, g: 0.5, b: 0.7, a: 1}
+      _linkType: 0
+      _modifierUniqueID: 6690307
+      _layers:
+      - _uniqueID: 84167669
+        _keyframes:
+        - _uniqueID: 91966110
+          _frameIndex: 0
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 0
+            _prevIndex: 0
+            _nextIndex: 2
+            _prevCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 2
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 0
+          _activeFrameIndexMin: -10
+          _activeFrameIndexMax: 2
+          _activeFrameIndexMin_Dummy: 30
+          _activeFrameIndexMax_Dummy: 60
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 59824831
+          _frameIndex: 2
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 2
+            _prevIndex: 0
+            _nextIndex: 4
+            _prevCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 2
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 2
+              _frameIndex_B: 4
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 2
+          _activeFrameIndexMin: 0
+          _activeFrameIndexMax: 4
+          _activeFrameIndexMin_Dummy: -50
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 53524226
+          _frameIndex: 4
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 4
+            _prevIndex: 2
+            _nextIndex: 8
+            _prevCurveResult:
+              _frameIndex_A: 2
+              _frameIndex_B: 4
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 4
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 4
+          _activeFrameIndexMin: 2
+          _activeFrameIndexMax: 8
+          _activeFrameIndexMin_Dummy: -56
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 65860909
+          _frameIndex: 8
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 8
+            _prevIndex: 4
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 4
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 8
+          _activeFrameIndexMin: 4
+          _activeFrameIndexMax: 30
+          _activeFrameIndexMin_Dummy: -52
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 85052346
+          _frameIndex: 30
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 30
+            _prevIndex: 8
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 30
+          _activeFrameIndexMin: 8
+          _activeFrameIndexMax: 40
+          _activeFrameIndexMin_Dummy: -30
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        _linkModType: 3
+        _transformID: -1
+        _boneID: 41841821
+        _guiColor: {r: 0.5631236, g: 0.5833633, b: 0.57867885, a: 1}
+        _guiLayerVisible: 1
+        _controlParamID: -1
+        _linkType: 0
+      - _uniqueID: 90037958
+        _keyframes:
+        - _uniqueID: 80850954
+          _frameIndex: 0
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 0
+            _prevIndex: 0
+            _nextIndex: 0
+            _prevCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 0
+              _smoothX_A: 0
+              _smoothY_A: 0
+              _smoothX_B: 0
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 1
+              _smoothX_A: 0
+              _smoothY_A: 0
+              _smoothX_B: 0
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 0
+          _activeFrameIndexMin: -10
+          _activeFrameIndexMax: 40
+          _activeFrameIndexMin_Dummy: 0
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        _linkModType: 3
+        _transformID: -1
+        _boneID: 85346626
+        _guiColor: {r: 0.46805194, g: 0.5565351, b: 0.5954853, a: 1}
+        _guiLayerVisible: 1
+        _controlParamID: -1
+        _linkType: 0
+      - _uniqueID: 99909351
+        _keyframes:
+        - _uniqueID: 62784395
+          _frameIndex: 0
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 0
+            _prevIndex: 0
+            _nextIndex: 8
+            _prevCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 0
+          _activeFrameIndexMin: -10
+          _activeFrameIndexMax: 8
+          _activeFrameIndexMin_Dummy: 30
+          _activeFrameIndexMax_Dummy: 60
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 61233949
+          _frameIndex: 8
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 8
+            _prevIndex: 0
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 8
+          _activeFrameIndexMin: 0
+          _activeFrameIndexMax: 30
+          _activeFrameIndexMin_Dummy: -52
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 61270964
+          _frameIndex: 30
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 30
+            _prevIndex: 8
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 30
+          _activeFrameIndexMin: 8
+          _activeFrameIndexMax: 40
+          _activeFrameIndexMin_Dummy: -30
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        _linkModType: 3
+        _transformID: -1
+        _boneID: 88517551
+        _guiColor: {r: 0.48507234, g: 0.56554013, b: 0.5130803, a: 1}
+        _guiLayerVisible: 1
+        _controlParamID: -1
+        _linkType: 0
+      - _uniqueID: 41978319
+        _keyframes:
+        - _uniqueID: 84238726
+          _frameIndex: 0
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 0
+            _prevIndex: 0
+            _nextIndex: 8
+            _prevCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 0
+          _activeFrameIndexMin: -10
+          _activeFrameIndexMax: 8
+          _activeFrameIndexMin_Dummy: 30
+          _activeFrameIndexMax_Dummy: 60
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 44165611
+          _frameIndex: 8
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 8
+            _prevIndex: 0
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 8
+          _activeFrameIndexMin: 0
+          _activeFrameIndexMax: 30
+          _activeFrameIndexMin_Dummy: -52
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 73972410
+          _frameIndex: 30
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 30
+            _prevIndex: 8
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 30
+          _activeFrameIndexMin: 8
+          _activeFrameIndexMax: 40
+          _activeFrameIndexMin_Dummy: -30
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        _linkModType: 3
+        _transformID: -1
+        _boneID: 99422514
+        _guiColor: {r: 0.4308841, g: 0.49874675, b: 0.48862553, a: 1}
+        _guiLayerVisible: 1
+        _controlParamID: -1
+        _linkType: 0
+      - _uniqueID: 92453795
+        _keyframes:
+        - _uniqueID: 27606922
+          _frameIndex: 0
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 0
+            _prevIndex: 0
+            _nextIndex: 8
+            _prevCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 0
+          _activeFrameIndexMin: -10
+          _activeFrameIndexMax: 8
+          _activeFrameIndexMin_Dummy: 30
+          _activeFrameIndexMax_Dummy: 60
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 11285300
+          _frameIndex: 8
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 8
+            _prevIndex: 0
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 8
+          _activeFrameIndexMin: 0
+          _activeFrameIndexMax: 30
+          _activeFrameIndexMin_Dummy: -52
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 81294881
+          _frameIndex: 30
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 30
+            _prevIndex: 8
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 30
+          _activeFrameIndexMin: 8
+          _activeFrameIndexMax: 40
+          _activeFrameIndexMin_Dummy: -30
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        _linkModType: 3
+        _transformID: -1
+        _boneID: 96706302
+        _guiColor: {r: 0.45730883, g: 0.5433284, b: 0.4968594, a: 1}
+        _guiLayerVisible: 1
+        _controlParamID: -1
+        _linkType: 0
+      - _uniqueID: 3493903
+        _keyframes:
+        - _uniqueID: 97054084
+          _frameIndex: 0
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 0
+            _prevIndex: 0
+            _nextIndex: 2
+            _prevCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 2
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 0
+          _activeFrameIndexMin: -10
+          _activeFrameIndexMax: 2
+          _activeFrameIndexMin_Dummy: 30
+          _activeFrameIndexMax_Dummy: 60
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 39955341
+          _frameIndex: 2
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 2
+            _prevIndex: 0
+            _nextIndex: 8
+            _prevCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 2
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 2
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 2
+          _activeFrameIndexMin: 0
+          _activeFrameIndexMax: 8
+          _activeFrameIndexMin_Dummy: 0
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 5813035
+          _frameIndex: 8
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 8
+            _prevIndex: 2
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 2
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 8
+          _activeFrameIndexMin: 2
+          _activeFrameIndexMax: 30
+          _activeFrameIndexMin_Dummy: 0
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 43517721
+          _frameIndex: 30
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 30
+            _prevIndex: 8
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 30
+          _activeFrameIndexMin: 8
+          _activeFrameIndexMax: 40
+          _activeFrameIndexMin_Dummy: -30
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        _linkModType: 3
+        _transformID: -1
+        _boneID: 64720766
+        _guiColor: {r: 0.44868675, g: 0.41573104, b: 0.49858674, a: 1}
+        _guiLayerVisible: 1
+        _controlParamID: -1
+        _linkType: 0
+      - _uniqueID: 5097920
+        _keyframes:
+        - _uniqueID: 36387406
+          _frameIndex: 0
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 0
+            _prevIndex: 0
+            _nextIndex: 0
+            _prevCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 0
+              _smoothX_A: 0
+              _smoothY_A: 0
+              _smoothX_B: 0
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 1
+              _smoothX_A: 0
+              _smoothY_A: 0
+              _smoothX_B: 0
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 0
+          _activeFrameIndexMin: -10
+          _activeFrameIndexMax: 40
+          _activeFrameIndexMin_Dummy: 0
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        _linkModType: 3
+        _transformID: -1
+        _boneID: 48993900
+        _guiColor: {r: 0.5809634, g: 0.5893862, b: 0.5677761, a: 1}
+        _guiLayerVisible: 1
+        _controlParamID: -1
+        _linkType: 0
+      - _uniqueID: 69431555
+        _keyframes:
+        - _uniqueID: 26540951
+          _frameIndex: 0
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 0
+            _prevIndex: 0
+            _nextIndex: 8
+            _prevCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 0
+          _activeFrameIndexMin: -10
+          _activeFrameIndexMax: 8
+          _activeFrameIndexMin_Dummy: 30
+          _activeFrameIndexMax_Dummy: 60
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 88805736
+          _frameIndex: 8
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 8
+            _prevIndex: 0
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 8
+          _activeFrameIndexMin: 0
+          _activeFrameIndexMax: 30
+          _activeFrameIndexMin_Dummy: 0
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 840459
+          _frameIndex: 30
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 30
+            _prevIndex: 8
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 30
+          _activeFrameIndexMin: 8
+          _activeFrameIndexMax: 40
+          _activeFrameIndexMin_Dummy: -30
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        _linkModType: 3
+        _transformID: -1
+        _boneID: 68548188
+        _guiColor: {r: 0.5946733, g: 0.48531216, b: 0.5748856, a: 1}
+        _guiLayerVisible: 1
+        _controlParamID: -1
+        _linkType: 0
+      - _uniqueID: 19314566
+        _keyframes:
+        - _uniqueID: 63391096
+          _frameIndex: 0
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 0
+            _prevIndex: 0
+            _nextIndex: 8
+            _prevCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 0
+          _activeFrameIndexMin: -10
+          _activeFrameIndexMax: 8
+          _activeFrameIndexMin_Dummy: 30
+          _activeFrameIndexMax_Dummy: 60
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 81298550
+          _frameIndex: 8
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 8
+            _prevIndex: 0
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 8
+          _activeFrameIndexMin: 0
+          _activeFrameIndexMax: 30
+          _activeFrameIndexMin_Dummy: -52
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 78275341
+          _frameIndex: 30
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 30
+            _prevIndex: 8
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 30
+          _activeFrameIndexMin: 8
+          _activeFrameIndexMax: 40
+          _activeFrameIndexMin_Dummy: -30
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        _linkModType: 3
+        _transformID: -1
+        _boneID: 53494726
+        _guiColor: {r: 0.5545275, g: 0.46106246, b: 0.5592515, a: 1}
+        _guiLayerVisible: 1
+        _controlParamID: -1
+        _linkType: 0
+      - _uniqueID: 67241790
+        _keyframes:
+        - _uniqueID: 36513575
+          _frameIndex: 0
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 0
+            _prevIndex: 0
+            _nextIndex: 8
+            _prevCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 0
+              _smoothX_A: 0
+              _smoothY_A: 0
+              _smoothX_B: 0
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 0
+          _activeFrameIndexMin: -10
+          _activeFrameIndexMax: 8
+          _activeFrameIndexMin_Dummy: 0
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 87217526
+          _frameIndex: 8
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 8
+            _prevIndex: 0
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 8
+          _activeFrameIndexMin: 0
+          _activeFrameIndexMax: 30
+          _activeFrameIndexMin_Dummy: 0
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 7530088
+          _frameIndex: 30
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 30
+            _prevIndex: 8
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 1
+              _smoothX_A: 0
+              _smoothY_A: 0
+              _smoothX_B: 0
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 30
+          _activeFrameIndexMin: 8
+          _activeFrameIndexMax: 40
+          _activeFrameIndexMin_Dummy: 0
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        _linkModType: 3
+        _transformID: -1
+        _boneID: 62399017
+        _guiColor: {r: 0.43379763, g: 0.44358572, b: 0.5909318, a: 1}
+        _guiLayerVisible: 1
+        _controlParamID: -1
+        _linkType: 0
+      - _uniqueID: 79783783
+        _keyframes:
+        - _uniqueID: 26985923
+          _frameIndex: 0
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 0
+            _prevIndex: 0
+            _nextIndex: 8
+            _prevCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 0
+              _smoothX_A: 0
+              _smoothY_A: 0
+              _smoothX_B: 0
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 0
+          _activeFrameIndexMin: -10
+          _activeFrameIndexMax: 8
+          _activeFrameIndexMin_Dummy: 0
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 27210703
+          _frameIndex: 8
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 8
+            _prevIndex: 0
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 0
+              _frameIndex_B: 8
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 8
+          _activeFrameIndexMin: 0
+          _activeFrameIndexMax: 30
+          _activeFrameIndexMin_Dummy: 0
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 7758582
+          _frameIndex: 30
+          _curveKey:
+            _prevTangentType: 1
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 1
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 30
+            _prevIndex: 8
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 8
+              _frameIndex_B: 30
+              _tangentType: 1
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 1
+              _smoothX_A: 0
+              _smoothY_A: 0
+              _smoothX_B: 0
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 30
+          _activeFrameIndexMin: 8
+          _activeFrameIndexMax: 40
+          _activeFrameIndexMin_Dummy: 0
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        _linkModType: 3
+        _transformID: -1
+        _boneID: 33831158
+        _guiColor: {r: 0.47177666, g: 0.55141217, b: 0.4076462, a: 1}
+        _guiLayerVisible: 1
+        _controlParamID: -1
+        _linkType: 0
+      _guiTimelineFolded: 1
+    - _uniqueID: 89012226
+      _guiColor: {r: 0.15, g: 0.5, b: 0.7, a: 1}
+      _linkType: 1
+      _modifierUniqueID: -1
+      _layers:
+      - _uniqueID: 82580466
+        _keyframes:
+        - _uniqueID: 72383611
+          _frameIndex: 2
+          _curveKey:
+            _prevTangentType: 2
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 2
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 2
+            _prevIndex: 2
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 0
+              _smoothX_A: 0
+              _smoothY_A: 0
+              _smoothX_B: 0
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: 2
+              _frameIndex_B: 30
+              _tangentType: 2
+              _isTargetIsA: 1
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 2
+          _activeFrameIndexMin: -10
+          _activeFrameIndexMax: 30
+          _activeFrameIndexMin_Dummy: 0
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 1
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        - _uniqueID: 25923299
+          _frameIndex: 30
+          _curveKey:
+            _prevTangentType: 2
+            _prevSmoothX: 0.5
+            _prevSmoothY: 0
+            _nextTangentType: 2
+            _nextSmoothX: 0.5
+            _nextSmoothY: 0
+            _keyIndex: 30
+            _prevIndex: 2
+            _nextIndex: 30
+            _prevCurveResult:
+              _frameIndex_A: 2
+              _frameIndex_B: 30
+              _tangentType: 2
+              _isTargetIsA: 0
+              _smoothX_A: 0.5
+              _smoothY_A: 0
+              _smoothX_B: 0.5
+              _smoothY_B: 0
+            _nextCurveResult:
+              _frameIndex_A: -1
+              _frameIndex_B: -1
+              _tangentType: 0
+              _isTargetIsA: 1
+              _smoothX_A: 0
+              _smoothY_A: 0
+              _smoothX_B: 0
+              _smoothY_B: 0
+          _isKeyValueSet: 0
+          _isActive: 1
+          _isLoopAsStart: 0
+          _isLoopAsEnd: 0
+          _loopFrameIndex: 30
+          _activeFrameIndexMin: 2
+          _activeFrameIndexMax: 40
+          _activeFrameIndexMin_Dummy: 0
+          _activeFrameIndexMax_Dummy: 0
+          _prevRotationBiasMode: 0
+          _nextRotationBiasMode: 0
+          _prevRotationBiasCount: 0
+          _nextRotationBiasCount: 0
+          _conSyncValue_Int: 0
+          _conSyncValue_Float: 0
+          _conSyncValue_Vector2: {x: 0, y: 0}
+        _linkModType: 0
+        _transformID: -1
+        _boneID: -1
+        _guiColor: {r: 0.42131945, g: 0.5720904, b: 0.44577348, a: 1}
+        _guiLayerVisible: 1
+        _controlParamID: 472644
+        _linkType: 1
+      _guiTimelineFolded: 0
+    _animEvents:
+    - _frameIndex: 30
+      _frameIndex_End: -1
+      _eventName: TouchAnimEnd
+      _callType: 0
+      _subParams: []
+    _animationClipForMecanim: {fileID: 7400000, guid: 452cc424e2438234b81dfe3d593f1917,
       type: 2}
   _animPlayManager:
     _animPlayDataList:
@@ -46557,6 +50278,9 @@ MonoBehaviour:
       _meshGroupID: 99062942
     - _animClipID: 78790240
       _animClipName: Hold
+      _meshGroupID: 99062942
+    - _animClipID: 32235314
+      _animClipName: Touch
       _meshGroupID: 99062942
   _mainMeshGroupIDList: 9e94e705
   _rootUnits: []
@@ -46631,7 +50355,7 @@ MonoBehaviour:
       _texture: {fileID: 2800000, guid: 2e92adb9390b13444a0ec157c1a4dc60, type: 3}
       _textureID: 0
       _shader: {fileID: 4800000, guid: b3aee9f90da5b3247adc84e67cadd725, type: 3}
-  _optAnimEventListener: {fileID: 0}
+  _optAnimEventListener: {fileID: 114570124437100952}
   _subObjectGroup: {fileID: 1678754715224998}
   _subObjectGroup_Mesh: {fileID: 1484671582958842}
   _subObjectGroup_MeshGroup: {fileID: 1869425966277020}
@@ -46650,7 +50374,7 @@ MonoBehaviour:
   _sortingLayerID: 0
   _sortingOrder: 0
   _isUsingMecanim: 0
-  _mecanimAnimClipResourcePath: C:/git/Polaris/Assets/Resources/Animation/Thuban
+  _mecanimAnimClipResourcePath: D:/git/Polaris/Assets/Resources/Animation/Thuban
   _emptyAnimClipForMecanim: {fileID: 7400000, guid: f2a7aa3710d69c048a50abe14876d767,
     type: 2}
   _animator: {fileID: 95000527452040432}
@@ -55173,6 +58897,1962 @@ MonoBehaviour:
     _blendMethod: 0
     _isColorPropertyEnabled: 1
     _calculatedWeightedVertexList: []
+  - _syncTarget: 2
+    _keyControlParamID: -1
+    _keyAnimClipID: 32235314
+    _keyAnimTimelineID: 31923981
+    _keyAnimTimelineLayerID: 84167669
+    _paramSetList:
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 91966110
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 41841821
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 59824831
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 41841821
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1.1, y: 0.8}
+          _mtrxToSpace:
+            _m00: 1.1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 0.8
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 53524226
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 41841821
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 0.8, y: 1.1}
+          _mtrxToSpace:
+            _m00: 0.8
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1.1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 65860909
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 41841821
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 5
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 0.9961947
+            _m01: -0.08715574
+            _m02: 0
+            _m10: 0.08715574
+            _m11: 0.9961947
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 0.9961947
+            _m01: -0.08715574
+            _m02: 0
+            _m10: 0.08715574
+            _m11: 0.9961947
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 85052346
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 41841821
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    _isEnabled: 1
+    _layerIndex: 41
+    _layerWeight: 1
+    _blendMethod: 0
+    _isColorPropertyEnabled: 1
+    _calculatedWeightedVertexList: []
+  - _syncTarget: 2
+    _keyControlParamID: -1
+    _keyAnimClipID: 32235314
+    _keyAnimTimelineID: 31923981
+    _keyAnimTimelineLayerID: 90037958
+    _paramSetList:
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 80850954
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 85346626
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    _isEnabled: 1
+    _layerIndex: 42
+    _layerWeight: 1
+    _blendMethod: 0
+    _isColorPropertyEnabled: 1
+    _calculatedWeightedVertexList: []
+  - _syncTarget: 2
+    _keyControlParamID: -1
+    _keyAnimClipID: 32235314
+    _keyAnimTimelineID: 31923981
+    _keyAnimTimelineLayerID: 99909351
+    _paramSetList:
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 62784395
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 88517551
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 61233949
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 88517551
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 4.591858
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 0.9967903
+            _m01: -0.08005728
+            _m02: 0
+            _m10: 0.08005728
+            _m11: 0.9967903
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 0.9967903
+            _m01: -0.08005728
+            _m02: 0
+            _m10: 0.08005728
+            _m11: 0.9967903
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 61270964
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 88517551
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    _isEnabled: 1
+    _layerIndex: 43
+    _layerWeight: 1
+    _blendMethod: 0
+    _isColorPropertyEnabled: 1
+    _calculatedWeightedVertexList: []
+  - _syncTarget: 2
+    _keyControlParamID: -1
+    _keyAnimClipID: 32235314
+    _keyAnimTimelineID: 31923981
+    _keyAnimTimelineLayerID: 41978319
+    _paramSetList:
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 84238726
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 99422514
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 44165611
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 99422514
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: -91.41397
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: -0.024675889
+            _m01: 0.9996955
+            _m02: 0
+            _m10: -0.9996955
+            _m11: -0.024675889
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: -0.024675889
+            _m01: 0.9996955
+            _m02: 0
+            _m10: -0.9996955
+            _m11: -0.024675889
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 73972410
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 99422514
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    _isEnabled: 1
+    _layerIndex: 44
+    _layerWeight: 1
+    _blendMethod: 0
+    _isColorPropertyEnabled: 1
+    _calculatedWeightedVertexList: []
+  - _syncTarget: 2
+    _keyControlParamID: -1
+    _keyAnimClipID: 32235314
+    _keyAnimTimelineID: 31923981
+    _keyAnimTimelineLayerID: 92453795
+    _paramSetList:
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 27606922
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 96706302
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 11285300
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 96706302
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 102.2391
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: -0.21199165
+            _m01: -0.9772715
+            _m02: 0
+            _m10: 0.9772715
+            _m11: -0.21199165
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: -0.21199165
+            _m01: -0.9772715
+            _m02: 0
+            _m10: 0.9772715
+            _m11: -0.21199165
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 81294881
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 96706302
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    _isEnabled: 1
+    _layerIndex: 45
+    _layerWeight: 1
+    _blendMethod: 0
+    _isColorPropertyEnabled: 1
+    _calculatedWeightedVertexList: []
+  - _syncTarget: 2
+    _keyControlParamID: -1
+    _keyAnimClipID: 32235314
+    _keyAnimTimelineID: 31923981
+    _keyAnimTimelineLayerID: 3493903
+    _paramSetList:
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 97054084
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 64720766
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 39955341
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 64720766
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: -12.54259
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 0.97613484
+            _m01: 0.21716526
+            _m02: 0
+            _m10: -0.21716526
+            _m11: 0.97613484
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 0.97613484
+            _m01: 0.21716526
+            _m02: 0
+            _m10: -0.21716526
+            _m11: 0.97613484
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 5813035
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 64720766
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 4.450645
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 0.99698454
+            _m01: -0.07760031
+            _m02: 0
+            _m10: 0.07760031
+            _m11: 0.99698454
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 0.99698454
+            _m01: -0.07760031
+            _m02: 0
+            _m10: 0.07760031
+            _m11: 0.99698454
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 43517721
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 64720766
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    _isEnabled: 1
+    _layerIndex: 46
+    _layerWeight: 1
+    _blendMethod: 0
+    _isColorPropertyEnabled: 1
+    _calculatedWeightedVertexList: []
+  - _syncTarget: 2
+    _keyControlParamID: -1
+    _keyAnimClipID: 32235314
+    _keyAnimTimelineID: 31923981
+    _keyAnimTimelineLayerID: 5097920
+    _paramSetList:
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 36387406
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 48993900
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    _isEnabled: 1
+    _layerIndex: 47
+    _layerWeight: 1
+    _blendMethod: 0
+    _isColorPropertyEnabled: 1
+    _calculatedWeightedVertexList: []
+  - _syncTarget: 2
+    _keyControlParamID: -1
+    _keyAnimClipID: 32235314
+    _keyAnimTimelineID: 31923981
+    _keyAnimTimelineLayerID: 69431555
+    _paramSetList:
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 26540951
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 68548188
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 88805736
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 68548188
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: -5
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 0.9961947
+            _m01: 0.08715574
+            _m02: 0
+            _m10: -0.08715574
+            _m11: 0.9961947
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 0.9961947
+            _m01: 0.08715574
+            _m02: 0
+            _m10: -0.08715574
+            _m11: 0.9961947
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 840459
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 68548188
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    _isEnabled: 1
+    _layerIndex: 48
+    _layerWeight: 1
+    _blendMethod: 0
+    _isColorPropertyEnabled: 1
+    _calculatedWeightedVertexList: []
+  - _syncTarget: 2
+    _keyControlParamID: -1
+    _keyAnimClipID: 32235314
+    _keyAnimTimelineID: 31923981
+    _keyAnimTimelineLayerID: 19314566
+    _paramSetList:
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 63391096
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 53494726
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 81298550
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 53494726
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 10
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 0.9848077
+            _m01: -0.17364818
+            _m02: 0
+            _m10: 0.17364818
+            _m11: 0.9848077
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 0.9848077
+            _m01: -0.17364818
+            _m02: 0
+            _m10: 0.17364818
+            _m11: 0.9848077
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 78275341
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 53494726
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    _isEnabled: 1
+    _layerIndex: 49
+    _layerWeight: 1
+    _blendMethod: 0
+    _isColorPropertyEnabled: 1
+    _calculatedWeightedVertexList: []
+  - _syncTarget: 2
+    _keyControlParamID: -1
+    _keyAnimClipID: 32235314
+    _keyAnimTimelineID: 31923981
+    _keyAnimTimelineLayerID: 67241790
+    _paramSetList:
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 36513575
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 62399017
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 7530088
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 62399017
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 87217526
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 62399017
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 20
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 0.9396926
+            _m01: -0.34202012
+            _m02: 0
+            _m10: 0.34202012
+            _m11: 0.9396926
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 0.9396926
+            _m01: -0.34202012
+            _m02: 0
+            _m10: 0.34202012
+            _m11: 0.9396926
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    _isEnabled: 1
+    _layerIndex: 50
+    _layerWeight: 1
+    _blendMethod: 0
+    _isColorPropertyEnabled: 1
+    _calculatedWeightedVertexList: []
+  - _syncTarget: 2
+    _keyControlParamID: -1
+    _keyAnimClipID: 32235314
+    _keyAnimTimelineID: 31923981
+    _keyAnimTimelineLayerID: 79783783
+    _paramSetList:
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 7758582
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 33831158
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 26985923
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 33831158
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: 0
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 1
+            _m01: -0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    - _conSyncValue_Int: 0
+      _conSyncValue_Float: 0
+      _conSyncValue_Vector2: {x: 0, y: 0}
+      _conSyncValueRange_Under: {x: 0, y: 0}
+      _conSyncValueRange_Over: {x: 0, y: 0}
+      _keyframeUniqueID: 27210703
+      _overlapWeight: 1
+      _meshData: []
+      _boneData:
+      - _meshGroupUniqueID_Modifier: 99062942
+        _meshGropuUniqueID_Bone: 99062942
+        _transformUniqueID: 52042615
+        _boneID: 33831158
+        _transformMatrix:
+          _pos: {x: 0, y: 0}
+          _angleDeg: -20
+          _scale: {x: 1, y: 1}
+          _mtrxToSpace:
+            _m00: 0.9396926
+            _m01: 0.34202012
+            _m02: 0
+            _m10: -0.34202012
+            _m11: 0.9396926
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxToLowerSpace:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotation:
+            _m00: 0.9396926
+            _m01: 0.34202012
+            _m02: 0
+            _m10: -0.34202012
+            _m11: 0.9396926
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+          _mtrxOnlyRotationInv:
+            _m00: 1
+            _m01: 0
+            _m02: 0
+            _m10: 0
+            _m11: 1
+            _m12: 0
+            _m20: 0
+            _m21: 0
+            _m22: 1
+    _isEnabled: 1
+    _layerIndex: 51
+    _layerWeight: 1
+    _blendMethod: 0
+    _isColorPropertyEnabled: 1
+    _calculatedWeightedVertexList: []
   _isColorPropertyEnabled: 1
   _isExtraPropertyEnabled: 0
 --- !u!114 &114866069033761450
@@ -58894,16 +64574,16 @@ MonoBehaviour:
     _shapeLength: 41
     _shapeTaper: 10
     _shapeHelper: 0
-    _shapePoint_End: {x: 50.75, y: -49.75}
-    _shapePoint_Mid1: {x: 17.95, y: -42.25}
-    _shapePoint_Mid2: {x: 17.949999, y: -57.25}
-    _shapePoint_End1: {x: 50.75, y: -43}
-    _shapePoint_End2: {x: 50.75, y: -56.5}
-    _shapePoint_End_IK: {x: 50.75, y: -49.75}
-    _shapePoint_Mid1_IK: {x: 17.95, y: -42.25}
-    _shapePoint_Mid2_IK: {x: 17.949999, y: -57.25}
-    _shapePoint_End1_IK: {x: 50.75, y: -43}
-    _shapePoint_End2_IK: {x: 50.75, y: -56.5}
+    _shapePoint_End: {x: 42.55, y: -49.75}
+    _shapePoint_Mid1: {x: 16.31, y: -41.5}
+    _shapePoint_Mid2: {x: 16.31, y: -58}
+    _shapePoint_End1: {x: 42.55, y: -42.325}
+    _shapePoint_End2: {x: 42.55, y: -57.175003}
+    _shapePoint_End_IK: {x: 42.55, y: -49.75}
+    _shapePoint_Mid1_IK: {x: 16.31, y: -41.5}
+    _shapePoint_Mid2_IK: {x: 16.31, y: -58}
+    _shapePoint_End1_IK: {x: 42.55, y: -42.325}
+    _shapePoint_End2_IK: {x: 42.55, y: -57.175003}
     _optionLocalMove: 0
     _optionIK: 1
     _isIKTail: 0
@@ -58982,16 +64662,16 @@ MonoBehaviour:
     _shapeLength: 62
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: -3.6536603, y: -121.51408}
-    _shapePoint_Mid1: {x: 8.140728, y: -72.756485}
-    _shapePoint_Mid2: {x: -6.8021927, y: -71.44915}
-    _shapePoint_End1: {x: -3.6536603, y: -121.51408}
-    _shapePoint_End2: {x: -3.6536603, y: -121.51408}
-    _shapePoint_End_IK: {x: -3.6536603, y: -121.51408}
-    _shapePoint_Mid1_IK: {x: 8.140728, y: -72.756485}
-    _shapePoint_Mid2_IK: {x: -6.8021927, y: -71.44915}
-    _shapePoint_End1_IK: {x: -3.6536603, y: -121.51408}
-    _shapePoint_End2_IK: {x: -3.6536603, y: -121.51408}
+    _shapePoint_End: {x: -1.7323515, y: -110.08893}
+    _shapePoint_Mid1: {x: 10.540105, y: -71.463135}
+    _shapePoint_Mid2: {x: -5.873047, y: -69.77244}
+    _shapePoint_End1: {x: -1.7323515, y: -110.08893}
+    _shapePoint_End2: {x: -1.7323515, y: -110.08893}
+    _shapePoint_End_IK: {x: -1.7323515, y: -110.08893}
+    _shapePoint_Mid1_IK: {x: 10.540105, y: -71.463135}
+    _shapePoint_Mid2_IK: {x: -5.873047, y: -69.77244}
+    _shapePoint_End1_IK: {x: -1.7323515, y: -110.08893}
+    _shapePoint_End2_IK: {x: -1.7323515, y: -110.08893}
     _optionLocalMove: 0
     _optionIK: 0
     _isIKTail: 0
@@ -59070,16 +64750,16 @@ MonoBehaviour:
     _shapeLength: 60
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: 14.797148, y: -119.74086}
-    _shapePoint_Mid1: {x: 21.458288, y: -71.61728}
-    _shapePoint_Mid2: {x: 6.460572, y: -71.87907}
-    _shapePoint_End1: {x: 14.797148, y: -119.74086}
-    _shapePoint_End2: {x: 14.797148, y: -119.74086}
-    _shapePoint_End_IK: {x: 14.797148, y: -119.74086}
-    _shapePoint_Mid1_IK: {x: 21.458288, y: -71.61728}
-    _shapePoint_Mid2_IK: {x: 6.460572, y: -71.87907}
-    _shapePoint_End1_IK: {x: 14.797148, y: -119.74086}
-    _shapePoint_End2_IK: {x: 14.797148, y: -119.74086}
+    _shapePoint_End: {x: 15.263392, y: -108.69422}
+    _shapePoint_Mid1: {x: 21.653091, y: -69.94123}
+    _shapePoint_Mid2: {x: 5.172265, y: -70.73646}
+    _shapePoint_End1: {x: 15.263392, y: -108.69422}
+    _shapePoint_End2: {x: 15.263392, y: -108.69422}
+    _shapePoint_End_IK: {x: 15.263392, y: -108.69422}
+    _shapePoint_Mid1_IK: {x: 21.653091, y: -69.94123}
+    _shapePoint_Mid2_IK: {x: 5.172265, y: -70.73646}
+    _shapePoint_End1_IK: {x: 15.263392, y: -108.69422}
+    _shapePoint_End2_IK: {x: 15.263392, y: -108.69422}
     _optionLocalMove: 0
     _optionIK: 0
     _isIKTail: 0
@@ -59158,16 +64838,16 @@ MonoBehaviour:
     _shapeLength: 54
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: 3.9000063, y: -105.47624}
-    _shapePoint_Mid1: {x: 15.359036, y: -63.1539}
-    _shapePoint_Mid2: {x: 0.42318878, y: -61.768097}
-    _shapePoint_End1: {x: 3.9000063, y: -105.47624}
-    _shapePoint_End2: {x: 3.9000063, y: -105.47624}
-    _shapePoint_End_IK: {x: 3.9000063, y: -105.47624}
-    _shapePoint_Mid1_IK: {x: 15.359036, y: -63.1539}
-    _shapePoint_Mid2_IK: {x: 0.42318878, y: -61.768097}
-    _shapePoint_End1_IK: {x: 3.9000063, y: -105.47624}
-    _shapePoint_End2_IK: {x: 3.9000063, y: -105.47624}
+    _shapePoint_End: {x: 5.070005, y: -94.91815}
+    _shapePoint_Mid1: {x: 16.477606, y: -61.268147}
+    _shapePoint_Mid2: {x: 0.048173524, y: -59.743767}
+    _shapePoint_End1: {x: 5.070005, y: -94.91815}
+    _shapePoint_End2: {x: 5.070005, y: -94.91815}
+    _shapePoint_End_IK: {x: 5.070005, y: -94.91815}
+    _shapePoint_Mid1_IK: {x: 16.477606, y: -61.268147}
+    _shapePoint_Mid2_IK: {x: 0.048173524, y: -59.743767}
+    _shapePoint_End1_IK: {x: 5.070005, y: -94.91815}
+    _shapePoint_End2_IK: {x: 5.070005, y: -94.91815}
     _optionLocalMove: 0
     _optionIK: 0
     _isIKTail: 1
@@ -59246,16 +64926,16 @@ MonoBehaviour:
     _shapeLength: 38
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: 8.750001, y: 1.25}
-    _shapePoint_Mid1: {x: 1.250001, y: -29.15}
-    _shapePoint_Mid2: {x: 16.25, y: -29.15}
-    _shapePoint_End1: {x: 8.750001, y: 1.25}
-    _shapePoint_End2: {x: 8.750001, y: 1.25}
-    _shapePoint_End_IK: {x: 8.750001, y: 1.25}
-    _shapePoint_Mid1_IK: {x: 1.250001, y: -29.15}
-    _shapePoint_Mid2_IK: {x: 16.25, y: -29.15}
-    _shapePoint_End1_IK: {x: 8.750001, y: 1.25}
-    _shapePoint_End2_IK: {x: 8.750001, y: 1.25}
+    _shapePoint_End: {x: 8.520615, y: -5.053033}
+    _shapePoint_Mid1: {x: 0.61494684, y: -29.487135}
+    _shapePoint_Mid2: {x: 17.1133, y: -29.25408}
+    _shapePoint_End1: {x: 8.520615, y: -5.053033}
+    _shapePoint_End2: {x: 8.520615, y: -5.053033}
+    _shapePoint_End_IK: {x: 8.520615, y: -5.053033}
+    _shapePoint_Mid1_IK: {x: 0.61494684, y: -29.487135}
+    _shapePoint_Mid2_IK: {x: 17.1133, y: -29.25408}
+    _shapePoint_End1_IK: {x: 8.520615, y: -5.053033}
+    _shapePoint_End2_IK: {x: 8.520615, y: -5.053033}
     _optionLocalMove: 0
     _optionIK: 1
     _isIKTail: 0
@@ -59334,16 +65014,16 @@ MonoBehaviour:
     _shapeLength: 61
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: -24.113232, y: -74.07125}
-    _shapePoint_Mid1: {x: -0.37495098, y: -30.779402}
-    _shapePoint_Mid2: {x: -14.47034, y: -25.649097}
-    _shapePoint_End1: {x: -24.113232, y: -74.07125}
-    _shapePoint_End2: {x: -24.113232, y: -74.07125}
-    _shapePoint_End_IK: {x: -24.113232, y: -74.07125}
-    _shapePoint_Mid1_IK: {x: -0.37495098, y: -30.779402}
-    _shapePoint_Mid2_IK: {x: -14.47034, y: -25.649097}
-    _shapePoint_End1_IK: {x: -24.113232, y: -74.07125}
-    _shapePoint_End2_IK: {x: -24.113232, y: -74.07125}
+    _shapePoint_End: {x: -32.67569, y: -59.46445}
+    _shapePoint_Mid1: {x: -3.3819304, y: -32.370914}
+    _shapePoint_Mid2: {x: -16.847826, y: -22.835733}
+    _shapePoint_End1: {x: -32.67569, y: -59.46445}
+    _shapePoint_End2: {x: -32.67569, y: -59.46445}
+    _shapePoint_End_IK: {x: -32.67569, y: -59.46445}
+    _shapePoint_Mid1_IK: {x: -3.3819304, y: -32.370914}
+    _shapePoint_Mid2_IK: {x: -16.847826, y: -22.835733}
+    _shapePoint_End1_IK: {x: -32.67569, y: -59.46445}
+    _shapePoint_End2_IK: {x: -32.67569, y: -59.46445}
     _optionLocalMove: 0
     _optionIK: 0
     _isIKTail: 0
@@ -59422,16 +65102,16 @@ MonoBehaviour:
     _shapeLength: 56
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: 27.393051, y: -71.52627}
-    _shapePoint_Mid1: {x: 25.414719, y: -26.145916}
-    _shapePoint_Mid2: {x: 10.742504, y: -29.264591}
-    _shapePoint_End1: {x: 27.393051, y: -71.52627}
-    _shapePoint_End2: {x: 27.393051, y: -71.52627}
-    _shapePoint_End_IK: {x: 27.393051, y: -71.52627}
-    _shapePoint_Mid1_IK: {x: 25.414719, y: -26.145916}
-    _shapePoint_Mid2_IK: {x: 10.742504, y: -29.264591}
-    _shapePoint_End1_IK: {x: 27.393051, y: -71.52627}
-    _shapePoint_End2_IK: {x: 27.393051, y: -71.52627}
+    _shapePoint_End: {x: 39.38206, y: -57.81273}
+    _shapePoint_Mid1: {x: 28.099304, y: -22.808908}
+    _shapePoint_Mid2: {x: 13.930705, y: -31.264725}
+    _shapePoint_End1: {x: 39.38206, y: -57.81273}
+    _shapePoint_End2: {x: 39.38206, y: -57.81273}
+    _shapePoint_End_IK: {x: 39.38206, y: -57.81273}
+    _shapePoint_Mid1_IK: {x: 28.099304, y: -22.808908}
+    _shapePoint_Mid2_IK: {x: 13.930705, y: -31.264725}
+    _shapePoint_End1_IK: {x: 39.38206, y: -57.81273}
+    _shapePoint_End2_IK: {x: 39.38206, y: -57.81273}
     _optionLocalMove: 0
     _optionIK: 0
     _isIKTail: 0
@@ -59510,16 +65190,16 @@ MonoBehaviour:
     _shapeLength: 70
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: 8.750001, y: 63.25}
-    _shapePoint_Mid1: {x: 1.250001, y: 7.25}
-    _shapePoint_Mid2: {x: 16.25, y: 7.25}
-    _shapePoint_End1: {x: 8.750001, y: 63.25}
-    _shapePoint_End2: {x: 8.750001, y: 63.25}
-    _shapePoint_End_IK: {x: 8.750001, y: 63.25}
-    _shapePoint_Mid1_IK: {x: 1.250001, y: 7.25}
-    _shapePoint_Mid2_IK: {x: 16.25, y: 7.25}
-    _shapePoint_End1_IK: {x: 8.750001, y: 63.25}
-    _shapePoint_End2_IK: {x: 8.750001, y: 63.25}
+    _shapePoint_End: {x: 19.998955, y: 43.37748}
+    _shapePoint_Mid1: {x: 2.8109858, y: 1.1912682}
+    _shapePoint_Mid2: {x: 18.966215, y: -2.1641083}
+    _shapePoint_End1: {x: 19.998955, y: 43.37748}
+    _shapePoint_End2: {x: 19.998955, y: 43.37748}
+    _shapePoint_End_IK: {x: 19.998955, y: 43.37748}
+    _shapePoint_Mid1_IK: {x: 2.8109858, y: 1.1912682}
+    _shapePoint_Mid2_IK: {x: 18.966215, y: -2.1641083}
+    _shapePoint_End1_IK: {x: 19.998955, y: 43.37748}
+    _shapePoint_End2_IK: {x: 19.998955, y: 43.37748}
     _optionLocalMove: 0
     _optionIK: 1
     _isIKTail: 1
@@ -59598,16 +65278,16 @@ MonoBehaviour:
     _shapeLength: 97
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: -74.425964, y: -77.900185}
-    _shapePoint_Mid1: {x: -40.837498, y: -7.545188}
-    _shapePoint_Mid2: {x: -54.932888, y: -2.4148848}
-    _shapePoint_End1: {x: -74.425964, y: -77.900185}
-    _shapePoint_End2: {x: -74.425964, y: -77.900185}
-    _shapePoint_End_IK: {x: -74.425964, y: -77.900185}
-    _shapePoint_Mid1_IK: {x: -40.837498, y: -7.545188}
-    _shapePoint_Mid2_IK: {x: -54.932888, y: -2.4148848}
-    _shapePoint_End1_IK: {x: -74.425964, y: -77.900185}
-    _shapePoint_End2_IK: {x: -74.425964, y: -77.900185}
+    _shapePoint_End: {x: -82.801, y: -50.601376}
+    _shapePoint_Mid1: {x: -43.13237, y: -2.1411967}
+    _shapePoint_Mid2: {x: -57.165714, y: 6.5372405}
+    _shapePoint_End1: {x: -82.801, y: -50.601376}
+    _shapePoint_End2: {x: -82.801, y: -50.601376}
+    _shapePoint_End_IK: {x: -82.801, y: -50.601376}
+    _shapePoint_Mid1_IK: {x: -43.13237, y: -2.1411967}
+    _shapePoint_Mid2_IK: {x: -57.165714, y: 6.5372405}
+    _shapePoint_End1_IK: {x: -82.801, y: -50.601376}
+    _shapePoint_End2_IK: {x: -82.801, y: -50.601376}
     _optionLocalMove: 0
     _optionIK: 0
     _isIKTail: 1
@@ -59686,16 +65366,16 @@ MonoBehaviour:
     _shapeLength: 24
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: -29.25, y: -21.500002}
-    _shapePoint_Mid1: {x: -10.049998, y: -36.5}
-    _shapePoint_Mid2: {x: -10.05, y: -6.5}
-    _shapePoint_End1: {x: -29.25, y: -21.500002}
-    _shapePoint_End2: {x: -29.25, y: -21.500002}
-    _shapePoint_End_IK: {x: -29.25, y: -21.500002}
-    _shapePoint_Mid1_IK: {x: -10.049998, y: -36.5}
-    _shapePoint_Mid2_IK: {x: -10.05, y: -6.5}
-    _shapePoint_End1_IK: {x: -29.25, y: -21.500002}
-    _shapePoint_End2_IK: {x: -29.25, y: -21.500002}
+    _shapePoint_End: {x: -25.799221, y: -22.55905}
+    _shapePoint_Mid1: {x: -11.238232, y: -39.76827}
+    _shapePoint_Mid2: {x: -9.674709, y: -6.805328}
+    _shapePoint_End1: {x: -25.799221, y: -22.55905}
+    _shapePoint_End2: {x: -25.799221, y: -22.55905}
+    _shapePoint_End_IK: {x: -25.799221, y: -22.55905}
+    _shapePoint_Mid1_IK: {x: -11.238232, y: -39.76827}
+    _shapePoint_Mid2_IK: {x: -9.674709, y: -6.805328}
+    _shapePoint_End1_IK: {x: -25.799221, y: -22.55905}
+    _shapePoint_End2_IK: {x: -25.799221, y: -22.55905}
     _optionLocalMove: 0
     _optionIK: 0
     _isIKTail: 0
@@ -59774,16 +65454,16 @@ MonoBehaviour:
     _shapeLength: 12
     _shapeTaper: 100
     _shapeHelper: 0
-    _shapePoint_End: {x: 30, y: -21.5}
-    _shapePoint_Mid1: {x: 20.400002, y: -6.5}
-    _shapePoint_Mid2: {x: 20.4, y: -36.5}
-    _shapePoint_End1: {x: 30, y: -21.5}
-    _shapePoint_End2: {x: 30, y: -21.5}
-    _shapePoint_End_IK: {x: 30, y: -21.5}
-    _shapePoint_Mid1_IK: {x: 20.400002, y: -6.5}
-    _shapePoint_Mid2_IK: {x: 20.4, y: -36.5}
-    _shapePoint_End1_IK: {x: 30, y: -21.5}
-    _shapePoint_End2_IK: {x: 30, y: -21.5}
+    _shapePoint_End: {x: 28.524208, y: -22.38198}
+    _shapePoint_Mid1: {x: 19.619184, y: -6.5095863}
+    _shapePoint_Mid2: {x: 22.113161, y: -39.41521}
+    _shapePoint_End1: {x: 28.524208, y: -22.38198}
+    _shapePoint_End2: {x: 28.524208, y: -22.38198}
+    _shapePoint_End_IK: {x: 28.524208, y: -22.38198}
+    _shapePoint_Mid1_IK: {x: 19.619184, y: -6.5095863}
+    _shapePoint_Mid2_IK: {x: 22.113161, y: -39.41521}
+    _shapePoint_End1_IK: {x: 28.524208, y: -22.38198}
+    _shapePoint_End2_IK: {x: 28.524208, y: -22.38198}
     _optionLocalMove: 0
     _optionIK: 0
     _isIKTail: 0
