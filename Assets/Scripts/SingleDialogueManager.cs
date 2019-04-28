@@ -129,6 +129,15 @@ public class SingleDialogueManager : MonoBehaviour
 		if (!Selecting && Input.anyKeyDown)
 		{
 			StartCoroutine(AddBalloon());
-		}
-	}
+        }
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadScene("DialogueSelect");
+            }
+        }
+
+    }
 }
