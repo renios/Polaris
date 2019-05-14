@@ -8,7 +8,8 @@ namespace Prologue
     public class ImageFadeIn : MonoBehaviour
     {
         public Sprite[] images = new Sprite[17];
-        public float animTime = 2f;
+        //time for fade 
+        public float fadeTime;
         private Image TargetImage;
         //for fade in
         private float start_in = 0f;
@@ -28,6 +29,12 @@ namespace Prologue
             TargetImage = GetComponent<Image>();
         }
 
+        public bool isFinished()
+        {
+            Debug.Log(count);
+            return (count == 17) ? true : false;
+        }
+
         public void StartFadeIn()
         {
             StartCoroutine("FadeIn");
@@ -41,7 +48,7 @@ namespace Prologue
             color.a = Mathf.Lerp(start_in, end_in, time);
             while (color.a < 1f)
             {
-                time += Time.deltaTime / animTime;
+                time += Time.deltaTime / fadeTime;
                 color.a = Mathf.Lerp(start_in, end_in, time);
                 TargetImage.color = color;
                 yield return null;
@@ -67,7 +74,7 @@ namespace Prologue
             color.a = Mathf.Lerp(start_out, end_out, time);
             while (color.a > 0f)
             {
-                time += Time.deltaTime / animTime;
+                time += Time.deltaTime / fadeTime;
                 color.a = Mathf.Lerp(start_out, end_out, time);
                 TargetImage.color = color;
                 yield return null;

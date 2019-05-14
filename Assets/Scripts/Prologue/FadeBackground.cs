@@ -7,7 +7,6 @@ namespace Prologue
 {
     public class FadeBackground : MonoBehaviour
     {
-
         private Image Renderer;
         private Image img;
 
