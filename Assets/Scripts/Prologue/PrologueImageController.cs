@@ -13,8 +13,8 @@ namespace Prologue
         public float waitTime;
         //빈종이 대기 시간
         public float emptyTime;
-        //이미지 페이드에 걸리는 시간. Opening1 컴포넌트에서 수정 가능.
-        float fadeTime;
+        //이미지 페이드에 걸리는 시간. Opening1 오브젝트에서 수정 가능.
+        public float fadeTime;
         float totalTime;
 
         private void Awake()
@@ -23,6 +23,7 @@ namespace Prologue
             bg = GameObject.Find("Image").GetComponent<FadeBackground>();
             fadeTime = controller.fadeTime;
         }
+
         private void Start()
         {
             Transition();

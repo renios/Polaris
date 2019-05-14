@@ -7,7 +7,8 @@ namespace Prologue
 {
     public class BalloonController : MonoBehaviour
     {
-        public float animTime = 2f;
+        ImageFadeIn fadeController;
+        PrologueImageController imageController;
         private Image TargetImage;
         //for fade in
         private float start_in = 0f;
@@ -15,27 +16,48 @@ namespace Prologue
         //for fade out
         private float start_out = 1f;
         private float end_out = 0f;
-        
-        private float time = 0f;
 
-        public bool finished;
+        private float fadeTime;
+        private float waitTime;
+        private float emptyTime;
+
+        private float time = 0f;
+        private int pos = 0;
+        
+        private Text TargetText;
+
+        private int textNum = 0;
 
         private void Awake()
         {
-            finished = false;
+            fadeController = GameObject.Find("Opening1").GetComponent<ImageFadeIn>();
+            imageController = GameObject.Find("Prologue Controller").GetComponent<PrologueImageController>();
             TargetImage = GetComponent<Image>();
+            fadeTime = fadeController.fadeTime;
+            waitTime = imageController.waitTime;
+            emptyTime = imageController.emptyTime;
         }
 
         private void Start()
         {
-            StartFadeIn(); StartSetPos();
-            Invoke("StartFadeOut", 8.0f);
-            Invoke("StartFadeIn", 25.0f);
-            Invoke("StartFadeOut", 33.0f);
-            Invoke("StartFadeIn", 35.5f);
-            Invoke("StartFadeOut", 43.5f);
-            Invoke("StartFadeIn", 46.0f);
-            Invoke("StartFadeOut", 58.0f);
+            StartFadeIn(); 
+            float time = 0.0f;
+            time += 2 * (fadeTime + waitTime);
+            Invoke("StartFadeOut", time);
+            time = time + 2 * emptyTime + 3 * waitTime + 5 * fadeTime;
+            Invoke("StartSetPos", time);
+            Invoke("StartFadeIn", time);
+            time += 2 * (fadeTime + waitTime);
+            Invoke("StartFadeOut", time);
+            time += (fadeTime + emptyTime);
+            Invoke("StartFadeIn", time);
+            time += 2 * (fadeTime + waitTime);
+            Invoke("StartFadeOut", time);
+            time += (fadeTime + emptyTime);
+            Invoke("StartSetPos", time);
+            Invoke("StartFadeIn", time);
+            time += 3 * (fadeTime + waitTime);
+            Invoke("StartFadeOut", time);
         }
 
         public void StartFadeIn()
@@ -45,18 +67,30 @@ namespace Prologue
 
         IEnumerator FadeIn()
         {
-            finished = false;
+            if (textNum == 0)
+                TargetText = GameObject.Find("Text1").GetComponent<Text>();
+            else if (textNum == 1)
+                TargetText = GameObject.Find("Text2").GetComponent<Text>();
+            else if (textNum == 2)
+                TargetText = GameObject.Find("Text3").GetComponent<Text>();
+            else
+                TargetText = GameObject.Find("Text4").GetComponent<Text>();
+
             Color color = TargetImage.color;
+            Color textColor = TargetText.color;
+
             time = 0f;
             color.a = Mathf.Lerp(start_in, end_in, time);
             while (color.a < 1f)
             {
-                time += Time.deltaTime / animTime;
+                time += Time.deltaTime / fadeTime;
                 color.a = Mathf.Lerp(start_in, end_in, time);
+                textColor.a = Mathf.Lerp(start_in, end_in, time);
                 TargetImage.color = color;
+                TargetText.color = textColor;
                 yield return null;
             }
-            finished = true;
+            textNum++;
         }
 
         public void StartFadeOut()
@@ -66,31 +100,34 @@ namespace Prologue
 
         IEnumerator FadeOut()
         {
-            finished = false;
             Color color = TargetImage.color;
+            Color textColor = TargetText.color;
             time = 0f;
             color.a = Mathf.Lerp(start_out, end_out, time);
+            textColor.a = Mathf.Lerp(start_out, end_out, time);
             while (color.a > 0f)
             {
-                time += Time.deltaTime / animTime;
+                time += Time.deltaTime / fadeTime;
                 color.a = Mathf.Lerp(start_out, end_out, time);
+                textColor.a = Mathf.Lerp(start_out, end_out, time);
                 TargetImage.color = color;
+                TargetText.color = textColor;
                 yield return null;
             }
-            finished = true;
         }
 
         public void StartSetPos()
         {
-            StartCoroutine("SetPos");
+            if (pos == 0)
+            {
+                transform.localPosition = new Vector3(0, 610, 0);
+                pos++;
+            }
+            else if (pos == 1)
+            {
+                transform.localPosition = new Vector3(0, 690, 0);
+            }
         }
-
-        IEnumerator SetPos()
-        {
-            yield return new WaitForSeconds(24.5f);
-            transform.localPosition = new Vector3(0, 610, 0);
-            yield return new WaitForSeconds(21.0f);
-            transform.localPosition = new Vector3(0, 690, 0);
-        }
+        
     }
 }

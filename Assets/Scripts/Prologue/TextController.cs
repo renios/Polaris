@@ -7,7 +7,7 @@ namespace Prologue
 {
     public class TextController : MonoBehaviour
     {
-        public float animTime = 2f;
+        ImageFadeIn fadeController;
         public float FadeInTime;
         public float FadeOutTime;
 
@@ -20,13 +20,12 @@ namespace Prologue
         private float end_out = 0f;
 
         private float time = 0f;
-
-        public bool finished;
+        float fadeTime;
 
         private void Awake()
         {
-            finished = false;
             TargetText = GetComponent<Text>();
+            fadeController = GameObject.Find("Opening1").GetComponent<ImageFadeIn>();
         }
 
         private void Start()
@@ -42,18 +41,17 @@ namespace Prologue
 
         IEnumerator FadeIn()
         {
-            finished = false;
+         
             Color color = TargetText.color;
             time = 0f;
             color.a = Mathf.Lerp(start_in, end_in, time);
             while (color.a < 1f)
             {
-                time += Time.deltaTime / animTime;
+                time += Time.deltaTime / fadeTime;
                 color.a = Mathf.Lerp(start_in, end_in, time);
                 TargetText.color = color;
                 yield return null;
             }
-            finished = true;
         }
 
         public void StartFadeOut()
@@ -63,18 +61,16 @@ namespace Prologue
 
         IEnumerator FadeOut()
         {
-            finished = false;
             Color color = TargetText.color;
             time = 0f;
             color.a = Mathf.Lerp(start_out, end_out, time);
             while (color.a > 0f)
             {
-                time += Time.deltaTime / animTime;
+                time += Time.deltaTime / fadeTime;
                 color.a = Mathf.Lerp(start_out, end_out, time);
                 TargetText.color = color;
                 yield return null;
             }
-            finished = true;
         }
     }
 }

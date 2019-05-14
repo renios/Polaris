@@ -54,7 +54,7 @@ namespace Prologue
                 yield return null;
             }
             finished = true;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.0f);
             color.a = 0.0f;
             TargetImage.color = color;
             if(count<17) gameObject.GetComponent<Image>().sprite = images[count];

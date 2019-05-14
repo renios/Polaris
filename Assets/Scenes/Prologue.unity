@@ -123,7 +123,6 @@ GameObject:
   - component: {fileID: 60067755}
   - component: {fileID: 60067757}
   - component: {fileID: 60067756}
-  - component: {fileID: 60067758}
   m_Layer: 5
   m_Name: Text3
   m_TagString: Untagged
@@ -188,21 +187,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 60067754}
---- !u!114 &60067758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 60067754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2889cb4778044f146afee3204aa503f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animTime: 2
-  FadeInTime: 35.5
-  FadeOutTime: 43.5
-  finished: 0
 --- !u!1 &72239498
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +323,6 @@ GameObject:
   - component: {fileID: 380032943}
   - component: {fileID: 380032945}
   - component: {fileID: 380032944}
-  - component: {fileID: 380032946}
   m_Layer: 5
   m_Name: Text2
   m_TagString: Untagged
@@ -404,21 +387,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 380032942}
---- !u!114 &380032946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 380032942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2889cb4778044f146afee3204aa503f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animTime: 2
-  FadeInTime: 25
-  FadeOutTime: 33
-  finished: 0
 --- !u!1 &547934578
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,8 +709,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8322403b14b37c46804d4e4b908c7eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 1
+  waitTime: 2
   emptyTime: 0.5
+  fadeTime: 0
 --- !u!1 &1150775955
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,7 +810,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b5f6c4a6b4cbc9843bc3ffc33c48c254, type: 3}
   - {fileID: 21300000, guid: 9ed7516e9c79ac042aa6b82a8a1db48c, type: 3}
   - {fileID: 21300000, guid: ec4a46d712c573744903ba3a83744cc2, type: 3}
-  fadeTime: 0.5
+  fadeTime: 2
   finished: 0
 --- !u!1 &1173390607
 GameObject:
@@ -928,7 +897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1390236183
 RectTransform:
   m_ObjectHideFlags: 0
@@ -995,8 +964,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e8afe594ce79d418246f4f57e89433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animTime: 2
-  finished: 0
 --- !u!1 &1442233844
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,7 +1042,6 @@ GameObject:
   - component: {fileID: 1470173734}
   - component: {fileID: 1470173736}
   - component: {fileID: 1470173735}
-  - component: {fileID: 1470173737}
   m_Layer: 5
   m_Name: Text1
   m_TagString: Untagged
@@ -1141,21 +1107,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1470173733}
---- !u!114 &1470173737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1470173733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2889cb4778044f146afee3204aa503f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animTime: 2
-  FadeInTime: 0
-  FadeOutTime: 8
-  finished: 0
 --- !u!1 &1562081296
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,7 +1492,6 @@ GameObject:
   - component: {fileID: 1955339239}
   - component: {fileID: 1955339241}
   - component: {fileID: 1955339240}
-  - component: {fileID: 1955339242}
   m_Layer: 5
   m_Name: Text4
   m_TagString: Untagged
@@ -1607,18 +1557,3 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1955339238}
---- !u!114 &1955339242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1955339238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2889cb4778044f146afee3204aa503f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animTime: 2
-  FadeInTime: 46
-  FadeOutTime: 58
-  finished: 0
