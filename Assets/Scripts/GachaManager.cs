@@ -89,7 +89,7 @@ public class GachaManager : MonoBehaviour {
                 {
                     //mos = (Input.mousePosition / 100f) + new Vector3(-5.4f, -9.6f, 0f);
                     mos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) * (1 / 0.522f);
-                    if (Vector3.Distance(mos, new Vector3(3.5f, -1.3f, 0)) <= 1.3f)
+                    if (mos.y > -1.44f || Vector3.Distance(mos, new Vector3(3.5f, -1.3f, 0)) <= 1.3f)
                     {
                         if (Variables.isFirst)
                         {
