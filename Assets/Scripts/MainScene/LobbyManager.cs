@@ -20,11 +20,13 @@ public class LobbyManager : MonoBehaviour
     {
         sdchara = GameObject.Find("Characters").gameObject; 
         popup = GameObject.Find("Setting").transform.Find("Setting Panel").gameObject;
+        /*
         //다락방 이동 시.
         if (Variables.CameraMove == true)
         {
             Camera.main.transform.position = new Vector3(0, 5.0119f, -10);
         }
+        */
         ShowCharacter();
     }
 
@@ -49,11 +51,11 @@ public class LobbyManager : MonoBehaviour
                         float PositionX = Random.Range(-0.9f, 0.9f);
                         float PositionY;
                         int floor = Random.Range(0, 3);
-                        if (floor == 0) PositionY = -3.25f;
-                        else if (floor == 1) PositionY = -1.5f;
-                        else PositionY = PositionY = -0.15f;
+                        if (floor == 0) PositionY = -2.0f;
+                        else if (floor == 1) PositionY = -0.2f;
+                        else PositionY = PositionY = 1.35f;
                         chr.transform.localPosition = new Vector3(PositionX, PositionY, PositionZ);
-                        PositionZ += 0.1f;
+                        PositionZ -= 0.1f;
                     }
                 }
             }
@@ -118,6 +120,8 @@ public class LobbyManager : MonoBehaviour
             }
         }
 
+        /*
+
         if (SwipeManager.Instance.IsSwiping(SwipeManager.SwipeDirection.Down))
         {
             if(!popup.activeSelf)
@@ -128,6 +132,9 @@ public class LobbyManager : MonoBehaviour
             if(!popup.activeSelf)
                 Camera.main.transform.DOMove(new Vector3(0, -5.0119f, -10), 0.75f);
         }
+
+        */
+
         //TODO : 씬 바꾸는 임시 코드 개선
         if (Input.GetKeyDown(KeyCode.Escape))
         {
