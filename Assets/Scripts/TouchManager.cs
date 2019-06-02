@@ -5,7 +5,6 @@ using System.Linq;
 using UnityEngine;
 
 public class TouchManager : MonoBehaviour {
-    
     GameObject Scope = null;
 
     private float skyRadius = 4.6f;
@@ -17,6 +16,8 @@ public class TouchManager : MonoBehaviour {
     private int divideCount = 10; // divideCount만큼의 동심원 둘레에 ray를 쏩니다.
 
     public static bool moveAble = true;
+    private Vector2 startScopePos;
+    private Vector2 startMousePos;
     // private string[] charList = new string[] { "acher", "catseye", "melik", "pluto", "polaris", "sirius", "thuban", "vega", "rescha", "sualocin", "rigeleuse" }; // 캐릭터 추가하면 별자리는 자동추가됩니다.
     
     Dictionary<string, float> Constellation = new Dictionary<string, float>();
@@ -123,8 +124,12 @@ public class TouchManager : MonoBehaviour {
 
         // Click for Test
         Vector3 centerT = new Vector3(0f, 3.78f, -1f);
-
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButtonDown(0))
+        {
+            startMousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 9f)) * (1 / 0.522f);
+            startScopePos = Scope.transform.localPosition;
+        }
+        else if(Input.GetMouseButton(0))
         {
             //Vector3 mos = (Input.mousePosition / 100f) + new Vector3(-5.4f, -9.6f, -1f);
             Vector3 mos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 9f)) * (1 / 0.522f);
@@ -138,7 +143,9 @@ public class TouchManager : MonoBehaviour {
                 }
                 else
                 {
-                    Scope.transform.localPosition = mos;
+                    Vector3 v = (Vector2)mos - startMousePos + startScopePos;
+                    v.y = 9f * (1f / 0.522f);
+                    Scope.transform.localPosition = v;
                 }
             }
             Variables.scopePos = Scope.transform.localPosition;
