@@ -143,9 +143,9 @@ public class TouchManager : MonoBehaviour {
                 }
                 else
                 {
-                    Vector3 v = (Vector2)mos - startMousePos + startScopePos;
-                    v.y = 9f * (1f / 0.522f);
-                    Scope.transform.localPosition = v;
+                    Vector2 v = (Vector2)mos - startMousePos + startScopePos;
+                    //v.y = 9f * (1f / 0.522f);
+                    Scope.transform.localPosition = new Vector3(v.x, v.y, -1);
                 }
             }
             Variables.scopePos = Scope.transform.localPosition;
