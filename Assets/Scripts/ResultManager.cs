@@ -39,7 +39,7 @@ public class ResultManager : MonoBehaviour {
 	void FixedUpdate () {
 		if(isEnd)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 isEnd = false;
                 TouchManager.moveAble = true;
@@ -99,7 +99,7 @@ public class ResultManager : MonoBehaviour {
         }
         else
         {
-            if(Input.GetMouseButton(0))
+            if(Input.GetMouseButtonDown(0))
             {
                 if(favorityUp.gameObject.activeSelf )
                 {
