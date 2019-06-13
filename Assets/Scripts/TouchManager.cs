@@ -16,8 +16,8 @@ public class TouchManager : MonoBehaviour {
     private int divideCount = 10; // divideCount만큼의 동심원 둘레에 ray를 쏩니다.
 
     public static bool moveAble = true;
-    private Vector2 startScopePos;
-    private Vector2 startMousePos;
+    private Vector3 startScopePos;
+    private Vector3 startMousePos;
     // private string[] charList = new string[] { "acher", "catseye", "melik", "pluto", "polaris", "sirius", "thuban", "vega", "rescha", "sualocin", "rigeleuse" }; // 캐릭터 추가하면 별자리는 자동추가됩니다.
     
     Dictionary<string, float> Constellation = new Dictionary<string, float>();
@@ -32,8 +32,10 @@ public class TouchManager : MonoBehaviour {
         Scope = GameObject.Find("Scope");
         Scope.transform.localPosition = Variables.scopePos;
         
+        touchOn = false;
+
         characterAdd();
-        shotRay();
+        ShotRay();
     }
 	
     void characterAdd()
@@ -90,39 +92,9 @@ public class TouchManager : MonoBehaviour {
             Variables.Constels.Add(newConstel.InternalName, newConstel);
         }
     }
-
+    /*
     public void ScopeMove()
     {
-        Vector2 center = new Vector2(0f, 3.78f);
-        
-        touchOn = false;
-        //if (Input.touchCount > 0)
-        //{
-        //    for (int i = 0; i < Input.touchCount; i++)
-        //    {
-        //        tempTouchs = Input.GetTouch(i);
-        //        if (tempTouchs.phase == TouchPhase.Began || tempTouchs.phase == TouchPhase.Moved)
-        //        {
-        //            if(Vector3.Distance(tempTouchs.position, center) < skyRadius)
-        //            {
-        //                if (Vector3.Distance(tempTouchs.position, center) >= touchBound)
-        //                {
-        //                    Scope.transform.position = center + touchBound * ((tempTouchs.position - center / Vector3.Distance(tempTouchs.position, center)));
-        //                }
-        //                else
-        //                {
-        //                    Scope.transform.position = tempTouchs.position;
-        //                }
-        //            }
-
-        //            touchOn = true;
-        //            shotRay();
-        //            break;
-        //        }
-        //    }
-        //}
-
-        // Click for Test
         Vector3 centerT = new Vector3(0f, 3.78f, -1f);
         if(Input.GetMouseButtonDown(0))
         {
@@ -152,8 +124,60 @@ public class TouchManager : MonoBehaviour {
             shotRay();
         }
     }
+    */
+    public void ScopeMove()
+    {
+        Vector3 center = new Vector3(-0.1f * 0.522f, 3.76f * 0.522f, -1);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-    public void shotRay()
+        if (Input.GetMouseButton(0)) {
+            if (!touchOn) { 
+                startMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                startScopePos = Scope.transform.position;
+                if (Vector2.Distance(startMousePos, center) < skyRadius * 0.522f) {
+                    touchOn = true;
+                }
+            }
+        }
+        else {
+            if (touchOn) {
+                if (Vector2.Distance(mousePos, startMousePos) < 0.01f){
+                    if (Vector2.Distance(mousePos, center) > touchBound * 0.522f) {
+                        Vector2 delta = mousePos - center;
+                        startMousePos = center + (Vector3)(delta.normalized * touchBound * 0.522f);
+                    }
+                    startMousePos.z = -1;
+                    Scope.transform.position = startMousePos;
+                }
+                touchOn = false;
+            }
+        }
+        
+        if (touchOn) {
+            var scopePos = startScopePos + (mousePos - startMousePos);
+            if (Vector2.Distance(scopePos, center) > touchBound * 0.522f) {
+                Vector2 delta = scopePos - center;
+                var newScopePos = center + (Vector3)(delta.normalized * touchBound * 0.522f);
+                //startMousePos += scopePos - newScopePos;
+                scopePos = newScopePos;
+            }
+            scopePos.z = -1f;
+            Scope.transform.position = scopePos;
+        }
+
+        ShotRay();
+    }
+    /*
+    void DebugVector(Vector2 v, string name = null) {
+
+        Debug.Log(name + " " + v.x + ", " + v.y);
+    }
+    void DebugVector(Vector3 v, string name = null) {
+        DebugVector((Vector2)v, name);
+    }
+    */
+
+    public void ShotRay()
     {
         charProb.Clear();
         Constellation = Constellation.ToDictionary(p => p.Key, p => 0f);
