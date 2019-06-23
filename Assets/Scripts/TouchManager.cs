@@ -140,7 +140,7 @@ public class TouchManager : MonoBehaviour {
             }
         }
         else {
-            if (touchOn) {
+            if (touchOn) {/*
                 if (Vector2.Distance(mousePos, startMousePos) < 0.01f){
                     if (Vector2.Distance(mousePos, center) > touchBound * 0.522f) {
                         Vector2 delta = mousePos - center;
@@ -148,7 +148,7 @@ public class TouchManager : MonoBehaviour {
                     }
                     startMousePos.z = -1;
                     Scope.transform.position = startMousePos;
-                }
+                }*/
                 touchOn = false;
             }
         }
