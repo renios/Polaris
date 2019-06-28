@@ -12,18 +12,13 @@ public class MainMenu : MonoBehaviour
     }
     public void PushButton2()
     {
-        Variables.CameraMove = true;
-        SceneChanger.Instance.ChangeScene("MainScene");
+        SceneChanger.Instance.ChangeScene("GachaScene");
     }
     public void PushButton3()
     {
-        SceneChanger.Instance.ChangeScene("GachaScene");
-    }
-    public void PushButton4()
-    {
         SceneChanger.Instance.ChangeScene("AlbumScene");
     }
-    public void PushButton5()
+    public void PushButton4()
     {
 
     }
