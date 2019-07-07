@@ -27,11 +27,23 @@ namespace Dialogue
             var character = Variables.Characters[Variables.DialogCharIndex].InternalName;
             var card = Variables.Characters[Variables.DialogCharIndex].Cards[Variables.DialogCardIndex].InternalSubname;
             var dialogPath = "Characters/" + character + "/" + card + "/dialog_" + Variables.DialogChapterIndex;
+            var imagePath = "Characters/" + character + "/" + card + "/image_dialogue";
+            var dummyDialogPath = "Characters/acher/" + card + "/dialog_" + Variables.DialogChapterIndex; // Dummy 용도로 Acher 사용
+            var dummyImagePath = "Characters/Acher/" + card + "/image_dialogue"; // Dummy 용도로 Acher 사용
+
             Debug.Log(character + " " + Variables.DialogChapterIndex);
 
             var jsonAsset = Resources.Load<TextAsset>(dialogPath);
+            if (jsonAsset == null)
+                jsonAsset = Resources.Load<TextAsset>(dummyDialogPath);
+
             CurrentDialogue = JsonMapper.ToObject<DialogueData>(jsonAsset.text);
             CharName.text = Variables.Characters[Variables.DialogCharIndex].Name;
+            
+            var imageSprite = Resources.Load<Sprite>(imagePath);
+            if (imageSprite == null)
+                imageSprite = Resources.Load<Sprite>(dummyImagePath);
+
             StandingImage.sprite = Resources.Load<Sprite>("Characters/" + character + "/" + card + "/image_dialogue");
             // TODO: 배경 이미지 로드...? 아니면 배경 이미지 바꾸는 커맨드 JSON에 넣을 것인지...?
         }
