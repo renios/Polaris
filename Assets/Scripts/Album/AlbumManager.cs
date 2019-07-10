@@ -16,7 +16,7 @@ namespace Album
         public HorizontalScrollSnap AlbumSnap;
         public Text PageNumber;
 
-        private readonly int maxPageElement = 6;
+        private readonly int maxPageElement = 9;
 
         private void Awake()
         {
@@ -60,7 +60,7 @@ namespace Album
                 {
                     if (iCnt % maxPageElement == 0)
                     {
-                        var newObj = Instantiate(Resources.Load<GameObject>("Prefabs/Clean Album Page"));
+                        var newObj = Instantiate(Resources.Load<GameObject>("Prefabs/AlbumGridPage"));
                         curPage = newObj.GetComponent<AlbumPage>();
                         newObj.transform.SetParent(PageParent.transform);
                         newObj.transform.localScale = Vector3.one;

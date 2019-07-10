@@ -18,9 +18,13 @@ namespace Dialogue
     public struct DialogueContent
     {
         public int Type;
+        public string Talker;
         public string DialogText;
         public string[] JuncTexts;
         public int[] Directions;
         public int NextPhase;
+        public string ImageKey;
+        public string BgmKey;
+        public string EffectKey;
     }
 }

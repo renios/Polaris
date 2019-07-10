@@ -7,7 +7,6 @@ namespace Album
 {
     public class AlbumPageElement : MonoBehaviour
     {
-        public Text Name, Subname, ConstelName;
         public Image Thumbnail;
         public Slider RarityBar, FavorityGage;
         public Text FavorLevel, FavorityLeft;
@@ -31,16 +30,7 @@ namespace Album
 
         public void Set(CharacterData data)
         {
-            Name.text = data.Name;
-            Subname.text = data.Cards[CardIndex].Subname;
             Thumbnail.sprite = Resources.Load<Sprite>("Characters/" + data.InternalName + "/" + data.Cards[CardIndex].InternalSubname + "/image_albumbutton");
-            ConstelName.text = "";
-            for (int i = 0; i < data.ConstelKey.Length; i++)
-            {
-                if (i > 0)
-                    ConstelName.text += ", ";
-                ConstelName.text += Variables.Constels[data.ConstelKey[i]].Name;
-            }
             RarityBar.value = data.Cards[CardIndex].Rarity;
 
             int curProgress, nextRequired;
