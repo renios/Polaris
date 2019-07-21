@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 
+// Last edited 2019-07-21 by thiEFcat
 [System.Serializable]
 public class SaveData
 {
     public int CharVersion;
     public List<CharacterData> Characters;
+    public int Starlight;
 
     public void Load()
     {
@@ -44,6 +46,8 @@ public class SaveData
             foreach (var data in Characters)
             { Variables.Characters.Add(data.CharNumber, data); }
         }
+
+        Variables.Starlight = Starlight;
     }
 
     public void Create()
@@ -56,6 +60,9 @@ public class SaveData
         foreach (var data in charGroup.Characters)
             Variables.Characters.Add(data.CharNumber, data);
 
+        Starlight = 0;
+        Variables.Starlight = Starlight;
+
         Variables.isFirst = true;
     }
 
@@ -66,5 +73,7 @@ public class SaveData
         Characters = new List<CharacterData>();
         foreach (var item in Variables.Characters)
             Characters.Add(item.Value);
+
+        Starlight = Variables.Starlight;
     }
 }

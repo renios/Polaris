@@ -14,6 +14,7 @@ public static class Variables
     public static Dictionary<string, ConstelData> Constels;     // 별자리에 대한 데이터
     public static Dictionary<int, CharacterData> Characters;    // 캐릭터에 대한 데이터
     public static int CharacterVersion;
+    public static int Starlight;
 
     public static readonly int[] FavorityThreshold = { 2, 3, 4, 5, 6 };     // 캐릭터 호감도 문턱에 관한 배열 30 70 120 180 250
 
