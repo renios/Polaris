@@ -50,7 +50,8 @@ namespace Dialogue
 
         private void Start()
         {
-            SoundManager.Play(SoundType.BgmMain);
+            SoundManager.Play(CurrentDialogue.Dialogues[CurrentPhase].Contents[CurrentIndex].BgmKey);
+
             if (Variables.Characters[Variables.DialogCharIndex].Cards[Variables.DialogCardIndex].StoryProgress <= Variables.DialogChapterIndex)
             {
                 Variables.Characters[Variables.DialogCharIndex].Cards[Variables.DialogCardIndex].StoryProgress = Variables.DialogChapterIndex + 1;

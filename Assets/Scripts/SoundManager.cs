@@ -47,12 +47,18 @@ public class SoundManager : MonoBehaviour {
 			string name = clip.name;
 			soundDictionary.Add(name, clip);
 		}
-	}
-	public static void Play(SoundType type){
-		Debug.Log("Play : " + type.ToString());
-		Instance.PlaySound(type);
-	}
-	public static void FadeMusicVolume(float targetVolume, float duration)
+    }
+    public static void Play(SoundType type)
+    {
+        Debug.Log("Play : " + type.ToString());
+        Instance.PlaySound(type);
+    }
+    public static void Play(string BgmKey)
+    {
+        Debug.Log("Play : " + BgmKey);
+        Instance.PlaySound(BgmKey);
+    }
+    public static void FadeMusicVolume(float targetVolume, float duration)
 	{
 		Instance.musicPlayer.DOFade(targetVolume, duration);
 	}
@@ -78,5 +84,35 @@ public class SoundManager : MonoBehaviour {
 		else {
 			Debug.LogWarning("NullSoundTypeException : There is no given type on SoundType enum! (" + type.ToString() + ")");
 		}
-	}
+    }
+    public void PlaySound(string BgmKey)
+    {
+        AudioClip clip;
+        if (soundDictionary.TryGetValue(BgmKey, out clip))
+        {
+            if (clip == null)
+            {
+                Debug.LogWarning("NullSoundTypeException : There is no given type of sound file! (" + BgmKey+ ")");
+                return;
+            }
+            if (BgmKey.Contains("Bgm"))
+            {
+                if (musicPlayer.clip != clip)
+                {
+                    musicPlayer.clip = clip;
+                    musicPlayer.volume = 1;
+                    musicPlayer.Play();
+                }
+            }
+            else
+            {
+                soundPlayer.clip = clip;
+                soundPlayer.Play();
+            }
+        }
+        else
+        {
+            Debug.LogWarning("NullSoundTypeException : There is no given type on SoundType enum! (" + BgmKey + ")");
+        }
+    }
 }
