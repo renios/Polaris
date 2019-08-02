@@ -66,7 +66,7 @@ public class TouchManager : MonoBehaviour {
         if(moveAble)
             ScopeMove();
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && Variables.isTutorialFinished)
         {
             SceneChanger.Instance.ChangeScene("MainScene");
         }
@@ -314,7 +314,7 @@ public class TouchManager : MonoBehaviour {
     //TODO : 씬 바꾸는 임시 코드 개선
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && Variables.isTutorialFinished)
         {
             SceneChanger.Instance.ChangeScene("MainScene");
         }

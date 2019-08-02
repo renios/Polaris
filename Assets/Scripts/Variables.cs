@@ -19,6 +19,7 @@ public static class Variables
     public static readonly int[] FavorityThreshold = { 2, 3, 4, 5, 6 };     // 캐릭터 호감도 문턱에 관한 배열 30 70 120 180 250
 
     public static bool CameraMove;
+    public static bool isTutorialFinished = false;
 
     public static int btnState = 0; // 0: 관측시작, 1: 관측중, 2: 관측완료, 3: 가챠결과 확인
     public static bool isFirst = true;

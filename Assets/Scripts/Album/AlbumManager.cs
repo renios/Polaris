@@ -89,7 +89,7 @@ namespace Album
         void Update()
         {
             //TODO : 씬 바꾸는 임시 코드 개선
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && Variables.isTutorialFinished)
             {
                 SceneChanger.Instance.ChangeScene("MainScene");
             }
