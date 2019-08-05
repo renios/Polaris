@@ -133,7 +133,7 @@ public class SingleDialogueManager : MonoBehaviour
 
         if (Application.platform == RuntimePlatform.Android)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && Variables.HasSave)
             {
                 SceneManager.LoadScene("DialogueSelect");
             }

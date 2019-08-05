@@ -32,6 +32,7 @@ public class Title : MonoBehaviour {
         TitleText.color = new Color(1, 1, 1, 0);
         TitleSubText.color = new Color(1, 1, 1, 0);
         TouchText.color = new Color(1, 1, 1, 0);
+        Variables.isTutorialFinished = false;
 
         SoundManager.Play(SoundType.BgmTitle);
     }
@@ -104,6 +105,7 @@ public class Title : MonoBehaviour {
         {
             GameManager.Instance.LoadGame();
             SceneChanger.Instance.ChangeScene("MainScene");
+            Variables.isTutorialFinished = true;
         }
         else
         {
