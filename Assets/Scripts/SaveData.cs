@@ -30,7 +30,6 @@ public class SaveData
             {
                 if(Variables.Characters.ContainsKey(curData.CharNumber))
                 {
-                    Variables.Characters[curData.CharNumber].Observed = curData.Observed;
                     for (int i = 0; i < curData.Cards.Count; i++)
                     {
                         Variables.Characters[curData.CharNumber].Cards[i].Observed = curData.Cards[i].Observed;

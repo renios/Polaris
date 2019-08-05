@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 44799293}
   - component: {fileID: 44799292}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Polar Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -350,7 +350,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 44799293}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1458512465}
+        m_MethodName: JumpPageIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &44799293
@@ -506,7 +517,7 @@ GameObject:
   - component: {fileID: 52654376}
   - component: {fileID: 52654375}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: Summer Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -568,7 +579,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 52654376}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1458512465}
+        m_MethodName: JumpPageIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &52654376
@@ -899,6 +921,7 @@ GameObject:
   - component: {fileID: 76177868}
   - component: {fileID: 76177870}
   - component: {fileID: 76177869}
+  - component: {fileID: 76177871}
   m_Layer: 5
   m_Name: 'Constel Group: Autumn'
   m_TagString: Untagged
@@ -939,7 +962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -959,6 +982,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 76177867}
+--- !u!114 &76177871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 76177867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07e292b839e38c84ba5063c2a866380e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroupIndex: 3
+  PercentText: {fileID: 79700410}
+  GageSlider: {fileID: 1521043400}
+  GageText: {fileID: 836166272}
 --- !u!1 &77969925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1942,7 +1980,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -2146,7 +2184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4250,7 +4288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4598,7 +4636,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -4870,7 +4908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -7173,7 +7211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -7543,7 +7581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -11094,7 +11132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -11743,7 +11781,7 @@ GameObject:
   - component: {fileID: 1132973915}
   - component: {fileID: 1132973914}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Autumn Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11805,7 +11843,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1132973915}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1458512465}
+        m_MethodName: JumpPageIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1132973915
@@ -13546,6 +13595,7 @@ GameObject:
   - component: {fileID: 1341902224}
   - component: {fileID: 1341902226}
   - component: {fileID: 1341902225}
+  - component: {fileID: 1341902227}
   m_Layer: 5
   m_Name: 'Constel Group: Summer'
   m_TagString: Untagged
@@ -13586,7 +13636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -13606,6 +13656,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1341902223}
+--- !u!114 &1341902227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1341902223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07e292b839e38c84ba5063c2a866380e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroupIndex: 2
+  PercentText: {fileID: 805884969}
+  GageSlider: {fileID: 1675394283}
+  GageText: {fileID: 2112751751}
 --- !u!1 &1387423566
 GameObject:
   m_ObjectHideFlags: 0
@@ -13618,7 +13683,7 @@ GameObject:
   - component: {fileID: 1387423569}
   - component: {fileID: 1387423568}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Spring Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13680,7 +13745,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1387423569}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1458512465}
+        m_MethodName: JumpPageIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1387423569
@@ -14285,8 +14361,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PageParent: {fileID: 2048641540}
   CharPopup: {fileID: 1188340395}
+  AlbumGroupInfo:
+  - {fileID: 1653194668}
+  - {fileID: 2076321979}
+  - {fileID: 1341902223}
+  - {fileID: 76177867}
+  - {fileID: 1666256903}
   AlbumSnap: {fileID: 923748909}
   PageNumber: {fileID: 602106594}
+  GroupStartPage: 
 --- !u!4 &1458512466
 Transform:
   m_ObjectHideFlags: 0
@@ -14923,7 +15006,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -14940,7 +15023,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2024067699}
   m_FillRect: {fileID: 2024067698}
   m_HandleRect: {fileID: 0}
@@ -15635,7 +15718,7 @@ GameObject:
   - component: {fileID: 1568778518}
   - component: {fileID: 1568778517}
   m_Layer: 5
-  m_Name: Button (4)
+  m_Name: Winter Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15697,7 +15780,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1568778518}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1458512465}
+        m_MethodName: JumpPageIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1568778518
@@ -16649,6 +16743,7 @@ GameObject:
   - component: {fileID: 1653194669}
   - component: {fileID: 1653194671}
   - component: {fileID: 1653194670}
+  - component: {fileID: 1653194672}
   m_Layer: 5
   m_Name: 'Constel Group: Polar'
   m_TagString: Untagged
@@ -16689,7 +16784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -16709,6 +16804,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1653194668}
+--- !u!114 &1653194672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1653194668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07e292b839e38c84ba5063c2a866380e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroupIndex: 0
+  PercentText: {fileID: 1002532544}
+  GageSlider: {fileID: 2110177784}
+  GageText: {fileID: 577951913}
 --- !u!1 &1666256903
 GameObject:
   m_ObjectHideFlags: 0
@@ -16719,6 +16829,7 @@ GameObject:
   - component: {fileID: 1666256904}
   - component: {fileID: 1666256906}
   - component: {fileID: 1666256905}
+  - component: {fileID: 1666256907}
   m_Layer: 5
   m_Name: 'Constel Group: Winter'
   m_TagString: Untagged
@@ -16759,7 +16870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -16779,6 +16890,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1666256903}
+--- !u!114 &1666256907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1666256903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07e292b839e38c84ba5063c2a866380e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroupIndex: 4
+  PercentText: {fileID: 1156951101}
+  GageSlider: {fileID: 1760877583}
+  GageText: {fileID: 16130245}
 --- !u!1 &1673434569
 GameObject:
   m_ObjectHideFlags: 0
@@ -16911,7 +17037,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -16928,7 +17054,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 731845400}
   m_FillRect: {fileID: 731845399}
   m_HandleRect: {fileID: 0}
@@ -17007,7 +17133,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -17518,7 +17644,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -17535,7 +17661,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1546518634}
   m_FillRect: {fileID: 1546518633}
   m_HandleRect: {fileID: 0}
@@ -20424,6 +20550,7 @@ GameObject:
   - component: {fileID: 2076321980}
   - component: {fileID: 2076321982}
   - component: {fileID: 2076321981}
+  - component: {fileID: 2076321983}
   m_Layer: 5
   m_Name: 'Constel Group: Spring'
   m_TagString: Untagged
@@ -20464,7 +20591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -20484,6 +20611,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2076321979}
+--- !u!114 &2076321983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2076321979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07e292b839e38c84ba5063c2a866380e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroupIndex: 1
+  PercentText: {fileID: 162196479}
+  GageSlider: {fileID: 2094156653}
+  GageText: {fileID: 261896120}
 --- !u!1 &2076639542
 GameObject:
   m_ObjectHideFlags: 0
@@ -20748,7 +20890,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -20765,7 +20907,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 387732016}
   m_FillRect: {fileID: 387732015}
   m_HandleRect: {fileID: 0}
@@ -21361,7 +21503,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -21378,7 +21520,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 697166227}
   m_FillRect: {fileID: 697166226}
   m_HandleRect: {fileID: 0}

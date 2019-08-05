@@ -33,8 +33,12 @@ public class GameManager : MonoBehaviour
         Variables.Constels = new Dictionary<string, ConstelData>();
         foreach (JsonData data in constelGroup["constels"])
         {
-            var newConstel = new ConstelData((string)data["key"], (string)data["name"]);
-            Variables.Constels.Add(newConstel.InternalName, newConstel);
+            var index = (int)data["groupIndex"];
+            foreach(JsonData constel in data["groupItems"])
+            {
+                var newConstel = new ConstelData((string)constel["key"], (string)constel["name"], index);
+                Variables.Constels.Add(newConstel.InternalName, newConstel);
+            }
         }
     }
 

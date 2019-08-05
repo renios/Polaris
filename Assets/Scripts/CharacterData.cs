@@ -9,6 +9,7 @@ using UnityEngine;
 public class CharacterData
 {
     public int CharNumber;
+    public int ConstelGroupIndex;
     public string[] ConstelKey;
     public double[] ConstelWeight;
     public string Name;
@@ -17,13 +18,13 @@ public class CharacterData
     public string LYDistance;
     public string Description;
 
-    public bool Observed;
     public List<CardData> Cards;
 }
 
 public struct CharacterDataCore
 {
     public int CharNumber;
+    public int ConstelGroupIndex;
     public string[] ConstelKey;
     public double[] ConstelWeight;
     public string Name;
@@ -38,6 +39,7 @@ public struct CharacterDataCore
         var d = new CharacterData()
         {
             CharNumber = c.CharNumber,
+            ConstelGroupIndex = c.ConstelGroupIndex,
             ConstelKey = c.ConstelKey,
             ConstelWeight = c.ConstelWeight,
             Name = c.Name,
