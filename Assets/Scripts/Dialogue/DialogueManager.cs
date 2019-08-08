@@ -9,16 +9,13 @@ namespace Dialogue
     public class DialogueManager : MonoBehaviour
     {
         public static DialogueManager Instance { get; private set; }
+        public static string ImageRootPath { get; private set; }
 
-        public GameObject[] ObjectTemplate;
-        public RectTransform ObjectParent;
-        public Image StandingImage;
-        public Text CharName;
+        public DialogueDisplayer Displayer;
+        public DialogueInteractor Interactor;
+        public DialogueInput Receiver;
 
         public DialogueData CurrentDialogue;
-        public int CurrentPhase, CurrentIndex;
-
-        private bool isInSelectMode = false;
 
         private void Awake()
         {
@@ -28,8 +25,8 @@ namespace Dialogue
             var card = Variables.Characters[Variables.DialogCharIndex].Cards[Variables.DialogCardIndex].InternalSubname;
             var dialogPath = "Characters/" + character + "/" + card + "/dialog_" + Variables.DialogChapterIndex;
             var imagePath = "Characters/" + character + "/" + card + "/image_dialogue";
+            ImageRootPath = "Characters/" + character + "/" + card + "/DialogueImage/";
             var dummyDialogPath = "Characters/acher/" + card + "/dialog_" + Variables.DialogChapterIndex; // Dummy 용도로 Acher 사용
-            var dummyImagePath = "Characters/Acher/" + card + "/image_dialogue"; // Dummy 용도로 Acher 사용
 
             Debug.Log(character + " " + Variables.DialogChapterIndex);
 
@@ -38,95 +35,82 @@ namespace Dialogue
                 jsonAsset = Resources.Load<TextAsset>(dummyDialogPath);
 
             CurrentDialogue = JsonMapper.ToObject<DialogueData>(jsonAsset.text);
-            CharName.text = Variables.Characters[Variables.DialogCharIndex].Name;
-            
-            var imageSprite = Resources.Load<Sprite>(imagePath);
-            if (imageSprite == null)
-                imageSprite = Resources.Load<Sprite>(dummyImagePath);
-
-            StandingImage.sprite = Resources.Load<Sprite>("Characters/" + character + "/" + card + "/image_dialogue");
-            // TODO: 배경 이미지 로드...? 아니면 배경 이미지 바꾸는 커맨드 JSON에 넣을 것인지...?
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
-            SoundManager.Play(CurrentDialogue.Dialogues[CurrentPhase].Contents[CurrentIndex].BgmKey);
-
             if (Variables.Characters[Variables.DialogCharIndex].Cards[Variables.DialogCardIndex].StoryProgress <= Variables.DialogChapterIndex)
             {
                 Variables.Characters[Variables.DialogCharIndex].Cards[Variables.DialogCardIndex].StoryProgress = Variables.DialogChapterIndex + 1;
                 GameManager.Instance.SaveGame();
             }
-            ShowDialogue();
+
+            int finalPhase = 0;
+            yield return PlayDialogue(CurrentDialogue, r => finalPhase = r);
+            Debug.Log("Ended. Final phase: " + finalPhase);
+            SceneChanger.Instance.ChangeScene(Variables.DialogAfterScene);
         }
 
-        public void ShowDialogue()
+        public void Play(DialogueData data)
         {
-            if(!isInSelectMode)
+            int finalPhase;
+            StartCoroutine(PlayDialogue(data, r => finalPhase = r));
+        }
+
+        IEnumerator PlayDialogue(DialogueData data, System.Action<int> result)
+        {
+            Displayer.ClearAll();
+
+            int curPhase = 0;
+            for(int i = 0; i < data.Dialogues[curPhase].Contents.Length; i++)
             {
-                if(CurrentIndex >= CurrentDialogue.Dialogues[CurrentPhase].Contents.Length)
+                var dialog = data.Dialogues[curPhase].Contents[i];
+                switch(dialog.Type)
                 {
-                    SceneChanger.Instance.ChangeScene(Variables.DialogAfterScene);
-                    return;
-                }
-
-                var curDialogData = CurrentDialogue.Dialogues[CurrentPhase].Contents[CurrentIndex];
-
-                if(curDialogData.Type <= -1)
-                {
-                    if (curDialogData.NextPhase > 0)
-                    {
-                        CurrentPhase = curDialogData.NextPhase;
-                        CurrentIndex = 0;
-                        ShowDialogue();
-                    }
-                    else
-                        SceneChanger.Instance.ChangeScene(Variables.DialogAfterScene);
-                }
-                else
-                {
-                    var newObject = Instantiate(ObjectTemplate[curDialogData.Type]);
-                    var newDialogObj = newObject.GetComponentInChildren<DialogueObject>();
-
-                    newObject.SetActive(true);
-                    newDialogObj.Set(curDialogData);
-                    newObject.transform.SetParent(ObjectParent);
-                    newObject.transform.localScale = Vector3.one;
-                    CurrentIndex++;
-                    SoundManager.Play(SoundType.ClickDialogue);
-                    LayoutRebuilder.MarkLayoutForRebuild(newObject.transform as RectTransform);
-                    LayoutRebuilder.ForceRebuildLayoutImmediate(newObject.transform as RectTransform);
-
-                    if (curDialogData.Type == 2)
-                        isInSelectMode = true;
+                    case 0:
+                    case 1:
+                        yield return ShowText(dialog.Talker, dialog.DialogText);
+                        break;
+                    case 2:
+                        yield return ShowInteraction(dialog.JuncTexts, dialog.Directions);
+                        if (dialog.Directions[Interactor.Result] > -1)
+                        {
+                            curPhase = dialog.Directions[Interactor.Result];
+                            i = -1;
+                        }
+                        break;
+                    case 10:
+                        Displayer.DisplayForeImage(dialog.ImageKey);
+                        break;
+                    case 11:
+                        SoundManager.Play(dialog.BgmKey);
+                        break;
+                    case -1:
+                        if (dialog.NextPhase == -1)
+                            result(curPhase);
+                        else
+                        {
+                            curPhase = dialog.NextPhase;
+                            i = -1;
+                        }
+                        break;
+                    default:
+                        Debug.LogError("Oops, unknown type.");
+                        break;
                 }
             }
         }
 
-        public void ShowDialogue(DialogueContent content)
+        IEnumerator ShowText(string talker, string text)
         {
-            var newObject = Instantiate(ObjectTemplate[content.Type]);
-            var newDialogObj = newObject.GetComponentInChildren<DialogueObject>();
-
-            newObject.transform.SetParent(ObjectParent);
-            newObject.SetActive(true);
-            newDialogObj.Set(content);
-            newObject.transform.localScale = Vector3.one;
-            isInSelectMode = false;
-            LayoutRebuilder.MarkLayoutForRebuild(newObject.transform as RectTransform);
-            LayoutRebuilder.ForceRebuildLayoutImmediate(newObject.transform as RectTransform);
+            yield return Displayer.DisplayText(talker, text);
         }
 
-        public IEnumerator GetButtonInput(DialogueObject dialog, string text, int nextPhase)
+        IEnumerator ShowInteraction(string[] texts, int[] nexts)
         {
-            SoundManager.Play(SoundType.ClickNormal);
-            yield return dialog.Delete();
-            ShowDialogue(new DialogueContent() { Type = 1, DialogText = text });
-            if (nextPhase > -1)
-            {
-                CurrentPhase = nextPhase;
-                CurrentIndex = 0;
-            }
+            Interactor.gameObject.SetActive(true);
+            yield return Interactor.Show(texts, nexts);
+            Interactor.gameObject.SetActive(false);
         }
     }
 }
