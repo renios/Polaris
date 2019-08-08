@@ -33,6 +33,7 @@ public class LobbyManager : MonoBehaviour
     void ShowCharacter()
     {
         float PositionZ = 0f;
+        if (Variables.Characters == null) { Debug.Log("세이브 파일이 비정상적임"); return; }
         foreach (KeyValuePair<int, CharacterData> c in Variables.Characters)
         {
             var chrData = Variables.Characters[c.Key];
