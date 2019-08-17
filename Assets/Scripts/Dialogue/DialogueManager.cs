@@ -29,12 +29,15 @@ namespace Dialogue
             var dummyDialogPath = "Characters/acher/" + card + "/dialog_" + Variables.DialogChapterIndex; // Dummy 용도로 Acher 사용
 
             Debug.Log(character + " " + Variables.DialogChapterIndex);
+            try
+            {
+                var jsonAsset = Resources.Load<TextAsset>(dialogPath);
+                if (jsonAsset == null)
+                    jsonAsset = Resources.Load<TextAsset>(dummyDialogPath);
 
-            var jsonAsset = Resources.Load<TextAsset>(dialogPath);
-            if (jsonAsset == null)
-                jsonAsset = Resources.Load<TextAsset>(dummyDialogPath);
-
-            CurrentDialogue = JsonMapper.ToObject<DialogueData>(jsonAsset.text);
+                CurrentDialogue = JsonMapper.ToObject<DialogueData>(jsonAsset.text);
+            }
+            catch { CurrentDialogue = DialogueParser.ParseFromCSV(dialogPath); }
         }
 
         private IEnumerator Start()
@@ -61,10 +64,14 @@ namespace Dialogue
         {
             Displayer.ClearAll();
 
+            var dicPhase = new Dictionary<int, DialoguePhase>();
+            foreach(var phase in data.Dialogues)
+                dicPhase.Add(phase.Phase, phase);
+
             int curPhase = 0;
-            for(int i = 0; i < data.Dialogues[curPhase].Contents.Length; i++)
+            for(int i = 0; i < dicPhase[curPhase].Contents.Length; i++)
             {
-                var dialog = data.Dialogues[curPhase].Contents[i];
+                var dialog = dicPhase[curPhase].Contents[i];
                 switch(dialog.Type)
                 {
                     case 0:

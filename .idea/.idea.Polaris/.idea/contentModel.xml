@@ -3,22 +3,502 @@
   <component name="ContentModelStore">
     <e p="C:\Users\USER-PC\.Rider2017.3\system\resharper-host\local\Transient\ReSharperHost\v11\SolutionCaches\_Polaris.567692917.00" t="ExcludeRecursive" />
     <e p="C:\Users\USER-PC\Documents\Unity Projects\Polaris" t="IncludeRecursive">
-      <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
-      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
-      <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
-      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="AnyPortrait" t="Include">
+          <e p="Assets" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="Animation" t="Include">
+                <e p="apAnimCommonKeyframe.cs" t="Include" />
+                <e p="apAnimControlParamResult.cs" t="Include" />
+                <e p="apAnimCurve.cs" t="Include" />
+                <e p="apAnimCurveResult.cs" t="Include" />
+                <e p="apAnimCurveTable.cs" t="Include" />
+                <e p="apAnimEvent.cs" t="Include" />
+                <e p="apAnimKeyframe.cs" t="Include" />
+                <e p="apAnimMecanimData.cs" t="Include" />
+                <e p="apAnimTimeline.cs" t="Include" />
+                <e p="apAnimTimelineLayer.cs" t="Include" />
+              </e>
+              <e p="AnimationPlayer" t="Include">
+                <e p="apAnimPlayData.cs" t="Include" />
+                <e p="apAnimPlayManager.cs" t="Include" />
+                <e p="apAnimPlayMecanim.cs" t="Include" />
+                <e p="apAnimPlayQueue.cs" t="Include" />
+                <e p="apAnimPlayRequest.cs" t="Include" />
+                <e p="apAnimPlayUnit.cs" t="Include" />
+              </e>
+              <e p="apPortrait.cs" t="Include" />
+              <e p="BasicObjects" t="Include">
+                <e p="apAnimClip.cs" t="Include" />
+                <e p="apBone.cs" t="Include" />
+                <e p="apCache.cs" t="Include" />
+                <e p="apController.cs" t="Include" />
+                <e p="apControlParam.cs" t="Include" />
+                <e p="apDebugLog.cs" t="Include" />
+                <e p="apLinkedMatrix.cs" t="Include" />
+                <e p="apMaskMesh.cs" t="Include" />
+                <e p="apMesh.cs" t="Include" />
+                <e p="apMeshComponents.cs" t="Include" />
+                <e p="apMeshGroup.cs" t="Include" />
+                <e p="apRootUnit.cs" t="Include" />
+                <e p="apStackMatrix.cs" t="Include" />
+                <e p="apTextureData.cs" t="Include" />
+                <e p="apUtil.cs" t="Include" />
+                <e p="apVertex.cs" t="Include" />
+              </e>
+              <e p="BoneIK" t="Include">
+                <e p="apBoneIKChainSet.cs" t="Include" />
+                <e p="apBoneIKChainUnit.cs" t="Include" />
+                <e p="apBoneIKController.cs" t="Include" />
+              </e>
+              <e p="Force" t="Include">
+                <e p="apForceManager.cs" t="Include" />
+                <e p="apForceUnit.cs" t="Include" />
+                <e p="apPullTouch.cs" t="Include" />
+              </e>
+              <e p="Modifier" t="Include">
+                <e p="apModifierBase.cs" t="Include" />
+                <e p="apModifierStack.cs" t="Include" />
+                <e p="Override" t="Include">
+                  <e p="apModifier_AnimatedFFD.cs" t="Include" />
+                  <e p="apModifier_AnimatedMorph.cs" t="Include" />
+                  <e p="apModifier_AnimatedTF.cs" t="Include" />
+                  <e p="apModifier_FFD.cs" t="Include" />
+                  <e p="apModifier_Morph.cs" t="Include" />
+                  <e p="apModifier_Physic.cs" t="Include" />
+                  <e p="apModifier_Rigging.cs" t="Include" />
+                  <e p="apModifier_TF.cs" t="Include" />
+                  <e p="apModifier_Volume.cs" t="Include" />
+                </e>
+                <e p="ParamSet" t="Include">
+                  <e p="apModifiedBone.cs" t="Include" />
+                  <e p="apModifiedMesh.cs" t="Include" />
+                  <e p="apModifiedVertex.cs" t="Include" />
+                  <e p="apModifiedVertexRig.cs" t="Include" />
+                  <e p="apModifiedVertexWeight.cs" t="Include" />
+                  <e p="apModifierParamSet.cs" t="Include" />
+                  <e p="apModifierParamSetGroup.cs" t="Include" />
+                  <e p="apModifierParamSetGroupAnimPack.cs" t="Include" />
+                  <e p="apModifierParamSetGroupVertWeight.cs" t="Include" />
+                  <e p="PhysicsParam" t="Include">
+                    <e p="apPhysicsParam.cs" t="Include" />
+                  </e>
+                </e>
+              </e>
+              <e p="OptimizedObjects" t="Include">
+                <e p="apOptBatchedMaterial.cs" t="Include" />
+                <e p="apOptBone.cs" t="Include" />
+                <e p="apOptMesh.cs" t="Include" />
+                <e p="apOptNode.cs" t="Include" />
+                <e p="apOptRenderVertex.cs" t="Include" />
+                <e p="apOptRootUnit.cs" t="Include" />
+                <e p="apOptSharedMaterial.cs" t="Include" />
+                <e p="apOptSortedRenderBuffer.cs" t="Include" />
+                <e p="apOptTextureData.cs" t="Include" />
+                <e p="apOptTransform.cs" t="Include" />
+                <e p="BoneIK" t="Include">
+                  <e p="apOptBoneIKChainSet.cs" t="Include" />
+                  <e p="apOptBoneIKChainUnit.cs" t="Include" />
+                  <e p="apOptBoneIKController.cs" t="Include" />
+                </e>
+                <e p="Modifier" t="Include">
+                  <e p="Calculate" t="Include">
+                    <e p="apOptCalculatedMesh.cs" t="Include" />
+                    <e p="apOptCalculatedResultParam.cs" t="Include" />
+                    <e p="apOptCalculatedResultParamSubList.cs" t="Include" />
+                    <e p="apOptCalculatedResultStack.cs" t="Include" />
+                    <e p="MetaData" t="Include">
+                      <e p="apOptCalculatedLerpArea.cs" t="Include" />
+                      <e p="apOptCalculatedLerpPoint.cs" t="Include" />
+                    </e>
+                    <e p="VertexRequest" t="Include">
+                      <e p="apOptVertexRequest.cs" t="Include" />
+                    </e>
+                  </e>
+                  <e p="Modified" t="Include">
+                    <e p="apOptModifiedBone.cs" t="Include" />
+                    <e p="apOptModifiedMesh.cs" t="Include" />
+                    <e p="apOptModifiedVertex.cs" t="Include" />
+                    <e p="apOptModifiedVertexRig.cs" t="Include" />
+                    <e p="apOptModifiedVertexWeight.cs" t="Include" />
+                    <e p="PhysicsParam" t="Include">
+                      <e p="apOptPhysicsParam.cs" t="Include" />
+                    </e>
+                  </e>
+                  <e p="Param" t="Include">
+                    <e p="apOptParamSet.cs" t="Include" />
+                    <e p="apOptParamSetGroup.cs" t="Include" />
+                    <e p="apOptParamSetGroupVertWeight.cs" t="Include" />
+                  </e>
+                  <e p="Stack" t="Include">
+                    <e p="apOptModifierMainStack.cs" t="Include" />
+                    <e p="apOptModifierSubStack.cs" t="Include" />
+                    <e p="Units" t="Include">
+                      <e p="apOptModifierUnitBase.cs" t="Include" />
+                    </e>
+                  </e>
+                </e>
+              </e>
+              <e p="PSDSet" t="Include">
+                <e p="apPSDSet.cs" t="Include" />
+                <e p="apPSDSetLayer.cs" t="Include" />
+              </e>
+              <e p="RenderCalculate" t="Include">
+                <e p="apCalculatedLog.cs" t="Include" />
+                <e p="apCalculatedMesh.cs" t="Include" />
+                <e p="apCalculatedMeshGroup.cs" t="Include" />
+                <e p="apCalculatedRenderUnit.cs" t="Include" />
+                <e p="apCalculatedResultParam.cs" t="Include" />
+                <e p="apCalculatedResultParamSubList.cs" t="Include" />
+                <e p="apCalculatedResultStack.cs" t="Include" />
+                <e p="apRenderUnit.cs" t="Include" />
+                <e p="apRenderVertex.cs" t="Include" />
+                <e p="apSortedRenderBuffer.cs" t="Include" />
+                <e p="MetaData" t="Include">
+                  <e p="apCalculatedLerpArea.cs" t="Include" />
+                  <e p="apCalculatedLerpPoint.cs" t="Include" />
+                </e>
+              </e>
+              <e p="TransformData" t="Include">
+                <e p="apTransform_Mesh.cs" t="Include" />
+                <e p="apTransform_MeshGroup.cs" t="Include" />
+                <e p="apTransform_Vertex.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="apShader_AlphaMask.shader" t="Include" />
+              <e p="apShader_ClippedWithMask.shader" t="Include" />
+              <e p="apShader_ClippedWithMask_Additive.shader" t="Include" />
+              <e p="apShader_ClippedWithMask_Multiplicative.shader" t="Include" />
+              <e p="apShader_ClippedWithMask_SoftAdditive.shader" t="Include" />
+              <e p="apShader_Transparent.shader" t="Include" />
+              <e p="apShader_Transparent_Additive.shader" t="Include" />
+              <e p="apShader_Transparent_Multiplicative.shader" t="Include" />
+              <e p="apShader_Transparent_SoftAdditive.shader" t="Include" />
+              <e p="Linear" t="Include">
+                <e p="apShader_L_ClippedWithMask.shader" t="Include" />
+                <e p="apShader_L_ClippedWithMask_Additive.shader" t="Include" />
+                <e p="apShader_L_ClippedWithMask_Multiplicative.shader" t="Include" />
+                <e p="apShader_L_ClippedWithMask_SoftAdditive.shader" t="Include" />
+                <e p="apShader_L_Transparent.shader" t="Include" />
+                <e p="apShader_L_Transparent_Additive.shader" t="Include" />
+                <e p="apShader_L_Transparent_Multiplicative.shader" t="Include" />
+                <e p="apShader_L_Transparent_SoftAdditive.shader" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Demo" t="Include">
+            <e p="Girl" t="Include">
+              <e p="apTutorial_PortraitController.cs" t="Include" />
+            </e>
+            <e p="PirateGame" t="Include">
+              <e p="apTutorial_PirateGame_Actor.cs" t="Include" />
+              <e p="apTutorial_PirateGame_Bomb.cs" t="Include" />
+              <e p="apTutorial_PirateGame_Bullet.cs" t="Include" />
+              <e p="apTutorial_PirateGame_Enemy.cs" t="Include" />
+              <e p="apTutorial_PirateGame_Manager.cs" t="Include" />
+            </e>
+            <e p="PirateGame3D" t="Include">
+              <e p="apTutorial_PirateGame3D_Actor.cs" t="Include" />
+              <e p="apTutorial_PirateGame3D_BillboardMesh.cs" t="Include" />
+              <e p="apTutorial_PirateGame3D_Bomb.cs" t="Include" />
+              <e p="apTutorial_PirateGame3D_Bullet.cs" t="Include" />
+              <e p="apTutorial_PirateGame3D_Enemy.cs" t="Include" />
+              <e p="apTutorial_PirateGame3D_Manager.cs" t="Include" />
+              <e p="Materials" t="Include">
+                <e p="apShader_DemoToolLit.shader" t="Include" />
+              </e>
+            </e>
+            <e p="Runner" t="Include">
+              <e p="apTutorial_RunnerCharacter.cs" t="Include" />
+              <e p="apTutorial_RunnerGame.cs" t="Include" />
+              <e p="apTutorial_RunnerMapTile.cs" t="Include" />
+              <e p="apTutorial_RunnerObject.cs" t="Include" />
+            </e>
+            <e p="SDCharacter" t="Include">
+              <e p="apTutorial_SDController.cs" t="Include" />
+            </e>
+            <e p="Slime" t="Include">
+              <e p="apTutorial_SlimeController.cs" t="Include" />
+            </e>
+            <e p="SwordGirl" t="Include">
+              <e p="apTutorial_SwordGirlController.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Editor" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="apEditor.cs" t="Include" />
+              <e p="apEditor_Localization.cs" t="Include" />
+              <e p="apEditor_Localization_UIWord.cs" t="Include" />
+              <e p="apEditorTroubleShooting.cs" t="Include" />
+              <e p="Dialog" t="Include">
+                <e p="apDialog_AddAnimTimeline.cs" t="Include" />
+                <e p="apDialog_AddChildTransform.cs" t="Include" />
+                <e p="apDialog_AddModifier.cs" t="Include" />
+                <e p="apDialog_AnimationEvents.cs" t="Include" />
+                <e p="apDialog_Bake.cs" t="Include" />
+                <e p="apDialog_CaptureScreen.cs" t="Include" />
+                <e p="apDialog_ControlParamPreset.cs" t="Include" />
+                <e p="apDialog_ExtraOption.cs" t="Include" />
+                <e p="apDialog_FFDSize.cs" t="Include" />
+                <e p="apDialog_ModifierLockSetting.cs" t="Include" />
+                <e p="apDialog_NewPortrait.cs" t="Include" />
+                <e p="apDialog_OnionSetting.cs" t="Include" />
+                <e p="apDialog_PhysicsPreset.cs" t="Include" />
+                <e p="apDialog_PortraitSetting.cs" t="Include" />
+                <e p="apDialog_RetargetBase.cs" t="Include" />
+                <e p="apDialog_RetargetPose.cs" t="Include" />
+                <e p="apDialog_RetargetSinglePoseExport.cs" t="Include" />
+                <e p="apDialog_RetargetSinglePoseImport.cs" t="Include" />
+                <e p="apDialog_SelectControlParam.cs" t="Include" />
+                <e p="apDialog_SelectLinkedBone.cs" t="Include" />
+                <e p="apDialog_SelectLinkedMeshGroup.cs" t="Include" />
+                <e p="apDialog_SelectTextureAsset.cs" t="Include" />
+                <e p="apDialog_SelectTextureData.cs" t="Include" />
+                <e p="apDialog_StartPage.cs" t="Include" />
+                <e p="apDialog_UpdateLog.cs" t="Include" />
+              </e>
+              <e p="Hierarchy" t="Include">
+                <e p="apEditorAnimClipTargetHierarchy.cs" t="Include" />
+                <e p="apEditorHierarchy.cs" t="Include" />
+                <e p="apEditorHierarchyUnit.cs" t="Include" />
+                <e p="apEditorMeshGroupHierarchy.cs" t="Include" />
+              </e>
+              <e p="Inspector" t="Include">
+                <e p="apInspector_Portrait.cs" t="Include" />
+              </e>
+              <e p="MeshGenerator" t="Include">
+                <e p="apMeshGenerator.cs" t="Include" />
+                <e p="apMeshGenMapper.cs" t="Include" />
+                <e p="apMirrorVertexSet.cs" t="Include" />
+              </e>
+              <e p="PSDLoadWizard" t="Include">
+                <e p="apPSDBakeData.cs" t="Include" />
+                <e p="apPSDDialog.cs" t="Include" />
+                <e p="apPSDGL.cs" t="Include" />
+                <e p="apPSDLayerBakeParam.cs" t="Include" />
+                <e p="apPSDLayerData.cs" t="Include" />
+                <e p="apPSDLoader.cs" t="Include" />
+                <e p="apPSDMouse.cs" t="Include" />
+                <e p="apPSDProcess.cs" t="Include" />
+                <e p="apPSDReimportDialog.cs" t="Include" />
+              </e>
+              <e p="SnapShot" t="Include">
+                <e p="apControlParamPreset.cs" t="Include" />
+                <e p="apPhysicsPreset.cs" t="Include" />
+                <e p="apSnapShot_Keyframe.cs" t="Include" />
+                <e p="apSnapShot_Mesh.cs" t="Include" />
+                <e p="apSnapShot_MeshGroup.cs" t="Include" />
+                <e p="apSnapShot_ModifiedBone.cs" t="Include" />
+                <e p="apSnapShot_ModifiedMesh.cs" t="Include" />
+                <e p="apSnapShot_Portrait.cs" t="Include" />
+                <e p="apSnapShot_VertRig.cs" t="Include" />
+                <e p="apSnapShotBase.cs" t="Include" />
+                <e p="apSnapShotManager.cs" t="Include" />
+                <e p="apSnapShotStackUnit.cs" t="Include" />
+                <e p="Undo" t="Include">
+                  <e p="apUndoGroupData.cs" t="Include" />
+                  <e p="apUndoManager.cs" t="Include" />
+                  <e p="apUndoUnit_MeshVertex.cs" t="Include" />
+                  <e p="apUndoUnitBase.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Subtool" t="Include">
+                <e p="apBakeLinkParam.cs" t="Include" />
+                <e p="apBakeMaterialParam.cs" t="Include" />
+                <e p="apEditorController.cs" t="Include" />
+                <e p="apExporter.cs" t="Include" />
+                <e p="apGizmoController.cs" t="Include" />
+                <e p="apGizmoController_Animation.cs" t="Include" />
+                <e p="apGizmoController_Bone.cs" t="Include" />
+                <e p="apGizmoController_Mesh.cs" t="Include" />
+                <e p="apGizmoController_MeshAutoGen.cs" t="Include" />
+                <e p="apGizmoController_MeshTRS.cs" t="Include" />
+                <e p="apGizmoController_ModTransform.cs" t="Include" />
+                <e p="apGizmoController_ModVert.cs" t="Include" />
+                <e p="apGizmoController_Physics.cs" t="Include" />
+                <e p="apGizmoController_Rigging.cs" t="Include" />
+                <e p="apGizmos.cs" t="Include" />
+                <e p="apMouse.cs" t="Include" />
+                <e p="apMouseSet.cs" t="Include" />
+                <e p="apScreenCaptureRequest.cs" t="Include" />
+                <e p="apSelection.cs" t="Include" />
+                <e p="apSequenceExporter.cs" t="Include" />
+                <e p="apShaderGenerator.cs" t="Include" />
+                <e p="apVertexController.cs" t="Include" />
+                <e p="CShader" t="Include">
+                  <e p="apCShader_Blur.compute" t="Include" />
+                  <e p="apCShader_MergeChannels.compute" t="Include" />
+                  <e p="apCShader_ResizeTexture.compute" t="Include" />
+                </e>
+              </e>
+              <e p="TimelineGUI" t="Include">
+                <e p="apTimelineLayerInfo.cs" t="Include" />
+              </e>
+              <e p="Util" t="Include">
+                <e p="apAnimCurveGL.cs" t="Include" />
+                <e p="apControllerGL.cs" t="Include" />
+                <e p="apEditorImageSet.cs" t="Include" />
+                <e p="apEditorUtil.cs" t="Include" />
+                <e p="apGL.cs" t="Include" />
+                <e p="apHotKey.cs" t="Include" />
+                <e p="apKeyframeCurveGL.cs" t="Include" />
+                <e p="apLangPack.txt" t="Include" />
+                <e p="apLangPack_UI.txt" t="Include" />
+                <e p="apLocalization.cs" t="Include" />
+                <e p="apTimelineGL.cs" t="Include" />
+                <e p="apTimer.cs" t="Include" />
+                <e p="apUpdateLog.txt" t="Include" />
+                <e p="AutoSave" t="Include">
+                  <e p="apBackup.cs" t="Include" />
+                  <e p="apBackupTable.cs" t="Include" />
+                  <e p="apBackupTimer.cs" t="Include" />
+                  <e p="apBackupUnit.cs" t="Include" />
+                </e>
+                <e p="Onion" t="Include">
+                  <e p="apOnion.cs" t="Include" />
+                </e>
+                <e p="Retarget" t="Include">
+                  <e p="apRetarget.cs" t="Include" />
+                  <e p="apRetargetAnimEvent.cs" t="Include" />
+                  <e p="apRetargetAnimFile.cs" t="Include" />
+                  <e p="apRetargetBaseFile.cs" t="Include" />
+                  <e p="apRetargetBonePose.cs" t="Include" />
+                  <e p="apRetargetBonePoseUnit.cs" t="Include" />
+                  <e p="apRetargetBoneUnit.cs" t="Include" />
+                  <e p="apRetargetControlParam.cs" t="Include" />
+                  <e p="apRetargetKeyframeUnit.cs" t="Include" />
+                  <e p="apRetargetMapping.cs" t="Include" />
+                  <e p="apRetargetPoseListFile.cs" t="Include" />
+                  <e p="apRetargetSubUnit.cs" t="Include" />
+                  <e p="apRetargetTimelineLayerUnit.cs" t="Include" />
+                  <e p="apRetargetTimelineUnit.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="apShader_Alpha2White.shader" t="Include" />
+              <e p="apShader_ClippedTexture2X.shader" t="Include" />
+              <e p="apShader_ClippedTexture2X_Additive.shader" t="Include" />
+              <e p="apShader_ClippedTexture2X_Multiplicative.shader" t="Include" />
+              <e p="apShader_ClippedTexture2X_SoftAdditive.shader" t="Include" />
+              <e p="apShader_ClippedTexture2X_ToneColor.shader" t="Include" />
+              <e p="apShader_Color.shader" t="Include" />
+              <e p="apShader_GUITexture.shader" t="Include" />
+              <e p="apShader_MaskOnly.shader" t="Include" />
+              <e p="apShader_Texture2X.shader" t="Include" />
+              <e p="apShader_Texture2X_Additive.shader" t="Include" />
+              <e p="apShader_Texture2X_Multiplicative.shader" t="Include" />
+              <e p="apShader_Texture2X_SoftAdditive.shader" t="Include" />
+              <e p="apShader_Texture2X_ToneColor.shader" t="Include" />
+              <e p="apShader_Texture2X_VColorAdd.shader" t="Include" />
+              <e p="apShader_Texture2X_VColorAdd_Additive.shader" t="Include" />
+              <e p="apShader_Texture2X_VColorAdd_Multiplicative.shader" t="Include" />
+              <e p="apShader_Texture2X_VColorAdd_SoftAdditive.shader" t="Include" />
+              <e p="Linear" t="Include">
+                <e p="apShader_L_ClippedTexture2X.shader" t="Include" />
+                <e p="apShader_L_ClippedTexture2X_Additive.shader" t="Include" />
+                <e p="apShader_L_ClippedTexture2X_Multiplicative.shader" t="Include" />
+                <e p="apShader_L_ClippedTexture2X_SoftAdditive.shader" t="Include" />
+                <e p="apShader_L_ClippedTexture2X_ToneColor.shader" t="Include" />
+                <e p="apShader_L_Color.shader" t="Include" />
+                <e p="apShader_L_GUITexture.shader" t="Include" />
+                <e p="apShader_L_MaskOnly.shader" t="Include" />
+                <e p="apShader_L_Texture2X.shader" t="Include" />
+                <e p="apShader_L_Texture2X_Additive.shader" t="Include" />
+                <e p="apShader_L_Texture2X_Multiplicative.shader" t="Include" />
+                <e p="apShader_L_Texture2X_SoftAdditive.shader" t="Include" />
+                <e p="apShader_L_Texture2X_ToneColor.shader" t="Include" />
+                <e p="apShader_L_Texture2X_VColorAdd.shader" t="Include" />
+                <e p="apShader_L_Texture2X_VColorAdd_Additive.shader" t="Include" />
+                <e p="apShader_L_Texture2X_VColorAdd_Multiplicative.shader" t="Include" />
+                <e p="apShader_L_Texture2X_VColorAdd_SoftAdditive.shader" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="license.txt" t="Include" />
+          <e p="readme.txt" t="Include" />
+        </e>
         <e p="Demigiant" t="Include">
           <e p="DOTween" t="Include">
+            <e p="DOTween.XML" t="Include" />
             <e p="DOTween43.xml" t="Include" />
             <e p="DOTween46.xml" t="Include" />
             <e p="DOTween50.xml" t="Include" />
+            <e p="Editor" t="Include">
+              <e p="DOTweenEditor.XML" t="Include" />
+            </e>
             <e p="Examples" t="Include">
               <e p="Basics.cs" t="Include" />
               <e p="Sequences.cs" t="Include" />
             </e>
             <e p="readme.txt" t="Include" />
           </e>
+        </e>
+        <e p="JMO Assets" t="Include">
+          <e p="!JMO Assets Readme.txt" t="Include" />
+          <e p="Cartoon FX" t="Include">
+            <e p="CartoonFX Free.txt" t="Include" />
+            <e p="Demo" t="Include">
+              <e p="Assets" t="Include">
+                <e p="CFX_AutoStopLoopedEffect.cs" t="Include" />
+                <e p="CFX_Demo_New.cs" t="Include" />
+                <e p="CFX_Demo_RandomDir.cs" t="Include" />
+                <e p="CFX_Demo_RandomDirectionTranslate.cs" t="Include" />
+                <e p="CFX_Demo_RotateCamera.cs" t="Include" />
+                <e p="CFX_Demo_Translate.cs" t="Include" />
+              </e>
+            </e>
+            <e p="Scripts" t="Include">
+              <e p="CFX_AutoDestructShuriken.cs" t="Include" />
+              <e p="CFX_AutoRotate.cs" t="Include" />
+              <e p="CFX_LightFlicker.cs" t="Include" />
+              <e p="CFX_LightIntensityFade.cs" t="Include" />
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="CFX3 Multiply Color.shader" t="Include" />
+              <e p="CFXM_MobileParticleAdd_Alpha8.shader" t="Include" />
+            </e>
+          </e>
+          <e p="Cartoon FX Easy Editor" t="Include">
+            <e p="CartoonFX Easy Editor Readme.txt" t="Include" />
+            <e p="Editor" t="Include">
+              <e p="CFXEasyEditor.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Particlecollection_Free samples" t="Include">
+          <e p="Plugins" t="Include">
+            <e p="Effect" t="Include">
+              <e p="Editor" t="Include">
+                <e p="EffectControllerInspector.cs" t="Include" />
+                <e p="EffectToolBar.cs" t="Include" />
+                <e p="RenderEffectInspector.cs" t="Include" />
+                <e p="ShaderCustomEditor" t="Include">
+                  <e p="ShaderMaterialsEditor.cs" t="Include" />
+                </e>
+                <e p="XUIUtils.cs" t="Include" />
+              </e>
+              <e p="Script" t="Include">
+                <e p="CameraTarget.cs" t="Include" />
+                <e p="EffectController.cs" t="Include" />
+                <e p="EffectDemo.cs" t="Include" />
+                <e p="EffectShaderPropertyStr.cs" t="Include" />
+                <e p="RenderEffect.cs" t="Include" />
+                <e p="TransformExtension.cs" t="Include" />
+              </e>
+              <e p="Shader" t="Include">
+                <e p="effect_distortion_mask.shader" t="Include" />
+                <e p="ParticleAddEffect.shader" t="Include" />
+                <e p="ParticleAddSoftEffect.shader" t="Include" />
+                <e p="ParticleBlendEffect.shader" t="Include" />
+                <e p="ParticlePremultiplyBlend.shader" t="Include" />
+                <e p="Toon Additive.shader" t="Include" />
+                <e p="Toon Blended Premmultiply.shader" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="READ ME.txt" t="Include" />
         </e>
         <e p="Plugins" t="Include">
           <e p="DarkTonic" t="Include">
@@ -306,12 +786,71 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="Album" t="Include">
+            <e p="AlbumCharInfo.cs" t="Include" />
+            <e p="AlbumGroupChecker.cs" t="Include" />
+            <e p="AlbumManager.cs" t="Include" />
+            <e p="AlbumPage.cs" t="Include" />
+            <e p="AlbumPageElement.cs" t="Include" />
+            <e p="AlbumStoryElement.cs" t="Include" />
+          </e>
           <e p="Balloon.cs" t="Include" />
+          <e p="ButtonClickSound.cs" t="Include" />
+          <e p="CardData.cs" t="Include" />
+          <e p="CharacterData.cs" t="Include" />
+          <e p="ClickableObject.cs" t="Include" />
+          <e p="ConstelData.cs" t="Include" />
+          <e p="Dialogue" t="Include">
+            <e p="DialogueData.cs" t="Include" />
+            <e p="DialogueDisplayer.cs" t="Include" />
+            <e p="DialogueInput.cs" t="Include" />
+            <e p="DialogueInteractButton.cs" t="Include" />
+            <e p="DialogueInteractor.cs" t="Include" />
+            <e p="DialogueManager.cs" t="Include" />
+            <e p="DialogueParser.cs" t="Include" />
+            <e p="RichTextHelper.cs" t="Include" />
+          </e>
+          <e p="DialogueSelectButtonManager.cs" t="Include" />
           <e p="DialogueSelector.cs" t="Include" />
           <e p="DialogueText.cs" t="Include" />
           <e p="DoTweenHelper.cs" t="Include" />
           <e p="Enums.cs" t="Include" />
+          <e p="GachaManager.cs" t="Include" />
+          <e p="GameManager.cs" t="Include" />
+          <e p="LoadingBar.cs" t="Include" />
+          <e p="MainMenu.cs" t="Include" />
+          <e p="MainMenuPannel.cs" t="Include" />
+          <e p="MainScene" t="Include">
+            <e p="CameraSetting.cs" t="Include" />
+            <e p="CharacterObject.cs" t="Include" />
+            <e p="GemManager.cs" t="Include" />
+            <e p="LobbyManager.cs" t="Include" />
+            <e p="Move.cs" t="Include" />
+            <e p="SettingPopup.cs" t="Include" />
+            <e p="SwipeManager.cs" t="Include" />
+          </e>
+          <e p="MouseEffectManager.cs" t="Include" />
+          <e p="NormalBalloon.cs" t="Include" />
+          <e p="Opening.cs" t="Include" />
+          <e p="Prologue" t="Include">
+            <e p="BalloonController.cs" t="Include" />
+            <e p="FadeBackground.cs" t="Include" />
+            <e p="ImageFadeIn.cs" t="Include" />
+            <e p="PrologueImageController.cs" t="Include" />
+            <e p="TextController.cs" t="Include" />
+          </e>
+          <e p="ResultManager.cs" t="Include" />
+          <e p="SaveData.cs" t="Include" />
+          <e p="SceneChanger.cs" t="Include" />
+          <e p="SelectBalloon.cs" t="Include" />
+          <e p="SelectedDialogueData.cs" t="Include" />
           <e p="SingleDialogueManager.cs" t="Include" />
+          <e p="SoundManager.cs" t="Include" />
+          <e p="TitleScene" t="Include">
+            <e p="Title.cs" t="Include" />
+          </e>
+          <e p="TouchManager.cs" t="Include" />
+          <e p="Variables.cs" t="Include" />
         </e>
         <e p="SuperScrollView" t="Include">
           <e p="Demo" t="Include">
@@ -377,11 +916,239 @@
             <e p="Version 2.2.txt" t="Include" />
           </e>
         </e>
+        <e p="UETools" t="Include">
+          <e p="Magic_Particle_Effects" t="Include">
+            <e p="readme.txt" t="Include" />
+            <e p="Scripts" t="Include">
+              <e p="CameraMovement.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="unity-ui-extensions" t="Include">
+          <e p="Editor" t="Include">
+            <e p="AccordionElementEditor.cs" t="Include" />
+            <e p="BezierLineRendererEditor.cs" t="Include" />
+            <e p="BoxSliderEditor.cs" t="Include" />
+            <e p="CanvasGroupActivator.cs" t="Include" />
+            <e p="CUIBezierCurveEditor.cs" t="Include" />
+            <e p="CUIGraphicEditor.cs" t="Include" />
+            <e p="CUIImageEditor.cs" t="Include" />
+            <e p="CUITextEditor.cs" t="Include" />
+            <e p="NonDrawingGraphicEditor.cs" t="Include" />
+            <e p="ReadOnlyDrawer.cs" t="Include" />
+            <e p="TextPicEditor.cs" t="Include" />
+            <e p="uGUITools.cs" t="Include" />
+            <e p="UIExtensionsMenuOptions.cs" t="Include" />
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="Controls" t="Include">
+              <e p="Accordion" t="Include">
+                <e p="Accordion.cs" t="Include" />
+                <e p="AccordionElement.cs" t="Include" />
+                <e p="Tweening" t="Include">
+                  <e p="FloatTween.cs" t="Include" />
+                  <e p="ITweenValue.cs" t="Include" />
+                  <e p="TweenRunner.cs" t="Include" />
+                </e>
+              </e>
+              <e p="BoxSlider.cs" t="Include" />
+              <e p="ColorPicker" t="Include">
+                <e p="ColorImage.cs" t="Include" />
+                <e p="ColorLabel.cs" t="Include" />
+                <e p="ColorPickerControl.cs" t="Include" />
+                <e p="ColorPickerPresets.cs" t="Include" />
+                <e p="ColorPickerTester.cs" t="Include" />
+                <e p="ColorSlider.cs" t="Include" />
+                <e p="ColorSliderImage.cs" t="Include" />
+                <e p="ColorValues.cs" t="Include" />
+                <e p="Events" t="Include">
+                  <e p="ColorChangedEvent.cs" t="Include" />
+                  <e p="HSVChangedEvent.cs" t="Include" />
+                </e>
+                <e p="HexColorField.cs" t="Include" />
+                <e p="HSVUtil.cs" t="Include" />
+                <e p="SVBoxSlider.cs" t="Include" />
+                <e p="TiltWindow.cs" t="Include" />
+              </e>
+              <e p="ComboBox" t="Include">
+                <e p="AutoCompleteComboBox.cs" t="Include" />
+                <e p="ComboBox.cs" t="Include" />
+                <e p="DropDownList.cs" t="Include" />
+                <e p="DropDownListButton.cs" t="Include" />
+                <e p="DropDownListItem.cs" t="Include" />
+              </e>
+              <e p="CooldownButton.cs" t="Include" />
+              <e p="InputFocus.cs" t="Include" />
+              <e p="MultiTouchScrollRect.cs" t="Include" />
+              <e p="RadialSlider.cs" t="Include" />
+              <e p="ReorderableList" t="Include">
+                <e p="ReorderableList.cs" t="Include" />
+                <e p="ReorderableListContent.cs" t="Include" />
+                <e p="ReorderableListDebug.cs" t="Include" />
+                <e p="ReorderableListElement.cs" t="Include" />
+              </e>
+              <e p="RescalingPanels" t="Include">
+                <e p="RescaleDragPanel.cs" t="Include" />
+                <e p="RescalePanel.cs" t="Include" />
+                <e p="ResizePanel.cs" t="Include" />
+              </e>
+              <e p="SegmentedControl.cs" t="Include" />
+              <e p="SelectionBox" t="Include">
+                <e p="ExampleSelectable.cs" t="Include" />
+                <e p="IBoxSelectable.cs" t="Include" />
+                <e p="SelectionBox.cs" t="Include" />
+              </e>
+              <e p="Stepper.cs" t="Include" />
+              <e p="TextPic.cs" t="Include" />
+              <e p="UI_Knob.cs" t="Include" />
+            </e>
+            <e p="Effects" t="Include">
+              <e p="BestFitOutline.cs" t="Include" />
+              <e p="CurlyUI" t="Include">
+                <e p="CUIBezierCurve.cs" t="Include" />
+                <e p="CUIGraphic.cs" t="Include" />
+                <e p="CUIImage.cs" t="Include" />
+                <e p="CUIMisc.cs" t="Include" />
+                <e p="CUIText.cs" t="Include" />
+              </e>
+              <e p="CurvedText.cs" t="Include" />
+              <e p="CylinderText.cs" t="Include" />
+              <e p="Gradient.cs" t="Include" />
+              <e p="Gradient2.cs" t="Include" />
+              <e p="LetterSpacing.cs" t="Include" />
+              <e p="MonoSpacing.cs" t="Include" />
+              <e p="NicerOutline.cs" t="Include" />
+              <e p="RaycastMask.cs" t="Include" />
+              <e p="ShaderEffects" t="Include">
+                <e p="UIAdditiveEffect.cs" t="Include" />
+                <e p="UIImageCrop.cs" t="Include" />
+                <e p="UILinearDodgeEffect.cs" t="Include" />
+                <e p="UIMultiplyEffect.cs" t="Include" />
+                <e p="UIScreenEffect.cs" t="Include" />
+                <e p="UISoftAdditiveEffect.cs" t="Include" />
+              </e>
+              <e p="ShineEffect.cs" t="Include" />
+              <e p="ShineEffector.cs" t="Include" />
+              <e p="SoftMaskScript.cs" t="Include" />
+              <e p="UIFlippable.cs" t="Include" />
+              <e p="UIParticleSystem.cs" t="Include" />
+            </e>
+            <e p="InputModules" t="Include">
+              <e p="AimerInputModule.cs" t="Include" />
+              <e p="GamePadInputModule.cs" t="Include" />
+            </e>
+            <e p="Layout" t="Include">
+              <e p="CurvedLayout.cs" t="Include" />
+              <e p="FancyScrollView.cs" t="Include" />
+              <e p="FancyScrollViewCell.cs" t="Include" />
+              <e p="FlowLayoutGroup.cs" t="Include" />
+              <e p="HorizontalScrollSnap.cs" t="Include" />
+              <e p="IScrollSnap.cs" t="Include" />
+              <e p="RadialLayout.cs" t="Include" />
+              <e p="ScrollPositionController.cs" t="Include" />
+              <e p="ScrollSnap.cs" t="Include" />
+              <e p="ScrollSnapBase.cs" t="Include" />
+              <e p="ScrollSnapScrollbarHelper.cs" t="Include" />
+              <e p="TableLayoutGroup.cs" t="Include" />
+              <e p="TileSizeFitter.cs" t="Include" />
+              <e p="UIVerticalScroller.cs" t="Include" />
+              <e p="VerticalScrollSnap.cs" t="Include" />
+            </e>
+            <e p="MenuSystem" t="Include">
+              <e p="Menu.cs" t="Include" />
+              <e p="MenuManager.cs" t="Include" />
+              <e p="SimpleMenu.cs" t="Include" />
+            </e>
+            <e p="Primitives" t="Include">
+              <e p="DiamondGraph.cs" t="Include" />
+              <e p="UICircle.cs" t="Include" />
+              <e p="UICornerCut.cs" t="Include" />
+              <e p="UIGridRenderer.cs" t="Include" />
+              <e p="UILineRenderer.cs" t="Include" />
+              <e p="UILineTextureRenderer.cs" t="Include" />
+              <e p="UIPolygon.cs" t="Include" />
+              <e p="UIPrimitiveBase.cs" t="Include" />
+            </e>
+            <e p="TabNavigationHelper.cs" t="Include" />
+            <e p="ToolTips" t="Include">
+              <e p="BoundTooltip" t="Include">
+                <e p="BoundTooltipItem.cs" t="Include" />
+                <e p="BoundTooltipTrigger.cs" t="Include" />
+              </e>
+              <e p="HoverTooltip.cs" t="Include" />
+              <e p="ToolTip.cs" t="Include" />
+            </e>
+            <e p="UIWindowBase.cs" t="Include" />
+            <e p="Utilities" t="Include">
+              <e p="BezierPath.cs" t="Include" />
+              <e p="CableCurve.cs" t="Include" />
+              <e p="Circle.cs" t="Include" />
+              <e p="CLZF2.cs" t="Include" />
+              <e p="DragCorrector.cs" t="Include" />
+              <e p="ExtensionsToggle.cs" t="Include" />
+              <e p="ExtensionsToggleGroup.cs" t="Include" />
+              <e p="InputFieldEnterSubmit.cs" t="Include" />
+              <e p="NonDrawingGraphic.cs" t="Include" />
+              <e p="PaginationManager.cs" t="Include" />
+              <e p="PPIViewer.cs" t="Include" />
+              <e p="ReadOnlyAttribute.cs" t="Include" />
+              <e p="ReturnKeyTriggersButton.cs" t="Include" />
+              <e p="ScrollConflictManager.cs" t="Include" />
+              <e p="ScrollRectEx.cs" t="Include" />
+              <e p="ScrollRectExtensions.cs" t="Include" />
+              <e p="ScrollRectLinker.cs" t="Include" />
+              <e p="ScrollRectTweener.cs" t="Include" />
+              <e p="SelectableScaler.cs" t="Include" />
+              <e p="SetPropertyUtility.cs" t="Include" />
+              <e p="switchToRectTransform.cs" t="Include" />
+              <e p="TestCompression.cs" t="Include" />
+              <e p="UI_InfiniteScroll.cs" t="Include" />
+              <e p="UI_ScrollRectOcclusion.cs" t="Include" />
+              <e p="UI_TweenScale.cs" t="Include" />
+              <e p="UIExtensionMethods.cs" t="Include" />
+              <e p="UIHighlightable.cs" t="Include" />
+              <e p="UILineConnector.cs" t="Include" />
+              <e p="UIScrollToSelection.cs" t="Include" />
+              <e p="UIScrollToSelectionXY.cs" t="Include" />
+              <e p="UISelectableExtension.cs" t="Include" />
+            </e>
+            <e p="VR Extensions" t="Include">
+              <e p="VRCursor.cs" t="Include" />
+              <e p="VRInputModule.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="SoftMaskShader.shader" t="Include" />
+            <e p="UI Particle Add.shader" t="Include" />
+            <e p="UI Particle AddMultiply.shader" t="Include" />
+            <e p="UI Particle AddSmooth.shader" t="Include" />
+            <e p="UI Particle Alpha Blend.shader" t="Include" />
+            <e p="UI Particle Blend.shader" t="Include" />
+            <e p="UI Particle Multiply.shader" t="Include" />
+            <e p="UI Particle MultiplyDouble.shader" t="Include" />
+            <e p="UI Particle Premultiply Blend.shader" t="Include" />
+            <e p="UI Particle VertexLit Blended.shader" t="Include" />
+            <e p="UIAdditive.shader" t="Include" />
+            <e p="UIImageCrop.shader" t="Include" />
+            <e p="UILinearDodge.shader" t="Include" />
+            <e p="UIMultiply.shader" t="Include" />
+            <e p="UIParticleHidden.shader" t="Include" />
+            <e p="UIScreen.shader" t="Include" />
+            <e p="UISoftAdditive.shader" t="Include" />
+          </e>
+        </e>
       </e>
-      <e p="obj" t="ExcludeRecursive" />
+      <e p="Library" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
+      <e p="Polaris.csproj" t="IncludeRecursive" />
+      <e p="Polaris.Editor.csproj" t="IncludeRecursive" />
+      <e p="Polaris.Editor.Plugins.csproj" t="IncludeRecursive" />
+      <e p="Polaris.Plugins.csproj" t="IncludeRecursive" />
       <e p="Polaris.sln" t="IncludeFlat" />
-      <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="UnityVS_bin\Debug" t="ExcludeRecursive" />
+        <e p="UnityVS_obj\Debug" t="ExcludeRecursive" />
+      </e>
     </e>
   </component>
 </project>
