@@ -15,8 +15,21 @@ public static class Variables
     public static Dictionary<int, CharacterData> Characters;    // 캐릭터에 대한 데이터
     public static int CharacterVersion;
     public static int Starlight;
+    public static int[] StoreUpgradeLevel;
 
     public static readonly int[] FavorityThreshold = { 2, 3, 4, 5, 6 };     // 캐릭터 호감도 문턱에 관한 배열 30 70 120 180 250
+
+    // 상점 처리 및 레벨에 따른 데이터 테이블입니다.
+    public static readonly int[][] StoreUpgradeValue = new int[][]
+    {
+        new[]{ 0, 30, 60, 90, 120, 150, 180, 210, 240, 300, 360, 420, 480, 540, 600, 660, 720, 780, 840 },
+        new[]{ 0, 1, 2, 3, 4, 5 } }
+    ;
+    public static readonly int[][] StoreUpgradeMoney = new int[][]
+    {
+        new[]{ 0, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800 },
+        new[]{ 0, 500, 1000, 2000, 4000 }
+    };
 
     public static bool CameraMove;
     public static bool isTutorialFinished = false;

@@ -10,6 +10,7 @@ public class SaveData
     public int CharVersion;
     public List<CharacterData> Characters;
     public int Starlight;
+    public int[] StoreUpgradeLevel;
 
     public void Load()
     {
@@ -46,7 +47,9 @@ public class SaveData
             { Variables.Characters.Add(data.CharNumber, data); }
         }
 
+        // 기타 변수들을 동기화시켜줍니다.
         Variables.Starlight = Starlight;
+        Variables.StoreUpgradeLevel = StoreUpgradeLevel;
     }
 
     public void Create()
@@ -60,7 +63,9 @@ public class SaveData
             Variables.Characters.Add(data.CharNumber, data);
 
         Starlight = 0;
+        StoreUpgradeLevel = new[] { 1, 1, 1 };
         Variables.Starlight = Starlight;
+        Variables.StoreUpgradeLevel = StoreUpgradeLevel;
 
         Variables.isFirst = true;
     }
@@ -74,5 +79,6 @@ public class SaveData
             Characters.Add(item.Value);
 
         Starlight = Variables.Starlight;
+        StoreUpgradeLevel = Variables.StoreUpgradeLevel;
     }
 }

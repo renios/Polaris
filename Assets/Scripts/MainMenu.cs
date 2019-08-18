@@ -20,6 +20,6 @@ public class MainMenu : MonoBehaviour
     }
     public void PushButton4()
     {
-
+        SceneChanger.Instance.ChangeScene("StoreScene");
     }
 }
