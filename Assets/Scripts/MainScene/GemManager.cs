@@ -6,41 +6,34 @@ using UnityEngine.UI;
 public class GemManager : MonoBehaviour {
 
     public static GemManager Instance { get; set; }
-    private static int Gem1;
-    private static int Gem2;
-    public Text GemText1;
-    public Text GemText2;
+    private static int Gem1 = 0;
+    //private static int Gem2 = 0;
+    private Text GemText1;
+    //private Text GemText2;
 
     private void Awake()
     {
         Instance = this;
+        GemText1 = GameObject.Find("Gem1_Text").GetComponent<Text>();
+        //GemText2 = GameObject.Find("Gem2_Text").GetComponent<Text>();
         //temp
-        Gem1 = 1000; Gem2 = 1000;
         ShowState();
     }
 
-    public void SaveState(bool gem, int num)
+    public void SaveState(int num)
     {
-        if (gem)
-        {
-            Gem1 += num;
-            if (Gem1 > 99999) Gem1 = 99999;
-            else if (Gem1 < 0) Gem1 = 0;
-            ShowState();
-        }
-        else
-        {
-            Gem2 += num;
-            if (Gem2 > 99999) Gem2 = 99999;
-            else if (Gem2 < 0) Gem2 = 0;
-            ShowState();
-        }
+        int temp = Gem1 += num;
+        if (temp > 99999) Gem1 = 99999;
+         //일단 0미만으로 내려가야는 경우엔 안바뀌도록 
+        else if (temp < 0) Gem1 = 0;
+        ShowState();
+        
     }
 
     private void ShowState()
     {
         GemText1.text = Gem1.ToString();
-        GemText2.text = Gem2.ToString();
+       // GemText2.text = Gem2.ToString();
     }
 
 }
