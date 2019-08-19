@@ -18,6 +18,7 @@ public class CardData
     public bool Observed;
     public int Favority;
     public int StoryProgress;
+    public string LastReapDate;
 }
 
 public class CardDataCore

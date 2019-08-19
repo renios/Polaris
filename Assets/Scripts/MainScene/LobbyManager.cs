@@ -36,17 +36,19 @@ public class LobbyManager : MonoBehaviour
         if (Variables.Characters == null) { Debug.Log("세이브 파일이 비정상적임"); return; }
         foreach (KeyValuePair<int, CharacterData> c in Variables.Characters)
         {
-            var chrData = Variables.Characters[c.Key];
+            //var chrData = Variables.Characters[c.Key];
             for (int i = 0; i < c.Value.Cards.Count; i++)
             {
-                var cardData = chrData.Cards[i];
+                var cardData = c.Value.Cards[i];
                 if (cardData.Observed && cardData.Observable)
                 {
-                    string name = chrData.InternalName.Substring(0, 1).ToUpper() + chrData.InternalName.Substring(1);
+                    string name = c.Value.InternalName.Substring(0, 1).ToUpper() + c.Value.InternalName.Substring(1);
                     GameObject sd = Resources.Load<GameObject>("Prefabs/" + name);
                     if (sd != null)
                     {
                         var chr = Instantiate(sd);
+                        chr.AddComponent<CharacterStarlight>();
+                        chr.GetComponent<CharacterStarlight>().CharacterData = new int[2] {c.Key, i};
                         chr.transform.SetParent(sdchara.transform);
                         chr.transform.localScale = new Vector3(0.25f, 0.25f, 1);
                         float PositionX = Random.Range(-0.9f, 0.9f);
@@ -72,6 +74,7 @@ public class LobbyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Variables.Starlight);
         // 잡고있으면 움직인다
         // 잡고있을때 떼면 떨어진다
         if (pickedCharacter != null) {
@@ -110,17 +113,23 @@ public class LobbyManager : MonoBehaviour
         // 안 잡고있을때 누르면 잡는다
         if (Input.GetMouseButtonDown(0)) {
             var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            RaycastHit2D hit = Physics2D.Raycast((Vector2)mousePosition, Vector2.zero, 0f);
+            if(hit.collider != null && hit.collider.name.Contains("star_balloon"))
+                hit.collider.GetComponentInParent<CharacterStarlight>().OnBalloonClicked();
+
             float characterHeight = 0.6f;
             int layermaskValue = (1 << 10) + (1 << 11); //10번 레이어와 11번 레이어를 체크
 
-            var tryPick = Physics2D.OverlapCircle((Vector2)mousePosition - Vector2.up*characterHeight, characterHeight, layermaskValue);
-            if (tryPick != null) {
+            var tryPick = Physics2D.OverlapCircle((Vector2)mousePosition - Vector2.up * characterHeight, characterHeight, layermaskValue);
+            if (tryPick != null)
+            {
                 pickedCharacter = tryPick.gameObject;
                 pickedPosition = mousePosition;
                 pickedTime = Time.time;
             }
         }
-
+        
         /*
 
         if (SwipeManager.Instance.IsSwiping(SwipeManager.SwipeDirection.Down))
