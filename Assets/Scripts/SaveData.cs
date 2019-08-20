@@ -36,6 +36,7 @@ public class SaveData
                         Variables.Characters[curData.CharNumber].Cards[i].Observed = curData.Cards[i].Observed;
                         Variables.Characters[curData.CharNumber].Cards[i].Favority = curData.Cards[i].Favority;
                         Variables.Characters[curData.CharNumber].Cards[i].StoryProgress = curData.Cards[i].StoryProgress;
+                        Variables.Characters[curData.CharNumber].Cards[i].LastReapDate = curData.Cards[i].LastReapDate;
                     }
                 }
             }
