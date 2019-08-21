@@ -69,6 +69,13 @@ namespace AnyPortrait
 		[SerializeField]
 		public List<apOptModifiedMesh> _meshData = new List<apOptModifiedMesh>();
 
+
+		//19.5.23 : 최적화를 위해서 기존의 apOptModifiedMesh 에서 apOptModifiedMeshSet로 변경.
+		public bool _isUseModMeshSet = false;//1.1.7부터는 이 값은 항상 true가 된다.
+		[SerializeField]
+		public List<apOptModifiedMeshSet> _meshSetData = new List<apOptModifiedMeshSet>();
+
+
 		[SerializeField]
 		public List<apOptModifiedBone> _boneData = new List<apOptModifiedBone>();
 
@@ -95,47 +102,89 @@ namespace AnyPortrait
 				}
 			}
 
-
-			for (int i = 0; i < _meshData.Count; i++)
+			if (_isUseModMeshSet)
 			{
-				_meshData[i].Link(portrait);
+				//19.5.23 : 새로운 버전
+				for (int i = 0; i < _meshSetData.Count; i++)
+				{
+					_meshSetData[i].Link(portrait);
+				}
 			}
+			else
+			{
+				//이전 버전
+				for (int i = 0; i < _meshData.Count; i++)
+				{
+					_meshData[i].Link(portrait);
+				}
+			}
+			
 
 			//TODO : OptBone은 현재 Link할 객체가 없다.
 			//필요하다면 Link를 여기에 추가해주자
 
 		}
 
-		public void BakeModifierParamSet(apModifierParamSet srcParamSet, apPortrait portrait)
+
+		public IEnumerator LinkParamSetGroupAsync(apOptParamSetGroup paramSetGroup, apPortrait portrait, apAsyncTimer asyncTimer)
 		{
-			//switch (srcParamSet._syncTarget)
-			//{
-			//	case apModifierParamSet.SYNC_TARGET.Static:
-			//		_syncTarget = SYNC_TARGET.Static;
-			//		break;
+			_parentParamSetGroup = paramSetGroup;
 
-			//	case apModifierParamSet.SYNC_TARGET.Controller:
-			//		_syncTarget = SYNC_TARGET.Controller;
-			//		break;
+			_syncKeyframe = null;
+			if (_keyframeUniqueID >= 0)
+			{
+				//TODO
+				//_syncKeyframe = 
+				if (paramSetGroup._keyAnimTimelineLayer != null)
+				{
+					_syncKeyframe = paramSetGroup._keyAnimTimelineLayer.GetKeyframeByID(_keyframeUniqueID);
+				}
+			}
 
-			//	case apModifierParamSet.SYNC_TARGET.KeyFrame:
-			//		_syncTarget = SYNC_TARGET.KeyFrame;
-			//		break;
+			if(asyncTimer.IsYield())
+			{
+				yield return asyncTimer.WaitAndRestart();
+			}
 
-			//	default:
-			//		Debug.LogError("연동 에러 : ParamSet에 정의되지 않은 타입 : " + srcParamSet._syncTarget);
-			//		break;
-			//}
+			if (_isUseModMeshSet)
+			{
+				//19.5.23 : 새로운 버전
+				for (int i = 0; i < _meshSetData.Count; i++)
+				{
+					_meshSetData[i].Link(portrait);
 
-			//_controlKeyName = srcParamSet._controlKeyName;
+					if (asyncTimer.IsYield())
+					{
+						yield return asyncTimer.WaitAndRestart();
+					}
+				}
+			}
+			else
+			{
+				//이전 버전
+				for (int i = 0; i < _meshData.Count; i++)
+				{
+					_meshData[i].Link(portrait);
 
-			//_conSyncValue_Bool = srcParamSet._conSyncValue_Bool;
+					if (asyncTimer.IsYield())
+					{
+						yield return asyncTimer.WaitAndRestart();
+					}
+				}
+			}
+			
+
+			//TODO : OptBone은 현재 Link할 객체가 없다.
+			//필요하다면 Link를 여기에 추가해주자
+
+		}
+
+		public void BakeModifierParamSet(apModifierParamSet srcParamSet, apPortrait portrait, bool isUseModMeshSet)
+		{	
 			_conSyncValue_Int = srcParamSet._conSyncValue_Int;
 			_conSyncValue_Float = srcParamSet._conSyncValue_Float;
 			_conSyncValue_Vector2 = srcParamSet._conSyncValue_Vector2;
-			//_conSyncValue_Vector3 = srcParamSet._conSyncValue_Vector3;
-			//_conSyncValue_Color = srcParamSet._conSyncValue_Color;
-
+			
 
 			_keyframeUniqueID = srcParamSet._keyframeUniqueID;
 			_syncKeyframe = null;
@@ -145,21 +194,51 @@ namespace AnyPortrait
 			_meshData.Clear();
 			_boneData.Clear();
 
-
-			//SrcModifier ParamSet의 ModMesh, ModBone을 Bake해주자
-			//Debug.LogError("TODO : Bone 데이터 연동");
-			for (int i = 0; i < srcParamSet._meshData.Count; i++)
+			//19.5.23 : meshSetData 추가
+			if(_meshSetData == null)
 			{
-				apModifiedMesh srcModMesh = srcParamSet._meshData[i];
-				apOptModifiedMesh optModMesh = new apOptModifiedMesh();
-				bool isResult = optModMesh.Bake(srcModMesh, portrait);
-				if (isResult)
+				_meshSetData = new List<apOptModifiedMeshSet>();
+			}
+			_meshSetData.Clear();
+			_isUseModMeshSet = isUseModMeshSet;//<<이 값이 1.1.7부터는 true가 된다.
+
+
+			if (!_isUseModMeshSet)
+			{
+				//이전버전
+				//SrcModifier ParamSet의 ModMesh, ModBone을 Bake해주자
+				for (int i = 0; i < srcParamSet._meshData.Count; i++)
 				{
-					_meshData.Add(optModMesh);
+					apModifiedMesh srcModMesh = srcParamSet._meshData[i];
+					apOptModifiedMesh optModMesh = new apOptModifiedMesh();
+					bool isResult = optModMesh.Bake(srcModMesh, portrait);
+					if (isResult)
+					{
+						_meshData.Add(optModMesh);
+					}
+				}
+			}
+			else
+			{
+				//변경된 버전 : 19.5.23 (v.1.1.7)
+				for (int i = 0; i < srcParamSet._meshData.Count; i++)
+				{
+					apModifiedMesh srcModMesh = srcParamSet._meshData[i];
+					apOptModifiedMeshSet optModMeshSet = new apOptModifiedMeshSet();
+					bool isResult = optModMeshSet.Bake(
+											srcParamSet._parentParamSetGroup._parentModifier,
+											srcParamSet._parentParamSetGroup,
+											srcModMesh,
+											portrait);
+					if (isResult)
+					{
+						_meshSetData.Add(optModMeshSet);
+					}
 				}
 			}
 
-			//추가 : ModBone
+
+			//ModBone
 			for (int i = 0; i < srcParamSet._boneData.Count; i++)
 			{
 				apModifiedBone srcModBone = srcParamSet._boneData[i];

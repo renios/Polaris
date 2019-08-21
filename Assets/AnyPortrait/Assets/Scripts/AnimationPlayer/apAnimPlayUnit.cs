@@ -112,6 +112,9 @@ namespace AnyPortrait
 		// 내부 스테이트 처리 변수
 		private PLAY_STATUS _nextPlayStatus = PLAY_STATUS.Ready;
 		private bool _isFirstFrame = false;
+
+		//추가 1.14 : 프레임 리셋 여부를 자동으로 설정하지 않고, 변수를 통해 제어한다.
+		private bool _isResetFrameOnReadyStatus = true;//<<기본적으로는 Ready 스테이트일때 프레임을 리셋한다.
 		//private float _tFade = 0.0f;
 
 		//총 재생 시간.
@@ -173,8 +176,9 @@ namespace AnyPortrait
 		/// <summary>[Please do not use it] Request Key</summary>
 		public int LinkKey { get { return _linkKey; }  }
 
-		//추가 5.5 : 메카님용 Play Unit인가
-		//private bool _isMecanimPlayUnit = false;
+		//삭제 3.1 : 1.1.4, 1.1.5에서 작성된 변수인데 1.1.6에서 일단 안씀. 버그 생기면 확인 바람
+		//[NonSerialized]
+		//private float _timeRatioPrev = 0.0f;
 
 		[NonSerialized]
 		private float _mecanimTime = 0.0f;
@@ -186,7 +190,17 @@ namespace AnyPortrait
 		private float _mecanimTimeLength = 0.0f;
 
 		[NonSerialized]
+		private float _mecanimDeltaTime = 0.0f;
+
+		[NonSerialized]
 		private bool _isMecanimResetable = false;
+
+		////1.17 추가 : 이벤트 초기화 관련하여 정밀한 처리 위해 변수 추가됨
+		//[NonSerialized]
+		//private int _mecanimTimeRatioLoopCount = -1;
+
+		//[NonSerialized]
+		//private bool _isMecanimLoopingFrame = false;
 
 		
 
@@ -208,6 +222,7 @@ namespace AnyPortrait
 			//_isMecanimPlayUnit = true;
 			_mecanimTime = 0.0f;
 			_mecanimTimePrev = 0.0f;
+			//_timeRatioPrev = 0.0f;//<<1.1.6에서 삭제
 		}
 
 		
@@ -260,6 +275,9 @@ namespace AnyPortrait
 			_isFirstFrame = true;
 			_nextPlayStatus = _playStatus;
 
+			//추가 1.14 
+			_isResetFrameOnReadyStatus = true;
+
 			if (isEditor)
 			{
 				_linkedAnimClip.Stop_Editor(false);//Stop은 하되 업데이트는 하지 않는다. (false)
@@ -271,6 +289,8 @@ namespace AnyPortrait
 
 			_unitWeight = 0.0f;
 			_totalRequestWeights = 0.0f;
+
+			
 		}
 
 
@@ -489,18 +509,6 @@ namespace AnyPortrait
 
 			//_isWeightCalculated = true;
 
-			//if(iDebugType == 1)
-			//{
-			//	_debugWeight1 += multiplyUnitWeight * requestWeight;
-			//}
-			//else if(iDebugType == 2)
-			//{
-			//	_debugWeight2 += multiplyUnitWeight * requestWeight;
-			//}
-			//else
-			//{
-			//	_debugWeight3 += multiplyUnitWeight * requestWeight;
-			//}
 			
 		}
 
@@ -543,8 +551,11 @@ namespace AnyPortrait
 							//_unitWeight = 0.0f;
 							//_prevUnitWeight = 0.0f;
 							_linkedAnimClip.SetPlaying_Opt(false);
-							_linkedAnimClip.SetFrame_Opt(_linkedAnimClip.StartFrame);
-							//Debug.Log("Ready");
+							if (_isResetFrameOnReadyStatus)
+							{
+								_linkedAnimClip.SetFrame_Opt(_linkedAnimClip.StartFrame, false);
+							}
+							_isResetFrameOnReadyStatus = true;//True가 기본값
 						}
 						
 					}
@@ -647,6 +658,29 @@ namespace AnyPortrait
 			}
 		}
 
+		//1.15 추가 : 시작시 프레임을 설정할 수 있다.
+		/// <summary>
+		/// [Please do not use it]
+		/// "PlayAt()" is called by apAnimPlayManager
+		/// </summary>
+		public void PlayAt(int frame)
+		{
+			if (_playStatus == PLAY_STATUS.Ready)
+			{
+				_isPause = false;
+				_unitWeight = 0.0f;
+				
+				_isPlayStartEventCalled = false;
+				_isEndEventCalled = false;
+
+				
+				_linkedAnimClip.SetFrame_Opt(frame, true);//<<여기가 바뀜 + 자동으로 Clamp
+
+				//바로 시작
+				ChangeNextStatus(PLAY_STATUS.Play);
+			}
+		}
+
 		//일반적인 Play와 달리 강제로 재시작을 한다.
 		
 		/// <summary>
@@ -661,7 +695,27 @@ namespace AnyPortrait
 			ChangeNextStatus(PLAY_STATUS.Play);
 			_isFirstFrame = true;
 
-			_linkedAnimClip.SetFrame_Opt(_linkedAnimClip.StartFrame);
+			_linkedAnimClip.SetFrame_Opt(_linkedAnimClip.StartFrame, false);
+		}
+
+		//추가 1.4 : 특정 프레임에서 시작을 하도록 초기화
+		/// <summary>
+		/// [Please do not use it]
+		/// "ResetPlayAt()" is called by apAnimPlayManager
+		/// </summary>
+		public void ResetPlayAt(int frame)
+		{
+			_isPause = false;
+			_isPlayStartEventCalled = false;
+			_isEndEventCalled = false;
+			ChangeNextStatus(PLAY_STATUS.Play);
+			_isFirstFrame = true;
+
+			//변경 사항 1.14
+			_isResetFrameOnReadyStatus = false;//<<이걸 False로 해야 처음 시작시 프레임이 초기화되는 걸 막을 수 있다.
+
+			_linkedAnimClip.SetFrame_Opt(frame, true);//<<여기가 바뀜 + 자동으로 Clamp
+			
 		}
 
 		/// <summary>
@@ -767,11 +821,14 @@ namespace AnyPortrait
 			_mecanimTime = 0.0f;
 			_mecanimTimePrev = 0.0f;
 			_mecanimTimeLength = animClip.TimeLength;
-
+			//_timeRatioPrev = 0.0f;//<<1.1.6에서 삭제
+			
 			
 			if (!animClip.IsLoop)
 			{
 				animClip.Stop_Opt(false);
+				
+				
 			}
 			
 		}
@@ -781,6 +838,8 @@ namespace AnyPortrait
 			if(_linkedAnimClip != null)
 			{
 				_linkedAnimClip.Stop_Opt(false);
+				
+
 				_linkedAnimClip._parentPlayUnit = null;
 				_linkedAnimClip = null;
 			}
@@ -795,9 +854,11 @@ namespace AnyPortrait
 			_mecanimTime = 0.0f;
 			_mecanimTimePrev = 0.0f;
 			_mecanimTimeLength = 1.0f;
+			//_timeRatioPrev = 0.0f;//<<1.1.6에서 삭제
 
 			
 		}
+
 		public void Mecanim_Update(float weight, float timeRatio, int playOrder, int playLayer, BLEND_METHOD blendMethod, float speed)
 		{
 			if(_linkedAnimClip == null)
@@ -813,27 +874,70 @@ namespace AnyPortrait
 			_layer = playLayer;
 			
 			_isMecanimResetable = false;
+			//_isMecanimLoopingFrame = false;
 
+			//2.28 일단 이거 제외 [1.1.6]
+			//1.1.4 / 1.1.5에서 메카님 음수 speed에 적용하려고 만든 것 같은데, 오작동을 일으킨다.
+			//Debug.Log("Mecanim [" + timeRatio + " ( " + speed + " )]");
+			//if((speed > 0.0f && timeRatio < _timeRatioPrev) ||
+			//	(speed < 0.0f && timeRatio > _timeRatioPrev))
+			//{
+			//	//Debug.LogWarning("[" + _linkedAnimClip._name + "] 메카님 Speed와 TimeRatio 증감이 반대 : " + (timeRatio - _timeRatioPrev) + " / Speed : " + speed);
+			//	//Debug.LogWarning("[" + _linkedAnimClip._name + "] 메카님 Speed와 TimeRatio 증감이 반대 : " + _timeRatioPrev + " >> " + timeRatio + " / Speed : " + speed);
+			//	//Speed와 맞지 않은 증감폭이다.
+				
+			//	//이전
+			//	//timeRatio = _timeRatioPrev - (timeRatio - _timeRatioPrev);<<이게 문제.. 근데 왜..
+			//}
+			//_timeRatioPrev = timeRatio;//<<1.1.6에서 삭제
+
+			
 			if(_linkedAnimClip.IsLoop)
 			{
+				//int curTimeRatioLoopCount = (int)timeRatio;
+				//if(_mecanimTimeRatioLoopCount != curTimeRatioLoopCount)
+				//{
+				//	Debug.LogError("[Index Changed] _isMecanimLoopingFrame > True : " + timeRatio + " (" + _mecanimTimeRatioLoopCount + " >> " + curTimeRatioLoopCount + ")");
+				//	//루프 카운트가 바뀌었다. > //이번 프레임에서 루프가 된다.
+				//	_isMecanimLoopingFrame = true;
+				//	_mecanimTimeRatioLoopCount = curTimeRatioLoopCount;
+				//}
+				//else
+				//{
+				//	if(
+				//		(speed > 0.0f && timeRatio < 0.0f) ||
+				//		(speed < 0.0f && timeRatio > 0.0f)
+				//		)
+				//	{
+				//		Debug.LogError("[Speed And Time Inverted] _isMecanimLoopingFrame > True : " + timeRatio + " (Speed : " + speed + ")");
+				//		//앞으로 진행하는데, timeRatio가 뒤로 가거나 또는 그 반대
+				//		//Loop가 발생한 것이다.
+				//		_isMecanimLoopingFrame = true;
+				//	}
+				//}
+
 				if(timeRatio > 1.0f)
-				{
+				{	
 					timeRatio -= (int)timeRatio;
 				}
 				else if(timeRatio < 0.0f)
 				{
 					timeRatio = (1.0f - Mathf.Abs(timeRatio) - (int)Mathf.Abs(timeRatio));
 				}
+
+				
 			}
 			else
 			{
 				if(timeRatio > 1.0f)
 				{
-					timeRatio = 2.0f;
+					//timeRatio = 2.0f;//이전
+					timeRatio = 1.0f;//변경
 				}
 				else if(timeRatio < 0.0f)
 				{
-					timeRatio = -1.0f;
+					//timeRatio = -1.0f;//이전
+					timeRatio = 0.0f;//변경
 				}
 				else
 				{
@@ -843,6 +947,7 @@ namespace AnyPortrait
 			}
 			
 			_mecanimTime = timeRatio * _mecanimTimeLength;
+
 			
 
 			bool isResetFrame = false;
@@ -867,20 +972,47 @@ namespace AnyPortrait
 					}
 				}
 			}
+			//if(_isMecanimLoopingFrame)
+			//{
+			//	Debug.LogError(">> Reset Event");
+			//	_linkedAnimClip.ResetEvents();
+			//}
 
-			//Debug.Log("Mecanim_Update - " + timeRatio);
-			//_linkedAnimClip.UpdateFrame_OptMecanim(_mecanimTime - _mecanimTimePrev, speed);
+			//TODO : 여기서 tDelta로만 Forward/Backward를 결정하는게 아니라, 메카님의 Speed로 방향을 인식하도록 바꾸어야 한다.
 			if(!isResetFrame)
 			{
-				_linkedAnimClip.Update_Opt(_mecanimTime - _mecanimTimePrev);//<<기존
+				_mecanimDeltaTime = _mecanimTime - _mecanimTimePrev;
+				if (_mecanimTimeLength > 0.0f)
+				{
+					if (_mecanimDeltaTime < 0.0f && speed > 0.0f)
+					{
+						//진행 방향과 시간이 반대라면
+						while (_mecanimDeltaTime < 0.0f)
+						{
+							_mecanimDeltaTime += _mecanimTimeLength;
+						}
+					}
+					else if (_mecanimDeltaTime > 0.0f && speed < 0.0f)
+					{
+						//진행 방향과 시간이 반대라면
+						while (_mecanimDeltaTime > 0.0f)
+						{
+							_mecanimDeltaTime -= _mecanimTimeLength;
+						}
+					}
+				}
+				
+				//변경 1.17 : 일반 Update_Opt에서 UpdateMecanim_Opt로 변경한다.
+				//_linkedAnimClip.UpdateMecanim_Opt(_mecanimTime - _mecanimTimePrev, speed);
 			}
 			else
 			{
-				//Debug.Log("Reset Frame : _mecanimTime : " + _mecanimTime);
-				_linkedAnimClip.Update_Opt(_mecanimTime);
+				_mecanimDeltaTime = _mecanimTime;
+				//변경 1.17 : 일반 Update_Opt에서 UpdateMecanim_Opt로 변경한다.
+				//_linkedAnimClip.UpdateMecanim_Opt(_mecanimTime, speed);
 			}
+			_linkedAnimClip.UpdateMecanim_Opt(_mecanimDeltaTime, speed);
 			
-			//_linkedAnimClip.Update_Opt(Time.deltaTime * speed);//<<테스트
 			_mecanimTimePrev = _mecanimTime;
 		}
 

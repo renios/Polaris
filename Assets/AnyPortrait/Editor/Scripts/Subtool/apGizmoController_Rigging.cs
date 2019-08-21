@@ -71,7 +71,8 @@ namespace AnyPortrait
 												MultipleSelect__Modifier_Rigging,
 												null, null, null, null,
 												apGizmos.TRANSFORM_UI.TRS_NoDepth,
-												FirstLink__Modifier_Rigging);
+												FirstLink__Modifier_Rigging,
+												AddHotKeys__Modifier_Rigging);
 		}
 
 		public apGizmos.SelectResult FirstLink__Modifier_Rigging()
@@ -277,7 +278,7 @@ namespace AnyPortrait
 								}
 							}
 
-							Editor.RefreshControllerAndHierarchy();
+							Editor.RefreshControllerAndHierarchy(false);
 							//Editor.Repaint();
 							Editor.SetRepaint();
 						}
@@ -373,7 +374,7 @@ namespace AnyPortrait
 					//}
 
 					//변경 : Bone은 해제되지 않는다.
-					if (Editor.Select.IsLockExEditKey)
+					if (Editor.Select.IsSelectionLock)
 					{
 						Editor.Select.SetBone(prevBone);//복구
 					}
@@ -393,12 +394,12 @@ namespace AnyPortrait
 				if (prevBone != Editor.Select.Bone)
 				{
 					_isBoneSelect_MovePosReset = true;
-					Editor.RefreshControllerAndHierarchy();
+					Editor.RefreshControllerAndHierarchy(false);
 				}
 			}
 
 
-			if (!Editor.Select.IsLockExEditKey)
+			if (!Editor.Select.IsSelectionLock)
 			{
 				if (!isAnySelected && selectType == apGizmos.SELECT_TYPE.New)
 				{
@@ -458,7 +459,7 @@ namespace AnyPortrait
 						Editor.Select.SetSubMeshInGroup(null);
 					}
 
-					Editor.RefreshControllerAndHierarchy();
+					Editor.RefreshControllerAndHierarchy(false);
 					//Editor.Repaint();
 					Editor.SetRepaint();
 				}
@@ -501,16 +502,79 @@ namespace AnyPortrait
 				Editor.Select.SetBone(null);
 			}
 
-			if (!Editor.Select.IsLockExEditKey)
+			if (!Editor.Select.IsSelectionLock)
 			{
 				Editor.Select.SetSubMeshInGroup(null);
 			}
 
-			Editor.RefreshControllerAndHierarchy();
+			Editor.RefreshControllerAndHierarchy(false);
 			Editor.SetRepaint();
 		}
 
 
+
+		//-----------------------------------------------------------------------------------------
+		// 단축키
+		//-----------------------------------------------------------------------------------------
+		public void AddHotKeys__Modifier_Rigging()
+		{
+			Editor.AddHotKeyEvent(OnHotKeyEvent__Modifier_Rigging__Ctrl_A, "Select All Vertices", KeyCode.A, false, false, true, null);
+		}
+
+		// 단축키 : 버텍스 전체 선택
+		private void OnHotKeyEvent__Modifier_Rigging__Ctrl_A(object paramObject)
+		{
+			if (Editor.Select.MeshGroup == null || Editor.Select.Modifier == null)
+			{
+				return;
+			}
+
+			if (Editor.Select.ModRenderVertListOfMod == null)
+			{
+				return;
+			}
+			
+			bool isAnyChanged = false;
+			if (Editor.Select.ExKey_ModMesh != null && Editor.Select.MeshGroup != null)
+			{
+				//선택된 RenderUnit을 고르자
+				apRenderUnit targetRenderUnit = Editor.Select.MeshGroup.GetRenderUnit(Editor.Select.ExKey_ModMesh._transform_Mesh);
+
+				if (targetRenderUnit != null)
+				{
+					for (int iVert = 0; iVert < targetRenderUnit._renderVerts.Count; iVert++)
+					{
+						apRenderVertex renderVert = targetRenderUnit._renderVerts[iVert];
+
+						apModifiedVertexRig selectedModVertRig = Editor.Select.ExKey_ModMesh._vertRigs.Find(delegate (apModifiedVertexRig a)
+						{
+							return renderVert._vertex._uniqueID == a._vertexUniqueID;
+						});
+
+						if (selectedModVertRig != null)
+						{
+							Editor.Select.AddModVertexOfModifier(null, selectedModVertRig, null, renderVert);
+
+							isAnyChanged = true;
+						}
+
+					}
+
+					Editor.RefreshControllerAndHierarchy(false);
+					//Editor.Repaint();
+					Editor.SetRepaint();
+				}
+			}
+
+			if (isAnyChanged)
+			{
+				Editor.Gizmos.SetSelectResultForce_Multiple<apSelection.ModRenderVert>(Editor.Select.ModRenderVertListOfMod);
+
+				Editor.Select.AutoSelectModMeshOrModBone();
+			}
+		}
+
+		//-----------------------------------------------------------------------------------------
 		/// <summary>
 		/// Rigging Modifier내에서의 Gizmo 이벤트 : Vertex 다중 선택. Bone은 선택하지 않는다.
 		/// </summary>
@@ -581,7 +645,7 @@ namespace AnyPortrait
 						}
 					}
 
-					Editor.RefreshControllerAndHierarchy();
+					Editor.RefreshControllerAndHierarchy(false);
 					//Editor.Repaint();
 					Editor.SetRepaint();
 				}

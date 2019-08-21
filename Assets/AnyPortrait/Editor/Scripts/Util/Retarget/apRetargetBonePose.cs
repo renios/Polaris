@@ -281,6 +281,7 @@ namespace AnyPortrait
 					}
 				}
 
+				sw.Flush();
 
 				sw.Close();
 				fs.Close();

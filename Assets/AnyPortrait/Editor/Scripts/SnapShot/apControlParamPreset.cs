@@ -68,6 +68,9 @@ namespace AnyPortrait
 					}
 				}
 
+
+				sw.Flush();
+
 				if (sw != null)
 				{
 					sw.Close();

@@ -29,9 +29,11 @@ Shader "AnyPortrait/Transparent/Colored Texture (2X) Additive"
 		LOD 200
 
 		CGPROGRAM
-		// Physically based Standard lighting model, and enable shadows on all light types
+		
 		//#pragma surface surf SimpleColor alpha
-		#pragma surface surf SimpleColor//AlphaBlend가 아닌 경우
+		
+		//AlphaBlend가 아닌 경우
+		#pragma surface surf SimpleColor
 
 		// Use shader model 3.0 target, to get nicer looking lighting
 		#pragma target 3.0

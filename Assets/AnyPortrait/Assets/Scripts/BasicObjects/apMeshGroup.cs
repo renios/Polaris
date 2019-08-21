@@ -1589,6 +1589,9 @@ namespace AnyPortrait
 								modMesh._renderUnit = renderUnit;
 							}
 
+							//추가 : 5.19 잘못된 데이터 삭제
+							modMesh.CheckAndRemoveInvalidData(modifier);
+
 							if ((modifier.IsPhysics || modifier.IsVolume) && modMesh._isMeshTransform)
 							{
 								modMesh.RefreshVertexWeights(_parentPortrait, modifier.IsPhysics, modifier.IsVolume);

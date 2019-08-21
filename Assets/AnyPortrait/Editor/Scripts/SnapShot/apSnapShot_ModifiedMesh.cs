@@ -49,6 +49,39 @@ namespace AnyPortrait
 		private Color _meshColor = new Color(0.5f, 0.5f, 0.5f, 1.0f);
 		private bool _isVisible = true;
 
+		//추가 3.29 : ExtraOption도 저장하자
+		public class ExtraDummyValue
+		{
+			public bool _isDepthChanged = false;
+			public int _deltaDepth = 0;
+
+			public bool _isTextureChanged = false;
+			public apTextureData _linkedTextureData = null;
+
+			public int _textureDataID = -1;
+
+			public float _weightCutout = 0.5f;
+			public float _weightCutout_AnimPrev = 0.5f;
+			public float _weightCutout_AnimNext = 0.6f;
+
+			public ExtraDummyValue(apModifiedMesh.ExtraValue srcValue)
+			{
+				_isDepthChanged = srcValue._isDepthChanged;
+				_deltaDepth = srcValue._deltaDepth;
+
+				_isTextureChanged = srcValue._isTextureChanged;
+				_linkedTextureData = srcValue._linkedTextureData;
+
+				_textureDataID = srcValue._textureDataID;
+
+				_weightCutout = srcValue._weightCutout;
+				_weightCutout_AnimPrev = srcValue._weightCutout_AnimPrev;
+				_weightCutout_AnimNext = srcValue._weightCutout_AnimNext;
+			}
+		}
+
+		private bool _isExtraValueEnabled = false;
+		private ExtraDummyValue _extraValue = null;
 
 		// Init
 		//--------------------------------------------
@@ -148,6 +181,17 @@ namespace AnyPortrait
 			_meshColor = modMesh._meshColor;
 			_isVisible = modMesh._isVisible;
 
+
+			_isExtraValueEnabled = false;
+			_extraValue = null;
+
+			//추가 3.29 : ExtraValue도 복사
+			if(modMesh._isExtraValueEnabled)
+			{
+				_isExtraValueEnabled = true;
+				_extraValue = new ExtraDummyValue(modMesh._extraValue);
+			}
+
 			return true;
 		}
 
@@ -218,6 +262,34 @@ namespace AnyPortrait
 			modMesh._transformMatrix = new apMatrix(_transformMatrix);
 			modMesh._meshColor = _meshColor;
 			modMesh._isVisible = _isVisible;
+
+
+			//추가 3.29 : ExtraProperty도 복사
+			modMesh._isExtraValueEnabled = _isExtraValueEnabled;
+			if(modMesh._extraValue == null)
+			{
+				modMesh._extraValue = new apModifiedMesh.ExtraValue();
+				modMesh._extraValue.Init();
+			}
+			if(_isExtraValueEnabled)
+			{
+				if(_extraValue != null)
+				{
+					modMesh._extraValue._isDepthChanged = _extraValue._isDepthChanged;
+					modMesh._extraValue._deltaDepth = _extraValue._deltaDepth;
+					modMesh._extraValue._isTextureChanged = _extraValue._isTextureChanged;
+					modMesh._extraValue._linkedTextureData = _extraValue._linkedTextureData;
+					modMesh._extraValue._textureDataID = _extraValue._textureDataID;
+					modMesh._extraValue._weightCutout = _extraValue._weightCutout;
+					modMesh._extraValue._weightCutout_AnimPrev = _extraValue._weightCutout_AnimPrev;
+					modMesh._extraValue._weightCutout_AnimNext = _extraValue._weightCutout_AnimNext;
+				}
+			}
+			else
+			{
+				modMesh._extraValue.Init();
+			}
+
 
 			return true;
 		}

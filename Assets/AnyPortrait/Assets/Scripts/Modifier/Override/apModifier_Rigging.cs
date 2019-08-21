@@ -135,6 +135,10 @@ namespace AnyPortrait
 		public override bool IsTarget_Bone { get { return false; } }
 		public override bool IsTarget_ChildMeshTransform { get { return true; } }//<
 
+		//추가
+		public override bool IsPhysics { get { return false; } }
+		public override bool IsVolume { get { return false; } }
+
 		//중요 : Rigging은 Post 업데이트이다.
 		public override bool IsPreUpdate { get { return false; } }
 

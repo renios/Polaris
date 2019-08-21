@@ -352,6 +352,8 @@ namespace AnyPortrait
 					sw.WriteLine(mappings[i].GetEncodingData());
 				}
 
+				sw.Flush();
+
 				sw.Close();
 				fs.Close();
 

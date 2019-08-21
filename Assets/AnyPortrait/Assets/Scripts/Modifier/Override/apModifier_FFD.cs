@@ -94,6 +94,10 @@ namespace AnyPortrait
 		public override bool IsTarget_MeshGroupTransform { get { return true; } }
 		public override bool IsTarget_Bone { get { return false; } }
 		public override bool IsTarget_ChildMeshTransform { get { return true; } }
+
+		//추가
+		public override bool IsPhysics { get { return false; } }
+		public override bool IsVolume { get { return false; } }
 	}
 
 }

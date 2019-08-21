@@ -655,12 +655,12 @@ namespace AnyPortrait
 		// Draw Curve And Update
 		//----------------------------------------------------------------------------------------
 
-		public static void DrawCurve(apAnimCurve curveA, apAnimCurve curveB, apAnimCurveResult curveResult, Color graphColorA, Color graphColorB)
+		public static bool DrawCurve(apAnimCurve curveA, apAnimCurve curveB, apAnimCurveResult curveResult, Color graphColorA, Color graphColorB)
 		{
 			if (_matBatch == null)
-			{ return; }
+			{ return false; }
 			if (_matBatch.IsNotReady())
-			{ return; }
+			{ return false; }
 
 			//int leftAxisSize = 40;
 			//int bottomAxisSize = 5;
@@ -674,6 +674,8 @@ namespace AnyPortrait
 
 			int gridWidth = _layoutWidth - (leftAxisSize + 2 * margin + 4);
 			int gridHeight = _layoutHeight - (bottomAxisSize + 2 * margin + 4);
+
+			bool isCurveChanged = false;
 
 			//TODO
 			//1. Grid를 그린다. + Grid의 축에 글씨를 쓴다. (왼쪽에 Percent)
@@ -694,7 +696,7 @@ namespace AnyPortrait
 				case apAnimCurve.TANGENT_TYPE.Smooth:
 					{
 						DrawSmoothLine(curveA, curveB, graphColorA, graphColorB, posA, posB);
-						DrawSmoothLineControlPoints(curveA, curveB, posA, posB);
+						isCurveChanged = DrawSmoothLineControlPoints(curveA, curveB, posA, posB);//<<커브를 수정할 수 있다.
 					}
 					break;
 
@@ -733,6 +735,8 @@ namespace AnyPortrait
 					_selectedCurveKey = null;
 				}
 			}
+
+			return isCurveChanged;
 		}
 
 		private static void DrawGrid(int leftAxisSize, int bottomAxisSize, int margin, int gridWidth, int gridHeight)
@@ -809,7 +813,7 @@ namespace AnyPortrait
 		private static bool _isLockMouse = false;
 		private static Vector2 _prevMousePos = Vector2.zero;
 
-		private static void DrawSmoothLineControlPoints(apAnimCurve curveA, apAnimCurve curveB, Vector2 posA, Vector2 posB)
+		private static bool DrawSmoothLineControlPoints(apAnimCurve curveA, apAnimCurve curveB, Vector2 posA, Vector2 posB)
 		{
 			Vector2 smoothA_Ratio = new Vector2(Mathf.Clamp01(curveA._nextSmoothX), Mathf.Clamp01(curveA._nextSmoothY));
 			Vector2 smoothB_Ratio = new Vector2(Mathf.Clamp01(curveB._prevSmoothX), Mathf.Clamp01(curveB._prevSmoothY));
@@ -832,6 +836,7 @@ namespace AnyPortrait
 			AddCursorRect(smoothA_Pos, pointSize, pointSize, MouseCursor.MoveArrow);
 			AddCursorRect(smoothB_Pos, pointSize, pointSize, MouseCursor.MoveArrow);
 
+			bool isCurveChanged = false;
 
 			if (_isMouseEvent && !_isMouseEventUsed)
 			{
@@ -900,6 +905,8 @@ namespace AnyPortrait
 								curveB.Refresh();
 								//Debug.LogError("Make Curve");
 								_prevMousePos = _mousePos;
+
+								isCurveChanged = true;
 							}
 						}
 
@@ -911,6 +918,8 @@ namespace AnyPortrait
 						break;
 				}
 			}
+
+			return isCurveChanged;
 		}
 
 		// Functions

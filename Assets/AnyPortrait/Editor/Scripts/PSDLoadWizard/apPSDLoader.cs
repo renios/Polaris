@@ -382,7 +382,7 @@ namespace AnyPortrait
 
 		public void CheckClippingValidation()
 		{
-			//Debug.Log("CheckClippingValidation");
+			//Debug.Log("-- CheckClippingValidation --");
 			//클리핑이 가능한가 체크
 			//어떤 클리핑 옵션이 나올때
 			//"같은 레벨에서" ㅁ CC[C] 까지는 Okay / ㅁCCC..[C]는 No
@@ -394,16 +394,30 @@ namespace AnyPortrait
 				curLayerData._isClippingValid = true;
 
 				if (curLayerData._isImageLayer && curLayerData._isClipping)
-				{
+				{	
 					//앞으로 체크해보자.
-					int curLevel = curLayerData._hierarchyLevel;
+					int curIndex = i;
 					bool isClippingValid = false;
-					if (curLevel > 0)
+
+					//Debug.Log(">> 클리핑 체크 대상 : " + curLayerData._name + " / Index : " + curIndex + " / Hierarchy Level : " + curLayerData._hierarchyLevel);
+
+					if (curIndex > 0)
 					{
-						for (int iPrevLevel = curLevel; iPrevLevel >= 0; iPrevLevel--)
+						for (int iPrevInex = curIndex - 1; iPrevInex >= 0; iPrevInex--)
 						{
-							apPSDLayerData prevLayerData = _layerDataList[iPrevLevel];
-							if(prevLayerData != null && prevLayerData._isBakable && prevLayerData._isImageLayer && !prevLayerData._isClipping && prevLayerData._hierarchyLevel == curLevel)
+							apPSDLayerData prevLayerData = _layerDataList[iPrevInex];
+
+							if(prevLayerData == null || prevLayerData == curLayerData)
+							{
+								continue;
+							}
+
+							//Debug.Log(" [" + iPrevInex + "] : " + prevLayerData._name + " / Hierarchy Level : " + prevLayerData._hierarchyLevel);
+
+							if(prevLayerData._isBakable 
+								&& prevLayerData._isImageLayer 
+								&& !prevLayerData._isClipping 
+								&& prevLayerData._hierarchyLevel == curLayerData._hierarchyLevel)
 							{
 								//한번이라도 Clipping이 가능하다면.. (Clipping할 대상이 있다)
 								isClippingValid = true;
@@ -411,6 +425,8 @@ namespace AnyPortrait
 							}
 						}
 					}
+
+					//Debug.Log("클리핑 결과 : " + isClippingValid);
 
 					curLayerData._isClippingValid = isClippingValid;
 

@@ -476,7 +476,7 @@ namespace AnyPortrait
 				{
 					girlAnimator.SetTrigger("Shoot");
 					_isGirlShootable = false;
-				}
+				}				
 
 			}
 

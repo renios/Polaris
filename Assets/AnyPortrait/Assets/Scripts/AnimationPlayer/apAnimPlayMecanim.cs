@@ -73,6 +73,8 @@ namespace AnyPortrait
 			public float _speed = 0.0f;
 			public float _weight = 0.0f;
 			public float _timeRatio = 0.0f;
+			
+
 
 			public apAnimPlayUnit _playUnit = null;//<<미리 만들어놓고, 실행중일 때에는 연결, 그렇지 않을 때에는 해제한다.
 
@@ -100,13 +102,14 @@ namespace AnyPortrait
 				_blendMethod = apAnimPlayUnit.BLEND_METHOD.Interpolation;
 				_speed = 0.0f;
 				_weight = 0.0f;
-				_timeRatio = -1.0f;
+				_timeRatio = 0.0f;
 			}
 
 			public void SetData(	int playedLayer, 
 									int playOrder,
 									apAnimPlayUnit.BLEND_METHOD blendMethod,
 									float speed,
+									float speedMultiplier,
 									float weight,
 									float timeRatio)
 			{
@@ -115,7 +118,8 @@ namespace AnyPortrait
 				_playedLayer = playedLayer;
 				_playOrder = playOrder;
 				_blendMethod = blendMethod;
-				_speed = speed;
+				//_speed = speed;
+				_speed = speed * speedMultiplier;
 				_weight = weight;
 				_timeRatio = timeRatio;
 			}
@@ -137,28 +141,6 @@ namespace AnyPortrait
 
 			public void UpdateAnimClipAndPlayUnit()
 			{
-				//if (_weight < 1.0f)
-				//{
-				//	Debug.Log("[" + _playOrder + "] [" + _animClip._name + "] : " + _timeRatio + " / Weight " + _weight);
-				//}
-				//if (_playUnit.IsLoop)
-				//{
-				//	if (_timeRatio > 1.0f)
-				//	{
-				//		_timeRatio -= (int)_timeRatio;
-				//	}
-				//}
-				//else
-				//{
-				//	if (_timeRatio > 1.0f)
-				//	{
-				//		_timeRatio = 1.0f;
-				//	}
-				//}
-				//if(_animClip._name == "Shoot")
-				//{
-				//	Debug.Log("Update : " + _timeRatio + " /  Weight : " + _weight);
-				//}
 				_playUnit.Mecanim_Update(_weight, _timeRatio, _playOrder, _playedLayer, _blendMethod, _speed);
 			}
 		}
@@ -185,12 +167,26 @@ namespace AnyPortrait
 		private MecanimClipData _nextClipData = null;
 		private int _curOrder = 0;
 	
+		//추가 3.5 : Unity 2017부터 추가된 "Timeline"기능에 대한 연동 객체이다.
+#if UNITY_2017_1_OR_NEWER
+		private apAnimPlayTimeline _timlinePlay = null;
+
+		private enum PLAY_TYPE
+		{
+			Mecanim,
+			Timeline
+		}
+
+		private PLAY_TYPE _playType = PLAY_TYPE.Mecanim;
+#endif
 
 		// Init
 		//---------------------------------------------
 		public apAnimPlayMecanim()
 		{
-
+#if UNITY_2017_1_OR_NEWER
+			_playType = PLAY_TYPE.Mecanim;
+#endif
 		}
 
 		public void LinkPortrait(apPortrait portrait, apAnimPlayManager animPlayManager)
@@ -211,9 +207,21 @@ namespace AnyPortrait
 
 			_animController = _animator.runtimeAnimatorController;
 
+#if UNITY_2017_1_OR_NEWER
+			//추가 3.5 : Unity 2017부터 추가된 "Timeline"기능에 대한 연동 객체이다.
+			if(_timlinePlay == null)
+			{
+				_timlinePlay = new apAnimPlayTimeline();
+			}
+
+			_timlinePlay.Link(portrait, animPlayManager, this);
+			
+#endif
+
 			if(_animController == null)
 			{
-				Debug.LogError("AnyPortrait : No RuntimeAnimatorController on Animator");
+				//변경 : 타임라인을 위해서 Mecanim을 사용하는 경우, RuntimeAnimatorController가 필요없을 수 있다.
+				//Debug.LogError("AnyPortrait : No RuntimeAnimatorController on Animator");
 				return;
 			}
 			
@@ -336,9 +344,77 @@ namespace AnyPortrait
 		//---------------------------------------------
 		public void Update()
 		{
+
+#if UNITY_2017_1_OR_NEWER
+			//추가 3.5 : Timeline의 PlayerDirector가 연결되어 있다면 재생할 수 있는지 확인하자.
+			//재생되는 타임라인이 있다면, 메카님 컨트롤러는 무시하고 타임라인의 제어를 받자
+			if(_timlinePlay != null)
+			{
+				if(_timlinePlay.IsAnyPlaying)
+				{
+					if(_playType == PLAY_TYPE.Mecanim)
+					{
+						//Mecanim > Timeline
+						_playType = PLAY_TYPE.Timeline;
+
+						//메카님에서 재생중이던 클립들을 모두 Unlink해야한다.
+						UnlinkAllMecanimClips();
+					}
+
+					//타임라인으로 재생을 한다.
+					_timlinePlay.Update();
+
+
+					if(_timlinePlay.IsLastPlayedTimelineClipChanged)
+					{
+						//프레임 보정>>
+						//마지막으로 재생된 TimelineClip과, 현재 Animator에서 백그라운드에서 재생중인 State간의 시간을 보정한다.
+						//- 0번 레이어야 한다.
+						//- 재생 중인 State여야 한다.
+						if(_timlinePlay.LastPlayedTimelineClip != null
+							&& _animator != null 
+							&& _isValidAnimator 
+							&& _nLayers > 0)
+						{
+							_curStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+							_curClipInfos = _animator.GetCurrentAnimatorClipInfo(0);
+
+							UnityEngine.Timeline.TimelineClip lastTimelineClip = _timlinePlay.LastPlayedTimelineClip;
+							float lastLocalTime = _timlinePlay.LastPlayedLocalTime;
+
+							if(_curClipInfos != null && _curClipInfos.Length > 0)
+							{
+								if(_curClipInfos[0].clip == lastTimelineClip.animationClip)
+								{
+									//현재 "재생중"인 "0번"레이어의 "현재 클립"과 동일하다
+									//시간을 보정하자
+									_animator.PlayInFixedTime(0, 0, lastLocalTime);
+								}
+							}
+						}
+					}
+
+					//더이상 처리를 하지 않는다.
+					return;
+				}
+
+				
+
+				if (_playType == PLAY_TYPE.Timeline)
+				{
+					//Timeline > Mecanim
+					_playType = PLAY_TYPE.Mecanim;
+
+					//Timeline에서 재생중이던 클립들을 모두 Unlink해야한다.
+					_timlinePlay.UnlinkAll();
+				}
+			}
+#endif
+
 			if(!_isValidAnimator)
 			{
-				Debug.Log("IsValidAnimator = false");
+				//변경 : Timeline을 위해서 설정된 경우 RuntimeAnimatorController가 필요 없을 수 있다.
+				//Debug.LogError("AnyPortrait : IsValidAnimator = false");
 				return;
 			}
 
@@ -405,6 +481,7 @@ namespace AnyPortrait
 												_curOrder, 
 												_curMecanimLayer._blendType, 
 												_curStateInfo.speed,
+												_curStateInfo.speedMultiplier,
 												_curLayerWeight * _curClipInfos[iClip].weight,
 												_curNormalizedTime);
 
@@ -448,6 +525,7 @@ namespace AnyPortrait
 												_curMecanimLayer._blendType, 
 												//apAnimPlayUnit.BLEND_METHOD.Additive,
 												_nextStateInfo.speed,
+												_nextStateInfo.speedMultiplier,
 												_curLayerWeight * _nextClipInfos[iClip].weight,
 												_nextNormalizedTime);
 
@@ -496,6 +574,75 @@ namespace AnyPortrait
 
 				//Prev를 갱신한다
 				_curClipData._isCalculatedPrev = _curClipData._isCalculated;
+			}
+		}
+
+
+		// Functions
+		//---------------------------------------------
+		// 외부 제어 함수들 - 주로 Timeline
+#if UNITY_2017_1_OR_NEWER
+		public bool AddTimelineTrack(UnityEngine.Playables.PlayableDirector playableDirector, string trackName, int layer, apAnimPlayUnit.BLEND_METHOD blendMethod)
+		{
+			if(_timlinePlay == null)
+			{
+				Debug.LogError("AnyPortrait : AddTimelineTrack() is Failed. It is not ready to be associated with the Timeline. Please try again in the next frame.");
+				return false;
+			}
+			
+			return _timlinePlay.AddTrack(playableDirector, trackName, layer, blendMethod);
+		}
+
+		public void RemoveInvalidTimelineTracks()
+		{
+			if(_timlinePlay == null)
+			{
+				return;
+			}
+			_timlinePlay.RemoveInvalidTracks();
+		}
+
+		public void RemoveAllTimelineTracks()
+		{
+			if(_timlinePlay == null)
+			{
+				return;
+			}
+			_timlinePlay.ClearTracks();
+		}
+
+		public void UnlinkTimelinePlayableDirector(UnityEngine.Playables.PlayableDirector playableDirector)
+		{
+			if(_timlinePlay == null)
+			{
+				return;
+			}
+
+			_timlinePlay.UnlinkPlayableDirector(playableDirector);
+		}
+
+		public void SetTimelineEnable(bool isEnabled)
+		{
+			if(_timlinePlay == null)
+			{
+				return;
+			}
+
+			_timlinePlay.SetEnable(isEnabled);
+		}
+
+#endif
+
+
+		// 추가 3.7 : Unlink 처리
+		private void UnlinkAllMecanimClips()
+		{
+			for (int i = 0; i < _nClipData; i++)
+			{
+				_curClipData = _clipData[i];
+				_curClipData.Unlink();
+				_curClipData._isCalculated = false;
+				_curClipData._isCalculatedPrev = false;
 			}
 		}
 

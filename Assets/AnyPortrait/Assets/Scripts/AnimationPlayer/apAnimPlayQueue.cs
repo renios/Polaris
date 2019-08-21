@@ -339,6 +339,7 @@ namespace AnyPortrait
 			return newPlayUnit;
 		}
 
+		
 
 		//AnimClip을 PlayUnit에 담아서 재생한다.
 		//Queue에 저장된 클립들이 모두 끝나면 블렌드 없이 바로 실행된다.
@@ -594,7 +595,223 @@ namespace AnyPortrait
 		}
 
 
+		//---------------------------------------------------------------------------------------------
+		public apAnimPlayUnit PlayAt(apAnimPlayData playData, int frame, apAnimPlayUnit.BLEND_METHOD blendMethod, float blendTime = 0.0f, bool isAutoEndIfNotloop = true)
+		{
+			//현재 상태에서 실행되지 않은 Queued 애니메이션 재생 요청은 삭제한다.
+			PushAllNoActiveRequests();
 
+			//Request를 생성한다.
+			apAnimPlayRequest request = PopRequest();
+			request.SetCurrentPlayedUnits(this);
+
+			//현재 플레이 중인 AnimPlayUnit들의 LinkKey를 넣어준다.
+			for (int i = 0; i < _animPlayUnits.Count; i++)
+			{
+				request.AddPrevPlayUnitKeyLink(_animPlayUnits[i].LinkKey, _animPlayUnits[i].UnitWeight);
+			}
+
+			apAnimPlayUnit newPlayUnit = MakePlayUnit(playData, blendMethod, isAutoEndIfNotloop);
+
+			newPlayUnit.Resume();//Pause가 걸려있으면 풀어주자
+
+			//Play 명령을 준다.
+			request.PlayNewAt(newPlayUnit, frame, blendTime);//<<수정됨
+
+			//이때, 만약 PlayQueued 타입이며 newPlayUnit을 타겟으로 하는게 있으면 처리할 때 무력화시켜야 한다.
+			apAnimPlayRequest overlapQueuedRequest = _requests_Live.Find(delegate (apAnimPlayRequest a)
+			{
+				return a != request && a.RequestType == apAnimPlayRequest.REQUEST_TYPE.Queued && a._nextPlayUnit == newPlayUnit;
+			});
+			if(overlapQueuedRequest != null)
+			{
+				PushRequest(overlapQueuedRequest);
+			}
+
+			_nPlayedUnit = _animPlayUnits.Count;
+			
+			//Order를 갱신한다.
+			RefreshOrder();
+
+			return newPlayUnit;
+		}
+
+
+		public apAnimPlayUnit PlayQueuedAt(apAnimPlayData playData, int frame, apAnimPlayUnit.BLEND_METHOD blendMethod, float blendTime = 0.0f, bool isAutoEndIfNotloop = true)
+		{
+			apAnimPlayRequest lastRequest = null;
+
+			if (_requests_Live.Count > 0)
+			{
+				//1. Request가 있는 경우/
+				//Chain을 시도한다.
+				//마지막 Request를 찾는다. (End가 아닌거면 다 됨)
+				
+				for (int i = _requests_Live.Count - 1; i >= 0; i--)
+				{
+					if(_requests_Live[i].Status != apAnimPlayRequest.STATUS.End)
+					{
+						lastRequest = _requests_Live[i];
+						break;
+					}
+				}
+
+				//아직 처리중인 마지막 Request가 있을 때
+				//Request 타입과 해당 AnimPlayUnit에 따라 
+				//1) Chain+Queued을 할지, 2) 그냥 Play를 할 지, 3) 처리를 포기할 지
+				//결정을 한다.
+				if (lastRequest != null)
+				{
+					int chainType = -1;
+					switch (lastRequest.RequestType)
+					{
+						case apAnimPlayRequest.REQUEST_TYPE.New:
+						case apAnimPlayRequest.REQUEST_TYPE.Queued:
+							{
+								//대기 중이거나 재생 중이다.
+								//1. 같은 PlayUnit이라면 -> Loop 타입이라면 취소, Once 타입이라면 Chain 처리
+								//2. Loop 타입이라면 -> 그냥 Play
+								//3. 그외 -> Chain 처리
+								if (lastRequest._nextPlayUnit._linkedAnimClip == playData._linkedAnimClip)
+								{
+									//1. 같은 PlayUnit이다.
+									if (lastRequest._nextPlayUnit.IsLoop)
+									{
+										//Loop 타입이라면 취소
+										chainType = QUEUE_CHAIN__3_SKIP;
+									}
+									else
+									{
+										//Once 타입이라면 Chain 처리
+										//chainType = QUEUE_CHAIN__1_LINK_CHAIN;
+
+										//변경 : 이미 같은 애니메이션에 대하여 New, Queued가 등록된 요청이다.
+										//처리하지 않는걸로 하자
+										chainType = QUEUE_CHAIN__3_SKIP;
+									}
+								}
+								else if (lastRequest._nextPlayUnit.IsLoop)
+								{
+									//2. 마지막 PlayUnit이 Loop 타입이다.
+									// -> 그냥 Play
+									chainType = QUEUE_CHAIN__2_PLAY;
+								}
+								else
+								{
+									//3. 그외 -> Chain 처리
+									chainType = QUEUE_CHAIN__1_LINK_CHAIN;
+								}
+							}
+							break;
+
+						case apAnimPlayRequest.REQUEST_TYPE.Stop:
+							{
+								//정지 요청이 있다.
+								//Chain 없이 Play를 시도한다. (Stop 이후이므로)
+								chainType = QUEUE_CHAIN__2_PLAY;
+							}
+							break;
+					}
+
+					switch (chainType)
+					{
+						case QUEUE_CHAIN__1_LINK_CHAIN:
+							{
+								//Last Unit과 Chain으로 연결한다.
+							}
+							break;
+
+						case QUEUE_CHAIN__2_PLAY:
+							//Debug.LogError("Play Queued -> 2) Play");
+							//return Play(playData, blendMethod, blendTime, isAutoEndIfNotloop);//<<일반
+							return PlayAt(playData, frame, blendMethod, blendTime, isAutoEndIfNotloop);//<<시작 프레임 제어
+
+						case QUEUE_CHAIN__3_SKIP:
+							//Debug.LogError("Play Queued -> 3) Skip");
+							return null;
+					}
+				}
+			}
+
+			apAnimPlayUnit lastPlayUnit = null;
+
+			if(lastRequest != null)
+			{
+				//Chain 처리가 되었다면
+				//-> LastPlayUnit은 Chain된 Request의 PlayUnit으로 삼는다.
+				lastPlayUnit = lastRequest._nextPlayUnit;
+
+			}
+			else
+			{
+				//Chain 처리가 안되었을 때
+				//마지막 PlayUnit을 비교하여 처리한다.
+				//1. 마지막 PlayUnit이 없는 경우 -> 바로 Play
+				//2. 마지막 PlayUnit이 Loop 타입이어서 기다릴 수 없는 경우 -> 바로 Play
+
+				if (_nPlayedUnit == 0)
+				{
+					//return Play(playData, blendMethod, blendTime, isAutoEndIfNotloop);//일반
+					return PlayAt(playData, frame, blendMethod, blendTime, isAutoEndIfNotloop);//시작 프레임 제어
+				}
+
+				//마지막 PlayUnit을 가져오자
+				lastPlayUnit = _animPlayUnits[_animPlayUnits.Count - 1];
+
+				if (lastPlayUnit.IsLoop)
+				{
+					//만약 마지막 PlayUnit이 Loop라면 => Queued 되지 않는다. 자동으로 [Play]로 바뀜
+					//return Play(playData, blendMethod, blendTime, isAutoEndIfNotloop);//일반
+					return PlayAt(playData, frame, blendMethod, blendTime, isAutoEndIfNotloop);//시작 프레임 제어
+				}
+			}
+			
+			if(lastPlayUnit != null && lastPlayUnit._linkedAnimClip == playData._linkedAnimClip)
+			{
+				//Debug.LogError("이미 재생중인 애니메이션이다.");
+				return null;
+			}
+			
+			//Request를 생성한다.
+			apAnimPlayRequest request = PopRequest();
+			//request.SetCurrentPlayedUnits(this, _animPlayUnits);
+			request.SetCurrentPlayedUnits(this);
+			
+
+			//현재 플레이 중인 AnimPlayUnit들의 LinkKey를 넣어준다.
+			for (int i = 0; i < _animPlayUnits.Count; i++)
+			{
+				request.AddPrevPlayUnitKeyLink(_animPlayUnits[i].LinkKey, _animPlayUnits[i].UnitWeight);
+			}
+			
+			apAnimPlayUnit newPlayUnit = MakePlayUnit(playData, blendMethod, isAutoEndIfNotloop);
+			
+			newPlayUnit.Pause();
+
+			
+			//Play Queued 명령을 준다.
+			//request.PlayQueued(newPlayUnit, lastPlayUnit, blendTime);//일반
+			request.PlayQueuedAt(newPlayUnit, lastPlayUnit, frame, blendTime);//시작 프레임 지정
+
+
+			//추가 : Chain 처리를 해주자
+			if(lastRequest != null)
+			{
+				lastRequest._chainedRequest_Next = request;
+				request._chainedRequest_Prev = lastRequest;
+			}
+			
+			_nPlayedUnit = _animPlayUnits.Count;
+
+			//Order를 갱신한다.
+			RefreshOrder();
+			
+			
+
+			return newPlayUnit;
+		}
+
+		//---------------------------------------------------------------------------------------------
 
 
 		#region [미사용 코드] CrossFade 대신 Play에서 BlendTime을 넣자

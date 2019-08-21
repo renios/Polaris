@@ -70,7 +70,8 @@ namespace AnyPortrait
 				null,
 				null,
 				apGizmos.TRANSFORM_UI.Position2D | apGizmos.TRANSFORM_UI.Vertex_Transform,
-				FirstLink__MeshTRS
+				FirstLink__MeshTRS,
+				AddHotKeys__MeshTRS
 				);
 		}
 
@@ -182,7 +183,41 @@ namespace AnyPortrait
 			Editor.VertController.UnselectVertex();
 		}
 
+		//---------------------------------------------------------------------------------------------
+		// 단축키
+		//---------------------------------------------------------------------------------------------
+		public void AddHotKeys__MeshTRS()
+		{
+			Editor.AddHotKeyEvent(OnHotKeyEvent__MeshTRS__Ctrl_A, "Select All Vertices", KeyCode.A, false, false, true, null);
+		}
 
+		// 단축키 : 버텍스 전체 선택
+		private void OnHotKeyEvent__MeshTRS__Ctrl_A(object paramObject)
+		{
+			if(Editor.Select.SelectionType != apSelection.SELECTION_TYPE.Mesh
+				|| Editor.Select.Mesh == null
+				|| Editor.Select.Mesh.LinkedTextureData == null
+				|| Editor.Select.Mesh.LinkedTextureData._image == null
+				|| Editor._meshEditMode != apEditor.MESH_EDIT_MODE.MakeMesh
+				|| Editor._meshEditeMode_MakeMesh != apEditor.MESH_EDIT_MODE_MAKEMESH.TRS)
+			{
+				return;
+			}
+
+			apMesh mesh = Editor.Select.Mesh;
+
+			List<apVertex> vertices = mesh._vertexData;
+			if(vertices.Count == 0)
+			{
+				return;
+			}
+			//전체 선택
+			Editor.VertController.SelectVertices(vertices, apGizmos.SELECT_TYPE.Add);
+			Editor.SetRepaint();
+
+			Editor.Gizmos.SetSelectResultForce_Multiple<apVertex>(Editor.VertController.Vertices);
+		}
+		//---------------------------------------------------------------------------------------
 		public apGizmos.SelectResult MultipleSelect__MeshTRS(Vector2 mousePosGL_Min, Vector2 mousePosGL_Max, Vector2 mousePosW_Min, Vector2 mousePosW_Max, apGizmos.SELECT_TYPE areaSelectType)
 		{
 			if(Editor.Select.SelectionType != apSelection.SELECTION_TYPE.Mesh

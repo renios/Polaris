@@ -98,8 +98,13 @@ namespace AnyPortrait
 		//private apMatrix3x3[] vertMatrixList = null;
 		//private apMatrix3x3[] tmpVertMatrixList = null;
 
+		//이전 : apMatrix를 이용하는 경우
+		//private apMatrix tmpMatrix = new apMatrix();
 
-		private apMatrix tmpMatrix = new apMatrix();
+		//변경 3.27 : apMatrixCal을 이용하는 것으로 변경
+		private apMatrixCal tmpMatrix = new apMatrixCal();
+
+
 		private List<apOptCalculatedResultParamSubList> subParamGroupList = null;
 		private List<apOptCalculatedResultParam.OptParamKeyValueSet> subParamKeyValueList = null;
 		private float layerWeight = 0.0f;
@@ -113,8 +118,9 @@ namespace AnyPortrait
 		private apOptVertexRequest tmpVertRequest = null;
 
 
-		private apOptParamSetGroupVertWeight weightedVertData = null;
-		//private apOptModifiedVertexRig tmpVertRig = null;
+		//삭제 19.5.20 : 이 변수를 더이상 사용하지 않음
+		//private apOptParamSetGroupVertWeight weightedVertData = null;
+
 		private Color tmpColor = Color.clear;
 		private bool tmpVisible = false;
 		//private float tmpBoneIKWeight = 0.0f;
@@ -132,6 +138,11 @@ namespace AnyPortrait
 		private apOptPhysicsMeshParam tmpPhysicMeshParam = null;
 		private int tmpNumVert = 0;
 		private float tmpMass = 0.0f;
+
+		//추가 : ModMeshSet의 PhysicsVertex
+		private apOptModifiedPhysicsVertex tmpModPhysicsVert = null;
+		private apOptModifiedPhysicsVertex.LinkedVertex tmpLinkedPhysicVert = null;
+
 
 		private Vector2 tmpF_gravity = Vector2.zero;
 		private Vector2 tmpF_wind = Vector2.zero;
@@ -173,6 +184,14 @@ namespace AnyPortrait
 		private float tmpExtra_TextureMaxWeight = -1.0f;//최대 Weight 값
 
 
+		//private apOptModifiedMesh_Vertex		tmpSubModMesh_Vertex = null;
+		private apOptModifiedMesh_Transform		tmpSubModMesh_Transform = null;
+		//private apOptModifiedMesh_VertexRig		tmpSubModMesh_Rigging = null;
+		private apOptModifiedMesh_Physics		tmpSubModMesh_Physics = null;
+		private apOptModifiedMesh_Color			tmpSubModMesh_Color = null;
+		private apOptModifiedMesh_Extra			tmpSubModMesh_Extra = null;
+
+
 		private static Color _defaultColor = new Color(0.5f, 0.5f, 0.5f, 1.0f);
 
 		//Modifier의 설정들을 저장하자
@@ -211,6 +230,11 @@ namespace AnyPortrait
 		private const float PHYSIC_DELTA_TIME = 0.033f;//20FPS (0.05), 30FPS (0.033), 15FPS (0.067), 40FPS (0.025)
 
 		private System.Diagnostics.Stopwatch _stopWatch = null;
+
+		//추가 19.5.23 : 최적화를 위해 개선된 ModMeshSet (< ModMesh)을 사용할지 여부. v1.1.7 이후에 Bake를 하면 항상 true이다.
+		[SerializeField]
+		public bool _isUseModMeshSet = false;
+
 
 		#region [미사용 코드 : 빠른 Transform / Bone 접근을 위해 만들었지만 더 빠른 방법을 생각해내었다]
 		////Rigging을 위한 값
@@ -273,8 +297,24 @@ namespace AnyPortrait
 				_paramSetGroupList[i].LinkPortrait(portrait, this);
 			}
 		}
+
+		public IEnumerator LinkAsync(apPortrait portrait, apOptTransform parentOptTransform, apAsyncTimer asyncTimer)
+		{
+			_portrait = portrait;
+			_parentOptTransform = parentOptTransform;
+
+			for (int i = 0; i < _paramSetGroupList.Count; i++)
+			{
+				yield return _paramSetGroupList[i].LinkPortraitAsync(portrait, this, asyncTimer);
+			}
+
+			if(asyncTimer.IsYield())
+			{
+				yield return asyncTimer.WaitAndRestart();
+			}
+		}
 		           
-		public void Bake(apModifierBase srcModifier, apPortrait portrait)
+		public void Bake(apModifierBase srcModifier, apPortrait portrait, bool isUseModMeshSet)
 		{
 			_uniqueID = srcModifier._uniqueID;
 			_layer = srcModifier._layer;
@@ -318,13 +358,14 @@ namespace AnyPortrait
 				apModifierParamSetGroup srcParamSetGroup = srcModifier._paramSetGroup_controller[i];
 
 				apOptParamSetGroup optParamSetGroup = new apOptParamSetGroup();
-				optParamSetGroup.Bake(portrait, this, srcParamSetGroup, _isAnimated);
+				optParamSetGroup.Bake(portrait, this, srcParamSetGroup, _isAnimated, isUseModMeshSet);
 
 				_paramSetGroupList.Add(optParamSetGroup);
 				
 			}
 
-			
+			//추가 19.5.23 : ModMeshSet을 사용하도록 하자
+			_isUseModMeshSet = isUseModMeshSet;
 		}
 
 		// Functions
@@ -352,80 +393,86 @@ namespace AnyPortrait
 
 		public void Calculate(float tDelta)
 		{
-			switch (_modifierType)
+			//Calculate 최적화 : 19.5.24
+			if (_isUseModMeshSet)
 			{
-				case apModifierBase.MODIFIER_TYPE.Base:
-					break;
+				//ModMeshSet을 사용하는 버전의 Calculate
+				switch (_modifierType)
+				{
+					case apModifierBase.MODIFIER_TYPE.Base:
+						break;
 
-				case apModifierBase.MODIFIER_TYPE.Volume:
-					break;
+					case apModifierBase.MODIFIER_TYPE.Volume:
+						break;
 
-				case apModifierBase.MODIFIER_TYPE.Morph:
-//#if UNITY_EDITOR
-//					Profiler.BeginSample("Opt Mod Calculate - Morph");
-//#endif
-					Calculate_Morph(tDelta);
-//#if UNITY_EDITOR
-//					Profiler.EndSample();
-//#endif
-					break;
+					case apModifierBase.MODIFIER_TYPE.Morph:
+					case apModifierBase.MODIFIER_TYPE.AnimatedMorph:
+						Calculate_Morph_UseModMeshSet(tDelta);
+						break;
 
-				case apModifierBase.MODIFIER_TYPE.AnimatedMorph:
-//#if UNITY_EDITOR
-//			Profiler.BeginSample("Opt Mod Calculate - Animated Morph");
-//#endif
-					Calculate_Morph(tDelta);
-//#if UNITY_EDITOR
-//					Profiler.EndSample();
-//#endif
-					break;
+					case apModifierBase.MODIFIER_TYPE.Rigging:
+						Calculate_Rigging_UseModMeshSet(tDelta);
+						break;
 
-				case apModifierBase.MODIFIER_TYPE.Rigging:
-//#if UNITY_EDITOR
-//			Profiler.BeginSample("Opt Mod Calculate - Rigging");
-//#endif
-					Calculate_Rigging(tDelta);
-//#if UNITY_EDITOR
-//					Profiler.EndSample();
-//#endif
-					break;
+					case apModifierBase.MODIFIER_TYPE.Physic:
+						Calculate_Physics_UseModMeshSet(tDelta);
+						break;
 
-				case apModifierBase.MODIFIER_TYPE.Physic:
-//#if UNITY_EDITOR
-//			Profiler.BeginSample("Opt Mod Calculate - Physics");
-//#endif
-					Calculate_Physics(tDelta);
-//#if UNITY_EDITOR
-//					Profiler.EndSample();
-//#endif
-					break;
+					case apModifierBase.MODIFIER_TYPE.TF:
+					case apModifierBase.MODIFIER_TYPE.AnimatedTF:
+						Calculate_TF_UseModMeshSet(tDelta);
+						break;
 
-				case apModifierBase.MODIFIER_TYPE.TF:
-//#if UNITY_EDITOR
-//			Profiler.BeginSample("Opt Mod Calculate - TF");
-//#endif
-					Calculate_TF(tDelta);
-//#if UNITY_EDITOR
-//					Profiler.EndSample();
-//#endif
-					break;
+					case apModifierBase.MODIFIER_TYPE.FFD:
+						break;
 
-				case apModifierBase.MODIFIER_TYPE.AnimatedTF:
-//#if UNITY_EDITOR
-//			Profiler.BeginSample("Opt Mod Calculate - Animated TF");
-//#endif
-					Calculate_TF(tDelta);
-//#if UNITY_EDITOR
-//					Profiler.EndSample();
-//#endif
-					break;
-
-				case apModifierBase.MODIFIER_TYPE.FFD:
-					break;
-
-				case apModifierBase.MODIFIER_TYPE.AnimatedFFD:
-					break;
+					case apModifierBase.MODIFIER_TYPE.AnimatedFFD:
+						break;
+				}
 			}
+			else
+			{
+				//이전 버전의 Calculate
+				switch (_modifierType)
+				{
+					case apModifierBase.MODIFIER_TYPE.Base:
+						break;
+
+					case apModifierBase.MODIFIER_TYPE.Volume:
+						break;
+
+					case apModifierBase.MODIFIER_TYPE.Morph:
+						Calculate_Morph(tDelta);
+						break;
+
+					case apModifierBase.MODIFIER_TYPE.AnimatedMorph:
+						Calculate_Morph(tDelta);
+						break;
+
+					case apModifierBase.MODIFIER_TYPE.Rigging:
+						Calculate_Rigging(tDelta);
+						break;
+
+					case apModifierBase.MODIFIER_TYPE.Physic:
+						Calculate_Physics(tDelta);
+						break;
+
+					case apModifierBase.MODIFIER_TYPE.TF:
+						Calculate_TF(tDelta);
+						break;
+
+					case apModifierBase.MODIFIER_TYPE.AnimatedTF:
+						Calculate_TF(tDelta);
+						break;
+
+					case apModifierBase.MODIFIER_TYPE.FFD:
+						break;
+
+					case apModifierBase.MODIFIER_TYPE.AnimatedFFD:
+						break;
+				}
+			}
+			
 		}
 
 
@@ -482,7 +529,9 @@ namespace AnyPortrait
 				subParamKeyValueList = null;
 				layerWeight = 0.0f;
 				keyParamSetGroup = null;
-				weightedVertData = calParam._weightedVertexData;
+
+				//삭제 19.5.20 : 이 변수를 더이상 사용하지 않음
+				//weightedVertData = calParam._weightedVertexData;
 
 				//일단 초기화
 				//구버전
@@ -917,7 +966,14 @@ namespace AnyPortrait
 				else
 				{
 					calParam._isAvailable = true;
-					calParam._result_Matrix.MakeMatrix();
+
+					//Morph에서는 이 과정이 필요없는데?
+					////이전 : apMatrix로 계산된 경우
+					////calParam._result_Matrix.MakeMatrix();
+
+					////변경 3.27 : apMatrixCal로 계산된 경우
+					//calParam._result_Matrix.CalculateScale_FromLerp();
+
 				}
 
 			}
@@ -1084,12 +1140,20 @@ namespace AnyPortrait
 							if(paramKeyValue._isAnimRotationBias)
 							{
 								//추가 : RotationBias가 있다면 미리 계산된 Bias Matrix를 사용한다.
-								tmpMatrix.AddMatrix(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight, false);
+								//이전 : apMatrix
+								//tmpMatrix.AddMatrix(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight, false);
+
+								//변경 3.27 : apMatrixCal
+								tmpMatrix.AddMatrixParallel(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight);
 							}
 							else
 							{
 								//기본 식
-								tmpMatrix.AddMatrix(paramKeyValue._modifiedMesh._transformMatrix, paramKeyValue._weight, false);
+								//이전 : apMatrix
+								//tmpMatrix.AddMatrix(paramKeyValue._modifiedMesh._transformMatrix, paramKeyValue._weight, false);
+
+								//변경 3.27 : apMatrixCal
+								tmpMatrix.AddMatrixParallel(paramKeyValue._modifiedMesh._transformMatrix, paramKeyValue._weight);
 							}
 							
 
@@ -1223,31 +1287,25 @@ namespace AnyPortrait
 							if(paramKeyValue._isAnimRotationBias)
 							{
 								//추가 : RotationBias가 있다면 미리 계산된 Bias Matrix를 사용한다.
-								tmpMatrix.AddMatrix(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight, false);
+								//이전 : apMatrix
+								//tmpMatrix.AddMatrix(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight, false);
+
+								//변경 3.27 : apMatrixCal
+								tmpMatrix.AddMatrixParallel(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight);
 							}
 							else
 							{
-								tmpMatrix.AddMatrix(paramKeyValue._modifiedBone._transformMatrix, paramKeyValue._weight, false);
+								//이전 : apMatrix
+								//tmpMatrix.AddMatrix(paramKeyValue._modifiedBone._transformMatrix, paramKeyValue._weight, false);
+
+								//변경 3.27 : apMatrixCal
+								tmpMatrix.AddMatrixParallel(paramKeyValue._modifiedBone._transformMatrix, paramKeyValue._weight);
 							}
 
-							//if (isBoneIKControllerUsed)
-							//{
-							//	//추가 : Bone IK Weight 계산
-							//	tmpBoneIKWeight += paramKeyValue._weight * paramKeyValue._modifiedBone._boneIKController_MixWeight;
-							//}
 							
 							nColorCalculated++;//Visible 계산을 위해 "ParamKey 계산 횟수"를 카운트하자
 						}
-
-						//if (totalParamWeight < 0.3f)
-						//{
-						//	Debug.LogError("Modifier Cal Param [Weight 합이 너무 작다 : " + totalParamWeight + " - 계산된 Param 개수 : " + nAddedWeight + " / 계산안된 Param 개수 : " + nSkipWeight + " (Total : " + nParamKeys +")]");
-						//	Debug.LogError("Sub List [" + iSubList + " / " + subParamGroupList.Count + "]");
-						//}
-						//else
-						//{
-						//	Debug.Log(">>>Modifier Cal Param [Weight 합이 적절 : " + totalParamWeight + " - 계산된 Param 개수 : " + nAddedWeight + " / 계산안된 Param 개수 : " + nSkipWeight + " (Total : " + nParamKeys +")]");
-						//}
+						
 					}
 
 					//추가 : ParamSetWeight를 사용한다면 -> LayerWeight x ParamSetWeight(0~1)을 사용한다.
@@ -1262,21 +1320,7 @@ namespace AnyPortrait
 					}
 
 
-					//if (tmpTotalParamSetWeight < 0.3f && layerWeight > 0.001f && IsAnimated)
-					//{
-					//	Debug.LogError("Param Weight가 작다 : " + tmpTotalParamSetWeight + " / Layer Weight : " + layerWeight + " [ Skip : " + (layerWeight < 0.001f) + " ]");
-					//	if(keyParamSetGroup._keyAnimClip != null)
-					//	{
-					//		Debug.LogError("연결된 AnimClip : " + keyParamSetGroup._keyAnimClip._name + " [Anim 계산된 LayerWeight : " + keyParamSetGroup._isAnimUpdatedLayerWeight + " / AnimEnabled " + keyParamSetGroup.IsAnimEnabled + " ]");
-					//		Debug.Log("PlayUnit : " + (keyParamSetGroup._keyAnimClip._parentPlayUnit != null));
-					//		Debug.Log("Anim Clip ID : " + keyParamSetGroup._keyAnimClip._uniqueID);
-					//	}
-					//	else
-					//	{
-					//		Debug.LogError("연결된 AnimClip이 없다? : " + keyParamSetGroup._keyAnimClipID + " [Anim 계산된 LayerWeight : " + keyParamSetGroup._isAnimUpdatedLayerWeight + " / AnimEnabled " + keyParamSetGroup.IsAnimEnabled + " ]");
-					//	}
-					//}
-
+					
 
 					if (layerWeight < 0.001f)
 					{
@@ -1296,45 +1340,20 @@ namespace AnyPortrait
 
 					calParam._totalParamSetGroupWeight += layerWeight;//<<수정 : 나중에 Modifier 자체의 Weight를 적용할 수 있게 만든다.
 
-					//디버그용 코드
-					//if(isBoneTarget 
-					//		&& calParam._isAnimModifier 
-					//		//&& layerWeight < 0.3f
-					//		&& calParam._targetBone.name.Contains("Pelvis"))
-					//{
-						
-					//	Debug.Log("[" + iCalculatedSubParam + "] Layer Weight가 낮은 Anim Bone | Weight : " + layerWeight + " / " + tmpMatrix.ToString());
-					//}
-
-					//if(tmpMatrix._scale.magnitude < 0.3f)
-					//{
-					//	Debug.LogError("Modifier 계산 중 tmpMatrix가 너무 작다 [Mod Bone? : " + isBoneTarget +"]");
-					//}
+					//추가 3.26 : apMatrixCal 계산
+					tmpMatrix.CalculateScale_FromAdd();
 
 					//if (keyParamSetGroup._layerIndex == 0)
 					if (iCalculatedSubParam == 0)
 					{
-						//calParam._result_Matrix.SetMatrix(tmpMatrix);
-
-						//이 코드는 Make Matrix를 계속 호출한다. >> 삭제 예정
-						//calParam._result_Matrix.SetPos(tmpMatrix._pos * layerWeight);
-						//calParam._result_Matrix.SetRotate(tmpMatrix._angleDeg * layerWeight);
-						//calParam._result_Matrix.SetScale(tmpMatrix._scale * layerWeight + Vector2.one * (1.0f - layerWeight));
-						//calParam._result_Matrix.MakeMatrix();
-
 						//위 코드를 하나로 합쳤다.
-						calParam._result_Matrix.SetTRS(	tmpMatrix._pos * layerWeight,
-														tmpMatrix._angleDeg * layerWeight,
-														tmpMatrix._scale * layerWeight + Vector2.one * (1.0f - layerWeight));
+						//이전 : apMatrix로 계산된 tmpMatrix
+						//calParam._result_Matrix.SetTRS(	tmpMatrix._pos * layerWeight,
+						//								tmpMatrix._angleDeg * layerWeight,
+						//								tmpMatrix._scale * layerWeight + Vector2.one * (1.0f - layerWeight));
 
-
-						//if (isBoneIKControllerUsed)
-						//{
-						//	//추가 : Bone IK Weight 계산
-						//	calParam._result_BoneIKWeight = tmpBoneIKWeight * layerWeight;
-						//	calParam._isBoneIKWeightCalculated = true;
-							
-						//}
+						//변경 3.27 : apMatrixCal로 계산된 tmpMatrix
+						calParam._result_Matrix.SetTRSForLerp(tmpMatrix);
 
 					}
 					else
@@ -1343,27 +1362,21 @@ namespace AnyPortrait
 						{
 							case apModifierParamSetGroup.BLEND_METHOD.Additive:
 								{
-									calParam._result_Matrix.AddMatrix(tmpMatrix, layerWeight, true);
+									//이전 : apMatrix로 계산
+									//calParam._result_Matrix.AddMatrix(tmpMatrix, layerWeight, true);
 
-									//if (isBoneIKControllerUsed)
-									//{
-									//	//추가 : Bone IK Weight 계산
-									//	calParam._result_BoneIKWeight += tmpBoneIKWeight * layerWeight;
-									//	calParam._isBoneIKWeightCalculated = true;
-									//}
+									//변경 3.27 : apMatrixCal로 계산
+									calParam._result_Matrix.AddMatrixLayered(tmpMatrix, layerWeight);
 								}
 								break;
 
 							case apModifierParamSetGroup.BLEND_METHOD.Interpolation:
 								{
-									calParam._result_Matrix.LerpMartix(tmpMatrix, layerWeight);
+									//이전 : apMatrix로 계산
+									//calParam._result_Matrix.LerpMartix(tmpMatrix, layerWeight);
 
-									//if (isBoneIKControllerUsed)
-									//{
-									//	//추가 : Bone IK Weight 계산
-									//	calParam._result_BoneIKWeight = calParam._result_BoneIKWeight * (1.0f - layerWeight) + (tmpBoneIKWeight * layerWeight);
-									//	calParam._isBoneIKWeightCalculated = true;
-									//}
+									//변경 3.27 : apMatrixCal로 계산
+									calParam._result_Matrix.LerpMatrixLayered(tmpMatrix, layerWeight);
 								}
 								break;
 						}
@@ -1417,7 +1430,12 @@ namespace AnyPortrait
 				else
 				{
 					calParam._isAvailable = true;
-					calParam._result_Matrix.MakeMatrix();//<?
+
+					//이전 : apMatrix로 계산된 경우
+					//calParam._result_Matrix.MakeMatrix();
+
+					//변경 : apMatrixCal로 계산한 경우
+					calParam._result_Matrix.CalculateScale_FromLerp();
 				}
 			}
 		}
@@ -1753,7 +1771,8 @@ namespace AnyPortrait
 				layerWeight = 0.0f;
 				keyParamSetGroup = null;
 
-				weightedVertData = calParam._weightedVertexData;
+				//삭제 19.5.20 : 이 변수를 더이상 사용하지 않음
+				//weightedVertData = calParam._weightedVertexData;
 
 				//일단 초기화
 				for (int iPos = 0; iPos < posList.Length; iPos++)
@@ -2512,48 +2531,63 @@ namespace AnyPortrait
 						{
 							case apModifierParamSetGroup.BLEND_METHOD.Additive:
 								{
-									if (weightedVertData != null)
-									{
-										//Vertex 가중치가 추가되었다.
-										float vertWeight = 0.0f;
-										for (int iPos = 0; iPos < posList.Length; iPos++)
-										{
-											vertWeight = layerWeight * weightedVertData._vertWeightList[iPos];
+									//변경 19.5.20 : weightedVertData를 더이상 사용하지 않음
+									//if (weightedVertData != null)
+									//{
+									//	//Vertex 가중치가 추가되었다.
+									//	float vertWeight = 0.0f;
+									//	for (int iPos = 0; iPos < posList.Length; iPos++)
+									//	{
+									//		vertWeight = layerWeight * weightedVertData._vertWeightList[iPos];
 
-											posList[iPos] += tmpPosList[iPos] * vertWeight;
-										}
-									}
-									else
+									//		posList[iPos] += tmpPosList[iPos] * vertWeight;
+									//	}
+									//}
+									//else
+									//{
+									//	for (int iPos = 0; iPos < posList.Length; iPos++)
+									//	{
+									//		posList[iPos] += tmpPosList[iPos] * layerWeight;
+									//	}
+									//}
+
+									//변경됨 19.5.20
+									for (int iPos = 0; iPos < posList.Length; iPos++)
 									{
-										for (int iPos = 0; iPos < posList.Length; iPos++)
-										{
-											posList[iPos] += tmpPosList[iPos] * layerWeight;
-										}
+										posList[iPos] += tmpPosList[iPos] * layerWeight;
 									}
 								}
 								break;
 
 							case apModifierParamSetGroup.BLEND_METHOD.Interpolation:
 								{
-									if (weightedVertData != null)
-									{
-										//Vertex 가중치가 추가되었다.
-										float vertWeight = 0.0f;
-										for (int iPos = 0; iPos < posList.Length; iPos++)
-										{
-											vertWeight = layerWeight * weightedVertData._vertWeightList[iPos];
+									//변경 19.5.20 : weightedVertData를 더이상 사용하지 않음
+									//if (weightedVertData != null)
+									//{
+									//	//Vertex 가중치가 추가되었다.
+									//	float vertWeight = 0.0f;
+									//	for (int iPos = 0; iPos < posList.Length; iPos++)
+									//	{
+									//		vertWeight = layerWeight * weightedVertData._vertWeightList[iPos];
 
-											posList[iPos] = (posList[iPos] * (1.0f - vertWeight)) +
-															(tmpPosList[iPos] * vertWeight);
-										}
-									}
-									else
+									//		posList[iPos] = (posList[iPos] * (1.0f - vertWeight)) +
+									//						(tmpPosList[iPos] * vertWeight);
+									//	}
+									//}
+									//else
+									//{
+									//	for (int iPos = 0; iPos < posList.Length; iPos++)
+									//	{
+									//		posList[iPos] = (posList[iPos] * (1.0f - layerWeight)) +
+									//						(tmpPosList[iPos] * layerWeight);
+									//	}
+									//}
+
+									//변경됨 19.5.20
+									for (int iPos = 0; iPos < posList.Length; iPos++)
 									{
-										for (int iPos = 0; iPos < posList.Length; iPos++)
-										{
-											posList[iPos] = (posList[iPos] * (1.0f - layerWeight)) +
-															(tmpPosList[iPos] * layerWeight);
-										}
+										posList[iPos] = (posList[iPos] * (1.0f - layerWeight)) +
+														(tmpPosList[iPos] * layerWeight);
 									}
 								}
 								break;
@@ -2572,6 +2606,2309 @@ namespace AnyPortrait
 
 			}
 		}
+
+
+
+
+
+		//------------------------------------------------------------------------------------------------------------------------------------
+		// ModMeshSet을 사용하는 버전 (v1.1.7)에서의 Calculate 코드들
+		//------------------------------------------------------------------------------------------------------------------------------------
+
+		
+
+
+		//--------------------------------------------------------------------------
+		// Morph
+		//--------------------------------------------------------------------------
+		private void Calculate_Morph_UseModMeshSet(float tDelta)
+		{
+
+			
+//#if UNITY_EDITOR
+//			Profiler.BeginSample("Modifier - Calculate Morph");
+//#endif
+
+			//bool isFirstDebug = true;
+			apOptCalculatedResultParam calParam = null;
+			bool isUpdatable = false;
+			for (int i = 0; i < _calculatedResultParams.Count; i++)
+			{
+				calParam = _calculatedResultParams[i];
+
+				
+				//1. 계산 [중요]
+				isUpdatable = calParam.Calculate();
+				if (!isUpdatable)
+				{
+					calParam._isAvailable = false;
+					continue;
+				}
+				else
+				{
+					calParam._isAvailable = true;
+				}
+
+				//추가 : 색상 처리 초기화
+				calParam._isColorCalculated = false;
+
+
+				//계산 결과를 Vertex에 넣어줘야 한다.
+				//구버전
+				//posList = calParam._result_Positions;
+				//tmpPosList = calParam._tmp_Positions;
+
+				//신버전
+				vertRequestList = calParam._result_VertLocalPairs;
+
+
+				subParamGroupList = calParam._subParamKeyValueList;
+				subParamKeyValueList = null;
+				layerWeight = 0.0f;
+				keyParamSetGroup = null;
+
+				//삭제 19.5.20 : 이 변수를 더이상 사용하지 않음
+				//weightedVertData = calParam._weightedVertexData;
+
+				//일단 초기화
+				//구버전
+				//for (int iPos = 0; iPos < posList.Length; iPos++)
+				//{
+				//	posList[iPos] = Vector2.zero;
+				//}
+
+				//신버전
+				for (int iVR = 0; iVR < vertRequestList.Count; iVR++)
+				{
+					vertRequestList[iVR].InitCalculate();
+				}
+
+
+				if (_isColorProperty)
+				{
+					calParam._result_Color = new Color(0.5f, 0.5f, 0.5f, 1.0f);
+					calParam._result_IsVisible = false;//Alpha와 달리 Visible 값은 false -> OR 연산으로 작동한다.
+				}
+				else
+				{
+					calParam._result_IsVisible = true;
+				}
+
+
+				//추가 12.5 : Extra Option 초기화
+				//이건 ModMesh에서 값을 가진 경우에 한해서만 계산이 된다.
+				calParam._isExtra_DepthChanged = false;
+				calParam._isExtra_TextureChanged = false;
+				calParam._extra_DeltaDepth = 0;
+				calParam._extra_TextureDataID = -1;
+				calParam._extra_TextureData = null;
+
+
+
+
+
+				int iCalculatedSubParam = 0;
+
+				iColoredKeyParamSetGroup = 0;//<<실제 Color 처리가 된 ParamSetGroup의 개수
+				tmpIsColoredKeyParamSetGroup = false;
+
+
+
+				//추가 12.5 : Extra Option 계산 값				
+				tmpExtra_DepthChanged = false;
+				tmpExtra_TextureChanged = false;
+				tmpExtra_DeltaDepth = 0;
+				tmpExtra_TextureDataID = 0;
+				tmpExtra_TextureData = null;
+				tmpExtra_DepthMaxWeight = -1.0f;//최대 Weight 값
+				tmpExtra_TextureMaxWeight = -1.0f;//최대 Weight 값
+
+
+				//SubList (ParamSetGroup을 키값으로 레이어화된 데이터)를 순회하면서 먼저 계산한다.
+				//레이어간 병합 과정에 신경 쓸것
+				for (int iSubList = 0; iSubList < subParamGroupList.Count; iSubList++)
+				{
+					curSubList = subParamGroupList[iSubList];
+
+					int nParamKeys = curSubList._subParamKeyValues.Count;//Sub Params
+					subParamKeyValueList = curSubList._subParamKeyValues;
+
+					paramKeyValue = null;
+
+					
+					keyParamSetGroup = curSubList._keyParamSetGroup;
+					
+					//Vertex Pos 대신 Vertex Requst를 보간하자
+					vertRequest = curSubList._vertexRequest;
+					
+
+					tmpColor = Color.clear;
+					tmpVisible = false;
+
+					tmpTotalParamSetWeight = 0.0f;
+					nColorCalculated = 0;
+
+					//KeyParamSetGroup이 Color를 지원하는지 체크
+					tmpIsColoredKeyParamSetGroup = _isColorProperty && keyParamSetGroup._isColorPropertyEnabled;
+
+					
+					//-------------------------------------------
+					// 여기가 과부하가 가장 심한 곳이다! 우오오오
+					//-------------------------------------------
+
+					//Param (MorphKey에 따라서)을 기준으로 데이터를 넣어준다.
+					//Dist에 따른 ParamWeight를 가중치로 적용한다.
+					for (int iPV = 0; iPV < nParamKeys; iPV++)
+					{
+						paramKeyValue = subParamKeyValueList[iPV];
+
+						if (!paramKeyValue._isCalculated)
+						{ continue; }
+
+						tmpTotalParamSetWeight += paramKeyValue._weight * paramKeyValue._paramSet._overlapWeight;
+
+						
+						//최적화해야할 부분 1)
+						//구버전)
+						//Pos를 일일이 돌게 아니라 VertexRequst의 Weight만 지정하자
+						////---------------------------- Pos List
+						//for (int iPos = 0; iPos < posList.Length; iPos++)
+						//{
+						//	//calculatedValue = paramKeyValue._modifiedValue._vertices[iPos]._deltaPos * paramKeyValue._weight;
+						//	tmpPosList[iPos] += paramKeyValue._modifiedMesh._vertices[iPos]._deltaPos * paramKeyValue._weight;
+						//}
+						////---------------------------- Pos List
+
+						//>> 최적화 코드)
+						vertRequest._modWeightPairs[iPV].SetWeight(paramKeyValue._weight);
+
+
+
+						//---------------------------- Color
+						if (tmpIsColoredKeyParamSetGroup)
+						{
+							//기존
+							//if (paramKeyValue._modifiedMesh._isVisible)
+							//{
+							//	tmpColor += paramKeyValue._modifiedMesh._meshColor * paramKeyValue._weight;
+							//	tmpVisible = true;//하나라도 Visible이면 Visible이 된다.
+							//}
+							//else
+							//{
+							//	tmpParamColor = paramKeyValue._modifiedMesh._meshColor;
+							//	tmpParamColor.a = 0.0f;
+							//	tmpColor += tmpParamColor * paramKeyValue._weight;
+							//}
+
+							//변경
+							tmpSubModMesh_Color = paramKeyValue._modifiedMeshSet.SubModMesh_Color;
+							if(tmpSubModMesh_Color != null)
+							{
+								if(tmpSubModMesh_Color._isVisible)
+								{
+									tmpColor += tmpSubModMesh_Color._meshColor * paramKeyValue._weight;
+									tmpVisible = true;//하나라도 Visible이면 Visible이 된다.
+								}
+								else
+								{
+									tmpParamColor = tmpSubModMesh_Color._meshColor;
+									tmpParamColor.a = 0.0f;
+									tmpColor += tmpParamColor * paramKeyValue._weight;
+								}
+							}
+							
+						}
+
+						nColorCalculated++;
+						//---------------------------- Color
+
+						//---------------------------- Extra Option
+						//추가 12.5 : Extra Option
+						if (_isExtraPropertyEnabled)
+						{
+							//이전 코드
+							//1. Modifier의 Extra Property가 켜져 있어야 한다.
+							//2. 현재 ParamKeyValue의 ModMesh의 Depth나 TextureData Changed 옵션이 켜져 있어야 한다.
+							//2-1. Depth인 경우 Ex-Transform이 켜져 있어야 한다.
+							//2-2. Texture인 경우 Ex-Color가 켜져 있어야 한다.
+							//if (paramKeyValue._modifiedMesh._isExtraValueEnabled
+							//	&& (paramKeyValue._modifiedMesh._extraValue._isDepthChanged || paramKeyValue._modifiedMesh._extraValue._isTextureChanged)
+							//	)
+							//{
+							//	//현재 ParamKeyValue의 CutOut된 가중치를 구해야한다.
+							//	float extraWeight = paramKeyValue._weight;//<<일단 가중치를 더한다.
+							//	float bias = 0.0001f;
+							//	float overlapBias = 0.01f;
+							//	float cutOut = 0.0f;
+							//	bool isExactWeight = false;
+							//	if (IsAnimated)
+							//	{
+							//		switch (paramKeyValue._animKeyPos)
+							//		{
+							//			case apOptCalculatedResultParam.AnimKeyPos.ExactKey: isExactWeight = true; break;
+							//			case apOptCalculatedResultParam.AnimKeyPos.NextKey: cutOut = paramKeyValue._modifiedMesh._extraValue._weightCutout_AnimPrev; break; //Next Key라면 Prev와의 CutOut을 가져온다.
+							//			case apOptCalculatedResultParam.AnimKeyPos.PrevKey: cutOut = paramKeyValue._modifiedMesh._extraValue._weightCutout_AnimNext; break;//Prev Key라면 Next와의 CutOut을 가져온다.
+							//		}
+							//	}
+							//	else
+							//	{
+							//		cutOut = paramKeyValue._modifiedMesh._extraValue._weightCutout;
+							//	}
+
+							//	cutOut = Mathf.Clamp01(cutOut + overlapBias);//살짝 겹치게
+
+							//	if (isExactWeight)
+							//	{
+							//		extraWeight = 10000.0f;
+							//	}
+							//	else if (cutOut < bias)
+							//	{
+							//		//정확하면 최대값
+							//		//아니면 적용안함
+							//		if (extraWeight > 1.0f - bias) { extraWeight = 10000.0f; }
+							//		else { extraWeight = -1.0f; }
+							//	}
+							//	else
+							//	{
+							//		if (extraWeight < 1.0f - cutOut) { extraWeight = -1.0f; }
+							//		else { extraWeight = (extraWeight - (1.0f - cutOut)) / cutOut; }
+							//	}
+
+							//	if (extraWeight > 0.0f)
+							//	{
+							//		if (paramKeyValue._modifiedMesh._extraValue._isDepthChanged)
+							//		{
+							//			//2-1. Depth 이벤트
+							//			if(extraWeight > tmpExtra_DepthMaxWeight)
+							//			{
+							//				//가중치가 최대값보다 큰 경우
+							//				tmpExtra_DepthMaxWeight = extraWeight;
+							//				tmpExtra_DepthChanged = true;
+							//				tmpExtra_DeltaDepth = paramKeyValue._modifiedMesh._extraValue._deltaDepth;
+							//			}
+
+							//		}
+							//		if (paramKeyValue._modifiedMesh._extraValue._isTextureChanged)
+							//		{
+							//			//2-2. Texture 이벤트
+							//			if(extraWeight > tmpExtra_TextureMaxWeight)
+							//			{
+							//				//가중치가 최대값보다 큰 경우
+							//				tmpExtra_TextureMaxWeight = extraWeight;
+							//				tmpExtra_TextureChanged = true;
+							//				tmpExtra_TextureData = paramKeyValue._modifiedMesh._extraValue._linkedTextureData;
+							//				tmpExtra_TextureDataID = paramKeyValue._modifiedMesh._extraValue._textureDataID;
+							//			}
+							//		}
+							//	}
+							//}
+
+							//변경
+							tmpSubModMesh_Extra = paramKeyValue._modifiedMeshSet.SubModMesh_Extra;
+
+							if (tmpSubModMesh_Extra != null
+									&& (tmpSubModMesh_Extra._extraValue._isDepthChanged || tmpSubModMesh_Extra._extraValue._isTextureChanged)
+									)
+							{
+								//현재 ParamKeyValue의 CutOut된 가중치를 구해야한다.
+								float extraWeight = paramKeyValue._weight;//<<일단 가중치를 더한다.
+								float bias = 0.0001f;
+								float overlapBias = 0.01f;
+								float cutOut = 0.0f;
+								bool isExactWeight = false;
+								if (IsAnimated)
+								{
+									switch (paramKeyValue._animKeyPos)
+									{
+										case apOptCalculatedResultParam.AnimKeyPos.ExactKey:
+											isExactWeight = true;
+											break;
+										case apOptCalculatedResultParam.AnimKeyPos.NextKey:
+											cutOut = tmpSubModMesh_Extra._extraValue._weightCutout_AnimPrev;
+											break; //Next Key라면 Prev와의 CutOut을 가져온다.
+										case apOptCalculatedResultParam.AnimKeyPos.PrevKey:
+											cutOut = tmpSubModMesh_Extra._extraValue._weightCutout_AnimNext;
+											break;//Prev Key라면 Next와의 CutOut을 가져온다.
+									}
+								}
+								else
+								{
+									cutOut = tmpSubModMesh_Extra._extraValue._weightCutout;
+								}
+
+								cutOut = Mathf.Clamp01(cutOut + overlapBias);//살짝 겹치게
+
+								if (isExactWeight)
+								{
+									extraWeight = 10000.0f;
+								}
+								else if (cutOut < bias)
+								{
+									//정확하면 최대값
+									//아니면 적용안함
+									if (extraWeight > 1.0f - bias) { extraWeight = 10000.0f; }
+									else { extraWeight = -1.0f; }
+								}
+								else
+								{
+									if (extraWeight < 1.0f - cutOut) { extraWeight = -1.0f; }
+									else { extraWeight = (extraWeight - (1.0f - cutOut)) / cutOut; }
+								}
+
+								if (extraWeight > 0.0f)
+								{
+									if (tmpSubModMesh_Extra._extraValue._isDepthChanged)
+									{
+										//2-1. Depth 이벤트
+										if (extraWeight > tmpExtra_DepthMaxWeight)
+										{
+											//가중치가 최대값보다 큰 경우
+											tmpExtra_DepthMaxWeight = extraWeight;
+											tmpExtra_DepthChanged = true;
+											tmpExtra_DeltaDepth = tmpSubModMesh_Extra._extraValue._deltaDepth;
+										}
+
+									}
+									if (tmpSubModMesh_Extra._extraValue._isTextureChanged)
+									{
+										//2-2. Texture 이벤트
+										if (extraWeight > tmpExtra_TextureMaxWeight)
+										{
+											//가중치가 최대값보다 큰 경우
+											tmpExtra_TextureMaxWeight = extraWeight;
+											tmpExtra_TextureChanged = true;
+											tmpExtra_TextureData = tmpSubModMesh_Extra._extraValue._linkedTextureData;
+											tmpExtra_TextureDataID = tmpSubModMesh_Extra._extraValue._textureDataID;
+										}
+									}
+								}
+							}
+						}
+						//---------------------------- Extra Option
+
+
+//#if UNITY_EDITOR
+//						Profiler.EndSample();
+//#endif
+					}//--- Params
+
+//#if UNITY_EDITOR
+//					Profiler.EndSample();
+//#endif
+
+					//추가 : ParamSetWeight를 사용한다면 -> LayerWeight x ParamSetWeight(0~1)을 사용한다.
+					if (!_isUseParamSetWeight)
+					{
+						layerWeight = Mathf.Clamp01(keyParamSetGroup._layerWeight);
+					}
+					else
+					{
+						layerWeight = Mathf.Clamp01(keyParamSetGroup._layerWeight * Mathf.Clamp01(tmpTotalParamSetWeight));
+					}
+
+
+					if (layerWeight < 0.001f)
+					{
+						continue;
+					}
+
+					vertRequest.SetCalculated();//<<일단 계산하기 위해 참조 했음을 알린다.
+
+					calParam._totalParamSetGroupWeight += layerWeight;//<<수정 : 나중에 Modifier 자체의 Weight를 적용할 수 있게 만든다.
+
+					if (nColorCalculated == 0)
+					{
+						tmpVisible = true;
+						tmpColor = _defaultColor;
+					}
+
+					//if (keyParamSetGroup._layerIndex == 0)
+					if (iCalculatedSubParam == 0)
+					{
+						//구버전 : Vertex Pos를 직접 수정
+						//for (int iPos = 0; iPos < posList.Length; iPos++)
+						//{
+						//	posList[iPos] = tmpPosList[iPos] * layerWeight;
+						//}
+
+						//신버전 : VertexRequest에 넣자
+						vertRequest.MultiplyWeight(layerWeight);
+					}
+					else
+					{
+
+//#if UNITY_EDITOR
+//						Profiler.BeginSample("Modifier - Calculate Morph > Overlap Pos List");
+//#endif
+
+						switch (keyParamSetGroup._blendMethod)
+						{
+							case apModifierParamSetGroup.BLEND_METHOD.Additive:
+								{
+									//VertexRequest에 넣자
+									//Additive : Prev + Next * weight이므로
+									//Next에만 weight를 곱한다.
+									vertRequest.MultiplyWeight(layerWeight);
+
+								}
+								break;
+
+							case apModifierParamSetGroup.BLEND_METHOD.Interpolation:
+								{
+									//VertexRequest에 넣자
+									//Interpolation : Prev * (1-weight) + Next * weight이므로
+									//Prev에 1-weight
+									//Next에 weight
+									//단, 계산 안한건 제외한다.
+									float invWeight = 1.0f - layerWeight;
+									for (int iVR = 0; iVR < vertRequestList.Count; iVR++)
+									{
+										tmpVertRequest = vertRequestList[iVR];
+										if(!tmpVertRequest._isCalculated)
+										{
+											//아직 계산 안한건 패스
+											continue;
+										}
+										if(tmpVertRequest == vertRequest)
+										{
+											//Next엔 * weight
+											tmpVertRequest.MultiplyWeight(layerWeight);
+										}
+										else
+										{
+											//Prev엔 * (1-weight)
+											tmpVertRequest.MultiplyWeight(invWeight);
+										}
+									}
+								}
+								break;
+
+							default:
+								Debug.LogError("Mod-Morph : Unknown BLEND_METHOD : " + keyParamSetGroup._blendMethod);
+								break;
+						}
+
+//#if UNITY_EDITOR
+//						Profiler.EndSample();
+//#endif
+
+					}
+
+
+					if (tmpIsColoredKeyParamSetGroup)
+					{
+						if (iColoredKeyParamSetGroup == 0 || keyParamSetGroup._blendMethod == apModifierParamSetGroup.BLEND_METHOD.Interpolation)
+						{
+							//색상 Interpolation
+							calParam._result_Color = apUtil.BlendColor_ITP(calParam._result_Color, tmpColor, layerWeight);
+							calParam._result_IsVisible |= tmpVisible;
+						}
+						else
+						{
+							//색상 Additive
+							calParam._result_Color = apUtil.BlendColor_Add(calParam._result_Color, tmpColor, layerWeight);
+							calParam._result_IsVisible |= tmpVisible;
+						}
+						iColoredKeyParamSetGroup++;
+						calParam._isColorCalculated = true;
+					}
+
+
+					//추가 12.5 : Extra Option
+					if(_isExtraPropertyEnabled)
+					{
+						if(tmpExtra_DepthChanged)
+						{
+							calParam._isExtra_DepthChanged = true;
+							calParam._extra_DeltaDepth = tmpExtra_DeltaDepth;
+						}
+
+						if(tmpExtra_TextureChanged)
+						{
+							calParam._isExtra_TextureChanged = true;
+							calParam._extra_TextureData = tmpExtra_TextureData;
+							calParam._extra_TextureDataID = tmpExtra_TextureDataID;
+						}
+					}
+
+
+					iCalculatedSubParam++;
+
+				}//-SubList (ParamSetGroup을 키값으로 따로 적용한다.)
+
+
+
+
+				if (iCalculatedSubParam == 0)
+				{
+					calParam._isAvailable = false;
+				}
+				else
+				{
+					calParam._isAvailable = true;
+				}
+
+			}
+
+//#if UNITY_EDITOR
+//			Profiler.EndSample();
+//#endif	
+		}
+
+
+
+
+
+		//--------------------------------------------------------------------------
+		// TF (Transform)
+		//--------------------------------------------------------------------------
+		private void Calculate_TF_UseModMeshSet(float tDelta)
+		{
+			apOptCalculatedResultParam calParam = null;
+			bool isUpdatable = false;
+
+			//추가 : Bone을 대상으로 하는가
+			//Bone대상이면 ModBone을 사용해야한다.
+			bool isBoneTarget = false;
+			//bool isBoneIKControllerUsed = false;//<<Bone IK 추가
+
+			for (int i = 0; i < _calculatedResultParams.Count; i++)
+			{
+				calParam = _calculatedResultParams[i];
+
+				if (calParam._targetBone != null)
+				{
+					//ModBone을 참조하는 Param이다.
+					isBoneTarget = true;
+					//if(calParam._targetBone._IKController._controllerType != apOptBoneIKController.CONTROLLER_TYPE.None)
+					//{
+					//	isBoneIKControllerUsed = true;//<<추가
+					//	Debug.Log("Bone IK Used");
+					//}
+					//else
+					//{
+					//	isBoneIKControllerUsed = false;//<<추가
+					//}
+				}
+				else
+				{
+					//ModMesh를 참조하는 Param이다.
+					isBoneTarget = false;
+					//isBoneIKControllerUsed = false;//<<
+				}
+				//1. 계산 [중요]
+				isUpdatable = calParam.Calculate();
+
+				if (!isUpdatable)
+				{
+					calParam._isAvailable = false;
+					continue;
+				}
+				else
+				{
+					calParam._isAvailable = true;
+				}
+
+				//초기화
+				subParamGroupList = calParam._subParamKeyValueList;
+				subParamKeyValueList = null;
+				keyParamSetGroup = null;
+
+				calParam._result_Matrix.SetIdentity();
+
+				calParam._isColorCalculated = false;
+
+				if (!isBoneTarget)
+				{
+					if (_isColorProperty)
+					{
+						calParam._result_Color = new Color(0.5f, 0.5f, 0.5f, 1.0f);
+						calParam._result_IsVisible = false;
+					}
+					else
+					{
+						calParam._result_IsVisible = true;
+					}
+				}
+				else
+				{
+					calParam._result_IsVisible = true;
+					calParam._result_Color = new Color(0.5f, 0.5f, 0.5f, 1.0f);
+				}
+
+
+				//추가 12.5 : Extra Option 초기화
+				calParam._isExtra_DepthChanged = false;
+				calParam._isExtra_TextureChanged = false;
+				calParam._extra_DeltaDepth = 0;
+				calParam._extra_TextureDataID = -1;
+				calParam._extra_TextureData = null;
+
+
+
+				//초기화
+				tmpMatrix.SetIdentity();
+				layerWeight = 0.0f;
+
+				//tmpBoneIKWeight = 0.0f;
+				tmpVisible = false;
+
+				int iCalculatedSubParam = 0;
+
+				iColoredKeyParamSetGroup = 0;//<<실제 Color 처리가 된 ParamSetGroup의 개수
+				tmpIsColoredKeyParamSetGroup = false;
+
+				//추가 : Bone 타겟이면 BoneIKWeight를 계산해야한다.
+				//calParam._result_BoneIKWeight = 0.0f;
+				//calParam._isBoneIKWeightCalculated = false;
+
+				//추가 12.5 : Extra Option 계산 값 초기화
+				tmpExtra_DepthChanged = false;
+				tmpExtra_TextureChanged = false;
+				tmpExtra_DeltaDepth = 0;
+				tmpExtra_TextureDataID = 0;
+				tmpExtra_TextureData = null;
+				tmpExtra_DepthMaxWeight = -1.0f;//최대 Weight 값
+				tmpExtra_TextureMaxWeight = -1.0f;//최대 Weight 값
+
+
+				for (int iSubList = 0; iSubList < subParamGroupList.Count; iSubList++)
+				{
+					curSubList = subParamGroupList[iSubList];
+
+					int nParamKeys = curSubList._subParamKeyValues.Count;//Sub Params
+					subParamKeyValueList = curSubList._subParamKeyValues;
+
+					paramKeyValue = null;
+
+					keyParamSetGroup = curSubList._keyParamSetGroup;
+
+					//레이어 내부의 임시 데이터를 먼저 초기화
+					tmpMatrix.SetZero();//<<TF에서 추가됨
+					tmpColor = Color.clear;
+
+					tmpVisible = false;
+
+					tmpTotalParamSetWeight = 0.0f;
+					nColorCalculated = 0;
+
+					//KeyParamSetGroup이 Color를 지원하는지 체크
+					tmpIsColoredKeyParamSetGroup = _isColorProperty && keyParamSetGroup._isColorPropertyEnabled && !isBoneTarget;
+
+					if (!isBoneTarget)
+					{
+						//ModMesh를 활용하는 타입인 경우 >> ModMeshSet으로 변경
+						for (int iPV = 0; iPV < nParamKeys; iPV++)
+						{
+							paramKeyValue = subParamKeyValueList[iPV];
+
+							if (!paramKeyValue._isCalculated)
+							{ continue; }
+
+							tmpSubModMesh_Transform = paramKeyValue._modifiedMeshSet.SubModMesh_Transform;
+
+							//ParamSetWeight를 추가
+							tmpTotalParamSetWeight += paramKeyValue._weight * paramKeyValue._paramSet._overlapWeight;
+
+							//Weight에 맞게 Matrix를 만들자
+							if(paramKeyValue._isAnimRotationBias)
+							{
+								//추가 : RotationBias가 있다면 미리 계산된 Bias Matrix를 사용한다.
+								//이전 : apMatrix
+								//tmpMatrix.AddMatrix(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight, false);
+
+								//변경 3.27 : apMatrixCal
+								tmpMatrix.AddMatrixParallel(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight);
+							}
+							else
+							{
+								//이전
+								//tmpMatrix.AddMatrixParallel(paramKeyValue._modifiedMesh._transformMatrix, paramKeyValue._weight);
+
+								//ModMeshSet으로 변경
+								tmpMatrix.AddMatrixParallel(tmpSubModMesh_Transform._transformMatrix, paramKeyValue._weight);
+							}
+
+
+							//색상 처리
+							if (tmpIsColoredKeyParamSetGroup)
+							{
+								//기존
+								//if (paramKeyValue._modifiedMesh._isVisible)
+								//{
+								//	tmpColor += paramKeyValue._modifiedMesh._meshColor * paramKeyValue._weight;
+								//	tmpVisible = true;
+								//}
+								//else
+								//{
+								//	//Visible False
+								//	tmpParamColor = paramKeyValue._modifiedMesh._meshColor;
+								//	tmpParamColor.a = 0.0f;
+								//	tmpColor += tmpParamColor * paramKeyValue._weight;
+								//}
+
+								//변경
+								tmpSubModMesh_Color = paramKeyValue._modifiedMeshSet.SubModMesh_Color;
+								if (tmpSubModMesh_Color != null)
+								{
+									if (tmpSubModMesh_Color._isVisible)
+									{
+										tmpColor += tmpSubModMesh_Color._meshColor * paramKeyValue._weight;
+										tmpVisible = true;//하나라도 Visible이면 Visible이 된다.
+									}
+									else
+									{
+										tmpParamColor = tmpSubModMesh_Color._meshColor;
+										tmpParamColor.a = 0.0f;
+										tmpColor += tmpParamColor * paramKeyValue._weight;
+									}
+								}
+							}
+
+							nColorCalculated++;
+
+
+							//---------------------------------------------
+							//추가 12.5 : Extra Option
+							if (_isExtraPropertyEnabled)
+							{
+								//이전코드
+								////1. Modifier의 Extra Property가 켜져 있어야 한다.
+								////2. 현재 ParamKeyValue의 ModMesh의 Depth나 TextureData Changed 옵션이 켜져 있어야 한다.
+								////2-1. Depth인 경우 Ex-Transform이 켜져 있어야 한다.
+								////2-2. Texture인 경우 Ex-Color가 켜져 있어야 한다.
+								//if (paramKeyValue._modifiedMesh._isExtraValueEnabled
+								//	&& (paramKeyValue._modifiedMesh._extraValue._isDepthChanged || paramKeyValue._modifiedMesh._extraValue._isTextureChanged)
+								//	)
+								//{
+								//	//현재 ParamKeyValue의 CutOut된 가중치를 구해야한다.
+								//	float extraWeight = paramKeyValue._weight;//<<일단 가중치를 더한다.
+								//	float bias = 0.0001f;
+								//	float cutOut = 0.0f;
+								//	bool isExactWeight = false;
+								//	if (IsAnimated)
+								//	{
+								//		switch (paramKeyValue._animKeyPos)
+								//		{
+								//			case apOptCalculatedResultParam.AnimKeyPos.ExactKey: isExactWeight = true; break;
+								//			case apOptCalculatedResultParam.AnimKeyPos.NextKey: cutOut = paramKeyValue._modifiedMesh._extraValue._weightCutout_AnimPrev; break; //Next Key라면 Prev와의 CutOut을 가져온다.
+								//			case apOptCalculatedResultParam.AnimKeyPos.PrevKey: cutOut = paramKeyValue._modifiedMesh._extraValue._weightCutout_AnimNext; break;//Prev Key라면 Next와의 CutOut을 가져온다.
+								//		}
+								//	}
+								//	else
+								//	{
+								//		cutOut = paramKeyValue._modifiedMesh._extraValue._weightCutout;
+								//	}
+
+								//	cutOut = Mathf.Clamp01(cutOut + 0.01f);//살짝 겹치게
+
+								//	if (isExactWeight)
+								//	{
+								//		extraWeight = 10000.0f;
+								//	}
+								//	else if (cutOut < bias)
+								//	{
+								//		//정확하면 최대값
+								//		//아니면 적용안함
+								//		if (extraWeight > 1.0f - bias) { extraWeight = 10000.0f; }
+								//		else { extraWeight = -1.0f; }
+								//	}
+								//	else
+								//	{
+								//		if (extraWeight < 1.0f - cutOut) { extraWeight = -1.0f; }
+								//		else { extraWeight = (extraWeight - (1.0f - cutOut)) / cutOut; }
+								//	}
+
+								//	if (extraWeight > 0.0f)
+								//	{
+								//		if (paramKeyValue._modifiedMesh._extraValue._isDepthChanged)
+								//		{
+								//			//2-1. Depth 이벤트
+								//			if(extraWeight > tmpExtra_DepthMaxWeight)
+								//			{
+								//				//가중치가 최대값보다 큰 경우
+								//				tmpExtra_DepthMaxWeight = extraWeight;
+								//				tmpExtra_DepthChanged = true;
+								//				tmpExtra_DeltaDepth = paramKeyValue._modifiedMesh._extraValue._deltaDepth;
+								//			}
+
+								//		}
+								//		if (paramKeyValue._modifiedMesh._extraValue._isTextureChanged)
+								//		{
+								//			//2-2. Texture 이벤트
+								//			if(extraWeight > tmpExtra_TextureMaxWeight)
+								//			{
+								//				//가중치가 최대값보다 큰 경우
+								//				tmpExtra_TextureMaxWeight = extraWeight;
+								//				tmpExtra_TextureChanged = true;
+								//				tmpExtra_TextureData = paramKeyValue._modifiedMesh._extraValue._linkedTextureData;
+								//				tmpExtra_TextureDataID = paramKeyValue._modifiedMesh._extraValue._textureDataID;
+								//			}
+								//		}
+								//	}
+								//}
+
+
+								//변경 : ModMeshSet을 이용하는 것으로 변경
+								tmpSubModMesh_Extra = paramKeyValue._modifiedMeshSet.SubModMesh_Extra;
+
+								if (tmpSubModMesh_Extra != null
+										&& (tmpSubModMesh_Extra._extraValue._isDepthChanged || tmpSubModMesh_Extra._extraValue._isTextureChanged)
+										)
+								{
+									//현재 ParamKeyValue의 CutOut된 가중치를 구해야한다.
+									float extraWeight = paramKeyValue._weight;//<<일단 가중치를 더한다.
+									float bias = 0.0001f;
+									float overlapBias = 0.01f;
+									float cutOut = 0.0f;
+									bool isExactWeight = false;
+									if (IsAnimated)
+									{
+										switch (paramKeyValue._animKeyPos)
+										{
+											case apOptCalculatedResultParam.AnimKeyPos.ExactKey:
+												isExactWeight = true;
+												break;
+											case apOptCalculatedResultParam.AnimKeyPos.NextKey:
+												cutOut = tmpSubModMesh_Extra._extraValue._weightCutout_AnimPrev;
+												break; //Next Key라면 Prev와의 CutOut을 가져온다.
+											case apOptCalculatedResultParam.AnimKeyPos.PrevKey:
+												cutOut = tmpSubModMesh_Extra._extraValue._weightCutout_AnimNext;
+												break;//Prev Key라면 Next와의 CutOut을 가져온다.
+										}
+									}
+									else
+									{
+										cutOut = tmpSubModMesh_Extra._extraValue._weightCutout;
+									}
+
+									cutOut = Mathf.Clamp01(cutOut + overlapBias);//살짝 겹치게
+
+									if (isExactWeight)
+									{
+										extraWeight = 10000.0f;
+									}
+									else if (cutOut < bias)
+									{
+										//정확하면 최대값
+										//아니면 적용안함
+										if (extraWeight > 1.0f - bias)
+										{ extraWeight = 10000.0f; }
+										else
+										{ extraWeight = -1.0f; }
+									}
+									else
+									{
+										if (extraWeight < 1.0f - cutOut)
+										{ extraWeight = -1.0f; }
+										else
+										{ extraWeight = (extraWeight - (1.0f - cutOut)) / cutOut; }
+									}
+
+									if (extraWeight > 0.0f)
+									{
+										if (tmpSubModMesh_Extra._extraValue._isDepthChanged)
+										{
+											//2-1. Depth 이벤트
+											if (extraWeight > tmpExtra_DepthMaxWeight)
+											{
+												//가중치가 최대값보다 큰 경우
+												tmpExtra_DepthMaxWeight = extraWeight;
+												tmpExtra_DepthChanged = true;
+												tmpExtra_DeltaDepth = tmpSubModMesh_Extra._extraValue._deltaDepth;
+											}
+
+										}
+										if (tmpSubModMesh_Extra._extraValue._isTextureChanged)
+										{
+											//2-2. Texture 이벤트
+											if (extraWeight > tmpExtra_TextureMaxWeight)
+											{
+												//가중치가 최대값보다 큰 경우
+												tmpExtra_TextureMaxWeight = extraWeight;
+												tmpExtra_TextureChanged = true;
+												tmpExtra_TextureData = tmpSubModMesh_Extra._extraValue._linkedTextureData;
+												tmpExtra_TextureDataID = tmpSubModMesh_Extra._extraValue._textureDataID;
+											}
+										}
+									}
+								}
+							}
+							//---------------------------------------------
+						}
+					}
+					else
+					{
+						//float totalParamWeight = 0.0f;
+						//int nAddedWeight = 0;
+						//int nSkipWeight = 0;
+
+						//ModBone을 활용하는 타입인 경우
+						for (int iPV = 0; iPV < nParamKeys; iPV++)
+						{
+							paramKeyValue = subParamKeyValueList[iPV];
+
+							if (!paramKeyValue._isCalculated)
+							{
+								continue;
+							}
+
+							//ParamSetWeight를 추가
+							tmpTotalParamSetWeight += paramKeyValue._weight * paramKeyValue._paramSet._overlapWeight;
+							//nAddedWeight++;
+
+							//Weight에 맞게 Matrix를 만들자
+							
+							if(paramKeyValue._isAnimRotationBias)
+							{
+								//추가 : RotationBias가 있다면 미리 계산된 Bias Matrix를 사용한다.
+								//이전 : apMatrix
+								//tmpMatrix.AddMatrix(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight, false);
+
+								//변경 3.27 : apMatrixCal
+								tmpMatrix.AddMatrixParallel(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight);
+							}
+							else
+							{
+								//이전 : apMatrix
+								//tmpMatrix.AddMatrix(paramKeyValue._modifiedBone._transformMatrix, paramKeyValue._weight, false);
+
+								//변경 3.27 : apMatrixCal
+								tmpMatrix.AddMatrixParallel(paramKeyValue._modifiedBone._transformMatrix, paramKeyValue._weight);
+							}
+
+							
+							nColorCalculated++;//Visible 계산을 위해 "ParamKey 계산 횟수"를 카운트하자
+						}
+						
+					}
+
+					//추가 : ParamSetWeight를 사용한다면 -> LayerWeight x ParamSetWeight(0~1)을 사용한다.
+
+					if (!_isUseParamSetWeight)
+					{
+						layerWeight = Mathf.Clamp01(keyParamSetGroup._layerWeight);
+					}
+					else
+					{
+						layerWeight = Mathf.Clamp01(keyParamSetGroup._layerWeight * Mathf.Clamp01(tmpTotalParamSetWeight));
+					}
+
+
+					
+
+					if (layerWeight < 0.001f)
+					{
+						continue;
+					}
+
+					if ((nColorCalculated == 0 && _isColorProperty) || isBoneTarget)
+					{
+						tmpVisible = true;
+						tmpColor = _defaultColor;
+						if (!isBoneTarget)
+						{
+							tmpMatrix.SetIdentity();
+							tmpColor = _defaultColor;
+						}
+					}
+
+					calParam._totalParamSetGroupWeight += layerWeight;//<<수정 : 나중에 Modifier 자체의 Weight를 적용할 수 있게 만든다.
+
+					//추가 3.26 : apMatrixCal 계산
+					tmpMatrix.CalculateScale_FromAdd();
+
+					//if (keyParamSetGroup._layerIndex == 0)
+					if (iCalculatedSubParam == 0)
+					{
+						//위 코드를 하나로 합쳤다.
+						//이전 : apMatrix로 계산된 tmpMatrix
+						//calParam._result_Matrix.SetTRS(	tmpMatrix._pos * layerWeight,
+						//								tmpMatrix._angleDeg * layerWeight,
+						//								tmpMatrix._scale * layerWeight + Vector2.one * (1.0f - layerWeight));
+
+						//변경 3.27 : apMatrixCal로 계산된 tmpMatrix
+						calParam._result_Matrix.SetTRSForLerp(tmpMatrix);
+
+					}
+					else
+					{
+						switch (keyParamSetGroup._blendMethod)
+						{
+							case apModifierParamSetGroup.BLEND_METHOD.Additive:
+								{
+									//이전 : apMatrix로 계산
+									//calParam._result_Matrix.AddMatrix(tmpMatrix, layerWeight, true);
+
+									//변경 3.27 : apMatrixCal로 계산
+									calParam._result_Matrix.AddMatrixLayered(tmpMatrix, layerWeight);
+								}
+								break;
+
+							case apModifierParamSetGroup.BLEND_METHOD.Interpolation:
+								{
+									//이전 : apMatrix로 계산
+									//calParam._result_Matrix.LerpMartix(tmpMatrix, layerWeight);
+
+									//변경 3.27 : apMatrixCal로 계산
+									calParam._result_Matrix.LerpMatrixLayered(tmpMatrix, layerWeight);
+								}
+								break;
+						}
+
+					}
+
+					
+					//변경 : 색상은 별도로 카운팅해서 처리하자
+					if (tmpIsColoredKeyParamSetGroup)
+					{
+						if (iColoredKeyParamSetGroup == 0 || keyParamSetGroup._blendMethod == apModifierParamSetGroup.BLEND_METHOD.Interpolation)
+						{
+							//색상 Interpolation
+							calParam._result_Color = apUtil.BlendColor_ITP(calParam._result_Color, tmpColor, layerWeight);
+							calParam._result_IsVisible |= tmpVisible;
+						}
+						else
+						{
+							//색상 Additive
+							calParam._result_Color = apUtil.BlendColor_Add(calParam._result_Color, tmpColor, layerWeight);
+							calParam._result_IsVisible |= tmpVisible;
+						}
+						iColoredKeyParamSetGroup++;
+						calParam._isColorCalculated = true;
+					}
+
+					//추가 12.5 : Extra Option
+					if(_isExtraPropertyEnabled)
+					{
+						if(tmpExtra_DepthChanged)
+						{
+							calParam._isExtra_DepthChanged = true;
+							calParam._extra_DeltaDepth = tmpExtra_DeltaDepth;
+						}
+
+						if(tmpExtra_TextureChanged)
+						{
+							calParam._isExtra_TextureChanged = true;
+							calParam._extra_TextureData = tmpExtra_TextureData;
+							calParam._extra_TextureDataID = tmpExtra_TextureDataID;
+						}
+					}
+
+					iCalculatedSubParam++;
+				}
+
+				if (iCalculatedSubParam == 0)
+				{
+					calParam._isAvailable = false;
+				}
+				else
+				{
+					calParam._isAvailable = true;
+
+					//이전 : apMatrix로 계산된 경우
+					//calParam._result_Matrix.MakeMatrix();
+
+					//변경 : apMatrixCal로 계산한 경우
+					calParam._result_Matrix.CalculateScale_FromLerp();
+				}
+			}
+		}
+
+
+
+		//----------------------------------------------------------------------
+		// Rigging
+		//----------------------------------------------------------------------
+		private void Calculate_Rigging_UseModMeshSet(float tDelta)
+		{
+			if (_calculatedResultParams.Count == 0)
+			{
+				//Debug.LogError("Result Param Count : 0");
+				return;
+			}
+
+
+			apOptCalculatedResultParam calParam = null;
+
+			for (int iCalParam = 0; iCalParam < _calculatedResultParams.Count; iCalParam++)
+			{
+				calParam = _calculatedResultParams[iCalParam];
+
+				//Sub List를 돌면서 Weight 체크
+
+				// 중요! -> Static은 Weight 계산이 필요없어염
+				//-------------------------------------------------------
+				//1. Param Weight Calculate
+				calParam.Calculate();
+				//-------------------------------------------------------
+
+				//신버전
+				vertRequestList = calParam._result_VertLocalPairs;
+
+
+				subParamGroupList = calParam._subParamKeyValueList;
+				subParamKeyValueList = null;
+				layerWeight = 0.0f;
+				
+				//초기화
+				//신버전
+				for (int iVR = 0; iVR < vertRequestList.Count; iVR++)
+				{
+					vertRequestList[iVR].InitCalculate();
+				}
+				
+				calParam._result_IsVisible = true;
+
+				//삭제 19.5.25 : 필요없는 코드
+				//int iCalculatedSubParam = 0;
+
+
+
+				//SubList (ParamSetGroup을 키값으로 레이어화된 데이터)를 순회하면서 먼저 계산한다.
+				//레이어간 병합 과정에 신경 쓸것
+				for (int iSubList = 0; iSubList < subParamGroupList.Count; iSubList++)
+				{
+					curSubList = subParamGroupList[iSubList];
+
+					int nParamKeys = curSubList._subParamKeyValues.Count;//Sub Params
+					subParamKeyValueList = curSubList._subParamKeyValues;
+					
+					paramKeyValue = null;
+
+					keyParamSetGroup = curSubList._keyParamSetGroup;//<<
+					
+					//레이어 내부의 임시 데이터를 먼저 초기화
+					
+					//신버전
+					//Vertex Pos 대신 Vertex Requst를 보간하자
+					vertRequest = curSubList._vertexRequest;
+					vertRequest.SetCalculated();//<<일단 계산하기 위해 참조 했음을 알린다.
+
+					//삭제 19.5.25 : 사용되지 않음
+					//tmpColor = Color.clear;
+					//tmpVisible = false;
+
+					//float totalWeight = 0.0f;
+					//int nCalculated = 0;
+					
+					//Param (MorphKey에 따라서)을 기준으로 데이터를 넣어준다.
+					//Dist에 따른 ParamWeight를 가중치로 적용한다.
+
+					
+					for (int iPV = 0; iPV < nParamKeys; iPV++)
+					{
+						paramKeyValue = subParamKeyValueList[iPV];
+
+						paramKeyValue._weight = 1.0f;
+
+						//totalWeight += paramKeyValue._weight;
+						//nCalculated++;//Visible 계산을 위해 "paramKey 계산 횟수"를 카운트하자
+					}//--- Params
+
+
+					//이제 tmp값을 Result에 넘겨주자
+					//처음 Layer라면 -> 100% 적용
+					//그렇지 않다면 Blend를 해주자
+
+					//이전
+					//layerWeight = 1.0f;
+					//calParam._totalParamSetGroupWeight += layerWeight;//<<수정 : 나중에 Modifier 자체의 Weight를 적용할 수 있게 만든다.
+
+					//변경
+					calParam._totalParamSetGroupWeight += 1.0f;
+
+					//삭제 19.5.25 : 리깅에선 필요없는 코드
+					//if (nCalculated == 0)
+					//{
+					//	tmpVisible = true;
+					//}
+
+
+					
+					//삭제 19.5.25 : 필요없는 코드
+					//iCalculatedSubParam++;
+
+				}//-SubList (ParamSetGroup을 키값으로 따로 적용한다.)
+				calParam._isAvailable = true;
+
+
+			}
+
+			//Rigging을 그 이후의 보간이 없다.
+		}
+
+
+		//초당 얼마나 업데이트 요청을 받는지 체크
+
+		private void Calculate_Physics_UseModMeshSet(float tDelta)
+		{
+			if (_calculatedResultParams.Count == 0)
+			{
+				return;
+			}
+
+			if (_stopWatch == null)
+			{
+				_stopWatch = new System.Diagnostics.Stopwatch();
+				_stopWatch.Start();
+			}
+
+
+
+			tDelta = (float)(_stopWatch.ElapsedMilliseconds) / 1000.0f;
+
+
+			//tDelta *= 0.5f;
+			bool isValidFrame = false;
+			_tDeltaFixed += tDelta;
+			_tUpdateCall += tDelta;
+			_nUpdateCall++;
+
+
+
+			if (_tDeltaFixed > PHYSIC_DELTA_TIME)
+			{
+				//Debug.Log("Delta Time : " + tDelta + " >> " + PHYSIC_DELTA_TIME);
+				tDelta = PHYSIC_DELTA_TIME;
+				_tDeltaFixed -= PHYSIC_DELTA_TIME;
+				isValidFrame = true;
+			}
+			else
+			{
+				tDelta = 0.0f;
+				isValidFrame = false;
+			}
+
+			if (isValidFrame)
+			{
+				_nUpdateValid++;
+			}
+
+
+			if (_tUpdateCall > 1.0f)
+			{
+				//Debug.Log("초당 Update Call 횟수 : " + _nUpdateCall + " / Valid : " + _nUpdateValid + " (" + _tUpdateCall + ")");
+				_tUpdateCall = 0.0f;
+				_nUpdateCall = 0;
+				_nUpdateValid = 0;
+			}
+
+			_stopWatch.Stop();
+			_stopWatch.Reset();
+			_stopWatch.Start();
+
+
+			//tDelta *= 0.5f;
+
+			apOptCalculatedResultParam calParam = null;
+
+			//지역 변수를 여기서 일괄 선언하자
+
+			//bool isFirstDebug = true;
+			//외부 힘을 업데이트해야하는지를 여기서 체크하자
+			bool isExtTouchProcessing = false;
+			bool isExtTouchWeightRefresh = false;
+			if (_portrait.IsAnyTouchEvent)
+			{
+				isExtTouchProcessing = true;//터치 이벤트 중이다.
+				if (_tmpTouchProcessCode != _portrait.TouchProcessCode)
+				{
+					//처리중인 터치 이벤트가 바뀌었다.
+					//새로운 터치라면 Weight를 새로 만들어야하고, 아니면 Weight를 초기화해야함
+					_tmpTouchProcessCode = _portrait.TouchProcessCode;
+					isExtTouchWeightRefresh = true;
+
+				}
+			}
+			else
+			{
+				_tmpTouchProcessCode = 0;
+			}
+
+
+
+			for (int iCalParam = 0; iCalParam < _calculatedResultParams.Count; iCalParam++)
+			{
+				calParam = _calculatedResultParams[iCalParam];
+
+				//Sub List를 돌면서 Weight 체크
+
+				// 중요!
+				//-------------------------------------------------------
+				//1. Param Weight Calculate
+				calParam.Calculate();
+				//-------------------------------------------------------
+
+				posList = calParam._result_Positions;
+				tmpPosList = calParam._tmp_Positions;
+				subParamGroupList = calParam._subParamKeyValueList;
+				subParamKeyValueList = null;
+				layerWeight = 0.0f;
+				keyParamSetGroup = null;
+
+				//삭제 19.5.20 : 이 변수를 더이상 사용하지 않음
+				//weightedVertData = calParam._weightedVertexData;
+
+				//일단 초기화
+				for (int iPos = 0; iPos < posList.Length; iPos++)
+				{
+					posList[iPos] = Vector2.zero;
+				}
+
+				calParam._result_IsVisible = true;
+
+				int iCalculatedSubParam = 0;
+
+
+				//SubList (ParamSetGroup을 키값으로 레이어화된 데이터)를 순회하면서 먼저 계산한다.
+				//레이어간 병합 과정에 신경 쓸것
+				for (int iSubList = 0; iSubList < subParamGroupList.Count; iSubList++)
+				{
+					curSubList = subParamGroupList[iSubList];
+
+					if (curSubList._keyParamSetGroup == null)
+					{
+						//Debug.LogError("Modifier Cal Param Failed : " + DisplayName + " / " + calParam._linkedModifier.DisplayName);
+						continue;
+					}
+
+					//int nParamKeys = calParam._paramKeyValues.Count;//전체 Params
+					int nParamKeys = curSubList._subParamKeyValues.Count;//Sub Params
+					subParamKeyValueList = curSubList._subParamKeyValues;
+
+
+
+					paramKeyValue = null;
+
+					keyParamSetGroup = curSubList._keyParamSetGroup;
+
+
+
+					bool isFirstParam = true;
+
+					//레이어 내부의 임시 데이터를 먼저 초기화
+					for (int iPos = 0; iPos < posList.Length; iPos++)
+					{
+						tmpPosList[iPos] = Vector2.zero;
+					}
+
+					float totalWeight = 0.0f;
+					int nCalculated = 0;
+
+
+
+					//Param (MorphKey에 따라서)을 기준으로 데이터를 넣어준다.
+					//Dist에 따른 ParamWeight를 가중치로 적용한다.
+
+					for (int iPV = 0; iPV < nParamKeys; iPV++)
+					{
+						paramKeyValue = subParamKeyValueList[iPV];
+
+						//if (!paramKeyValue._isCalculated) { continue; }
+
+						totalWeight += paramKeyValue._weight;
+
+
+
+						//물리 계산 순서
+						//Vertex 각각의 이전프레임으로 부터의 속력 계산
+						//
+						if (posList.Length > 0
+							&& _portrait._isPhysicsPlay_Opt//<<Portrait에서 지원하는 경우만
+							&& _portrait._isImportant//<<Important 설정이 붙은 객체만
+
+#if IS_APDEMO
+							&& false//데모 버전에서는 씬에서 물리 기능이 작동하지 않습니다.
+#endif
+							)
+						{
+
+
+							//기존 버전
+							//tmpModVertWeight = null;
+							//tmpPhysicVertParam = null;
+							//tmpPhysicMeshParam = paramKeyValue._modifiedMesh.PhysicParam;
+
+							//ModMeshSet 버전
+							tmpSubModMesh_Physics = paramKeyValue._modifiedMeshSet.SubModMesh_Physics;
+							tmpPhysicMeshParam = tmpSubModMesh_Physics._physicMeshParam;
+							tmpModPhysicsVert = null;
+
+
+							tmpNumVert = posList.Length;
+							tmpMass = tmpPhysicMeshParam._mass;
+							if (tmpMass < 0.001f)
+							{
+								tmpMass = 0.001f;
+							}
+							//Debug.Log("Mass : " + tmpMass);
+
+							//Vertex에 상관없이 적용되는 힘
+							// 중력, 바람
+							//1) 중력 : mg
+							tmpF_gravity = tmpMass * tmpPhysicMeshParam.GetGravityAcc();
+
+							//2) 바람 : ma
+							tmpF_wind = tmpMass * tmpPhysicMeshParam.GetWindAcc(tDelta);
+
+
+							tmpF_stretch = Vector2.zero;
+							//tmpF_airDrag = Vector2.zero;
+
+							//tmpF_inertia = Vector2.zero;
+							tmpF_recover = Vector2.zero;
+							tmpF_ext = Vector2.zero;
+							tmpF_sum = Vector2.zero;
+
+							//tmpLinkedVert = null;//<<이전
+							tmpLinkedPhysicVert = null;//<<변경
+
+							tmpIsViscosity = tmpPhysicMeshParam._viscosity > 0.0f;
+
+
+							//수정
+							// "잡아 당기는 코드"를 미리 만들고, Weight를 지정한다.
+							//Weight에 따라서 힘의 결과가 속도로 계산되는 비율이 결정된다.
+							//Touch Weight가 클수록 Velocity는 0이 된다.
+
+
+							//Debug.Log("Wind : " + tmpF_wind + " / Gravity : " + tmpF_gravity);
+							//---------------------------- Pos List
+
+							//bool isFirstDebug = true;
+							//int iDebugLog = -1;
+							bool isTouchCalculated = false;
+							float touchCalculatedWeight = 0.0f;
+							Vector2 touchCalculatedDeltaPos = Vector2.zero;
+
+							for (int iPos = 0; iPos < tmpNumVert; iPos++)
+							{
+								//여기서 물리 계산을 하자
+								//이전
+								//tmpModVertWeight = paramKeyValue._modifiedMesh._vertWeights[iPos];
+								//tmpModVertWeight.UpdatePhysicVertex(tDelta, isValidFrame);//<<RenderVert의 위치와 속도를 계산한다.
+
+								//ModMeshSet용
+								tmpModPhysicsVert = tmpSubModMesh_Physics._vertWeights[iPos];
+								tmpModPhysicsVert.UpdatePhysicVertex(tDelta, isValidFrame);
+
+								tmpF_stretch = Vector2.zero;
+								//tmpF_airDrag = Vector2.zero;
+
+								tmpF_recover = Vector2.zero;
+								tmpF_ext = Vector2.zero;
+								tmpF_sum = Vector2.zero;
+
+								//이전
+								//if (!tmpModVertWeight._isEnabled)
+								//{
+								//	//처리 안함다
+								//	tmpModVertWeight._calculatedDeltaPos = Vector2.zero;
+								//	continue;
+								//}
+								//if (tmpModVertWeight._vertex == null)
+								//{
+								//	//Debug.LogError("Render Vertex is Not linked");
+								//	break;
+								//}
+
+								//변경
+								if (!tmpModPhysicsVert._isEnabled)
+								{
+									//계산하지 않음
+									tmpModPhysicsVert._calculatedDeltaPos = Vector2.zero;
+									continue;
+								}
+								if (tmpModPhysicsVert._vertex == null)
+								{
+									break;
+								}
+
+								//최적화는 나중에 하고 일단 업데이트만이라도 하자
+								//이전
+								//tmpPhysicVertParam = tmpModVertWeight._physicParam;
+
+								//변경 : PhysicVertParam 자체가 없다.
+
+								//이전
+								//tmpModVertWeight._isLimitPos = false;
+								//tmpModVertWeight._limitScale = -1.0f;
+
+								//변경
+								tmpModPhysicsVert._isLimitPos = false;
+								tmpModPhysicsVert._limitScale = -1.0f;
+
+								//터치 이벤트 초기화
+								isTouchCalculated = false;
+								touchCalculatedWeight = 0.0f;
+								touchCalculatedDeltaPos = Vector2.zero;
+
+								//"잡아 당김"을 구현하자
+								if (isExtTouchProcessing)
+								{
+									Vector2 pullTouchPos = Vector2.zero;
+									float pullTouchTotalWeight = 0.0f;
+									//Weight를 새로 갱신하자
+									for (int i = 0; i < apForceManager.MAX_TOUCH_UNIT; i++)
+									{
+										apPullTouch touch = _portrait.GetTouch(i);
+										Vector2 touchPos = touch.Position;
+										//touchPos *= -1;
+
+										if (isExtTouchWeightRefresh)
+										{
+											if (touch.IsLive)
+											{
+												//pos 1F 위치에 의한 Weight를 새로 갱신해야한다.
+												//이전
+												//tmpModVertWeight._touchedWeight[i] = touch.GetTouchedWeight(tmpModVertWeight._pos_1F);
+												//tmpModVertWeight._touchedPosDelta[i] = tmpModVertWeight._pos_1F - touch.Position;
+
+												//변경
+												tmpModPhysicsVert._touchedWeight[i] = touch.GetTouchedWeight(tmpModPhysicsVert._pos_1F);
+												tmpModPhysicsVert._touchedPosDelta[i] = tmpModPhysicsVert._pos_1F - touch.Position;
+											}
+											else
+											{
+												//이전
+												//tmpModVertWeight._touchedWeight[i] = -1.0f;//Weight를 초기화
+
+												//변경
+												tmpModPhysicsVert._touchedWeight[i] = -1.0f;//Weight를 초기화
+											}
+										}
+
+										if (touch.IsLive)
+										{
+											//Weight를 이용하여 보간을 하자
+											//이후 누적 후 평균값을 넣자
+											//이전
+											//pullTouchPos += (tmpModVertWeight._touchedPosDelta[i] + touch.Position - tmpModVertWeight._pos_1F) * tmpModVertWeight._touchedWeight[i];
+											//pullTouchTotalWeight += tmpModVertWeight._touchedWeight[i];
+
+											//변경
+											pullTouchPos += (tmpModPhysicsVert._touchedPosDelta[i] + touch.Position - tmpModPhysicsVert._pos_1F) * tmpModPhysicsVert._touchedWeight[i];
+											pullTouchTotalWeight += tmpModPhysicsVert._touchedWeight[i];
+										}
+									}
+
+									if (pullTouchTotalWeight > 0.0f)
+									{
+										pullTouchPos /= pullTouchTotalWeight;
+
+										//이전
+										//pullTouchPos = paramKeyValue._modifiedMesh._targetTransform._rootUnit._transform.InverseTransformVector(pullTouchPos);
+
+										//변경
+										pullTouchPos = paramKeyValue._modifiedMeshSet._targetTransform._rootUnit._transform.InverseTransformVector(pullTouchPos);
+
+										pullTouchPos.x = -pullTouchPos.x;
+										pullTouchPos.y = -pullTouchPos.y;
+
+										float itpPull = Mathf.Clamp01(pullTouchTotalWeight);
+
+										//Debug.Log("Touch DeltaPos (" + pullTouchTotalWeight + ") " + limitedNextCalPos + " >> " + pullTouchPos + " / ITP : " + itpPull);
+
+										touchCalculatedDeltaPos = pullTouchPos;
+										isTouchCalculated = true;
+										touchCalculatedWeight = itpPull;
+
+
+									}
+								}
+
+
+								//추가
+								//> 유효한 프레임 : 물리 계산을 한다.
+								//> 생략하는 프레임 : 이전 속도를 그대로 이용한다.
+								if (isValidFrame)
+								{
+
+
+									tmpF_stretch = Vector2.zero;
+
+
+									//1) 장력 Strech : -k * (<delta Dist> * 기존 UnitVector)
+
+
+									//for (int iLinkVert = 0; iLinkVert < tmpPhysicVertParam._linkedVertices.Count; iLinkVert++)//이전
+
+									for (int iLinkVert = 0; iLinkVert < tmpModPhysicsVert._linkedVertices.Count; iLinkVert++)//변경
+									{
+										//tmpLinkedVert = tmpPhysicVertParam._linkedVertices[iLinkVert];//이전
+										tmpLinkedPhysicVert = tmpModPhysicsVert._linkedVertices[iLinkVert];//이전
+
+										//이전
+										//float linkWeight = tmpLinkedVert._distWeight;
+
+										//tmpSrcVertPos_NoMod = tmpModVertWeight._pos_World_NoMod;
+										//tmpLinkVertPos_NoMod = tmpLinkedVert._modVertWeight._pos_World_NoMod;
+										//tmpLinkedVert._deltaPosToTarget_NoMod = tmpSrcVertPos_NoMod - tmpLinkVertPos_NoMod;
+
+										//tmpSrcVertPos_Cur = tmpModVertWeight._pos_World_LocalTransform;
+										//tmpLinkVertPos_Cur = tmpLinkedVert._modVertWeight._pos_World_LocalTransform;
+
+										//tmpDeltaVec_0 = tmpSrcVertPos_NoMod - tmpLinkVertPos_NoMod;
+										//tmpDeltaVec_Cur = tmpSrcVertPos_Cur - tmpLinkVertPos_Cur;
+
+										//변경
+										float linkWeight = tmpLinkedPhysicVert._distWeight;
+
+										tmpSrcVertPos_NoMod = tmpModPhysicsVert._pos_World_NoMod;
+										tmpLinkVertPos_NoMod = tmpLinkedPhysicVert._modVertWeight._pos_World_NoMod;
+										tmpLinkedPhysicVert._deltaPosToTarget_NoMod = tmpSrcVertPos_NoMod - tmpLinkVertPos_NoMod;
+
+										tmpSrcVertPos_Cur = tmpModPhysicsVert._pos_World_LocalTransform;
+										tmpLinkVertPos_Cur = tmpLinkedPhysicVert._modVertWeight._pos_World_LocalTransform;
+
+										tmpDeltaVec_0 = tmpSrcVertPos_NoMod - tmpLinkVertPos_NoMod;
+										tmpDeltaVec_Cur = tmpSrcVertPos_Cur - tmpLinkVertPos_Cur;
+
+
+
+										//길이 차이로 힘을 만들고
+										//방향은 현재 Delta
+
+										//<추가> 만약 장력 벡터가 완전히 뒤집힌 경우
+										//면이 뒤집혔다.
+										if (Vector2.Dot(tmpDeltaVec_0, tmpDeltaVec_Cur) < 0)
+										{
+											//면이 뒤집혔다.
+											tmpF_stretch += tmpPhysicMeshParam._stretchK * (tmpDeltaVec_0 - tmpDeltaVec_Cur) * linkWeight;
+										}
+										else
+										{
+											//정상 면
+											tmpF_stretch += -1.0f * tmpPhysicMeshParam._stretchK * (tmpDeltaVec_Cur.magnitude - tmpDeltaVec_0.magnitude) * tmpDeltaVec_Cur.normalized * linkWeight;
+										}
+
+
+
+									}
+									tmpF_stretch *= -1;//<<위치기반인 경우 좌표계가 반대여서 -1을 넣는다. <<< 이게 왜이리 힘들던지;;
+
+
+									//3) 공기 저항 : "현재 이동 방향의 반대 방향"
+									//..삭제됨
+
+
+									//5) 복원력
+									//tmpF_recover = -1.0f * tmpPhysicMeshParam._restoring * tmpModVertWeight._calculatedDeltaPos;//이전
+									tmpF_recover = -1.0f * tmpPhysicMeshParam._restoring * tmpModPhysicsVert._calculatedDeltaPos;//변경
+
+
+
+									//변동
+									//중력과 바람은 크기는 그대로 두고, 방향은 World였다고 가정
+									//Local로 오기 위해서는 Inverse를 해야한다.
+									float gravitySize = tmpF_gravity.magnitude;
+									float windSize = tmpF_wind.magnitude;
+									Vector2 tmpF_gravityL = Vector2.zero;
+									Vector2 tmpF_windL = Vector2.zero;
+									if (gravitySize > 0.0f)
+									{
+										//이전
+										//tmpF_gravityL = paramKeyValue._modifiedMesh._targetTransform._rootUnit._transform.InverseTransformVector(tmpF_gravity.normalized).normalized * gravitySize;
+										//변경
+										tmpF_gravityL = paramKeyValue._modifiedMeshSet._targetTransform._rootUnit._transform.InverseTransformVector(tmpF_gravity.normalized).normalized * gravitySize;
+
+										tmpF_gravityL.y = -tmpF_gravityL.y;
+										tmpF_gravityL.x = -tmpF_gravityL.x;
+									}
+									if (windSize > 0.0f)
+									{
+										//이전
+										//tmpF_windL = paramKeyValue._modifiedMesh._targetTransform._rootUnit._transform.InverseTransformVector(tmpF_wind.normalized).normalized * windSize;
+										//변경
+										tmpF_windL = paramKeyValue._modifiedMeshSet._targetTransform._rootUnit._transform.InverseTransformVector(tmpF_wind.normalized).normalized * windSize;
+
+										tmpF_windL.y = -tmpF_windL.y;
+										tmpF_windL.x = -tmpF_windL.x;
+									}
+
+									//6) 추가 : 외부 힘
+									if (_portrait.IsAnyForceEvent)
+									{
+										//이전 프레임에서의 힘을 이용한다.
+										//해당 위치가 Local이고, 요청된 힘은 World이다.
+										//World로 계산한 뒤의 위치를 잡자...는 이미 World였네요.
+										//그대로 하고, 힘만 로컬로 바구면 될 듯
+
+										//Vector2 F_extW = _portrait.GetForce(tmpModVertWeight._pos_1F);//이전
+										Vector2 F_extW = _portrait.GetForce(tmpModPhysicsVert._pos_1F);//변경
+
+										float powerSize = F_extW.magnitude;
+
+										//이전
+										//tmpF_ext = paramKeyValue._modifiedMesh._targetTransform._rootUnit._transform.InverseTransformVector(F_extW).normalized * powerSize;
+										//변경
+										tmpF_ext = paramKeyValue._modifiedMeshSet._targetTransform._rootUnit._transform.InverseTransformVector(F_extW).normalized * powerSize;
+
+										tmpF_ext.x = -tmpF_ext.x;
+										tmpF_ext.y = -tmpF_ext.y;
+									}
+
+									float inertiaK = Mathf.Clamp01(tmpPhysicMeshParam._inertiaK);
+
+									//5) 힘의 합력을 구한다.
+									//-------------------------------------------
+									//이전
+									//if (tmpModVertWeight._physicParam._isMain)
+									//{
+									//	tmpF_sum = tmpF_gravityL + tmpF_windL + tmpF_stretch + tmpF_recover + tmpF_ext;//관성 제외 (중력, 바람 W2L) - 공기 저항 제외
+									//}
+									//else
+									//{
+									//	tmpF_sum = tmpF_gravityL + tmpF_windL + tmpF_stretch + ((tmpF_recover + tmpF_ext) * 0.5f);//관성 제외 (중력, 바람 W2L) - 공기저항 제외
+
+									//	inertiaK *= 0.5f;//<<관성 감소
+									//}
+
+
+									if (tmpModPhysicsVert._isMain)
+									{
+										tmpF_sum = tmpF_gravityL + tmpF_windL + tmpF_stretch + tmpF_recover + tmpF_ext;//관성 제외 (중력, 바람 W2L) - 공기 저항 제외
+									}
+									else
+									{
+										tmpF_sum = tmpF_gravityL + tmpF_windL + tmpF_stretch + ((tmpF_recover + tmpF_ext) * 0.5f);//관성 제외 (중력, 바람 W2L) - 공기저항 제외
+
+										inertiaK *= 0.5f;//<<관성 감소
+									}
+
+
+
+									//-------------------------------------------
+
+
+									if (isTouchCalculated)
+									{
+										tmpF_sum *= (1.0f - touchCalculatedWeight);
+									}
+
+									//F = ma
+									//a = F / m
+									//Vector2 acc = F_sum / mass;
+
+									//S = vt + S0
+									//-------------------------------
+
+
+									//<<수정>>
+									//이전
+									//tmpModVertWeight._velocity_Next = 
+									//		tmpModVertWeight._velocity_1F 
+									//		+ (tmpModVertWeight._velocity_1F - tmpModVertWeight._velocity_Real) * inertiaK
+									//		+ (tmpF_sum / tmpMass) * tDelta											
+									//		;
+
+									//변경
+									tmpModPhysicsVert._velocity_Next =
+											tmpModPhysicsVert._velocity_1F
+											+ (tmpModPhysicsVert._velocity_1F - tmpModPhysicsVert._velocity_Real) * inertiaK
+											+ (tmpF_sum / tmpMass) * tDelta
+											;
+
+
+									//Air Drag식 수정
+									if (tmpPhysicMeshParam._airDrag > 0.0f)
+									{
+										//이전
+										//tmpModVertWeight._velocity_Next *= Mathf.Clamp01((1.0f - (tmpPhysicMeshParam._airDrag * tDelta) / (tmpMass + 0.5f)));
+
+										//변경
+										tmpModPhysicsVert._velocity_Next *= Mathf.Clamp01((1.0f - (tmpPhysicMeshParam._airDrag * tDelta) / (tmpMass + 0.5f)));
+									}
+									//-------------------------------
+								}
+								else
+								{
+									//-------------------------------------
+									//tmpModVertWeight._velocity_Next = tmpModVertWeight._velocity_1F;//이전
+									tmpModPhysicsVert._velocity_Next = tmpModPhysicsVert._velocity_1F;//변경
+																									  //-------------------------------------
+								}
+
+
+
+								//변경.
+								//여기서 일단 속력을 미리 적용하자
+								if (isValidFrame)
+								{
+									//tmpNextVelocity = tmpModVertWeight._velocity_Next;//이전
+									tmpNextVelocity = tmpModPhysicsVert._velocity_Next;//변경
+
+									//Vector2 limitedNextCalPos = tmpModVertWeight._calculatedDeltaPos + (tmpNextVelocity * tDelta);//이전
+									Vector2 limitedNextCalPos = tmpModPhysicsVert._calculatedDeltaPos + (tmpNextVelocity * tDelta);//변경
+
+									//터치 이벤트에 의해서 속도가 보간된다.
+									if (isTouchCalculated)
+									{
+										limitedNextCalPos = (limitedNextCalPos * (1.0f - touchCalculatedWeight)) + (touchCalculatedDeltaPos * touchCalculatedWeight);
+
+										//tmpNextVelocity = (limitedNextCalPos - tmpModVertWeight._calculatedDeltaPos) / tDelta;//이전
+										tmpNextVelocity = (limitedNextCalPos - tmpModPhysicsVert._calculatedDeltaPos) / tDelta;//변경
+									}
+
+									//V += at
+									//마음대로 증가하지 않도록 한다.
+									if (tmpPhysicMeshParam._isRestrictMoveRange)
+									{
+										float radiusFree = tmpPhysicMeshParam._moveRange * 0.5f;
+										float radiusMax = tmpPhysicMeshParam._moveRange;
+
+										if (radiusMax <= radiusFree)
+										{
+											tmpNextVelocity *= 0.0f;
+											//둘다 0이라면 아예 이동이 불가
+											//이전
+											//if (!tmpModVertWeight._isLimitPos)
+											//{
+											//	tmpModVertWeight._isLimitPos = true;
+											//	tmpModVertWeight._limitScale = 0.0f;
+											//}
+
+											if (!tmpModPhysicsVert._isLimitPos)
+											{
+												tmpModPhysicsVert._isLimitPos = true;
+												tmpModPhysicsVert._limitScale = 0.0f;
+											}
+										}
+										else
+										{
+											float curDeltaPosSize = (limitedNextCalPos).magnitude;
+
+											if (curDeltaPosSize < radiusFree)
+											{
+												//moveRatio = 1.0f;
+												//별일 없슴다
+											}
+											else
+											{
+												//기본은 선형의 사이즈이지만,
+												//돌아가는 힘은 유지해야한다.
+												//[deltaPos unitVector dot newVelocity] = 1일때 : 바깥으로 나가려는 힘
+												// = -1일때 : 안으로 들어오려는 힘
+												// -1 ~ 1 => 0 ~ 1 : 0이면 moveRatio가 1, 1이면 moveRatio가 거리에 따라 1>0
+
+												//float dotVector = Vector2.Dot(tmpModVertWeight._calculatedDeltaPos.normalized, tmpNextVelocity.normalized);//이전
+												float dotVector = Vector2.Dot(tmpModPhysicsVert._calculatedDeltaPos.normalized, tmpNextVelocity.normalized);//변경
+
+												dotVector = (dotVector * 0.5f) + 0.5f; //0: 속도 느려짐 없음 (안쪽으로 들어가려고 함), 1:증가하는 방향
+
+												float outerItp = Mathf.Clamp01((curDeltaPosSize - radiusFree) / (radiusMax - radiusFree));//0 : 속도 느려짐 없음, 1:속도 0
+
+												tmpNextVelocity *= Mathf.Clamp01(1.0f - (dotVector * outerItp));//적절히 느려지게 만들자
+
+												if (curDeltaPosSize > radiusMax)
+												{
+													//이전
+													//if (!tmpModVertWeight._isLimitPos || radiusMax < tmpModVertWeight._limitScale)
+													//{
+													//	tmpModVertWeight._isLimitPos = true;
+													//	tmpModVertWeight._limitScale = radiusMax;
+													//}
+
+													//변경
+													if (!tmpModPhysicsVert._isLimitPos || radiusMax < tmpModPhysicsVert._limitScale)
+													{
+														tmpModPhysicsVert._isLimitPos = true;
+														tmpModPhysicsVert._limitScale = radiusMax;
+													}
+												}
+											}
+										}
+									}
+
+									//장력에 의한 길이 제한도 처리한다.
+									if (tmpPhysicMeshParam._isRestrictStretchRange)
+									{
+
+										bool isLimitVelocity2Max = false;
+										Vector2 stretchLimitPos = Vector2.zero;
+										float limitCalPosDist = 0.0f;
+
+										//for (int iLinkVert = 0; iLinkVert < tmpPhysicVertParam._linkedVertices.Count; iLinkVert++)//이전
+										for (int iLinkVert = 0; iLinkVert < tmpModPhysicsVert._linkedVertices.Count; iLinkVert++)//변경
+										{
+											//tmpLinkedVert = tmpPhysicVertParam._linkedVertices[iLinkVert];//이전
+											tmpLinkedPhysicVert = tmpModPhysicsVert._linkedVertices[iLinkVert];//변경
+
+											//길이의 Min/Max가 있다.
+											//float distStretchBase = tmpLinkedVert._deltaPosToTarget_NoMod.magnitude;//이전
+											float distStretchBase = tmpLinkedPhysicVert._deltaPosToTarget_NoMod.magnitude;//변경
+
+											float stretchRangeMax = (tmpPhysicMeshParam._stretchRangeRatio_Max) * distStretchBase;
+											float stretchRangeMax_Half = (tmpPhysicMeshParam._stretchRangeRatio_Max * 0.5f) * distStretchBase;
+
+											//Vector2 curDeltaFromLinkVert = limitedNextCalPos - tmpLinkedVert._modVertWeight._calculatedDeltaPos_Prev;//이전
+											Vector2 curDeltaFromLinkVert = limitedNextCalPos - tmpLinkedPhysicVert._modVertWeight._calculatedDeltaPos_Prev;//변경
+
+											float curDistFromLinkVert = curDeltaFromLinkVert.magnitude;
+
+											//너무 멀면 제한한다.
+											//단, 제한 권장은 Weight에 맞게
+
+											//float weight = Mathf.Clamp01(tmpLinkedVert._distWeight);
+											isLimitVelocity2Max = false;
+
+											if (curDistFromLinkVert > stretchRangeMax_Half)
+											{
+												isLimitVelocity2Max = true;//늘어나는 한계점으로 이동하는 중
+																		   //이전
+																		   //stretchLimitPos = tmpLinkedVert._modVertWeight._calculatedDeltaPos_Prev + curDeltaFromLinkVert.normalized * stretchRangeMax;
+																		   //stretchLimitPos -= tmpModVertWeight._calculatedDeltaPos_Prev;
+
+												//변경
+												stretchLimitPos = tmpLinkedPhysicVert._modVertWeight._calculatedDeltaPos_Prev + curDeltaFromLinkVert.normalized * stretchRangeMax;
+												stretchLimitPos -= tmpModPhysicsVert._calculatedDeltaPos_Prev;
+
+
+												limitCalPosDist = (stretchLimitPos).magnitude;
+											}
+
+											if (isLimitVelocity2Max)
+											{
+												//LinkVert간의 벡터를 기준으로 nextVelocity가 확대/축소하는 방향이라면 그 반대의 값을 넣는다.
+												float dotVector = Vector2.Dot(curDeltaFromLinkVert.normalized, tmpNextVelocity.normalized);
+												//-1 : 축소하려는 방향으로 이동하는 중
+												//1 : 확대하려는 방향으로 이동하는 중
+
+
+												float outerItp = 0.0f;
+												if (isLimitVelocity2Max)
+												{
+													//너무 바깥으로 이동하려고 할때, 속도를 줄인다.
+													dotVector = Mathf.Clamp01(dotVector);
+													if (stretchRangeMax > stretchRangeMax_Half)
+													{
+														outerItp = Mathf.Clamp01((curDistFromLinkVert - stretchRangeMax_Half) / (stretchRangeMax - stretchRangeMax_Half));
+													}
+													else
+													{
+														outerItp = 1.0f;//무조건 속도 0
+
+														//이전
+														//if (!tmpModVertWeight._isLimitPos || limitCalPosDist < tmpModVertWeight._limitScale)
+														//{
+														//	tmpModVertWeight._isLimitPos = true;
+														//	tmpModVertWeight._limitScale = limitCalPosDist;
+														//}
+
+														//변경
+														if (!tmpModPhysicsVert._isLimitPos || limitCalPosDist < tmpModPhysicsVert._limitScale)
+														{
+															tmpModPhysicsVert._isLimitPos = true;
+															tmpModPhysicsVert._limitScale = limitCalPosDist;
+														}
+													}
+
+												}
+
+												tmpNextVelocity *= Mathf.Clamp01(1.0f - (dotVector * outerItp));//적절히 느려지게 만들자
+											}
+
+
+										}
+
+									}
+
+									//limitedNextCalPos = tmpModVertWeight._calculatedDeltaPos + (tmpNextVelocity * tDelta);//이전
+									limitedNextCalPos = tmpModPhysicsVert._calculatedDeltaPos + (tmpNextVelocity * tDelta);//변경
+
+
+									//이걸 한번더 해서 위치 보정
+									if (isTouchCalculated)
+									{
+										Vector2 nextTouchPos = (limitedNextCalPos * (1.0f - touchCalculatedWeight)) + (touchCalculatedDeltaPos * touchCalculatedWeight);
+
+										limitedNextCalPos = nextTouchPos;
+
+										//tmpNextVelocity = (limitedNextCalPos - tmpModVertWeight._calculatedDeltaPos) / tDelta;//이전
+										tmpNextVelocity = (limitedNextCalPos - tmpModPhysicsVert._calculatedDeltaPos) / tDelta;//변경
+									}
+									//이전
+									//tmpModVertWeight._velocity_Next = tmpNextVelocity;
+									//tmpModVertWeight._calculatedDeltaPos_Prev = tmpModVertWeight._calculatedDeltaPos;
+									//tmpModVertWeight._calculatedDeltaPos = limitedNextCalPos;
+
+									//변경
+									tmpModPhysicsVert._velocity_Next = tmpNextVelocity;
+									tmpModPhysicsVert._calculatedDeltaPos_Prev = tmpModPhysicsVert._calculatedDeltaPos;
+									tmpModPhysicsVert._calculatedDeltaPos = limitedNextCalPos;
+								}
+								else
+								{
+									//이전
+									//tmpModVertWeight._calculatedDeltaPos_Prev = tmpModVertWeight._calculatedDeltaPos;
+									//tmpNextVelocity = tmpModVertWeight._velocity_Next;
+									//tmpModVertWeight._calculatedDeltaPos = tmpModVertWeight._calculatedDeltaPos + (tmpNextVelocity * tDelta);
+
+									//변경
+									tmpModPhysicsVert._calculatedDeltaPos_Prev = tmpModPhysicsVert._calculatedDeltaPos;
+									tmpNextVelocity = tmpModPhysicsVert._velocity_Next;
+									tmpModPhysicsVert._calculatedDeltaPos = tmpModPhysicsVert._calculatedDeltaPos + (tmpNextVelocity * tDelta);
+								}
+							}
+
+							//1차로 계산된 값을 이용하여 점성력을 체크한다.
+							//수정 : 이미 위치는 계산되었다. 위치를 중심으로 처리를 하자 점성/이동한계를 계산하자
+							for (int iPos = 0; iPos < tmpNumVert; iPos++)
+							{
+								//이전
+								//tmpModVertWeight = paramKeyValue._modifiedMesh._vertWeights[iPos];
+								//tmpPhysicVertParam = tmpModVertWeight._physicParam;
+
+								//변경
+								tmpModPhysicsVert = tmpSubModMesh_Physics._vertWeights[iPos];
+
+								//이전
+								//if (!tmpModVertWeight._isEnabled)
+								//{
+								//	//처리 안함다
+								//	tmpModVertWeight._calculatedDeltaPos = Vector2.zero;
+								//	continue;
+								//}
+								//if (tmpModVertWeight._vertex == null)
+								//{
+								//	Debug.LogError("Render Vertex is Not linked");
+								//	break;
+								//}
+
+								//변경
+								if (!tmpModPhysicsVert._isEnabled)
+								{
+									//처리 안함다
+									tmpModPhysicsVert._calculatedDeltaPos = Vector2.zero;
+									continue;
+								}
+								if (tmpModPhysicsVert._vertex == null)
+								{
+									Debug.LogError("Render Vertex is Not linked");
+									break;
+								}
+
+								if (isValidFrame)
+								{
+									//이전
+									//tmpNextVelocity = tmpModVertWeight._velocity_Next;
+									//tmpNextCalPos = tmpModVertWeight._calculatedDeltaPos;
+
+									//변경
+									tmpNextVelocity = tmpModPhysicsVert._velocity_Next;
+									tmpNextCalPos = tmpModPhysicsVert._calculatedDeltaPos;
+
+
+									//if (tmpIsViscosity && !tmpModVertWeight._physicParam._isMain)//이전
+									if (tmpIsViscosity && !tmpModPhysicsVert._isMain)//변경
+									{
+
+										//점성 로직 추가
+										//ID가 같으면 DeltaPos가 비슷해야한다.
+										tmpLinkedViscosityWeight = 0.0f;
+										tmpLinkedTotalCalPos = Vector2.zero;
+
+										//int curViscosityID = tmpModVertWeight._physicParam._viscosityGroupID;//이전
+										int curViscosityID = tmpModPhysicsVert._viscosityGroupID;//변경
+
+										//for (int iLinkVert = 0; iLinkVert < tmpPhysicVertParam._linkedVertices.Count; iLinkVert++)//이전
+										for (int iLinkVert = 0; iLinkVert < tmpModPhysicsVert._linkedVertices.Count; iLinkVert++)//변경
+										{
+											//이전
+											//tmpLinkedVert = tmpPhysicVertParam._linkedVertices[iLinkVert];
+											//float linkWeight = tmpLinkedVert._distWeight;
+
+											//if ((tmpLinkedVert._modVertWeight._physicParam._viscosityGroupID & curViscosityID) != 0)
+											//{
+											//	tmpLinkedTotalCalPos += tmpLinkedVert._modVertWeight._calculatedDeltaPos * linkWeight;//<<Vel 대신 Pos로 바꾸자
+											//	tmpLinkedViscosityWeight += linkWeight;
+											//}
+
+											//변경
+											tmpLinkedPhysicVert = tmpModPhysicsVert._linkedVertices[iLinkVert];
+											float linkWeight = tmpLinkedPhysicVert._distWeight;
+
+											if ((tmpLinkedPhysicVert._modVertWeight._viscosityGroupID & curViscosityID) != 0)
+											{
+												tmpLinkedTotalCalPos += tmpLinkedPhysicVert._modVertWeight._calculatedDeltaPos * linkWeight;//<<Vel 대신 Pos로 바꾸자
+												tmpLinkedViscosityWeight += linkWeight;
+											}
+										}
+
+										//점성도를 추가한다.
+										if (tmpLinkedViscosityWeight > 0.0f)
+										{
+											float clampViscosity = Mathf.Clamp01(tmpPhysicMeshParam._viscosity) * 0.7f;
+
+
+											tmpNextCalPos = tmpNextCalPos * (1.0f - clampViscosity) + tmpLinkedTotalCalPos * clampViscosity;
+										}
+
+									}
+
+									//이동 한계 한번 더 계산
+									//이전
+									//if (tmpModVertWeight._isLimitPos && tmpNextCalPos.magnitude > tmpModVertWeight._limitScale)
+									//{
+									//	tmpNextCalPos = tmpNextCalPos.normalized * tmpModVertWeight._limitScale;
+									//}
+
+									//변경
+									if (tmpModPhysicsVert._isLimitPos && tmpNextCalPos.magnitude > tmpModPhysicsVert._limitScale)
+									{
+										tmpNextCalPos = tmpNextCalPos.normalized * tmpModPhysicsVert._limitScale;
+									}
+
+
+									//계산 끝!
+									//새로운 변위를 넣어주자
+									//tmpModVertWeight._calculatedDeltaPos = tmpNextCalPos;//이전
+									tmpModPhysicsVert._calculatedDeltaPos = tmpNextCalPos;//변경
+
+
+									//속도를 다시 계산해주자
+									//이전
+									//tmpNextVelocity = (tmpModVertWeight._calculatedDeltaPos - tmpModVertWeight._calculatedDeltaPos_Prev) / tDelta;
+									//변경
+									tmpNextVelocity = (tmpModPhysicsVert._calculatedDeltaPos - tmpModPhysicsVert._calculatedDeltaPos_Prev) / tDelta;
+
+
+									//-----------------------------------------------------------------------------------------
+									//속도 갱신
+									//tmpModVertWeight._velocity_Next = tmpNextVelocity;//이전
+									tmpModPhysicsVert._velocity_Next = tmpNextVelocity;//변경
+
+
+									//속도 차이가 크다면 Real의 비중이 커야 한다.
+									//같은 방향이면 -> 버티기 관성이 더 잘보이는게 좋다
+									//다른 방향이면 Real을 관성으로 사용해야한다. (그래야 다음 프레임에 관성이 크게 보임)
+									//속도 변화에 따라서 체크
+									//이전
+									//float velocityRefreshITP_X = Mathf.Clamp01(Mathf.Abs(((tmpModVertWeight._velocity_Real.x - tmpModVertWeight._velocity_Real1F.x) / (Mathf.Abs(tmpModVertWeight._velocity_Real1F.x) + 0.1f)) * 0.5f));
+									//float velocityRefreshITP_Y = Mathf.Clamp01(Mathf.Abs(((tmpModVertWeight._velocity_Real.y - tmpModVertWeight._velocity_Real1F.y) / (Mathf.Abs(tmpModVertWeight._velocity_Real1F.y) + 0.1f)) * 0.5f));
+
+									//tmpModVertWeight._velocity_1F.x = tmpNextVelocity.x * (1.0f - velocityRefreshITP_X) + (tmpNextVelocity.x * 0.5f + tmpModVertWeight._velocity_Real.x * 0.5f) * velocityRefreshITP_X;
+									//tmpModVertWeight._velocity_1F.y = tmpNextVelocity.y * (1.0f - velocityRefreshITP_Y) + (tmpNextVelocity.y * 0.5f + tmpModVertWeight._velocity_Real.y * 0.5f) * velocityRefreshITP_Y;
+
+									//tmpModVertWeight._pos_1F = tmpModVertWeight._pos_Real;
+
+									//변경
+									float velocityRefreshITP_X = Mathf.Clamp01(Mathf.Abs(((tmpModPhysicsVert._velocity_Real.x - tmpModPhysicsVert._velocity_Real1F.x) / (Mathf.Abs(tmpModPhysicsVert._velocity_Real1F.x) + 0.1f)) * 0.5f));
+									float velocityRefreshITP_Y = Mathf.Clamp01(Mathf.Abs(((tmpModPhysicsVert._velocity_Real.y - tmpModPhysicsVert._velocity_Real1F.y) / (Mathf.Abs(tmpModPhysicsVert._velocity_Real1F.y) + 0.1f)) * 0.5f));
+
+									tmpModPhysicsVert._velocity_1F.x = tmpNextVelocity.x * (1.0f - velocityRefreshITP_X) + (tmpNextVelocity.x * 0.5f + tmpModPhysicsVert._velocity_Real.x * 0.5f) * velocityRefreshITP_X;
+									tmpModPhysicsVert._velocity_1F.y = tmpNextVelocity.y * (1.0f - velocityRefreshITP_Y) + (tmpNextVelocity.y * 0.5f + tmpModPhysicsVert._velocity_Real.y * 0.5f) * velocityRefreshITP_Y;
+
+									tmpModPhysicsVert._pos_1F = tmpModPhysicsVert._pos_Real;
+
+									//-----------------------------------------------------------------------------------------
+
+
+									//Damping
+									//이전
+									//if (tmpModVertWeight._calculatedDeltaPos.sqrMagnitude < tmpPhysicMeshParam._damping * tmpPhysicMeshParam._damping
+									//	&& tmpNextVelocity.sqrMagnitude < tmpPhysicMeshParam._damping * tmpPhysicMeshParam._damping)
+									//{
+									//	tmpModVertWeight._calculatedDeltaPos = Vector2.zero;
+									//	tmpModVertWeight.DampPhysicVertex();
+									//}
+
+									//변경
+									if (tmpModPhysicsVert._calculatedDeltaPos.sqrMagnitude < tmpPhysicMeshParam._damping * tmpPhysicMeshParam._damping
+										&& tmpNextVelocity.sqrMagnitude < tmpPhysicMeshParam._damping * tmpPhysicMeshParam._damping)
+									{
+										tmpModPhysicsVert._calculatedDeltaPos = Vector2.zero;
+										tmpModPhysicsVert.DampPhysicVertex();
+									}
+								}
+
+								//이전
+								//tmpPosList[iPos] +=
+								//		(tmpModVertWeight._calculatedDeltaPos * tmpModVertWeight._weight)
+								//		* paramKeyValue._weight;
+
+								//변경
+								tmpPosList[iPos] +=
+											(tmpModPhysicsVert._calculatedDeltaPos * tmpModPhysicsVert._weight)
+											* paramKeyValue._weight;
+
+
+							}
+							//---------------------------- Pos List
+						}
+						if (isFirstParam)
+						{
+							isFirstParam = false;
+						}
+
+
+						nCalculated++;//Visible 계산을 위해 "paramKey 계산 횟수"를 카운트하자
+
+					}//--- Params
+
+
+
+					//이제 tmp값을 Result에 넘겨주자
+					//처음 Layer라면 -> 100% 적용
+					//그렇지 않다면 Blend를 해주자
+
+					layerWeight = Mathf.Clamp01(keyParamSetGroup._layerWeight);
+
+
+					calParam._totalParamSetGroupWeight += layerWeight;//<<수정 : 나중에 Modifier 자체의 Weight를 적용할 수 있게 만든다.
+
+
+					//if (keyParamSetGroup._layerIndex == 0)
+					if (iCalculatedSubParam == 0)//<<변경
+					{
+						for (int iPos = 0; iPos < posList.Length; iPos++)
+						{
+							posList[iPos] = tmpPosList[iPos] * layerWeight;
+						}
+					}
+					else
+					{
+						switch (keyParamSetGroup._blendMethod)
+						{
+							case apModifierParamSetGroup.BLEND_METHOD.Additive:
+								{
+									//변경됨 19.5.20
+									for (int iPos = 0; iPos < posList.Length; iPos++)
+									{
+										posList[iPos] += tmpPosList[iPos] * layerWeight;
+									}
+								}
+								break;
+
+							case apModifierParamSetGroup.BLEND_METHOD.Interpolation:
+								{
+									//변경됨 19.5.20
+									for (int iPos = 0; iPos < posList.Length; iPos++)
+									{
+										posList[iPos] = (posList[iPos] * (1.0f - layerWeight)) +
+														(tmpPosList[iPos] * layerWeight);
+									}
+								}
+								break;
+
+							default:
+								Debug.LogError("Mod-Physics : Unknown BLEND_METHOD : " + keyParamSetGroup._blendMethod);
+								break;
+						}
+					}
+
+					iCalculatedSubParam++;
+
+				}//-SubList (ParamSetGroup을 키값으로 따로 적용한다.)
+				calParam._isAvailable = true;
+
+
+			}
+		}
+
+
+		//------------------------------------------------------------------------------------------------------------------------------------
 
 
 		// Get / Set

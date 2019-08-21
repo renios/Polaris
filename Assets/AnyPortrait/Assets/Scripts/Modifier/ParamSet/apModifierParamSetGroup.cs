@@ -183,17 +183,19 @@ namespace AnyPortrait
 
 
 
-		//추가
-		//ParamSet List + 타겟 Mesh Transform에 대해서
-		//일부 Vertex만 가중치를 줘서 Modifier를 적용할 수 있도록 리스트를 만든다.
+		//변경 19.5.20 : 이 변수는 더이상 사용하지 않는다.
+		
+		//ParamSet List + 타겟 Mesh Transform에 대해서 일부 Vertex만 가중치를 줘서 Modifier를 적용할 수 있도록 리스트를 만든다.
 		//MeshTransform에 맞게 구분할 수 있다.
 		//CaculateParamKeyValue에도 연동을 해준다.
-		[SerializeField]
-		public List<apModifierParamSetGroupVertWeight> _calculatedWeightedVertexList = new List<apModifierParamSetGroupVertWeight>();
+		//[SerializeField]
+		//public List<apModifierParamSetGroupVertWeight> _calculatedWeightedVertexList = new List<apModifierParamSetGroupVertWeight>();
 
 		//Editor 제어를 위한 apLinkedMatrix
+		//변경 3.26 : 계산용 행렬 (apMatrixCal)을 사용하자
 		[NonSerialized]
-		public apMatrix _tmpMatrix = new apMatrix();
+		//public apMatrix _tmpMatrix = new apMatrix();
+		public apMatrixCal _tmpMatrix = new apMatrixCal();
 
 		[NonSerialized]
 		public Vector2[] _tmpPositions = null;
@@ -238,6 +240,7 @@ namespace AnyPortrait
 			//_blendMethod = BLEND_METHOD.Interpolation;
 			_blendMethod = BLEND_METHOD.Additive;//<<기본값을 Additive로 변경
 
+			
 		}
 
 		public void LinkPortrait(apPortrait portrait, apModifierBase parentModifier)
@@ -247,18 +250,9 @@ namespace AnyPortrait
 
 			if (_tmpMatrix == null)
 			{
-				_tmpMatrix = new apMatrix();
+				//변경 : apMatrix > apMatrixCal로 변경
+				//_tmpMatrix = new apMatrix();
 			}
-
-			//if (_tmpPositions == null)
-			//{
-			//	_tmpPositions = new List<Vector2>();
-			//}
-
-			//if(_tmpVertMatrices == null)
-			//{
-			//	_tmpVertMatrices = new List<apMatrix3x3>();
-			//}
 		}
 
 
@@ -655,6 +649,11 @@ namespace AnyPortrait
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="isUseMeshDefaultColorToModifier">Sync 도중 ModMesh 생성시 기본 색상 값을 어떤 값으로 할지 여부 (옵션에 따름)</param>
+		/// <returns></returns>
 		public bool RefreshSync()
 		{
 			if (_syncTransform_Mesh == null)
@@ -796,39 +795,41 @@ namespace AnyPortrait
 				}
 			}
 
-			//추가 : Sync시 WeightedVertex도 같이 처리해주자
-			// 동기화 안된건 자동 삭제
-			for (int i = 0; i < _calculatedWeightedVertexList.Count; i++)
-			{
-				_calculatedWeightedVertexList[i]._isSync = false;
-			}
+			// 변경 19.5.20 : 이 변수는 더이상 사용되지 않는다. > 삭제
 
-			for (int iSync = 0; iSync < _syncTransform_Mesh.Count; iSync++)
-			{
-				apTransform_Mesh meshTransform = _syncTransform_Mesh[iSync];
-				apModifierParamSetGroupVertWeight existWV = _calculatedWeightedVertexList.Find(delegate (apModifierParamSetGroupVertWeight a)
-				{
-					return a._meshTransform_ID == meshTransform._transformUniqueID;
-				});
-				if (existWV != null)
-				{
-					existWV._isSync = true;
-					existWV.LinkMeshTransform(meshTransform);
-				}
-				else
-				{
-					//없다. 새로 만들자
-					apModifierParamSetGroupVertWeight newVW = new apModifierParamSetGroupVertWeight(meshTransform);
-					newVW._isSync = true;
-					_calculatedWeightedVertexList.Add(newVW);
-				}
-			}
+			////Sync시 WeightedVertex도 같이 처리해주자
+			//// 동기화 안된건 자동 삭제
+			//for (int i = 0; i < _calculatedWeightedVertexList.Count; i++)
+			//{
+			//	_calculatedWeightedVertexList[i]._isSync = false;
+			//}
 
-			//동기화 되지 않은건 지운다.
-			_calculatedWeightedVertexList.RemoveAll(delegate (apModifierParamSetGroupVertWeight a)
-			{
-				return !a._isSync;
-			});
+			//for (int iSync = 0; iSync < _syncTransform_Mesh.Count; iSync++)
+			//{
+			//	apTransform_Mesh meshTransform = _syncTransform_Mesh[iSync];
+			//	apModifierParamSetGroupVertWeight existWV = _calculatedWeightedVertexList.Find(delegate (apModifierParamSetGroupVertWeight a)
+			//	{
+			//		return a._meshTransform_ID == meshTransform._transformUniqueID;
+			//	});
+			//	if (existWV != null)
+			//	{
+			//		existWV._isSync = true;
+			//		existWV.LinkMeshTransform(meshTransform);
+			//	}
+			//	else
+			//	{
+			//		//없다. 새로 만들자
+			//		apModifierParamSetGroupVertWeight newVW = new apModifierParamSetGroupVertWeight(meshTransform);
+			//		newVW._isSync = true;
+			//		_calculatedWeightedVertexList.Add(newVW);
+			//	}
+			//}
+
+			////동기화 되지 않은건 지운다.
+			//_calculatedWeightedVertexList.RemoveAll(delegate (apModifierParamSetGroupVertWeight a)
+			//{
+			//	return !a._isSync;
+			//});
 
 			return isAnyChanged;
 		}
@@ -844,7 +845,7 @@ namespace AnyPortrait
 			//{
 			//	//추가할 수 없다.
 			//	return false;
-			//}
+			//}ㅠB
 			if (!_parentModifier.IsTarget_MeshTransform)
 			{
 				return false;
@@ -874,6 +875,7 @@ namespace AnyPortrait
 
 					modMesh.Init(_parentModifier._meshGroup._uniqueID, parentMeshGroupOfTransform._uniqueID, _parentModifier.ModifiedValueType);
 
+					
 					modMesh.SetTarget_MeshTransform(meshTransform._transformUniqueID, meshTransform._mesh._uniqueID, meshTransform._meshColor2X_Default, meshTransform._isVisible_Default);
 					modMesh.Link_MeshTransform(_parentModifier._meshGroup, parentMeshGroupOfTransform, meshTransform, targetRenderUnit, _portrait);
 
@@ -1126,13 +1128,15 @@ namespace AnyPortrait
 			return _syncTransform_MeshGroup.Contains(meshGroupTransform);
 		}
 
-		public apModifierParamSetGroupVertWeight GetWeightVertexData(apTransform_Mesh meshTransform)
-		{
-			return _calculatedWeightedVertexList.Find(delegate (apModifierParamSetGroupVertWeight a)
-				{
-					return a._meshTransform_ID == meshTransform._transformUniqueID;
-				});
-		}
+		// 삭제 19.5.20 : 이 변수는 더이상 사용되지 않는다.
+		//public apModifierParamSetGroupVertWeight GetWeightVertexData(apTransform_Mesh meshTransform)
+		//{
+		//	return _calculatedWeightedVertexList.Find(delegate (apModifierParamSetGroupVertWeight a)
+		//		{
+		//			return a._meshTransform_ID == meshTransform._transformUniqueID;
+		//		});
+		//}
+
 		public bool IsBoneContain(apBone bone)
 		{
 			return _syncBone.Contains(bone);

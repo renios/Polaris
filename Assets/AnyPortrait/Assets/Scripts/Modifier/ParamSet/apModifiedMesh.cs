@@ -462,8 +462,47 @@ namespace AnyPortrait
 			}
 		}
 
+
+		//추가 5.19
+		//유효하지 않은 데이터를 삭제하는 기능
+		public void CheckAndRemoveInvalidData(apModifierBase parentModifier)
+		{
+			//유효하지 않은 데이터가 있다면 삭제한다.
+			if((int)(_modValueType & MOD_VALUE_TYPE.VertexPosList) == 0)
+			{
+				//1. Vertex 정보가 있는 경우 삭제
+				if(_vertices != null && _vertices.Count > 0)
+				{
+					//Debug.LogError("Invalid Data [" + parentModifier.DisplayName + "] : 잘못된 Vertex 리스트");
+					_vertices.Clear();
+				}
+			}
+			if((int)(_modValueType & MOD_VALUE_TYPE.VertexWeightList_Physics) == 0
+				&& (int)(_modValueType & MOD_VALUE_TYPE.VertexWeightList_Volume) == 0)
+			{
+				//2. VertexWeight 정보가 있는 경우 삭제
+				if(_vertWeights != null && _vertWeights.Count > 0)
+				{
+					//Debug.LogError("Invalid Data [" + parentModifier.DisplayName + "] : 잘못된 VertexWeight 리스트");
+					_vertWeights.Clear();
+				}
+			}
+			if((int)(_modValueType & MOD_VALUE_TYPE.BoneVertexWeightList) == 0)
+			{
+				//3. VertRig 정보가 있는 경우 삭제
+				if(_vertRigs != null && _vertRigs.Count > 0)
+				{
+					//Debug.LogError("Invalid Data [" + parentModifier.DisplayName + "] : 잘못된 VertexRig 리스트");
+					_vertRigs.Clear();
+				}
+			}
+		}
+
 		// 버텍스 Refresh
 		//---------------------------------------------------
+		
+
+
 		public void RefreshVertices()
 		{
 			if (_transform_Mesh._mesh != null)
@@ -727,7 +766,11 @@ namespace AnyPortrait
 
 		public void RefreshVertexWeights(apPortrait portrait, bool isPhysics, bool isVolume)
 		{
-
+			//if((int)(_modValueType & MOD_VALUE_TYPE.VertexWeightList_Volume) == 0
+			//	&& (int)(_modValueType & MOD_VALUE_TYPE.VertexWeightList_Physics) == 0)
+			//{
+			//	Debug.LogError("잘못된 Vertex Weight 설정");
+			//}
 			if (_renderUnit != null)
 			{
 				//"Modifier가 연산되기 전"의 WorldPosition을 미리 계산하자

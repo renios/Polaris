@@ -61,11 +61,16 @@ namespace AnyPortrait
 
 		public int _loopFrameIndex = -1;
 
+		// 변경 19.5.20 : 용량 최적화를 위해서 activeFrame 변수들은 NonSerialized로 변경
 		//값이 적용되는 프레임 범위
+		[NonSerialized, NonBackupField]
 		public int _activeFrameIndexMin = 0;
+		[NonSerialized, NonBackupField]
 		public int _activeFrameIndexMax = 0;
 
+		[NonSerialized, NonBackupField]
 		public int _activeFrameIndexMin_Dummy = 0;
+		[NonSerialized, NonBackupField]
 		public int _activeFrameIndexMax_Dummy = 0;
 
 
@@ -222,8 +227,10 @@ namespace AnyPortrait
 			//_isLoopAsEnd = false;
 			//_loopFrameIndex = -1;
 
-			//_curveKey.Set
-			//_curveKey.SetLinkedCurveKey(prevCurveKey, nextCurveKey, isPrevDummyIndex, isNextDummyIndex);
+			//이전
+			//_curveKey.SetLinkedCurveKey(prevCurveKey, nextCurveKey, prevFrameIndex, nextFrameIndex, isMakeCurveForce);
+
+			//변경 19.5.20
 			_curveKey.SetLinkedCurveKey(prevCurveKey, nextCurveKey, prevFrameIndex, nextFrameIndex);
 		}
 

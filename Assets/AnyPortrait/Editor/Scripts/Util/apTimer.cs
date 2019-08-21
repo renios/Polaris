@@ -99,6 +99,8 @@ namespace AnyPortrait
 		private int _fps = 0;//Repaint 타입의 연산 시간을 계산한다.
 
 		private const long MIN_UPDATE_DELTA_TIME = 16;//(16)60FPS보다 작으면 강제 업데이트 갱신을 막아야 한다.
+		private const long MIN_UPDATE_DELTA_TIME_LOWCPU_LOW = 500;//(500) LowCPU_Low 모드에서는 2FPS 기준으로 동작
+		private const long MIN_UPDATE_DELTA_TIME_LOWCPU_MID = 50;//(50) LowCPU_Mid 모드에서는 20FPS 기준으로 동작
 
 		private bool _isValidFrame = false;
 		// Init
@@ -119,7 +121,7 @@ namespace AnyPortrait
 
 		// Functions
 		//----------------------------------------
-		public bool CheckTime_Update()
+		public bool CheckTime_Update(apEditor.LOW_CPU_STATUS lowCPUStatus)
 		{
 			//if(apVersion.I.IsDemoViolation)
 			//{
@@ -144,12 +146,39 @@ namespace AnyPortrait
 			_deltaTimeCount[UPDATE_ALL_FRAME] += deltaTime_UpdateAllFrame;
 
 			//Update는 60FPS보다 높으면 프레임 스킵을 해야한다.
-			if (_deltaTimeCount[UPDATE] > MIN_UPDATE_DELTA_TIME)
+
+			if(lowCPUStatus == apEditor.LOW_CPU_STATUS.LowCPU_Low)
 			{
-				_prevDeltaTime[UPDATE] = (_deltaTimeCount[UPDATE] / 1000.0);
-				_deltaTimeCount[UPDATE] = 0;
-				_isValidFrame = true;
+				//약 2FPS
+				if (_deltaTimeCount[UPDATE] > MIN_UPDATE_DELTA_TIME_LOWCPU_LOW)
+				{
+					_prevDeltaTime[UPDATE] = (_deltaTimeCount[UPDATE] / 1000.0);
+					_deltaTimeCount[UPDATE] = 0;
+					_isValidFrame = true;
+				}
 			}
+			else if(lowCPUStatus == apEditor.LOW_CPU_STATUS.LowCPU_Mid)
+			{
+				//약 10FPS
+				if (_deltaTimeCount[UPDATE] > MIN_UPDATE_DELTA_TIME_LOWCPU_MID)
+				{
+					_prevDeltaTime[UPDATE] = (_deltaTimeCount[UPDATE] / 1000.0);
+					_deltaTimeCount[UPDATE] = 0;
+					_isValidFrame = true;
+				}
+			}
+			else
+			{
+				//정상적인 FPS
+				if (_deltaTimeCount[UPDATE] > MIN_UPDATE_DELTA_TIME)
+				{
+					_prevDeltaTime[UPDATE] = (_deltaTimeCount[UPDATE] / 1000.0);
+					_deltaTimeCount[UPDATE] = 0;
+					_isValidFrame = true;
+				}
+			}
+			
+			
 
 			//Update All Frame은 프레임 스킵 없이 매번 경과 시간을 리턴한다.
 			_prevDeltaTime[UPDATE_ALL_FRAME] = (_deltaTimeCount[UPDATE_ALL_FRAME] / 1000.0);
@@ -165,7 +194,7 @@ namespace AnyPortrait
 			return _isValidFrame;
 		}
 
-		public void CheckTime_Repaint()
+		public void CheckTime_Repaint(apEditor.LOW_CPU_STATUS lowCPUStatus)
 		{
 			//if(apVersion.I.IsDemoViolation)
 			//{
@@ -184,13 +213,36 @@ namespace AnyPortrait
 			_deltaTimeCount[REPAINT] = deltaTime_Repaint;
 			_prevDeltaTime[REPAINT] = (_deltaTimeCount[REPAINT] / 1000.0f);
 
-			if (_prevDeltaTime[REPAINT] > 0.0f)
+			if (lowCPUStatus == apEditor.LOW_CPU_STATUS.LowCPU_Low || lowCPUStatus == apEditor.LOW_CPU_STATUS.LowCPU_Mid)
 			{
-				_fps = (int)(1.0f / (_prevDeltaTime[REPAINT] * _subTimer[REPAINT].TimeMultiply));
+				//Low CPU에서는 Repaint가 아주 낮은 단위로 호출되는데,
+				//이때 중간중간에 2프레임간 연속으로 실행되면서 FPS가 높은걸로 나타난다.
+				//따라서 일정값의 FPS보다 높다면 (=시간 간격이 짧다면)
+				//그 프레임은 무시해야한다.
+				if (_prevDeltaTime[REPAINT] > 0.01f)
+				{
+					_fps = (int)(1.0f / (_prevDeltaTime[REPAINT] * _subTimer[REPAINT].TimeMultiply));
+				}
 			}
+			else
+			{
+				if (_prevDeltaTime[REPAINT] > 0.0f)
+				{
+					_fps = (int)(1.0f / (_prevDeltaTime[REPAINT] * _subTimer[REPAINT].TimeMultiply));
+				}
+			}
+			
 
 			_stopWatch[REPAINT].Reset();
 			_stopWatch[REPAINT].Start();
+
+			if (lowCPUStatus == apEditor.LOW_CPU_STATUS.LowCPU_Low || lowCPUStatus == apEditor.LOW_CPU_STATUS.LowCPU_Mid)
+			{
+				//LowCPU 모드일때는
+				//Repaint직후에 불필요한 Update를 막고자 Update용 StopWatch를 리셋한다
+				_stopWatch[UPDATE].Reset();
+				_stopWatch[UPDATE].Start();
+			}
 		}
 
 		//강제로 다른 곳에서 업데이트를 하면 초기화한다.

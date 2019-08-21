@@ -190,6 +190,11 @@ namespace AnyPortrait
 			//_calculateResult.SetMeshGroup(_meshGroup);
 			//_calculateResult.Clear();
 
+			// 변경 3.23 : 이전과 달리 색상 속성을 초기에 비활성화
+			
+			_isColorPropertyEnabled = false;
+			_isExtraPropertyEnabled = false;
+
 			RefreshParamSet();
 		}
 
@@ -575,9 +580,14 @@ namespace AnyPortrait
 		/// </summary>
 		public virtual bool IsPreUpdate { get { return true; } }
 
+		//이전
+		//public bool IsPhysics { get { return (int)(ModifierType & MODIFIER_TYPE.Physic) != 0; } }
+		//public bool IsVolume { get { return (int)(ModifierType & MODIFIER_TYPE.Volume) != 0; } }
 
-		public bool IsPhysics { get { return (int)(ModifierType & MODIFIER_TYPE.Physic) != 0; } }
-		public bool IsVolume { get { return (int)(ModifierType & MODIFIER_TYPE.Volume) != 0; } }
+		//변경
+		public virtual bool IsPhysics { get { return false; } }
+		public virtual bool IsVolume { get { return false; } }
+
 		public virtual bool IsUseParamSetWeight { get { return false; } }
 
 		/// <summary>
@@ -672,11 +682,15 @@ namespace AnyPortrait
 		/// <param name="meshGroup"></param>
 		/// <param name="meshTransform"></param>
 		/// <param name="targetParamSet"></param>
-		/// <param name="isExclusive">meshData리스트에 단 한개만 넣는 경우에는 True</param>
+		/// <param name="isExclusive">meshData리스트에 단 한개만 넣는 경우에는 True. 기본값은 false</param>
 		/// <param name="isRecursiveAvailable">True이면 해당 MeshGroup이 아닌 하위 MeshGroup의 Transform을 허용한다. 기본값은 false</param>
+		/// <param name="isRefreshLink">Link를 다시 한다. 기본값은 true</param>
+		/// <param name="isUseMeshDefaultColor">색상 기본값으로 메시 기본 값을 이용</param>
 		/// <returns></returns>
 		public apModifiedMesh AddMeshTransform(apMeshGroup meshGroup, apTransform_Mesh meshTransform, apModifierParamSet targetParamSet,
-												bool isExclusive = false, bool isRecursiveAvailable = false, bool isRefreshLink = true)
+												//bool isExclusive = false, bool isRecursiveAvailable = false, bool isRefreshLink = true, bool isUseMeshDefaultColor = true
+												bool isExclusive, bool isRecursiveAvailable, bool isRefreshLink
+												)
 		{
 			//현재 타입에서 추가 가능한가.
 			if (!IsTarget_MeshTransform)
@@ -1013,7 +1027,10 @@ namespace AnyPortrait
 			List<apCalculatedResultParam.ParamKeyValueSet> subParamKeyValueList = null;
 			float layerWeight = 0.0f;
 			apModifierParamSetGroup keyParamSetGroup = null;
-			apModifierParamSetGroupVertWeight weightedVertData = null;
+
+			// 이값 사용 안함 19.5.20
+			//apModifierParamSetGroupVertWeight weightedVertData = null;
+
 			apCalculatedResultParamSubList curSubList = null;
 			int nParamKeys = 0;
 			apCalculatedResultParam.ParamKeyValueSet paramKeyValue = null;
@@ -1052,7 +1069,8 @@ namespace AnyPortrait
 				layerWeight = 0.0f;
 				keyParamSetGroup = null;
 
-				weightedVertData = calParam._weightedVertexData;
+				// 삭제 19.5.20 : 이 값을 사용하지 않음
+				//weightedVertData = calParam._weightedVertexData;
 
 				//일단 초기화
 				for (int iPos = 0; iPos < posList.Length; iPos++)
@@ -1382,23 +1400,30 @@ namespace AnyPortrait
 								{
 									if (isExCalculatable_Transform)//<<추가
 									{
-										if (weightedVertData != null)
-										{
-											//Vertex 가중치가 추가되었다.
-											float vertWeight = 0.0f;
-											for (int iPos = 0; iPos < posList.Length; iPos++)
-											{
-												vertWeight = layerWeight * weightedVertData._weightedVerts[iPos]._adaptWeight;
+										// 변경 19.5.20 : weightedVertData 값을 사용하지 않음
+										//if (weightedVertData != null)
+										//{
+										//	//Vertex 가중치가 추가되었다.
+										//	float vertWeight = 0.0f;
+										//	for (int iPos = 0; iPos < posList.Length; iPos++)
+										//	{
+										//		vertWeight = layerWeight * weightedVertData._weightedVerts[iPos]._adaptWeight;
 
-												posList[iPos] += tmpPosList[iPos] * vertWeight;
-											}
-										}
-										else
+										//		posList[iPos] += tmpPosList[iPos] * vertWeight;
+										//	}
+										//}
+										//else
+										//{
+										//	for (int iPos = 0; iPos < posList.Length; iPos++)
+										//	{
+										//		posList[iPos] += tmpPosList[iPos] * layerWeight;
+										//	}
+										//}
+
+										//변경됨
+										for (int iPos = 0; iPos < posList.Length; iPos++)
 										{
-											for (int iPos = 0; iPos < posList.Length; iPos++)
-											{
-												posList[iPos] += tmpPosList[iPos] * layerWeight;
-											}
+											posList[iPos] += tmpPosList[iPos] * layerWeight;
 										}
 									}
 
@@ -1416,25 +1441,33 @@ namespace AnyPortrait
 								{
 									if (isExCalculatable_Transform)//<<추가
 									{
-										if (weightedVertData != null)
-										{
-											//Vertex 가중치가 추가되었다.
-											float vertWeight = 0.0f;
-											for (int iPos = 0; iPos < posList.Length; iPos++)
-											{
-												vertWeight = layerWeight * weightedVertData._weightedVerts[iPos]._adaptWeight;
+										// 변경 19.5.20 : weightedVertData 값을 사용하지 않음
+										//if (weightedVertData != null)
+										//{
+										//	//Vertex 가중치가 추가되었다.
+										//	float vertWeight = 0.0f;
+										//	for (int iPos = 0; iPos < posList.Length; iPos++)
+										//	{
+										//		vertWeight = layerWeight * weightedVertData._weightedVerts[iPos]._adaptWeight;
 
-												posList[iPos] = (posList[iPos] * (1.0f - vertWeight)) +
-																(tmpPosList[iPos] * vertWeight);
-											}
-										}
-										else
+										//		posList[iPos] = (posList[iPos] * (1.0f - vertWeight)) +
+										//						(tmpPosList[iPos] * vertWeight);
+										//	}
+										//}
+										//else
+										//{
+										//	for (int iPos = 0; iPos < posList.Length; iPos++)
+										//	{
+										//		posList[iPos] = (posList[iPos] * (1.0f - layerWeight)) +
+										//						(tmpPosList[iPos] * layerWeight);
+										//	}
+										//}
+
+										//변경됨
+										for (int iPos = 0; iPos < posList.Length; iPos++)
 										{
-											for (int iPos = 0; iPos < posList.Length; iPos++)
-											{
-												posList[iPos] = (posList[iPos] * (1.0f - layerWeight)) +
-																(tmpPosList[iPos] * layerWeight);
-											}
+											posList[iPos] = (posList[iPos] * (1.0f - layerWeight)) +
+															(tmpPosList[iPos] * layerWeight);
 										}
 									}
 									//if (isColorProperty)
@@ -1581,7 +1614,6 @@ namespace AnyPortrait
 				apModifierParamSetGroup keyParamSetGroup = null;
 
 				//결과 매트릭스를 만들자
-				//apMatrix resultMatrix = new apMatrix();
 				calParam._result_Matrix.SetIdentity();
 
 				//색상 처리 초기화
@@ -1616,8 +1648,11 @@ namespace AnyPortrait
 				//calParam._result_BoneIKWeight = 0.0f;
 				//calParam._isBoneIKWeightCalculated = false;
 
-				//apMatrix tmpMatrix = new apMatrix();
-				apMatrix tmpMatrix = null;
+				//변경 3.26 : 계산용 행렬 (apMatrixCal)을 사용하자
+				//apMatrix tmpMatrix = null;
+				apMatrixCal tmpMatrix = null;
+
+
 				Color tmpColor = Color.clear;
 				bool tmpVisible = false;
 				//float tmpBoneIKWeight = 0.0f;
@@ -1716,12 +1751,20 @@ namespace AnyPortrait
 								if (paramKeyValue._isAnimRotationBias)
 								{
 									//추가 : RotationBias가 있다면 미리 계산된 Bias Matrix를 사용한다.
-									tmpMatrix.AddMatrix(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight, false);
+									//이전 : apMatrix를 사용할 때
+									//tmpMatrix.AddMatrix(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight, false);
+
+									//변경 3.26 : apMatrixCal을 사용한다.
+									tmpMatrix.AddMatrixParallel(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight);
 								}
 								else
 								{
 									//기본 식
-									tmpMatrix.AddMatrix(paramKeyValue._modifiedMesh._transformMatrix, paramKeyValue._weight, false);
+									//이전 : apMatrix를 사용할 때
+									//tmpMatrix.AddMatrix(paramKeyValue._modifiedMesh._transformMatrix, paramKeyValue._weight, false);
+
+									//변경 3.26 : apMatrixCal을 사용한다.
+									tmpMatrix.AddMatrixParallel(paramKeyValue._modifiedMesh._transformMatrix, paramKeyValue._weight);
 								}
 							}
 
@@ -1867,11 +1910,19 @@ namespace AnyPortrait
 								if (paramKeyValue._isAnimRotationBias)
 								{
 									//추가 : RotationBias가 있다면 미리 계산된 Bias Matrix를 사용한다.
-									tmpMatrix.AddMatrix(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight, false);
+									//이전 : apMatrix
+									//tmpMatrix.AddMatrix(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight, false);
+
+									//변경 : apMatrixCal 이용
+									tmpMatrix.AddMatrixParallel(paramKeyValue.AnimRotationBiasedMatrix, paramKeyValue._weight);
 								}
 								else
 								{
-									tmpMatrix.AddMatrix(paramKeyValue._modifiedBone._transformMatrix, paramKeyValue._weight, false);
+									//이전 : apMatrix
+									//tmpMatrix.AddMatrix(paramKeyValue._modifiedBone._transformMatrix, paramKeyValue._weight, false);
+
+									//변경 : apMatrixCal 이용
+									tmpMatrix.AddMatrixParallel(paramKeyValue._modifiedBone._transformMatrix, paramKeyValue._weight);
 								}
 
 								//if (isBoneIKControllerUsed)
@@ -1923,39 +1974,23 @@ namespace AnyPortrait
 						tmpVisible = true;
 					}
 
+					//추가 3.26 : apMatrixCal 계산
+					tmpMatrix.CalculateScale_FromAdd();
 
 					//if (keyParamSetGroup._layerIndex == 0)
 					if (iCalculatedSubParam == 0)
 					{
 						if (isExCalculatable_Transform)//<<추가
 						{
-							//calParam._result_Matrix.SetMatrix(tmpMatrix);
-							calParam._result_Matrix.SetPos(tmpMatrix._pos * layerWeight);
-							calParam._result_Matrix.SetRotate(tmpMatrix._angleDeg * layerWeight);
-							calParam._result_Matrix.SetScale(tmpMatrix._scale * layerWeight + Vector2.one * (1.0f - layerWeight));
-							calParam._result_Matrix.MakeMatrix();
+							//이전 : apMatrix로 계산된 tmpMatrix
+							//calParam._result_Matrix.SetPos(tmpMatrix._pos * layerWeight);
+							//calParam._result_Matrix.SetRotate(tmpMatrix._angleDeg * layerWeight);
+							//calParam._result_Matrix.SetScale(tmpMatrix._scale * layerWeight + Vector2.one * (1.0f - layerWeight));
+							//calParam._result_Matrix.MakeMatrix();
 
-							//if (isBoneIKControllerUsed)
-							//{
-							//	//추가 : Bone IK Weight 계산
-							//	calParam._result_BoneIKWeight = tmpBoneIKWeight * layerWeight;
-							//	calParam._isBoneIKWeightCalculated = true;
-							//}
+							//변경 3.26 : apMatrixCal로 계산된 tmpMatrix
+							calParam._result_Matrix.SetTRSForLerp(tmpMatrix);
 						}
-
-						//>>> CalculatedLog
-						//keyParamSetGroup.CalculatedLog.CalculateParamSetGroup(layerWeight,
-						//														iCalculatedSubParam,
-						//														apModifierParamSetGroup.BLEND_METHOD.Interpolation,
-						//														null,
-						//														calParam.CalculatedLog);
-
-						//아래 코드로 옮김
-						//if (isColorProperty && tmpIsColoredKeyParamSetGroup)
-						//{
-						//	calParam._result_Color = apUtil.BlendColor_ITP(calParam._result_Color, tmpColor, layerWeight);
-						//	calParam._result_IsVisible |= tmpVisible;
-						//}
 					}
 					else
 					{
@@ -1965,20 +2000,12 @@ namespace AnyPortrait
 								{
 									if (isExCalculatable_Transform)//<<추가
 									{
-										calParam._result_Matrix.AddMatrix(tmpMatrix, layerWeight, true);
-
-										//if (isBoneIKControllerUsed)
-										//{
-										//	//추가 : Bone IK Weight 계산
-										//	calParam._result_BoneIKWeight += tmpBoneIKWeight * layerWeight;
-										//	calParam._isBoneIKWeightCalculated = true;
-										//}
+										//이전 : apMatrix로 계산
+										//calParam._result_Matrix.AddMatrix(tmpMatrix, layerWeight, true);
+										
+										//변경 3.26 : apMatrixCal로 계산된 AddMatrix
+										calParam._result_Matrix.AddMatrixLayered(tmpMatrix, layerWeight);
 									}
-									//if (isColorProperty)
-									//{
-									//	calParam._result_Color = apUtil.BlendColor_Add(calParam._result_Color, tmpColor, layerWeight);
-									//	calParam._result_IsVisible |= tmpVisible;
-									//}
 								}
 								break;
 
@@ -1986,20 +2013,13 @@ namespace AnyPortrait
 								{
 									if (isExCalculatable_Transform)//<<추가
 									{
-										calParam._result_Matrix.LerpMartix(tmpMatrix, layerWeight);
+										//이전 : apMatrix로 계산
+										//calParam._result_Matrix.LerpMartix(tmpMatrix, layerWeight);
 
-										//if (isBoneIKControllerUsed)
-										//{
-										//	//추가 : Bone IK Weight 계산
-										//	calParam._result_BoneIKWeight = calParam._result_BoneIKWeight * (1.0f - layerWeight) + (tmpBoneIKWeight * layerWeight);
-										//	calParam._isBoneIKWeightCalculated = true;
-										//}
+										//변경 3.26 : apMatrixCal로 계산 된 AddMatrix
+										calParam._result_Matrix.LerpMatrixLayered(tmpMatrix, layerWeight);
 									}
-									//if (isColorProperty)
-									//{
-									//	calParam._result_Color = apUtil.BlendColor_ITP(calParam._result_Color, tmpColor, layerWeight);
-									//	calParam._result_IsVisible |= tmpVisible;
-									//}
+									
 								}
 								break;
 
@@ -2015,6 +2035,7 @@ namespace AnyPortrait
 						//														null,
 						//														calParam.CalculatedLog);
 					}
+
 
 					//변경 : 색상은 별도로 카운팅해서 처리하자
 					if (tmpIsColoredKeyParamSetGroup)
@@ -2065,7 +2086,12 @@ namespace AnyPortrait
 				else
 				{
 					calParam._isAvailable = true;
-					calParam._result_Matrix.MakeMatrix();
+
+					//이전 : apMatrix로 계산된 경우
+					//calParam._result_Matrix.MakeMatrix();
+
+					//변경 : apMatrixCal로 계산한 경우
+					calParam._result_Matrix.CalculateScale_FromLerp();
 				}
 
 			}
@@ -2498,7 +2524,10 @@ namespace AnyPortrait
 			List<apCalculatedResultParam.ParamKeyValueSet> subParamKeyValueList = null;
 			float layerWeight = 0.0f;
 			apModifierParamSetGroup keyParamSetGroup = null;
-			apModifierParamSetGroupVertWeight weigetedVertData = null;
+			
+			// 삭제 19.5.20 : 이 값을 사용하지 않음
+			//apModifierParamSetGroupVertWeight weigetedVertData = null;
+
 			apCalculatedResultParamSubList curSubList = null;
 			int nParamKeys = 0;
 			apCalculatedResultParam.ParamKeyValueSet paramKeyValue = null;
@@ -2562,7 +2591,8 @@ namespace AnyPortrait
 				layerWeight = 0.0f;
 				keyParamSetGroup = null;
 
-				weigetedVertData = calParam._weightedVertexData;
+				// 삭제 19.5.20 : 이 변수 삭제됨
+				//weigetedVertData = calParam._weightedVertexData;
 
 				//일단 초기화
 				for (int iPos = 0; iPos < posList.Length; iPos++)
@@ -3285,48 +3315,62 @@ namespace AnyPortrait
 						{
 							case apModifierParamSetGroup.BLEND_METHOD.Additive:
 								{
-									if (weigetedVertData != null)
-									{
-										//Vertex 가중치가 추가되었다.
-										float vertWeight = 0.0f;
-										for (int iPos = 0; iPos < posList.Length; iPos++)
-										{
-											vertWeight = layerWeight * weigetedVertData._weightedVerts[iPos]._adaptWeight;
+									// 삭제 19.5.20 : weightedVertData 사용 안함
+									//if (weigetedVertData != null)
+									//{
+									//	//Vertex 가중치가 추가되었다.
+									//	float vertWeight = 0.0f;
+									//	for (int iPos = 0; iPos < posList.Length; iPos++)
+									//	{
+									//		vertWeight = layerWeight * weigetedVertData._weightedVerts[iPos]._adaptWeight;
 
-											posList[iPos] += tmpPosList[iPos] * vertWeight;
-										}
-									}
-									else
+									//		posList[iPos] += tmpPosList[iPos] * vertWeight;
+									//	}
+									//}
+									//else
+									//{
+									//	for (int iPos = 0; iPos < posList.Length; iPos++)
+									//	{
+									//		posList[iPos] += tmpPosList[iPos] * layerWeight;
+									//	}
+									//}
+
+									//변경됨
+									for (int iPos = 0; iPos < posList.Length; iPos++)
 									{
-										for (int iPos = 0; iPos < posList.Length; iPos++)
-										{
-											posList[iPos] += tmpPosList[iPos] * layerWeight;
-										}
+										posList[iPos] += tmpPosList[iPos] * layerWeight;
 									}
 								}
 								break;
 
 							case apModifierParamSetGroup.BLEND_METHOD.Interpolation:
 								{
-									if (weigetedVertData != null)
-									{
-										//Vertex 가중치가 추가되었다.
-										float vertWeight = 0.0f;
-										for (int iPos = 0; iPos < posList.Length; iPos++)
-										{
-											vertWeight = layerWeight * weigetedVertData._weightedVerts[iPos]._adaptWeight;
+									// 삭제 19.5.20 : weightedVertData 사용 안함
+									//if (weigetedVertData != null)
+									//{
+									//	//Vertex 가중치가 추가되었다.
+									//	float vertWeight = 0.0f;
+									//	for (int iPos = 0; iPos < posList.Length; iPos++)
+									//	{
+									//		vertWeight = layerWeight * weigetedVertData._weightedVerts[iPos]._adaptWeight;
 
-											posList[iPos] = (posList[iPos] * (1.0f - vertWeight)) +
-															(tmpPosList[iPos] * vertWeight);
-										}
-									}
-									else
+									//		posList[iPos] = (posList[iPos] * (1.0f - vertWeight)) +
+									//						(tmpPosList[iPos] * vertWeight);
+									//	}
+									//}
+									//else
+									//{
+									//	for (int iPos = 0; iPos < posList.Length; iPos++)
+									//	{
+									//		posList[iPos] = (posList[iPos] * (1.0f - layerWeight)) +
+									//						(tmpPosList[iPos] * layerWeight);
+									//	}
+									//}
+
+									for (int iPos = 0; iPos < posList.Length; iPos++)
 									{
-										for (int iPos = 0; iPos < posList.Length; iPos++)
-										{
-											posList[iPos] = (posList[iPos] * (1.0f - layerWeight)) +
-															(tmpPosList[iPos] * layerWeight);
-										}
+										posList[iPos] = (posList[iPos] * (1.0f - layerWeight)) +
+														(tmpPosList[iPos] * layerWeight);
 									}
 								}
 								break;

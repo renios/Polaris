@@ -230,13 +230,72 @@ namespace AnyPortrait
 				_layers[i].LinkOpt(animClip, this);
 			}
 		}
-		// Functions
-		//------------------------------------------
-		public void RefreshLayers()
+
+
+
+		public IEnumerator LinkOptAsync(apAnimClip animClip, apAsyncTimer asyncTimer)
 		{
+			_parentAnimClip = animClip;
+
+			animClip._portrait.RegistUniqueID(apIDManager.TARGET.AnimTimeline, _uniqueID);
+
+			if(asyncTimer.IsYield())
+			{
+				yield return asyncTimer.WaitAndRestart();
+			}
+
+			_linkedOptModifier = null;
+			//TODO : linkedBone 연결하자
+
+			switch (_linkType)
+			{
+				case apAnimClip.LINK_TYPE.AnimatedModifier:
+					{
+						//_boneUniqueID = -1;
+
+						if (_parentAnimClip._targetOptTranform != null)
+						{
+							_linkedOptModifier = _parentAnimClip._targetOptTranform.GetModifier(_modifierUniqueID);
+							if (_linkedOptModifier == null)
+							{
+								Debug.LogError("AnyPortrait Error : Runtime Timeline Link Error - No Modifier [" + _modifierUniqueID + "]");
+								_modifierUniqueID = -1;
+
+							}
+						}
+					}
+
+					break;
+
+				//case apAnimClip.LINK_TYPE.Bone:
+				case apAnimClip.LINK_TYPE.ControlParam:
+					_modifierUniqueID = -1;
+					break;
+			}
+
+
 			for (int i = 0; i < _layers.Count; i++)
 			{
-				_layers[i].SortAndRefreshKeyframes();
+				_layers[i].LinkOpt(animClip, this);
+			}
+		}
+		// Functions
+		//------------------------------------------
+		public void RefreshLayers(apAnimTimelineLayer targetTimelineLayer)
+		{
+			//변경 19.5.21 : 항상 모든 레이어를 Refresh하는게 아니라 타겟을 받아서 하는 걸로 변경
+			if (targetTimelineLayer == null)
+			{
+				//타겟이 없다면 전체 Refresh
+				for (int i = 0; i < _layers.Count; i++)
+				{
+					_layers[i].SortAndRefreshKeyframes();
+				}
+			}
+			else
+			{
+				//타겟만 Refresh하자
+				targetTimelineLayer.SortAndRefreshKeyframes();
 			}
 		}
 
@@ -543,13 +602,15 @@ namespace AnyPortrait
 		//------------------------------------------------------------------------------------------
 		// Copy For Bake
 		//------------------------------------------------------------------------------------------
-		public void CopyFromTimeline(apAnimTimeline srcTimeline)
+		public void CopyFromTimeline(apAnimTimeline srcTimeline, apAnimClip parentAnimClip)
 		{
 			_uniqueID = srcTimeline._uniqueID;
 			_guiColor = srcTimeline._guiColor;
 
 			_linkType = srcTimeline._linkType;
 			_modifierUniqueID = srcTimeline._modifierUniqueID;
+
+			_parentAnimClip = parentAnimClip;
 
 			_layers.Clear();
 			for (int iLayer = 0; iLayer < srcTimeline._layers.Count; iLayer++)
@@ -558,7 +619,9 @@ namespace AnyPortrait
 
 				//복사해준다.
 				apAnimTimelineLayer newLayer = new apAnimTimelineLayer();
-				newLayer.CopyFromTimelineLayer(srcLayer);
+				newLayer.CopyFromTimelineLayer(srcLayer, parentAnimClip, this);
+
+
 
 				_layers.Add(newLayer);
 			}

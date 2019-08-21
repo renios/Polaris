@@ -111,18 +111,22 @@ namespace AnyPortrait
 		public apRenderUnit _targetRenderUnit = null;
 		public apRenderUnit _ownerRenderUnit = null;
 
-		//추가 : 타겟 Bone
+		//타겟 Bone
 		public apBone _targetBone = null;
 
-
+		//삭제 19.5.20 : 이 변수를 더이상 사용하지 않음
 		//Vertex 가중치 적용 데이터
-		public apModifierParamSetGroupVertWeight _weightedVertexData = null;
+		//public apModifierParamSetGroupVertWeight _weightedVertexData = null;
 
 		//결과값
 		// 여기에 직접 처리를 해주자
 		public Vector2[] _result_Positions = null;
 		public apMatrix3x3[] _result_VertMatrices = null;//<<추가. 리깅용 결과 
-		public apMatrix _result_Matrix = new apMatrix();
+
+		//변경 3.26 : apMatrix에서 apMatrixCal로 변경
+		//public apMatrix _result_Matrix = new apMatrix();
+		public apMatrixCal _result_Matrix = new apMatrixCal();
+
 		public Color _result_Color = new Color(0.5f, 0.5f, 0.5f, 1f);
 		public bool _result_IsVisible = true;
 
@@ -347,8 +351,9 @@ namespace AnyPortrait
 										apModifierBase linkedModifier,
 										apRenderUnit targetRenderUnit,
 										apRenderUnit ownerRenderUnit,//<<추가 10.2 : Modifier를 가지고 있었던 RenderUnit
-										apBone targetBone,//<<추가
-										apModifierParamSetGroupVertWeight weightedVertData)
+										apBone targetBone
+										//apModifierParamSetGroupVertWeight weightedVertData//삭제 19.5.20
+			)
 		{
 			_calculatedValueType = calculatedValueType;
 			_calculatedSpace = calculatedSpace;
@@ -357,9 +362,10 @@ namespace AnyPortrait
 			_targetRenderUnit = targetRenderUnit;
 			_ownerRenderUnit = ownerRenderUnit;
 
-			_targetBone = targetBone;//<추가
+			_targetBone = targetBone;
 
-			_weightedVertexData = weightedVertData;
+			//삭제 19.5.20 : _weightedVertexData 변수 삭제됨
+			//_weightedVertexData = weightedVertData;
 
 			//처리 타입이 Vertex 계열이면 Vertex List를 준비해야한다.
 			if ((int)(_calculatedValueType & CALCULATED_VALUE_TYPE.VertexPos) != 0)
@@ -442,10 +448,12 @@ namespace AnyPortrait
 			_subParamKeyValueList.Clear();
 		}
 
-		public void LinkWeightedVertexData(apModifierParamSetGroupVertWeight weightedVertData)
-		{
-			_weightedVertexData = weightedVertData;
-		}
+
+		//삭제 19.5.20
+		//public void LinkWeightedVertexData(apModifierParamSetGroupVertWeight weightedVertData)
+		//{
+		//	_weightedVertexData = weightedVertData;
+		//}
 
 		/// <summary>
 		/// ParamSet을 받아서 SubList와 연동한다.

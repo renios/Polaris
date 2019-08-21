@@ -37,20 +37,31 @@ namespace AnyPortrait
 		/// Value : Material
 		/// 추가로, 사용량도 확인할 수 있다.
 		/// </summary>
-		public class OptMaterialSet
+		public class MaterialUnit
 		{
+			//이전 방식
 			public Texture _texture = null;
 			public Shader _shader = null;
+
+			//변경된 방식 19.6.16 : Material Info를 이용한다.
+			public bool _isUseMaterialInfo = false;
+
+			public apOptMaterialInfo _materialInfo = null;
 
 			[NonSerialized]
 			public Material _material = null;
 
 			public List<apPortrait> _linkedPortraits = new List<apPortrait>();
 
-			public OptMaterialSet(Texture texture, Shader shader)
+			public MaterialUnit(Texture texture, Shader shader)
 			{
+				//구형 버전이다. (Material Info 사용 안함)
 				_texture = texture;
 				_shader = shader;
+
+				_isUseMaterialInfo = false;
+				_materialInfo = null;
+
 				_material = new Material(_shader);
 				_material.SetColor("_Color", new Color(0.5f, 0.5f, 0.5f, 1.0f));
 				_material.SetTexture("_MainTex", _texture);
@@ -60,6 +71,50 @@ namespace AnyPortrait
 					_linkedPortraits = new List<apPortrait>();
 				}
 				_linkedPortraits.Clear();
+
+				//Debug.Log("구형 Shared Material 생성");
+			}
+
+
+			public MaterialUnit(apOptMaterialInfo srcMatInfo)
+			{
+				_texture = null;
+				_shader = null;
+
+				_isUseMaterialInfo = true;
+				_materialInfo = new apOptMaterialInfo();
+				_materialInfo.MakeFromSrc(srcMatInfo);
+
+				//_texture = _materialInfo._mainTex;
+				//_shader = _materialInfo._shader;
+
+				_material = new Material(_materialInfo._shader);
+				_material.SetColor("_Color", new Color(0.5f, 0.5f, 0.5f, 1.0f));
+				_material.SetTexture("_MainTex", _materialInfo._mainTex);
+
+				//Material Info에 저장된 초기 설정값을 적용한다.
+				_materialInfo.SetMaterialProperties(_material);
+
+
+
+				if(_linkedPortraits == null)
+				{
+					_linkedPortraits = new List<apPortrait>();
+				}
+				_linkedPortraits.Clear();
+
+				//Debug.Log("신형 Shared Material 생성");
+			}
+
+			public bool IsEqualMaterialInfo(apOptMaterialInfo matInfo)
+			{
+				if(!_isUseMaterialInfo)
+				{
+					//Material Info를 사용하지 않는다.
+					return false;
+				}
+
+				return apOptMaterialInfo.IsSameInfo(_materialInfo, matInfo);
 			}
 
 			public void LinkPortrait(apPortrait portrait)
@@ -100,8 +155,13 @@ namespace AnyPortrait
 
 		}
 
-		private Dictionary<Texture, Dictionary<Shader, OptMaterialSet>> _materialSets = new Dictionary<Texture, Dictionary<Shader, OptMaterialSet>>();
-		private Dictionary<apPortrait, List<OptMaterialSet>> _portrait2MaterialSets = new Dictionary<apPortrait, List<OptMaterialSet>>();
+		//이전 버전 : MaterialInfo를 사용하지 않는 경우
+		private Dictionary<Texture, Dictionary<Shader, MaterialUnit>> _matUnits_Prev = new Dictionary<Texture, Dictionary<Shader, MaterialUnit>>();
+		private Dictionary<apPortrait, List<MaterialUnit>> _portrait2MatUnits_Prev = new Dictionary<apPortrait, List<MaterialUnit>>();
+
+		//변경 19.6.16 : MaterialInfo에 의해서 리스트가 복잡해짐
+		private Dictionary<Texture, Dictionary<Shader, List<MaterialUnit>>> _matUnits_MatInfo = new Dictionary<Texture, Dictionary<Shader, List<MaterialUnit>>>();
+		private Dictionary<apPortrait, List<MaterialUnit>> _portrait2MatUnits_MatInfo = new Dictionary<apPortrait, List<MaterialUnit>>();
 		
 		
 
@@ -113,37 +173,55 @@ namespace AnyPortrait
 		}
 
 		public void Clear()
-		{
-			
+		{	
 			//리스트를 클리어 하기 전에 Material을 삭제해야한다.
-			if (_materialSets == null)
+			if (_matUnits_Prev == null)
 			{
-				_materialSets = new Dictionary<Texture, Dictionary<Shader, OptMaterialSet>>();
+				_matUnits_Prev = new Dictionary<Texture, Dictionary<Shader, MaterialUnit>>();
 			}
 			else
 			{
-				int nRemoved = 0;
-				foreach (KeyValuePair<Texture, Dictionary<Shader, OptMaterialSet>> shaderMatSet in _materialSets)
+				foreach (KeyValuePair<Texture, Dictionary<Shader, MaterialUnit>> shaderMatUnit in _matUnits_Prev)
 				{
-					foreach (KeyValuePair<Shader, OptMaterialSet> matSet in shaderMatSet.Value)
+					foreach (KeyValuePair<Shader, MaterialUnit> matSet in shaderMatUnit.Value)
 					{
 						//재질 삭제
 						matSet.Value.RemoveMaterial();
-						nRemoved++;
 					}
 				}
-
-				_materialSets.Clear();
-
-				//Debug.LogWarning("Clear Shared Materials [" + nRemoved + "]");
+				_matUnits_Prev.Clear();
 			}
-			_portrait2MaterialSets.Clear();
+			_portrait2MatUnits_Prev.Clear();
+
+			//MatInfo 리스트도 초기화
+			if (_matUnits_MatInfo == null)
+			{
+				_matUnits_MatInfo = new Dictionary<Texture, Dictionary<Shader, List<MaterialUnit>>>();
+			}
+			else
+			{
+				foreach (KeyValuePair<Texture, Dictionary<Shader, List<MaterialUnit>>> shaderMatUnit in _matUnits_MatInfo)
+				{
+					foreach (KeyValuePair<Shader, List<MaterialUnit>> matUnitList in shaderMatUnit.Value)
+					{
+						//재질 삭제
+						for (int iUnit = 0; iUnit < matUnitList.Value.Count; iUnit++)
+						{
+							matUnitList.Value[iUnit].RemoveMaterial();
+						}
+						
+					}
+				}
+				_matUnits_MatInfo.Clear();
+			}
+			_portrait2MatUnits_MatInfo.Clear();
 		}
 
 
 		// Functions
 		//-----------------------------------------------------------------------------
-		public Material GetSharedMaterial(Texture texture, Shader shader, apPortrait portrait)
+		//Material Info를 사용하지 않는 이전 방식
+		public Material GetSharedMaterial_Prev(Texture texture, Shader shader, apPortrait portrait)
 		{
 #if UNITY_EDITOR
 			if(UnityEditor.BuildPipeline.isBuildingPlayer)
@@ -151,24 +229,22 @@ namespace AnyPortrait
 				return null;
 			}
 #endif
-			OptMaterialSet matSet = null;
+			MaterialUnit matUnit = null;
 
 			//Debug.LogWarning("Shared Material - Get Shared Material [ " + texture.name + " / " + shader.name + " / " + portrait.name + " ]");
-			if(_materialSets.ContainsKey(texture))
+			if(_matUnits_Prev.ContainsKey(texture))
 			{
-				if(_materialSets[texture].ContainsKey(shader))
+				if(_matUnits_Prev[texture].ContainsKey(shader))
 				{
-					matSet = _materialSets[texture][shader];
-
-					//Debug.Log(">> 기존에 만들어진 Material 리턴");
+					matUnit = _matUnits_Prev[texture][shader];
 				}
 				else
 				{
 					//새로운 Material Set 생성
-					matSet = new OptMaterialSet(texture, shader);
+					matUnit = new MaterialUnit(texture, shader);
 
 					//Shader 키와 함께 등록
-					_materialSets[texture].Add(shader, matSet);
+					_matUnits_Prev[texture].Add(shader, matUnit);
 
 					//Debug.Log(">> (!) 새로운 Material 리턴");
 				}
@@ -177,33 +253,115 @@ namespace AnyPortrait
 			else
 			{
 				//새로운 Material Set 생성
-				matSet = new OptMaterialSet(texture, shader);
+				matUnit = new MaterialUnit(texture, shader);
 
 				//Texture 키와 리스트 생성
-				_materialSets.Add(texture, new Dictionary<Shader, OptMaterialSet>());
+				_matUnits_Prev.Add(texture, new Dictionary<Shader, MaterialUnit>());
 
 				//Shader 키와 함께 등록
-				_materialSets[texture].Add(shader, matSet);
+				_matUnits_Prev[texture].Add(shader, matUnit);
 
 				//Debug.Log(">> (!) 새로운 Material 리턴");
 			}
 
 			//Portrait 등록
-			matSet.LinkPortrait(portrait);
-			List<OptMaterialSet> matSetList = null;
-			if(!_portrait2MaterialSets.ContainsKey(portrait))
+			matUnit.LinkPortrait(portrait);
+			List<MaterialUnit> matUnitList = null;
+			if(!_portrait2MatUnits_Prev.ContainsKey(portrait))
 			{
-				_portrait2MaterialSets.Add(portrait, new List<OptMaterialSet>());
+				_portrait2MatUnits_Prev.Add(portrait, new List<MaterialUnit>());
 			}
-			matSetList = _portrait2MaterialSets[portrait];
-			if(!matSetList.Contains(matSet))
+			matUnitList = _portrait2MatUnits_Prev[portrait];
+			if(!matUnitList.Contains(matUnit))
 			{
-				matSetList.Add(matSet);
+				matUnitList.Add(matUnit);
 			}
-			
 
 			//Shader Material 반환
-			return matSet._material;
+			return matUnit._material;
+		}
+
+
+
+		/// <summary>
+		/// Material Info를 이용하여 Shared Material을 가져오거나 만드는 함수 (v1.1.7)
+		/// </summary>
+		/// <param name="portrait"></param>
+		/// <returns></returns>
+		public Material GetSharedMaterial_MatInfo(apOptMaterialInfo matInfo, apPortrait portrait)
+		{
+#if UNITY_EDITOR
+			if(UnityEditor.BuildPipeline.isBuildingPlayer)
+			{
+				return null;
+			}
+#endif
+			
+			MaterialUnit matUnit = null;
+
+			if(_matUnits_MatInfo.ContainsKey(matInfo._mainTex))
+			{
+				if(_matUnits_MatInfo[matInfo._mainTex].ContainsKey(matInfo._shader))
+				{
+					List<MaterialUnit> matUnitList = _matUnits_MatInfo[matInfo._mainTex][matInfo._shader];
+
+					matUnit = matUnitList.Find(delegate(MaterialUnit a)
+					{
+						return a.IsEqualMaterialInfo(matInfo);
+					});
+				}
+			}
+
+			//새로 만들어야 한다.
+			if(matUnit == null)
+			{
+				//새로운 Material Unit 생성
+				matUnit = new MaterialUnit(matInfo);
+
+				List<MaterialUnit> matUnitList = null;
+				Dictionary<Shader, List<MaterialUnit>> shader2MatUnitList = null;
+
+				if(_matUnits_MatInfo.ContainsKey(matInfo._mainTex))
+				{
+					shader2MatUnitList = _matUnits_MatInfo[matInfo._mainTex];
+				}
+				else
+				{
+					shader2MatUnitList = new Dictionary<Shader, List<MaterialUnit>>();
+					_matUnits_MatInfo.Add(matInfo._mainTex, shader2MatUnitList);
+				}
+
+				if(shader2MatUnitList.ContainsKey(matInfo._shader))
+				{
+					matUnitList = shader2MatUnitList[matInfo._shader];
+				}
+				else
+				{
+					matUnitList = new List<MaterialUnit>();
+					shader2MatUnitList.Add(matInfo._shader, matUnitList);
+				}
+
+				matUnitList.Add(matUnit);
+
+				//Debug.Log(">> (!) 새로운 Material 리턴");
+			}
+
+			//Portrait 등록
+			matUnit.LinkPortrait(portrait);
+
+			List<MaterialUnit> matUnitList_InPortrait = null;
+			if(!_portrait2MatUnits_MatInfo.ContainsKey(portrait))
+			{
+				_portrait2MatUnits_MatInfo.Add(portrait, new List<MaterialUnit>());
+			}
+			matUnitList_InPortrait = _portrait2MatUnits_MatInfo[portrait];
+			if(!matUnitList_InPortrait.Contains(matUnit))
+			{
+				matUnitList_InPortrait.Add(matUnit);
+			}
+
+			//Shader Material 반환
+			return matUnit._material;
 		}
 
 		
@@ -219,24 +377,29 @@ namespace AnyPortrait
 		public void OnPortraitDestroyed(apPortrait portrait)
 		{
 			//Debug.LogError("Shared Material - OnPortraitDestroyed : " + portrait.name);
+			OnPortraitDestroyed_Prev(portrait);
+			OnPortraitDestroyed_MatInfo(portrait);
+		}
 
-			if(!_portrait2MaterialSets.ContainsKey(portrait))
+
+
+		private void OnPortraitDestroyed_Prev(apPortrait portrait)
+		{
+			if(!_portrait2MatUnits_Prev.ContainsKey(portrait))
 			{
 				return;
 			}
-			
 
-
-			List<OptMaterialSet> optMatSetList = _portrait2MaterialSets[portrait];
-			OptMaterialSet curMatSet = null;
+			List<MaterialUnit> optMatUnitList = _portrait2MatUnits_Prev[portrait];
+			MaterialUnit curMatSet = null;
 
 			List<Texture> removedTextureKey = new List<Texture>();
 			List<Shader> removedShaderKey = new List<Shader>();
 			int nRemoved = 0;
 
-			for (int i = 0; i < optMatSetList.Count; i++)
+			for (int i = 0; i < optMatUnitList.Count; i++)
 			{
-				curMatSet = optMatSetList[i];
+				curMatSet = optMatUnitList[i];
 
 				//Mat Set에서 Portrait를 삭제한다.
 				if(curMatSet.RemovePortrait(portrait))
@@ -263,37 +426,119 @@ namespace AnyPortrait
 					curTex = removedTextureKey[i];
 					curShader = removedShaderKey[i];
 
-					if(!_materialSets.ContainsKey(curTex))
+					if(!_matUnits_Prev.ContainsKey(curTex))
 					{
 						continue;
 					}
 
 					//Texture + Shader에 해당하는 Material Set를 삭제한다.
-					_materialSets[curTex].Remove(curShader);
+					_matUnits_Prev[curTex].Remove(curShader);
 
 					//만약 이 Texture 키에 대한 Shader-Set 리스트에 아무런 데이터가 없다면
 					//이 텍스쳐에 대한 Set도 삭제
-					if(_materialSets[curTex].Count == 0)
+					if(_matUnits_Prev[curTex].Count == 0)
 					{
-						_materialSets.Remove(curTex);
+						_matUnits_Prev.Remove(curTex);
 					}
 				}
 			}
 
 			//마지막으로 연결 리스트도 삭제
-			_portrait2MaterialSets.Remove(portrait);
+			_portrait2MatUnits_Prev.Remove(portrait);
+		}
+
+		private void OnPortraitDestroyed_MatInfo(apPortrait portrait)
+		{
+			if(!_portrait2MatUnits_MatInfo.ContainsKey(portrait))
+			{
+				return;
+			}
+
+			List<MaterialUnit> optMatUnitList = _portrait2MatUnits_MatInfo[portrait];
+			MaterialUnit curMatUnit = null;
+
+			List<Texture> removedTextureKey = new List<Texture>();
+			List<Shader> removedShaderKey = new List<Shader>();
+			List<MaterialUnit> removedMatUnit = new List<MaterialUnit>();
+			int nRemoved = 0;
+
+			for (int i = 0; i < optMatUnitList.Count; i++)
+			{
+				curMatUnit = optMatUnitList[i];
+
+				//Mat Set에서 Portrait를 삭제한다.
+				if(curMatUnit.RemovePortrait(portrait))
+				{
+					//모든 Portrait가 삭제되었다. > 연결된 Portrait가 0
+					//여기서 바로 재질 삭제
+					curMatUnit.RemoveMaterial();
+
+					//리스트에서 삭제할 준비
+					removedTextureKey.Add(curMatUnit._materialInfo._mainTex);
+					removedShaderKey.Add(curMatUnit._materialInfo._shader);
+					removedMatUnit.Add(curMatUnit);
+					nRemoved++;
+				}
+			}
+
+			//Debug.LogError(">> " + nRemoved + "개의 쓸모없는 Shared material이 삭제된다.");
+
+			if(nRemoved > 0)
+			{
+				Texture curTex = null;
+				Shader curShader = null;
+				//MaterialUnit curMatUnit = null;
+				
+				List<MaterialUnit> curMatUnits = null;
+				for (int i = 0; i < nRemoved; i++)
+				{
+					curTex = removedTextureKey[i];
+					curShader = removedShaderKey[i];
+					curMatUnit = removedMatUnit[i];
+
+					if(!_matUnits_MatInfo.ContainsKey(curTex))
+					{
+						continue;
+					}
+
+					//Texture + Shader에 해당하는 Material Set를 삭제한다.
+					if(!_matUnits_MatInfo[curTex].ContainsKey(curShader))
+					{
+						continue;
+					}
+
+					curMatUnits = _matUnits_MatInfo[curTex][curShader];
+
+					curMatUnits.Remove(curMatUnit);
+
+					//리스트 > Shader > Texture 순으로 Count가 0이면 삭제
+					if(_matUnits_MatInfo[curTex][curShader].Count == 0)
+					{
+						_matUnits_MatInfo[curTex].Remove(curShader);
+
+						if(_matUnits_MatInfo[curTex].Count == 0)
+						{
+							_matUnits_MatInfo.Remove(curTex);
+						}
+					}
+				}
+			}
+
+			//마지막으로 연결 리스트도 삭제
+			_portrait2MatUnits_MatInfo.Remove(portrait);
 		}
 
 		// Get / Set
 		//-----------------------------------------------------------------------------
 		public void DebugAllMaterials()
 		{
+			
 			Debug.LogError("Shared Materials");
 			int index = 0;
-			foreach (KeyValuePair<Texture, Dictionary<Shader, OptMaterialSet>> tex2ShaderMat in _materialSets)
+			foreach (KeyValuePair<Texture, Dictionary<Shader, MaterialUnit>> tex2ShaderMat in _matUnits_Prev)
 			{
 				Debug.LogWarning("Texture : " + tex2ShaderMat.Key.name);
-				foreach (KeyValuePair<Shader, OptMaterialSet> shader2Mat in tex2ShaderMat.Value)
+				foreach (KeyValuePair<Shader, MaterialUnit> shader2Mat in tex2ShaderMat.Value)
 				{
 					Debug.Log(" [" + index + "] : " + shader2Mat.Key.name + " (" + shader2Mat.Value._linkedPortraits.Count + ")");
 					

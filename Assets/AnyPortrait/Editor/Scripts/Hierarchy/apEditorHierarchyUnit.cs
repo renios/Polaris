@@ -29,6 +29,8 @@ namespace AnyPortrait
 		//--------------------------------------------------------------------------
 		public delegate void FUNC_UNIT_CLICK(apEditorHierarchyUnit eventUnit, int savedKey, object savedObj);
 		public delegate void FUNC_UNIT_CLICK_VISIBLE(apEditorHierarchyUnit eventUnit, int savedKey, object savedObj, bool isVisible, bool isPostfixIcon);
+		public delegate void FUNC_UNIT_CLICK_ORDER_CHANGED(apEditorHierarchyUnit eventUnit, int savedKey, object savedObj, bool isOrderUp);
+		public delegate void FUNC_UNIT_CLICK_RESTORE_TMPWORK();
 
 
 		public enum UNIT_TYPE
@@ -63,6 +65,10 @@ namespace AnyPortrait
 		public VISIBLE_TYPE _visibleType_Prefix = VISIBLE_TYPE.None;//Visible 속성이 붙은 경우는 이것도 세팅해야한다.
 		public VISIBLE_TYPE _visibleType_Postfix = VISIBLE_TYPE.None;//Visible 속성이 붙은 경우는 이것도 세팅해야한다.
 
+		//추가 19.6.29 : VisiblePrefix를 리셋하는 버튼을 Label에 추가할 수 있다.
+		public bool _isRestoreTmpWorkVisibleBtn = false;
+		private bool _isTmpWorkAnyChanged = false;
+
 		public apEditorHierarchyUnit _parentUnit = null;
 		public List<apEditorHierarchyUnit> _childUnits = new List<apEditorHierarchyUnit>();
 
@@ -87,6 +93,7 @@ namespace AnyPortrait
 
 		public FUNC_UNIT_CLICK _funcClick = null;
 		public FUNC_UNIT_CLICK_VISIBLE _funcClickVisible = null;
+		public FUNC_UNIT_CLICK_ORDER_CHANGED _funcClickOrderChanged = null;
 
 		private GUIContent _guiContent_Text = new GUIContent();
 		private GUIContent _guiContent_Icon = new GUIContent();
@@ -114,8 +121,18 @@ namespace AnyPortrait
 
 		private GUIContent _guiContent_ModRegisted = new GUIContent();
 
+		private GUIContent _guiContent_OrderUp = new GUIContent();
+		private GUIContent _guiContent_OrderDown = new GUIContent();
+		private bool _isOrderChangable = false;
+
 		public int _indexPerParent = -1;
 		private int _indexCountForChild = 0;
+
+
+		//추가 19.6.29 : RestoreTmpWorkVisible 버튼
+		private GUIContent _guiContent_RestoreTmpWorkVisible_ON = null;
+		private GUIContent _guiContent_RestoreTmpWorkVisible_OFF = null;
+
 
 		//추가된 내용
 		//일부 버튼들은 나오거나 안나올 수 있다.
@@ -142,6 +159,13 @@ namespace AnyPortrait
 		private bool _isNextRender_VisiblePrefix;
 		private bool _isNextRenderFoldBtn;
 		private bool _isNextRender_VisiblePostFix;
+
+		//추가 19.6.29 : RestoreTmpWorkVisible 버튼
+		private bool _isPrevRender_RestoreTmpWorkVisible = false;
+		private bool _isCurRender_RestoreTmpWorkVisible = false;
+		private bool _isNextRender_RestoreTmpWorkVisible = false;
+
+		private FUNC_UNIT_CLICK_RESTORE_TMPWORK _funcClickRestoreTmpWorkVisible = null;
 
 		// Init
 		//--------------------------------------------------------------------------
@@ -201,6 +225,8 @@ namespace AnyPortrait
 			_isPrevRender_VisiblePrefix = false;
 			_isPrevRender_VisiblePostfix = false;
 			_isPrevRender_Fold = false;
+
+			_isPrevRender_RestoreTmpWorkVisible = false;
 		}
 
 		//추가
@@ -224,14 +250,10 @@ namespace AnyPortrait
 			if (EditorGUIUtility.isProSkin)
 			{
 				_guiStyle_None.normal.textColor = GUI.skin.label.normal.textColor;
-				//_guiStyle_None.hover.textColor = Color.yellow;
-				//_guiStyle_None.active.textColor = Color.yellow;
 			}
 			else
 			{
 				_guiStyle_None.normal.textColor = Color.black;
-				//_guiStyle_None.hover.textColor = Color.cyan;
-				//_guiStyle_None.active.textColor = Color.yellow;
 			}
 
 			
@@ -242,14 +264,10 @@ namespace AnyPortrait
 			if (EditorGUIUtility.isProSkin)
 			{
 				_guiStyle_Selected.normal.textColor = Color.cyan;
-				//_guiStyle_Selected.hover.textColor = Color.yellow;
-				//_guiStyle_Selected.active.textColor = Color.yellow;
 			}
 			else
 			{
 				_guiStyle_Selected.normal.textColor = Color.white;
-				//_guiStyle_Selected.hover.textColor = Color.cyan;
-				//_guiStyle_Selected.active.textColor = Color.yellow;
 			}
 			
 			_guiStyle_Selected.alignment = TextAnchor.MiddleLeft;
@@ -269,6 +287,16 @@ namespace AnyPortrait
 			_guiContent_FoldDown = new GUIContent(imgFoldDown);
 			_guiContent_FoldRight = new GUIContent(imgFoldRight);
 			_guiContent_ModRegisted = new GUIContent(imgModRegisted);
+		}
+
+		public void SetBasicIconImg(Texture2D imgFoldDown, Texture2D imgFoldRight, Texture2D imgModRegisted, Texture2D imgOrderUp, Texture2D imgOrderDown)
+		{
+			_guiContent_FoldDown = new GUIContent(imgFoldDown);
+			_guiContent_FoldRight = new GUIContent(imgFoldRight);
+			_guiContent_ModRegisted = new GUIContent(imgModRegisted);
+
+			_guiContent_OrderUp = new GUIContent(imgOrderUp);
+			_guiContent_OrderDown = new GUIContent(imgOrderDown);
 		}
 
 		//TODO : Visible 속성이 붙은 경우는 이걸 호출해서 세팅해줘야 한다.
@@ -304,13 +332,19 @@ namespace AnyPortrait
 		public void SetEvent(FUNC_UNIT_CLICK funcUnitClick)
 		{
 			_funcClick = funcUnitClick;
+			_funcClickVisible = null;
+			_funcClickOrderChanged = null;
+			_isOrderChangable = false;
 		}
 
 		//TODO : Visible 속성이 붙은 경우는 위 함수(SetEvent)대신 이걸 호출해야한다.
-		public void SetEvent(FUNC_UNIT_CLICK funcUnitClick, FUNC_UNIT_CLICK_VISIBLE funcClickVisible)
+		public void SetEvent(FUNC_UNIT_CLICK funcUnitClick, FUNC_UNIT_CLICK_VISIBLE funcClickVisible, FUNC_UNIT_CLICK_ORDER_CHANGED funcClickOrderChanged = null)
 		{
 			_funcClick = funcUnitClick;
 			_funcClickVisible = funcClickVisible;
+			_funcClickOrderChanged = funcClickOrderChanged;
+
+			_isOrderChangable = _funcClickOrderChanged != null;
 		}
 
 		public void SetParent(apEditorHierarchyUnit parentUnit)
@@ -328,12 +362,31 @@ namespace AnyPortrait
 			RefreshPrevRender();
 		}
 
+		//추가 Label에서 TmpWorkVisible을 초기화하는 버튼을 추가할 수 있다.
+		public void SetRestoreTmpWorkVisible(Texture2D btnIcon_ON, Texture2D btnIcon_OFF, FUNC_UNIT_CLICK_RESTORE_TMPWORK funcRestoreClick)
+		{
+			_isRestoreTmpWorkVisibleBtn = true;
+			_isTmpWorkAnyChanged = false;
+			_guiContent_RestoreTmpWorkVisible_ON = new GUIContent(btnIcon_ON);
+			_guiContent_RestoreTmpWorkVisible_OFF = new GUIContent(btnIcon_OFF);
+			_funcClickRestoreTmpWorkVisible = funcRestoreClick;
+		}
+
+		public void SetRestoreTmpWorkVisibleAnyChanged(bool isAnyChanged)
+		{
+			_isTmpWorkAnyChanged = isAnyChanged;
+		}
 
 
 		// Set
 		//--------------------------------------------------------------------------
 		public void ChangeText(string text)
 		{
+			//수정 1.1 : 버그
+			if(text == null)
+			{
+				text = "";
+			}
 			_text = text;
 			MakeGUIContent();
 		}
@@ -345,17 +398,31 @@ namespace AnyPortrait
 
 		public void SetLabel(Texture2D icon, string text, int savedKey, object savedObj)
 		{
+			//수정 1.1 : 버그
+			if(text == null)
+			{
+				text = "";
+			}
+
 			_unitType = UNIT_TYPE.Label;
 			_icon = icon;
 			_text = text;
 			_savedKey = savedKey;
 			_savedObj = savedObj;
 
+			_isRestoreTmpWorkVisibleBtn = false;
+
 			MakeGUIContent();
 		}
 
 		public void SetToggleButton(Texture2D icon, string text, int savedKey, object savedObj)
 		{
+			//수정 1.1 : 버그
+			if(text == null)
+			{
+				text = "";
+			}
+
 			_unitType = UNIT_TYPE.ToggleButton;
 			_icon = icon;
 			_text = text;
@@ -367,6 +434,12 @@ namespace AnyPortrait
 
 		public void SetToggleButton_Visible(Texture2D icon, string text, int savedKey, object savedObj, VISIBLE_TYPE visibleType_Prefix, VISIBLE_TYPE visibleType_Postfix)
 		{
+			//수정 1.1 : 버그
+			if(text == null)
+			{
+				text = "";
+			}
+
 			_unitType = UNIT_TYPE.ToggleButton_Visible;
 			_icon = icon;
 			_text = text;
@@ -380,6 +453,12 @@ namespace AnyPortrait
 
 		public void SetOnlyButton(Texture2D icon, string text, int savedKey, object savedObj)
 		{
+			//수정 1.1 : 버그
+			if(text == null)
+			{
+				text = "";
+			}
+
 			_unitType = UNIT_TYPE.OnlyButton;
 			_icon = icon;
 			_text = text;
@@ -420,11 +499,14 @@ namespace AnyPortrait
 			_isPrevRender_VisiblePrefix = (_unitType == UNIT_TYPE.ToggleButton_Visible && _visibleType_Prefix != VISIBLE_TYPE.None);
 			_isPrevRender_VisiblePostfix = (_unitType == UNIT_TYPE.ToggleButton_Visible && _visibleType_Postfix != VISIBLE_TYPE.None);
 			_isPrevRender_Fold = (_childUnits.Count > 0 || (_parentUnit == null && _unitType == UNIT_TYPE.Label));
+
+			//추가 19.6.29 : TmpWork
+			_isPrevRender_RestoreTmpWorkVisible = _unitType == UNIT_TYPE.Label && _isRestoreTmpWorkVisibleBtn ;
 		}
 
 		// GUI
 		//--------------------------------------------------------------------------
-		public void GUI_Render(int leftWidth, int width, int height, float scrollX, bool isGUIEvent, int level)
+		public void GUI_Render(int leftWidth, int width, int height, float scrollX, bool isGUIEvent, int level, bool isOrderButtonVisible = false)
 		{
 			CheckAndCreateGUIStyle();//<<추가 GUI Style 생성
 
@@ -459,6 +541,8 @@ namespace AnyPortrait
 			_isCurRenderFoldBtn = (_childUnits.Count > 0 || (_parentUnit == null && _unitType == UNIT_TYPE.Label));
 			_isCurRender_VisiblePostFix = (_unitType == UNIT_TYPE.ToggleButton_Visible && _visibleType_Postfix != VISIBLE_TYPE.None);
 
+			_isCurRender_RestoreTmpWorkVisible = (_unitType == UNIT_TYPE.Label && _isRestoreTmpWorkVisibleBtn);
+
 			if (isGUIEvent)
 			{
 				//GUIEvent에서는 Prev를 무시한다.
@@ -466,6 +550,7 @@ namespace AnyPortrait
 				_isNextRender_VisiblePrefix = _isCurRender_VisiblePrefix;
 				_isNextRenderFoldBtn = _isCurRenderFoldBtn;
 				_isNextRender_VisiblePostFix = _isCurRender_VisiblePostFix;
+				_isNextRender_RestoreTmpWorkVisible = _isCurRender_RestoreTmpWorkVisible;
 			}
 			else
 			{
@@ -474,6 +559,7 @@ namespace AnyPortrait
 				_isNextRender_VisiblePrefix = _isPrevRender_VisiblePrefix;
 				_isNextRenderFoldBtn = _isPrevRender_Fold;
 				_isNextRender_VisiblePostFix = _isPrevRender_VisiblePostfix;
+				_isNextRender_RestoreTmpWorkVisible = _isPrevRender_RestoreTmpWorkVisible;
 			}
 			
 			
@@ -542,9 +628,40 @@ namespace AnyPortrait
 					//leftWidth = level * 5;
 				}
 			}
+
+			//추가 : 레이어 순서 변경 버튼
+			if(isOrderButtonVisible && _isOrderChangable)
+			{
+				if(GUILayout.Button(_guiContent_OrderUp, _guiStyle_None, GUILayout.Width(12), GUILayout.Height(height)))
+				{
+					if(_funcClickOrderChanged != null)
+					{
+						_funcClickOrderChanged(this, _savedKey, _savedObj, true);
+					}
+				}
+				if(GUILayout.Button(_guiContent_OrderDown, _guiStyle_None, GUILayout.Width(12), GUILayout.Height(height)))
+				{
+					if(_funcClickOrderChanged != null)
+					{
+						_funcClickOrderChanged(this, _savedKey, _savedObj, false);
+					}
+				}
+
+				leftWidth -= 30;
+				if (leftWidth < 0)
+				{
+					leftWidth = 0;
+					//leftWidth = level * 5;
+				}
+				GUILayout.Space(leftWidth);
+			}
+			else
+			{
+				//기본 여백
+				GUILayout.Space(Mathf.Max(leftWidth, level * 10));
+			}
 			
-			//GUILayout.Space(leftWidth);
-			GUILayout.Space(Mathf.Max(leftWidth, level * 10));
+			
 
 
 			//맨 앞에 ▼/▶ 아이콘을 보이고, 작동시킬지를 결정
@@ -558,8 +675,20 @@ namespace AnyPortrait
 			//int width_Icon = height - 2;
 			int width_Icon = height - 6;
 
-			//GUIContent guiContent = null;
-			//if (isFoldVisible)
+			//추가 19.6.29 : RestoreTmpWorkVisible버튼
+			if(_isNextRender_RestoreTmpWorkVisible)
+			{
+				if (GUILayout.Button((_isTmpWorkAnyChanged ? _guiContent_RestoreTmpWorkVisible_ON : _guiContent_RestoreTmpWorkVisible_OFF), _guiStyle_None, GUILayout.Width(width_FoldBtn), GUILayout.Height(height)))
+				{
+					if (_funcClickRestoreTmpWorkVisible != null)
+					{
+						_funcClickRestoreTmpWorkVisible();
+					}
+				}
+				GUILayout.Space(2);
+			}
+
+			
 			if(_isNextRenderFoldBtn)
 			{
 				//Fold 아이콘을 출력하고 Button 기능을 추가한다.
@@ -576,6 +705,10 @@ namespace AnyPortrait
 						_isFoldOut = !_isFoldOut;
 					}
 				}
+			}
+			else if(isOrderButtonVisible && _isOrderChangable)
+			{
+				GUILayout.Space(2);
 			}
 			else
 			{

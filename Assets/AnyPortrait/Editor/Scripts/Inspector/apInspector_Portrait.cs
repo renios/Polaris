@@ -19,6 +19,11 @@ using System;
 using UnityEditor;
 //using UnityEngine.Profiling;
 
+#if UNITY_2017_1_OR_NEWER
+using UnityEngine.Timeline;
+using UnityEngine.Playables;
+#endif
+
 using AnyPortrait;
 
 namespace AnyPortrait
@@ -32,26 +37,127 @@ namespace AnyPortrait
 		private bool _showBaseInspector = false;
 		private List<apControlParam> _controlParams = null;
 
-
+		//private bool _isFold_BasicSettings = false;
 		private bool _isFold_RootPortraits = false;
 		private bool _isFold_AnimationClips = false;
-		private bool _isFold_ConrolParameters = false;
-		
 
+		//추가 3.4
+#if UNITY_2017_1_OR_NEWER
+		private bool _isFold_Timeline = false;
+		private int _nTimelineTrackSet = 0;
+#endif
+		//private bool _isFold_ConrolParameters = false;
+
+		//3.7 추가 : 이미지들
+		private bool _isImageLoaded = false;
+		private Texture2D _img_EditorIsOpen = null;
+
+		private Texture2D _img_OpenEditor = null;
+		private Texture2D _img_QuickBake = null;
+		private Texture2D _img_RefreshMeshes = null;
+
+		private Texture2D _img_BasicSettings = null;
+		private Texture2D _img_RootPortraits = null;
+		private Texture2D _img_AnimationSettings = null;
+		private Texture2D _img_Mecanim = null;
+#if UNITY_2017_1_OR_NEWER
+		private Texture2D _img_Timeline = null;
+#endif
+		private Texture2D _img_ControlParams = null;
+
+		private GUIContent _guiContent_EditorIsOpen = null;
+		private GUIContent _guiContent_OpenEditor = null;
+		private GUIContent _guiContent_QuickBake = null;
+		private GUIContent _guiContent_RefreshMeshes = null;
+
+		private GUIContent _guiContent_BasicSettings = null;
+		private GUIContent _guiContent_RootPortraits = null;
+		private GUIContent _guiContent_AnimationSettings = null;
+
+		private GUIContent _guiContent_Mecanim = null;
+#if UNITY_2017_1_OR_NEWER
+		private GUIContent _guiContent_Timeline = null;
+#endif
+
+		private GUIContent _guiContent_ControlParams = null;
+		
+		private GUIStyle _guiStyle_buttonIcon = null;
+		private GUIStyle _guiStyle_subTitle = null;
+		
+		
+		
 
 
 		void OnEnable()
 		{
 			_targetPortrait = null;
 
+			//_isFold_BasicSettings = true;
 			_isFold_RootPortraits = true;
 			_isFold_AnimationClips = true;
-			_isFold_ConrolParameters = true;
+			//_isFold_ConrolParameters = true;
+
+			//추가 3.4
+#if UNITY_2017_1_OR_NEWER
+			_isFold_Timeline = true;//<<
+			_nTimelineTrackSet = 0;
+#endif
+		}
+
+		private void LoadImages()
+		{
+			if (_isImageLoaded)
+			{
+				return;
+			}
+			_img_EditorIsOpen = LoadImage("InspectorIcon_EditorIsOpen");
+
+			_img_OpenEditor = LoadImage("InspectorIcon_OpenEditor");
+			_img_QuickBake = LoadImage("InspectorIcon_QuickBake");
+			_img_RefreshMeshes = LoadImage("InspectorIcon_RefreshMeshes");
+
+			_img_BasicSettings = LoadImage("InspectorIcon_BasicSettings");
+			_img_RootPortraits = LoadImage("InspectorIcon_RootPortraits");
+			_img_AnimationSettings = LoadImage("InspectorIcon_AnimationSettings");
+			_img_Mecanim = LoadImage("InspectorIcon_Mecanim");
+#if UNITY_2017_1_OR_NEWER
+			_img_Timeline = LoadImage("InspectorIcon_Timeline");
+#endif
+			_img_ControlParams = LoadImage("InspectorIcon_ControlParams");
+
+			_guiContent_EditorIsOpen = new GUIContent("  Editor is opened", _img_EditorIsOpen);
+			_guiContent_OpenEditor = new GUIContent(_img_OpenEditor);
+			_guiContent_QuickBake = new GUIContent(_img_QuickBake);
+			_guiContent_RefreshMeshes = new GUIContent(_img_RefreshMeshes);
+
+			_guiContent_BasicSettings = new GUIContent("  Basic Settings", _img_BasicSettings);
+			_guiContent_RootPortraits = new GUIContent("  Root Portraits", _img_RootPortraits);
+			_guiContent_AnimationSettings = new GUIContent("  Animation Settings", _img_AnimationSettings);
+
+			_guiContent_Mecanim = new GUIContent("  Mecanim Settings", _img_Mecanim);
+#if UNITY_2017_1_OR_NEWER
+			_guiContent_Timeline = new GUIContent("  Timeline Settings", _img_Timeline);
+#endif
+
+			_guiContent_ControlParams = new GUIContent("  Control Parameters", _img_ControlParams);
+
+			
+			_guiStyle_buttonIcon = new GUIStyle(GUI.skin.label);
+			_guiStyle_buttonIcon.alignment = TextAnchor.MiddleCenter;
+
+			_guiStyle_subTitle = new GUIStyle(GUI.skin.box);
+			_guiStyle_subTitle.alignment = TextAnchor.MiddleCenter;
+			_guiStyle_subTitle.margin = new RectOffset(0, 0, 0, 0);
+			_guiStyle_subTitle.padding = new RectOffset(0, 0, 0, 0);
+
+			_isImageLoaded = true;
 		}
 
 		public override void OnInspectorGUI()
 		{
 			//return;
+			LoadImages();
+			
 
 			//base.OnInspectorGUI();
 			apPortrait targetPortrait = target as apPortrait;
@@ -74,7 +180,10 @@ namespace AnyPortrait
 			if (apEditor.IsOpen())
 			{
 				//에디터가 작동중에는 안보이도록 하자
-				EditorGUILayout.LabelField("Editor is opened");
+				//EditorGUILayout.LabelField("Editor is opened");
+				GUILayout.Space(10);
+				
+				EditorGUILayout.LabelField(_guiContent_EditorIsOpen, GUILayout.Height(36));
 
 				//Profiler.EndSample();
 
@@ -93,37 +202,90 @@ namespace AnyPortrait
 
 				if (!EditorApplication.isPlaying)
 				{
+					int iconWidth = 32;
+					int iconHeight = 34;
+					int buttonHeight = 34;
 					
+					//추가 19.5.26 : 용량 최적화 기능이 추가되었는가
+					if(!_targetPortrait._isSizeOptimizedV117)
+					{
+						GUILayout.Space(10);
+
+						Color prevBackColor = GUI.backgroundColor;
+						GUI.backgroundColor = new Color(1.0f, 0.7f, 0.7f, 1.0f);
+						GUILayout.Box("[File size reduction] has not been applied.\nExecute the [Bake] again.", 
+							_guiStyle_subTitle, 
+							GUILayout.Width((int)EditorGUIUtility.currentViewWidth - 36), GUILayout.Height(40));
+						GUI.backgroundColor = prevBackColor;
+					}
+
 					if (!_targetPortrait._isOptimizedPortrait)
 					{
 						GUILayout.Space(10);
-						if (GUILayout.Button("Open Editor and Select", GUILayout.Height(30)))
+						
+						EditorGUILayout.BeginHorizontal(GUILayout.Height(iconHeight));
+						GUILayout.Space(5);
+						EditorGUILayout.LabelField(_guiContent_OpenEditor, _guiStyle_buttonIcon, GUILayout.Width(iconWidth), GUILayout.Height(iconHeight));
+						GUILayout.Space(5);
+						if (GUILayout.Button("Open Editor and Select", GUILayout.Height(buttonHeight)))
 						{
 							request_OpenEditor = true;
-							
 						}
-						if (GUILayout.Button("Quick Bake", GUILayout.Height(25)))
+						EditorGUILayout.EndHorizontal();
+
+						EditorGUILayout.BeginHorizontal(GUILayout.Height(iconHeight));
+						GUILayout.Space(5);
+						EditorGUILayout.LabelField(_guiContent_QuickBake, _guiStyle_buttonIcon, GUILayout.Width(iconWidth), GUILayout.Height(iconHeight));
+						GUILayout.Space(5);
+						if (GUILayout.Button("Quick Bake", GUILayout.Height(buttonHeight)))
 						{
 							request_QuickBake = true;
 						}
+						EditorGUILayout.EndHorizontal();
 					}
 					else
 					{
 						GUILayout.Space(10);
-						if (GUILayout.Button("Open Editor (Not Selectable)", GUILayout.Height(30)))
+
+						EditorGUILayout.BeginHorizontal(GUILayout.Height(iconHeight));
+						GUILayout.Space(5);
+						EditorGUILayout.LabelField(_guiContent_OpenEditor, _guiStyle_buttonIcon, GUILayout.Width(iconWidth), GUILayout.Height(iconHeight));
+						GUILayout.Space(5);
+						if (GUILayout.Button("Open Editor (Not Selectable)", GUILayout.Height(buttonHeight)))
 						{
 							//열기만 하고 선택은 못함
 							request_OpenEditor = true;
 						}
+						EditorGUILayout.EndHorizontal();
 					}
 					//추가 12.18 : Mesh를 리프레시 하자
-					if (GUILayout.Button("Refresh Meshes", GUILayout.Height(25)))
+
+					EditorGUILayout.BeginHorizontal(GUILayout.Height(iconHeight));
+					GUILayout.Space(5);
+					EditorGUILayout.LabelField(_guiContent_RefreshMeshes, _guiStyle_buttonIcon, GUILayout.Width(iconWidth), GUILayout.Height(iconHeight));
+					GUILayout.Space(5);
+					if (GUILayout.Button("Refresh Meshes", GUILayout.Height(buttonHeight)))
 					{
 						request_RefreshMeshes = true;
 					}
+					EditorGUILayout.EndHorizontal();
+
+					
 				}
 
 				GUILayout.Space(10);
+
+				
+				//BasicSettings
+				//-----------------------------------------------------------------------------
+				//"Basic Settings"
+				
+				int width = (int)EditorGUIUtility.currentViewWidth;
+				int subTitleWidth = width - 44;
+				int subTitleHeight = 26;
+				
+				GUILayout.Box(_guiContent_BasicSettings, _guiStyle_subTitle, GUILayout.Width(subTitleWidth), GUILayout.Height(subTitleHeight));
+
 
 				_targetPortrait._isImportant = EditorGUILayout.Toggle("Is Important", _targetPortrait._isImportant);
 				_targetPortrait._optAnimEventListener = (MonoBehaviour)EditorGUILayout.ObjectField("Event Listener", _targetPortrait._optAnimEventListener, typeof(MonoBehaviour), true);
@@ -145,22 +307,22 @@ namespace AnyPortrait
 				int nextLayerIndex = EditorGUILayout.Popup("Sorting Layer", layerIndex, sortingLayerName);
 				int nextLayerOrder = EditorGUILayout.IntField("Sorting Order", _targetPortrait._sortingOrder);
 
-				if(nextLayerIndex != layerIndex)
+				if (nextLayerIndex != layerIndex)
 				{
 					//Sorting Layer를 바꾸자
-					if(nextLayerIndex >= 0 && nextLayerIndex < SortingLayer.layers.Length)
+					if (nextLayerIndex >= 0 && nextLayerIndex < SortingLayer.layers.Length)
 					{
 						string nextLayerName = SortingLayer.layers[nextLayerIndex].name;
 						_targetPortrait.SetSortingLayer(nextLayerName);
 					}
 				}
-				if(nextLayerOrder != _targetPortrait._sortingOrder)
+				if (nextLayerOrder != _targetPortrait._sortingOrder)
 				{
 					_targetPortrait.SetSortingOrder(nextLayerOrder);
 				}
 
 
-				if(prevImportant != _targetPortrait._isImportant ||
+				if (prevImportant != _targetPortrait._isImportant ||
 					prevAnimEventListener != _targetPortrait._optAnimEventListener ||
 					prevSortingLayerID != _targetPortrait._sortingLayerID ||
 					prevSortingOrder != _targetPortrait._sortingOrder)
@@ -173,66 +335,39 @@ namespace AnyPortrait
 
 				//빌보드
 				apPortrait.BILLBOARD_TYPE nextBillboard = (apPortrait.BILLBOARD_TYPE)EditorGUILayout.EnumPopup("Billboard Type", _targetPortrait._billboardType);
-				if(nextBillboard != _targetPortrait._billboardType)
+				if (nextBillboard != _targetPortrait._billboardType)
 				{
 					_targetPortrait._billboardType = nextBillboard;
 					apEditorUtil.SetEditorDirty();
 				}
 
-				GUILayout.Space(5);
-				
-				_isFold_RootPortraits = EditorGUILayout.Foldout(_isFold_RootPortraits, "Root Portraits");
+				GUILayout.Space(20);
+
+				// Root Portraits
+				//-----------------------------------------------------------------------------
+				GUILayout.Box(_guiContent_RootPortraits, _guiStyle_subTitle, GUILayout.Width(subTitleWidth), GUILayout.Height(subTitleHeight));
+
+				_isFold_RootPortraits = EditorGUILayout.Foldout(_isFold_RootPortraits, "Portraits");
 				if(_isFold_RootPortraits)
 				{
-					string strRootPortrait = "";
-					if(_targetPortrait._optRootUnitList.Count == 0)
-					{
-						strRootPortrait = "No Baked Portrait";
-					}
-					else if(_targetPortrait._optRootUnitList.Count == 1)
-					{
-						strRootPortrait = "1 Baked Portrait";
-					}
-					else
-					{
-						strRootPortrait = _targetPortrait._optRootUnitList.Count + " Baked Portraits";
-					}
-					EditorGUILayout.LabelField(strRootPortrait);
-					GUILayout.Space(5);
 					for (int i = 0; i < _targetPortrait._optRootUnitList.Count; i++)
 					{
 						apOptRootUnit rootUnit = _targetPortrait._optRootUnitList[i];
 						EditorGUILayout.ObjectField("[" + i + "]", rootUnit, typeof(apOptRootUnit), true);
 					}
-
-					GUILayout.Space(20);
 				}
 
+				GUILayout.Space(20);
 
-				
-				
 
-				_isFold_AnimationClips = EditorGUILayout.Foldout(_isFold_AnimationClips, "Animation Settings");
+				// Animation Settings
+				//-----------------------------------------------------------------------------
+
+				GUILayout.Box(_guiContent_AnimationSettings, _guiStyle_subTitle, GUILayout.Width(subTitleWidth), GUILayout.Height(subTitleHeight));
+
+				_isFold_AnimationClips = EditorGUILayout.Foldout(_isFold_AnimationClips, "Animation Clips");
 				if(_isFold_AnimationClips)
 				{
-					EditorGUILayout.LabelField("Animation Clips");
-					string strAnimClips = "";
-					if(_targetPortrait._animClips.Count == 0)
-					{
-						strAnimClips = "No Animation Clip";
-					}
-					else if(_targetPortrait._animClips.Count == 1)
-					{
-						strAnimClips = "1 Animation Clip";
-					}
-					else
-					{
-						strAnimClips = _targetPortrait._animClips.Count + " Animation Clips";
-					}
-					EditorGUILayout.LabelField(strAnimClips);
-					GUILayout.Space(5);
-					
-					
 					for (int i = 0; i < _targetPortrait._animClips.Count; i++)
 					{
 						EditorGUILayout.BeginHorizontal();
@@ -264,196 +399,299 @@ namespace AnyPortrait
 						
 						EditorGUILayout.EndHorizontal();
 					}
-					GUILayout.Space(10);
-					AnimationClip nextEmptyAnimClip = EditorGUILayout.ObjectField("Empty Animation Clip", _targetPortrait._emptyAnimClipForMecanim, typeof(AnimationClip), false) as AnimationClip;
-					if (nextEmptyAnimClip != _targetPortrait._emptyAnimClipForMecanim)
+				}
+
+				GUILayout.Space(10);
+
+				AnimationClip nextEmptyAnimClip = EditorGUILayout.ObjectField("Empty Anim Clip", _targetPortrait._emptyAnimClipForMecanim, typeof(AnimationClip), false) as AnimationClip;
+				if (nextEmptyAnimClip != _targetPortrait._emptyAnimClipForMecanim)
+				{
+					UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+					Undo.IncrementCurrentGroup();
+					Undo.RegisterCompleteObjectUndo(_targetPortrait, "Animation Changed");
+
+					_targetPortrait._emptyAnimClipForMecanim = nextEmptyAnimClip;
+				}
+
+				GUILayout.Space(10);
+
+				//EditorGUILayout.LabelField("Mecanim Settings");
+				EditorGUILayout.LabelField(_guiContent_Mecanim, GUILayout.Height(24));
+				
+				bool isNextUsingMecanim = EditorGUILayout.Toggle("Use Mecanim", _targetPortrait._isUsingMecanim);
+				if (_targetPortrait._isUsingMecanim != isNextUsingMecanim)
+				{
+					UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+					Undo.IncrementCurrentGroup();
+					Undo.RegisterCompleteObjectUndo(_targetPortrait, "Mecanim Setting Changed");
+
+					_targetPortrait._isUsingMecanim = isNextUsingMecanim;
+				}
+
+
+				if(_targetPortrait._isUsingMecanim)
+				{
+					//GUILayout.Space(10);
+					try
 					{
-						UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
-						Undo.IncrementCurrentGroup();
-						Undo.RegisterCompleteObjectUndo(_targetPortrait, "Animation Changed");
-
-						_targetPortrait._emptyAnimClipForMecanim = nextEmptyAnimClip;
-					}
-
-					GUILayout.Space(10);
-					EditorGUILayout.LabelField("Mecanim Settings");
-					bool isNextUsingMecanim = EditorGUILayout.Toggle("Use Mecanim", _targetPortrait._isUsingMecanim);
-					if (_targetPortrait._isUsingMecanim != isNextUsingMecanim)
-					{
-						UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
-						Undo.IncrementCurrentGroup();
-						Undo.RegisterCompleteObjectUndo(_targetPortrait, "Mecanim Setting Changed");
-
-						_targetPortrait._isUsingMecanim = isNextUsingMecanim;
-					}
-
-
-					if(_targetPortrait._isUsingMecanim)
-					{
-						GUILayout.Space(10);
-						try
+						Animator nextAnimator = EditorGUILayout.ObjectField("Animator", _targetPortrait._animator, typeof(Animator), true) as Animator;
+						if (nextAnimator != _targetPortrait._animator)
 						{
-							Animator nextAnimator = EditorGUILayout.ObjectField("Animator", _targetPortrait._animator, typeof(Animator), true) as Animator;
-							if (nextAnimator != _targetPortrait._animator)
+							//하위에 있는 Component일 때에만 변동 가능
+							if (nextAnimator == null)
 							{
-								//하위에 있는 Component일 때에만 변동 가능
-								if (nextAnimator == null)
+								_targetPortrait._animator = null;
+							}
+							else
+							{
+								if (nextAnimator == _targetPortrait.GetComponent<Animator>())
 								{
-									_targetPortrait._animator = null;
+									_targetPortrait._animator = nextAnimator;
 								}
 								else
 								{
-									if (nextAnimator == _targetPortrait.GetComponent<Animator>())
-									{
-										_targetPortrait._animator = nextAnimator;
-									}
-									else
-									{
-										EditorUtility.DisplayDialog("Invalid Animator", "Invalid Animator. Only the Animator, which is its own component, is valid.", "Okay");
+									EditorUtility.DisplayDialog("Invalid Animator", "Invalid Animator. Only the Animator, which is its own component, is valid.", "Okay");
 
-									}
 								}
-
 							}
-						}
-						catch(Exception)
-						{
 
 						}
-						if (_targetPortrait._animator == null)
-						{
-							//1. Animator가 없다면
-							// > 생성하기
-							// > 생성되어 있다면 다시 링크
-							GUIStyle guiStyle_WarningText = new GUIStyle(GUI.skin.label);
-							guiStyle_WarningText.normal.textColor = Color.red;
-							EditorGUILayout.LabelField("Warning : No Animator!", guiStyle_WarningText);
-							GUILayout.Space(5);
+					}
+					catch(Exception)
+					{
 
-							if(GUILayout.Button("Add / Check Animator", GUILayout.Height(25)))
+					}
+					if (_targetPortrait._animator == null)
+					{
+						//1. Animator가 없다면
+						// > 생성하기
+						// > 생성되어 있다면 다시 링크
+						GUIStyle guiStyle_WarningText = new GUIStyle(GUI.skin.label);
+						guiStyle_WarningText.normal.textColor = Color.red;
+						EditorGUILayout.LabelField("Warning : No Animator!", guiStyle_WarningText);
+						GUILayout.Space(5);
+
+						if(GUILayout.Button("Add / Check Animator", GUILayout.Height(25)))
+						{
+							UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+							Undo.IncrementCurrentGroup();
+							Undo.RegisterCompleteObjectUndo(_targetPortrait, "Mecanim Setting Changed");
+
+							Animator animator = _targetPortrait.gameObject.GetComponent<Animator>();
+							if(animator == null)
 							{
-								UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
-								Undo.IncrementCurrentGroup();
-								Undo.RegisterCompleteObjectUndo(_targetPortrait, "Mecanim Setting Changed");
-
-								Animator animator = _targetPortrait.gameObject.GetComponent<Animator>();
-								if(animator == null)
-								{
-									animator = _targetPortrait.gameObject.AddComponent<Animator>();
-								}
-								_targetPortrait._animator = animator;
+								animator = _targetPortrait.gameObject.AddComponent<Animator>();
 							}
+							_targetPortrait._animator = animator;
 						}
-						else
+					}
+					else
+					{
+						//2. Animator가 있다면
+						if (GUILayout.Button("Refresh Layers", GUILayout.Height(25)))
 						{
-							//2. Animator가 있다면
-							if (GUILayout.Button("Refresh Layers", GUILayout.Height(25)))
-							{
-								UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
-								Undo.IncrementCurrentGroup();
-								Undo.RegisterCompleteObjectUndo(_targetPortrait, "Mecanim Setting Changed");
+							UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+							Undo.IncrementCurrentGroup();
+							Undo.RegisterCompleteObjectUndo(_targetPortrait, "Mecanim Setting Changed");
 
-								//Animator의 Controller가 있는지 체크해야한다.
+							//Animator의 Controller가 있는지 체크해야한다.
 								
-								if(_targetPortrait._animator.runtimeAnimatorController == null)
-								{
-									//AnimatorController가 없다면 Layer는 초기화
-									_targetPortrait._animatorLayerBakedData.Clear();
-								}
-								else
-								{
-									//AnimatorController가 있다면 레이어에 맞게 설정
-									_targetPortrait._animatorLayerBakedData.Clear();
-									UnityEditor.Animations.AnimatorController animatorController = _targetPortrait._animator.runtimeAnimatorController as UnityEditor.Animations.AnimatorController;
+							if(_targetPortrait._animator.runtimeAnimatorController == null)
+							{
+								//AnimatorController가 없다면 Layer는 초기화
+								_targetPortrait._animatorLayerBakedData.Clear();
+							}
+							else
+							{
+								//AnimatorController가 있다면 레이어에 맞게 설정
+								_targetPortrait._animatorLayerBakedData.Clear();
+								UnityEditor.Animations.AnimatorController animatorController = _targetPortrait._animator.runtimeAnimatorController as UnityEditor.Animations.AnimatorController;
 
-									if(animatorController != null && animatorController.layers.Length > 0)
+								if(animatorController != null && animatorController.layers.Length > 0)
+								{
+									for (int iLayer = 0; iLayer < animatorController.layers.Length; iLayer++)
 									{
-										for (int iLayer = 0; iLayer < animatorController.layers.Length; iLayer++)
+										apAnimMecanimData_Layer newLayerData = new apAnimMecanimData_Layer();
+										newLayerData._layerIndex = iLayer;
+										newLayerData._layerName = animatorController.layers[iLayer].name;
+										newLayerData._blendType = apAnimMecanimData_Layer.MecanimLayerBlendType.Unknown;
+										switch (animatorController.layers[iLayer].blendingMode)
 										{
-											apAnimMecanimData_Layer newLayerData = new apAnimMecanimData_Layer();
-											newLayerData._layerIndex = iLayer;
-											newLayerData._layerName = animatorController.layers[iLayer].name;
-											newLayerData._blendType = apAnimMecanimData_Layer.MecanimLayerBlendType.Unknown;
-											switch (animatorController.layers[iLayer].blendingMode)
-											{
-												case UnityEditor.Animations.AnimatorLayerBlendingMode.Override:
-													newLayerData._blendType = apAnimMecanimData_Layer.MecanimLayerBlendType.Override;
-													break;
+											case UnityEditor.Animations.AnimatorLayerBlendingMode.Override:
+												newLayerData._blendType = apAnimMecanimData_Layer.MecanimLayerBlendType.Override;
+												break;
 
-												case UnityEditor.Animations.AnimatorLayerBlendingMode.Additive:
-													newLayerData._blendType = apAnimMecanimData_Layer.MecanimLayerBlendType.Additive;
-													break;
-											}
-
-											_targetPortrait._animatorLayerBakedData.Add(newLayerData);
+											case UnityEditor.Animations.AnimatorLayerBlendingMode.Additive:
+												newLayerData._blendType = apAnimMecanimData_Layer.MecanimLayerBlendType.Additive;
+												break;
 										}
+
+										_targetPortrait._animatorLayerBakedData.Add(newLayerData);
 									}
 								}
 							}
+						}
+						GUILayout.Space(5);
+						EditorGUILayout.LabelField("Animator Controller Layers");
+						for (int i = 0; i < _targetPortrait._animatorLayerBakedData.Count; i++)
+						{
+							apAnimMecanimData_Layer layer = _targetPortrait._animatorLayerBakedData[i];
+							EditorGUILayout.BeginHorizontal();
 							GUILayout.Space(5);
-							EditorGUILayout.LabelField("Animator Controller Layers");
-							for (int i = 0; i < _targetPortrait._animatorLayerBakedData.Count; i++)
+							EditorGUILayout.LabelField("[" + layer._layerIndex + "]", GUILayout.Width(50));
+							EditorGUILayout.TextField(layer._layerName);
+							apAnimMecanimData_Layer.MecanimLayerBlendType nextBlendType = (apAnimMecanimData_Layer.MecanimLayerBlendType)EditorGUILayout.EnumPopup(layer._blendType);
+							EditorGUILayout.EndHorizontal();
+
+							if (nextBlendType != layer._blendType)
 							{
-								apAnimMecanimData_Layer layer = _targetPortrait._animatorLayerBakedData[i];
-								EditorGUILayout.BeginHorizontal();
-								GUILayout.Space(5);
-								EditorGUILayout.LabelField("[" + layer._layerIndex + "]", GUILayout.Width(50));
-								EditorGUILayout.TextField(layer._layerName);
-								apAnimMecanimData_Layer.MecanimLayerBlendType nextBlendType = (apAnimMecanimData_Layer.MecanimLayerBlendType)EditorGUILayout.EnumPopup(layer._blendType);
-								EditorGUILayout.EndHorizontal();
+								UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+								Undo.IncrementCurrentGroup();
+								Undo.RegisterCompleteObjectUndo(_targetPortrait, "Mecanim Setting Changed");
 
-								if (nextBlendType != layer._blendType)
-								{
-									UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
-									Undo.IncrementCurrentGroup();
-									Undo.RegisterCompleteObjectUndo(_targetPortrait, "Mecanim Setting Changed");
-
-									_targetPortrait._animatorLayerBakedData[i]._blendType = nextBlendType;
-								}
+								_targetPortrait._animatorLayerBakedData[i]._blendType = nextBlendType;
 							}
 						}
+					}
+						
+				}
+
+
+				GUILayout.Space(20);
+
+
+				//추가 3.4 : 타임라인 설정
+#if UNITY_2017_1_OR_NEWER
+
+				EditorGUILayout.LabelField(_guiContent_Timeline, GUILayout.Height(24));
+
+				_isFold_Timeline = EditorGUILayout.Foldout(_isFold_Timeline, "Track Data");
+				if(_isFold_Timeline)
+				{
+					
+					int nextTimelineTracks = EditorGUILayout.DelayedIntField("Size", _nTimelineTrackSet);
+					if(nextTimelineTracks != _nTimelineTrackSet)
+					{
+						//TimelineTrackSet의 개수가 바뀌었다. 
+						UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+						Undo.IncrementCurrentGroup();
+						Undo.RegisterCompleteObjectUndo(_targetPortrait, "Track Setting Changed");
+						_nTimelineTrackSet = nextTimelineTracks;
+						if(_nTimelineTrackSet < 0)
+						{
+							_nTimelineTrackSet = 0;
+						}
+
+						//일단 이전 개수만큼 복사를 한다.
+						int nPrev = 0;
+						List<apPortrait.TimelineTrackPreset> prevSets = new List<apPortrait.TimelineTrackPreset>();
+						if(targetPortrait._timelineTrackSets != null && targetPortrait._timelineTrackSets.Length > 0)
+						{
+							for (int i = 0; i < targetPortrait._timelineTrackSets.Length; i++)
+							{
+								prevSets.Add(targetPortrait._timelineTrackSets[i]);
+							}
+							nPrev = targetPortrait._timelineTrackSets.Length;
+						}
+						
+						//배열을 새로 만들자
+						targetPortrait._timelineTrackSets = new apPortrait.TimelineTrackPreset[_nTimelineTrackSet];
+
+						//가능한 이전 소스를 복사한다.
+						for (int i = 0; i < _nTimelineTrackSet; i++)
+						{
+							if(i < nPrev)
+							{
+								targetPortrait._timelineTrackSets[i] = new apPortrait.TimelineTrackPreset();
+								targetPortrait._timelineTrackSets[i]._playableDirector = prevSets[i]._playableDirector;
+								targetPortrait._timelineTrackSets[i]._trackName = prevSets[i]._trackName;
+								targetPortrait._timelineTrackSets[i]._layer = prevSets[i]._layer;
+								targetPortrait._timelineTrackSets[i]._blendMethod = prevSets[i]._blendMethod;
+							}
+							else
+							{
+								targetPortrait._timelineTrackSets[i] = new apPortrait.TimelineTrackPreset();
+							}
+						}
+
+
+						apEditorUtil.ReleaseGUIFocus();
 						
 					}
 
+					GUILayout.Space(5);
 
-					GUILayout.Space(20);
+					if(targetPortrait._timelineTrackSets != null)
+					{
+						apPortrait.TimelineTrackPreset curTrackSet = null;
+						for (int i = 0; i < targetPortrait._timelineTrackSets.Length; i++)
+						{
+							//트랙을 하나씩 적용
+							curTrackSet = targetPortrait._timelineTrackSets[i];
+							
+							EditorGUILayout.LabelField("[" + i + "] : " + (curTrackSet._playableDirector == null ? "<None>" : curTrackSet._playableDirector.name));
+							PlayableDirector nextDirector = EditorGUILayout.ObjectField("Director", curTrackSet._playableDirector, typeof(PlayableDirector), true) as PlayableDirector;
+							string nextTrackName = EditorGUILayout.DelayedTextField("Track Name", curTrackSet._trackName);
+							int nextLayer = EditorGUILayout.DelayedIntField("Layer", curTrackSet._layer);
+							apAnimPlayUnit.BLEND_METHOD nextBlendMethod = (apAnimPlayUnit.BLEND_METHOD)EditorGUILayout.EnumPopup("Blend", curTrackSet._blendMethod);
 
+							if(nextDirector != curTrackSet._playableDirector 
+								|| nextTrackName != curTrackSet._trackName
+								|| nextLayer != curTrackSet._layer
+								|| nextBlendMethod != curTrackSet._blendMethod
+								)
+							{
+								UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+								Undo.IncrementCurrentGroup();
+								Undo.RegisterCompleteObjectUndo(_targetPortrait, "Track Setting Changed");
+
+								curTrackSet._playableDirector = nextDirector;
+								curTrackSet._trackName = nextTrackName;
+								curTrackSet._layer = nextLayer;
+								curTrackSet._blendMethod = nextBlendMethod;
+
+								apEditorUtil.ReleaseGUIFocus();
+							}
+
+							GUILayout.Space(5);
+						}
+					}
 				}
 
+				GUILayout.Space(20);
+#endif
 				
 				bool isChanged = false;
 
-				_isFold_ConrolParameters = EditorGUILayout.Foldout(_isFold_ConrolParameters, "Control Parameters");
-				if (_isFold_ConrolParameters)
-				{
+				// Control Parameters
+				//-----------------------------------------------------------------------------
+
+				GUILayout.Box(_guiContent_ControlParams, _guiStyle_subTitle, GUILayout.Width(subTitleWidth), GUILayout.Height(subTitleHeight));
+
 #if UNITY_2017_3_OR_NEWER
-					_curControlCategory = (apControlParam.CATEGORY)EditorGUILayout.EnumFlagsField(new GUIContent("Category"), _curControlCategory);
-#else				
-					_curControlCategory = (apControlParam.CATEGORY)EditorGUILayout.EnumMaskPopup(new GUIContent("Category"), _curControlCategory);
+				_curControlCategory = (apControlParam.CATEGORY)EditorGUILayout.EnumFlagsField(new GUIContent("Category"), _curControlCategory);
+#else
+				_curControlCategory = (apControlParam.CATEGORY)EditorGUILayout.EnumMaskPopup(new GUIContent("Category"), _curControlCategory);
 #endif
 
-					EditorGUILayout.Space();
-					//1. 컨르롤러를 제어할 수 있도록 하자
+				EditorGUILayout.Space();
+				//1. 컨르롤러를 제어할 수 있도록 하자
 					
-					if (_controlParams != null)
+				if (_controlParams != null)
+				{
+					for (int i = 0; i < _controlParams.Count; i++)
 					{
-						for (int i = 0; i < _controlParams.Count; i++)
+						if ((int)(_controlParams[i]._category & _curControlCategory) != 0)
 						{
-							if ((int)(_controlParams[i]._category & _curControlCategory) != 0)
+							if (GUI_ControlParam(_controlParams[i]))
 							{
-								if (GUI_ControlParam(_controlParams[i]))
-								{
-									isChanged = true;
-								}
+								isChanged = true;
 							}
 						}
 					}
-
-					GUILayout.Space(20);
 				}
-				
 
-				GUILayout.Space(10);
+				GUILayout.Space(30);
 
 				//2. 토글 버튼을 두어서 기본 Inspector 출력 여부를 결정하자.
 				string strBaseButton = "Show All Properties";
@@ -537,10 +775,11 @@ namespace AnyPortrait
 			_showBaseInspector = false;
 
 			//_isFold_BasicSettings = true;
+			//_isFold_BasicSettings = true;
 			_isFold_RootPortraits = true;
 			//_isFold_AnimationSettings = true;
 			_isFold_AnimationClips = true;
-			_isFold_ConrolParameters = true;
+			//_isFold_ConrolParameters = true;
 
 			_controlParams = null;
 			if (_targetPortrait._controller != null)
@@ -553,8 +792,17 @@ namespace AnyPortrait
 			_requestType = REQUEST_TYPE.None;
 			_coroutine = null;
 
+#if UNITY_2017_1_OR_NEWER
+			_nTimelineTrackSet = (_targetPortrait._timelineTrackSets == null) ? 0 :_targetPortrait._timelineTrackSets.Length;
+#endif
+
 			EditorApplication.update -= ExecuteCoroutine;
+
+
 		}
+
+
+
 
 		private bool GUI_ControlParam(apControlParam controlParam)
 		{
@@ -704,6 +952,12 @@ namespace AnyPortrait
 			}
 			_requestType = REQUEST_TYPE.None;
 			_requestPortrait = null;
+		}
+
+
+		private Texture2D LoadImage(string iconName)
+		{
+			return AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/AnyPortrait/Editor/Images/Inspector/" + iconName + ".png");
 		}
 	}
 

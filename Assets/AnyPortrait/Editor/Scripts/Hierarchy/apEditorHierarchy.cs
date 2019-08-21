@@ -116,40 +116,80 @@ namespace AnyPortrait
 				return;
 			}
 
-			List<apRootUnit> rootUnits = Editor._portrait._rootUnits;
-			for (int i = 0; i < rootUnits.Count; i++)
+			//0. 루트 유닛
+			//기존 : 리스트 그대로
+			//List<apRootUnit> rootUnits = Editor._portrait._rootUnits;
+			//for (int i = 0; i < rootUnits.Count; i++)
+			//{
+			//	apRootUnit rootUnit = rootUnits[i];
+			//	AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Root), "Root Unit " + i, CATEGORY.Overall_Item, rootUnit, false, _rootUnit_Overall);
+			//}
+
+			//변경 3.29 : 정렬된 리스트
+			List<apObjectOrders.OrderSet> rootUnitSets = Editor._portrait._objectOrders.RootUnits;
+			for (int i = 0; i < rootUnitSets.Count; i++)
 			{
-				apRootUnit rootUnit = rootUnits[i];
-				AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Root), "Root Unit " + i, CATEGORY.Overall_Item, rootUnit, false, _rootUnit_Overall);
+				apObjectOrders.OrderSet rootUnitSet = rootUnitSets[i];
+				AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Root), 
+					"Root Unit " + i + " (" + rootUnitSet._linked_RootUnit.Name + ")",//<<변경
+					CATEGORY.Overall_Item, rootUnitSet._linked_RootUnit, false, _rootUnit_Overall);
 			}
 
 
 			//1. 이미지 파일들을 검색하자
-			List<apTextureData> textures = Editor._portrait._textureData;
-			for (int i = 0; i < textures.Count; i++)
+			//기존 : 리스트 그대로
+			//List<apTextureData> textures = Editor._portrait._textureData;
+			//for (int i = 0; i < textures.Count; i++)
+			//{
+			//	apTextureData textureData = textures[i];
+			//	AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Image), textureData._name, CATEGORY.Images_Item, textureData, false, _rootUnit_Image);
+			//}
+
+			//변경 3.29 : 정렬된 리스트
+			List<apObjectOrders.OrderSet> textureSets = Editor._portrait._objectOrders.Images;
+			for (int i = 0; i < textureSets.Count; i++)
 			{
-				apTextureData textureData = textures[i];
-				AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Image), textureData._name, CATEGORY.Images_Item, textureData, false, _rootUnit_Image);
+				apObjectOrders.OrderSet textureDataSet = textureSets[i];
+				AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Image), textureDataSet._linked_Image._name, CATEGORY.Images_Item, textureDataSet._linked_Image, false, _rootUnit_Image);
 			}
+
 			AddUnit_OnlyButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Add), Editor.GetUIWord(UIWORD.AddImage), CATEGORY.Images_Add, null, false, _rootUnit_Image);
 			AddUnit_OnlyButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_AddPSD), Editor.GetUIWord(UIWORD.ImportPSDFile), CATEGORY.Images_AddPSD, null, false, _rootUnit_Image);//추가 : PSD
 
 			//2. 메시 들을 검색하자
-			List<apMesh> meshes = Editor._portrait._meshes;
-			for (int i = 0; i < meshes.Count; i++)
+			//기존 : 리스트 그대로
+			//List<apMesh> meshes = Editor._portrait._meshes;
+			//for (int i = 0; i < meshes.Count; i++)
+			//{
+			//	apMesh mesh = meshes[i];
+			//	AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Mesh), mesh._name, CATEGORY.Mesh_Item, mesh, false, _rootUnit_Mesh);
+			//}
+
+			//변경 3.29 : 정렬된 리스트
+			List<apObjectOrders.OrderSet> mesheSets = Editor._portrait._objectOrders.Meshes;
+			for (int i = 0; i < mesheSets.Count; i++)
 			{
-				apMesh mesh = meshes[i];
-				AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Mesh), mesh._name, CATEGORY.Mesh_Item, mesh, false, _rootUnit_Mesh);
+				apObjectOrders.OrderSet meshSet = mesheSets[i];
+				AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Mesh), meshSet._linked_Mesh._name, CATEGORY.Mesh_Item, meshSet._linked_Mesh, false, _rootUnit_Mesh);
 			}
 			AddUnit_OnlyButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Add), Editor.GetUIWord(UIWORD.AddMesh), CATEGORY.Mesh_Add, null, false, _rootUnit_Mesh);
 
 			//3. 메시 그룹들을 검색하자
 			//메시 그룹들은 하위에 또다른 Mesh Group을 가지고 있다.
-			List<apMeshGroup> meshGroups = Editor._portrait._meshGroups;
+			//기존 : 리스트 그대로
+			//List<apMeshGroup> meshGroups = Editor._portrait._meshGroups;
 
-			for (int i = 0; i < meshGroups.Count; i++)
+			//변경 : 정렬된 리스트
+			List<apObjectOrders.OrderSet> meshGroupSets = Editor._portrait._objectOrders.MeshGroups;
+
+			for (int i = 0; i < meshGroupSets.Count; i++)
 			{
-				apMeshGroup meshGroup = meshGroups[i];
+				//기존
+				//apMeshGroup meshGroup = meshGroupSets[i];
+
+				//변경
+				apObjectOrders.OrderSet meshGrouSet = meshGroupSets[i];
+				apMeshGroup meshGroup = meshGrouSet._linked_MeshGroup;
 
 				if (meshGroup._parentMeshGroup == null || meshGroup._parentMeshGroupID < 0)
 				{
@@ -169,31 +209,39 @@ namespace AnyPortrait
 
 
 			//7. 파라미터들을 검색하자
-			List<apControlParam> cParams = Editor.ParamControl._controlParams;
-			for (int i = 0; i < cParams.Count; i++)
+			//기존 : 리스트 그대로
+			//List<apControlParam> cParams = Editor.ParamControl._controlParams;
+			//for (int i = 0; i < cParams.Count; i++)
+			//{
+			//	apControlParam cParam = cParams[i];
+			//	AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Param), cParam._keyName, CATEGORY.Param_Item, cParam, false, _rootUnit_Param);
+			//}
+
+			//변경 : 정렬된 리스트
+			List<apObjectOrders.OrderSet> cParamSets = Editor._portrait._objectOrders.ControlParams;
+			for (int i = 0; i < cParamSets.Count; i++)
 			{
-				apControlParam cParam = cParams[i];
-				AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Param),
-										cParam._keyName,
-										CATEGORY.Param_Item,
-										cParam,
-										false,
-										_rootUnit_Param);
+				apObjectOrders.OrderSet cParamSet = cParamSets[i];
+				AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Param), cParamSet._linked_ControlParam._keyName, CATEGORY.Param_Item, cParamSet._linked_ControlParam, false, _rootUnit_Param);
 			}
 			AddUnit_OnlyButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Add), Editor.GetUIWord(UIWORD.AddControlParameter), CATEGORY.Param_Add, null, false, _rootUnit_Param);
 
 
 			//8. 애니메이션을 넣자
-			List<apAnimClip> animClips = Editor._portrait._animClips;
-			for (int i = 0; i < animClips.Count; i++)
+			//기존 : 리스트 그대로
+			//List<apAnimClip> animClips = Editor._portrait._animClips;
+			//for (int i = 0; i < animClips.Count; i++)
+			//{
+			//	apAnimClip animClip = animClips[i];
+			//	AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Animation), animClip._name, CATEGORY.Animation_Item, animClip, false, _rootUnit_Animation);
+			//}
+
+			//변경 : 정렬된 리스트
+			List<apObjectOrders.OrderSet> animClipSets = Editor._portrait._objectOrders.AnimClips;
+			for (int i = 0; i < animClipSets.Count; i++)
 			{
-				apAnimClip animClip = animClips[i];
-				AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Animation),
-										animClip._name,
-										CATEGORY.Animation_Item,
-										animClip,
-										false,
-										_rootUnit_Animation);
+				apObjectOrders.OrderSet animClipSet = animClipSets[i];
+				AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Animation), animClipSet._linked_AnimClip._name, CATEGORY.Animation_Item, animClipSet._linked_AnimClip, false, _rootUnit_Animation);
 			}
 			AddUnit_OnlyButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Add), Editor.GetUIWord(UIWORD.AddAnimationClip), CATEGORY.Animation_Add, null, false, _rootUnit_Animation);
 		}
@@ -206,7 +254,7 @@ namespace AnyPortrait
 				if (parentMeshGroup._childMeshGroupTransforms[iChild]._meshGroup != null)
 				{
 					apMeshGroup childMeshGroup = parentMeshGroup._childMeshGroupTransforms[iChild]._meshGroup;
-					apEditorHierarchyUnit hierarchyUnit = AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_MeshGroup), childMeshGroup._name, CATEGORY.MeshGroup_Item, childMeshGroup, false, parentUnit);
+					apEditorHierarchyUnit hierarchyUnit = AddUnit_ToggleButton(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_MeshGroup), childMeshGroup._name, CATEGORY.MeshGroup_Item, childMeshGroup, false, parentUnit, false);
 
 					if (childMeshGroup._childMeshGroupTransforms.Count > 0)
 					{
@@ -241,14 +289,26 @@ namespace AnyPortrait
 		}
 
 
-		private apEditorHierarchyUnit AddUnit_ToggleButton(Texture2D icon, string text, CATEGORY savedKey, object savedObj, bool isRoot, apEditorHierarchyUnit parent)
+		private apEditorHierarchyUnit AddUnit_ToggleButton(Texture2D icon, string text, CATEGORY savedKey, object savedObj, bool isRoot, apEditorHierarchyUnit parent, bool isOrderChangable = true)
 		{
 			apEditorHierarchyUnit newUnit = new apEditorHierarchyUnit();
 
 			newUnit.SetBasicIconImg(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_FoldDown),
 										Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_FoldRight),
-										Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Registered));
-			newUnit.SetEvent(OnUnitClick);
+										Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Registered),
+										Editor.ImageSet.Get(apImageSet.PRESET.Modifier_LayerUp),
+										Editor.ImageSet.Get(apImageSet.PRESET.Modifier_LayerDown)
+										);
+			if(isOrderChangable)
+			{
+				newUnit.SetEvent(OnUnitClick, null, OnUnitClickOrderChanged);
+			}
+			else
+			{
+				newUnit.SetEvent(OnUnitClick);
+			}
+			
+
 			newUnit.SetToggleButton(icon, text, (int)savedKey, savedObj);
 
 			_units_All.Add(newUnit);
@@ -302,95 +362,166 @@ namespace AnyPortrait
 			}
 
 			List<apEditorHierarchyUnit> deletedUnits = new List<apEditorHierarchyUnit>();
+			
 			//0. 루트 유닛들을 검색하자
-			List<apRootUnit> rootUnits = Editor._portrait._rootUnits;
-			for (int i = 0; i < rootUnits.Count; i++)
+			//이전
+			//List<apRootUnit> rootUnits = Editor._portrait._rootUnits;
+
+			//변경
+			List<apObjectOrders.OrderSet> rootUnitSets = Editor._portrait._objectOrders.RootUnits;
+			for (int i = 0; i < rootUnitSets.Count; i++)
 			{
-				apRootUnit rootUnit = Editor._portrait._rootUnits[i];
+				//이전
+				//apRootUnit rootUnit = Editor._portrait._rootUnits[i];
+				
+				//변경
+				apRootUnit rootUnit = rootUnitSets[i]._linked_RootUnit;
 				RefreshUnit(CATEGORY.Overall_Item,
 								Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Root),
 								rootUnit,
-								"Root Unit " + i,
+								"Root Unit " + i + " (" + rootUnit.Name + ")",//<<변경
 								Editor.Select.RootUnit,
-								_rootUnit_Overall);
+								_rootUnit_Overall, 
+								i);
 			}
-			CheckRemovableUnits<apRootUnit>(deletedUnits, CATEGORY.Overall_Item, rootUnits);
+			//이전
+			//CheckRemovableUnits<apRootUnit>(deletedUnits, CATEGORY.Overall_Item, rootUnits);
+
+			//변경
+			CheckRemovableUnits<apRootUnit>(deletedUnits, CATEGORY.Overall_Item, Editor._portrait._rootUnits);
 
 
 			//1. 이미지 파일들을 검색하자 -> 있는건 없애고, 없는건 만들자
-			List<apTextureData> textures = Editor._portrait._textureData;
-			for (int i = 0; i < textures.Count; i++)
+			//이전
+			//List<apTextureData> textures = Editor._portrait._textureData;
+
+			//변경
+			List<apObjectOrders.OrderSet> textureSets = Editor._portrait._objectOrders.Images;
+			for (int i = 0; i < textureSets.Count; i++)
 			{
-				apTextureData textureData = textures[i];
+				//이전
+				//apTextureData textureData = textures[i];
+
+				//변경
+				apTextureData textureData = textureSets[i]._linked_Image;
 				RefreshUnit(CATEGORY.Images_Item,
 								Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Image),
 								textureData,
 								textureData._name,
 								Editor.Select.TextureData,
-								_rootUnit_Image);
+								_rootUnit_Image,
+								i);
 			}
+			//이전
+			//CheckRemovableUnits<apTextureData>(deletedUnits, CATEGORY.Images_Item, textures);
 
-			CheckRemovableUnits<apTextureData>(deletedUnits, CATEGORY.Images_Item, textures);
+			//변경
+			CheckRemovableUnits<apTextureData>(deletedUnits, CATEGORY.Images_Item, Editor._portrait._textureData);
 
 
 
 			//2. 메시 들을 검색하자
-			List<apMesh> meshes = Editor._portrait._meshes;
-			for (int i = 0; i < meshes.Count; i++)
+			//이전
+			//List<apMesh> meshes = Editor._portrait._meshes;
+			
+			//변경
+			List<apObjectOrders.OrderSet> mesheSets = Editor._portrait._objectOrders.Meshes;
+			for (int i = 0; i < mesheSets.Count; i++)
 			{
-				apMesh mesh = meshes[i];
+				//이전
+				//apMesh mesh = meshes[i];
+
+				//변경
+				apMesh mesh = mesheSets[i]._linked_Mesh;
 				RefreshUnit(CATEGORY.Mesh_Item,
 								Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Mesh),
 								mesh,
 								mesh._name,
 								Editor.Select.Mesh,
-								_rootUnit_Mesh);
+								_rootUnit_Mesh,
+								i);
 			}
+			//이전
+			//CheckRemovableUnits<apMesh>(deletedUnits, CATEGORY.Mesh_Item, meshes);
+			
+			//변경
+			CheckRemovableUnits<apMesh>(deletedUnits, CATEGORY.Mesh_Item, Editor._portrait._meshes);
 
-			CheckRemovableUnits<apMesh>(deletedUnits, CATEGORY.Mesh_Item, meshes);
 
 			//3. Mesh Group들을 검색하자
-			List<apMeshGroup> meshGroups = Editor._portrait._meshGroups;
-			for (int i = 0; i < meshGroups.Count; i++)
+			//이전
+			//List<apMeshGroup> meshGroups = Editor._portrait._meshGroups;
+			//변경
+			List<apObjectOrders.OrderSet> meshGroupSets = Editor._portrait._objectOrders.MeshGroups;
+
+			for (int i = 0; i < meshGroupSets.Count; i++)
 			{
 				//이건 재귀 함수 -_-;
-				if (meshGroups[i]._parentMeshGroup == null)
+				apMeshGroup meshGroup = meshGroupSets[i]._linked_MeshGroup;
+				if (meshGroup._parentMeshGroup == null)
 				{
-					RefreshUnit_MeshGroup(meshGroups[i], _rootUnit_MeshGroup);
+					RefreshUnit_MeshGroup(meshGroup, _rootUnit_MeshGroup, i);
 				}
 			}
-			CheckRemovableUnits<apMeshGroup>(deletedUnits, CATEGORY.MeshGroup_Item, meshGroups);
+			//이전
+			//CheckRemovableUnits<apMeshGroup>(deletedUnits, CATEGORY.MeshGroup_Item, meshGroups);
+
+			//변경
+			CheckRemovableUnits<apMeshGroup>(deletedUnits, CATEGORY.MeshGroup_Item, Editor._portrait._meshGroups);
+
 
 			//7. 파라미터들을 검색하자
-			List<apControlParam> cParams = Editor.ParamControl._controlParams;
-			for (int i = 0; i < cParams.Count; i++)
+			//이전
+			//List<apControlParam> cParams = Editor.ParamControl._controlParams;
+			
+			//변경
+			List<apObjectOrders.OrderSet> cParamSets = Editor._portrait._objectOrders.ControlParams;
+			for (int i = 0; i < cParamSets.Count; i++)
 			{
-				apControlParam cParam = cParams[i];
+				//이전
+				//apControlParam cParam = cParams[i];
+
+				//변경
+				apControlParam cParam = cParamSets[i]._linked_ControlParam;
 				RefreshUnit(CATEGORY.Param_Item,
 								Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Param),
 								cParam,
 								cParam._keyName,
 								Editor.Select.Param,
-								_rootUnit_Param);
-
-				CheckRemovableUnits<apControlParam>(deletedUnits, CATEGORY.Param_Item, cParams);
+								_rootUnit_Param,
+								i);
 			}
+			//이전
+			//CheckRemovableUnits<apControlParam>(deletedUnits, CATEGORY.Param_Item, cParams);
+			
+			//변경
+			CheckRemovableUnits<apControlParam>(deletedUnits, CATEGORY.Param_Item, Editor.ParamControl._controlParams);
 
 
 			//8. 애니메이션을 넣자
-			List<apAnimClip> animClips = Editor._portrait._animClips;
-			for (int i = 0; i < animClips.Count; i++)
+			//이전
+			//List<apAnimClip> animClips = Editor._portrait._animClips;
+
+			List<apObjectOrders.OrderSet> animClipSets = Editor._portrait._objectOrders.AnimClips;
+			for (int i = 0; i < animClipSets.Count; i++)
 			{
-				apAnimClip animClip = animClips[i];
+				//이전
+				//apAnimClip animClip = animClips[i];
+				//변경
+				apAnimClip animClip = animClipSets[i]._linked_AnimClip;
 				RefreshUnit(CATEGORY.Animation_Item,
 								Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_Animation),
 								animClip,
 								animClip._name,
 								Editor.Select.AnimClip,
-								_rootUnit_Animation);
-
-				CheckRemovableUnits<apAnimClip>(deletedUnits, CATEGORY.Animation_Item, animClips);
+								_rootUnit_Animation,
+								i);
 			}
+			//이전
+			//CheckRemovableUnits<apAnimClip>(deletedUnits, CATEGORY.Animation_Item, animClips);
+			
+			//변경
+			CheckRemovableUnits<apAnimClip>(deletedUnits, CATEGORY.Animation_Item, Editor._portrait._animClips);
 
 			//삭제할 유닛을 체크하고 계산하자
 			for (int i = 0; i < deletedUnits.Count; i++)
@@ -418,14 +549,15 @@ namespace AnyPortrait
 
 
 
-		private void RefreshUnit_MeshGroup(apMeshGroup parentMeshGroup, apEditorHierarchyUnit refreshedHierarchyUnit)
+		private void RefreshUnit_MeshGroup(apMeshGroup parentMeshGroup, apEditorHierarchyUnit refreshedHierarchyUnit, int indexPerParent)
 		{
 			apEditorHierarchyUnit unit = RefreshUnit(CATEGORY.MeshGroup_Item,
 								Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_MeshGroup),
 								parentMeshGroup,
 								parentMeshGroup._name,
 								Editor.Select.MeshGroup,
-								refreshedHierarchyUnit);
+								refreshedHierarchyUnit,
+								indexPerParent);
 
 			if (parentMeshGroup._childMeshGroupTransforms.Count > 0)
 			{
@@ -435,14 +567,20 @@ namespace AnyPortrait
 					apMeshGroup childMeshGroup = parentMeshGroup._childMeshGroupTransforms[i]._meshGroup;
 					if (childMeshGroup != null)
 					{
-						RefreshUnit_MeshGroup(childMeshGroup, unit);
+						RefreshUnit_MeshGroup(childMeshGroup, unit, i);
 					}
 				}
 			}
 		}
 
 
-		private apEditorHierarchyUnit RefreshUnit(CATEGORY category, Texture2D iconImage, object obj, string objName, object selectedObj, apEditorHierarchyUnit parentUnit)
+		private apEditorHierarchyUnit RefreshUnit(CATEGORY category, 
+			Texture2D iconImage, 
+			object obj, 
+			string objName, 
+			object selectedObj, 
+			apEditorHierarchyUnit parentUnit,
+			int indexPerParent)
 		{
 			apEditorHierarchyUnit unit = _units_All.Find(delegate (apEditorHierarchyUnit a)
 				{
@@ -474,6 +612,11 @@ namespace AnyPortrait
 					unit.SetSelected(false);
 				}
 
+				//수정 1.1 : 버그
+				if(unit._text == null)
+				{
+					unit._text = "";
+				}
 
 				if (!unit._text.Equals(objName))
 				{
@@ -484,6 +627,10 @@ namespace AnyPortrait
 			{
 				unit = AddUnit_ToggleButton(iconImage, objName, category, obj, false, parentUnit);
 			}
+
+			//추가 3.29 : Refresh의 경우 Index를 외부에서 지정한다.
+			unit._indexPerParent = indexPerParent;
+
 			return unit;
 		}
 
@@ -767,10 +914,117 @@ namespace AnyPortrait
 		}
 
 
+		public void OnUnitClickOrderChanged(apEditorHierarchyUnit eventUnit, int savedKey, object savedObj, bool isOrderUp)
+		{
+			//Hierarchy의 항목 순서를 바꾸자
+			if (Editor == null || Editor._portrait == null)
+			{
+				return;
+			}
+			apObjectOrders orders = Editor._portrait._objectOrders;
+
+			bool isChanged = false;
+			bool isResult = false;
+			CATEGORY category = (CATEGORY)savedKey;
+			switch (category)
+			{
+				case CATEGORY.Overall_Item:
+					{
+						apRootUnit rootUnit = savedObj as apRootUnit;
+						if(rootUnit != null)
+						{
+							isResult = orders.ChangeOrder(Editor._portrait, apObjectOrders.OBJECT_TYPE.RootUnit, rootUnit._childMeshGroup._uniqueID, isOrderUp);
+							if(isResult)
+							{
+								isChanged = true;
+							}
+							
+						}
+					}
+					break;
+
+				case CATEGORY.Images_Item:
+					{
+						apTextureData textureData = savedObj as apTextureData;
+						if(textureData != null)
+						{
+							isResult = orders.ChangeOrder(Editor._portrait, apObjectOrders.OBJECT_TYPE.Image, textureData._uniqueID, isOrderUp);
+							if(isResult)
+							{
+								isChanged = true;
+							}
+						}
+					}
+					break;
+
+				case CATEGORY.Mesh_Item:
+					{
+						apMesh mesh = savedObj as apMesh;
+						if(mesh != null)
+						{
+							isResult = orders.ChangeOrder(Editor._portrait, apObjectOrders.OBJECT_TYPE.Mesh, mesh._uniqueID, isOrderUp);
+							if(isResult)
+							{
+								isChanged = true;
+							}
+						}
+					}
+					break;
+
+				case CATEGORY.MeshGroup_Item:
+					{
+						apMeshGroup meshGroup = savedObj as apMeshGroup;
+						if(meshGroup != null)
+						{
+							isResult = orders.ChangeOrder(Editor._portrait, apObjectOrders.OBJECT_TYPE.MeshGroup, meshGroup._uniqueID, isOrderUp);
+							if(isResult)
+							{
+								isChanged = true;
+							}
+						}
+					}
+					break;
+
+				case CATEGORY.Animation_Item:
+					{
+						apAnimClip animClip = savedObj as apAnimClip;
+						if(animClip != null)
+						{
+							isResult = orders.ChangeOrder(Editor._portrait, apObjectOrders.OBJECT_TYPE.AnimClip, animClip._uniqueID, isOrderUp);
+							if(isResult)
+							{
+								isChanged = true;
+							}
+						}
+					}
+					break;
+
+				case CATEGORY.Param_Item:
+					{
+						apControlParam cParam = savedObj as apControlParam;
+						if(cParam != null)
+						{
+							isResult = orders.ChangeOrder(Editor._portrait, apObjectOrders.OBJECT_TYPE.ControlParam, cParam._uniqueID, isOrderUp);
+							if(isResult)
+							{
+								isChanged = true;
+							}
+						}
+					}
+					break;
+			}
+
+			if(isChanged)
+			{
+				apEditorUtil.SetEditorDirty();
+				Editor.RefreshControllerAndHierarchy(false);
+			}
+		}
+
 		// GUI
 		//---------------------------------------------
 		//Hierarchy 레이아웃 출력
-		public void GUI_RenderHierarchy(int width, apEditor.HIERARCHY_FILTER hierarchyFilter, float scrollX, bool isGUIEvent)
+		public void GUI_RenderHierarchy(int width, apEditor.HIERARCHY_FILTER hierarchyFilter, float scrollX, bool isGUIEvent, bool isOrderChanged)
 		{
 			//루트 노드는 For문으로 돌리고, 그 이후부터는 재귀 호출
 			bool isUnitRenderable = false;
@@ -802,7 +1056,7 @@ namespace AnyPortrait
 				}
 				if (isUnitRenderable)
 				{
-					GUI_RenderUnit(_units_Root[i], 0, width, scrollX, isGUIEvent);
+					GUI_RenderUnit(_units_Root[i], 0, width, scrollX, isGUIEvent, isOrderChanged);
 					GUILayout.Space(10);
 				}
 			}
@@ -812,9 +1066,9 @@ namespace AnyPortrait
 
 		//재귀적으로 Hierarchy 레이아웃을 출력
 		//Child에 진입할때마다 Level을 높인다. (여백과 Fold의 기준이 됨)
-		private void GUI_RenderUnit(apEditorHierarchyUnit unit, int level, int width, float scrollX, bool isGUIEvent)
+		private void GUI_RenderUnit(apEditorHierarchyUnit unit, int level, int width, float scrollX, bool isGUIEvent, bool isOrderChanged)
 		{
-			unit.GUI_Render(level * 10, width, 20, scrollX, isGUIEvent, level);
+			unit.GUI_Render(level * 10, width, 20, scrollX, isGUIEvent, level, isOrderChanged);
 			//if (unit._isFoldOut)
 			if (unit.IsFoldOut)
 			{
@@ -823,7 +1077,7 @@ namespace AnyPortrait
 					for (int i = 0; i < unit._childUnits.Count; i++)
 					{
 						//재귀적으로 호출
-						GUI_RenderUnit(unit._childUnits[i], level + 1, width, scrollX, isGUIEvent);
+						GUI_RenderUnit(unit._childUnits[i], level + 1, width, scrollX, isGUIEvent, isOrderChanged);
 					}
 				}
 			}

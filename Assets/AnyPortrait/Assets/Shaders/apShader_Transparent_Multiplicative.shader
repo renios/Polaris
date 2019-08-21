@@ -33,7 +33,7 @@ Shader "AnyPortrait/Transparent/Colored Texture (2X) Multiplicative"
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types
 		//#pragma surface surf SimpleColor alpha
-		#pragma surface surf SimpleColor//AlphaBlend가 아닌경우
+		#pragma surface surf SimpleColor finalcolor:alphaCorrection noforwardadd//AlphaBlend가 아닌경우
 
 		// Use shader model 3.0 target, to get nicer looking lighting
 		#pragma target 3.0
@@ -62,9 +62,17 @@ Shader "AnyPortrait/Transparent/Colored Texture (2X) Multiplicative"
 			c.rgb *= _Color.rgb * 2.0f;
 
 			o.Alpha = c.a * _Color.a;
-			//o.Albedo = c.rgb;
+			
+			o.Albedo = c.rgb;
+			
 			//Multiply 식
-			o.Albedo = c.rgb * (o.Alpha) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - o.Alpha);
+			//o.Albedo = c.rgb * (o.Alpha) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - o.Alpha);
+		}
+
+		void alphaCorrection(Input IN, SurfaceOutput o, inout half4 color)
+		{
+			color.rgb = color.rgb * (color.a) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - color.a);
+			color.a = 1.0f;
 		}
 		ENDCG
 	}

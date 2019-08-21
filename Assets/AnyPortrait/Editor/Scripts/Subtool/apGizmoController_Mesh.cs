@@ -57,7 +57,8 @@ namespace AnyPortrait
 												MultipleSelect__MeshEdit_Modify,
 												null, null, null, null,
 												apGizmos.TRANSFORM_UI.None,
-												FirstLink__MeshEdit_Modify);
+												FirstLink__MeshEdit_Modify,
+												AddHotKeys__MeshEdit_Modify);
 		}
 
 
@@ -143,6 +144,29 @@ namespace AnyPortrait
 			Editor.SetRepaint();
 		}
 
+		//--------------------------------------------------------------------------
+		// 단축키
+		//--------------------------------------------------------------------------
+		public void AddHotKeys__MeshEdit_Modify()
+		{
+			Editor.AddHotKeyEvent(OnHotKeyEvent__MeshEdit_Modify__Ctrl_A, "Select All Vertices", KeyCode.A, false, false, true, null);
+		}
+
+		// 단축키 : 버텍스 전체 선택
+		private void OnHotKeyEvent__MeshEdit_Modify__Ctrl_A(object paramObject)
+		{
+			if (Editor.Select.Mesh == null || Editor._meshEditMode != apEditor.MESH_EDIT_MODE.Modify)
+			{
+				return;
+			}
+
+			List<apVertex> vertices = Editor.Select.Mesh._vertexData;
+			Editor.VertController.SelectVertices(vertices, apGizmos.SELECT_TYPE.Add);
+
+			Editor.SetRepaint();
+
+			Editor.Gizmos.SetSelectResultForce_Multiple<apVertex>(Editor.VertController.Vertices);
+		}
 		//--------------------------------------------------------------------------
 		public apGizmos.SelectResult MultipleSelect__MeshEdit_Modify(Vector2 mousePosGL_Min, Vector2 mousePosGL_Max, Vector2 mousePosW_Min, Vector2 mousePosW_Max, apGizmos.SELECT_TYPE areaSelectType)
 		{

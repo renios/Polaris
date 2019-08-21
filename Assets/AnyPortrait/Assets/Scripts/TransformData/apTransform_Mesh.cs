@@ -177,35 +177,6 @@ namespace AnyPortrait
 		[SerializeField]
 		public List<ClipMeshSet> _clipChildMeshes = new List<ClipMeshSet>();
 
-		#region [미사용 코드] 고정 크기의 ChildClipMeshes
-		//[SerializeField]
-		//public List<int> _clipChildMeshTransformIDs = new List<int>();
-
-		//[NonSerialized]
-		//public List<apTransform_Mesh> _clipChildMeshTransforms = new List<apTransform_Mesh>();
-
-		//[NonSerialized]
-		//public List<apRenderUnit> _clipChildRenderUnits = new List<apRenderUnit>(); 
-		#endregion
-
-
-		//private apMatrix _calculateTmpMatrix = new apMatrix();
-		//public apMatrix CalculatedTmpMatrix {  get { return _calculateTmpMatrix; } }
-
-		//private apMatrix _calculateTmpMatrix_Local = new apMatrix();
-
-		//[NonSerialized]
-		//private apCalculatedLog _calLog = null;
-
-		//public apCalculatedLog CalculatedLog
-		//{
-		//	get
-		//	{
-		//		if (_calLog == null)
-		//		{ _calLog = new apCalculatedLog(this); }
-		//		return _calLog;
-		//	}
-		//}
 
 
 		[NonSerialized]
@@ -222,8 +193,82 @@ namespace AnyPortrait
 		[SerializeField]
 		public bool _receiveShadow = false;
 
-		//[NonSerialized]
-		//public bool _isVisible_TmpWork = true;//<<이값이 false이면 아예 렌더링이 안된다. 작업용. 허용되는 경우 외에는 항상 True
+		
+		//추가 19.6.9 : MaterialSet 옵션과 Property 초기화 옵션
+		[SerializeField]
+		public int _materialSetID = -1;
+
+		[NonSerialized]
+		public apMaterialSet _linkedMaterialSet = null;
+
+		[SerializeField]
+		public bool _isUseDefaultMaterialSet = true;//<<이게 True이면 MaterialSetID에 상관없이 Default 설정의 MatSet이 적용된다. 
+
+		//Material Set을 사용하는 것과 별개로, 커스텀하게 Property를 설정할 수 있다.
+		[Serializable]
+		public class CustomMaterialProperty
+		{
+			[SerializeField]
+			public string _name = "";
+
+			public enum SHADER_PROP_TYPE
+			{
+				Float = 0, 
+				Int = 1,
+				Vector = 2,
+				Texture = 3,
+				Color = 4
+			}
+
+			[SerializeField]
+			public SHADER_PROP_TYPE _propType = SHADER_PROP_TYPE.Float;
+
+			[SerializeField]
+			public float _value_Float = 0.0f;
+
+			[SerializeField]
+			public int _value_Int = 0;
+
+			[SerializeField]
+			public Vector4 _value_Vector = new Vector4(0, 0, 0, 0);
+
+			[SerializeField]
+			public Color _value_Color = new Color(0, 0, 0, 1);
+
+			[SerializeField]
+			public Texture _value_Texture = null;
+
+			public CustomMaterialProperty()
+			{
+
+			}
+
+			public void MakeEmpty()
+			{
+				_name = "<No Name>";
+				_propType = SHADER_PROP_TYPE.Float;
+				_value_Float = 0.0f;
+				_value_Int = 0;
+				_value_Vector = Vector4.zero;
+				_value_Color = new Color(0, 0, 0, 1);
+				_value_Texture = null;
+			}
+
+			public void CopyFromSrc(CustomMaterialProperty src)
+			{
+				_name = src._name;
+				_propType = src._propType;
+				_value_Float = src._value_Float;
+				_value_Int = src._value_Int;
+				_value_Vector = src._value_Vector;
+				_value_Color = src._value_Color;
+				_value_Texture = src._value_Texture;
+			}
+		}
+
+		[SerializeField]
+		public List<CustomMaterialProperty> _customMaterialProperties = new List<CustomMaterialProperty>();
+
 
 		// Init
 		//--------------------------------------------

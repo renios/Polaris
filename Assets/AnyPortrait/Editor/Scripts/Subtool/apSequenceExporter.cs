@@ -1152,7 +1152,7 @@ namespace AnyPortrait
 			}
 
 			_Sprite_CurAnimClip.LinkEditor(_editor._portrait);
-			_Sprite_CurAnimClip.RefreshTimelines();
+			_Sprite_CurAnimClip.RefreshTimelines(null);//모든 타임라인 Refresh
 			_Sprite_CurAnimClip.SetFrame_Editor(_Sprite_CurAnimClip.StartFrame);
 			_Sprite_CurAnimClip.Pause_Editor();
 			_Sprite_CurAnimClip._isSelectedInEditor = true;
@@ -1290,7 +1290,7 @@ namespace AnyPortrait
 					}
 
 					_Sprite_CurAnimClip.LinkEditor(_editor._portrait);
-					_Sprite_CurAnimClip.RefreshTimelines();
+					_Sprite_CurAnimClip.RefreshTimelines(null);
 					_Sprite_CurAnimClip.SetFrame_Editor(_Sprite_CurAnimClip.StartFrame);
 					_Sprite_CurAnimClip.Pause_Editor();
 					_Sprite_CurAnimClip._isSelectedInEditor = true;
@@ -1920,7 +1920,8 @@ namespace AnyPortrait
 				sw.WriteLine("\t]");
 				sw.WriteLine("}");
 
-				
+				sw.Flush();
+
 				sw.Close();
 				fs.Close();
 				sw = null;
@@ -2037,7 +2038,7 @@ namespace AnyPortrait
 				}
 				sw.WriteLine("=========================================================================");
 				
-
+				sw.Flush();
 				
 				sw.Close();
 				fs.Close();

@@ -3357,5 +3357,179 @@ namespace AnyPortrait
 		{
 			UnityEditorInternal.AssetStore.Open("content/111584");
 		}
+
+
+
+		// 절대 경로 <-> 상대 경로 (Asset에 대하여)
+		//-------------------------------------------------------------------------------------------
+		public static string GetProjectAssetPath()
+		{
+			return Application.dataPath;
+		}
+
+		
+
+		public enum PATH_INFO_TYPE
+		{
+			//유효하지 않다
+			//절대 경로이며 Asset 폴더 밖에 있다.
+			//절대 경로이며 Asset 폴더 안에 있다.
+			//상대 경로이며 Asset 폴더 밖에 있다.
+			//상대 경로이며 Asset 폴더 안에 있다.
+			NotValid,
+			Absolute_OutAssetFolder,
+			Absolute_InAssetFolder,
+			Relative_OutAssetFolder,
+			Relative_InAssetFolder,
+
+		}
+		public static PATH_INFO_TYPE GetPathInfo(string path)
+		{
+			if(string.IsNullOrEmpty(path))
+			{
+				return PATH_INFO_TYPE.NotValid;
+			}
+
+			path = path.Replace("\\", "/");
+			//Debug.Log("GetPathInfo : " + path);
+
+			//1. path가 Relative인지 확인
+			System.IO.DirectoryInfo di_AssetFolder = new System.IO.DirectoryInfo(Application.dataPath);
+
+			System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(path);
+
+			//System.Uri uri_target = new Uri(path);
+			
+			
+			//Debug.Log("Asset Path : " + di_AssetFolder.FullName);
+			//Debug.Log("Target Path : " + di.FullName);
+
+			if(di.Exists && !path.StartsWith("Assets"))
+			{
+				//유효한 경로이다 >> 절대 경로이다.
+				//Asset 폴더 안쪽에 있는지 확인
+				if(di.FullName.StartsWith(di_AssetFolder.FullName))
+				{
+					//Asset Folder의 경로로 부터 시작한다면
+					//>> 절대 경로 + Asset 폴더 안쪽
+					//Debug.Log(">>> 절대 경로 + Asset 폴더 안쪽");
+					return PATH_INFO_TYPE.Absolute_InAssetFolder;
+				}
+				else
+				{
+					//>> 절대 경로 + Asset 폴더 바깥쪽
+					//Debug.Log(">>> 절대 경로 + Asset 폴더 바깥쪽");
+					return PATH_INFO_TYPE.Absolute_OutAssetFolder;
+				}
+				
+			}
+			else
+			{
+				//유효하지 않다면 상대 경로일 수 있다.
+				//string checkPath = Application.dataPath + "/" + path;
+				//Debug.Log("Check Path : " + checkPath);
+				string projectPath = Application.dataPath;
+				projectPath = projectPath.Substring(0, projectPath.Length - 6);//"Assets 글자를 뒤에서 뺀다"
+
+				string fullPath = projectPath + path;
+				//Debug.Log("FullPath : " + fullPath);
+				//다시 체크
+				di = new System.IO.DirectoryInfo(fullPath);
+				if(di.Exists)
+				{
+					//Asset 폴더를 기준으로 하는 상대 경로가 맞다.
+					//안쪽에 있는지 확인
+					bool isInAssetFoler = IsInFolder(di_AssetFolder.FullName, di.FullName);
+					if(isInAssetFoler)
+					{
+						//>> 상대 경로 + Asset 폴더 안쪽
+						//Debug.Log(">>> 상대 경로 + Asset 폴더 안쪽");
+						return PATH_INFO_TYPE.Relative_InAssetFolder;
+					}
+					else
+					{
+						//>> 상대 경로 + Asset 폴더 바깥쪽
+						//Debug.Log(">>> 상대 경로 + Asset 폴더 바깥쪽");
+						return PATH_INFO_TYPE.Relative_OutAssetFolder;
+					}
+				}
+				else
+				{
+					//그냥 잘못된 경로네요..
+					
+				}
+
+			}
+			
+			//Debug.Log(">>> 잘못된 경로");
+			return PATH_INFO_TYPE.NotValid;
+		}
+
+		private static bool IsInFolder(string parentPath, string childPath)
+		{
+			System.IO.DirectoryInfo di_Parent = new System.IO.DirectoryInfo(parentPath);
+			System.IO.DirectoryInfo di_Child = new System.IO.DirectoryInfo(childPath);
+			if(!di_Parent.Exists || !di_Child.Exists)
+			{
+				return false;
+			}
+
+			string parentPath_Lower = di_Parent.FullName.ToLower();
+			string rootPath_Lower = di_Child.Root.FullName.ToLower();
+			System.IO.DirectoryInfo di_Cur = new System.IO.DirectoryInfo(childPath);
+
+			string curPath_Lower = "";
+			while (true)
+			{
+				curPath_Lower = di_Cur.FullName.ToLower();
+				//Root에 도달했으면 종료
+				if(curPath_Lower.Equals(rootPath_Lower))
+				{
+					break;
+				}
+
+				if (curPath_Lower.Equals(parentPath_Lower))
+				{
+					//Parent Path가 나왔다.
+					return true;
+				}
+
+
+
+				try
+				{
+					//위 폴더로 이동해보자
+					di_Cur = di_Cur.Parent;
+					if(!di_Cur.Exists)
+					{
+						break;
+					}
+				}
+				catch(Exception)
+				{
+					//에러 발생
+					break;
+				}
+			}
+
+			return false;
+		}
+
+
+		public static string AbsolutePath2RelativePath(string absPath)
+		{
+			Uri uri_Asset = new Uri(Application.dataPath);
+			Uri uri_AbsPath = new Uri(absPath);
+
+			Uri uri_Relative = uri_Asset.MakeRelativeUri(uri_AbsPath);
+			string resultPath = uri_Relative.ToString();
+
+			//Debug.LogError("Abs > Rel : " + resultPath);
+			resultPath = resultPath.Replace("\\", "/");
+
+			//Debug.LogError(">>> " + resultPath);
+			return resultPath;
+		}
+		//-------------------------------------------------------------------------------------------
 	}
 }

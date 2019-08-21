@@ -64,17 +64,39 @@ namespace AnyPortrait
 		[SerializeField, NonBackupField]//백업하진 않는다. 다시 Bake하세염
 		public apOptSortedRenderBuffer _sortedRenderBuffer = new apOptSortedRenderBuffer();
 
+		//추가 2.25 : Flipped 체크
+		private bool _isFlipped_X = false;
+		private bool _isFlipped_Y = false;
+		//private bool _isFlipped_X_Prev = false;
+		//private bool _isFlipped_Y_Prev = false;
+		//private bool _isFlipped = false;
+
+		private bool _isFirstFlippedCheck = true;
+		//private Vector3 _defaultScale = Vector3.one;
+
 
 		// Init
 		//------------------------------------------------
 		void Awake()
 		{
 			_transform = transform;
+
+			_isFlipped_X = false;
+			_isFlipped_Y = false;
+			//_isFlipped_X_Prev = false;
+			//_isFlipped_Y_Prev = false;
+			//_isFlipped = false;
+
+			_isFirstFlippedCheck = true;
 		}
 
 		void Start()
 		{
 			this.enabled = false;//<<업데이트를 하진 않습니다.
+
+			_isFirstFlippedCheck = true;
+
+			
 		}
 
 		// Update
@@ -147,6 +169,22 @@ namespace AnyPortrait
 			}
 		}
 
+		//추가 19.5.28 : Async용으로 다시 작성된 함수
+		public IEnumerator LinkAsync(apPortrait portrait, apAsyncTimer asyncTimer)
+		{
+			yield return _sortedRenderBuffer.LinkAsync(portrait, this, asyncTimer);
+
+			for (int i = 0; i < _optTransforms.Count; i++)
+			{
+				_optTransforms[i].SetExtraDepthChangedEvent(OnExtraDepthChanged);
+			}
+
+			if(asyncTimer.IsYield())
+			{
+				yield return asyncTimer.WaitAndRestart();
+			}
+		}
+
 		// Functions
 		//------------------------------------------------
 		//public void RemoveAllCalculateResultParams()
@@ -194,6 +232,11 @@ namespace AnyPortrait
 			{
 				return;
 			}
+
+			//추가 : Flipped 체크
+			CheckFlippedTransform();
+			
+
 
 			//---------------------------------------------------------
 //#if UNITY_EDITOR
@@ -396,7 +439,49 @@ namespace AnyPortrait
 			_sortedRenderBuffer.OnExtraDepthChanged(optTransform, deltaDepth);
 		}
 
+
+		// 추가 2.25 : Flipped 관련 처리
+		//-------------------------------------------------------------
+		private void CheckFlippedTransform()
+		{
+			if(_isFirstFlippedCheck)
+			{
+				_transform = transform;
+				//_defaultScale = _transform.localScale;
+
+				//_isFlipped_X_Prev = _isFlipped_X;
+				//_isFlipped_Y_Prev = _isFlipped_Y;
+			}
+
+			_isFlipped_X = _portrait._transform.lossyScale.x < 0.0f;
+			_isFlipped_Y = _portrait._transform.lossyScale.y < 0.0f;
+
+			//Debug.Log("Check Flipped Transform : " + _portrait._transform.lossyScale);
+
+			//일단 이부분 미적용
+			//if (_isFlipped_X_Prev != _isFlipped_X ||
+			//	_isFlipped_Y_Prev != _isFlipped_Y ||
+			//	_isFirstFlippedCheck)
+			//{
+			//	_transform.localScale = new Vector3(
+			//		(_isFlipped_X ? -_defaultScale.x : _defaultScale.x),
+			//		(_isFlipped_Y ? -_defaultScale.y : _defaultScale.y),
+			//		_defaultScale.z
+			//		);
+
+			//	_isFlipped_X_Prev = _isFlipped_X;
+			//	_isFlipped_Y_Prev = _isFlipped_Y;
+
+			//	_rootOptTransform.SetRootFlipped(_isFlipped_X, _isFlipped_Y);
+
+			//	//Debug.LogWarning("Flip Changed");
+			//}
+
+			_isFirstFlippedCheck = false;
+		}
 		
+		public bool IsFlippedX { get { return _isFlipped_X; } }
+		public bool IsFlippedY { get { return _isFlipped_Y; } }
 
 
 		// Get / Set

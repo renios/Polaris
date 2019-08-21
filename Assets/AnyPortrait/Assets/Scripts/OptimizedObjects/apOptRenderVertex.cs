@@ -76,19 +76,26 @@ namespace AnyPortrait
 
 		//3. [TF+Cal] 중첩된 Mesh/MeshGroup Transform
 		public apMatrix3x3 _matrix_MeshTransform = apMatrix3x3.identity;
+		
 
 		//4. [Cal] Vert World - Blended
 		public apMatrix3x3 _matrix_Cal_VertWorld = apMatrix3x3.identity;
 
 		//private Vector2 _cal_VertWorld = Vector2.zero;
 		
-		//추가 9.20
 		//5. [TF] Mesh의 Perspective -> Ortho를 위한 변환 매트릭스
 		[NonSerialized]
 		public apMatrix3x3 _matrix_MeshOrthoCorrection = apMatrix3x3.identity;
 
 		[NonSerialized]
 		public bool _isMeshOrthoCorrection = false;
+
+		//추가 2.25
+		//6. [Flip] Flip Multiply 값
+		[NonSerialized]
+		private float _flipWeight_X = 1.0f;
+		[NonSerialized]
+		private float _flipWeight_Y = 1.0f;
 
 		// 계산 완료
 		public apMatrix3x3 _matrix_ToWorld = apMatrix3x3.identity;
@@ -103,6 +110,8 @@ namespace AnyPortrait
 		private Vector2 _cal_posLocalUpdated2 = Vector2.zero;
 
 		//TODO : 물리 관련 지연 변수 추가 필요
+
+
 
 
 		// Init
@@ -135,6 +144,10 @@ namespace AnyPortrait
 			//_weight_Rigging = 0.0f;
 			_matrix_Rigging = apMatrix3x3.identity;
 
+			//추가 : 2.25 
+			_flipWeight_X = 1.0f;
+			_flipWeight_Y = 1.0f;
+
 			_matrix_MeshOrthoCorrection = apMatrix3x3.identity;
 			_isMeshOrthoCorrection = false;
 		}
@@ -161,6 +174,10 @@ namespace AnyPortrait
 			_vertPos3_LocalUpdated.x = _pos_Local.x;
 			_vertPos3_LocalUpdated.y = _pos_Local.y;
 			_vertPos3_LocalUpdated.z = 0;
+
+			//추가 : 2.25 
+			_flipWeight_X = 1.0f;
+			_flipWeight_Y = 1.0f;
 
 			//_pos_Rigging = Vector2.zero;
 			//_weight_Rigging = 0.0f;
@@ -194,6 +211,8 @@ namespace AnyPortrait
 			_matrix_MeshTransform = matrix_meshTransform;
 		}
 
+		
+
 		public void SetMatrix_4_Calculate_VertWorld(Vector2 deltaPos)
 		{
 			_matrix_Cal_VertWorld = apMatrix3x3.TRS(deltaPos, 0, Vector2.one);
@@ -205,6 +224,13 @@ namespace AnyPortrait
 		{
 			_matrix_MeshOrthoCorrection = matrix_orthoCorrection;
 			_isMeshOrthoCorrection = true;
+		}
+
+		public void SetMatrix_6_FlipWeight(float flipWeightX, float flipWeightY)
+		{
+			//추가 : 2.25 
+			_flipWeight_X = flipWeightX;
+			_flipWeight_Y = flipWeightY;
 		}
 
 		// Calculate
@@ -257,6 +283,11 @@ namespace AnyPortrait
 			_matrix_ToWorld._m10 = (_matrix_MeshTransform._m10 * _matrix_Rigging._m00) + (_matrix_MeshTransform._m11 * _matrix_Rigging._m10);
 			_matrix_ToWorld._m11 = (_matrix_MeshTransform._m10 * _matrix_Rigging._m01) + (_matrix_MeshTransform._m11 * _matrix_Rigging._m11);
 
+			////추가 2.25 : Flip
+			//_matrix_ToWorld._m00 *= _flipWeight_X;
+			//_matrix_ToWorld._m11 *= _flipWeight_Y;
+			
+
 			//2.
 			//x=02, y=12
 			// X : MR00(Lx+Px) + MR01(Ly+Py) + M00Rx + M01Ry + Wx + Mx
@@ -279,6 +310,8 @@ namespace AnyPortrait
 			_matrix_ToWorld._m21 = 0;
 			_matrix_ToWorld._m22 = 1;
 
+			
+
 			//_matrix_ToVert = _matrix_ToWorld.inverse;
 
 			//이전 식
@@ -291,6 +324,10 @@ namespace AnyPortrait
 
 			//리깅 변경 후 코드
 			_vertPos_World = _matrix_ToWorld.MultiplyPoint(_pos_Local);
+
+			//추가 2.26 : Flip
+			_vertPos_World.x *= _flipWeight_X;
+			_vertPos_World.y *= _flipWeight_Y;
 
 			//_vertPos_World.x = _vertPos3_World.x;
 			//_vertPos_World.y = _vertPos3_World.y;

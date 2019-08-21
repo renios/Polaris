@@ -142,7 +142,16 @@ namespace AnyPortrait
 				{
 					_vertexRequest = new apOptVertexRequest(_isVertexLocalMorph ? apOptVertexRequest.REQUEST_TYPE.VertLocal :  apOptVertexRequest.REQUEST_TYPE.Rigging);
 				}
-				_vertexRequest.AddModMesh(paramKeyValue._modifiedMesh);
+				//변경 19.5.24 : ModifiedMeshSet을 이용할지 여부
+				if(paramKeyValue._modifiedMesh != null)
+				{
+					_vertexRequest.AddModMesh(paramKeyValue._modifiedMesh);
+				}
+				else if(paramKeyValue._modifiedMeshSet != null)
+				{
+					_vertexRequest.AddModMeshSet(paramKeyValue._modifiedMeshSet);
+				}
+				
 			}
 		}
 

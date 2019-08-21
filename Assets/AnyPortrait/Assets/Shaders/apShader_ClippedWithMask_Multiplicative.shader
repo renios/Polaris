@@ -21,15 +21,16 @@ Shader "AnyPortrait/Transparent/Clipped With Mask (2X) Multiplicative"
 		_MaskTex("Mask Texture 1 (A)", 2D) = "white" {}					// Mask Texture for clipping Rendering (controlled by AnyPortrait)
 		_MaskScreenSpaceOffset("Mask Screen Space Offset (XY_Scale)", Vector) = (0, 0, 0, 1)		// Mask Texture's Transform Offset (controlled by AnyPortrait)
 	}
+
 	SubShader
 	{
-		Tags{ "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane"}
+		Tags{ "RenderType" = "Transparent" "Queue" = "Transparent" "PreviewType" = "Plane" }
 		//Blend SrcAlpha OneMinusSrcAlpha
 		Blend DstColor SrcColor//2X Multiply
 		LOD 200
 
 		CGPROGRAM
-		#pragma surface surf SimpleColor//AlphaBlend가 아닌 경우
+		#pragma surface surf SimpleColor finalcolor:alphaCorrection noforwardadd //AlphaBlend가 아닌 경우
 
 		// Use shader model 3.0 target, to get nicer looking lighting
 		#pragma target 3.0
@@ -41,6 +42,8 @@ Shader "AnyPortrait/Transparent/Clipped With Mask (2X) Multiplicative"
 			c.a = s.Alpha;
 			return c;
 		}
+
+		
 
 		half4 _Color;
 		sampler2D _MainTex;
@@ -62,7 +65,7 @@ Shader "AnyPortrait/Transparent/Clipped With Mask (2X) Multiplicative"
 
 			float2 screenUV = IN.screenPos.xy / max(IN.screenPos.w, 0.0001f);
 			//float2 screenUVNoEdit = screenUV;
-			
+
 			screenUV -= float2(0.5f, 0.5f);
 
 			screenUV.x *= _MaskScreenSpaceOffset.z;
@@ -71,7 +74,7 @@ Shader "AnyPortrait/Transparent/Clipped With Mask (2X) Multiplicative"
 			screenUV.x += _MaskScreenSpaceOffset.x * _MaskScreenSpaceOffset.z;
 			screenUV.y += _MaskScreenSpaceOffset.y * _MaskScreenSpaceOffset.w;
 
-			
+
 			screenUV += float2(0.5f, 0.5f);
 
 			float mask = tex2D(_MaskTex, screenUV).r;
@@ -86,8 +89,18 @@ Shader "AnyPortrait/Transparent/Clipped With Mask (2X) Multiplicative"
 			//o.Albedo = c.rgb;
 
 			//Multiply 식
-			o.Albedo = c.rgb * (o.Alpha) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - o.Alpha);
+			//o.Albedo = c.rgb * (o.Alpha) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - o.Alpha);
+			o.Albedo = c.rgb;
+		}
+
+		void alphaCorrection(Input IN, SurfaceOutput o, inout fixed4 color)
+		{
+			color.rgb = color.rgb * (color.a) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - color.a);
+			color.a = 1.0f;
 		}
 		ENDCG
+
+		
 	}
+
 }

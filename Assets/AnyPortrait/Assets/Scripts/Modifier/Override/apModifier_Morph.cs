@@ -149,6 +149,10 @@ namespace AnyPortrait
 
 		public override bool IsUseParamSetWeight { get { return true; } }//ParamSet 자체의 OverlapWeight를 사용한다.
 
+		//추가
+		public override bool IsPhysics { get { return false; } }
+		public override bool IsVolume { get { return false; } }
+
 		//[NonSerialized]
 		//private int _prevOutputParams = -1;
 

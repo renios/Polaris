@@ -42,10 +42,23 @@ namespace AnyPortrait
 			public apOptModifiedMesh _modMesh = null;
 			public float _weight = 0.0f;
 
+			//추가 19.5.24 : ModMeshSet의 Vertex를 이용하는 경우
+			public apOptModifiedMesh_Vertex _modMeshSet_Vertex = null;
+
 			public ModWeightPair(apOptModifiedMesh modMesh)
 			{
 				_isCalculated = false;
 				_modMesh = modMesh;
+				_modMeshSet_Vertex = null;
+				_weight = 0.0f;
+			}
+
+			//추가 : ModMeshSet을 이용한다.
+			public ModWeightPair(apOptModifiedMesh_Vertex modMeshSet_Vertex)
+			{
+				_isCalculated = false;
+				_modMesh = null;
+				_modMeshSet_Vertex = modMeshSet_Vertex;
 				_weight = 0.0f;
 			}
 
@@ -132,6 +145,35 @@ namespace AnyPortrait
 				_nRigTable = _rigTable.Length;
 				
 			}
+
+			//추가 : ModMeshSet으로 RigWeightTable을 만드는 기능도 추가
+			public VertRigWeightTable(int vertIndex, apOptModifiedMeshSet modMeshSet, apOptModifiedMesh_VertexRig modMeshSet_Rigging)
+			{
+				apOptModifiedMesh_VertexRig.VertexRig.WeightPair[] weightPairs = modMeshSet_Rigging._vertRigs[vertIndex]._weightPairs;
+				
+				_rigTable = new RigBoneWeightPair[weightPairs.Length];
+
+				//float totalWeight = 0.0f;
+				_totalRiggingWeight = 0.0f;
+				for (int i = 0; i < weightPairs.Length; i++)
+				{
+					_rigTable[i] = new RigBoneWeightPair(modMeshSet._targetTransform, weightPairs[i]._bone, weightPairs[i]._weight);
+					_totalRiggingWeight += weightPairs[i]._weight;
+				}
+				//Debug.Log("VertRigWeightTable : " + totalWeight);
+
+				//RiggingMatrix를 위해서는 무조건 Normalize를 해야한다.
+				//주의 : _totalRiggingWeight이 값은 1이 아닌 원래의 Weight 합을 유지해야한다. 보간시 필요
+				if (_totalRiggingWeight > 0.0f)
+				{
+					for (int i = 0; i < _rigTable.Length; i++)
+					{
+						_rigTable[i]._weight /= _totalRiggingWeight;
+					}
+				}
+				_nRigTable = _rigTable.Length;
+				
+			}
 		}
 
 		//각 Vertex마다 Rig 정보를 넣자
@@ -194,6 +236,36 @@ namespace AnyPortrait
 				{
 					_rigBoneWeightTables[i] = new VertRigWeightTable(i, modMesh);
 					//_totalRiggingWeight += _rigBoneWeightTables[i]._totalRiggingWeight;//<<추가 RiggingWeight를 계산합시다.
+				}
+			}
+		}
+
+
+
+		public void AddModMeshSet(apOptModifiedMeshSet modMeshSet)
+		{
+			if (_requestType == REQUEST_TYPE.VertLocal)
+			{	
+				_modWeightPairs.Add(new ModWeightPair(modMeshSet.SubModMesh_Vertex));
+				_nModWeightPairs = _modWeightPairs.Count;
+			}
+			else if(_requestType == REQUEST_TYPE.Rigging)
+			{
+				apOptModifiedMesh_VertexRig modMesh_Rigging = modMeshSet.SubModMesh_Rigging;
+				if(_rigBoneWeightTables != null)
+				{
+					//??
+					//Rigging은 Static 타입이어서 ModMesh가 하나만 생성된다.
+					Debug.LogError("Overwritten Mod Mesh To Rigging");
+					return;
+				}
+
+				//_totalRiggingWeight = 0.0f;
+				_rigBoneWeightTables = new VertRigWeightTable[modMesh_Rigging._vertRigs.Length];
+
+				for (int i = 0; i < modMesh_Rigging._vertRigs.Length; i++)
+				{
+					_rigBoneWeightTables[i] = new VertRigWeightTable(i, modMeshSet, modMesh_Rigging);
 				}
 			}
 		}

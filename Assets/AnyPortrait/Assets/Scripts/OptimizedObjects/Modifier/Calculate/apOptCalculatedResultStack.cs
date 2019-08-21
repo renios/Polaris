@@ -100,6 +100,10 @@ namespace AnyPortrait
 		private bool _isAnyExtra = false;//추가 12.5 : ExtraOption 결과
 		
 		
+		//추가 19.5.25 : ModMeshSet을 사용하면서 추가된 변수들
+		private bool _isUseModMeshSet = false;
+		private delegate Vector2 FUNC_GET_DEFERRED_LOCAL_POS(int vertexIndex);
+		private FUNC_GET_DEFERRED_LOCAL_POS _funcGetDeferredLocalPos = null;
 
 
 		//private Color _color_Default = new Color(0.5f, 0.5f, 0.5f, 1.0f);
@@ -238,6 +242,18 @@ namespace AnyPortrait
 			_parentOptTransform = parentOptTransform;
 			_targetOptMesh = _parentOptTransform._childMesh;
 
+			//추가 19.5.24 : ModMeshSet에 따라서 
+			_isUseModMeshSet = parentOptTransform._isUseModMeshSet;
+			if(_isUseModMeshSet)
+			{
+				_funcGetDeferredLocalPos = GetDeferredLocalPos_UseModMeshSet;//새로운 버전
+			}
+			else
+			{
+				_funcGetDeferredLocalPos = GetDeferredLocalPos_Prev;//이전 버전
+			}
+		
+
 		}
 
 		// Functions
@@ -333,18 +349,44 @@ namespace AnyPortrait
 					
 					bool isExtraEnabledParam = false;
 					apOptCalculatedResultParam.OptParamKeyValueSet curParamKeyValue = null;
+					
 					for (int i = 0; i < resultParam._paramKeyValues.Count; i++)
 					{
 						curParamKeyValue = resultParam._paramKeyValues[i];
 						
-						if(curParamKeyValue._modifiedMesh._isExtraValueEnabled
-							&&
-							(curParamKeyValue._modifiedMesh._extraValue._isDepthChanged || curParamKeyValue._modifiedMesh._extraValue._isTextureChanged))
+						if(curParamKeyValue._modifiedMesh == null
+							&& curParamKeyValue._modifiedMeshSet == null//<<19.5.24 추가
+							)
 						{
-							//하나라도 Extra Option이 켜진 ParamKeyValueSet이 있다면
-							//이 ResultParam은 ExtraOption 계산에 참조되어야 한다.
-							isExtraEnabledParam = true;
-							break;
+							continue;
+						}
+
+
+						if (curParamKeyValue._modifiedMesh != null)
+						{
+							if (curParamKeyValue._modifiedMesh._isExtraValueEnabled
+								&&
+								(curParamKeyValue._modifiedMesh._extraValue._isDepthChanged || curParamKeyValue._modifiedMesh._extraValue._isTextureChanged))
+							{
+								//하나라도 Extra Option이 켜진 ParamKeyValueSet이 있다면
+								//이 ResultParam은 ExtraOption 계산에 참조되어야 한다.
+								isExtraEnabledParam = true;
+								break;
+							}
+						}
+						else if(curParamKeyValue._modifiedMeshSet != null)
+						{
+							//추가 19.5.24 ; ModMeshSet을 사용하여 검사하는 경우
+							apOptModifiedMesh_Extra subModMesh_Extra = curParamKeyValue._modifiedMeshSet.SubModMesh_Extra;
+							if(subModMesh_Extra != null && 
+								(subModMesh_Extra._extraValue._isDepthChanged || subModMesh_Extra._extraValue._isTextureChanged)
+								)
+							{
+								//하나라도 Extra Option이 켜진 ParamKeyValueSet이 있다면
+								//이 ResultParam은 ExtraOption 계산에 참조되어야 한다.
+								isExtraEnabledParam = true;
+								break;
+							}
 						}
 					}
 					if(isExtraEnabledParam)
@@ -418,15 +460,33 @@ namespace AnyPortrait
 						{
 							curParamKeyValue = resultParam._paramKeyValues[i];
 
-							if (curParamKeyValue._modifiedMesh._isExtraValueEnabled
-								&&
-								(curParamKeyValue._modifiedMesh._extraValue._isDepthChanged || curParamKeyValue._modifiedMesh._extraValue._isTextureChanged))
+							if (curParamKeyValue._modifiedMesh != null)
 							{
-								//하나라도 Extra Option이 켜진 ParamKeyValueSet이 있다면
-								//이 ResultParam은 ExtraOption 계산에 참조되어야 한다.
-								isExtraEnabledParam = true;
-								break;
+								if (curParamKeyValue._modifiedMesh._isExtraValueEnabled
+									&&
+									(curParamKeyValue._modifiedMesh._extraValue._isDepthChanged || curParamKeyValue._modifiedMesh._extraValue._isTextureChanged))
+								{
+									//하나라도 Extra Option이 켜진 ParamKeyValueSet이 있다면
+									//이 ResultParam은 ExtraOption 계산에 참조되어야 한다.
+									isExtraEnabledParam = true;
+									break;
+								}
 							}
+							else if(curParamKeyValue._modifiedMeshSet != null)
+							{
+								//추가 19.5.24 : ModMeshSet에 값이 저장되어 있다면
+								apOptModifiedMesh_Extra subModMesh_Extra = curParamKeyValue._modifiedMeshSet.SubModMesh_Extra;
+								if(subModMesh_Extra != null && 
+									(subModMesh_Extra._extraValue._isDepthChanged || subModMesh_Extra._extraValue._isTextureChanged)
+									)
+								{
+									//하나라도 Extra Option이 켜진 ParamKeyValueSet이 있다면
+									//이 ResultParam은 ExtraOption 계산에 참조되어야 한다.
+									isExtraEnabledParam = true;
+									break;
+								}
+							}
+							
 						}
 						if (isExtraEnabledParam)
 						{
@@ -900,15 +960,9 @@ namespace AnyPortrait
 					// Blend 방식에 맞게 Matrix를 만들자 하자
 					if (_cal_resultParam.ModifierBlendMethod == apModifierBase.BLEND_METHOD.Interpolation || _iCalculatedParam == 0)
 					{
-						//Debug.Log("Cal TF [ITP] : " + _cal_resultParam._result_Matrix.Pos3 + " (Weight : " + _cal_curWeight + ")");
-
 						BlendMatrix_ITP(_result_MeshTransform, _cal_resultParam._result_Matrix, _cal_curWeight);
 
-						//if (_cal_resultParam._result_Matrix.Scale2.magnitude < 0.5f || _cal_curWeight < 0.5f)
-						//{
-						//	Debug.Log("Cal TF [ITP] : " + _cal_resultParam._result_Matrix.Scale2 + " > " + _result_MeshTransform.Scale2 + " (Weight : " + _cal_curWeight + ")");
-						//}
-
+						
 						_cal_prevWeight += _cal_curWeight;
 
 					}
@@ -921,11 +975,7 @@ namespace AnyPortrait
 				}
 
 				_result_MeshTransform.MakeMatrix();
-
-				if (_result_MeshTransform._scale.magnitude < 0.5f)
-				{
-					Debug.Log("Cal TF [ITP] : " + _result_MeshTransform._scale + " (Total Weight : " + _cal_prevWeight + ")");
-				}
+				
 
 //#if UNITY_EDITOR
 //				Profiler.EndSample();
@@ -1306,36 +1356,42 @@ namespace AnyPortrait
 			return prevResult + nextResult * nextWeight;
 		}
 
-		//private void BlendMatrix_ITP(apMatrix prevResult, apMatrix nextResult, float prevWeight, float nextWeight)
-		private void BlendMatrix_ITP(apMatrix prevResult, apMatrix nextResult, float nextWeight)
+		//이전 : apMatrix를 사용하는 경우
+		//private void BlendMatrix_ITP(apMatrix prevResult, apMatrix nextResult, float nextWeight)
+		//{
+		//	prevResult.LerpMartix(nextResult, nextWeight);
+		//}
+
+		//private void BlendMatrix_Add(apMatrix prevResult, apMatrix nextResult, float nextWeight)
+		//{
+		//	prevResult._pos += nextResult._pos * nextWeight;
+		//	prevResult._angleDeg += nextResult._angleDeg * nextWeight;
+			
+		//	prevResult._scale.x = (prevResult._scale.x * (1.0f - nextWeight)) + (prevResult._scale.x * nextResult._scale.x * nextWeight);
+		//	prevResult._scale.y = (prevResult._scale.y * (1.0f - nextWeight)) + (prevResult._scale.y * nextResult._scale.y * nextWeight);
+			
+		//}
+
+		//이후 : apMatrixCal을 사용하는 경우
+		// 변경 3.26 : apMatrixCal을 이용하는 것으로 변경
+		private void BlendMatrix_ITP(apMatrix prevResult, apMatrixCal nextResult, float nextWeight)
 		{
-			//prevResult._pos = ((prevResult._pos * prevWeight) + (nextResult._pos * nextWeight)) / (prevWeight + nextWeight);
-			//prevResult._angleDeg = ((prevResult._angleDeg * prevWeight) + (nextResult._angleDeg * nextWeight)) / (prevWeight + nextWeight);
-			//prevResult._scale = ((prevResult._scale * prevWeight) + (nextResult._scale * nextWeight)) / (prevWeight + nextWeight);
+			if (nextWeight <= 0.0f)
+			{
+				return;
+			}
 
-			//float totalWeight = prevWeight + nextWeight;
-			//if(totalWeight <= 0.0f)
-			//{
-			//	return;
-			//}
-
-			//float totalWeight = 1.0f;
-
-			//prevResult.LerpMartix(nextResult, nextWeight / totalWeight);
-			prevResult.LerpMartix(nextResult, nextWeight);
+			prevResult.LerpMartixCal(nextResult, nextWeight / 1.0f);
 		}
 
-		private void BlendMatrix_Add(apMatrix prevResult, apMatrix nextResult, float nextWeight)
+		private void BlendMatrix_Add(apMatrix prevResult, apMatrixCal nextResult, float nextWeight)
 		{
 			prevResult._pos += nextResult._pos * nextWeight;
 			prevResult._angleDeg += nextResult._angleDeg * nextWeight;
-			//prevResult._scale += nextResult._scale * nextWeight;
-
-			prevResult._scale.x = (prevResult._scale.x * (1.0f - nextWeight)) + (prevResult._scale.x * nextResult._scale.x * nextWeight);
-			prevResult._scale.y = (prevResult._scale.y * (1.0f - nextWeight)) + (prevResult._scale.y * nextResult._scale.y * nextWeight);
-			//prevResult._scale.z = (prevResult._scale.z * (1.0f - nextWeight)) + (prevResult._scale.z * nextResult._scale.z * nextWeight);
+			
+			prevResult._scale.x = (prevResult._scale.x * (1.0f - nextWeight)) + (prevResult._scale.x * nextResult._calculatedScale.x * nextWeight);
+			prevResult._scale.y = (prevResult._scale.y * (1.0f - nextWeight)) + (prevResult._scale.y * nextResult._calculatedScale.y * nextWeight);
 		}
-
 
 
 		// Get / Set
@@ -1344,8 +1400,14 @@ namespace AnyPortrait
 		public bool IsVertexWorld { get { return _isAnyVertWorld; } }
 		public bool IsRigging { get { return _isAnyRigging; } }
 
-
+		//변경 19.5.25 : 대리자를 이용하여 적용
 		public Vector2 GetDeferredLocalPos(int vertexIndex)
+		{
+			return _funcGetDeferredLocalPos(vertexIndex);
+		}
+
+
+		private Vector2 GetDeferredLocalPos_Prev(int vertexIndex)
 		{
 			_tmpPos = Vector2.zero;
 
@@ -1374,6 +1436,49 @@ namespace AnyPortrait
 						}
 						//_tmpPos += _cal_vertRequestModWeightPair._modMesh._vertices[vertexIndex]._deltaPos * _cal_vertRequestModWeightPair._weight;
 						_tmpPos += _cal_vertRequestModWeightPair._modMesh._vertices[vertexIndex]._deltaPos * _cal_vertRequestModWeightPair._weight * _cal_vertRequest._totalWeight;//<<수정
+						
+					}
+				}
+				
+			}
+
+			return _tmpPos;
+		}
+
+
+
+		private Vector2 GetDeferredLocalPos_UseModMeshSet(int vertexIndex)
+		{
+			_tmpPos = Vector2.zero;
+
+			for (int iParam = 0; iParam < _resultParams_VertLocal.Count; iParam++)
+			{
+				_cal_resultParam = _resultParams_VertLocal[iParam];
+
+				
+				for (int iVR = 0; iVR < _cal_resultParam._result_VertLocalPairs.Count; iVR++)
+				{
+					_cal_vertRequest = _cal_resultParam._result_VertLocalPairs[iVR];
+
+					
+					if(!_cal_vertRequest._isCalculated ||_cal_vertRequest._totalWeight == 0.0f)
+					{
+						continue;
+					}
+
+					for (int iModPair = 0; iModPair < _cal_vertRequest._nModWeightPairs; iModPair++)
+					{
+						_cal_vertRequestModWeightPair = _cal_vertRequest._modWeightPairs[iModPair];
+						if(!_cal_vertRequestModWeightPair._isCalculated)
+						{
+							continue;
+							
+						}
+						//이전
+						//_tmpPos += _cal_vertRequestModWeightPair._modMesh._vertices[vertexIndex]._deltaPos * _cal_vertRequestModWeightPair._weight * _cal_vertRequest._totalWeight;//<<수정
+
+						//ModMeshSet을 이용하는 것으로 변경						
+						_tmpPos += _cal_vertRequestModWeightPair._modMeshSet_Vertex._vertDeltaPos[vertexIndex] * _cal_vertRequestModWeightPair._weight * _cal_vertRequest._totalWeight;//<<수정
 						
 					}
 				}

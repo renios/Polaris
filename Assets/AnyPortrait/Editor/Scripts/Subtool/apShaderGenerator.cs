@@ -265,6 +265,8 @@ namespace AnyPortrait
 					sw_Dst.WriteLine(strWriteLine);
 				}
 
+				sw_Dst.Flush();
+
 				sr_Src.Close();
 				fs_Src.Close();
 				sw_Dst.Close();

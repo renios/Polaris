@@ -18,6 +18,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
+#if UNITY_2017_1_OR_NEWER
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
+#endif
+
 using AnyPortrait;
 
 namespace AnyPortrait
@@ -180,11 +185,16 @@ namespace AnyPortrait
 		[SerializeField]
 		public int _FPS = 30;
 
-		[NonBackupField]
-		private float _timePerFrame = 1.0f / 30.0f;
+		//이전 : Important가 아닐 때의 타이머 > UpdateToken 방식으로 변경
+		//[NonBackupField]
+		//private float _timePerFrame = 1.0f / 30.0f;
 
-		[NonBackupField]
-		private float _tDelta = 0.0f;
+		//[NonBackupField]
+		//private float _tDelta = 0.0f;
+
+		//추가 2.28 : Important가 아닌 업데이트를 위한 토큰
+		[NonSerialized, NonBackupField]
+		private apOptUpdateChecker.UpdateToken _updateToken = null;
 
 		/// <summary>[Please do not use it]</summary>
 		[SerializeField, HideInInspector]
@@ -356,7 +366,44 @@ namespace AnyPortrait
 		[SerializeField]
 		public bool _meshReceiveShadow = false;
 
+
 		
+		//Unity 2017 이상 : Timeline 연동 : 별도의 함수 없이 바로 시작
+#if UNITY_2017_1_OR_NEWER
+		[Serializable]
+		public class TimelineTrackPreset
+		{
+			[SerializeField, NonBackupField]
+			public PlayableDirector _playableDirector;
+
+			[SerializeField, NonBackupField]
+			public string _trackName;
+
+			[SerializeField, NonBackupField]
+			public int _layer = 0;
+
+			[SerializeField, NonBackupField]
+			public apAnimPlayUnit.BLEND_METHOD _blendMethod = apAnimPlayUnit.BLEND_METHOD.Additive;
+		}
+		[SerializeField, NonBackupField]
+		public TimelineTrackPreset[] _timelineTrackSets;
+#endif
+
+
+		//추가 3.29 : 에디터의 Hierarchy에서 보여지는 순서에 대한 ID 리스트 클래스
+		[SerializeField, NonBackupField]
+		public apObjectOrders _objectOrders = new apObjectOrders();
+
+		//추가 19.5.26 : ModMeshSet을 사용한 "v1.1.7에 적용된용량 최적화 빌드가 되었는가"
+		[SerializeField, NonBackupField]
+		public bool _isSizeOptimizedV117 = false;
+
+		
+		//추가 19.6.2 : MaterialSet를 저장하자. Bake시 이용함.
+		[SerializeField]
+		public List<apMaterialSet> _materialSets = new List<apMaterialSet>();
+
+
 		// Init
 		//-----------------------------------------------------
 		void Awake()
@@ -368,10 +415,12 @@ namespace AnyPortrait
 					_FPS = 10;
 				}
 				//_isImportant = true;
-				_timePerFrame = 1.0f / (float)_FPS;
-				_tDelta = _timePerFrame * UnityEngine.Random.Range(0.0f, 1.0f);
-				//_updateKeyIndex = 0;
 
+				//이전 > UpdateToken으로 변경
+				//_timePerFrame = 1.0f / (float)_FPS;
+				//_tDelta = _timePerFrame * UnityEngine.Random.Range(0.0f, 1.0f);
+				
+				
 				if (_initStatus == INIT_STATUS.Ready)
 				{
 					//_initStatus = INIT_STATUS.Ready;
@@ -393,8 +442,10 @@ namespace AnyPortrait
 					_FPS = 10;
 				}
 				
-				_timePerFrame = 1.0f / (float)_FPS;
-				_tDelta = _timePerFrame * UnityEngine.Random.Range(0.0f, 1.0f);
+				//이전 > UpdateToken 방식으로 변경
+				//_timePerFrame = 1.0f / (float)_FPS;
+				//_tDelta = _timePerFrame * UnityEngine.Random.Range(0.0f, 1.0f);
+
 
 				if (_initStatus == INIT_STATUS.Ready)
 				{
@@ -444,6 +495,12 @@ namespace AnyPortrait
 					if (_curPlayingOptRootUnit == null)
 					{
 						return;
+					}
+
+					//추가 2.28 : 
+					if(!_isImportant)
+					{
+						_updateToken = apOptUpdateChecker.I.AddRequest(_updateToken, _FPS, Time.deltaTime);
 					}
 
 
@@ -536,9 +593,9 @@ namespace AnyPortrait
 				
 
 #region [핵심 코드 >>> Update에서 넘어온 코드]
-				_tDelta += Time.deltaTime;
+				//_tDelta += Time.deltaTime;//<<이전 방식 (Important가 아닌 경우)
 
-				#region [사용 : 1프레임 지연 없이 사용하는 경우. 단, 외부 처리에 대해서는 Request 방식으로 처리해야한다.]
+#region [사용 : 1프레임 지연 없이 사용하는 경우. 단, 외부 처리에 대해서는 Request 방식으로 처리해야한다.]
 				//힘 관련 업데이트
 				ForceManager.Update(Time.deltaTime);
 				
@@ -549,7 +606,7 @@ namespace AnyPortrait
 				//추가 : 애니메이션 업데이트가 끝났다면 ->
 				//다른 스크립트에서 요청한 ControlParam 수정 정보를 반영한다.
 				_controller.CompleteRequests();
-				#endregion
+#endregion
 
 
 				//if (_tDelta > _timePerFrame)
@@ -574,22 +631,31 @@ namespace AnyPortrait
 					}
 					else
 					{
-						if (_tDelta > _timePerFrame)
+						//이전 방식 : 랜덤값이 포함된 간헐적 업데이트
+						//if (_tDelta > _timePerFrame)
+						//{
+						//	//Important가 꺼진다면 프레임 FPS를 나누어서 처리한다.
+						//	_curPlayingOptRootUnit.UpdateTransforms(_timePerFrame);
+
+						//	_tDelta -= _timePerFrame;
+						//}
+						//else
+						//{
+						//	//추가 4.8
+						//	//만약 Important가 꺼진 상태에서 MaskMesh가 있다면
+						//	//Mask Mesh의 RenderTexture가 매 프레임 갱신 안될 수 있다.
+						//	//따라서 RenderTexture 만큼은 매 프레임 갱신해야한다.
+						//	_curPlayingOptRootUnit.UpdateTransformsOnlyMaskMesh();
+						//}
+
+						//새로운 방식 : 중앙에서 관리하는 토큰 업데이트
+						if (apOptUpdateChecker.I.GetUpdatable(_updateToken))
 						{
-							//원래는 이 코드
-							//_curPlayingOptRootUnit.UpdateTransforms(Time.deltaTime);//<
-
-							//Important가 꺼진다면 프레임 FPS를 나누어서 처리한다.
-							_curPlayingOptRootUnit.UpdateTransforms(_timePerFrame);
-
-							_tDelta -= _timePerFrame;
+							_curPlayingOptRootUnit.UpdateTransforms(_updateToken.ResultElapsedTime);
+							//_tDelta -= _timePerFrame;
 						}
 						else
 						{
-							//추가 4.8
-							//만약 Important가 꺼진 상태에서 MaskMesh가 있다면
-							//Mask Mesh의 RenderTexture가 매 프레임 갱신 안될 수 있다.
-							//따라서 RenderTexture 만큼은 매 프레임 갱신해야한다.
 							_curPlayingOptRootUnit.UpdateTransformsOnlyMaskMesh();
 						}
 					}
@@ -600,7 +666,7 @@ namespace AnyPortrait
 				}
 				
 
-				#endregion
+#endregion
 			}
 		}
 
@@ -652,6 +718,75 @@ namespace AnyPortrait
 #endif
 		}
 
+
+#if UNITY_2017_1_OR_NEWER
+		//추가 3.9 : 타임라인을 포함한 씬에서의 시뮬레이션을 위한 함수 (초기화와 업데이트)
+		/// <summary>
+		/// [Please do not use it]
+		/// </summary>
+		public void InitializeAsSimulating()
+		{
+			//추가) AnimPlayer를 추가했다.
+			_animPlayManager.LinkPortrait(this);
+		}
+#endif
+
+#if UNITY_2017_1_OR_NEWER
+		/// <summary>
+		/// [Please do not use it]
+		/// </summary>
+		/// <param name="deltaTime"></param>
+		public void UpdateForceAsSimulating(float deltaTime)
+		{
+			//강제로 업데이트를 한다.
+			//시뮬레이션을 위한 것이므로, 애니메이션이 포함된다.
+#if UNITY_EDITOR
+			try
+			{
+#endif
+				if (_initStatus == INIT_STATUS.Ready)
+				{
+					Initialize();
+				}
+
+				
+				if(_initStatus != INIT_STATUS.Completed)
+				{
+					//로딩이 끝나지 않았다면 처리를 하지 않는다.
+					return;
+				}
+
+				//물리 업데이트
+				ForceManager.Update(deltaTime);
+
+				//애니메이션 업데이트
+				_animPlayManager.Update(deltaTime);
+
+				if (_curPlayingOptRootUnit != null)
+				{
+					//추가 9.19 : Camera 체크
+					if(_billboardType != BILLBOARD_TYPE.None)
+					{
+						CheckCameraAndBillboard();
+					}
+
+					_curPlayingOptRootUnit.UpdateTransforms(0.0f);
+				}
+
+				//일정 프레임마다 업데이트를 한다.
+				//_optRootUnit.UpdateTransforms(_tDelta);
+				
+
+#if UNITY_EDITOR
+			}
+			catch (Exception ex)
+			{
+				Debug.LogError("Portrait Exception : " + ex.ToString());
+			}
+#endif
+		}
+#endif
+
 		// Event
 		//-----------------------------------------------------
 		
@@ -672,6 +807,7 @@ namespace AnyPortrait
 
 					for (int i = 0; i < _optMeshes.Count; i++)
 					{
+						_optMeshes[i].InitMesh(true);
 						_optMeshes[i].ResetMeshAndMaterialIfMissing();
 					}
 					UpdateForce();
@@ -899,6 +1035,11 @@ namespace AnyPortrait
 				return false;
 			}
 
+			if(_transform == null)
+			{
+				_transform = transform;
+			}
+
 			HideRootUnits();
 
 			_funcAyncLinkCompleted = null;
@@ -984,7 +1125,7 @@ namespace AnyPortrait
 
 
 
-							#region [미사용 코드] Editor와 달리 여기서는 Monobehaviour인 것도 있고, Bake에서 이미 1차적으로 연결을 완료했다.
+#region [미사용 코드] Editor와 달리 여기서는 Monobehaviour인 것도 있고, Bake에서 이미 1차적으로 연결을 완료했다.
 							//List<apOptModifiedMesh> meshData = paramSet._meshData;
 							//for (int iMesh = 0; iMesh < meshData.Count; iMesh++)
 							//{
@@ -1045,7 +1186,7 @@ namespace AnyPortrait
 
 							//List<apModifiedBone> boneData = paramSet._boneData;
 							////TODO : 본 연동 
-							#endregion
+#endregion
 						}
 					}
 				}
@@ -1104,12 +1245,11 @@ namespace AnyPortrait
 
 			//비동기 로딩 시작
 			_initStatus = INIT_STATUS.AsyncLoading;
-
-			//for (int i = 0; i < _optMeshes.Count; i++)
-			//{
-			//	_optMeshes[i].InstantiateMaterial(_optBatchedMaterial);//재질 Batch 정보를 넣고 초기화
-			//	_optMeshes[i].Hide();
-			//}
+			
+			if(_transform == null)
+			{
+				_transform = transform;
+			}
 
 			HideRootUnits();
 
@@ -1143,9 +1283,50 @@ namespace AnyPortrait
 			//	_optMeshes[i].Hide();
 			//}
 
+			if(_transform == null)
+			{
+				_transform = transform;
+			}
+
 			HideRootUnits();
 
 			StartCoroutine(LinkOptCoroutine());
+
+			return true;
+
+		}
+
+		/// <summary>
+		/// Initialize using coroutine. 
+		/// This function runs at low CPU usage by setting the "time interval at which Yield is called" by the user. 
+		/// However, the processing time may be very long.
+		/// </summary>
+		/// <param name="timePerYield">Time value for whether Yield is called every few milliseconds during initialization.(10ms ~ 1000ms)</param>
+		/// <param name="onAsyncLinkCompleted">Functions to receive callbacks when initialization is complete.</param>
+		/// <returns>It returns False if it is already initialized or in progress. If it is true, it means that the initialization starts normally.></returns>
+		public bool AsyncInitialize(int timePerYield, OnAsyncLinkCompleted onAsyncLinkCompleted = null)
+		{
+			if(_initStatus != INIT_STATUS.Ready)
+			{
+				//오잉 비동기 로딩중이거나 로딩이 끝났네염
+				return false;
+			}
+
+			//비동기 로딩 시작
+			_initStatus = INIT_STATUS.AsyncLoading;
+
+			apAsyncTimer asyncTimer = new apAsyncTimer(timePerYield);
+
+			_funcAyncLinkCompleted = onAsyncLinkCompleted;
+
+			if(_transform == null)
+			{
+				_transform = transform;
+			}
+
+			HideRootUnits();
+
+			StartCoroutine(LinkOptCoroutineWithAsyncTimer(asyncTimer));
 
 			return true;
 
@@ -1306,12 +1487,196 @@ namespace AnyPortrait
 
 		}
 
+
+		//추가 19.5.28 : AsyncTimer를 이용하여 LinkOpCoroutine를 개선한 버전.
+		//실제로 실행 시간 타이머가 동작한다.
+		private IEnumerator LinkOptCoroutineWithAsyncTimer(apAsyncTimer asyncTimer)
+		{
+
+			//랜덤하게 프레임을 쉬어주자
+			int nWaitRandom = UnityEngine.Random.Range(0, 5);
+			for (int i = 0; i < nWaitRandom; i++)
+			{
+				yield return new WaitForEndOfFrame();
+			}
+
+			//추가 12.7 : OptRootUnit도 Link를 해야한다.
+			for (int iOptRootUnit = 0; iOptRootUnit < _optRootUnitList.Count; iOptRootUnit++)
+			{
+				yield return _optRootUnitList[iOptRootUnit].LinkAsync(this, asyncTimer);
+			}
+
+			
+			//MeshGroup -> OptTransform을 돌면서 처리
+			for (int iOptTransform = 0; iOptTransform < _optTransforms.Count; iOptTransform++)
+			{
+				apOptTransform optTransform = _optTransforms[iOptTransform];
+				optTransform.ClearResultParams(false);
+			}
+
+			HideRootUnits();
+
+			//타이머에 의해서 Wait
+			if(asyncTimer.IsYield())
+			{
+				yield return asyncTimer.WaitAndRestart();
+			}
+			
+
+			//BatchedMat도 연결
+			_optBatchedMaterial.Link(this);
+
+
+			for (int i = 0; i < _optMeshes.Count; i++)
+			{
+				_optMeshes[i].InitMesh(true);
+				_optMeshes[i].InstantiateMaterial(_optBatchedMaterial);//재질 Batch 정보를 넣고 초기화
+				_optMeshes[i].Hide();//<<비동기에서는 바로 Hide
+
+				//타이머에 의해서 Wait
+				if(asyncTimer.IsYield())
+				{
+					yield return asyncTimer.WaitAndRestart();
+				}
+			}
+
+			
+			for (int iOptTransform = 0; iOptTransform < _optTransforms.Count; iOptTransform++)
+			{
+				apOptTransform optTransform = _optTransforms[iOptTransform];
+
+				List<apOptModifierUnitBase> modifiers = optTransform._modifierStack._modifiers;
+				for (int iMod = 0; iMod < modifiers.Count; iMod++)
+				{
+					apOptModifierUnitBase mod = modifiers[iMod];
+
+					//추가 : Portrait를 연결해준다.
+					mod.Link(this, optTransform);
+
+					//타이머에 의해서 Wait
+					if(asyncTimer.IsYield())
+					{
+						yield return asyncTimer.WaitAndRestart();
+					}
+
+					
+					List<apOptParamSetGroup> paramSetGroups = mod._paramSetGroupList;
+					for (int iPSGroup = 0; iPSGroup < paramSetGroups.Count; iPSGroup++)
+					{
+						apOptParamSetGroup paramSetGroup = paramSetGroups[iPSGroup];
+
+						//List<apModifierParamSet> paramSets = mod._paramSetList;
+						//1. Key를 세팅해주자
+						switch (paramSetGroup._syncTarget)
+						{
+							case apModifierParamSetGroup.SYNC_TARGET.Static:
+								break;
+
+							case apModifierParamSetGroup.SYNC_TARGET.Controller:
+								paramSetGroup._keyControlParam = GetControlParam(paramSetGroup._keyControlParamID);
+								break;
+
+							case apModifierParamSetGroup.SYNC_TARGET.KeyFrame:
+								break;
+						}
+
+
+						List<apOptParamSet> paramSets = paramSetGroup._paramSetList;
+
+						for (int iParamSet = 0; iParamSet < paramSets.Count; iParamSet++)
+						{
+							apOptParamSet paramSet = paramSets[iParamSet];
+
+							//Link를 해주자
+							paramSet.LinkParamSetGroup(paramSetGroup, this);
+						}
+
+						//타이머에 의해서 Wait
+						if(asyncTimer.IsYield())
+						{
+							yield return asyncTimer.WaitAndRestart();
+						}
+					}
+				}
+				
+			}
+
+			//RefreshModifierLink
+			for (int i = 0; i < _optRootUnitList.Count; i++)
+			{
+				apOptRootUnit rootUnit = _optRootUnitList[i];
+				rootUnit._rootOptTransform.ClearResultParams(true);
+				yield return rootUnit._rootOptTransform.RefreshModifierLinkAsync(true, true, asyncTimer);
+
+				
+			}
+
+			//타이머에 의해서 Wait
+			if(asyncTimer.IsYield())
+			{
+				yield return asyncTimer.WaitAndRestart();
+			}
+
+			for (int i = 0; i < _animClips.Count; i++)
+			{
+				yield return _animClips[i].LinkOptAsync(this, asyncTimer);
+			}
+
+
+
+			//타이머에 의해서 Wait
+			if(asyncTimer.IsYield())
+			{
+				yield return asyncTimer.WaitAndRestart();
+			}
+			
+
+			//추가) AnimPlayer를 추가했다.
+			yield return _animPlayManager.LinkPortraitAsync(this, asyncTimer);
+			_isAutoPlayCheckable = true;
+
+			//Wait
+			yield return new WaitForEndOfFrame();
+
+			
+			//끝!
+			_initStatus = INIT_STATUS.Completed;
+
+			CleanUpMeshesCommandBuffers();
+
+			//if(_optRootUnitList.Count > 0)
+			//{
+			//	ShowRootUnit(_optRootUnitList[0]);//일단 첫번째 RootUnit이 나온다.
+			//}
+
+			ShowRootUnit();
+
+
+			//AsyncTimer 끝
+			asyncTimer.OnCompleted();
+			asyncTimer = null;
+
+			if(_funcAyncLinkCompleted != null)
+			{
+				//콜백 이벤트 호출
+				_funcAyncLinkCompleted(this);
+				_funcAyncLinkCompleted = null;
+			}
+
+
+		}
+
 		/// <summary>
 		/// [Please do not use it]
 		/// </summary>
 		public void SetFirstInitializeAfterBake()
 		{
 			_initStatus = INIT_STATUS.Ready;
+
+			if(_transform == null)
+			{
+				_transform = transform;
+			}
 		}
 		//--------------------------------------------------------------------------------------
 		// Editor
@@ -1384,6 +1749,9 @@ namespace AnyPortrait
 
 			return _animPlayManager.Play(animPlayData, layer, blendMethod, playOption, isAutoEndIfNotloop);
 		}
+
+
+		
 
 
 		private apAnimPlayData PlayNoDebug(string animClipName,
@@ -1583,7 +1951,257 @@ namespace AnyPortrait
 
 			return _animPlayManager.CrossFadeQueued(animPlayData, layer, blendMethod, fadeTime, isAutoEndIfNotloop);
 		}
+		//----------------------------------------------------------------------------
 
+		//추가 1.14 : 특정 프레임부터 재생을 한다. (Play, PlayQueued, CrossFade, CrossFadeQueued + At)
+
+		//그 외에는 동일
+		/// <summary>
+		/// Play the animation at the specified frame.
+		/// </summary>
+		/// <param name="animClipName">Name of the Animation Clip</param>
+		/// <param name="frame">Frame at the time the animation is played</param>
+		/// <param name="layer">The layer to which the animation is applied. From 0 to 20</param>
+		/// <param name="blendMethod">How it is blended with the animation of the lower layers</param>
+		/// <param name="playOption">How to stop which animations</param>
+		/// <param name="isAutoEndIfNotloop">If True, animation that does not play repeatedly is automatically terminated.</param>
+		/// <returns>Animation data to be played. If it fails, null is returned.</returns>
+		public apAnimPlayData PlayAt(string animClipName, int frame,
+									int layer = 0,
+									apAnimPlayUnit.BLEND_METHOD blendMethod = apAnimPlayUnit.BLEND_METHOD.Interpolation,
+									apAnimPlayManager.PLAY_OPTION playOption = apAnimPlayManager.PLAY_OPTION.StopSameLayer,
+									bool isAutoEndIfNotloop = false)
+		{
+			if (_animPlayManager == null)
+			{ return null; }
+
+			if(_isUsingMecanim)
+			{
+				//메카님이 켜진 경우 함수를 제어할 수 없다.
+				Debug.LogError("AnyPortrait : This function does not work because Mecanim Animator is active. Please use _animator.");
+				return null;
+			}
+
+			return _animPlayManager.PlayAt(animClipName, frame, layer, blendMethod, playOption, isAutoEndIfNotloop);
+		}
+
+
+		/// <summary>
+		/// Play the animation at the specified frame.
+		/// </summary>
+		/// <param name="animPlayData">Target animation playdata</param>
+		/// <param name="frame">Frame at the time the animation is played</param>
+		/// <param name="layer">The layer to which the animation is applied. From 0 to 20</param>
+		/// <param name="blendMethod">How it is blended with the animation of the lower layers</param>
+		/// <param name="playOption">How to stop which animations</param>
+		/// <param name="isAutoEndIfNotloop">If True, animation that does not play repeatedly is automatically terminated.</param>
+		/// <returns>Animation data to be played. If it fails, null is returned.</returns>
+		public apAnimPlayData PlayAt(apAnimPlayData animPlayData,
+									int frame,
+									int layer = 0,
+									apAnimPlayUnit.BLEND_METHOD blendMethod = apAnimPlayUnit.BLEND_METHOD.Interpolation,
+									apAnimPlayManager.PLAY_OPTION playOption = apAnimPlayManager.PLAY_OPTION.StopSameLayer,
+									bool isAutoEndIfNotloop = false)
+		{
+			if (_animPlayManager == null)
+			{ return null; }
+
+			if(_isUsingMecanim)
+			{
+				//메카님이 켜진 경우 함수를 제어할 수 없다.
+				Debug.LogError("AnyPortrait : This function does not work because Mecanim Animator is active. Please use _animator.");
+				return null;
+			}
+
+			return _animPlayManager.PlayAt(animPlayData, frame, layer, blendMethod, playOption, isAutoEndIfNotloop);
+		}
+
+
+		/// <summary>
+		/// Wait for the previous animation to finish, then play it at the specified frame.
+		/// (If the previously playing animation is a loop animation, it will not be executed.)
+		/// </summary>
+		/// <param name="animClipName">Name of the Animation Clip</param>
+		/// <param name="frame">Frame at the time the animation is played</param>
+		/// <param name="layer">The layer to which the animation is applied. From 0 to 20</param>
+		/// <param name="blendMethod">How it is blended with the animation of the lower layers</param>
+		/// <param name="isAutoEndIfNotloop">If True, animation that does not play repeatedly is automatically terminated.</param>
+		/// <returns>Animation data to be played. If it fails, null is returned.</returns>
+		public apAnimPlayData PlayQueuedAt(string animClipName, int frame,
+											int layer = 0,
+											apAnimPlayUnit.BLEND_METHOD blendMethod = apAnimPlayUnit.BLEND_METHOD.Interpolation,
+											bool isAutoEndIfNotloop = false)
+		{
+			if (_animPlayManager == null)
+			{ return null; }
+
+			if(_isUsingMecanim)
+			{
+				//메카님이 켜진 경우 함수를 제어할 수 없다.
+				Debug.LogError("AnyPortrait : This function does not work because Mecanim Animator is active. Please use _animator.");
+				return null;
+			}
+			
+			return _animPlayManager.PlayQueuedAt(animClipName, frame, layer, blendMethod, isAutoEndIfNotloop);
+		}
+
+
+
+		/// <summary>
+		/// Wait for the previous animation to finish, then play it at the specified frame.
+		/// (If the previously playing animation is a loop animation, it will not be executed.)
+		/// </summary>
+		/// <param name="animPlayData">Target animation playdata</param>
+		/// <param name="frame">Frame at the time the animation is played</param>
+		/// <param name="layer">The layer to which the animation is applied. From 0 to 20</param>
+		/// <param name="blendMethod">How it is blended with the animation of the lower layers</param>
+		/// <param name="isAutoEndIfNotloop">If True, animation that does not play repeatedly is automatically terminated.</param>
+		/// <returns>Animation data to be played. If it fails, null is returned.</returns>
+		public apAnimPlayData PlayQueuedAt(apAnimPlayData animPlayData, int frame,
+											int layer = 0,
+											apAnimPlayUnit.BLEND_METHOD blendMethod = apAnimPlayUnit.BLEND_METHOD.Interpolation,
+											bool isAutoEndIfNotloop = false)
+		{
+			if (_animPlayManager == null)
+			{ return null; }
+
+			if(_isUsingMecanim)
+			{
+				//메카님이 켜진 경우 함수를 제어할 수 없다.
+				Debug.LogError("AnyPortrait : This function does not work because Mecanim Animator is active. Please use _animator.");
+				return null;
+			}
+			
+			return _animPlayManager.PlayQueuedAt(animPlayData, frame, layer, blendMethod, isAutoEndIfNotloop);
+		}
+
+
+		/// <summary>
+		/// Play the animation at the specified frame smoothly.
+		/// </summary>
+		/// <param name="animClipName">Name of the Animation Clip</param>
+		/// <param name="frame">Frame at the time the animation is played</param>
+		/// <param name="fadeTime">Fade Time</param>
+		/// <param name="layer">The layer to which the animation is applied. From 0 to 20</param>
+		/// <param name="blendMethod">How it is blended with the animation of the lower layers</param>
+		/// <param name="playOption">How to stop which animations</param>
+		/// <param name="isAutoEndIfNotloop">If True, animation that does not play repeatedly is automatically terminated.</param>
+		/// <returns>Animation data to be played. If it fails, null is returned.</returns>
+		public apAnimPlayData CrossFadeAt(string animClipName, int frame,
+											float fadeTime = 0.3f,
+											int layer = 0,
+											apAnimPlayUnit.BLEND_METHOD blendMethod = apAnimPlayUnit.BLEND_METHOD.Interpolation,
+											apAnimPlayManager.PLAY_OPTION playOption = apAnimPlayManager.PLAY_OPTION.StopSameLayer,
+											bool isAutoEndIfNotloop = false)
+		{
+			if (_animPlayManager == null)
+			{ return null; }
+
+			if(_isUsingMecanim)
+			{
+				//메카님이 켜진 경우 함수를 제어할 수 없다.
+				Debug.LogError("AnyPortrait : This function does not work because Mecanim Animator is active. Please use _animator.");
+				return null;
+			}
+
+			return _animPlayManager.CrossFadeAt(animClipName, frame, layer, blendMethod, fadeTime, playOption, isAutoEndIfNotloop);
+		}
+
+
+
+		/// <summary>
+		/// Play the animation at the specified frame smoothly.
+		/// </summary>
+		/// <param name="animPlayData">Target animation playdata</param>
+		/// <param name="frame">Frame at the time the animation is played</param>
+		/// <param name="fadeTime">Fade Time</param>
+		/// <param name="layer">The layer to which the animation is applied. From 0 to 20</param>
+		/// <param name="blendMethod">How it is blended with the animation of the lower layers</param>
+		/// <param name="playOption">How to stop which animations</param>
+		/// <param name="isAutoEndIfNotloop">If True, animation that does not play repeatedly is automatically terminated.</param>
+		/// <returns>Animation data to be played. If it fails, null is returned.</returns>
+		public apAnimPlayData CrossFadeAt(apAnimPlayData animPlayData, int frame,
+											float fadeTime = 0.3f,
+											int layer = 0,
+											apAnimPlayUnit.BLEND_METHOD blendMethod = apAnimPlayUnit.BLEND_METHOD.Interpolation,
+											apAnimPlayManager.PLAY_OPTION playOption = apAnimPlayManager.PLAY_OPTION.StopSameLayer,
+											bool isAutoEndIfNotloop = false)
+		{
+			if (_animPlayManager == null)
+			{ return null; }
+
+			if(_isUsingMecanim)
+			{
+				//메카님이 켜진 경우 함수를 제어할 수 없다.
+				Debug.LogError("AnyPortrait : This function does not work because Mecanim Animator is active. Please use _animator.");
+				return null;
+			}
+
+			return _animPlayManager.CrossFadeAt(animPlayData, frame, layer, blendMethod, fadeTime, playOption, isAutoEndIfNotloop);
+		}
+
+		
+		/// <summary>
+		/// Wait for the previous animation to finish, then play it at the specified frame smoothly.
+		/// (If the previously playing animation is a loop animation, it will not be executed.)
+		/// </summary>
+		/// <param name="animClipName">Name of the Animation Clip</param>
+		/// <param name="frame">Frame at the time the animation is played</param>
+		/// <param name="fadeTime">Fade Time</param>
+		/// <param name="layer">The layer to which the animation is applied. From 0 to 20</param>
+		/// <param name="blendMethod">How it is blended with the animation of the lower layers</param>
+		/// <param name="isAutoEndIfNotloop">If True, animation that does not play repeatedly is automatically terminated.</param>
+		/// <returns>Animation data to be played. If it fails, null is returned.</returns>
+		public apAnimPlayData CrossFadeQueuedAt(string animClipName, int frame,
+												float fadeTime = 0.3f,
+												int layer = 0,
+												apAnimPlayUnit.BLEND_METHOD blendMethod = apAnimPlayUnit.BLEND_METHOD.Interpolation,
+												bool isAutoEndIfNotloop = false)
+		{
+			if (_animPlayManager == null)
+			{ return null; }
+
+			if(_isUsingMecanim)
+			{
+				//메카님이 켜진 경우 함수를 제어할 수 없다.
+				Debug.LogError("AnyPortrait : This function does not work because Mecanim Animator is active. Please use _animator.");
+				return null;
+			}
+
+			return _animPlayManager.CrossFadeQueuedAt(animClipName, frame, layer, blendMethod, fadeTime, isAutoEndIfNotloop);
+		}
+
+
+		/// <summary>
+		/// Wait for the previous animation to finish, then play it at the specified frame smoothly.
+		/// (If the previously playing animation is a loop animation, it will not be executed.)
+		/// </summary>
+		/// <param name="animPlayData">Target animation playdata</param>
+		/// <param name="frame">Frame at the time the animation is played</param>
+		/// <param name="fadeTime">Fade Time</param>
+		/// <param name="layer">The layer to which the animation is applied. From 0 to 20</param>
+		/// <param name="blendMethod">How it is blended with the animation of the lower layers</param>
+		/// <param name="isAutoEndIfNotloop">If True, animation that does not play repeatedly is automatically terminated.</param>
+		/// <returns>Animation data to be played. If it fails, null is returned.</returns>
+		public apAnimPlayData CrossFadeQueuedAt(apAnimPlayData animPlayData, int frame,
+												float fadeTime = 0.3f,
+												int layer = 0,
+												apAnimPlayUnit.BLEND_METHOD blendMethod = apAnimPlayUnit.BLEND_METHOD.Interpolation,
+												bool isAutoEndIfNotloop = false)
+		{
+			if (_animPlayManager == null)
+			{ return null; }
+
+			if(_isUsingMecanim)
+			{
+				//메카님이 켜진 경우 함수를 제어할 수 없다.
+				Debug.LogError("AnyPortrait : This function does not work because Mecanim Animator is active. Please use _animator.");
+				return null;
+			}
+
+			return _animPlayManager.CrossFadeQueuedAt(animPlayData, frame, layer, blendMethod, fadeTime, isAutoEndIfNotloop);
+		}
+		//-------------------------------------------------------------
 
 		/// <summary>
 		/// End all animations playing on the target layer.
@@ -1790,6 +2408,63 @@ namespace AnyPortrait
 			return _animPlayManager.GetAnimationPlaybackStatus(animClipName);
 		}
 
+
+
+
+
+		//추가 3.6 : 타임라인 관련 함수들
+		// 외부 제어 함수들 - 주로 Timeline
+#if UNITY_2017_1_OR_NEWER
+		/// <summary>
+		/// Connect the Timeline to apPortrait.
+		/// Enter the PlayableDirector with timeline and the name of Track.
+		/// If the connection is successful, it will play automatically when the Timeline is played.
+		/// </summary>
+		/// <param name="playableDirector">PlayableDirector with Timeline</param>
+		/// <param name="trackName">The name of the track to which apPortrait is connected.</param>
+		/// <param name="layer">The index when multiple tracks are blended to play the animation. It starts from 0.</param>
+		/// <param name="blendMethod">How multiple tracks are blended</param>
+		/// <returns>If the connection fails for some reason, such as a wrong name or no PlaybleDirector, false is returned.</returns>
+		public bool AddTimelineTrack(UnityEngine.Playables.PlayableDirector playableDirector, string trackName, int layer = 0, apAnimPlayUnit.BLEND_METHOD blendMethod = apAnimPlayUnit.BLEND_METHOD.Additive)
+		{
+			return _animPlayManager.AddTimelineTrack(playableDirector, trackName, layer, blendMethod);
+		}
+
+		/// <summary>
+		/// Any invalid Timeline track information is removed.
+		/// </summary>
+		public void RemoveInvalidTimelineTracks()
+		{
+			_animPlayManager.RemoveInvalidTimelineTracks();
+		}
+
+		/// <summary>
+		/// All Timeline track data are removed.
+		/// </summary>
+		public void RemoveAllTimelineTracks()
+		{
+			_animPlayManager.RemoveAllTimelineTracks();
+		}
+
+		/// <summary>
+		/// Track information containing the requested PlayableDirector will be deleted.
+		/// </summary>
+		/// <param name="playableDirector">A PlayableDirector that contains the track information you want to remove.</param>
+		public void UnlinkTimelinePlayableDirector(UnityEngine.Playables.PlayableDirector playableDirector)
+		{
+			_animPlayManager.UnlinkTimelinePlayableDirector(playableDirector);
+		}
+
+		/// <summary>
+		/// If False is entered, apPortrait is not under the control of the Timeline, even if it is associated with the Timeline.
+		/// </summary>
+		/// <param name="isEnabled">Whether to be controlled from the Timeline. (Default is True)</param>
+		public void SetTimelineEnable(bool isEnabled)
+		{
+			_animPlayManager.SetTimelineEnable(isEnabled);
+		}
+
+#endif
 		//---------------------------------------------------------------------------------------
 		// 물리 제어
 		//---------------------------------------------------------------------------------------
@@ -3176,7 +3851,7 @@ namespace AnyPortrait
 
 
 
-		#region [미사용 코드 : Material은 자동 Batch때문에 참조할 수 없다]
+#region [미사용 코드 : Material은 자동 Batch때문에 참조할 수 없다]
 		//public Material GetOptTransformMaterial(apOptTransform optTransform)
 		//{
 		//	if(optTransform == null) { return null; }
@@ -3206,7 +3881,7 @@ namespace AnyPortrait
 
 		//	return optTransform._childMesh._material;
 		//} 
-		#endregion
+#endregion
 
 		//Mesh Material을 초기화하여 Batch가 되도록 만든다.
 		/// <summary>Initialize the material of the target Opt-Transform so that it can be batch processed.</summary>
@@ -3833,7 +4508,7 @@ namespace AnyPortrait
 			//이름으로부터 SortingLayerID를 찾자
 			if(SortingLayer.layers == null || SortingLayer.layers.Length == 0)
 			{
-				Debug.LogError("AnyPortrait : SetSortingLayerName() Failed. There is no SortingLayer is this project.");
+				Debug.LogError("AnyPortrait : SetSortingLayer() Failed. There is no SortingLayer is this project.");
 				return;
 			}
 			int targetSortingLayerID = -1;
@@ -3850,7 +4525,7 @@ namespace AnyPortrait
 			//못찾았다.
 			if(!isTargetSortingLayerFound)
 			{
-				Debug.LogError("AnyPortrait : SetSortingLayerName() Failed. Could not find layer with requested name. <" + sortingLayerName + ">");
+				Debug.LogError("AnyPortrait : SetSortingLayer() Failed. Could not find layer with requested name. <" + sortingLayerName + ">");
 				return;
 			}
 
@@ -3875,8 +4550,114 @@ namespace AnyPortrait
 			}
 		}
 
+
+
+
 		/// <summary>
-		/// Get Name of Sorting Layer.
+		/// Changes the Sorting Layer of the specified OptTransform.
+		/// Use the name of the sorting layer set in the "Tags and Layers Manager" of the Unity project.
+		/// </summary>
+		/// <param name="optTransform">Target OptTransform</param>
+		/// <param name="sortingLayerName">Layer Name in Sorting Layers</param>
+		public void SetSortingLayer(apOptTransform optTransform, string sortingLayerName)
+		{
+			//이름으로부터 SortingLayerID를 찾자
+			if(SortingLayer.layers == null || SortingLayer.layers.Length == 0)
+			{
+				Debug.LogError("AnyPortrait : SetSortingLayer() Failed. There is no SortingLayer is this project.");
+				return;
+			}
+			if(optTransform == null || optTransform._childMesh == null)
+			{
+				Debug.LogError("AnyPortrait : SetSortingLayer() Failed. OptTransform is null or it does not have a mesh.");
+				return;
+			}
+			int targetSortingLayerID = -1;
+			bool isTargetSortingLayerFound = false;
+			for (int i = 0; i < SortingLayer.layers.Length; i++)
+			{
+				if(string.Equals(SortingLayer.layers[i].name, sortingLayerName))
+				{
+					isTargetSortingLayerFound = true;
+					targetSortingLayerID = SortingLayer.layers[i].id;
+					break;
+				}
+			}
+			//못찾았다.
+			if(!isTargetSortingLayerFound)
+			{
+				Debug.LogError("AnyPortrait : SetSortingLayer() Failed. Could not find layer with requested name. <" + sortingLayerName + ">");
+				return;
+			}
+
+			//Sorting Layer 적용
+			optTransform._childMesh.SetSortingLayer(sortingLayerName, targetSortingLayerID);
+		}
+		
+		/// <summary>
+		/// Changes the Sorting Layer of the specified OptTransform.
+		/// Use the name of the sorting layer set in the "Tags and Layers Manager" of the Unity project.
+		/// </summary>
+		/// <param name="transformName">Name of Opt-Transform with the target Opt-Mesh</param>
+		/// <param name="sortingLayerName">Layer Name in Sorting Layers</param>
+		public void SetSortingLayer(string transformName, string sortingLayerName)
+		{
+			SetSortingLayer(GetOptTransform(transformName), sortingLayerName);
+		}
+
+		/// <summary>
+		/// Changes the Sorting Layer of the specified OptTransform.
+		/// Use the name of the sorting layer set in the "Tags and Layers Manager" of the Unity project.
+		/// </summary>
+		/// <param name="rootUnitIndex">Root Unit Index</param>
+		/// <param name="transformName">Name of Opt-Transform with the target Opt-Mesh</param>
+		/// <param name="sortingLayerName">Layer Name in Sorting Layers</param>
+		public void SetSortingLayer(int rootUnitIndex, string transformName, string sortingLayerName)
+		{
+			SetSortingLayer(GetOptTransform(rootUnitIndex, transformName), sortingLayerName);
+		}
+
+		/// <summary>
+		/// Set the Sorting Order of the specified OptTransform.
+		/// </summary>
+		/// <param name="optTransform">Target OptTransform</param>
+		/// <param name="sortingOrder">Sorting Order (Default is 0)</param>
+		public void SetSortingOrder(apOptTransform optTransform, int sortingOrder)
+		{
+			if(optTransform == null || optTransform._childMesh == null)
+			{
+				Debug.LogError("AnyPortrait : SetSortingOrder() Failed. OptTransform is null or it does not have a mesh.");
+				return;
+			}
+
+			_sortingOrder = sortingOrder;
+			optTransform._childMesh.SetSortingOrder(sortingOrder);
+		}
+
+		/// <summary>
+		/// Set the Sorting Order of the specified OptTransform.
+		/// </summary>
+		/// <param name="transformName">Name of Opt-Transform with the target Opt-Mesh</param>
+		/// <param name="sortingOrder">Sorting Order (Default is 0)</param>
+		public void SetSortingOrder(string transformName, int sortingOrder)
+		{
+			SetSortingOrder(GetOptTransform(transformName), sortingOrder);
+		}
+
+		/// <summary>
+		/// Set the Sorting Order of the specified OptTransform.
+		/// </summary>
+		/// <param name="rootUnitIndex">Root Unit Index</param>
+		/// <param name="transformName">Name of Opt-Transform with the target Opt-Mesh</param>
+		/// <param name="sortingOrder">Sorting Order (Default is 0)</param>
+		public void SetSortingOrder(int rootUnitIndex, string transformName, int sortingOrder)
+		{
+			SetSortingOrder(GetOptTransform(rootUnitIndex, transformName), sortingOrder);
+		}
+
+
+		/// <summary>
+		/// Get Name of Sorting Layer
 		/// If Failed, "Unknown Layer" is returned
 		/// </summary>
 		/// <returns></returns>
@@ -3924,15 +4705,16 @@ namespace AnyPortrait
 			{
 				_isImportant = isImportant;
 
-				if(_isImportant)
-				{
+				//이전 : Update Token 방식으로 변경
+				//if(_isImportant)
+				//{
 					
-				}
-				else
-				{
-					//객체별로 업데이트 타이밍을 다르게 하기 위해 랜덤 값을 넣는다.
-					_tDelta += UnityEngine.Random.Range(0.0f, _timePerFrame);
-				}
+				//}
+				//else
+				//{
+				//	//객체별로 업데이트 타이밍을 다르게 하기 위해 랜덤 값을 넣는다.
+				//	_tDelta += UnityEngine.Random.Range(0.0f, _timePerFrame);
+				//}
 			}
 		}
 
@@ -4125,8 +4907,47 @@ namespace AnyPortrait
 					});
 
 
+					//추가 19.6.9 : Material Set 연결
+					if (meshTransform._isUseDefaultMaterialSet)
+					{
+						//Default MatSet을 사용하는 경우
+						meshTransform._linkedMaterialSet = GetDefaultMaterialSet();
+						if (meshTransform._linkedMaterialSet != null)
+						{
+							meshTransform._materialSetID = meshTransform._linkedMaterialSet._uniqueID;
+						}
+					}
+					else
+					{
+						//별도의 MatSet을 설정한 경우
+						if (meshTransform._materialSetID >= 0)
+						{
+							meshTransform._linkedMaterialSet = GetMaterialSet(meshTransform._materialSetID);
+							if (meshTransform._linkedMaterialSet == null)
+							{
+								//존재하지 않는 Material Set
+								meshTransform._materialSetID = -1;
+								//Debug.LogError("Material Set 잘못 연결 후 초기화");
+							}
+						}
+						else
+						{
+							meshTransform._linkedMaterialSet = null;
+						}
 
-					#region [미사용 코드]
+						//만약 연결이 안된다면 > Default를 찾아서 무조건 연결한다.
+						if (meshTransform._linkedMaterialSet == null)
+						{
+							meshTransform._linkedMaterialSet = GetDefaultMaterialSet();
+							if (meshTransform._linkedMaterialSet != null)
+							{
+								meshTransform._materialSetID = meshTransform._linkedMaterialSet._uniqueID;
+							}
+						}
+					}
+					
+
+#region [미사용 코드]
 					//if (meshTransform._clipChildMeshTransformIDs == null || meshTransform._clipChildMeshTransformIDs.Length != 3)
 					//{
 					//	meshTransform._clipChildMeshTransformIDs = new int[] { -1, -1, -1 };
@@ -4139,7 +4960,7 @@ namespace AnyPortrait
 					//{
 					//	meshTransform._clipChildRenderUnits = new apRenderUnit[] { null, null, null };
 					//} 
-					#endregion
+#endregion
 				}
 
 				for (int iChild = 0; iChild < meshGroup._childMeshTransforms.Count; iChild++)
@@ -4533,6 +5354,35 @@ namespace AnyPortrait
 							meshGroup._childMeshTransforms[iChild]._mesh = null;
 							//Debug.LogError("Mesh ID가 유효하지 않은 MeshTransform 발견 : " + meshGroup._childMeshTransforms[iChild]._nickName);
 						}
+
+						//추가 19.6.9 : Material Set 연결
+						if (meshTransform._isUseDefaultMaterialSet)
+						{
+							//기본값의 MatSet을 사용하자.
+							meshTransform._linkedMaterialSet = GetDefaultMaterialSet();
+							if(meshTransform._linkedMaterialSet != null)
+							{
+								//ID도 바꿔주자.
+								meshTransform._materialSetID = meshTransform._linkedMaterialSet._uniqueID;
+							}
+						}
+						else
+						{
+							if (meshTransform._materialSetID >= 0)
+							{
+								meshTransform._linkedMaterialSet = GetMaterialSet(meshTransform._materialSetID);
+								if (meshTransform._linkedMaterialSet == null)
+								{
+									//존재하지 않는 Material Set
+									meshTransform._materialSetID = -1;
+								}
+							}
+							else
+							{
+								meshTransform._linkedMaterialSet = null;
+							}
+						}
+						
 					}
 
 					
@@ -5186,7 +6036,7 @@ namespace AnyPortrait
 								}
 
 
-								#region [미사용 코드]
+#region [미사용 코드]
 								//switch (modMesh._targetType)
 								//{
 								//	case apModifiedMesh.TARGET_TYPE.VertexWithMeshTransform:
@@ -5229,7 +6079,7 @@ namespace AnyPortrait
 								//		}
 								//		break;
 								//} 
-								#endregion
+#endregion
 
 							}
 							
@@ -5476,7 +6326,7 @@ namespace AnyPortrait
 		{
 			_IDManager.RegistID(target, ID);
 		}
-		#region [미사용 코드]
+#region [미사용 코드]
 		//public void RegistUniqueID_Texture(int uniqueID)
 		//{
 		//	if (!_registeredUniqueIDs_Texture.Contains(uniqueID))
@@ -5540,7 +6390,7 @@ namespace AnyPortrait
 		//		_registeredUniqueIDs_AnimClip.Add(uniqueID);
 		//	}
 		//} 
-		#endregion
+#endregion
 
 
 
@@ -5554,7 +6404,7 @@ namespace AnyPortrait
 		{
 			return _IDManager.MakeUniqueID(target);
 		}
-		#region [미사용 코드]
+#region [미사용 코드]
 		//private int MakeUniqueID(List<int> IDList)
 		//{
 		//	int nextID = -1;
@@ -5594,7 +6444,7 @@ namespace AnyPortrait
 		//public int MakeUniqueID_Modifier()		{ return MakeUniqueID(_registeredUniqueIDs_Modifier); }
 		//public int MakeUniqueID_ControlParam()	{ return MakeUniqueID(_registeredUniqueIDs_ControlParam); }
 		//public int MakeUniqueID_AnimClip()		{ return MakeUniqueID(_registeredUniqueIDs_AnimClip); } 
-		#endregion
+#endregion
 
 
 		// 객체 삭제시 ID 회수
@@ -5749,7 +6599,7 @@ namespace AnyPortrait
 
 		}
 
-		#region [미사용 코드]
+#region [미사용 코드]
 		//public void PushUniqueID_Texture(int uniquedID)			{ _registeredUniqueIDs_Texture.Remove(uniquedID); }
 		//public void PushUniqueID_Vertex(int uniquedID)			{ _registeredUniqueIDs_Vert.Remove(uniquedID); }
 		//public void PushUniqueID_Mesh(int uniquedID)			{ _registeredUniqueIDs_Mesh.Remove(uniquedID); }
@@ -5758,7 +6608,7 @@ namespace AnyPortrait
 		//public void PushUniqueID_Modifier(int uniquedID)		{ _registeredUniqueIDs_Modifier.Remove(uniquedID); }
 		//public void PushUniqueID_ControlParam(int uniquedID)	{ _registeredUniqueIDs_ControlParam.Remove(uniquedID); }
 		//public void PushUniqueID_AnimClip(int uniquedID)		{ _registeredUniqueIDs_AnimClip.Remove(uniquedID); } 
-		#endregion
+#endregion
 
 		//카메라 관련
 		//-------------------------------------------------------------------------------------------------------
@@ -6012,6 +6862,23 @@ namespace AnyPortrait
 			return _optRootUnitList[rootUnitIndex];
 		}
 
+
+		//추가 19.6.3 : MaterialSet에 관련
+		public apMaterialSet GetMaterialSet(int uniqueID)
+		{
+			return _materialSets.Find(delegate(apMaterialSet a)
+			{
+				return a._uniqueID == uniqueID;
+			});
+		}
+
+		public apMaterialSet GetDefaultMaterialSet()
+		{
+			return _materialSets.Find(delegate (apMaterialSet a)
+			{
+				return a._isDefault;
+			});
+		}
 	}
 
 }

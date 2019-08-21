@@ -753,7 +753,7 @@ namespace AnyPortrait
 					}
 
 					nextSelectedAnimClip.LinkEditor(_editor._portrait);
-					nextSelectedAnimClip.RefreshTimelines();
+					nextSelectedAnimClip.RefreshTimelines(null);
 					nextSelectedAnimClip.SetFrame_Editor(nextSelectedAnimClip.StartFrame);
 					nextSelectedAnimClip.Pause_Editor();
 					nextSelectedAnimClip._isSelectedInEditor = true;

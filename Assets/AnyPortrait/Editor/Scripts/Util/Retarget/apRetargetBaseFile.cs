@@ -105,7 +105,7 @@ namespace AnyPortrait
 					sw.WriteLine(boneUnits[i].GetEncodingData());
 				}
 
-
+				sw.Flush();
 				sw.Close();
 				fs.Close();
 				sw = null;

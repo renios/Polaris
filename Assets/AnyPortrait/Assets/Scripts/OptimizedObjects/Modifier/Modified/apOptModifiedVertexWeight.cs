@@ -31,17 +31,18 @@ namespace AnyPortrait
 		// Members
 		//------------------------------------------------------
 		//기본 연동데이터
-		[NonSerialized]
-		public apOptMesh _mesh = null;
+		//[NonSerialized]
+		//public apOptMesh _mesh = null; //>> 19.5.23 : 불필요해서 삭제
 
 		[NonSerialized]
 		public apOptTransform _optTransform = null;
 
-		[NonSerialized]
-		public apOptModifiedMesh _modifiedMesh = null;
+		//[NonSerialized]
+		//public apOptModifiedMesh _modifiedMesh = null; //>> 19.5.23 : 불필요해서 삭제
 
-		public int _vertexUniqueID = -1;
-		public int _vertIndex = -1;
+		// 19.5.23 : 불필요해서 삭제
+		//public int _vertexUniqueID = -1;
+		//public int _vertIndex = -1;
 
 
 		[NonSerialized]
@@ -51,11 +52,12 @@ namespace AnyPortrait
 		public bool _isEnabled = false;
 		public float _weight = 0.0f;
 
-		[SerializeField]
-		public bool _isPhysics = false;
+		// 19.5.23 : 삭제
+		//[SerializeField]
+		//public bool _isPhysics = false;
 
-		[SerializeField]
-		public bool _isVolume = false;
+		//[SerializeField]
+		//public bool _isVolume = false;
 
 
 		//Physics인 경우
@@ -98,43 +100,7 @@ namespace AnyPortrait
 		[NonSerialized]
 		public Vector2 _acc_Ex = Vector2.zero;
 
-		//추가
-		//Editor와 달리, 아예 Scene에서의 Vert의 World Position을 저장하고, 이것의 변위를 따로 계산한다.
-		//No-Mod를 기반으로 하여, Local에서의 변위와 아예 별도로 취급한다.
-
-		//[NonSerialized]
-		//private Vector3 _pos_RootWorld = Vector3.zero;
-
-
-
-		//[NonSerialized]
-		//public Vector3 _velocityRoot_Prev = Vector3.zero;
-
-		//[NonSerialized]
-		//public Vector3 _velocityRoot_Cur = Vector3.zero;
-
-		//[NonSerialized]
-		//public Vector2 _velocityRoot2_Prev = Vector2.zero;
-
-		//[NonSerialized]
-		//public Vector2 _velocityRoot2_Cur = Vector2.zero;
-
-
-		////8Frame을 저장하여 Velocity를 샘플링한다.
-		////Index는 0이 최신, 7(또는 6)이 가장 이전의 값
-		//private const int NUM_POS_RECORD = 25;//60FPS 기준으로 최대 18프레임을 기록해야한다. 여유있게 25개 기록하자
-		//private const float MAX_VALID_RECORD_TIME = 0.3f;//최대 0.3초전 기록을 가지고 샘플링을 한다.
-
-		//[NonSerialized]
-		//public Vector2[] _pos_World_Records = new Vector2[NUM_POS_RECORD];
-
-		////[NonSerialized]
-		////public Vector3[] _pos_RootWorld_Records = new Vector3[NUM_POS_RECORD];
-
-		////Pos 사이의 변위 시간
-		////Pos[0] ~ tDelta[0] ~ Pos[1]
-		//[NonSerialized]
-		//public float[] _tDelta_Records = new float[NUM_POS_RECORD - 1];
+		
 
 		[NonSerialized]
 		public Vector2 _F_inertia_Prev = Vector2.zero;
@@ -169,40 +135,24 @@ namespace AnyPortrait
 		[NonSerialized]
 		public float _limitScale = -1.0f;
 
-		/// <summary>
-		/// 자유롭게 움직일 수 있는 영역 (반지름)
-		/// </summary>
-		[SerializeField]
-		public float _deltaPosRadius_Free = 0.0f;
+		// 삭제 19.5.23 : 아래의 변수들은 삭제되지 않는다.
+		///// <summary>
+		///// 자유롭게 움직일 수 있는 영역 (반지름)
+		///// </summary>
+		//[SerializeField]
+		//public float _deltaPosRadius_Free = 0.0f;
 
-		/// <summary>
-		/// 움직일 수 있는 최대 영역 (반지름)
-		/// </summary>
-		[SerializeField]
-		public float _deltaPosRadius_Max = 0.0f;
+		///// <summary>
+		///// 움직일 수 있는 최대 영역 (반지름)
+		///// </summary>
+		//[SerializeField]
+		//public float _deltaPosRadius_Max = 0.0f;
 
 
 		[SerializeField]
 		public apOptPhysicsVertParam _physicParam = new apOptPhysicsVertParam();
 
-		////디버깅 용으로 이 값들을 가지고 있자
-		//[NonSerialized]
-		//public Vector2 _dbgF_gravity = Vector2.zero;
-
-		//[NonSerialized]
-		//public Vector2 _dbgF_wind = Vector2.zero;
-
-		//[NonSerialized]
-		//public Vector2 _dbgF_stretch = Vector2.zero;
-
-		//[NonSerialized]
-		//public Vector2 _dbgF_airDrag = Vector2.zero;
-
-		//[NonSerialized]
-		//public Vector2 _dbgF_recover = Vector2.zero;
-
-		//[NonSerialized]
-		//public Vector2 _dbgF_sum = Vector2.zero;
+		
 
 		//추가 : 당기는 힘을 추가한다.
 		//[Touch ID, Weight] >> Weight 배열로 구현
@@ -225,18 +175,22 @@ namespace AnyPortrait
 		public void Bake(apModifiedVertexWeight srcModVertWeight)
 		{
 
-			_vertexUniqueID = srcModVertWeight._vertexUniqueID;
-			_vertIndex = srcModVertWeight._vertIndex;
+			//>>19.5.23 : 삭제 (불필요)
+			//_vertexUniqueID = srcModVertWeight._vertexUniqueID;
+			//_vertIndex = srcModVertWeight._vertIndex;
 
 			_isEnabled = srcModVertWeight._isEnabled;
 			_weight = srcModVertWeight._weight;
 
-			_isPhysics = srcModVertWeight._isPhysics;
-			_isVolume = srcModVertWeight._isVolume;
+			//>>19.5.23 : 삭제 (불필요)
+			//_isPhysics = srcModVertWeight._isPhysics;
+			//_isVolume = srcModVertWeight._isVolume;
 
 			_pos_World_NoMod = srcModVertWeight._pos_World_NoMod;
-			_deltaPosRadius_Free = srcModVertWeight._deltaPosRadius_Free;
-			_deltaPosRadius_Max = srcModVertWeight._deltaPosRadius_Max;
+
+			//>>19.5.23 : 삭제 (불필요)
+			//_deltaPosRadius_Free = srcModVertWeight._deltaPosRadius_Free;
+			//_deltaPosRadius_Max = srcModVertWeight._deltaPosRadius_Max;
 
 
 			if (_physicParam == null)
@@ -249,8 +203,9 @@ namespace AnyPortrait
 
 		public void Link(apOptModifiedMesh modifiedMesh, apOptTransform optTransform, apOptMesh mesh, apOptRenderVertex vertex)
 		{
-			_modifiedMesh = modifiedMesh;
-			_mesh = mesh;
+			//>>19.5.23 : 삭제 (불필요)
+			//_modifiedMesh = modifiedMesh;
+			//_mesh = mesh;
 			_vertex = vertex;
 			_optTransform = optTransform;
 
@@ -262,6 +217,8 @@ namespace AnyPortrait
 			DampPhysicVertex();
 
 		}
+
+		
 
 		// Functions
 		//------------------------------------------------------
@@ -275,7 +232,9 @@ namespace AnyPortrait
 		{
 			_velocity_Next = Vector2.zero;
 
-			if (!_isPhysics || _vertex == null)
+			if (
+				//!_isPhysics || //>>19.5.23 : 삭제 (불필요)
+				_vertex == null)
 			{
 				return;
 			}
@@ -287,24 +246,55 @@ namespace AnyPortrait
 
 			if (isValidFrame)
 			{
+
 				//이전 프레임의 값을 저장하여 딜레이를 시키자
 				if (tDelta > 0.0f)
 				{
+					Vector2 vertPosWorld = _vertex._vertPos_World;
+
+					//플립 테스트
+					if ((_optTransform._rootUnit.IsFlippedX && !_optTransform._rootUnit.IsFlippedY)
+						|| (!_optTransform._rootUnit.IsFlippedX && _optTransform._rootUnit.IsFlippedY))
+					{
+						if (_optTransform._rootUnit.IsFlippedX)
+						{
+							vertPosWorld.x *= -1;
+						}
+						if (_optTransform._rootUnit.IsFlippedY)
+						{
+							vertPosWorld.y *= -1;
+						}
+					}
+					
+
+
 					//새로운 방식
 					//Velocity_Cur에 의해 예상된 위치 (Predict)와 실제 위치(Real)
 					_pos_1F = _pos_Real;
 					_velocity_Real1F = _velocity_Real;
 					if (isWorld)
 					{
-						_pos_Real = _optTransform._rootUnit._transform.TransformPoint(_vertex._vertPos_World); //<<World 방식
-																											   //_pos_Real = _optTransform._rootUnit._transform.TransformPoint(_vertex._vertPos3_LocalUpdated); //<<World 방식
+						//이전
+						//_pos_Real = _optTransform._rootUnit._transform.TransformPoint(_vertex._vertPos_World); //<<World 방식
 
+						//변경
+						_pos_Real = _optTransform._rootUnit._transform.TransformPoint(vertPosWorld); //<<World 방식
+
+						
 					}
 					else
 					{
-						_pos_Real = _vertex._vertPos_World; //<<Local 방식
+						//이전
+						//_pos_Real = _vertex._vertPos_World; //<<Local 방식
+
+						//변경
+						_pos_Real = vertPosWorld; //<<Local 방식
 					}
-					_pos_World_LocalTransform = _vertex._vertPos_World;
+					//이전
+					//_pos_World_LocalTransform = _vertex._vertPos_World;
+
+					//변경
+					_pos_World_LocalTransform = vertPosWorld;
 
 					if (_tDelta_1F > 0.0f)
 					{
@@ -334,6 +324,8 @@ namespace AnyPortrait
 							_velocity_Real = (_pos_Real - _pos_1F) / tDelta;//<<Local 방식
 						}
 						_velocity_Real *= -1;//<<이거 확인할 것. 이거 왜 반대로 했어요?
+
+						
 						
 						//_velocity_Real = (_velocity_Real * 0.95f + _velocity_1F * 0.05f);//에러 보정 < 미사용
 
@@ -370,7 +362,15 @@ namespace AnyPortrait
 					_tDelta_1F = tDelta;
 
 
-
+					////테스트
+					//if(_optTransform._rootUnit.IsFlippedX)
+					//{
+					//	_velocity_Real.x *= -1;
+					//}
+					//if(_optTransform._rootUnit.IsFlippedY)
+					//{
+					//	_velocity_Real.y *= -1;
+					//}
 
 
 					if (_isUsePrevInertia)

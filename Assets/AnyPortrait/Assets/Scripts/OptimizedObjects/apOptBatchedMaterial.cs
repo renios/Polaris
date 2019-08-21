@@ -58,6 +58,31 @@ namespace AnyPortrait
 			[SerializeField]
 			private Shader _shader = null;
 
+
+
+			//추가 19.6.15 : Key값을 MaterialInfo로 설정하기
+			//MaterialInfo를 이용하는 경우, 위의 _texture, _textureID, _shader는 사용되지 않는다.
+			//Null값을 체크해야하므로 배열 형식을 이용한다.
+			[SerializeField]
+			private apOptMaterialInfo[] _materialInfo = null;
+
+			public apOptMaterialInfo MaterialInfo
+			{
+				get
+				{
+					if(_materialInfo == null || _materialInfo.Length == 0) { return null; }
+					return _materialInfo[0];
+				}
+			}
+
+			public bool IsUseMaterialInfo
+			{
+				get { return MaterialInfo != null; }
+			}
+
+			
+
+
 			[NonSerialized, NonBackupField]
 			public List<apOptMesh> _linkedMeshes = new List<apOptMesh>();
 
@@ -91,30 +116,95 @@ namespace AnyPortrait
 				_textureID = textureID;
 				_shader = shader;
 
-				//수정 : 생성할 때에는 Material을 생성하지 않는다.
-				//_material = new Material(_shader);
-				//_material.SetTexture("_MainTex", _texture);
-				//_material.SetColor("_Color", new Color(0.5f, 0.5f, 0.5f, 1.0f));
+				//이전 방식에서 MaterialInfo는 Null
+				_materialInfo = null;
 			}
 
-			public bool IsEqualMaterial(Texture2D texture, int textureID, Shader shader)
+
+			//추가 19.6.15 : MaterialInfo를 이용한 생성
+			public MaterialUnit(int uniqueID, apOptMaterialInfo srcMaterialInfo)
 			{
+				_uniqueID = uniqueID;
+
+				//Material Info를 활용하는 경우 이 변수들은 사용하지 않는다.
+				//_texture = texture;
+				//_textureID = textureID;
+				//_shader = shader;
+
+				_materialInfo = new apOptMaterialInfo[1];
+				_materialInfo[0] = new apOptMaterialInfo();
+				_materialInfo[0].MakeFromSrc(srcMaterialInfo);
+
+			}
+
+
+			/// <summary>
+			/// 이 재질이 요구 사항에 맞는가?
+			/// Material Info를 사용하지 않는 경우 (이전 버전)
+			/// </summary>
+			public bool IsEqualMaterial_Prev(Texture2D texture, int textureID, Shader shader)
+			{
+				if(IsUseMaterialInfo)
+				{
+					//Material Info를 사용한다면 이 재질은 요구사항에 맞지 않다.
+					return false;
+				}
 				return _texture == texture
 					&& _textureID == textureID
 					&& _shader == shader;
 			}
 
+
+			/// <summary>
+			/// 이 재질이 요구 사항에 맞는가?
+			/// Material Info를 사용하지 않는 경우 (이전 버전)
+			/// </summary>
+			public bool IsEqualMaterial_MatInfo(apOptMaterialInfo matInfo)
+			{
+				if(!IsUseMaterialInfo)
+				{
+					//Material Info를 사용하지 않는다면 이 재질은 요구사항에 맞지 않다.
+					return false;
+				}
+				return apOptMaterialInfo.IsSameInfo(MaterialInfo, matInfo);
+			}
+
+
+			
+
 			public void MakeMaterial()
 			{
-				_material = new Material(_shader);
+				if (!IsUseMaterialInfo)
+				{
+					//이전 버전으로 만드는 경우
+					_material = new Material(_shader);
 
-				_shaderID_MainTex = Shader.PropertyToID("_MainTex");
-				_shaderID_Color = Shader.PropertyToID("_Color");
+					_shaderID_MainTex = Shader.PropertyToID("_MainTex");
+					_shaderID_Color = Shader.PropertyToID("_Color");
 
-				_material.SetTexture(_shaderID_MainTex, _texture);
-				_material.SetColor(_shaderID_Color, new Color(0.5f, 0.5f, 0.5f, 1.0f));
+					_material.SetTexture(_shaderID_MainTex, _texture);
+					_material.SetColor(_shaderID_Color, new Color(0.5f, 0.5f, 0.5f, 1.0f));
+				}
+				else
+				{
+					//변경 19.6.15 : MaterialInfo를 이용하여 만드는 경우
+					apOptMaterialInfo matInfo = MaterialInfo;
 
+					_material = new Material(matInfo._shader);
+
+					_shaderID_MainTex = Shader.PropertyToID("_MainTex");
+					_shaderID_Color = Shader.PropertyToID("_Color");
+
+					_material.SetTexture(_shaderID_MainTex, matInfo._mainTex);
+					_material.SetColor(_shaderID_Color, new Color(0.5f, 0.5f, 0.5f, 1.0f));
+
+					//속성대로 초기화
+					matInfo.SetMaterialProperties(_material);
+				}
+
+				//복원용 재질
 				_material_Original = new Material(_material);
+				
 
 				ResetRequestProperties();
 			}
@@ -136,23 +226,7 @@ namespace AnyPortrait
 
 
 
-			//일괄 변경 요청 함수들
-			//public void RefreshLinkedMeshes()
-			//{
-			//	apOptMesh curMesh = null;
-			//	for (int i = 0; i < _linkedMeshes.Count; i++)
-			//	{
-			//		curMesh = _linkedMeshes[i];
-			//		if(curMesh == null)
-			//		{
-			//			continue;
-			//		}
-
-			//		//Batched 재질이 갱신되었다는 이벤트 호출
-			//		curMesh.OnBatchedMaterialPropertiesChanged();
-			//	}
-			//}
-
+			
 
 			/// <summary>
 			/// 변경 요청을 리셋한다.
@@ -186,8 +260,19 @@ namespace AnyPortrait
 			/// <param name="texture"></param>
 			public void RequestImage(Texture2D texture)
 			{
+				//원래의 Texture였는지 확인한다.
+				//Material Info를 사용하는지에 따라서 다른 조건문에서 처리
+				Texture2D defaultTexture = null;
+				if (IsUseMaterialInfo)
+				{
+					defaultTexture = MaterialInfo._mainTex;
+				}
+				else
+				{
+					defaultTexture = _texture;
+				}
 
-				if (texture == _texture)
+				if (texture == defaultTexture)
 				{
 					//원래대로 돌아왔다.
 					_isRequested_Texture = false;
@@ -460,6 +545,7 @@ namespace AnyPortrait
 
 		public void Clear(bool isDestroyMaterial)
 		{
+			//Debug.LogWarning("Batched Material 초기화");
 			if (isDestroyMaterial)
 			{
 				MaterialUnit curUnit = null;
@@ -491,21 +577,22 @@ namespace AnyPortrait
 
 		// Functions
 		//----------------------------------------------------
-		public MaterialUnit MakeBatchedMaterial(Texture2D texture, int textureID, Shader shader)
+		/// <summary>
+		/// Batched Material을 만들거나, 동일한 Material를 리턴하는 함수.
+		/// v1.1.6 또는 그 이전 버전의 함수이다.
+		/// </summary>
+		/// <param name="texture"></param>
+		/// <param name="textureID"></param>
+		/// <param name="shader"></param>
+		/// <returns></returns>
+		public MaterialUnit MakeBatchedMaterial_Prev(Texture2D texture, int textureID, Shader shader)
 		{
 			MaterialUnit result = _matUnits.Find(delegate (MaterialUnit a)
 			{
-				return a.IsEqualMaterial(texture, textureID, shader);
+				return a.IsEqualMaterial_Prev(texture, textureID, shader);
 			});
 			if(result != null)
 			{
-				//수정 : 이 함수는 Bake에서 호출되므로 Material은 만들지 않는다.
-				//Material resultMat = result._material;
-				//if(resultMat == null)
-				//{
-				//	result.MakeMaterial();
-				//	resultMat = result._material;
-				//}
 				return result;
 			}
 
@@ -513,6 +600,32 @@ namespace AnyPortrait
 			int newID = _matUnits.Count + 1;
 
 			result = new MaterialUnit(newID, texture, textureID, shader);
+			_matUnits.Add(result);
+
+			return result;
+		}
+
+		/// <summary>
+		/// Batched Material을 만들거나, 동일한 Material를 리턴하는 함수.
+		/// v1.1.7 또는 그 이후 버전을 위한 함수이며 Material Info를 이용한다.
+		/// </summary>
+		/// <param name="srcMatInfo"></param>
+		/// <returns></returns>
+		public MaterialUnit MakeBatchedMaterial_MatInfo(apOptMaterialInfo srcMatInfo)
+		{
+			MaterialUnit result = _matUnits.Find(delegate (MaterialUnit a)
+			{
+				return a.IsEqualMaterial_MatInfo(srcMatInfo);
+			});
+			if(result != null)
+			{
+				return result;
+			}
+
+			//새로 만들자
+			int newID = _matUnits.Count + 1;
+
+			result = new MaterialUnit(newID, srcMatInfo);
 			_matUnits.Add(result);
 
 			return result;
@@ -543,15 +656,25 @@ namespace AnyPortrait
 		
 
 
-		//추가 : Shared Materal도 여기서 만들어야 한다.
-		public Material GetSharedMaterial(Texture2D mainTex, Shader shader)
+		//Shared Materal도 여기서 만들어야 한다.
+		public Material GetSharedMaterial_Prev(Texture2D mainTex, Shader shader)
 		{
 			if(_parentPortrait == null)
 			{
 				//아직 연결이 안되었다.
 				return null;
 			}
-			return apOptSharedMaterial.I.GetSharedMaterial(mainTex, shader, _parentPortrait);
+			return apOptSharedMaterial.I.GetSharedMaterial_Prev(mainTex, shader, _parentPortrait);
+		}
+
+		public Material GetSharedMaterial_MatInfo(apOptMaterialInfo matInfo)
+		{
+			if(_parentPortrait == null)
+			{
+				//아직 연결이 안되었다.
+				return null;
+			}
+			return apOptSharedMaterial.I.GetSharedMaterial_MatInfo(matInfo, _parentPortrait);
 		}
 
 

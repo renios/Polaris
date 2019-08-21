@@ -93,5 +93,9 @@ namespace AnyPortrait
 		public override bool IsTarget_ChildMeshTransform { get { return false; } }
 
 		public override bool IsAnimated { get { return true; } }
+
+		//추가
+		public override bool IsPhysics { get { return false; } }
+		public override bool IsVolume { get { return false; } }
 	}
 }

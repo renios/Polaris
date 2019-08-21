@@ -35,7 +35,7 @@ namespace AnyPortrait
 
 		private string[] _colorSpaceNames = new string[] { "Gamma", "Linear" };
 #if UNITY_2018_2_OR_NEWER
-		private string[] _renderPipelineNames = new string[] { "Default", "Lightweight Render Pipeline" };
+		//private string[] _renderPipelineNames = new string[] { "Default", "Lightweight Render Pipeline" };
 #endif
 
 		private string[] _sortingLayerNames = null;
@@ -216,6 +216,7 @@ namespace AnyPortrait
 					//-------------------------------------
 					// Bake 함수를 실행한다. << 중요오오오오
 					//-------------------------------------
+					
 					apBakeResult bakeResult = _editor.Controller.Bake();
 
 
@@ -227,6 +228,9 @@ namespace AnyPortrait
 							_editor.GetTextFormat(TEXT.BakeWarning_Body, bakeResult.NumUnlinkedExternalObject),
 							_editor.GetText(TEXT.Okay));
 					}
+
+					//추가 3.29 : Bake 후에 Ambient를 체크하자
+					CheckAmbientAndCorrection();
 				}
 
 				GUILayout.Space(10);
@@ -308,6 +312,7 @@ namespace AnyPortrait
 					GUI.FocusControl(null);
 
 					//CheckChangedProperties(nextRootScale, nextZScale);
+					
 
 					//Optimized Bake를 하자
 					apBakeResult bakeResult = _editor.Controller.OptimizedBake(_targetPortrait, _targetPortrait._bakeTargetOptPortrait);
@@ -320,6 +325,9 @@ namespace AnyPortrait
 					}
 
 					_editor.Notification("[" + _targetPortrait.name + "] is Baked (Optimized)", false, false);
+
+					//추가 3.29 : Bake 후에 Ambient를 체크하자
+					CheckAmbientAndCorrection();
 				}
 
 				
@@ -417,23 +425,35 @@ namespace AnyPortrait
 				EditorGUILayout.TextField(_targetPortrait._mecanimAnimClipResourcePath, GUILayout.Width(width - (70 + 15)));
 				if (GUILayout.Button(_editor.GetText(TEXT.DLG_Change), guiStyle_ChangeBtn, GUILayout.Width(70), GUILayout.Height(18)))
 				{
-					string defaultPath = _targetPortrait._mecanimAnimClipResourcePath;
-					if (string.IsNullOrEmpty(defaultPath))
-					{
-						defaultPath = Application.dataPath;
-					}
-					string nextPath = EditorUtility.SaveFolderPanel("Select to export animation clips", defaultPath, "");
+					string nextPath = EditorUtility.SaveFolderPanel("Select to export animation clips", "", "");
 					if (!string.IsNullOrEmpty(nextPath))
 					{
 						if (apEditorUtil.IsInAssetsFolder(nextPath))
 						{
 							//유효한 폴더인 경우
+							//중요 : 경로가 절대 경로로 찍힌다.
+							//상대 경로로 바꾸자
+							apEditorUtil.PATH_INFO_TYPE pathInfoType = apEditorUtil.GetPathInfo(nextPath);
+							if(pathInfoType == apEditorUtil.PATH_INFO_TYPE.Absolute_InAssetFolder)
+							{
+								//절대 경로 + Asset 폴더 안쪽이라면
+								//Debug.LogError("절대 경로가 리턴 되었다. : " + nextPath);
+								nextPath = apEditorUtil.AbsolutePath2RelativePath(nextPath);
+								//Debug.LogError(">> 상대 경로로 변경 : " + nextPath);
+							}
+
+							apEditorUtil.SetRecord_Portrait(apUndoGroupData.ACTION.Portrait_BakeOptionChanged, _editor, _targetPortrait, _targetPortrait, false);
+
 							_targetPortrait._mecanimAnimClipResourcePath = nextPath;
 						}
 						else
 						{
 							//유효한 폴더가 아닌 경우
-							EditorUtility.DisplayDialog("Invalid Folder Path", "Invalid Clip Path", "Close");
+							//EditorUtility.DisplayDialog("Invalid Folder Path", "Invalid Clip Path", "Close");
+							EditorUtility.DisplayDialog(
+								_editor.GetText(TEXT.DLG_AnimClipSavePathValidationError_Title),
+								_editor.GetText(TEXT.DLG_AnimClipSavePathResetError_Body),
+								_editor.GetText(TEXT.Close));
 						}
 					}
 
@@ -496,32 +516,35 @@ namespace AnyPortrait
 				GUILayout.Space(10);
 
 #if UNITY_2018_2_OR_NEWER
-				//7. LWRP
-				//LWRP 쉐이더를 쓸지 여부와 다시 강제로 생성하기 버튼을 만들자.
-				bool prevUseLWRP = _editor._isUseLWRPShader;
-				int iPrevUseLWRP = prevUseLWRP ? 1 : 0;
-				int iNextUseLWRP = EditorGUILayout.Popup("Render Pipeline", iPrevUseLWRP, _renderPipelineNames);
-				if (iNextUseLWRP != iPrevUseLWRP)
-				{
-					apEditorUtil.SetRecord_Portrait(apUndoGroupData.ACTION.Portrait_SettingChanged, _editor, _targetPortrait, null, false);
-					if (iNextUseLWRP == 0)
-					{
-						//사용 안함
-						_editor._isUseLWRPShader = false;
-					}
-					else
-					{
-						//LWRP 사용함
-						_editor._isUseLWRPShader = true;
-					}
-				}
-				if(GUILayout.Button("Generate Lightweight Shaders"))
-				{
-					apShaderGenerator shaderGenerator = new apShaderGenerator();
-					shaderGenerator.GenerateLWRPShaders();
-				}
+				//변경 19.6.22 : LWRP 기능은 삭제
+				//Material Library를 열도록 하자
 
-				GUILayout.Space(10);
+				////7. LWRP
+				////LWRP 쉐이더를 쓸지 여부와 다시 강제로 생성하기 버튼을 만들자.
+				//bool prevUseLWRP = _editor._isUseLWRPShader;
+				//int iPrevUseLWRP = prevUseLWRP ? 1 : 0;
+				//int iNextUseLWRP = EditorGUILayout.Popup("Render Pipeline", iPrevUseLWRP, _renderPipelineNames);
+				//if (iNextUseLWRP != iPrevUseLWRP)
+				//{
+				//	apEditorUtil.SetRecord_Portrait(apUndoGroupData.ACTION.Portrait_SettingChanged, _editor, _targetPortrait, null, false);
+				//	if (iNextUseLWRP == 0)
+				//	{
+				//		//사용 안함
+				//		_editor._isUseLWRPShader = false;
+				//	}
+				//	else
+				//	{
+				//		//LWRP 사용함
+				//		_editor._isUseLWRPShader = true;
+				//	}
+				//}
+				//if(GUILayout.Button("Generate Lightweight Shaders"))
+				//{
+				//	apShaderGenerator shaderGenerator = new apShaderGenerator();
+				//	shaderGenerator.GenerateLWRPShaders();
+				//}
+
+				//GUILayout.Space(10);
 #endif
 
 				//11.7 추가 : Ambient Light를 검은색으로 만든다.
@@ -538,7 +561,7 @@ namespace AnyPortrait
 					!string.Equals(prevMecanimPath, _targetPortrait._mecanimAnimClipResourcePath) ||
 					prevBakeGamma != _editor._isBakeColorSpaceToGamma
 #if UNITY_2018_2_OR_NEWER
-					 || prevUseLWRP != _editor._isUseLWRPShader
+					 //|| prevUseLWRP != _editor._isUseLWRPShader
 #endif
 					 )
 				{
@@ -554,49 +577,78 @@ namespace AnyPortrait
 
 			GUILayout.Space(5);
 		}
-
-		//private void CheckChangedProperties(float nextRootScale, float nextZScale)
-		//{
-		//	bool isChanged = false;
-		//	if (nextRootScale != _targetPortrait._bakeScale
-		//		|| nextZScale != _targetPortrait._bakeZSize)
-		//	{
-		//		isChanged = true;
-		//	}
-
-		//	if (isChanged)
-		//	{
-		//		apEditorUtil.SetRecord_Portrait(apUndoGroupData.ACTION.Portrait_BakeOptionChanged, _editor, _targetPortrait, null, false);
-
-		//		if (nextRootScale < 0.0001f)
-		//		{
-		//			nextRootScale = 0.0001f;
-		//		}
-		//		if(nextZScale < 0.5f)
-		//		{
-		//			nextZScale = 0.5f;
-		//		}
-
-		//		_targetPortrait._bakeScale = nextRootScale;
-		//		_targetPortrait._bakeZSize = nextZScale;
-
-				
-
-		//		//if(nextPhysicsScale < 0.0f)
-		//		//{
-		//		//	nextPhysicsScale = 0.0f;
-		//		//}
-		//		//_targetPortrait._physicBakeScale = nextPhysicsScale;
-
-		//		GUI.FocusControl(null);
-		//	}
-		//}
+		
 
 		private void MakeAmbientLightToBlack()
 		{	
 			RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
 			RenderSettings.ambientLight = Color.black;
 			apEditorUtil.SetEditorDirty();
+		}
+
+
+		private void CheckAmbientAndCorrection()
+		{
+			if(_editor == null)
+			{
+				return;
+			}
+			if(!_editor._isAmbientCorrectionOption)
+			{
+				//Ambient 보정 옵션이 False이면 처리를 안함
+				return;
+			}
+
+			//현재 Ambient 색상과 모드를 확인하자
+			UnityEngine.Rendering.AmbientMode ambientMode = RenderSettings.ambientMode;
+			Color ambientColor = RenderSettings.ambientLight;
+			if(ambientMode == UnityEngine.Rendering.AmbientMode.Flat &&
+				ambientColor.r <= 0.001f &&
+				ambientColor.g <= 0.001f &&
+				ambientColor.b <= 0.001f)
+			{
+				//Ambient가 검은색이다.
+				return;
+			}
+			//이전
+			////Ambient 색상을 바꿀 것인지 물어보자
+			#region [미사용 코드]
+			//int iBtn = EditorUtility.DisplayDialogComplex(
+			//										_editor.GetText(TEXT.DLG_AmbientColorCorrection_Title),
+			//										_editor.GetText(TEXT.DLG_AmbientColorCorrection_Body),
+			//										_editor.GetText(TEXT.Okay),
+			//										_editor.GetText(TEXT.DLG_AmbientColorCorrection_Ignore),
+			//										_editor.GetText(TEXT.Cancel)
+			//										);
+
+			//if(iBtn == 0)
+			//{
+			//	//색상을 바꾸자
+			//	MakeAmbientLightToBlack();
+			//}
+			//else if(iBtn == 1)
+			//{
+			//	//무시하자
+			//	_editor._isAmbientCorrectionOption = false;
+			//	_editor.SaveEditorPref();
+			//} 
+			#endregion
+
+			//조건문 추가 19.6.22 : 현재의 기본 Material Set이 Ambient Color 색상이 검은색을 필요로할 경우
+			if(_targetPortrait != null)
+			{
+				apMaterialSet defaultMatSet = _targetPortrait.GetDefaultMaterialSet();
+				if(defaultMatSet != null)
+				{
+					if(!defaultMatSet._isNeedToSetBlackColoredAmbient)
+					{
+						//현재의 Default MatSet이 검은색을 필요로 하지 않는 경우
+						return;
+					}
+				}
+			}
+			//이후 : 별도의 다이얼로그 표시
+			apDialog_AmbientCorrection.ShowDialog(_editor, (int)position.x, (int)position.y);
 		}
 	}
 

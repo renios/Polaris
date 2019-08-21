@@ -246,7 +246,7 @@ namespace AnyPortrait
 			GUILayout.Space(5);
 
 			//"Add Event"
-			if(GUILayout.Button(_editor.GetText(TEXT.DLG_AddEvent), GUILayout.Width(width - (10 + 4 + 80)), GUILayout.Height(30)))
+			if(GUILayout.Button(_editor.GetText(TEXT.DLG_AddEvent), GUILayout.Width(width - (10 + 6 + (160))), GUILayout.Height(30)))
 			{
 				apEditorUtil.SetRecord_Portrait(apUndoGroupData.ACTION.Anim_AddEvent, _editor, _animClip._portrait, null, false);
 
@@ -293,9 +293,105 @@ namespace AnyPortrait
 				_curSelectedEvent = newEvent;
 
 			}
+
+			//추가 3.29 : 이벤트 복사하기 : 프레임은 무조건 다음 프레임에
+			string strCopy = _editor.GetUIWord(UIWORD.Copy);
+			//if(GUILayout.Button(_editor.GetUIWord(UIWORD.Copy), GUILayout.Width(80), GUILayout.Height(30)))
+			if(apEditorUtil.ToggledButton_2Side(strCopy, strCopy, false, _curSelectedEvent != null, 80, 30))
+			{
+				if (_curSelectedEvent != null)
+				{
+					apEditorUtil.SetRecord_Portrait(apUndoGroupData.ACTION.Anim_AddEvent, _editor, _animClip._portrait, null, false);
+
+					if (_animClip._animEvents == null)
+					{
+						_animClip._animEvents = new List<apAnimEvent>();
+					}
+
+					apAnimEvent newEvent = new apAnimEvent();
+					
+					//선택한 이벤트와 동일한 속성으로 설정.
+					//- _defaultFrame과 다르다면, 거기에 복사
+					//- _defaultFrame과 같다면 +1프레임
+					newEvent._eventName = _curSelectedEvent._eventName;
+					newEvent._callType = _curSelectedEvent._callType;
+
+					if(newEvent._callType == apAnimEvent.CALL_TYPE.Once)
+					{
+						if(_curSelectedEvent._frameIndex == _defaultFrame)
+						{
+							newEvent._frameIndex = _curSelectedEvent._frameIndex + 1;
+							newEvent._frameIndex_End = _curSelectedEvent._frameIndex_End + 1;
+						}
+						else
+						{
+							int frameLength = Mathf.Max(_curSelectedEvent._frameIndex_End - _curSelectedEvent._frameIndex, 0);
+
+							newEvent._frameIndex = _defaultFrame;
+							newEvent._frameIndex_End = newEvent._frameIndex + frameLength;
+						}
+						
+					}
+					else
+					{
+						int frameLength = Mathf.Max(_curSelectedEvent._frameIndex_End - _curSelectedEvent._frameIndex, 0);
+
+						if (_curSelectedEvent._frameIndex <= _defaultFrame && _defaultFrame <= _curSelectedEvent._frameIndex + frameLength)
+						{
+							//DefaultFrame이 기존 이벤트 영역에 포함되어 있다.
+							//기존 영역의 밖에서 생성
+							newEvent._frameIndex = _curSelectedEvent._frameIndex + frameLength + 1;
+							newEvent._frameIndex_End = newEvent._frameIndex + frameLength;
+						}
+						else
+						{
+							//DefaultFrame이 기존 이벤트 영역 밖에 있다.
+							//DefaultFrame부터 생성
+							newEvent._frameIndex = _defaultFrame;
+							newEvent._frameIndex_End = newEvent._frameIndex + frameLength;
+						}
+
+						
+					}
+
+					if(_curSelectedEvent._subParams == null)
+					{
+						_curSelectedEvent._subParams = new List<apAnimEvent.SubParameter>();
+					}
+					if(_curSelectedEvent._subParams != null)
+					{
+						for (int iParam = 0; iParam < _curSelectedEvent._subParams.Count; iParam++)
+						{
+							apAnimEvent.SubParameter existParam = _curSelectedEvent._subParams[iParam];
+							apAnimEvent.SubParameter newParam = new apAnimEvent.SubParameter();
+
+							//속성들 복사
+							newParam._paramType =		existParam._paramType;
+							newParam._boolValue =		existParam._boolValue;
+							newParam._intValue =		existParam._intValue;
+							newParam._floatValue =		existParam._floatValue;
+							newParam._vec2Value =		existParam._vec2Value;
+							newParam._strValue =		existParam._strValue;
+							newParam._intValue_End =	existParam._intValue_End;
+							newParam._floatValue_End =	existParam._floatValue_End;
+							newParam._vec2Value_End =	existParam._vec2Value_End;
+
+							newEvent._subParams.Add(newParam);
+						}
+					}
+					
+
+					_animClip._animEvents.Add(newEvent);
+
+					_curSelectedEvent = newEvent;
+				}
+			}
+
 			//"Sort"
 			if(GUILayout.Button(_editor.GetText(TEXT.DLG_Sort), GUILayout.Width(80), GUILayout.Height(30)))
 			{
+				apEditorUtil.SetRecord_Portrait(apUndoGroupData.ACTION.Anim_SortEvents, _editor, _animClip._portrait, null, false);
+
 				//프레임 순으로 정렬을 한다.
 				if (_animClip._animEvents != null)
 				{
@@ -307,6 +403,8 @@ namespace AnyPortrait
 						}
 						return a._frameIndex - b._frameIndex;
 					});
+
+					apEditorUtil.SetEditorDirty();
 				}
 			}
 			EditorGUILayout.EndHorizontal();

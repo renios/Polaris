@@ -190,6 +190,7 @@ namespace AnyPortrait
 		public float _limitScale = -1.0f;
 
 
+		
 		/// <summary>
 		/// 자유롭게 움직일 수 있는 영역 (반지름)
 		/// </summary>

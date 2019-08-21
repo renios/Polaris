@@ -353,6 +353,93 @@ namespace AnyPortrait
 		}
 
 
+		public IEnumerator LinkAsync(apPortrait portrait, apOptRootUnit rootUnit, apAsyncTimer asyncTimer)
+		{
+			if(!_isBaked)
+			{
+				//return;
+				yield break;
+			}
+			//_parentRootUnit = rootUnit;
+			if(_nOptTransforms == 0)
+			{
+				//return;
+				yield break;
+			}
+			OptBufferData curBuff = null;
+			apOptTransform linkedOptTransform = null;
+
+			if(_optTransform2Buff == null)
+			{
+				_optTransform2Buff = new Dictionary<apOptTransform, OptBufferData>();
+			}
+			_optTransform2Buff.Clear();
+
+			for (int i = 0; i < _nOptTransforms; i++)
+			{
+				curBuff = _buffers[i];
+				linkedOptTransform = rootUnit.GetTransform(curBuff._optTransformID);
+				if(linkedOptTransform == null)
+				{
+					curBuff._optTransform = null;
+					continue;
+				}
+
+				curBuff._optTransform = linkedOptTransform;
+				curBuff.ResetLink();
+
+				//OptTransform2Buff에도 연결
+				if (_optTransform2Buff.ContainsKey(linkedOptTransform))
+				{
+					continue;
+				}
+
+				_optTransform2Buff.Add(linkedOptTransform, curBuff);
+				
+				//Async Wait
+				if(asyncTimer.IsYield())
+				{
+					yield return asyncTimer.WaitAndRestart();
+				}
+			}
+
+			//OptTransform을 돌면서 부모/자식 관계를 연결해준다.
+			apOptTransform parentOptTransform = null;
+			OptBufferData parentBuff = null;
+			for (int i = 0; i < _nOptTransforms; i++)
+			{
+				curBuff = _buffers[i];
+				linkedOptTransform = curBuff._optTransform;
+				if(linkedOptTransform == null)
+				{
+					continue;
+				}
+
+				parentOptTransform = linkedOptTransform._parentTransform;
+				if(parentOptTransform != null)
+				{
+					if(_optTransform2Buff.ContainsKey(parentOptTransform))
+					{
+						parentBuff = _optTransform2Buff[parentOptTransform];
+						curBuff.SetParent(parentBuff);//<<부모로 연결
+					}
+				}
+			}
+			
+			_isNeedToSortDepthChangedBuffers = true;
+			_isNeedToApplyDepthChangedBuffers = true;
+			//현재 상태 + 이전 상태에 대해서 모두 값을 가지고 "상태가 바뀔 때" 이벤트를 호출해야한다.
+			_isDepthChanged = false;
+			_isDepthChanged_Prev = false;//<<에디터와 다르게 이 변수에 따라서 "다시 초기화"라는 이벤트를 만들어야 한다.
+
+			//Async Wait
+			if(asyncTimer.IsYield())
+			{
+				yield return asyncTimer.WaitAndRestart();
+			}
+		}
+
+
 		// Functions
 		//----------------------------------------------------------
 		/// <summary>

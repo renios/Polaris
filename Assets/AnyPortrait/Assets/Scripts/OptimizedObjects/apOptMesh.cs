@@ -141,8 +141,8 @@ namespace AnyPortrait
 		[SerializeField]
 		private Vector2[] _vertUVs = null;
 
-		[SerializeField]
-		private int[] _vertUniqueIDs = null;
+		//[SerializeField]
+		//private int[] _vertUniqueIDs = null;
 
 		[SerializeField]
 		private int[] _vertTris = null;
@@ -150,9 +150,18 @@ namespace AnyPortrait
 		[SerializeField]
 		private int[] _vertTris_Flipped = null;//<<추가 : Flipped된 경우 Reverse된 값을 사용한다.
 
-		[SerializeField]
-		private int _nVert = 0;
-		//TODO : Vertex에 직접 값을 입력하는건 ModVert에서 하자
+		//삭제 19.7.3 : RenderVert와 vertPositon의 개수가 다를 수 있다. (양면의 경우)
+		//[SerializeField]
+		//private int _nVert = 0;
+
+		//변경 19.7.3 : 버텍스 개수를 두개로 분리. NonSerialized로 바꾸었다. (초기화에서 값 설정)
+		[NonSerialized]
+		private int _nRenderVerts = 0;
+
+		[NonSerialized]
+		private int _nVertPos = 0;
+		
+
 
 		/// <summary>Rendered Vertices</summary>
 		public apOptRenderVertex[] RenderVertices { get { return _renderVerts; } }
@@ -161,13 +170,16 @@ namespace AnyPortrait
 
 
 		//<업데이트>
-		[SerializeField]
+		[SerializeField, NonSerialized]
+		//[NonSerialized]
 		private Vector3[] _vertPositions_Updated = null;
 
-		[SerializeField]
+		[SerializeField, NonSerialized]
+		//[NonSerialized]
 		private Vector3[] _vertPositions_Local = null;
 
-		[SerializeField]
+		[SerializeField, NonSerialized]
+		//[NonSerialized]
 		private Vector2[] _vertPositions_World = null;
 
 		//[SerializeField]
@@ -236,119 +248,7 @@ namespace AnyPortrait
 		private bool _isAnyCustomPropertyRequest = false;
 
 		
-
-		//수정 : Clipping시 처리가 바뀜
-		//이전 >> 스텐실을 이용해서 Child에서 Parent의 버텍스를 받아서 AlphaTest (3-pass)
-		//변경 
-		//	>> Parent는 커맨드 버퍼를 카메라에 등록해서 RTT를 수행
-		//	>> Child는 Parent의 RTT를 받아서 마스크 렌더링을 수행한다.
-		// 병합된 버텍스는 삭제한다.
-
-
-
-		#region [미사용 코드]
-		//// Mask를 만들 경우 => 통합 데이터를 만든다.
-		////자신을 포함한 서브메시 데이터
-		////인덱스를 합쳐야하므로 처리가 다르다.
-		//[Serializable]
-		//public class SubMeshData
-		//{
-		//	public int _meshIndex = -1;//Parent는 0 (RGB 각각 1, 2, 3)
-		//	public apOptMesh _optMesh = null;
-		//	public Material _material = null;
-		//	//public Vector3[] _verts_World = null;
-		//	//public Vector3[] _verts_Local = null;
-		//	//public int[] _triangles = null;
-		//	//public Vector2[] _uvs = null;
-		//	public int _nVert = 0;
-		//	public int _nTri = 0;
-
-		//	public int _vertIndexOffset = 0;
-		//	//public Color _color = Color.clear;
-		//	public Texture _texture = null;
-		//	public bool _isVisible = false;
-
-		//	public SubMeshData(int meshIndex, apOptMesh targetOptMesh, int vertexIndexOffset)
-		//	{
-		//		_meshIndex = meshIndex;
-		//		_optMesh = targetOptMesh;
-		//		_material = targetOptMesh._material;
-
-		//		_nVert = targetOptMesh._renderVerts.Length;
-		//		_nTri = targetOptMesh._vertTris.Length;
-
-		//		//_verts_World = new Vector3[targetOptMesh._renderVerts.Length];
-		//		//_verts_Local = new Vector3[targetOptMesh._renderVerts.Length];
-		//		//_triangles = new int[targetOptMesh._vertTris.Length];
-		//		//_uvs = new Vector2[targetOptMesh._vertUVs.Length];
-
-		//		//for (int i = 0; i < _verts_World.Length; i++)
-		//		//{
-		//		//	_verts_World[i] = targetOptMesh._renderVerts[i]._vertPos3_World;
-		//		//	_verts_Local[i] = Vector3.zero;//<<이건 계산 후에 적용
-		//		//}
-
-		//		//for (int i = 0; i < _triangles.Length; i++)
-		//		//{
-		//		//	_triangles[i] = targetOptMesh._vertTris[i];
-		//		//}
-
-		//		//for (int i = 0; i < _uvs.Length; i++)
-		//		//{
-		//		//	_uvs[i] = targetOptMesh._vertUVs[i];
-		//		//}
-
-		//		//_color = _material.color;
-		//		_texture = targetOptMesh._texture;
-
-		//		_vertIndexOffset = vertexIndexOffset;
-		//	}
-
-
-		//	public void SetVisible(bool isVisible)
-		//	{
-		//		_isVisible = isVisible;
-		//	}
-
-		//	public Color MeshColor
-		//	{
-		//		get
-		//		{
-		//			return _optMesh.MeshColor;
-		//		}
-		//	}
-		//} 
-		#endregion
-
-
-		#region [미사용 코드]
-		//[SerializeField]
-		//public SubMeshData[] _subMeshes = null;//<<Parnet일때만 만든다.
-		//private const int SUBMESH_BASE = 0;
-		//private const int SUBMESH_CLIP1 = 1;
-		//private const int SUBMESH_CLIP2 = 2;
-		//private const int SUBMESH_CLIP3 = 3;
-
-		//private static Color VertexColor_Base = new Color(0.0f, 0.0f, 0.0f, 1.0f);// Black
-		//private static Color VertexColor_Clip1 = new Color(1.0f, 0.0f, 0.0f, 1.0f); //Red
-		//private static Color VertexColor_Clip2 = new Color(0.0f, 1.0f, 0.0f, 1.0f); //Green
-		//private static Color VertexColor_Clip3 = new Color(0.0f, 0.0f, 1.0f, 1.0f); //Blue
-
-		//[SerializeField]
-		//private Vector3[] _vertPosList_ForMask = null;//전체 Vertex 위치 (Local)
-
-		//[SerializeField]
-		//private Color[] _vertColorList_ForMask = null;//전체 Vertex의 VertColor (Black - RGB) 
-		#endregion
-
-		//[SerializeField]
-		//private Vector3[] _vertPosList_ClippedMerge = null;
-
-		//[SerializeField]
-		//private Color[] _vertColorList_ClippedMerge = null;
-
-		//[SerializeField]
-		//private int _nVertParent = 0;
+		
 
 		/// <summary>[Please do not use it] Updated Matrix</summary>
 		public apMatrix3x3 _matrix_Vert2Mesh = apMatrix3x3.identity;
@@ -472,21 +372,68 @@ namespace AnyPortrait
 		private bool _cal_isVisibleRequest = false;
 		private bool _cal_isVisibleRequest_Masked = false;
 
-		//추가 3.22
 		//Transform이 Flipped된 경우 -> Vertex 배열을 역으로 계산해야한다.
-		private bool _cal_isFlipped = false;
-		private bool _cal_isFlipped_Prev = false;
+		//추가 : 2.25
+
+		//Flipped에 관해서 처리를 정밀하게 하자
+
+
+		private bool _cal_isRootFlipped_X = false;
+		private bool _cal_isRootFlipped_Y = false;
+		private bool _cal_isRootFlipped = false;
+		//private bool _cal_isRootFlipped_Prev = false;
+
+		private bool _cal_isUpdateFlipped_X = false;
+		private bool _cal_isUpdateFlipped_Y = false;
+		private bool _cal_isUpdateFlipped = false;
+
+		private bool _cal_isFlippedBuffer = false;
+		private bool _cal_isFlippedBuffer_Prev = false;
+
+		//추가 : 2.25 계산용 변수 하나 더
+		private apMatrix3x3 _cal_Matrix_TFResult_World = apMatrix3x3.identity;
 
 		[SerializeField]
 		public bool _isAlways2Side = false;
+
+		//추가 19.6.15 : Material Info가 추가되었다.
+		//Bake가 안된 경우 (v1.1.6 또는 이전 버전)에 처리하기 위해서 배열형태로 만든다.
+		[SerializeField, NonBackupField]
+		private apOptMaterialInfo[] _materialInfo = null;
+
+		public apOptMaterialInfo MaterialInfo
+		{
+			get
+			{
+				if(_materialInfo == null || _materialInfo.Length == 0) { return null; }
+				return _materialInfo[0];
+			}
+		}
+
+		public bool IsUseMaterialInfo
+		{
+			get { return MaterialInfo != null; }
+		}
+
+		
 
 		// Init
 		//------------------------------------------------
 		void Awake()
 		{	
 			_transform = transform;
-			_cal_isFlipped = false;
-			_cal_isFlipped_Prev = false;
+
+			_cal_isRootFlipped_X = false;
+			_cal_isRootFlipped_Y = false;
+			_cal_isRootFlipped = false;
+			//_cal_isRootFlipped_Prev = false;
+
+			_cal_isUpdateFlipped_X = false;
+			_cal_isUpdateFlipped_Y = false;
+			_cal_isUpdateFlipped = false;
+
+			_cal_isFlippedBuffer = false;
+			_cal_isFlippedBuffer_Prev = false;
 
 			_shaderID_MainTex = Shader.PropertyToID("_MainTex");
 			_shaderID_Color = Shader.PropertyToID("_Color");
@@ -679,6 +626,7 @@ namespace AnyPortrait
 
 		// Bake
 		//------------------------------------------------
+#if UNITY_EDITOR
 		/// <summary>[Please do not use it] Bake Functions</summary>
 		public void BakeMesh(Vector3[] vertPositions,
 								Vector2[] vertUVs,
@@ -689,8 +637,10 @@ namespace AnyPortrait
 								apOptTransform parentTransform,
 								Texture2D texture, int textureID,
 								apPortrait.SHADER_TYPE shaderType,
-								Shader shaderNormal, Shader shaderClipping, 
-								Shader alphaMask, int maskRenderTextureSize,
+								//Shader shaderNormal, Shader shaderClipping,//v1.1.6 또는 이전
+								apOptMaterialInfo materialInfo,//v1.1.7 또는 이후
+								Shader alphaMask,//<<AlphaMask는 따로
+								int maskRenderTextureSize,
 								bool isVisibleDefault,
 								bool isMaskParent, bool isMaskChild,
 								int batchedMatID, //Material batchedMaterial,//<<이건 필요없쩡..
@@ -699,11 +649,13 @@ namespace AnyPortrait
 								bool isReceiveShadow
 								)
 		{
+			ClearMaterialForBake();
+
 			_parentTransform = parentTransform;
 
 			_vertPositions = vertPositions;
 			_vertUVs = vertUVs;
-			_vertUniqueIDs = vertUniqueIDs;
+			//_vertUniqueIDs = vertUniqueIDs;//<<삭제. 의미가 없다.
 			_vertTris = vertTris;
 
 			_isAlways2Side = isAlways2Side;
@@ -723,27 +675,61 @@ namespace AnyPortrait
 				int nTri = _vertTris.Length;
 				int nTri2Side = nTri * 2;
 
+				int nVert = vertPositions.Length;
+				int nVert2Side = nVert * 2;
+
 				int[] vertTris2Side = new int[nTri2Side];
+
+				//기존 : 같은 버텍스를 두번 공유한다.
+				//Array.Copy(_vertTris, 0, vertTris2Side, 0, nTri);
+				//Array.Copy(_vertTris_Flipped, 0, vertTris2Side, nTri, nTri);
+				
+				//_vertTris = vertTris2Side;//<<전환
+
+
+				//변경 19.7.3 : 그냥 버텍스 리스트를 2개를 만들자
+				//정방향
 				Array.Copy(_vertTris, 0, vertTris2Side, 0, nTri);
-				Array.Copy(_vertTris_Flipped, 0, vertTris2Side, nTri, nTri);
-				//for (int i = 0; i < nTri; i++)
-				//{
-				//	vertTris2Side[i] = _vertTris[i];
-				//}
-				//for (int i = 0; i < nTri; i++)
-				//{
-				//	vertTris2Side[i + nTri] = _vertTris_Flipped[i];
-				//}
 
+				//역방향 (인덱스 값도 + nTri)
+				for (int i = 0; i < _vertTris_Flipped.Length; i++)
+				{
+					vertTris2Side[i + nTri] = _vertTris_Flipped[i] + nVert;
+				}
 
-				_vertTris = vertTris2Side;//<<전환
+				_vertTris = vertTris2Side;//적용
+
+				//다른 리스트도 두배로 증가
+				_vertPositions = new Vector3[nVert2Side];
+				_vertUVs = new Vector2[nVert2Side];
+				
+				for (int i = 0; i < nVert; i++)
+				{
+					_vertPositions[i] = vertPositions[i];
+					_vertPositions[i + nVert] = vertPositions[i];//<<nVert만큼 뒤에 더 추가
+
+					_vertUVs[i] = vertUVs[i];
+					_vertUVs[i + nVert] = vertUVs[i];
+				}
+				
+				//변경 19.7.3 : 양면 렌더링일때 (버텍스 수가 다름)
+				_nRenderVerts = nVert;
+				_nVertPos = nVert2Side;
 			}
-
+			else
+			{
+				//변경 19.7.3 : 단면 렌더링일때 (버텍스 수가 같음)
+				_nRenderVerts = _vertPositions.Length;
+				_nVertPos = _vertPositions.Length;
+			}
 			_texture = texture;
 			_textureID = textureID;
 
 			_pivotPos = pivotPos;
-			_nVert = _vertPositions.Length;
+
+			//_nVert = _vertPositions.Length;///이전
+			
+			
 
 			_isVisibleDefault = isVisibleDefault;
 
@@ -753,8 +739,16 @@ namespace AnyPortrait
 			_matrix_Vert2Mesh_Inverse = _matrix_Vert2Mesh.inverse;
 
 			_shaderType = shaderType;
-			_shaderNormal = shaderNormal;
-			_shaderClipping = shaderClipping;
+
+			//이전 코드
+			//_shaderNormal = shaderNormal;
+			//_shaderClipping = shaderClipping;
+
+			//변경된 코드 19.6.15 : MaterialInfo 이용
+			_materialInfo = new apOptMaterialInfo[1];
+			_materialInfo[0] = materialInfo;
+
+
 
 			_shader_AlphaMask = alphaMask;//MaskShader를 넣는다.
 
@@ -772,30 +766,27 @@ namespace AnyPortrait
 									Mathf.Abs(_parentTransform._meshColor2X_Default.b - 0.5f) < 0.004f &&
 									Mathf.Abs(_parentTransform._meshColor2X_Default.a - 1.0f) < 0.004f;
 			
-			if(!_isDefaultColorGray)
-			{
-				//Debug.Log("Gray가 아닌 mesh : " + this.name);
-			}
 			_isBatchedMaterial = !isMaskChild && _isDefaultColorGray;
 
 			_batchedMatID = batchedMatID;
 
-			if (_shaderNormal == null)
-			{
-				Debug.LogError("Shader Normal is Null");
-			}
-			if (_shaderClipping == null)
-			{
-				Debug.LogError("Shader Clipping is Null");
-			}
+			//삭제 19.6.16 : 
+			//if (_shaderNormal == null)
+			//{
+			//	Debug.LogError("Shader Normal is Null");
+			//}
+			//if (_shaderClipping == null)
+			//{
+			//	Debug.LogError("Shader Clipping is Null");
+			//}
 
 			//RenderVert를 만들어주자
-			_renderVerts = new apOptRenderVertex[_nVert];
-			for (int i = 0; i < _nVert; i++)
+			_renderVerts = new apOptRenderVertex[_nRenderVerts];
+			for (int i = 0; i < _nRenderVerts; i++)
 			{
 				_renderVerts[i] = new apOptRenderVertex(
 											_parentTransform, this,
-											_vertUniqueIDs[i], i,
+											vertUniqueIDs[i], i,
 											new Vector2(vertPositions[i].x, vertPositions[i].y),
 											_vertUVs[i],
 											depths[i]);
@@ -826,8 +817,8 @@ namespace AnyPortrait
 			}
 
 			_mesh.Clear();
-			_cal_isFlipped = false;
-			_cal_isFlipped_Prev = false;
+			_cal_isFlippedBuffer = false;
+			_cal_isFlippedBuffer_Prev = false;
 
 			//재질 설정을 해주자
 			//변경 12.12 : Bake시에는 Instanced만 사용하기로 한다.
@@ -855,48 +846,6 @@ namespace AnyPortrait
 			//일단 연결은 삭제한다.
 			
 
-			//이전 코드
-			//if(_sharedMaterial != null)
-			//{
-			//	try
-			//	{
-			//		UnityEngine.Object.DestroyImmediate(_sharedMaterial);
-			//	}
-			//	catch(Exception) { }
-			//	_sharedMaterial = null;
-			//}
-
-			//_material = null;
-			//_instanceMaterial = null;
-			//_isUseSharedMaterial = true;
-
-			//Batch된 재질을 사용하는 경우는 재질을 받아온다.
-			//그렇지 않은 경우는 Null로 둔다. (Mask Child인 경우이다)
-			//if(!_isBatchedMaterial)
-			//{	
-			//	//isMaskChild인 경우에는 SharedMaterial을 이 단계에서 만들지 않는다. (바로 뒤에 만들 것이므로)
-			//	_sharedMaterial = null;
-
-			//	//..아니다 Bake후에 보여질게 없다. 여기서 만들자
-			//	_sharedMaterial = new Material(_shaderNormal);
-			//	_sharedMaterial.SetColor("_Color", _parentTransform._meshColor2X_Default);
-			//	_sharedMaterial.SetTexture("_MainTex", _texture);
-
-			//	_material = _sharedMaterial;
-
-
-			//}
-			//else
-			//{
-			//	//Batch 대상이면 일단 Null로 둔다.
-			//	_sharedMaterial = null;
-
-			//	//현재 Material 정보는 Batch된 재질을 설정한다.
-			//	_material = batchedMaterial;
-			//}
-
-			
-
 			if (_meshRenderer == null)
 			{
 				_meshRenderer = GetComponent<MeshRenderer>();
@@ -907,6 +856,7 @@ namespace AnyPortrait
 			
 			//변경 12.12 : Bake에서는 Instanced Material을 넣는다.
 			_meshRenderer.sharedMaterial = _material_Cur;
+			
 
 
 			//그림자 설정은 제외 > 변경 : 옵션에 따라서 설정한다.
@@ -950,11 +900,27 @@ namespace AnyPortrait
 			_vertPositions_Local = new Vector3[_vertPositions.Length];
 			_vertPositions_World = new Vector2[_vertPositions.Length];
 
-			for (int i = 0; i < _vertPositions.Length; i++)
+			if (!_isAlways2Side)
 			{
-				//Calculate 전에는 직접 Pivot Pos를 적용해주자 (Calculate에서는 자동 적용)
-				_vertPositions_Updated[i] = _renderVerts[i]._vertPos3_LocalUpdated;
+				//일반 업데이트
+
+				for (int i = 0; i < _vertPositions.Length; i++)
+				{
+					//Calculate 전에는 직접 Pivot Pos를 적용해주자 (Calculate에서는 자동 적용)
+					_vertPositions_Updated[i] = _renderVerts[i]._vertPos3_LocalUpdated;
+				}
 			}
+			else
+			{
+				//양면 업데이트
+				for (int i = 0; i < _nRenderVerts; i++)
+				{
+					//Calculate 전에는 직접 Pivot Pos를 적용해주자 (Calculate에서는 자동 적용)
+					_vertPositions_Updated[i] = _renderVerts[i]._vertPos3_LocalUpdated;
+					_vertPositions_Updated[i + _nRenderVerts] = _renderVerts[i]._vertPos3_LocalUpdated;
+				}
+			}
+			
 			
 
 			_transform = transform;
@@ -981,10 +947,28 @@ namespace AnyPortrait
 				_isVisible = false;
 			}
 		}
-
+#endif
 
 
 		//-----------------------------------------------------------------------
+#if UNITY_EDITOR
+		//Bake를 위해서 이전에 완성된 Material을 삭제하자.
+		public void ClearMaterialForBake()
+		{
+			if(Application.isPlaying)
+			{
+				return;
+			}
+
+			_material_Instanced = null;
+			_material_Cur = null;
+			_material_Batched = null;
+			_material_Shared = null;
+
+			_isInitMaterial = false;
+		}
+#endif
+
 		//Bake되지 않는 Mesh의 초기화를 호출한다.
 		/// <summary>
 		/// [Please do not use it]
@@ -998,6 +982,51 @@ namespace AnyPortrait
 			}
 
 			_transform = transform;
+
+
+			//체크 19.7.3 : 만약 양면 렌더링인데, RenderVert와 _vertPositions의 개수가 같다면? (마이그레이션 코드)
+			if (_isAlways2Side)
+			{
+				//Debug.Log("Check 2-Sided Mesh [" + this.name + "]");
+				//Debug.Log("2-Sided Mesh Check / Vert Pos :" + _vertPositions.Length + ", Render Verts : " + _renderVerts.Length);
+				if (_vertPositions.Length == _renderVerts.Length)
+				{
+					
+					//이거의 개수를 두배로 늘려야 한다.
+					//다른 리스트도 두배로 증가
+					int nVert = _renderVerts.Length;
+					int nVert2Side = _renderVerts.Length * 2;
+
+					//Debug.LogError("Expand Verts : " + nVert + " > " + nVert2Side);
+
+					Vector3[] prevVertPos = _vertPositions;
+					Vector2[] prevVertUVs = _vertUVs;
+
+
+					_vertPositions = new Vector3[nVert2Side];
+					_vertUVs = new Vector2[nVert2Side];
+
+					for (int i = 0; i < nVert; i++)
+					{
+						_vertPositions[i] = prevVertPos[i];
+						_vertPositions[i + nVert] = prevVertPos[i];//<<nVert만큼 뒤에 더 추가
+
+						_vertUVs[i] = prevVertUVs[i];
+						_vertUVs[i + nVert] = prevVertUVs[i];
+					}
+
+					////Update, Local 배열도 다시 갱신
+					//_vertPositions_Updated = new Vector3[_vertPositions.Length];
+					//_vertPositions_Local = new Vector3[_vertPositions.Length];
+					//_vertPositions_World = new Vector2[_vertPositions.Length];
+					//for (int i = 0; i < _vertPositions.Length; i++)
+					//{
+					//	_vertPositions_Updated[i] = _vertPositions[i];
+					//}
+				}
+			}
+			
+
 
 			if(_mesh == null)
 			{
@@ -1022,6 +1051,9 @@ namespace AnyPortrait
 
 			_meshFilter.sharedMesh = _mesh;
 			
+			//_material_Instanced = null;
+			//_material_Cur = null;
+			//_isInitMaterial = false;
 
 			if (_meshRenderer == null)
 			{
@@ -1031,27 +1063,36 @@ namespace AnyPortrait
 			//_meshRenderer.material = _material;
 			_meshRenderer.sharedMaterial = _material_Cur;
 
+			
+
+
 			_meshRenderer.enabled = _isVisibleDefault;
 			_isVisible = _isVisibleDefault;
 			
-			if (_vertPositions_Updated == null || _vertPositions_Local == null)
+
+
+
+			_vertPositions_Updated = new Vector3[_vertPositions.Length];
+			_vertPositions_Local = new Vector3[_vertPositions.Length];
+			_vertPositions_World = new Vector2[_vertPositions.Length];
+			for (int i = 0; i < _vertPositions.Length; i++)
 			{
-				_vertPositions_Updated = new Vector3[_vertPositions.Length];
-				_vertPositions_Local = new Vector3[_vertPositions.Length];
-				for (int i = 0; i < _vertPositions.Length; i++)
-				{
-					_vertPositions_Updated[i] = _vertPositions[i];
-				}
+				_vertPositions_Updated[i] = _vertPositions[i];
 			}
 
 			//_texture_Updated = _texture;
 
 			_isInitMesh = true;
 
-			_cal_isFlipped = false;
-			_cal_isFlipped_Prev = false;
+			_cal_isFlippedBuffer = false;
+			_cal_isFlippedBuffer_Prev = false;
 
 			_isUseRiggingCache = false;
+
+			//추가 19.7.3 : 버텍스 개수는 InitMesh에서 설정
+			_nRenderVerts = (_renderVerts != null) ? _renderVerts.Length : 0;
+			_nVertPos = (_vertPositions != null) ? _vertPositions.Length : 0;
+			
 		}
 
 		/// <summary>
@@ -1080,17 +1121,34 @@ namespace AnyPortrait
 			//1. Material Instanced를 만들자.
 			if (_material_Instanced == null)
 			{
-				if (_isMaskChild)
+				//변경 19.6.16 : MaterialInfo를 이용하여 재질 만들기
+				if (IsUseMaterialInfo)
 				{
-					_material_Instanced = new Material(_shaderClipping);
+					apOptMaterialInfo matInfo = MaterialInfo;
+					_material_Instanced = new Material(matInfo._shader);
+
+					_material_Instanced.SetColor("_Color", _parentTransform._meshColor2X_Default);
+					_material_Instanced.SetTexture("_MainTex", matInfo._mainTex);
+
+					//추가 속성도 적용하자.
+					matInfo.SetMaterialProperties(_material_Instanced);
 				}
 				else
 				{
-					_material_Instanced = new Material(_shaderNormal);
+					//이전 방식
+					if (_isMaskChild)
+					{
+						_material_Instanced = new Material(_shaderClipping);
+					}
+					else
+					{
+						_material_Instanced = new Material(_shaderNormal);
+					}
+					_material_Instanced.SetColor("_Color", _parentTransform._meshColor2X_Default);
+					_material_Instanced.SetTexture("_MainTex", _texture);
 				}
-				_material_Instanced.SetColor("_Color", _parentTransform._meshColor2X_Default);
-				_material_Instanced.SetTexture("_MainTex", _texture);
 			}
+			
 
 			//2. Alpha Mask Material을 만들자.
 			if(_isMaskParent && _materialAlphaMask == null)
@@ -1101,7 +1159,10 @@ namespace AnyPortrait
 			_materialType = MATERIAL_TYPE.Instanced;
 			_material_Cur = _material_Instanced;
 
-			
+			if(_meshRenderer != null && _meshRenderer.sharedMaterial == null)
+			{
+				_meshRenderer.sharedMaterial = _material_Cur;
+			}
 		}
 
 
@@ -1134,71 +1195,30 @@ namespace AnyPortrait
 				{
 					_material_Batched = _materialUnit_Batched._material;
 				}
-				_material_Shared = batchedMaterial.GetSharedMaterial(_texture, _shaderNormal);
+
+				//변경 19.6.16
+				if(IsUseMaterialInfo)
+				{
+					//Material Info를 사용한다면
+					_material_Shared = batchedMaterial.GetSharedMaterial_MatInfo(MaterialInfo);
+				}
+				else
+				{
+					//이전 버전이라면
+					_material_Shared = batchedMaterial.GetSharedMaterial_Prev(_texture, _shaderNormal);
+				}
+				
 			}
 
 			_materialType = MATERIAL_TYPE.Instanced;
 			_meshRenderer.sharedMaterial = _material_Instanced;//<<일단 Instanced Material 넣기
 
+			
 			_isForceBatch2Shared = false;
 
 			//자동으로 선택해보자
 			AutoSelectMaterial();
-			#region [이전 코드]
-			//_material = null;
-			//_instanceMaterial = null;
-			////_sharedMaterial = null;
-
-			//if(_isBatchedMaterial)
-			//{
-			//	_sharedMaterial = batchedMaterial.GetMaterial(_batchedMatID);
-			//}
-			//else if(_isMaskChild)
-			//{
-			//	_sharedMaterial = new Material(_shaderClipping);
-			//	_sharedMaterial.SetColor("_Color", _parentTransform._meshColor2X_Default);
-			//	_sharedMaterial.SetTexture("_MainTex", _texture);
-			//}
-
-			//if(_sharedMaterial == null)
-			//{
-			//	//Debug.LogError("Null Material [" + this.name + "]");
-
-			//	//어쩔수 없이 하나 만들어서 사용한다.
-			//	_sharedMaterial = new Material(_shaderNormal);
-			//	_sharedMaterial.SetColor("_Color", _parentTransform._meshColor2X_Default);
-			//	_sharedMaterial.SetTexture("_MainTex", _texture);
-			//}
-
-
-
-			//_instanceMaterial = Instantiate<Material>(_sharedMaterial);
-			//if(_isMaskParent)
-			//{
-			//	//_materialAlphaMask = Instantiate<Material>(_materialAlphaMask);
-			//	if(_materialAlphaMask == null)
-			//	{
-			//		_materialAlphaMask = new Material(_shader_AlphaMask);
-			//	}
-			//}
-
-			//if (!_isMaskChild && _isDefaultColorGray)
-			//{
-			//	//기본값은 Batch가 되도록 처리
-			//	_isUseSharedMaterial = true;
-			//	_material = _sharedMaterial;
-
-			//	_meshRenderer.material = _material;
-			//}
-			//else
-			//{
-			//	//Mask Child는 필연적으로 Instance 값만 사용한다.
-			//	_isUseSharedMaterial = false;
-			//	_material = _instanceMaterial;
-
-			//	_meshRenderer.material = _material;
-			//} 
-			#endregion
+			
 
 			_isInitMaterial = true;
 		}
@@ -1230,9 +1250,7 @@ namespace AnyPortrait
 			{
 				_clipChildIDs[i] = clipChildIDs[i];
 			}
-			//_clipChildIDs[0] = clipChildIDs[0];
-			//_clipChildIDs[1] = clipChildIDs[1];
-			//_clipChildIDs[2] = clipChildIDs[2];
+			
 		}
 
 		/// <summary>
@@ -1452,102 +1470,13 @@ namespace AnyPortrait
 		{
 			_parentOptMesh = parentMesh;
 
-			//이전 코드
-			//if(_sharedMaterial != null)
-			//{
-			//	UnityEngine.Object.DestroyImmediate(_sharedMaterial);
-			//	_sharedMaterial = null;
-			//}
-			//_sharedMaterial = new Material(_shaderClipping);
-			////_sharedMaterial.SetColor("_Color", MeshColor);
-			//_sharedMaterial.SetColor("_Color", _parentTransform._meshColor2X_Default);
-			//_sharedMaterial.SetTexture("_MainTex", _texture);
-
-			//_material = _sharedMaterial;
-			//_instanceMaterial = null;
-
-			//_meshRenderer.sharedMaterial = _material;
-			//_isUseSharedMaterial = true;
-
+			
 			if(_meshRenderer.sharedMaterial == null ||
 				_material_Instanced == null)
 			{
 				MakeInstancedMaterial();
 				_meshRenderer.sharedMaterial = _material_Instanced;
 			}
-
-			
-
-
-			//이부분 코드를 날린다.
-			#region [미사용 코드 : 스텐실 병합 방식의 코드]
-			////Child라면 Rendering이 되지 않는다.
-			////_meshRenderer.enabled = false;
-			////> 수정
-			////Child도 렌더링을 다 한다.
-			//_meshRenderer.enabled = true;
-
-			////일반 재질이 아니라, Parent로 부터 Mask를 받는 스텐실 재질로 전환한다.
-			//_nVertParent = _parentOptMesh._renderVerts.Length;
-
-			//int nTotalVert = _nVert + _nVertParent;
-			//_vertPosList_ClippedMerge = new Vector3[nTotalVert];
-			//_vertColorList_ClippedMerge = new Color[nTotalVert];
-			////Parent -> 자기 자신 순으로 Vertex를 넣는다.
-			//Color vertColor_Parent = new Color(1.0f, 0.0f, 0.0f, 0.0f);
-			//Color vertColor_Self = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-
-			//List<int> vertIndexList_ClippedMerge = new List<int>();
-			//List<Vector2> vertUVs_ClippedMerge = new List<Vector2>();
-
-			//apOptMesh[] subMeshes = new apOptMesh[] { _parentOptMesh, this };
-			//int iVertOffset = 0;
-			//for (int iMesh = 0; iMesh < 2; iMesh++)
-			//{
-			//	apOptMesh subMesh = subMeshes[iMesh];
-			//	Color vertColor = vertColor_Parent;
-			//	iVertOffset = 0;
-			//	if (iMesh == 1)
-			//	{
-			//		vertColor = vertColor_Self;
-			//		iVertOffset = _nVertParent;
-			//	}
-
-			//	for (int iVert = 0; iVert < subMesh._renderVerts.Length; iVert++)
-			//	{
-			//		_vertPosList_ClippedMerge[iVert + iVertOffset] = subMesh._renderVerts[iVert]._pos_Local;
-			//		_vertColorList_ClippedMerge[iVert + iVertOffset] = vertColor;
-			//		vertUVs_ClippedMerge.Add(subMesh._vertUVs[iVert]);
-			//	}
-
-			//	int nTri = subMesh._vertTris.Length;
-			//	for (int iTri = 0; iTri < nTri; iTri++)
-			//	{
-			//		vertIndexList_ClippedMerge.Add(subMesh._vertTris[iTri] + iVertOffset);
-			//	}
-			//}
-
-			//_mesh.Clear();
-			//_mesh.vertices = _vertPosList_ClippedMerge;
-			//_mesh.triangles = vertIndexList_ClippedMerge.ToArray();
-			//_mesh.uv = vertUVs_ClippedMerge.ToArray();
-			//_mesh.colors = _vertColorList_ClippedMerge;
-
-			//_material = new Material(_shaderClipping);
-			//_material.SetColor("_Color", MeshColor);
-			//_material.SetTexture("_MainTex", _texture);
-
-			//_material.SetColor("_MaskColor", _parentOptMesh.MeshColor);
-			//_material.SetTexture("_MaskTex", _parentOptMesh._texture);
-
-			//_meshRenderer.sharedMaterial = _material;
-
-			//_mesh.RecalculateBounds();
-			//_mesh.RecalculateNormals();
-			//_mesh.MarkDynamic();
-
-			//RefreshClippedMesh(); 
-			#endregion
 		}
 
 		//Mask Parent의 세팅을 리셋한다.
@@ -1652,6 +1581,33 @@ namespace AnyPortrait
 			//안보이는건 업데이트하지 말자
 			if (_isVisible)
 			{
+				//추가 2.25 : Flipped 관련 코드가 업데이트 초기에 등장한다.
+				if (_cal_isRootFlipped)
+				{
+					//이전 계산에서 Flipped가 되었다면 일단 초기화
+					_transform.localScale = Vector3.one;
+					_transform.localPosition = new Vector3(-_pivotPos.x, -_pivotPos.y, 0);
+				}
+
+				////추가 : World 좌표계의 Flip을 별도로 계산한다.
+				_cal_isRootFlipped_X = _parentTransform._rootUnit.IsFlippedX;
+				_cal_isRootFlipped_Y = _parentTransform._rootUnit.IsFlippedY;
+				//_cal_isRootFlipped_X = _transform.lossyScale.x < 0.0f;
+				//_cal_isRootFlipped_Y = _transform.lossyScale.y < 0.0f;
+				_cal_isRootFlipped = (_cal_isRootFlipped_X && !_cal_isRootFlipped_Y)
+									|| (!_cal_isRootFlipped_X && _cal_isRootFlipped_Y);
+
+				float flipWeight_X = 1;
+				float flipWeight_Y = 1;
+
+				if(_cal_isRootFlipped)
+				{
+					flipWeight_X = _cal_isRootFlipped_X ? -1 : 1;
+					flipWeight_Y = _cal_isRootFlipped_Y ? -1 : 1;
+				}
+				
+
+				_cal_Matrix_TFResult_World = _parentTransform._matrix_TFResult_World.MtrxToSpace;
 
 				apOptRenderVertex rVert = null;
 
@@ -1662,7 +1618,7 @@ namespace AnyPortrait
 
 				apOptCalculatedResultStack calculateStack = _parentTransform.CalculatedStack;
 
-				for (int i = 0; i < _nVert; i++)
+				for (int i = 0; i < _nRenderVerts; i++)
 				{
 
 					rVert = _renderVerts[i];
@@ -1704,9 +1660,9 @@ namespace AnyPortrait
 						rVert._matrix_Cal_VertLocal.SetTRS(calculateStack.GetDeferredLocalPos(i));
 					}
 
-					rVert.SetMatrix_3_Transform_Mesh(_parentTransform._matrix_TFResult_World.MtrxToSpace);//<<기존
-					//rVert.SetMatrix_3_Transform_Mesh(_parentTransform._convert2TargetMatrix3x3 * _parentTransform._matrix_TFResult_World.MtrxToSpace);//<<변경
-
+					//rVert.SetMatrix_3_Transform_Mesh(_parentTransform._matrix_TFResult_World.MtrxToSpace);//<<기존
+					rVert.SetMatrix_3_Transform_Mesh(_cal_Matrix_TFResult_World);//<<한번 더 계산된 값으로 변경
+					
 					if (isVertexWorld)
 					{
 						rVert._matrix_Cal_VertWorld.SetTRS(calculateStack._result_VertWorld[i]);
@@ -1718,16 +1674,26 @@ namespace AnyPortrait
 						rVert.SetMatrix_5_OrthoCorrection(_parentTransform._convert2TargetMatrix3x3);
 					}
 
+					//추가
+					rVert.SetMatrix_6_FlipWeight(flipWeight_X, flipWeight_Y);
+
 					rVert.Calculate();
 
 					//업데이트 데이터를 넣어준다.
 					_vertPositions_Updated[i] =  rVert._vertPos3_LocalUpdated;
 					_vertPositions_World[i] = rVert._vertPos_World;
+					
+				}
 
-					//Pers -> Ortho 테스트
-					//_vertPositions_Updated[i] = _parentTransform._convert2TargetMatrix4x4.MultiplyPoint(rVert._vertPos3_LocalUpdated);//<<테스트
-					//_vertPositions_World[i] = _parentTransform._convert2TargetMatrix4x4.MultiplyPoint3x4(rVert._vertPos_World);//테스트
-
+				//추가 19.7.3 : 양면인 경우에는, 뒤쪽면도 업데이트를 해야한다.
+				if(_isAlways2Side)
+				{
+					for (int i = 0; i < _nRenderVerts; i++)
+					{
+						rVert = _renderVerts[i];
+						_vertPositions_Updated[i + _nRenderVerts] = rVert._vertPos3_LocalUpdated;
+						_vertPositions_World[i + _nRenderVerts] = rVert._vertPos_World;
+					}
 				}
 
 				//리깅 캐시를 사용하는 것으로 변경
@@ -1905,12 +1871,38 @@ namespace AnyPortrait
 			//} 
 			#endregion
 
-			//TODO : 이전에 먼저 transform을 수정해야한다.
-			//Debug.Log("Refresh Mesh");
 
-			//추가 : Flipped된 경우
-			_cal_isFlipped = (_parentTransform._matrix_TFResult_World._scale.x *
-								_parentTransform._matrix_TFResult_World._scale.y) < 0.0f;
+
+			//Flipped 계산
+
+
+			//Root의 Scale의 방향이 바뀌었으면 Flipped을 해야한다.
+			if (_cal_isRootFlipped)
+			{
+				//_cal_isRootFlipped_Prev = _cal_isRootFlipped;
+
+				_transform.localScale = new Vector3((_cal_isRootFlipped_X ? -1.0f : 1.0f),
+														(_cal_isRootFlipped_Y ? -1.0f : 1.0f),
+														1.0f);
+
+				_transform.localPosition = new Vector3((_cal_isRootFlipped_X ? _pivotPos.x : -_pivotPos.x),
+														(_cal_isRootFlipped_Y ? _pivotPos.y : -_pivotPos.y),
+														0);
+
+				//Debug.Log("Mesh [" + this.name + "] Changed" + (_cal_isRootFlipped_X ? " : Flipped X" : "") + (_cal_isRootFlipped_Y ? " : Flipped Y" : "") );
+			}
+
+			_cal_isUpdateFlipped_X = _parentTransform._matrix_TFResult_World._scale.x < 0.0f;
+			_cal_isUpdateFlipped_Y = _parentTransform._matrix_TFResult_World._scale.y < 0.0f;
+			_cal_isUpdateFlipped = (_cal_isUpdateFlipped_X && !_cal_isUpdateFlipped_Y)
+								|| (!_cal_isUpdateFlipped_X && _cal_isUpdateFlipped_Y);
+
+			_cal_isFlippedBuffer = (_cal_isUpdateFlipped && !_cal_isRootFlipped)
+								|| (!_cal_isUpdateFlipped && _cal_isRootFlipped);
+
+			//_cal_isFlippedBuffer = _cal_isUpdateFlipped;
+			//_cal_isFlippedBuffer = ( *
+			//					;
 
 			//Transform 제어 -> Vert 제어
 			if (_isMaskParent)
@@ -1927,7 +1919,7 @@ namespace AnyPortrait
 				_vertRange_YMin = float.MaxValue;//Max -> Min
 				_vertRange_YMax = float.MinValue;//Min -> Max
 
-				for (int i = 0; i < _nVert; i++)
+				for (int i = 0; i < _nVertPos; i++)
 				{
 					//_vertPositions_Local[i] = _transform.InverseTransformPoint(_vertPositions_Updated[i]);
 					_vertPositions_Local[i] = _vertPositions_Updated[i];
@@ -1951,7 +1943,7 @@ namespace AnyPortrait
 			}
 			else
 			{
-				for (int i = 0; i < _nVert; i++)
+				for (int i = 0; i < _nVertPos; i++)
 				{
 					//_vertPositions_Local[i] = _transform.InverseTransformPoint(_vertPositions_Updated[i]);
 					_vertPositions_Local[i] = _vertPositions_Updated[i];
@@ -1966,10 +1958,11 @@ namespace AnyPortrait
 			if (_isAlways2Side)
 			{
 				_mesh.triangles = _vertTris;
+				//_mesh.RecalculateNormals();
 			}
 			else
 			{
-				if (_cal_isFlipped)
+				if (_cal_isFlippedBuffer)
 				{
 					_mesh.triangles = _vertTris_Flipped;
 				}
@@ -1978,12 +1971,12 @@ namespace AnyPortrait
 					_mesh.triangles = _vertTris;
 				}
 
-				if (_cal_isFlipped_Prev != _cal_isFlipped)
+				if (_cal_isFlippedBuffer_Prev != _cal_isFlippedBuffer)
 				{
 					//Flip 여부가 바뀔 대
 					//Normal을 다시 계산한다.
 					_mesh.RecalculateNormals();
-					_cal_isFlipped_Prev = _cal_isFlipped;
+					_cal_isFlippedBuffer_Prev = _cal_isFlippedBuffer;
 				}
 			}
 			
@@ -2797,12 +2790,13 @@ namespace AnyPortrait
 		/// </summary>
 		public void ResetMaterialToBatch()
 		{
+			Debug.LogError("ResetMaterialToBatch");
 			if(_isMaskChild)
 			{
 				return;
 			}
 
-			Debug.Log("ResetMaterialToBatch : " + this.name);
+			//Debug.Log("ResetMaterialToBatch : " + this.name);
 			if(_material_Shared != null)
 			{
 				//Shared로 변경
@@ -2811,7 +2805,7 @@ namespace AnyPortrait
 				_material_Cur = _material_Shared;
 				_meshRenderer.sharedMaterial = _material_Cur;
 
-				Debug.Log(">> Shared");
+				//Debug.Log(">> Shared");
 			}
 
 			//이전 코드

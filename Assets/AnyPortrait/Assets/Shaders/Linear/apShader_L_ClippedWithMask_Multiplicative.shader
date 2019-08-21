@@ -29,7 +29,7 @@ Shader "AnyPortrait/Transparent/Linear/Clipped With Mask (2X) Multiplicative"
 		LOD 200
 
 		CGPROGRAM
-		#pragma surface surf SimpleColor//AlphaBlend가 아닌 경우
+		#pragma surface surf SimpleColor finalcolor:alphaCorrection noforwardadd//AlphaBlend가 아닌 경우
 
 		// Use shader model 3.0 target, to get nicer looking lighting
 		#pragma target 3.0
@@ -87,8 +87,14 @@ Shader "AnyPortrait/Transparent/Linear/Clipped With Mask (2X) Multiplicative"
 			//o.Albedo = c.rgb;
 
 			//Multiply 식
-			//o.Albedo = c.rgb * (o.Alpha) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - o.Alpha);
-			o.Albedo = pow(c.rgb, 2.2f) * (o.Alpha) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - o.Alpha);//Linear
+			//o.Albedo = pow(c.rgb, 2.2f) * (o.Alpha) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - o.Alpha);//Linear
+			o.Albedo = pow(c.rgb, 2.2f);
+		}
+
+		void alphaCorrection(Input IN, SurfaceOutput o, inout half4 color)
+		{
+			color.rgb = color.rgb * (color.a) + float4(0.5f, 0.5f, 0.5f, 1.0f) * (1.0f - color.a);
+			color.a = 1.0f;
 		}
 		ENDCG
 	}

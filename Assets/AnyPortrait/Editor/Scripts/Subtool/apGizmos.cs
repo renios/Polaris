@@ -336,6 +336,10 @@ namespace AnyPortrait
 		//마우스를 우클릭했을 때의 이벤트.
 		public delegate bool FUNC_GIZMO_EVENT__PRESS_BLUR(Vector2 pos, float tDelta, bool isFirstMove);
 
+		//추가 3.24 : 단축키를 등록하는 이벤트를 받는다.
+		//별다른 처리를 하지는 않고, 단축키 등록 타이밍만 알려줄 뿐이다.
+		public delegate void FUNC_GIZMO_EVENT__ADD_HOTKEYS();
+
 
 
 		[Flags]
@@ -504,6 +508,8 @@ namespace AnyPortrait
 		private FUNC_GIZMO_EVENT__PRESS_BLUR _funcGizmoPressBlur = null;
 		//[추가] Transform을 참조할 지 여부 결정
 
+		//추가 3.24 : 단축키 등록을 위한 이벤트 패스
+		private FUNC_GIZMO_EVENT__ADD_HOTKEYS _func_AddHotKeys = null;
 
 		//추가
 		//강제 업데이트
@@ -737,6 +743,7 @@ namespace AnyPortrait
 			public FUNC_GIZMO_EVENT__START_FFD_TRANSFORM _funcGizmoFFDStart;
 			public FUNC_GIZMO_EVENT__START_SOFT_SELECTION _funcGizmoSoftSelection = null;
 			public FUNC_GIZMO_EVENT__PRESS_BLUR _funcGizmoPressBlur = null;
+			public FUNC_GIZMO_EVENT__ADD_HOTKEYS _func_AddHotKeys = null;
 			//public FUNC_TRANSFORM__BONE_IK_MIXWeight _funcTransformBoneIKMixWeight = null;
 
 			public TRANSFORM_UI _transformUIVisible;
@@ -760,7 +767,8 @@ namespace AnyPortrait
 									FUNC_GIZMO_EVENT__START_SOFT_SELECTION funcGizmoSoftSelection,
 									FUNC_GIZMO_EVENT__PRESS_BLUR funcGizmoPressBlur,
 									TRANSFORM_UI transformUIVisible,
-									FUNC_GIZMO_EVENT__GET_NUM_SELECT_AFTER_LINK funcGizmoGetNumSelectAfterLink)
+									FUNC_GIZMO_EVENT__GET_NUM_SELECT_AFTER_LINK funcGizmoGetNumSelectAfterLink,
+									FUNC_GIZMO_EVENT__ADD_HOTKEYS func_AddHotKeys)
 			{
 				_funcGizmoSelect = funcGizmoSelect;
 				_funcGizmoUnselect = funcGizmoUnselect;
@@ -783,6 +791,8 @@ namespace AnyPortrait
 
 				_transformUIVisible = transformUIVisible;
 				_funcGizmoGetNumSelectAfterLink = funcGizmoGetNumSelectAfterLink;
+
+				_func_AddHotKeys = func_AddHotKeys;
 			}
 		}
 		public void LinkObject(GizmoEventSet gizmoEventSet)
@@ -812,6 +822,9 @@ namespace AnyPortrait
 			_transformUIVisible = gizmoEventSet._transformUIVisible;
 
 			_funcGizmoGetNumSelectAfterLink = gizmoEventSet._funcGizmoGetNumSelectAfterLink;
+
+
+			_func_AddHotKeys = gizmoEventSet._func_AddHotKeys;
 
 			_isFFDModeAvailable = false;
 			_isSoftSelectionModeAvailable = false;
@@ -919,6 +932,9 @@ namespace AnyPortrait
 
 			_funcGizmoMultipleSelect = null;
 			_isAreaSelectable = false;
+
+			_func_AddHotKeys = null;
+
 			//_lastSelectResult = SELECT_RESULT.None;
 			//_numSelected = 0;
 			SelectResult.Main.Init();
@@ -1054,7 +1070,11 @@ namespace AnyPortrait
 				_isGizmoRenderable = false;
 			}
 
-
+			//추가 3.24 : 단축키 등록을 위한 단계
+			if(_func_AddHotKeys != null)
+			{
+				_func_AddHotKeys();
+			}
 
 			if (!Event.current.isMouse && Event.current.type != EventType.Repaint)
 			{
@@ -3369,6 +3389,41 @@ namespace AnyPortrait
 				_funcTransformExtra();
 			}
 		}
+
+
+		//--------------------------------------------------------------------------
+		/// <summary>
+		/// 단축키나 외부의 함수에서 SelectResult를 갱신하는 경우..
+		/// </summary>
+		/// <param name="obj"></param>
+		public void SetSelectResultForce_Single(object obj)
+		{
+			if(obj == null)
+			{
+				SelectResult.Main.Init();
+			}
+			else
+			{
+				SelectResult.Main.SetSingle(obj);
+			}
+			
+			SelectResult.Prev.SetResult(SelectResult.Main);
+		}
+
+		public void SetSelectResultForce_Multiple<T>(List<T> objs)
+		{
+			if(objs == null)
+			{
+				SelectResult.Main.Init();
+			}
+			else
+			{
+				SelectResult.Main.SetMultiple(objs);
+			}
+			
+			SelectResult.Prev.SetResult(SelectResult.Main);
+		}
+		//--------------------------------------------------------------------------
 
 		//public void OnTransformChanged_BoneIKController(float boneIKMixWeight)
 		//{

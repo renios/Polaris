@@ -55,6 +55,8 @@ namespace AnyPortrait
 		private apControlParam _curSelectedParam = null;
 		private object _savedObject = null;
 
+
+
 		// Show Window
 		//--------------------------------------------------------------
 		public static object ShowDialog(apEditor editor, PARAM_TYPE paramTypeFilter, FUNC_SELECT_CONTROLPARAM_RESULT funcResult, object savedObject)
@@ -79,6 +81,39 @@ namespace AnyPortrait
 												(editor.position.yMin + editor.position.yMax) / 2 - (height / 2),
 												width, height);
 				s_window.Init(editor, loadKey, paramTypeFilter, funcResult, savedObject);
+
+				return loadKey;
+			}
+			else
+			{
+				return null;
+			}
+
+		}
+
+		//추가 3.22 : 리스트를 받아서 출력하자. 모디파이어용
+		public static object ShowDialogWithList(apEditor editor, List<apControlParam> controlParamList, FUNC_SELECT_CONTROLPARAM_RESULT funcResult, object savedObject)
+		{
+			CloseDialog();
+
+			if (editor == null || editor._portrait == null || editor._portrait._controller == null)
+			{
+				return null;
+			}
+
+			EditorWindow curWindow = EditorWindow.GetWindow(typeof(apDialog_SelectControlParam), true, "Select Control Param", true);
+			apDialog_SelectControlParam curTool = curWindow as apDialog_SelectControlParam;
+
+			object loadKey = new object();
+			if (curTool != null && curTool != s_window)
+			{
+				int width = 250;
+				int height = 400;
+				s_window = curTool;
+				s_window.position = new Rect((editor.position.xMin + editor.position.xMax) / 2 - (width / 2),
+												(editor.position.yMin + editor.position.yMax) / 2 - (height / 2),
+												width, height);
+				s_window.InitWithList(editor, loadKey, controlParamList, funcResult, savedObject);
 
 				return loadKey;
 			}
@@ -167,6 +202,29 @@ namespace AnyPortrait
 			}
 		}
 
+
+
+		public void InitWithList(apEditor editor, object loadKey, List<apControlParam> controlParamList, FUNC_SELECT_CONTROLPARAM_RESULT funcResult, object savedObject)
+		{
+			_editor = editor;
+			_loadKey = loadKey;
+			
+
+
+			_funcResult = funcResult;
+
+			_savedObject = savedObject;
+
+			_controlParams.Clear();
+
+			for (int i = 0; i < controlParamList.Count; i++)
+			{
+				if(!_controlParams.Contains(controlParamList[i]))
+				{
+					_controlParams.Add(controlParamList[i]);
+				}
+			}
+		}
 
 		// GUI
 		//--------------------------------------------------------------

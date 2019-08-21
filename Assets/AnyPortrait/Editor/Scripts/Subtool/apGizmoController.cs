@@ -72,7 +72,8 @@ namespace AnyPortrait
 				null,
 				null,
 				apGizmos.TRANSFORM_UI.TRS_WithDepth | apGizmos.TRANSFORM_UI.Color,
-				FirstLink__MeshGroup_Setting);
+				FirstLink__MeshGroup_Setting,
+				null);
 		}
 
 		public apGizmos.SelectResult FirstLink__MeshGroup_Setting()
@@ -200,7 +201,7 @@ namespace AnyPortrait
 					Editor.Select.SetSubMeshInGroup(null);
 				}
 
-				Editor.RefreshControllerAndHierarchy();
+				Editor.RefreshControllerAndHierarchy(false);
 				//Editor.Repaint();
 				Editor.SetRepaint();
 			}
@@ -222,7 +223,7 @@ namespace AnyPortrait
 			}
 
 			Editor.Select.SetSubMeshInGroup(null);
-			Editor.RefreshControllerAndHierarchy();
+			Editor.RefreshControllerAndHierarchy(false);
 			Editor.SetRepaint();
 		}
 
@@ -584,7 +585,7 @@ namespace AnyPortrait
 			{
 				Editor.Select.MeshGroup.SortRenderUnits(true);
 			}
-			Editor.RefreshControllerAndHierarchy();
+			Editor.RefreshControllerAndHierarchy(false);
 			Editor.SetRepaint();
 		}
 
@@ -631,7 +632,7 @@ namespace AnyPortrait
 
 
 			//curRenderUnit.SetColor(color);
-			Editor.RefreshControllerAndHierarchy();//Show/Hide 아이콘 갱신 땜시
+			Editor.RefreshControllerAndHierarchy(false);//Show/Hide 아이콘 갱신 땜시
 			Editor.SetRepaint();
 		}
 

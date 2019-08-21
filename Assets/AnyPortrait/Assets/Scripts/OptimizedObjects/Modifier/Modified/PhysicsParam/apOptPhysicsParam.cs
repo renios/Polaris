@@ -332,8 +332,8 @@ namespace AnyPortrait
 		//[NonSerialized]
 		//private apOptModifiedVertexWeight _parentModVertWeight = null;
 
-		[NonSerialized]
-		private apOptModifiedMesh _parentModMesh = null;
+		//[NonSerialized]
+		//private apOptModifiedMesh _parentModMesh = null;
 
 		//연결된 Vertex와 거리에 다른 Weight를 저장하자 ((1 - 길이 / 전체 길이)의 Normalize)
 
@@ -341,8 +341,9 @@ namespace AnyPortrait
 		[Serializable]
 		public class OptLinkedVertex
 		{
-			[SerializeField]
-			public int _vertUniqueID = -1;
+			//19.5.23 : 사용되지 않는 변수
+			//[SerializeField]
+			//public int _vertUniqueID = -1;
 
 			[SerializeField]
 			public int _vertIndex = -1;
@@ -353,17 +354,20 @@ namespace AnyPortrait
 			[NonSerialized]
 			public apOptModifiedVertexWeight _modVertWeight = null;
 
-			[SerializeField]
-			public Vector2 _deltaPosLocal = Vector2.zero;
+			//19.5.23 : 사용되지 않는 변수
+			//[SerializeField]
+			//public Vector2 _deltaPosLocal = Vector2.zero;
 
-			[SerializeField]
-			public float _distLocal = 0.0f;
+			//19.5.23 : 사용되지 않는 변수
+			//[SerializeField]
+			//public float _distLocal = 0.0f;
 
 			[SerializeField]
 			public float _distWeight = 0.0f;
 
-			[SerializeField]
-			public int _level = -1;
+			//19.5.23 : 사용되지 않는 변수
+			//[SerializeField]
+			//public int _level = -1;
 
 			[NonSerialized]
 			public Vector2 _deltaPosToTarget_NoMod = Vector2.zero;
@@ -372,16 +376,16 @@ namespace AnyPortrait
 			{
 				//_vertex = vertex;
 				_vertex = null;
-				_vertUniqueID = srcLinkedVertex._vertUniqueID;
+				//_vertUniqueID = srcLinkedVertex._vertUniqueID;//>>19.5.23 : 삭제 (불필요)
 				_vertIndex = srcLinkedVertex._vertex._index;
 
 				_modVertWeight = null;
 
-				_deltaPosLocal = srcLinkedVertex._deltaPosLocalLinkToTarget;
-				_distLocal = srcLinkedVertex._distLocal;
+				//_deltaPosLocal = srcLinkedVertex._deltaPosLocalLinkToTarget;//>>19.5.23 : 삭제 (불필요)
+				//_distLocal = srcLinkedVertex._distLocal;//>>19.5.23 : 삭제 (불필요)
 				_distWeight = srcLinkedVertex._distWeight;
 
-				_level = srcLinkedVertex._level;
+				//_level = srcLinkedVertex._level;//>>19.5.23 : 삭제 (불필요)
 			}
 
 
@@ -449,7 +453,7 @@ namespace AnyPortrait
 		/// <param name="parentModMesh"></param>
 		public void Link(apOptModifiedMesh parentModMesh, apOptModifiedVertexWeight parentModVertWeight)
 		{
-			_parentModMesh = parentModMesh;
+			//_parentModMesh = parentModMesh;
 			//_parentModVertWeight = parentModVertWeight;
 
 			if (_linkedVertices == null)
@@ -465,10 +469,12 @@ namespace AnyPortrait
 			{
 				OptLinkedVertex linkedVert = _linkedVertices[i];
 				apOptRenderVertex renderVert = mesh.RenderVertices[linkedVert._vertIndex];
-				apOptModifiedVertexWeight linkVertWeight = _parentModMesh._vertWeights[linkedVert._vertIndex];
+				apOptModifiedVertexWeight linkVertWeight = parentModMesh._vertWeights[linkedVert._vertIndex];
 				linkedVert.Link(renderVert, linkVertWeight);
 			}
 		}
+
+		
 	}
 
 }

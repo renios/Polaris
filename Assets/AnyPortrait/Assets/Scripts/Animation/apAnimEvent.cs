@@ -139,13 +139,22 @@ namespace AnyPortrait
 			//_isCalculated = false;
 		}
 
+		//추가 1.16 : 외부에서 호출이 안되도록 Lock을 걸 수 있다.
+		public void Lock()
+		{
+			_isEventCalled = true;
+		}
+
 		/// <summary>
 		/// 애니메이션 재생 후 이벤트 호출을 해야할지 말지 결정하기 위한 함수.
 		/// 이 함수를 호출한 후, IsEventCallable, GetCalculatedParam를 순서대로 호출한다.
 		/// </summary>
 		/// <param name="frame"></param>
-		public void Calculate(float fFrame, int iFrame, bool isForwardPlay, bool isPlaying)
+		public void Calculate(float fFrame, int iFrame, bool isForwardPlay, bool isPlaying, float tDelta, float speed)
 		{
+			//추가 1.16 : 재생 방향 체크한다.
+			CheckPlayDirectionInverted(iFrame, isForwardPlay, isPlaying, tDelta, speed);
+
 			_isCalculated = IsCalculatable(fFrame, iFrame, isForwardPlay, isPlaying);
 
 			if(!_isCalculated)
@@ -298,34 +307,59 @@ namespace AnyPortrait
 				}
 			}
 
+			//미사용 코드 > 이 코드는 오류가 많아서 제외. 위에서 미리 처리한다.
+			//if(_isPrevForwardPlay != isForwardPlay)
+			//{
+			//	//만약 재생 방향이 바뀌었다면
+			//	//영역 밖에서 EventCalled를 초기화한다.
+			//	//단 영역의 범위는 조금 넓게 본다. (계속 반복해서 재생될 수 있으므로)
+			//	if(_isEventCalled)
+			//	{
+			//		//TODO : 이거 좀 이상한데..
+			//		//전부다 Reset하면 안되고, 진행 방향만 Reset해야한다.
+			//		//진행 방향의 반대는 오히려 Lock을 걸어야 한다.
+			//		//아닛!! 코드 왜이랫ㅋㅋ
 
-			if(_isPrevForwardPlay != isForwardPlay)
+			//		if(_callType == CALL_TYPE.Once)
+			//		{
+			//			if((int)(_frameIndex + 0.5f) < (_frameIndex - 3) || 
+			//				(int)(_frameIndex + 0.5f) > (_frameIndex + 3))
+			//			{
+			//				ResetCallFlag();
+			//			}
+			//		}
+			//		else
+			//		{
+			//			if((int)(_frameIndex + 0.5f) < (_frameIndex - 3) || 
+			//				(int)(_frameIndex + 0.5f) > (_frameIndex_End + 3))
+			//			{
+			//				ResetCallFlag();
+			//			}
+			//		}
+			//	}
+			//}
+			//_isPrevForwardPlay = isForwardPlay;
+		}
+
+
+		//1.16 추가
+		private void CheckPlayDirectionInverted(int iFrame, bool isForwardPlay, bool isPlaying, float tDelta, float speed)
+		{
+			if(!isPlaying)
 			{
-				//만약 재생 방향이 바뀌었다면
-				//영역 밖에서 EventCalled를 초기화한다.
-				//단 영역의 범위는 조금 넓게 본다. (계속 반복해서 재생될 수 있으므로)
-				if(_isEventCalled)
-				{
-					if(_callType == CALL_TYPE.Once)
-					{
-						if((int)(_frameIndex + 0.5f) < (_frameIndex - 3) || 
-							(int)(_frameIndex + 0.5f) > (_frameIndex + 3))
-						{
-							ResetCallFlag();
-						}
-					}
-					else
-					{
-						if((int)(_frameIndex + 0.5f) < (_frameIndex - 3) || 
-							(int)(_frameIndex + 0.5f) > (_frameIndex_End + 3))
-						{
-							ResetCallFlag();
-						}
-					}
-				}
+				return;
 			}
+
+			if(_isPrevForwardPlay == isForwardPlay)
+			{
+				return;
+			}
+
+			OnSpeedSignInverted(iFrame, isForwardPlay, tDelta, speed);
+
 			_isPrevForwardPlay = isForwardPlay;
 		}
+
 
 		/// <summary>
 		/// 해당 프레임에 대해서 이벤트를 호출할 수 있는가.
@@ -340,31 +374,32 @@ namespace AnyPortrait
 				return false;
 			}
 
-			if (isPlaying)
-			{
-				if (_isPrevForwardPlay != isForwardPlay)
-				{
-					//만약 재생 방향이 바뀌었다면
-					//이벤트는 한정적으로만 처리해야한다.
-					if (_callType == CALL_TYPE.Once)
-					{
-						//if((int)(fFrame + 0.5f) == _frameIndex)
-						if (iFrame == _frameIndex)
-						{
-							return true;
-						}
-					}
-					else
-					{
-						//if ((int)fFrame >= _frameIndex && (int)(fFrame + 0.5f) <= _frameIndex_End)
-						if (iFrame >= _frameIndex && iFrame <= _frameIndex_End)
-						{
-							//호출 가능하다.
-							return true;
-						}
-					}
-				}
-			}
+			//이 코드도 삭제. CheckPlayDirectionInverted()에서 모두 처리 한다.
+			//if (isPlaying)
+			//{
+			//	if (_isPrevForwardPlay != isForwardPlay)
+			//	{
+			//		//만약 재생 방향이 바뀌었다면
+			//		//이벤트는 한정적으로만 처리해야한다.
+			//		if (_callType == CALL_TYPE.Once)
+			//		{
+			//			//if((int)(fFrame + 0.5f) == _frameIndex)
+			//			if (iFrame == _frameIndex)
+			//			{
+			//				return true;
+			//			}
+			//		}
+			//		else
+			//		{
+			//			//if ((int)fFrame >= _frameIndex && (int)(fFrame + 0.5f) <= _frameIndex_End)
+			//			if (iFrame >= _frameIndex && iFrame <= _frameIndex_End)
+			//			{
+			//				//호출 가능하다.
+			//				return true;
+			//			}
+			//		}
+			//	}
+			//}
 
 			if(_callType == CALL_TYPE.Once)
 			{
@@ -456,6 +491,72 @@ namespace AnyPortrait
 			else
 			{
 				return _subParamsToCallMultiple;
+			}
+		}
+
+
+		public void OnSpeedSignInverted(int curFrame, bool isForwardPlay, float tDelta, float speed)
+		{
+			//Debug.Log("[" + _eventName + " (" + _frameIndex + ")] OnSpeedSignInverted - " + curFrame + " >> " + (isForwardPlay ? "Forward" : "Backward") + " / Delta Time : " + tDelta + " / Speed : " + speed);
+			//만약 재생 방향이 바뀌었다면
+			//- 근처의 영역 (+- 3) 안에 있는 것은 처리를 바꾸지 않는다.
+			//- 영역 밖에 있는 이벤트 중에서 바뀐 방향에 해당하는 것은 Off->On으로 변경
+			//- 영역 밖에 있는 이벤트 중에서 바뀐 방향에 해당하지 않는 것은 On->Off (Lock)으로 변경
+
+			int minIndex = -1;
+			int maxIndex = -1;
+			if (_callType == CALL_TYPE.Once)
+			{
+				minIndex = _frameIndex;
+				maxIndex = _frameIndex;
+			}
+			else
+			{
+				minIndex = _frameIndex;
+				maxIndex = _frameIndex_End;
+			}
+
+			bool isNearFrame = false;
+			//근처의 영역에 포함되었는지 여부
+			//- 둘중 하나라도 +- 3이내에 포함되었다
+			//- min은 curFrame보다 작고, max는 curFrame보다 크다
+			if (
+				(minIndex > curFrame - 3 && minIndex < curFrame + 3) ||
+				(maxIndex > curFrame - 3 && maxIndex < curFrame + 3) ||
+				(minIndex < curFrame && maxIndex > curFrame)
+				)
+			{
+				isNearFrame = true;
+			}
+
+			if(isNearFrame)
+			{
+				//근처에 있는건 처리를 바꾸지 않는다.
+				//알아서 처리될 듯
+				//Debug.Log(" >> Is Near Frame");
+				return;
+			}
+
+			bool isForwardEvent = false;
+			//앞쪽에 위치한 이벤트인지 확인
+			if(minIndex >= curFrame)
+			{
+				isForwardEvent = true;
+			}
+
+			if(isForwardPlay == isForwardEvent)
+			{
+				//진행 방향과 위치한 방향이 같다.
+				//이벤트를 발생시킬 준비를 하자
+				//Debug.LogWarning(" >> Same Direction : " + _isEventCalled + " > False (Release)");
+				ResetCallFlag();
+			}
+			else
+			{
+				//진행 방향과 위치한 방향이 반대다.
+				//이벤트를 막아야 한다.
+				//Debug.LogError(" >> Diff Direction : " + _isEventCalled + " > True (Lock)");
+				Lock();
 			}
 		}
 

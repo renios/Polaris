@@ -62,7 +62,8 @@ namespace AnyPortrait
 												PivotReturn__Animation_OnlySelect,
 												null, null, null, null, null,
 												apGizmos.TRANSFORM_UI.None,
-												FirstLink__Animation);
+												FirstLink__Animation,
+												null);
 		}
 
 		public apGizmos.GizmoEventSet GetEventSet__Animation_EditTransform()
@@ -84,7 +85,8 @@ namespace AnyPortrait
 												| apGizmos.TRANSFORM_UI.Color 
 												| apGizmos.TRANSFORM_UI.Extra//<<추가
 												| apGizmos.TRANSFORM_UI.BoneIKController,
-												FirstLink__Animation
+												FirstLink__Animation,
+												null
 												);
 		}
 
@@ -111,7 +113,8 @@ namespace AnyPortrait
 												| apGizmos.TRANSFORM_UI.Color //<<Vertex Modifier도 Color를 선택할 수 있어야 한다.
 												| apGizmos.TRANSFORM_UI.Extra//<<추가
 												| apGizmos.TRANSFORM_UI.Vertex_Transform,
-												FirstLink__Animation);
+												FirstLink__Animation,
+												AddHotKeys__Animation_Vertex);
 		}
 
 
@@ -678,7 +681,8 @@ namespace AnyPortrait
 				}
 			}
 
-			Editor.RefreshControllerAndHierarchy();
+			Editor.RefreshControllerAndHierarchy(false);
+			Editor.RefreshTimelineLayers(apEditor.REFRESH_TIMELINE_REQUEST.None, null);//<<선택만 했으므로 큰 변경없이 Refresh
 			Editor.SetRepaint();
 
 			//일단 이거 빼보자.
@@ -793,7 +797,8 @@ namespace AnyPortrait
 			}
 
 
-			Editor.RefreshControllerAndHierarchy();
+			Editor.RefreshControllerAndHierarchy(false);
+			Editor.RefreshTimelineLayers(apEditor.REFRESH_TIMELINE_REQUEST.None, null);//선택 해제만 했으므로 간단한 갱신만
 			Editor.SetRepaint();
 		}
 
@@ -1178,7 +1183,13 @@ namespace AnyPortrait
 
 					//Refresh 추가
 					//Editor.Select.RefreshAnimEditing(true);
-					Editor.RefreshTimelineLayers(false);
+
+					//이전
+					//Editor.RefreshTimelineLayers(false);
+
+					//변경 19.5.21 : 모든 정보를 리셋할 필욘 없다. > 근데 키프레임이 몇개가 추가되었는지는 몰겄다;;
+					Editor.RefreshTimelineLayers(apEditor.REFRESH_TIMELINE_REQUEST.Timelines | apEditor.REFRESH_TIMELINE_REQUEST.LinkKeyframeAndModifier, null);
+
 					Editor.Select.AutoSelectAnimTimelineLayer();
 					Editor.Select.SetBone(bone);
 				}
@@ -2152,7 +2163,8 @@ namespace AnyPortrait
 
 					//Refresh 추가
 					//Editor.Select.RefreshAnimEditing(true);
-					Editor.RefreshTimelineLayers(false);
+					Editor.RefreshTimelineLayers(apEditor.REFRESH_TIMELINE_REQUEST.Timelines | apEditor.REFRESH_TIMELINE_REQUEST.LinkKeyframeAndModifier, null);
+
 					Editor.Select.AutoSelectAnimTimelineLayer();
 					Editor.Select.SetBone(bone);
 				}
@@ -2604,6 +2616,80 @@ namespace AnyPortrait
 		}
 
 
+
+		//----------------------------------------------------------------------------------------------
+		// 단축키 이벤트 (추가 3.24)
+		//----------------------------------------------------------------------------------------------
+		public void AddHotKeys__Animation_Vertex()
+		{
+			Editor.AddHotKeyEvent(OnHotKeyEvent__Animation_Vertex__Ctrl_A, "Select All Vertices", KeyCode.A, false, false, true, null);
+		}
+
+		// 단축키 : 버텍스 전체 선택
+		private void OnHotKeyEvent__Animation_Vertex__Ctrl_A(object paramObject)
+		{
+			if (Editor.Select.AnimClip == null || Editor.Select.AnimClip._targetMeshGroup == null)
+			{
+				return;
+			}
+
+			if (Editor.Select.AnimTimeline == null ||
+				Editor.Select.AnimTimeline._linkType != apAnimClip.LINK_TYPE.AnimatedModifier ||
+				Editor.Select.AnimTimeline._linkedModifier == null ||
+				Editor.Select.ModRenderVertListOfAnim == null
+				)
+			{
+				return;
+			}
+
+			if ((int)(Editor.Select.AnimTimeline._linkedModifier.CalculatedValueType & apCalculatedResultParam.CALCULATED_VALUE_TYPE.VertexPos) == 0)
+			{
+				return;
+			}
+
+			//apModifierBase linkedModifier = Editor.Select.AnimTimeline._linkedModifier;
+			apAnimKeyframe workKeyframe = Editor.Select.AnimWorkKeyframe;
+			apModifiedMesh targetModMesh = Editor.Select.ModMeshOfAnim;
+			apRenderUnit targetRenderUnit = Editor.Select.RenderUnitOfAnim;
+
+			if (workKeyframe == null || targetModMesh == null || targetRenderUnit == null)
+			{
+				return;
+			}
+
+
+			bool isAnyChanged = false;
+			apRenderVertex renderVert = null;
+			for (int iVert = 0; iVert < targetRenderUnit._renderVerts.Count; iVert++)
+			{
+				renderVert = targetRenderUnit._renderVerts[iVert];
+
+				apModifiedVertex selectedModVert = targetModMesh._vertices.Find(delegate (apModifiedVertex a)
+					{
+						return renderVert._vertex._uniqueID == a._vertexUniqueID;
+					});
+
+				if (selectedModVert != null)
+				{
+					//추가한다.
+					Editor.Select.AddModVertexOfAnim(selectedModVert, renderVert);
+
+					isAnyChanged = true;//<<뭔가 선택에 변동이 생겼다.
+				}
+			}
+
+
+			if (isAnyChanged)
+			{
+				Editor.Gizmos.SetSelectResultForce_Multiple<apSelection.ModRenderVert>(Editor.Select.ModRenderVertListOfAnim);
+
+				//Debug.LogError("성공");
+				Editor.RefreshControllerAndHierarchy(false);
+				Editor.RefreshTimelineLayers(apEditor.REFRESH_TIMELINE_REQUEST.None, null);
+				Editor.SetRepaint();
+			}
+		}
+
 		//----------------------------------------------------------------------------------------------
 		// 다중 선택 / FFD 제어 이벤트들 (Vertex / Bone만 가능하다)
 		//----------------------------------------------------------------------------------------------
@@ -2684,7 +2770,8 @@ namespace AnyPortrait
 			if (isAnyChanged)
 			{
 				//Debug.LogError("성공");
-				Editor.RefreshControllerAndHierarchy();
+				Editor.RefreshControllerAndHierarchy(false);
+				Editor.RefreshTimelineLayers(apEditor.REFRESH_TIMELINE_REQUEST.None, null);
 				Editor.SetRepaint();
 			}
 

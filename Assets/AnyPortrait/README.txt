@@ -1,5 +1,5 @@
 ﻿------------------------------------------------------------
-		AnyPortrait (Version 1.1.5)
+		AnyPortrait (Version 1.1.7)
 ------------------------------------------------------------
 
 
@@ -225,10 +225,63 @@ please contact us for any issues that may be causing the problem.
 1.1.5 (December 24, 2018)
 - Fixed an issue where the default depth of mesh does not change on Unity 2018.
 
+1.1.6 (April 19, 2019)
+- Unity's Timeline is now available, making it possible to create cinematic scenes
+- Option to limit the performance of the editor to prevent laptop overheating is added
+- Option to decide whether or not the "Selection Lock" be turned on when "Edit Mode" is turned on
+- Drawcall is not increased even when the Scale of the Transform is inverted by a negative value
+- When "Important option" is turned off, CPU optimization is improved more effectively
+- The ability to change the order of items in the Hierarchy UI is added
+- Functions to play animation from a specific point are added
+- Functions to change "Sorting Layer/Order" targeting an optTransform are added
+- The speed of the animation can be adjusted according to the "Speed Multiplier" property of "Animator"
+- The design of Inspector UI is better than before
+- A button is added to register the Control Parameter to the modifier without pressing the "Record key button"
+- The path where Animation clips are saved in Mecanim setting is changed to "Relative path"
+- "Edit Mode" turned on when adding a mesh to the Physics modifier
+- If the signs of the scale interpolated by modifiers are different from each other, the value is changed discontinuously to not be through 0
+- When editing a modifier, the "Edit mode" is not forcibly turned off even if the value of a Control Parameter is changed
+- A button to duplicate an Animation event is added
+- A warning message appears when a child Mesh Group is associated with an Animation clip
+- You can select all vertices with "Ctrl + A"
+- You can copy animation keyframes with "Ctrl + C, V"
+- Animation curves can be modified in batch when multiple keyframes are selected
+- An animation curve can be copied to keyframes of all timeline layers
+- When you bake a character, a dialog appears asking you to change the scene's Ambient Color automatically
+- "Length of a bone" is added in bone setting UI
+- An issue where the logs are continuously output to the console when using some functions is fixed
+- An error which is occurred on Hierarchy UI is fixed
+- An issue where Unity stopped when docking the AnyPortrait editor to the Unity editor and turning Maximize on and off is fixed
+- An issue where an animation with "Once" type could not play normally from Animator is fixed
+- An issue where a portrait could no longer be opened when "Extra Option" targets bones is fixed
+- A problem where multiple keys could be created with the same value of Control Parameters is fixed
+- An error, which is occurred when a scene is switched or Unity editor is restarted with the AnyPortrait editor open, is fixed
+- An issue where Extra Option value is missing when copying and pasting the modifier key is fixed
+- An issue where FPS of animations are not apply properly when executing "Optimized Bake" is fixed
+- An issue where vertices are moved to the mouse position when the mesh was created by pressing the Ctrl key and selecting the nearest vertex is fixed
+- An issue where temporarily hidden meshes were forcibly shown when changing the value of a Control Parameter while "Edit Mode" was turned on is fixed
+- A problem that can not import a PSD file with invalid channel information is fixed
+
+1.1.7 (July 10, 2019)
+- New features, "Material Library" and "Material Set" are added to manage various materials and shaders and apply various rendering techniques.
+- Data of modifiers and animations are optimized to reduce the size of the prefab file
+- Improved "AsyncInitialize" function to reduce CPU load is added
+- Processing speed for some additions and deletions in animation work is improved
+- Coping keyframes to other animation clips with "Ctrl+C,V" is available
+- It is available to select and add multiple meshes and mesh groups to a mesh group at once
+- User can set whether "Controller tab" is switched automatically when animation or modifier is selected
+- User can set whether the "Temporary rendering" of the mesh will be reset for reasons such as Undo or key-value change during the task
+- The button to reset the mesh's "Temporary rendering" is added
+- An issue where "Do Not Show this message" worked reversely in the Ambient Color correction dialog is fixed
+- An issue where existing keyframes could not be overwritten when copying animation keyframes with "Ctrl+C,V" key is fixed
+- A problem that clipping settings of layers were not applied when importing PSD file is fixed
+- A problem that the shadow and normal vector of 2-sided mesh are calculated abnormally is fixed
+- An issue where the animation clip was not opened in the editor when the Start Frame and the End Frame are the same is fixed
+
 
 
 ------------------------------------------------------------
-			한국어 설명 (버전 1.1.5)
+			한국어 설명 (버전 1.1.7)
 ------------------------------------------------------------
 
 AnyPortrait를 사용해주셔서 감사를 드립니다.
@@ -451,3 +504,56 @@ AnyPortrait는 PC, 모바일, 웹, 콘솔에서 구동되도록 개발되었습�
 
 1.1.5 (2018년 12월 24일)
 - Unity 2018에서 메시의 기본 Depth를 수정할 수 없는 문제가 수정되었습니다.
+
+1.1.6 (2019년 4월 19일)
+- 유니티의 Timeline을 지원하여 시네마틱 장면 제작
+- 노트북 과열 방지를 위한 에디터 성능 제한 기능 추가
+- "편집 모드"가 켜질 때, "선택 잠금"이 같이 켜질지 여부 설정
+- Scale이 음수의 값을 가져도 드로우콜이 증가되지 않도록 개선
+- Important 옵션을 껐을 때 CPU가 더욱 최적화
+- Hierarchy UI에서 항목의 순서를 변경하는 기능 추가됨
+- 애니메이션을 특정 시점부터 재생하는 함수가 추가됨
+- 일부의 optTransform의 Sorting Layer/Order를 변경하는 함수가 추가됨
+- Animator의 Speed Multiplier 속성 적용
+- Inspector UI의 디자인 개선
+- 컨트롤 파라미터를 선택해서 모디파이어에 추가 가능
+- Mecanim 설정의 "애니메이션 클립이 저장되는 경로"가 "상대 경로"로 변경
+- 메시를 Physic 모디파이어에 추가할 때 "편집 모드"가 바로 켜지도록 변경
+- 모디파이어에서 보간되는 Scale의 부호가 서로 다른 경우, Scale이 불연속적으로 보간되어 0이 되지 않도록 변경
+- 모디파이어를 편집할 때, 컨트롤 파라미터의 값을 변경해도 "편집 모드"가 꺼지지 않도록 변경
+- 애니메이션 이벤트를 복제할 수 있는 버튼 추가
+- 자식인 메시 그룹이 애니메이션 클립에 연결될 때 경고 메시지 출력
+- Ctrl + A를 눌러서 모든 버텍스 선택
+- Ctrl + C, V를 눌러서 선택한 키프레임들을 복사
+- 여러개의 키프레임들의 애니메이션 커브를 일괄 편집할 수 있도록 개선
+- 애니메이션 커브를 타임라인 레이어에 관계없이 모든 키프레임에 적용하는 기능 추가
+- Bake를 할 때, 씬의 Ambient Color의 설정을 자동으로 변경할 지 물어보는 다이얼로그 출력
+- 본 설정 UI에 "Length" 항목 추가
+- 일부 기능을 사용할 때 Console에 로그가 계속 출력되는 문제가 수정
+- Hierarchy UI에서 발생하는 에러가 수정
+- AnyPortrait 에디터를 유니티 에디터에 도킹한 상태에서 최대화를 켰다가 끄면 유니티가 멈추는 문제가 수정
+- AnyPortrait 에디터를 연 상태에서, 씬을 전환하거나 유니티 에디터를 재시작할 때 발생하는 에러가 수정
+- Once 타입의 애니메이션이 Animator에서 정상적으로 재생되지 않는 문제가 수정
+- Extra Option이 본을 대상으로 하는 경우, 해당 Portrait를 더이상 열 수 없는 문제가 수정
+- 모디파이어의 키를 복사할 때, Extra Option의 값이 누락되는 문제가 수정
+- 컨트롤 파라미터의 동일한 값에 여러개의 키가 생성될 수 있는 문제가 수정
+- Optimized Bake를 할 때, 애니메이션의 FPS가 정상적으로 적용되지 않는 문제가 수정
+- Ctrl 키를 누르고 가까운 버텍스를 선택할 때, 버텍스가 마우스의 위치로 이동되는 문제가 수정
+- "편집 모드"가 켜진 상태에서 컨트롤 파라미터의 값을 변경할 때 숨겨진 메시가 나타나는 문제가 수정
+- 유효하지 않은 채널 정보를 가진 PSD 파일을 임포트할 수 없는 문제가 수정
+
+1.1.7 (2019년 7월 10일)
+- 재질과 쉐이더을 통합하여 관리하고 다양한 렌더링 기법을 적용할 수 있도록 "재질 라이브러리"와 "재질 세트"가 추가
+- 모디파이어와 애니메이션 데이터를 최적화하여 프리팹의 파일 크기 감소
+- CPU 부하가 적도록 "개선된 AsyncInitialize" 함수 추가
+- 애니메이션 작업시 일부 추가, 삭제 과정에서의 처리 속도 향상
+- Ctrl+C,V 키를 이용하여 다른 애니메이션 클립으로 키프레임 복사 가능
+- 메시 그룹에 동시에 여러개의 메시, 메시 그룹을 선택하여 추가할 수 있도록 개선
+- 애니메이션이나 모디파이어 선택시 자동으로 "Controller 탭"이 열릴지 여부를 사용자가 설정 가능
+- 작업 도중에 실행 취소나 키값 변경 등의 이유로 메시의 "임시의 렌더링 여부"가 해제될지 여부를 사용자가 설정 가능
+- 메시의 "임시의 렌더링 여부"를 리셋하는 버튼 추가
+- Ambient Color 보정 다이얼로그에서 "Do Not Show this message"가 반대로 동작되는 문제 수정
+- 애니메이션 키프레임을 Ctrl+C,V 키로 복사할 때, 기존 키프레임을 덮어쓰지 못하는 문제 수정
+- PSD 파일을 가져올 때 레이어의 클리핑 설정이 적용안되던 문제 수정
+- 양면 메시의 그림자와 노멀 벡터가 비정상적으로 계산되는 문제 수정
+- 애니메이션의 Start Frame과 End Frame이 같은 경우 에디터에서 열리지 않는 문제 수정

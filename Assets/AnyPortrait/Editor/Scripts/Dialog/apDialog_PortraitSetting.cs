@@ -445,21 +445,141 @@ namespace AnyPortrait
 
 						}
 
+						//고급 옵션들
+
+						//변경 3.22 : 이하는 고급 옵션으로 분리한다.
+						//텍스트를 길게 작성할 수 있게 만든다.
+						GUILayout.Space(20);
+						EditorGUILayout.LabelField(_editor.GetText(TEXT.DLG_Setting_Advanced));
 						GUILayout.Space(10);
+						
+
+						GUIStyle guiStyle_WrapLabel = new GUIStyle(GUI.skin.label);
+						guiStyle_WrapLabel.wordWrap = true;
+						guiStyle_WrapLabel.alignment = TextAnchor.MiddleLeft;
+
+						int labelWidth = width - (30 + 20);
+						int toggleWidth = 20;
+
 						bool prevStartupScreen = _editor._startScreenOption_IsShowStartup;
-						EditorGUILayout.BeginHorizontal(GUILayout.Width(width), GUILayout.Height(25));
+						//EditorGUILayout.BeginHorizontal(GUILayout.Width(width), GUILayout.Height(25));
+						EditorGUILayout.BeginHorizontal(GUILayout.Width(width));//Height 삭제
 						GUILayout.Space(5);
-						EditorGUILayout.LabelField(_editor.GetText(TEXT.DLG_StartPage_AlawysOn), GUILayout.Width((width - (10 + 30))));
-						_editor._startScreenOption_IsShowStartup = EditorGUILayout.Toggle(_editor._startScreenOption_IsShowStartup, GUILayout.Width(30));
+						_editor._startScreenOption_IsShowStartup = EditorGUILayout.Toggle(_editor._startScreenOption_IsShowStartup, GUILayout.Width(toggleWidth));
+						GUILayout.Space(5);
+						EditorGUILayout.LabelField(_editor.GetText(TEXT.DLG_Setting_ShowStartPageOn), guiStyle_WrapLabel, GUILayout.Width(labelWidth));
 						EditorGUILayout.EndHorizontal();
+
+						GUILayout.Space(5);
 
 						//GUILayout.Space(10);
 						bool prevCheckVersion = _editor._isCheckLiveVersion_Option;
-						EditorGUILayout.BeginHorizontal(GUILayout.Width(width), GUILayout.Height(25));
+						//EditorGUILayout.BeginHorizontal(GUILayout.Width(width), GUILayout.Height(25));
+						EditorGUILayout.BeginHorizontal(GUILayout.Width(width));//Height 삭제
 						GUILayout.Space(5);
-						EditorGUILayout.LabelField(_editor.GetText(TEXT.CheckLatestVersionOption), GUILayout.Width((width - (10 + 30))));
-						_editor._isCheckLiveVersion_Option = EditorGUILayout.Toggle(_editor._isCheckLiveVersion_Option, GUILayout.Width(30));
+						_editor._isCheckLiveVersion_Option = EditorGUILayout.Toggle(_editor._isCheckLiveVersion_Option, GUILayout.Width(toggleWidth));
+						GUILayout.Space(5);
+						EditorGUILayout.LabelField(_editor.GetText(TEXT.CheckLatestVersionOption), guiStyle_WrapLabel, GUILayout.Width(labelWidth));
 						EditorGUILayout.EndHorizontal();
+
+						GUILayout.Space(5);
+
+						//추가 3.1 : 유휴 상태에서는 업데이트 빈도를 낮춤
+						bool prevLowCPUOption = _editor._isLowCPUOption;
+						//EditorGUILayout.BeginHorizontal(GUILayout.Width(width), GUILayout.Height(25));
+						EditorGUILayout.BeginHorizontal(GUILayout.Width(width));//Height 삭제
+						GUILayout.Space(5);
+						_editor._isLowCPUOption = EditorGUILayout.Toggle(_editor._isLowCPUOption, GUILayout.Width(toggleWidth));
+						GUILayout.Space(5);
+						//"Editor frame is low when idle"
+						EditorGUILayout.LabelField(_editor.GetText(TEXT.DLG_Setting_LowCPU), guiStyle_WrapLabel, GUILayout.Width(labelWidth));
+						EditorGUILayout.EndHorizontal();
+
+						GUILayout.Space(5);
+
+						//추가 3.29 : Ambient 자동으로 보정하기 기능
+						bool prevAmbientCorrection = _editor._isAmbientCorrectionOption;
+						EditorGUILayout.BeginHorizontal(GUILayout.Width(width));//Height 삭제
+						GUILayout.Space(5);
+						_editor._isAmbientCorrectionOption = EditorGUILayout.Toggle(_editor._isAmbientCorrectionOption, GUILayout.Width(toggleWidth));
+						GUILayout.Space(5);
+						EditorGUILayout.LabelField(_editor.GetText(TEXT.DLG_Setting_AmbientColorCorrection), guiStyle_WrapLabel, GUILayout.Width(labelWidth));
+						EditorGUILayout.EndHorizontal();
+
+						GUILayout.Space(5);
+
+						//추가 19.6.28 : 자동으로 Controller Tab으로 전환할 지 여부 (Mod, Anim)
+						bool prevAutoSwitchController_Mod = _editor._isAutoSwitchControllerTab_Mod;
+						EditorGUILayout.BeginHorizontal(GUILayout.Width(width));
+						GUILayout.Space(5);
+						_editor._isAutoSwitchControllerTab_Mod = EditorGUILayout.Toggle(_editor._isAutoSwitchControllerTab_Mod, GUILayout.Width(toggleWidth));
+						GUILayout.Space(5);
+						EditorGUILayout.LabelField(_editor.GetText(TEXT.Setting_SwitchContTab_Mod), guiStyle_WrapLabel, GUILayout.Width(labelWidth));
+						EditorGUILayout.EndHorizontal();
+
+						GUILayout.Space(5);
+
+						bool prevAutoSwitchController_Anim = _editor._isAutoSwitchControllerTab_Anim;
+						EditorGUILayout.BeginHorizontal(GUILayout.Width(width));
+						GUILayout.Space(5);
+						_editor._isAutoSwitchControllerTab_Anim = EditorGUILayout.Toggle(_editor._isAutoSwitchControllerTab_Anim, GUILayout.Width(toggleWidth));
+						GUILayout.Space(5);
+						EditorGUILayout.LabelField(_editor.GetText(TEXT.Setting_SwitchContTab_Anim), guiStyle_WrapLabel, GUILayout.Width(labelWidth));
+						EditorGUILayout.EndHorizontal();
+
+						GUILayout.Space(5);
+
+						//추가 19.6.28 : 작업 종료시 메시의 작업용 보이기/숨기기를 초기화 할 지 여부
+						bool prevTempMeshVisibility = _editor._isRestoreTempMeshVisibilityWhenTackEnded;
+						EditorGUILayout.BeginHorizontal(GUILayout.Width(width));
+						GUILayout.Space(5);
+						_editor._isRestoreTempMeshVisibilityWhenTackEnded = EditorGUILayout.Toggle(_editor._isRestoreTempMeshVisibilityWhenTackEnded, GUILayout.Width(toggleWidth));
+						GUILayout.Space(5);
+						EditorGUILayout.LabelField(_editor.GetText(TEXT.Setting_TempVisibilityMesh), guiStyle_WrapLabel, GUILayout.Width(labelWidth));
+						EditorGUILayout.EndHorizontal();
+						
+
+						GUILayout.Space(10);
+
+						//선택 잠금에 대해서
+						EditorGUILayout.BeginHorizontal(GUILayout.Width(width));
+						GUILayout.Space(34);
+						EditorGUILayout.LabelField(_editor.GetText(TEXT.DLG_Setting_EnableSelectionLockEditMode), guiStyle_WrapLabel);
+						EditorGUILayout.EndHorizontal();
+						bool prevSelectionEnableOption_RigPhy = _editor._isSelectionLockOption_RiggingPhysics;
+						bool prevSelectionEnableOption_Morph = _editor._isSelectionLockOption_Morph;
+						bool prevSelectionEnableOption_Transform = _editor._isSelectionLockOption_Transform;
+						bool prevSelectionEnableOption_ControlTimeline = _editor._isSelectionLockOption_ControlParamTimeline;
+
+						EditorGUILayout.BeginHorizontal(GUILayout.Width(width));
+						GUILayout.Space(5);
+						_editor._isSelectionLockOption_Morph = EditorGUILayout.Toggle(_editor._isSelectionLockOption_Morph, GUILayout.Width(toggleWidth));
+						GUILayout.Space(5);
+						EditorGUILayout.LabelField("- Morph " + _editor.GetText(TEXT.DLG_Modifier), guiStyle_WrapLabel, GUILayout.Width(labelWidth));
+						EditorGUILayout.EndHorizontal();
+
+						EditorGUILayout.BeginHorizontal(GUILayout.Width(width));
+						GUILayout.Space(5);
+						_editor._isSelectionLockOption_Transform = EditorGUILayout.Toggle(_editor._isSelectionLockOption_Transform, GUILayout.Width(toggleWidth));
+						GUILayout.Space(5);
+						EditorGUILayout.LabelField("- Transform " + _editor.GetText(TEXT.DLG_Modifier), guiStyle_WrapLabel, GUILayout.Width(labelWidth));
+						EditorGUILayout.EndHorizontal();
+
+						EditorGUILayout.BeginHorizontal(GUILayout.Width(width));
+						GUILayout.Space(5);
+						_editor._isSelectionLockOption_RiggingPhysics = EditorGUILayout.Toggle(_editor._isSelectionLockOption_RiggingPhysics, GUILayout.Width(toggleWidth));
+						GUILayout.Space(5);
+						EditorGUILayout.LabelField("- Rigging/Physic " + _editor.GetText(TEXT.DLG_Modifier), guiStyle_WrapLabel, GUILayout.Width(labelWidth));
+						EditorGUILayout.EndHorizontal();
+
+						EditorGUILayout.BeginHorizontal(GUILayout.Width(width));
+						GUILayout.Space(5);
+						_editor._isSelectionLockOption_ControlParamTimeline = EditorGUILayout.Toggle(_editor._isSelectionLockOption_ControlParamTimeline, GUILayout.Width(toggleWidth));
+						GUILayout.Space(5);
+						EditorGUILayout.LabelField("- Control Parameter " + _editor.GetUIWord(UIWORD.Timeline), guiStyle_WrapLabel, GUILayout.Width(labelWidth));
+						EditorGUILayout.EndHorizontal();
+
+
 
 
 						GUILayout.Space(20);
@@ -494,7 +614,19 @@ namespace AnyPortrait
 							!prevBonePose_Path.Equals(_editor._bonePose_BaseFolderName) ||
 							
 							prevStartupScreen != _editor._startScreenOption_IsShowStartup ||
-							prevCheckVersion != _editor._isCheckLiveVersion_Option
+							prevCheckVersion != _editor._isCheckLiveVersion_Option ||
+							prevLowCPUOption != _editor._isLowCPUOption ||
+							prevAmbientCorrection != _editor._isAmbientCorrectionOption ||
+							prevAutoSwitchController_Mod != _editor._isAutoSwitchControllerTab_Mod ||
+							prevAutoSwitchController_Anim != _editor._isAutoSwitchControllerTab_Anim ||
+
+							prevTempMeshVisibility != _editor._isRestoreTempMeshVisibilityWhenTackEnded ||
+
+							prevSelectionEnableOption_RigPhy != _editor._isSelectionLockOption_RiggingPhysics ||
+							prevSelectionEnableOption_Morph != _editor._isSelectionLockOption_Morph ||
+							prevSelectionEnableOption_Transform != _editor._isSelectionLockOption_Transform ||
+							prevSelectionEnableOption_ControlTimeline != _editor._isSelectionLockOption_ControlParamTimeline
+
 								)
 						{
 							bool isLanguageChanged = (prevLanguage != _editor._language);
@@ -508,8 +640,13 @@ namespace AnyPortrait
 							{
 								
 								_editor.ResetHierarchyAll();
-								_editor.RefreshTimelineLayers(true);
-								_editor.RefreshControllerAndHierarchy();
+
+								//이전
+								//_editor.RefreshTimelineLayers(true);
+								//_editor.RefreshControllerAndHierarchy();
+
+								//변경 19.5.21
+								_editor.RefreshControllerAndHierarchy(true);//<<True를 넣으면 RefreshTimelineLayer 함수가 같이 호출된다.
 							}
 						}
 					}

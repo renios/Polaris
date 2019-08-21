@@ -98,6 +98,9 @@ namespace AnyPortrait
 
 		public override bool IsAnimated { get { return true; } }
 
+		//추가
+		public override bool IsPhysics { get { return false; } }
+		public override bool IsVolume { get { return false; } }
 
 		/// <summary>
 		/// ExEdit 중 GeneralEdit 모드에서 "동시에 작업 가능하도록 허용 된 Modifier Type들"을 리턴한다.

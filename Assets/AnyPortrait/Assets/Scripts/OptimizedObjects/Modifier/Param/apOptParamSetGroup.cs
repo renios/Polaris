@@ -107,9 +107,9 @@ namespace AnyPortrait
 		[SerializeField]
 		public bool _isColorPropertyEnabled = true;
 
-
-		[SerializeField]
-		public List<apOptParamSetGroupVertWeight> _calculatedWeightedVertexList = new List<apOptParamSetGroupVertWeight>();
+		// 삭제 19.5.20 : 이 변수는 더이상 사용되지 않는다.
+		//[SerializeField]
+		//public List<apOptParamSetGroupVertWeight> _calculatedWeightedVertexList = new List<apOptParamSetGroupVertWeight>();
 
 
 		// Init
@@ -119,7 +119,7 @@ namespace AnyPortrait
 
 		}
 
-		public void Bake(apPortrait portrait, apOptModifierUnitBase parentModifier, apModifierParamSetGroup srcParamSetGroup, bool isAnimated)
+		public void Bake(apPortrait portrait, apOptModifierUnitBase parentModifier, apModifierParamSetGroup srcParamSetGroup, bool isAnimated, bool isUseModMeshSet)
 		{
 			_portrait = portrait;
 			_parentModifier = parentModifier;
@@ -146,7 +146,7 @@ namespace AnyPortrait
 
 				apOptParamSet optParamSet = new apOptParamSet();
 				optParamSet.LinkParamSetGroup(this, portrait);
-				optParamSet.BakeModifierParamSet(srcParamSet, portrait);
+				optParamSet.BakeModifierParamSet(srcParamSet, portrait, isUseModMeshSet);
 
 
 				_paramSetList.Add(optParamSet);
@@ -166,19 +166,21 @@ namespace AnyPortrait
 
 			_isColorPropertyEnabled = srcParamSetGroup._isColorPropertyEnabled;//<<추가.
 
-			_calculatedWeightedVertexList.Clear();
 
-			for (int i = 0; i < srcParamSetGroup._calculatedWeightedVertexList.Count; i++)
-			{
-				apModifierParamSetGroupVertWeight srcWV = srcParamSetGroup._calculatedWeightedVertexList[i];
+			// 삭제 19.5.20 : _calculatedWeightedVertexList 변수 삭제
+			//_calculatedWeightedVertexList.Clear();
 
-				apOptParamSetGroupVertWeight optWV = new apOptParamSetGroupVertWeight();
-				optWV.Bake(srcWV);
+			//for (int i = 0; i < srcParamSetGroup._calculatedWeightedVertexList.Count; i++)
+			//{
+			//	apModifierParamSetGroupVertWeight srcWV = srcParamSetGroup._calculatedWeightedVertexList[i];
 
-				optWV.Link(portrait.GetOptTransform(optWV._meshTransform_ID));//OptTransform을 연결한다.
+			//	apOptParamSetGroupVertWeight optWV = new apOptParamSetGroupVertWeight();
+			//	optWV.Bake(srcWV);
 
-				_calculatedWeightedVertexList.Add(optWV);
-			}
+			//	optWV.Link(portrait.GetOptTransform(optWV._meshTransform_ID));//OptTransform을 연결한다.
+
+			//	_calculatedWeightedVertexList.Add(optWV);
+			//}
 
 			LinkPortrait(portrait, parentModifier);
 		}
@@ -233,9 +235,69 @@ namespace AnyPortrait
 				_paramSetList[i].LinkParamSetGroup(this, portrait);
 			}
 
-			for (int i = 0; i < _calculatedWeightedVertexList.Count; i++)
+			// 삭제 19.5.20 : _calculatedWeightedVertexList 변수 삭제
+			//for (int i = 0; i < _calculatedWeightedVertexList.Count; i++)
+			//{
+			//	_calculatedWeightedVertexList[i].Link(portrait.GetOptTransform(_calculatedWeightedVertexList[i]._meshTransform_ID));
+			//}
+		}
+
+
+
+		public IEnumerator LinkPortraitAsync(apPortrait portrait, apOptModifierUnitBase parentModifier, apAsyncTimer asyncTimer)
+		{
+			_portrait = portrait;
+			_parentModifier = parentModifier;
+
+			switch (_syncTarget)
 			{
-				_calculatedWeightedVertexList[i].Link(portrait.GetOptTransform(_calculatedWeightedVertexList[i]._meshTransform_ID));
+				case apModifierParamSetGroup.SYNC_TARGET.Static:
+					break;
+
+				case apModifierParamSetGroup.SYNC_TARGET.Controller:
+					//_keyControlParam = _portrait.GetControlParam(_keyControlParamName);
+					_keyControlParam = _portrait.GetControlParam(_keyControlParamID);
+					break;
+
+				case apModifierParamSetGroup.SYNC_TARGET.KeyFrame:
+					_keyAnimClip = _portrait.GetAnimClip(_keyAnimClipID);
+					if (_keyAnimClip == null)
+					{
+						Debug.LogError("Error : No AnimClip [" + _keyAnimClipID + "]");
+						break;
+					}
+
+					_keyAnimTimeline = _keyAnimClip.GetTimeline(_keyAnimTimelineID);
+					if (_keyAnimTimeline == null)
+					{
+						Debug.LogError("Error : No AnimTimeline [" + _keyAnimTimelineID + "]");
+						break;
+					}
+
+					_keyAnimTimelineLayer = _keyAnimTimeline.GetTimelineLayer(_keyAnimTimelineLayerID);
+
+					if (_keyAnimTimelineLayer == null)
+					{
+						Debug.LogError("Error : No AnimTimelineLayer [" + _keyAnimTimelineLayerID + "]");
+						break;
+					}
+
+					break;
+
+				default:
+					Debug.LogError("apOptParamSetGroup : 알수 없는 타입 : " + _syncTarget);
+					break;
+			}
+
+			for (int i = 0; i < _paramSetList.Count; i++)
+			{
+				yield return _paramSetList[i].LinkParamSetGroupAsync(this, portrait, asyncTimer);
+			}
+
+			//Async Wait
+			if(asyncTimer.IsYield())
+			{
+				yield return asyncTimer.WaitAndRestart();
 			}
 		}
 
@@ -300,13 +362,14 @@ namespace AnyPortrait
 
 		// Get / Set
 		//--------------------------------------------
-		public apOptParamSetGroupVertWeight GetWeightVertexData(apOptTransform targetOptTransform)
-		{
-			return _calculatedWeightedVertexList.Find(delegate (apOptParamSetGroupVertWeight a)
-			{
-				return a._optTransform == targetOptTransform;
-			});
-		}
+		// 삭제 19.5.20 : _calculatedWeightedVertexList 변수 삭제
+		//public apOptParamSetGroupVertWeight GetWeightVertexData(apOptTransform targetOptTransform)
+		//{
+		//	return _calculatedWeightedVertexList.Find(delegate (apOptParamSetGroupVertWeight a)
+		//	{
+		//		return a._optTransform == targetOptTransform;
+		//	});
+		//}
 	}
 
 }

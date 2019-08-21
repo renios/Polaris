@@ -346,13 +346,17 @@ namespace AnyPortrait
 			}
 
 			SortAndRefreshKeyframes();
+			
 		}
 
 
 
 		// Functions
 		//--------------------------------------------------
-		public int SortAndRefreshKeyframes(bool isPrintLog = false)
+		//이전
+		//public int SortAndRefreshKeyframes(bool isPrintLog = false, bool isMakeCurveForce = false)
+		//변경 19.5.20 : 최적화 작업 겸 불필요한 인자 제거 (성능상에 Curve 만들고 안만들고는 큰 영향이 없다.. 이 함수 전체가 무거움)
+		public int SortAndRefreshKeyframes()
 		{
 			_keyframes.Sort(delegate (apAnimKeyframe a, apAnimKeyframe b)
 			{
@@ -404,11 +408,7 @@ namespace AnyPortrait
 				_activeKeyframes.Add(curKey);
 			}
 
-			if (isPrintLog)
-			{
-				Debug.Log("--------- Sort And Refresh [" + DisplayName + "] -----------");
-			}
-
+			
 			if (_activeKeyframes.Count > 0)
 			{
 				//1. 일단 루프 체크 및 더미 키 여부를 판단하자
@@ -601,23 +601,27 @@ namespace AnyPortrait
 					}
 
 
-					if (isPrintLog)
-					{
-						string strPrevKey = " X ";
-						string strNextKey = " X ";
+					//if (isPrintLog)
+					//{
+					//	string strPrevKey = " X ";
+					//	string strNextKey = " X ";
 
-						if (prevKey != null)
-						{
-							strPrevKey = " " + prevKey._frameIndex + " ";
-						}
-						if (nextKey != null)
-						{
-							strNextKey = " " + nextKey._frameIndex + " ";
-						}
+					//	if (prevKey != null)
+					//	{
+					//		strPrevKey = " " + prevKey._frameIndex + " ";
+					//	}
+					//	if (nextKey != null)
+					//	{
+					//		strNextKey = " " + nextKey._frameIndex + " ";
+					//	}
 
-						Debug.Log("Keyframe [" + curKey._frameIndex + "] Link (" + strPrevKey + ") <-> (" + strNextKey + ")");
-					}
+					//	Debug.Log("Keyframe [" + curKey._frameIndex + "] Link (" + strPrevKey + ") <-> (" + strNextKey + ")");
+					//}
 
+					//이전
+					//curKey.SetLinkedKeyframes(prevKey, nextKey, prevFrameIndex, nextFrameIndex, isMakeCurveForce);
+
+					//변경 19.5.20
 					curKey.SetLinkedKeyframes(prevKey, nextKey, prevFrameIndex, nextFrameIndex);
 				}
 
@@ -726,10 +730,10 @@ namespace AnyPortrait
 				}
 			}
 
-			if (isPrintLog)
-			{
-				Debug.Log("---------------------------------------------");
-			}
+			//if (isPrintLog)
+			//{
+			//	Debug.Log("---------------------------------------------");
+			//}
 
 			return nRefreshed;
 		}
@@ -870,9 +874,11 @@ namespace AnyPortrait
 		//-----------------------------------------------------------------------------------
 		// Copy For Bake
 		//-----------------------------------------------------------------------------------
-		public void CopyFromTimelineLayer(apAnimTimelineLayer srcTimelineLayer)
+		public void CopyFromTimelineLayer(apAnimTimelineLayer srcTimelineLayer, apAnimClip parentAnimClip, apAnimTimeline parentTimeline)
 		{
 			_uniqueID = srcTimelineLayer._uniqueID;
+			_parentTimeline = parentTimeline;
+			_parentAnimClip = parentAnimClip;
 
 			_keyframes.Clear();
 			for (int iKey = 0; iKey < srcTimelineLayer._keyframes.Count; iKey++)
@@ -895,6 +901,9 @@ namespace AnyPortrait
 			_controlParamID = srcTimelineLayer._controlParamID;
 
 			_linkType = srcTimelineLayer._linkType;
+
+			//SortAndRefreshKeyframes(false, true);//<<추가 3.31 : 커브 복사 버그 수정
+			SortAndRefreshKeyframes();//변경 19.5.20
 
 		}
 	}

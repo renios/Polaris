@@ -75,6 +75,10 @@ namespace AnyPortrait
 		}
 		private REQUEST_TYPE _requestType = REQUEST_TYPE.New;
 
+		//추가 1.15 : 시작 프레임이 아닌 특정 프레임에서 재생되게 만들 경우
+		private bool _isResetPlayAtStartFrame = true;//<<기본적으로는 재생을 시작할 때 ResetFrame을 한다. (True가 기본값)
+		private int _frameToStart = -1;
+
 		//다음에 플레이하게될 PlayUnit (필수)
 		public apAnimPlayUnit _nextPlayUnit = null;
 
@@ -155,6 +159,10 @@ namespace AnyPortrait
 
 			_isNextPlayUnitIsInPrevUnit = false;
 
+			//추가 1.15 사용자가 지정한 시작 프레임을 쓸 것인지 여부 (True면 StartFrame으로 강제됨)
+			_isResetPlayAtStartFrame = true;
+			_frameToStart = -1;
+
 			ReleaseChainedRequest();
 
 		}
@@ -213,9 +221,6 @@ namespace AnyPortrait
 
 		public void PlayNew(apAnimPlayUnit nextPlayUnit, float tBlend)
 		{
-			//Debug.LogError(">> AnimRequest <New> : " + nextPlayUnit._linkedAnimClip._name + " >> 바로 시작한다");
-
-			//_tNextPlayStart = tNextPlay;//<<이게 필요한가?
 			_tBlend = tBlend;
 			_tLive = 0.0f;
 
@@ -240,21 +245,13 @@ namespace AnyPortrait
 
 			_isNextPlayUnitIsInPrevUnit = false;
 
-			//이전 코드
-			//for (int i = 0; i < _prevPlayUnits.Count; i++)
-			//{
-			//	if (nextPlayUnit == _prevPlayUnits[i]
-			//		&& _prevPlayUnits[i].UnitWeight > 0.05f)
-			//	{
-			//		_isNextPlayUnitIsInPrevUnit = true;
-			//		break;
-			//	}
-			//}
-
-			
 			_isNextPlayUnitIsInPrevUnit = _parentAnimPlayQueue.IsAlreadyAnimUnitPlayed(_nextPlayUnit);
 
 			_nextUnitWeight_Overlap = 1.0f;
+
+			//추가 1.15 사용자가 지정한 시작 프레임 > Off
+			_isResetPlayAtStartFrame = true;
+			_frameToStart = -1;
 
 			
 			if (_isNextPlayUnitIsInPrevUnit)
@@ -268,6 +265,56 @@ namespace AnyPortrait
 			else
 			{
 				_nextPlayUnit.ResetPlay();
+			}
+		}
+
+
+
+		public void PlayNewAt(apAnimPlayUnit nextPlayUnit, int frame, float tBlend)
+		{
+			_tBlend = tBlend;
+			_tLive = 0.0f;
+
+			_isNextUnitPlayed = false;
+			_isNextUnitFrameReset = false;
+
+			_requestType = REQUEST_TYPE.New;
+			_nextPlayUnit = nextPlayUnit;
+			_nextPlayUnit.SetOwnerRequest_Next(this);
+
+			_prevWaitingPlayUnit = null;
+
+			_requestWeight = 0.0f;
+			_nextUnitWeight = 1.0f;
+			_prevUnitWeight = 1.0f;
+
+			_tActiveStart = 0.0f;
+			_tActiveEnd = _tBlend;
+			_tActiveMiddle = _tBlend * 0.5f;
+
+			_status = STATUS.Active;//<<바로 시작
+
+			_isNextPlayUnitIsInPrevUnit = false;
+
+			_isNextPlayUnitIsInPrevUnit = _parentAnimPlayQueue.IsAlreadyAnimUnitPlayed(_nextPlayUnit);
+
+			_nextUnitWeight_Overlap = 1.0f;
+
+			//추가 1.15 사용자가 지정한 시작 프레임 > On
+			_isResetPlayAtStartFrame = false;
+			_frameToStart = frame;
+
+			if (_isNextPlayUnitIsInPrevUnit)
+			{
+				_nextUnitWeight_Overlap = _nextPlayUnit.UnitWeight;
+				if (!_nextPlayUnit.IsLoop)
+				{
+					_nextPlayUnit.ResetPlayAt(frame);//<<이게 바뀜
+				}
+			}
+			else
+			{
+				_nextPlayUnit.ResetPlayAt(frame);//<<이게 바뀜
 			}
 		}
 
@@ -300,27 +347,50 @@ namespace AnyPortrait
 
 			_isNextPlayUnitIsInPrevUnit = false;
 
-			//이전코드
-			//for (int i = 0; i < _prevPlayUnits.Count; i++)
-			//{
-			//	if (nextPlayUnit == _prevPlayUnits[i]
-			//		&& _prevPlayUnits[i].UnitWeight > 0.05f)
-			//	{
-			//		_isNextPlayUnitIsInPrevUnit = true;
-			//		break;
-			//	}
-			//}
+			//추가 1.15 사용자가 지정한 시작 프레임 > Off
+			_isResetPlayAtStartFrame = true;
+			_frameToStart = -1;
 
 			_nextUnitWeight_Overlap = 1.0f;
 
-			//이걸 플레이하는 시점에서 지정
-			//_isNextPlayUnitIsInPrevUnit = _parentAnimPlayQueue.IsAlreadyAnimUnitPlayed(_nextPlayUnit);
+			
+		}
 
-			//_nextUnitWeight_Overlap = 1.0f;
-			//if (_isNextPlayUnitIsInPrevUnit)
-			//{
-			//	_nextUnitWeight_Overlap = _nextPlayUnit.UnitWeight;
-			//}
+
+		public void PlayQueuedAt(apAnimPlayUnit nextPlayUnit, apAnimPlayUnit prevLastPlayUnit, int frame, float tBlend)
+		{
+			//Debug.LogError(">> AnimRequest <Queued> : " + nextPlayUnit._linkedAnimClip._name + " >> 대기");
+
+			//_tNextPlayStart = -1;//Queued 타입은 플레이 시간을 받지 않는다.
+			_tBlend = tBlend;
+			_tLive = 0.0f;
+
+			_isNextUnitPlayed = false;
+			_isNextUnitFrameReset = false;
+
+			_requestType = REQUEST_TYPE.Queued;
+			_nextPlayUnit = nextPlayUnit;
+			_nextPlayUnit.SetOwnerRequest_Next(this);
+
+			_prevWaitingPlayUnit = prevLastPlayUnit;
+
+			_requestWeight = 0.0f;
+			_nextUnitWeight = 1.0f;
+			_prevUnitWeight = 1.0f;
+
+			_tActiveStart = -1.0f;
+			_tActiveEnd = -1.0f;//<<알 수 없다.
+			_tActiveMiddle = -1.0f;
+
+			_status = STATUS.Ready;//<<일단 대기
+
+			_isNextPlayUnitIsInPrevUnit = false;
+
+			_nextUnitWeight_Overlap = 1.0f;
+
+			//추가 1.15 사용자가 지정한 시작 프레임 > On
+			_isResetPlayAtStartFrame = false;
+			_frameToStart = frame;
 		}
 
 		public void Stop(float tBlend)
@@ -568,7 +638,16 @@ namespace AnyPortrait
 										if(!_isNextPlayUnitIsInPrevUnit)
 										{
 											_parentAnimPlayQueue.RefreshPlayOrderAll();//전체 Order를 갱신
-											_nextPlayUnit.Play();
+											//Debug.Log(">> Play (" + _isResetPlayAtStartFrame + " / " + _frameToStart + ")");
+											if (_isResetPlayAtStartFrame)
+											{
+												_nextPlayUnit.Play();
+											}
+											else
+											{
+												_nextPlayUnit.PlayAt(_frameToStart);
+												_isResetPlayAtStartFrame = true;//<<초기화
+											}
 										}
 										
 									}
@@ -626,7 +705,17 @@ namespace AnyPortrait
 													_parentAnimPlayQueue.RefreshPlayOrderAll();//전체 Order를 갱신
 													if (!_nextPlayUnit.IsLoop)
 													{
-														_nextPlayUnit.ResetPlay();
+														//Debug.LogError(">>> [Queued] Reset Play : " + _nextPlayUnit._linkedAnimClip._name);
+														//Debug.Log(">> ResetPlay (" + _isResetPlayAtStartFrame + " / " + _frameToStart + ")");
+														if (_isResetPlayAtStartFrame)
+														{
+															_nextPlayUnit.ResetPlay();
+														}
+														else
+														{
+															_nextPlayUnit.ResetPlayAt(_frameToStart);
+															_isResetPlayAtStartFrame = true;
+														}
 													}
 													else
 													{

@@ -229,6 +229,10 @@ namespace AnyPortrait
 		/// <summary>Bones</summary>
 		public apOptBone[] _boneList_All = null;
 
+		//추가 19.5.23 : 
+		private Dictionary<int, apOptBone> _boneID2Bone = null;
+
+
 		/// <summary>Bones (Root Only)</summary>
 		public apOptBone[] _boneList_Root = null;
 
@@ -272,6 +276,16 @@ namespace AnyPortrait
 
 		[NonSerialized]
 		public apMatrix3x3 _convert2TargetMatrix3x3 = apMatrix3x3.identity;
+
+		[NonSerialized]
+		private bool _isFlippedRoot_X = false;
+
+		[NonSerialized]
+		private bool _isFlippedRoot_Y = false;
+
+		//추가됨 19.5.25
+		[SerializeField]
+		public bool _isUseModMeshSet = false;
 
 
 		// Init
@@ -591,6 +605,18 @@ namespace AnyPortrait
 
 			_matrix_TFResult_World.RMultiply(_matrix_TF_ParentWorld);//<<[R]
 
+			//추가 2.25 : Flipped
+			if(_isFlippedRoot_X || _isFlippedRoot_Y)
+			{
+				//일단 적용하지 말자
+				//string prevMat = _matrix_TFResult_World.ToString();
+				//_matrix_TFResult_World.RScale((_isFlippedRoot_X ? -1 : 1), (_isFlippedRoot_Y ? -1 : 1));
+				//_matrix_TFResult_World.RMultiply(apMatrix.TRS(Vector2.zero, 0.0f, new Vector2((_isFlippedRoot_X ? -1 : 1), (_isFlippedRoot_Y ? -1 : 1))));
+				//string nextMat = _matrix_TFResult_World.ToString();
+
+				//Debug.Log("Flipped : " + prevMat + " >> " + nextMat);
+			}
+
 			//_matrix_TFResult_WorldWithoutMod.SRMultiply(_matrix_TF_ToParent, true);//ToParent는 넣지 않는다.
 			//_matrix_TFResult_WorldWithoutMod.SRMultiply(_matrix_TF_ParentWorld, true);//<<[SR]
 
@@ -601,6 +627,13 @@ namespace AnyPortrait
 				_matrix_TFResult_WorldWithoutMod.RMultiply(_matrix_TF_ToParent);//<<[R]
 				_matrix_TFResult_WorldWithoutMod.RMultiply(_matrix_TF_ParentWorld_NonModified);//<<[R]
 
+				//추가 2.25 : Flipped
+				if(_isFlippedRoot_X || _isFlippedRoot_Y)
+				{
+					//여기서 적용하지 말자
+					//_matrix_TFResult_WorldWithoutMod.RScale((_isFlippedRoot_X ? -1 : 1), (_isFlippedRoot_Y ? -1 : 1));
+					//_matrix_TFResult_World.RMultiply(apMatrix.TRS(Vector2.zero, 0.0f, new Vector2((_isFlippedRoot_X ? -1 : 1), (_isFlippedRoot_Y ? -1 : 1))));
+				}
 
 				//리깅용 단축식을 추가한다.
 				if (_childMesh != null)
@@ -1090,7 +1123,8 @@ namespace AnyPortrait
 							bool isMesh, int level, int depth,
 							bool isVisible_Default,
 							Color meshColor2X_Default,
-							float zScale
+							float zScale,
+							bool isUseModMeshSet
 										)
 		{
 			_portrait = portrait;
@@ -1145,13 +1179,19 @@ namespace AnyPortrait
 
 			_childTransforms = null;
 			_childMesh = null;
+
+			//추가 19.5.25 : v1.1.7부터는 ModMeshSet을 사용하도록 하자
+			_isUseModMeshSet = isUseModMeshSet;
+
+			//추가 : Bake 직후에는 Calculate Stack Result를 null로 날리자.
+			_calculatedStack = null;
 		}
 
-		public void BakeModifier(apPortrait portrait, apMeshGroup srcMeshGroup)
+		public void BakeModifier(apPortrait portrait, apMeshGroup srcMeshGroup, bool isUseModMesh)
 		{
 			if (srcMeshGroup != null)
 			{
-				_modifierStack.Bake(srcMeshGroup._modifierStack, portrait);
+				_modifierStack.Bake(srcMeshGroup._modifierStack, portrait, isUseModMesh);
 			}
 		}
 
@@ -1227,6 +1267,44 @@ namespace AnyPortrait
 					for (int i = 0; i < _childTransforms.Length; i++)
 					{
 						_childTransforms[i].RefreshModifierLink(true, false);
+					}
+				}
+			}
+
+			if (isRoot)
+			{
+				_modifierStack.LinkModifierStackToRenderUnitCalculateStack(true, this, isRecursive);
+			}
+			
+		}
+
+
+
+		/// <summary>
+		/// [핵심 코드]
+		/// Modifier를 업데이트할 수 있도록 연결해준다.
+		/// </summary>
+		public IEnumerator RefreshModifierLinkAsync(bool isRecursive, bool isRoot, apAsyncTimer asyncTimer)
+		{
+			if (_calculatedStack == null)
+			{
+				_calculatedStack = new apOptCalculatedResultStack(this);
+			}
+
+			if(asyncTimer.IsYield())
+			{
+				yield return asyncTimer.WaitAndRestart();
+			}
+
+			yield return _modifierStack.LinkAsync(_portrait, this, asyncTimer);
+
+			if(isRecursive)
+			{
+				if (_childTransforms != null && _childTransforms.Length > 0)
+				{
+					for (int i = 0; i < _childTransforms.Length; i++)
+					{
+						yield return _childTransforms[i].RefreshModifierLinkAsync(true, false, asyncTimer);
 					}
 				}
 			}
@@ -1325,6 +1403,14 @@ namespace AnyPortrait
 			}
 		}
 
+		//추가 2.25 : Root OptTransform인 경우, apPortrait가 Flipped된 상태인지 값을 받아야 한다.
+		public void SetRootFlipped(bool isFlippedX, bool isFlippedY)
+		{
+			_isFlippedRoot_X = isFlippedX;
+			_isFlippedRoot_Y = isFlippedY;
+			//Debug.LogError("[" + this.name + "] : Flipped / X : " + isFlippedX + " / Y : " + isFlippedY);
+		}
+
 		// Get / Set
 		//------------------------------------------------
 		public apOptModifierUnitBase GetModifier(int uniqueID)
@@ -1417,12 +1503,29 @@ namespace AnyPortrait
 		{
 			if (_boneList_All != null)
 			{
-				for (int i = 0; i < _boneList_All.Length; i++)
+				//이전
+				//for (int i = 0; i < _boneList_All.Length; i++)
+				//{
+				//	if (_boneList_All[i]._uniqueID == uniqueID)
+				//	{
+				//		return _boneList_All[i];
+				//	}
+				//}
+
+				//변경 19.5.23 : 첫 요청이 들어오면 ID > Bone 부터 만들자
+				if(_boneID2Bone == null || _boneID2Bone.Count != _boneList_All.Length)
 				{
-					if (_boneList_All[i]._uniqueID == uniqueID)
+					_boneID2Bone = new Dictionary<int, apOptBone>();
+
+					for (int i = 0; i < _boneList_All.Length; i++)
 					{
-						return _boneList_All[i];
+						_boneID2Bone.Add(_boneList_All[i]._uniqueID, _boneList_All[i]);
 					}
+				}
+				
+				if(_boneID2Bone.ContainsKey(uniqueID))
+				{
+					return _boneID2Bone[uniqueID];
 				}
 			}
 
@@ -1433,12 +1536,29 @@ namespace AnyPortrait
 		{
 			if (_boneList_All != null)
 			{
-				for (int i = 0; i < _boneList_All.Length; i++)
+				//이전
+				//for (int i = 0; i < _boneList_All.Length; i++)
+				//{
+				//	if (_boneList_All[i]._uniqueID == uniqueID)
+				//	{
+				//		return _boneList_All[i];
+				//	}
+				//}
+
+				//변경 19.5.23 : 첫 요청이 들어오면 ID > Bone 부터 만들자
+				if(_boneID2Bone == null || _boneID2Bone.Count != _boneList_All.Length)
 				{
-					if (_boneList_All[i]._uniqueID == uniqueID)
+					_boneID2Bone = new Dictionary<int, apOptBone>();
+
+					for (int i = 0; i < _boneList_All.Length; i++)
 					{
-						return _boneList_All[i];
+						_boneID2Bone.Add(_boneList_All[i]._uniqueID, _boneList_All[i]);
 					}
+				}
+				
+				if(_boneID2Bone.ContainsKey(uniqueID))
+				{
+					return _boneID2Bone[uniqueID];
 				}
 			}
 

@@ -135,28 +135,21 @@ namespace AnyPortrait
 			_rootUnit_Meshes = AddUnit_Label(null, meshGroupName, CATEGORY.MainName, null, true, null, HIERARCHY_TYPE.Meshes);
 			_rootUnit_Bones_Main = AddUnit_Label(null, meshGroupName, CATEGORY.MainName_Bone, null, true, null, HIERARCHY_TYPE.Bones);
 
+			//추가 19.6.29 : RestoreTmpWorkVisible 버튼을 추가하자.
+			_rootUnit_Meshes.SetRestoreTmpWorkVisible(	Editor.ImageSet.Get(apImageSet.PRESET.RestoreTmpVisibility_ON), 
+														Editor.ImageSet.Get(apImageSet.PRESET.RestoreTmpVisibility_OFF),
+														OnUnitClickRestoreTmpWork_Mesh);
+			_rootUnit_Meshes.SetRestoreTmpWorkVisibleAnyChanged(Editor.Select.IsTmpWorkVisibleChanged_Meshes);
+
+			_rootUnit_Bones_Main.SetRestoreTmpWorkVisible(	Editor.ImageSet.Get(apImageSet.PRESET.RestoreTmpVisibility_ON), 
+															Editor.ImageSet.Get(apImageSet.PRESET.RestoreTmpVisibility_OFF),
+															OnUnitClickRestoreTmpWork_Bone);
+			_rootUnit_Bones_Main.SetRestoreTmpWorkVisibleAnyChanged(Editor.Select.IsTmpWorkVisibleChanged_Bones);
+
 
 
 			apMeshGroup meshGroup = Editor.Select.MeshGroup;
-			//<BONE_EDIT>
-			//if (meshGroup._childMeshGroupTransformsWithBones.Count > 0)
-			//{
-			//	for (int i = 0; i < meshGroup._childMeshGroupTransformsWithBones.Count; i++)
-			//	{
-			//		apTransform_MeshGroup meshGroupTransformWithBones = meshGroup._childMeshGroupTransformsWithBones[i];
-
-			//		//Bone을 가지고 있는 Child MeshGroup Transform을 Sub 루트로 삼는다.
-			//		//나중에 구분하기 위해 meshGroupTransform을 SavedObj에 넣는다.
-			//		_rootUnit_Bones_Sub.Add(
-			//			AddUnit_Label(Editor.ImageSet.Get(apImageSet.PRESET.Hierarchy_MeshGroup),
-			//							meshGroupTransformWithBones._nickName,
-			//							CATEGORY.SubName_Bone,
-			//							meshGroupTransformWithBones, //<Saved Obj
-			//							true, null,
-			//							HIERARCHY_TYPE.Bones));
-
-			//	}
-			//}
+			
 
 			//수정
 			if(meshGroup._boneListSets.Count > 0)
@@ -690,6 +683,10 @@ namespace AnyPortrait
 			{
 				SortUnit_Recv_Bones(_units_Root_Bones[i]);
 			}
+
+			//추가 19.6.29 : TmpWorkVisible 확인
+			_rootUnit_Meshes.SetRestoreTmpWorkVisibleAnyChanged(Editor.Select.IsTmpWorkVisibleChanged_Meshes);
+			_rootUnit_Bones_Main.SetRestoreTmpWorkVisibleAnyChanged(Editor.Select.IsTmpWorkVisibleChanged_Bones);
 		}
 
 		private apEditorHierarchyUnit RefreshUnit(CATEGORY category,
@@ -737,6 +734,12 @@ namespace AnyPortrait
 
 				unit._visibleType_Prefix = visibleType_Prefix;
 				unit._visibleType_Postfix = visibleType_Postfix;
+
+				//수정 1.1 : 버그
+				if(unit._text == null)
+				{
+					unit._text = "";
+				}
 
 				if (!unit._text.Equals(objName))
 				{
@@ -1375,11 +1378,12 @@ namespace AnyPortrait
 						}
 					}
 
+					Editor.Controller.CheckTmpWorkVisible(Editor.Select.MeshGroup);//TmpWorkVisible이 변경되었다면 이 함수 호출
 
 					//그냥 Refresh
 					Editor.Select.MeshGroup.RefreshForce();
 
-					Editor.RefreshControllerAndHierarchy();
+					Editor.RefreshControllerAndHierarchy(false);
 				}
 				else
 				{
@@ -1407,7 +1411,7 @@ namespace AnyPortrait
 						}
 
 						Editor.Select.MeshGroup.RefreshForce();
-						Editor.RefreshControllerAndHierarchy();
+						Editor.RefreshControllerAndHierarchy(false);
 					}
 					else if (isModVisibleSetting)
 					{
@@ -1491,7 +1495,7 @@ namespace AnyPortrait
 							}
 
 							Editor.Select.MeshGroup.RefreshForce();
-							Editor.RefreshControllerAndHierarchy();
+							Editor.RefreshControllerAndHierarchy(false);
 
 
 						}
@@ -1512,11 +1516,35 @@ namespace AnyPortrait
 						bone.SetGUIVisible(!isVisibleDefault, true);
 					}
 					
-					Editor.RefreshControllerAndHierarchy();
+					Editor.Controller.CheckTmpWorkVisible(Editor.Select.MeshGroup);//TmpWorkVisible이 변경되었다면 이 함수 호출
+					Editor.RefreshControllerAndHierarchy(false);
 				}
 			}
 		}
 
+
+		//추가 19.6.29 : RestoreTmpWork 이벤트
+		public void OnUnitClickRestoreTmpWork_Mesh()
+		{
+			if(Editor == null || Editor.Select.MeshGroup == null)
+			{
+				return;
+			}
+
+			Editor.Controller.SetMeshGroupTmpWorkVisibleReset(Editor.Select.MeshGroup, true, true, false);
+			Editor.RefreshControllerAndHierarchy(true);
+		}
+
+		public void OnUnitClickRestoreTmpWork_Bone()
+		{
+			if(Editor == null || Editor.Select.MeshGroup == null)
+			{
+				return;
+			}
+
+			Editor.Controller.SetMeshGroupTmpWorkVisibleReset(Editor.Select.MeshGroup, true, false, true);
+			Editor.RefreshControllerAndHierarchy(true);
+		}
 
 		//------------------------------------------------------------------------------------------------------------
 		// Modifier에 등록되었는지 체크

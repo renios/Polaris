@@ -73,7 +73,8 @@ namespace AnyPortrait
 				| apGizmos.TRANSFORM_UI.Color 
 				| apGizmos.TRANSFORM_UI.BoneIKController
 				| apGizmos.TRANSFORM_UI.Extra,//<<Extra 옵션 추가
-				FirstLink__Modifier_Transform);
+				FirstLink__Modifier_Transform,
+				null);
 		}
 
 
@@ -178,7 +179,7 @@ namespace AnyPortrait
 
 			//int result = prevSelected;
 
-			if (!Editor.Select.IsLockExEditKey)
+			if (!Editor.Select.IsSelectionLock)
 			{
 				//Lock이 걸려있지 않다면 새로 선택할 수 있다.
 				//여러개를 선택할 수도 있다....단일 선택만 할까.. => 단일 선택만 하자
@@ -330,7 +331,7 @@ namespace AnyPortrait
 
 
 
-			Editor.RefreshControllerAndHierarchy();
+			Editor.RefreshControllerAndHierarchy(false);
 			//Editor.Repaint();
 			Editor.SetRepaint();
 
@@ -346,7 +347,7 @@ namespace AnyPortrait
 			{
 				return;
 			}
-			if (!Editor.Select.IsLockExEditKey)
+			if (!Editor.Select.IsSelectionLock)
 			{
 				//락이 풀려있어야 한다.
 				Editor.Select.SetBone(null);
@@ -354,7 +355,7 @@ namespace AnyPortrait
 				Editor.Select.SetSubMeshInGroup(null);
 
 
-				Editor.RefreshControllerAndHierarchy();
+				Editor.RefreshControllerAndHierarchy(false);
 				//Editor.Repaint();
 				Editor.SetRepaint();
 			}
@@ -776,7 +777,7 @@ namespace AnyPortrait
 			//우선 순위는 ModMesh
 			if (!isTargetTransform && !isTargetBone)
 			{
-				Debug.LogError("Rotate 에러");
+				Debug.LogError("Rotate Error");
 				return;
 			}
 

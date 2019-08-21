@@ -50,10 +50,16 @@ namespace AnyPortrait
 
 
 		//Copy 타입 (Clipboard)
-		private apSnapShotStackUnit _clipboard_ModMesh = null;//<<이건 따로 저장해주자
-		private apSnapShotStackUnit _clipboard_Keyframe = null;//<<이건 따로 저장해주자
+		private apSnapShotStackUnit _clipboard_ModMesh = null;
+		private apSnapShotStackUnit _clipboard_Keyframe = null;
 		private apSnapShotStackUnit _clipboard_VertRig = null;
-		private apSnapShotStackUnit _clipboard_ModBone = null;//<<이건 따로 저장해주자
+		private apSnapShotStackUnit _clipboard_ModBone = null;
+
+		//추가 3.29 : 여러개의 키프레임을 저장하기 위한 용도. Timeline에서 복사한 경우 해당한다.
+		private apAnimClip _clipboard_AnimClipOfKeyframes = null;
+		private List<apSnapShotStackUnit> _clipboard_Keyframes = null;
+		private int _copied_keyframes_StartFrame = -1;
+		private int _copied_keyframes_EndFrame = -1;
 
 		//Record 타입
 		private const int MAX_RECORD = 10;
@@ -84,6 +90,11 @@ namespace AnyPortrait
 			//_curSnapShot = null;
 			//_iCurSnapShot = -1;
 			//_restoredSnapShot = false;
+
+			_clipboard_AnimClipOfKeyframes = null;
+			_clipboard_Keyframes = null;
+			_copied_keyframes_StartFrame = -1;
+			_copied_keyframes_EndFrame = -1;
 		}
 
 
@@ -257,6 +268,106 @@ namespace AnyPortrait
 			return true;
 		}
 
+
+		//--------------------------------------------------------------------
+		// 2.5. Keyframe 여러개 복사하기
+		//--------------------------------------------------------------------
+		//추가 3.29 : 타임라인 UI에서 키프레임들을 Ctrl+C로 복사하기
+		public void Copy_KeyframesOnTimelineUI(apAnimClip animClip, List<apAnimKeyframe> keyframes)
+		{
+			if (animClip == null || keyframes == null || keyframes.Count == 0)
+			{
+				_clipboard_AnimClipOfKeyframes = null;
+				_clipboard_Keyframes = null;
+				_copied_keyframes_StartFrame = -1;
+				_copied_keyframes_EndFrame = -1;
+				return;
+			}
+
+
+			_clipboard_AnimClipOfKeyframes = animClip;
+			if(_clipboard_Keyframes == null)
+			{
+				_clipboard_Keyframes = new List<apSnapShotStackUnit>();
+			}
+			else
+			{
+				_clipboard_Keyframes.Clear();
+			}
+			
+			_copied_keyframes_StartFrame = -1;
+			_copied_keyframes_EndFrame = -1;
+
+			apAnimKeyframe srcKeyframe = null;
+			for (int i = 0; i < keyframes.Count; i++)
+			{
+				srcKeyframe = keyframes[i];
+
+				apSnapShotStackUnit newUnit = new apSnapShotStackUnit("Keyframe");
+				newUnit.SetSnapShot_Keyframe(srcKeyframe, "Clipboard");
+				_clipboard_Keyframes.Add(newUnit);
+
+				if(i == 0)
+				{
+					_copied_keyframes_StartFrame = srcKeyframe._frameIndex;
+					_copied_keyframes_EndFrame = srcKeyframe._frameIndex;
+				}
+				else
+				{
+					_copied_keyframes_StartFrame = Mathf.Min(_copied_keyframes_StartFrame, srcKeyframe._frameIndex);
+					_copied_keyframes_EndFrame = Mathf.Max(_copied_keyframes_EndFrame, srcKeyframe._frameIndex);
+				}
+			}
+		}
+
+		public bool IsKeyframesPastableOnTimelineUI(apAnimClip animClip)
+		{
+			if(_clipboard_AnimClipOfKeyframes != null 
+				&& animClip != null
+				&& _clipboard_AnimClipOfKeyframes == animClip
+				&& _clipboard_Keyframes != null
+				&& _clipboard_Keyframes.Count > 0
+				)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		/// <summary>
+		/// 다른 AnimClip으로 복사할 수 있는지 확인한다.
+		/// </summary>
+		/// <param name="animClip"></param>
+		/// <returns></returns>
+		public bool IsKeyframesPastableOnTimelineUI_ToOtherAnimClip(apAnimClip animClip)
+		{
+			if(_clipboard_AnimClipOfKeyframes != null 
+				&& animClip != null
+				&& animClip._targetMeshGroup != null
+				&& _clipboard_AnimClipOfKeyframes._targetMeshGroup != null
+				&& animClip._targetMeshGroup == _clipboard_AnimClipOfKeyframes._targetMeshGroup//최소한 MeshGroup은 같아야 한다.
+				//&& _clipboard_AnimClipOfKeyframes == animClip
+				&& _clipboard_Keyframes != null
+				&& _clipboard_Keyframes.Count > 0
+				)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		public List<apSnapShotStackUnit> GetKeyframesOnTimelineUI()
+		{
+			return _clipboard_Keyframes;
+		}
+
+		public int StartFrameOfKeyframesOnTimelineUI
+		{
+			get
+			{
+				return _copied_keyframes_StartFrame;
+			}
+		}
 
 		//--------------------------------------------------------------------
 		// 3. Vertex Rigging

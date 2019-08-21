@@ -149,10 +149,13 @@ namespace AnyPortrait
 			PREV = 0, NEXT = 1
 		}
 
-		[SerializeField]
+		//변경 19.5.22 : 용량 최적화를 위해서 AnimCurveResult를 NonSerialized로 변경
+		//[SerializeField]
+		[NonSerialized, NonBackupField]
 		public apAnimCurveResult _prevCurveResult = new apAnimCurveResult();
 
-		[SerializeField]
+		//[SerializeField]
+		[NonSerialized, NonBackupField]
 		public apAnimCurveResult _nextCurveResult = new apAnimCurveResult();
 
 		//[NonSerialized]
@@ -426,6 +429,8 @@ namespace AnyPortrait
 
 		public void SetLinkedCurveKey(apAnimCurve prevLinkedCurveKey, apAnimCurve nextLinkedCurveKey,
 										int prevIndex, int nextIndex
+			
+										//bool isMakeCurveForce = false//<< 삭제 19.5.20 : 이게 문제가 아닌데??
 									//, bool isPrevDummyIndex, bool isNextDummyIndex
 									)
 		{
@@ -479,16 +484,15 @@ namespace AnyPortrait
 			//CalculateSmooth(); 
 			#endregion
 
-			////Debug.Log("Link Curve Key");
-			//_prevTable.LinkAnimCurve(prevLinkedCurveKey);
-			//_nextTable.LinkAnimCurve(nextLinkedCurveKey);
+			//이전
+			//_prevCurveResult.Link(prevLinkedCurveKey, this, false, !(Application.isPlaying) || isMakeCurveForce);
+			//_nextCurveResult.Link(this, nextLinkedCurveKey, true, !(Application.isPlaying) || isMakeCurveForce);
 
-			//Refresh();
+			//변경 : 19.5.20 : 최적화 작업
+			_prevCurveResult.Link(prevLinkedCurveKey, this, false);
+			_nextCurveResult.Link(this, nextLinkedCurveKey, true);
 
-			_prevCurveResult.Link(prevLinkedCurveKey, this, false, !(Application.isPlaying));
-			_nextCurveResult.Link(this, nextLinkedCurveKey, true, !(Application.isPlaying));
-
-			//Refresh();
+			
 		}
 
 

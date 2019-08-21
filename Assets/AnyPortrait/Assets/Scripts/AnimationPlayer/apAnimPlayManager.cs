@@ -229,6 +229,92 @@ namespace AnyPortrait
 		}
 
 
+
+
+		// [런타임에서] Portrait를 연결하고, Portrait를 검색하여 animPlayData를 세팅한다.
+		// 다른 Link가 모두 끝난뒤에 호출하자
+		/// <summary>
+		/// Connect to Portrait and initialize it for runtime processing.
+		/// </summary>
+		/// <param name="portrait"></param>
+		public IEnumerator LinkPortraitAsync(apPortrait portrait, apAsyncTimer asyncTimer)
+		{
+			_portrait = portrait;
+
+			InitAndLink();
+
+			//Async Wait
+			if(asyncTimer.IsYield())
+			{
+				yield return asyncTimer.WaitAndRestart();
+			}
+
+
+
+			if (_animPlayDataList == null)
+			{
+				_animPlayDataList = new List<apAnimPlayData>();
+			}
+
+			apAnimPlayData animPlayData = null;
+
+			for (int i = 0; i < _animPlayDataList.Count; i++)
+			{
+				animPlayData = _animPlayDataList[i];
+				animPlayData._isValid = false;//일단 유효성 초기화 (나중에 값 넣으면 자동으로 true)
+
+				apAnimClip animClip = _portrait.GetAnimClip(animPlayData._animClipID);
+
+
+				apOptRootUnit rootUnit = _portrait._optRootUnitList.Find(delegate (apOptRootUnit a)
+				{
+					if (a._rootOptTransform != null)
+					{
+						if (a._rootOptTransform._meshGroupUniqueID == animPlayData._meshGroupID)
+						{
+							return true;
+						}
+					}
+					return false;
+				});
+
+				if (animClip != null && rootUnit != null)
+				{
+					animPlayData.Link(animClip, rootUnit);
+
+					//추가 : 여기서 ControlParamResult를 미리 만들어서 이후에 AnimClip이 미리 만들수 있게 해주자
+					animClip.MakeAndLinkControlParamResults();
+				}
+
+				//Async Wait
+				if (asyncTimer.IsYield())
+				{
+					yield return asyncTimer.WaitAndRestart();
+				}
+			}
+
+			//추가 : 메카님 연동
+			_mecanim.LinkPortrait(portrait, this);
+			
+
+			//Async Wait
+			if(asyncTimer.IsYield())
+			{
+				yield return asyncTimer.WaitAndRestart();
+			}
+
+			if(portrait._isUsingMecanim && portrait._animator != null)
+			{
+				_isMecanim = true;
+			}
+			else
+			{
+				_isMecanim = false;
+			}
+
+		}
+
+
 		// [Runtime] Functions
 		//-------------------------------------------------------
 		// 제어 함수
@@ -242,7 +328,7 @@ namespace AnyPortrait
 		{
 			if (!_isInitAndLink)
 			{
-				Debug.LogError("Not _isInitAndLink");
+				Debug.LogError("AnyPortrait : Not Initialized AnimPlayManager");
 				return;
 			}
 
@@ -301,6 +387,8 @@ namespace AnyPortrait
 			return Play(playData, layer, blendMethod, playOption, isAutoEndIfNotloop, isDebugMsg);
 		}
 
+		
+
 
 		/// <summary>
 		/// Play the animation
@@ -355,6 +443,11 @@ namespace AnyPortrait
 
 			return playData;
 		}
+
+
+
+		
+
 
 		//추가 : AnimPlayData로 PlayQueued를 바로 실행하는 함수가 나오면서, 이름으로 검색하는 건 오버로드로 뺌
 		public apAnimPlayData PlayQueued(string animClipName, int layer, apAnimPlayUnit.BLEND_METHOD blendMethod, bool isAutoEndIfNotloop = false)
@@ -508,13 +601,13 @@ namespace AnyPortrait
 		{
 			if (playData == null)
 			{
-				Debug.LogError("CrossFade Failed : Unknown AnimPlayData");
+				Debug.LogError("CrossFadeQueued Failed : Unknown AnimPlayData");
 				return null;
 			}
 
 			if (layer < MIN_LAYER_INDEX || layer > MAX_LAYER_INDEX)
 			{
-				Debug.LogError("CrossFade Failed : Layer " + layer + " is invalid. Layer must be between " + MIN_LAYER_INDEX + " ~ " + MAX_LAYER_INDEX);
+				Debug.LogError("CrossFadeQueued Failed : Layer " + layer + " is invalid. Layer must be between " + MIN_LAYER_INDEX + " ~ " + MAX_LAYER_INDEX);
 				return null;
 			}
 
@@ -553,7 +646,235 @@ namespace AnyPortrait
 			return playData;
 		}
 
+		//----------------------------------------------------------------------------------------
+		public apAnimPlayData PlayAt(string animClipName, int frame, int layer, apAnimPlayUnit.BLEND_METHOD blendMethod, PLAY_OPTION playOption = PLAY_OPTION.StopSameLayer, bool isAutoEndIfNotloop = false, bool isDebugMsg = true)
+		{
+			apAnimPlayData playData = GetAnimPlayData_Opt(animClipName);
+			if (playData == null)
+			{
+				if (isDebugMsg)
+				{
+					Debug.LogError("PlayAt Failed : No AnimClip [" + animClipName + "]");
+				}
+				return null;
+			}
+			return PlayAt(playData, frame, layer, blendMethod, playOption, isAutoEndIfNotloop, isDebugMsg);
+		}
 
+		public apAnimPlayData PlayAt(apAnimPlayData playData, int frame, int layer, apAnimPlayUnit.BLEND_METHOD blendMethod, PLAY_OPTION playOption = PLAY_OPTION.StopSameLayer, bool isAutoEndIfNotloop = false, bool isDebugMsg = true)
+		{
+			if (playData == null)
+			{
+				if (isDebugMsg)
+				{
+					Debug.LogError("PlayAt Failed : Unknown AnimPlayData");
+				}
+				return null;
+			}
+			
+			if (layer < MIN_LAYER_INDEX || layer > MAX_LAYER_INDEX)
+			{
+				if (isDebugMsg)
+				{
+					Debug.LogError("PlayAt Failed : Layer " + layer + " is invalid. Layer must be between " + MIN_LAYER_INDEX + " ~ " + MAX_LAYER_INDEX);
+				}
+				return null;
+			}
+
+			apAnimPlayQueue playQueue = _animPlayQueues[layer];
+			apAnimPlayUnit resultPlayUnit = playQueue.PlayAt(playData, frame, blendMethod, 0.0f, isAutoEndIfNotloop);
+
+			if (resultPlayUnit == null)
+			{
+				return null;
+			}
+
+			if (playOption == PLAY_OPTION.StopAllLayers)
+			{
+				//다른 레이어를 모두 정지시킨다.
+				for (int i = 0; i < _animPlayQueues.Count; i++)
+				{
+					if (i == layer) { continue; }
+					_animPlayQueues[i].StopAll(0.0f);
+				}
+			}
+
+			RefreshPlayOrders();
+
+			return playData;
+		}
+
+
+
+		public apAnimPlayData PlayQueuedAt(string animClipName, int frame, int layer, apAnimPlayUnit.BLEND_METHOD blendMethod, bool isAutoEndIfNotloop = false)
+		{
+			apAnimPlayData playData = GetAnimPlayData_Opt(animClipName);
+			if (playData == null)
+			{
+				Debug.LogError("PlayQueuedAt Failed : No AnimClip [" + animClipName + "]");
+				return null;
+			}
+			return PlayQueuedAt(playData, frame, layer, blendMethod, isAutoEndIfNotloop);
+		}
+
+		/// <summary>
+		/// Wait for the previous animation to finish, then play it.
+		/// (If the previously playing animation is a loop animation, it will not be executed.)
+		/// </summary>
+		/// <param name="animClipName">Name of the Animation Clip</param>
+		/// <param name="layer">The layer to which the animation is applied. From 0 to 20</param>
+		/// <param name="blendMethod">How it is blended with the animation of the lower layers</param>
+		/// <param name="isAutoEndIfNotloop">If True, animation that does not play repeatedly is automatically terminated.</param>
+		/// <returns>Animation data to be played. If it fails, null is returned.</returns>
+		public apAnimPlayData PlayQueuedAt(apAnimPlayData playData, int frame, int layer, apAnimPlayUnit.BLEND_METHOD blendMethod, bool isAutoEndIfNotloop = false)
+		{
+			if (playData == null)
+			{
+				Debug.LogError("PlayQueuedAt Failed : Unknown AnimPlayData");
+				return null;
+			}
+
+			if (layer < MIN_LAYER_INDEX || layer > MAX_LAYER_INDEX)
+			{
+				Debug.LogError("PlayQueuedAt Failed : Layer " + layer + " is invalid. Layer must be between " + MIN_LAYER_INDEX + " ~ " + MAX_LAYER_INDEX);
+				return null;
+			}
+
+			apAnimPlayQueue playQueue = _animPlayQueues[layer];
+			apAnimPlayUnit resultPlayUnit = playQueue.PlayQueuedAt(playData, frame, blendMethod, 0.0f, isAutoEndIfNotloop);
+
+			if (resultPlayUnit == null) { return null; }
+			
+			RefreshPlayOrders();
+
+			return playData;
+		}
+
+
+
+		public apAnimPlayData CrossFadeAt(string animClipName, int frame, int layer, apAnimPlayUnit.BLEND_METHOD blendMethod, float fadeTime, PLAY_OPTION playOption = PLAY_OPTION.StopSameLayer, bool isAutoEndIfNotloop = false)
+		{
+			apAnimPlayData playData = GetAnimPlayData_Opt(animClipName);
+			if (playData == null)
+			{
+				Debug.LogError("CrossFade Failed : No AnimClip [" + animClipName + "]");
+				return null;
+			}
+			return CrossFadeAt(playData, frame, layer, blendMethod, fadeTime, playOption, isAutoEndIfNotloop);
+		}
+
+
+		/// <summary>
+		/// Play the animation smoothly.
+		/// </summary>
+		/// <param name="animClipName">Name of the Animation Clip</param>
+		/// <param name="fadeTime">Fade Time</param>
+		/// <param name="layer">The layer to which the animation is applied. From 0 to 20</param>
+		/// <param name="blendMethod">How it is blended with the animation of the lower layers</param>
+		/// <param name="playOption">How to stop which animations</param>
+		/// <param name="isAutoEndIfNotloop">If True, animation that does not play repeatedly is automatically terminated.</param>
+		/// <returns>Animation data to be played. If it fails, null is returned.</returns>
+		public apAnimPlayData CrossFadeAt(apAnimPlayData playData, int frame, int layer, apAnimPlayUnit.BLEND_METHOD blendMethod, float fadeTime, PLAY_OPTION playOption = PLAY_OPTION.StopSameLayer, bool isAutoEndIfNotloop = false)
+		{
+			if (playData == null)
+			{
+				Debug.LogError("CrossFadeAt Failed : Unknown AnimPlayData");
+				return null;
+			}
+
+			if (layer < MIN_LAYER_INDEX || layer > MAX_LAYER_INDEX)
+			{
+				Debug.LogError("CrossFadeAt Failed : Layer " + layer + " is invalid. Layer must be between " + MIN_LAYER_INDEX + " ~ " + MAX_LAYER_INDEX);
+				return null;
+			}
+
+			if (fadeTime < 0.0f)
+			{
+				fadeTime = 0.0f;
+			}
+
+			apAnimPlayQueue playQueue = _animPlayQueues[layer];
+			apAnimPlayUnit resultPlayUnit = playQueue.PlayAt(playData, frame, blendMethod, fadeTime, isAutoEndIfNotloop);
+
+			if (resultPlayUnit == null)
+			{ return null; }
+
+
+			//float fadeInTime = resultPlayUnit.FadeInTime;
+
+			if (playOption == PLAY_OPTION.StopAllLayers)
+			{
+				//다른 레이어를 모두 정지시킨다. - 단, 딜레이를 준다.
+				for (int i = 0; i < _animPlayQueues.Count; i++)
+				{
+					if (i == layer)
+					{ continue; }
+					_animPlayQueues[i].StopAll(fadeTime);
+				}
+			}
+
+			RefreshPlayOrders();
+
+			return playData;
+		}
+
+
+
+		public apAnimPlayData CrossFadeQueuedAt(string animClipName, int frame, int layer, apAnimPlayUnit.BLEND_METHOD blendMethod, float fadeTime, bool isAutoEndIfNotloop = false)
+		{
+			apAnimPlayData playData = GetAnimPlayData_Opt(animClipName);
+			if (playData == null)
+			{
+				Debug.LogError("CrossFadeQueuedAt Failed : No AnimClip [" + animClipName + "]");
+				return null;
+			}
+			return CrossFadeQueuedAt(playData, frame, layer, blendMethod, fadeTime, isAutoEndIfNotloop);
+		}
+		/// <summary>
+		/// Wait for the previous animation to finish, then play it smoothly.
+		/// (If the previously playing animation is a loop animation, it will not be executed.)
+		/// </summary>
+		/// <param name="animClipName">Name of the Animation Clip</param>
+		/// <param name="fadeTime">Fade Time</param>
+		/// <param name="layer">The layer to which the animation is applied. From 0 to 20</param>
+		/// <param name="blendMethod">How it is blended with the animation of the lower layers</param>
+		/// <param name="isAutoEndIfNotloop">If True, animation that does not play repeatedly is automatically terminated.</param>
+		/// <returns>Animation data to be played. If it fails, null is returned.</returns>
+		public apAnimPlayData CrossFadeQueuedAt(apAnimPlayData playData, int frame, int layer, apAnimPlayUnit.BLEND_METHOD blendMethod, float fadeTime, bool isAutoEndIfNotloop = false)
+		{
+			if (playData == null)
+			{
+				Debug.LogError("CrossFadeQueuedAt Failed : Unknown AnimPlayData");
+				return null;
+			}
+
+			if (layer < MIN_LAYER_INDEX || layer > MAX_LAYER_INDEX)
+			{
+				Debug.LogError("CrossFadeQueuedAt Failed : Layer " + layer + " is invalid. Layer must be between " + MIN_LAYER_INDEX + " ~ " + MAX_LAYER_INDEX);
+				return null;
+			}
+
+			if (fadeTime < 0.0f)
+			{
+				fadeTime = 0.0f;
+			}
+
+			//Debug.Log("CrossFadeQueued [" + animClipName + "]");
+
+			apAnimPlayQueue playQueue = _animPlayQueues[layer];
+			apAnimPlayUnit resultPlayUnit = playQueue.PlayQueuedAt(playData, frame, blendMethod, fadeTime, isAutoEndIfNotloop);
+
+			if (resultPlayUnit == null)
+			{
+
+				return null;
+			}
+
+			RefreshPlayOrders();
+
+			return playData;
+		}
+		//----------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// End all animations playing on the target layer.
@@ -691,7 +1012,10 @@ namespace AnyPortrait
 				Debug.LogError("No AnimCip : " + animClipName);
 				return;
 			}
-			animPlayData._linkedAnimClip._speedRatio = speed;
+			//animPlayData._linkedAnimClip._speedRatio = speed;//이전
+			animPlayData._linkedAnimClip.SetSpeed(speed);//이후
+			
+			
 		}
 
 		public void SetAnimSpeed(float speed)
@@ -702,7 +1026,8 @@ namespace AnyPortrait
 				animClip = _animPlayDataList[i]._linkedAnimClip;
 				if(animClip != null)
 				{
-					animClip._speedRatio = speed;
+					//animClip._speedRatio = speed;//이전
+					animClip.SetSpeed(speed);//이후
 				}
 			}
 		}
@@ -771,6 +1096,67 @@ namespace AnyPortrait
 			//Debug.Log("Anim End And Refresh Order");
 			RefreshPlayOrders();
 		}
+
+		//추가 3.8 : 타임라인 관련 함수들
+		//Timeline이 유니티 2017의 기능이므로 그 전에는 막혀있다.
+#if UNITY_2017_1_OR_NEWER
+		public bool AddTimelineTrack(UnityEngine.Playables.PlayableDirector playableDirector, string trackName, int layer, apAnimPlayUnit.BLEND_METHOD blendMethod)
+		{
+			if (!_isMecanim)
+			{
+				Debug.LogError("AnyPortrait : AddTimelineTrack() is Failed. Mecanim is not activated.");
+				return false;
+			}
+			return _mecanim.AddTimelineTrack(playableDirector, trackName, layer, blendMethod);
+		}
+
+		public void RemoveInvalidTimelineTracks()
+		{
+			if (!_isMecanim)
+			{
+				Debug.LogError("AnyPortrait : RemoveInvalidTimelineTracks() is Failed. Mecanim is not activated.");
+				return;
+			}
+			_mecanim.RemoveInvalidTimelineTracks();
+		}
+
+		public void RemoveAllTimelineTracks()
+		{
+			if (!_isMecanim)
+			{
+				Debug.LogError("AnyPortrait : RemoveAllTimelineTracks() is Failed. Mecanim is not activated.");
+				return;
+			}
+			_mecanim.RemoveAllTimelineTracks();
+		}
+
+		public void UnlinkTimelinePlayableDirector(UnityEngine.Playables.PlayableDirector playableDirector)
+		{
+			if (!_isMecanim)
+			{
+				Debug.LogError("AnyPortrait : UnlinkTimelinePlayableDirector() is Failed. Mecanim is not activated.");
+				return;
+			}
+			_mecanim.UnlinkTimelinePlayableDirector(playableDirector);
+		}
+
+		public void SetTimelineEnable(bool isEnabled)
+		{
+			if (!_isMecanim)
+			{
+				Debug.LogError("AnyPortrait : SetTimelineEnable() is Failed. Mecanim is not activated.");
+				return;
+			}
+			_mecanim.SetTimelineEnable(isEnabled);
+		}
+
+#endif
+
+
+
+
+
+
 
 		// [에디터] Functions
 		//-------------------------------------------------------

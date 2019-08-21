@@ -1102,30 +1102,21 @@ namespace AnyPortrait
 							//이미 만든 Calculate Param이 있는지 확인
 							apCalculatedResultParam existParam = modifier.GetCalculatedResultParam(modMesh._renderUnit);
 
-							//추가 : 만약 Calculated Param을 찾지 못했다면..
-							//Parent의 누군가가 이미 만들었을 수 있다!
-							//Root Parent MeshGroup에 요청해서 한번 더 확인하자
-							//(Calculated Result Param을 공유할 수 있기 때문)
-							if (existParam == null && rootMeshGroup != null)
-							{
-								//rootMeshGroup._modifierStack
-								//?? 이거 해야하나
-							}
-
-							apModifierParamSetGroupVertWeight weightedVertexData = null;
-							if (modMesh._transform_Mesh != null)
-							{
-								weightedVertexData = paramSetGroup.GetWeightVertexData(modMesh._transform_Mesh);
-							}
+							
+							// 삭제 19.5.20 : apModifierParamSetGroupVertWeight를 사용하지 않음
+							//apModifierParamSetGroupVertWeight weightedVertexData = null;
+							//if (modMesh._transform_Mesh != null)
+							//{
+							//	weightedVertexData = paramSetGroup.GetWeightVertexData(modMesh._transform_Mesh);
+							//}
 
 							if (existParam != null)
 							{
-								//Debug.Log("> ModMesh [" + iModMesh + "] : " + modMesh._transformUniqueID + "< Exist >");
-								//Debug.LogWarning("> < Exist > " + modifier.DisplayName + " / ModMesh [" + iModMesh + "] : " + modMesh._renderUnit.Name);
-
 								existParam.AddParamSetAndModifiedValue(paramSetGroup, paramSet, modMesh, null);
 								existParam.RefreshResultVertices();
-								existParam.LinkWeightedVertexData(weightedVertexData);
+
+								//삭제 19.5.20
+								//existParam.LinkWeightedVertexData(weightedVertexData);
 
 								// > 추가 12.03 <
 								//ParamKeyValue가 추가될 때에도 CalculateStack을 갱신할 필요가 있다.
@@ -1143,8 +1134,8 @@ namespace AnyPortrait
 									modifier,
 									modMesh._renderUnit,
 									modMesh._renderUnit,
-									null,//<Bone은 없으닝께..
-									weightedVertexData
+									null//<Bone은 없으닝께..
+									//weightedVertexData // << 19.5.20 : 삭제
 									);
 
 								newCalParam.AddParamSetAndModifiedValue(paramSetGroup, paramSet, modMesh, null);
@@ -1236,8 +1227,8 @@ namespace AnyPortrait
 										modifier,
 										modBoneRenderUnit,//<<변경
 										modBone._renderUnit,
-										modBone._bone,
-										null//WeightedVertex
+										modBone._bone
+										//null//WeightedVertex // 19.5.20 : 삭제
 										);
 
 									newCalParam.AddParamSetAndModifiedValue(paramSetGroup, paramSet, null, modBone);

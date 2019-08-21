@@ -694,6 +694,7 @@ namespace AnyPortrait
 
 								if (_async_StreamWriter != null)
 								{
+									_async_StreamWriter.Flush();
 									_async_StreamWriter.Close();
 								}
 
@@ -967,6 +968,8 @@ namespace AnyPortrait
 				_table.FileWrite(sw);
 
 				FileWriteRecursive(sw, rootUnit, 0);
+
+				sw.Flush();
 
 				sw.Close();
 				fs.Close();

@@ -82,7 +82,8 @@ namespace AnyPortrait
 				| apGizmos.TRANSFORM_UI.Vertex_Transform 
 				| apGizmos.TRANSFORM_UI.Color
 				| apGizmos.TRANSFORM_UI.Extra,
-				FirstLink__Modifier_Vertex);
+				FirstLink__Modifier_Vertex,
+				AddHotKeys__Modifier_Vertex);
 		}
 
 
@@ -293,7 +294,7 @@ namespace AnyPortrait
 
 				//Vertex를 선택한게 없다면
 				//+ Lock 상태가 아니라면
-				if (!selectVertex && !Editor.Select.IsLockExEditKey)
+				if (!selectVertex && !Editor.Select.IsSelectionLock)
 				{
 					//Transform을 선택
 					isTransformSelectable = true;
@@ -304,7 +305,7 @@ namespace AnyPortrait
 				//(Editing 상태가 아닐때)
 				isTransformSelectable = true;
 
-				if (Editor.Select.ExKey_ModMesh != null && Editor.Select.IsLockExEditKey)
+				if (Editor.Select.ExKey_ModMesh != null && Editor.Select.IsSelectionLock)
 				{
 					//뭔가 선택된 상태에서 Lock이 걸리면 다른건 선택 불가
 					isTransformSelectable = false;
@@ -370,7 +371,7 @@ namespace AnyPortrait
 					Editor.Select.SetSubMeshInGroup(null);
 				}
 
-				Editor.RefreshControllerAndHierarchy();
+				Editor.RefreshControllerAndHierarchy(false);
 				//Editor.Repaint();
 				Editor.SetRepaint();
 			}
@@ -400,16 +401,75 @@ namespace AnyPortrait
 			}
 
 			Editor.Select.SetModVertexOfModifier(null, null, null, null);
-			if (!Editor.Select.IsLockExEditKey)
+			if (!Editor.Select.IsSelectionLock)
 			{
 				//SubMesh 해제를 위해서는 Lock이 풀려있어야함
 				Editor.Select.SetSubMeshInGroup(null);
 			}
 
-			Editor.RefreshControllerAndHierarchy();
+			Editor.RefreshControllerAndHierarchy(false);
 			Editor.SetRepaint();
 		}
 
+		//-------------------------------------------------------------------------------------
+		// 단축키 등록
+		//-------------------------------------------------------------------------------------
+		public void AddHotKeys__Modifier_Vertex()
+		{
+			Editor.AddHotKeyEvent(OnHotKeyEvent__Modifier_Vertex__Ctrl_A, "Select All Vertices", KeyCode.A, false, false, true, null);
+		}
+
+		// 단축키 : 버텍스 전체 선택
+		private void OnHotKeyEvent__Modifier_Vertex__Ctrl_A(object paramObject)
+		{
+			if (Editor.Select.MeshGroup == null || Editor.Select.Modifier == null)
+			{
+				return;
+			}
+
+			if (Editor.Select.ModRenderVertListOfMod == null)
+			{
+				return;
+			}
+			
+			bool isAnyChanged = false;
+			if (Editor.Select.ExEditingMode != apSelection.EX_EDIT.None && Editor.Select.ExKey_ModMesh != null && Editor.Select.MeshGroup != null)
+			{
+				//선택된 RenderUnit을 고르자
+				apRenderUnit targetRenderUnit = Editor.Select.MeshGroup.GetRenderUnit(Editor.Select.ExKey_ModMesh._transform_Mesh);
+
+				if (targetRenderUnit != null)
+				{
+					for (int iVert = 0; iVert < targetRenderUnit._renderVerts.Count; iVert++)
+					{
+						apRenderVertex renderVert = targetRenderUnit._renderVerts[iVert];
+						apModifiedVertex selectedModVert = Editor.Select.ExKey_ModMesh._vertices.Find(delegate (apModifiedVertex a)
+							{
+								return renderVert._vertex._uniqueID == a._vertexUniqueID;
+							});
+
+						if (selectedModVert != null)
+						{
+							Editor.Select.AddModVertexOfModifier(selectedModVert, null, null, renderVert);
+
+							isAnyChanged = true;
+						}
+					}
+
+					Editor.RefreshControllerAndHierarchy(false);
+					//Editor.Repaint();
+					Editor.SetRepaint();
+				}
+			}
+
+			if (isAnyChanged)
+			{
+				Editor.Gizmos.SetSelectResultForce_Multiple<apSelection.ModRenderVert>(Editor.Select.ModRenderVertListOfMod);
+
+				Editor.Select.AutoSelectModMeshOrModBone();
+			}
+		}
+		//-------------------------------------------------------------------------------------
 		/// <summary>
 		/// Modifier내에서의 Gizmo 이벤트 : Vertex 계열 선택시 [복수 선택]
 		/// </summary>
@@ -481,7 +541,7 @@ namespace AnyPortrait
 						}
 					}
 
-					Editor.RefreshControllerAndHierarchy();
+					Editor.RefreshControllerAndHierarchy(false);
 					//Editor.Repaint();
 					Editor.SetRepaint();
 				}

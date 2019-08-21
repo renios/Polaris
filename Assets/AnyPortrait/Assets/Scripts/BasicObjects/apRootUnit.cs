@@ -152,7 +152,18 @@ namespace AnyPortrait
 
 		// Get / Set
 		//--------------------------------------
+		public string Name
+		{
+			get
+			{
+				if(_childMeshGroup != null)
+				{
+					return _childMeshGroup._name;
+				}
+				return "<None>";
 
+			}
+		}
 
 	}
 

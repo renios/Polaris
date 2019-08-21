@@ -234,6 +234,8 @@ namespace AnyPortrait
 					//Debug.Log("[" + i + "] Name : " + unit._sceneName + " - " + unit._portraitName + " / Time : " + unit._timer_Min + " / Last Saved : " + unit._lastWorkDateTime.ToString());
 				}
 
+				sw.Flush();
+
 				sw.Close();
 				fs.Close();
 				sw = null;

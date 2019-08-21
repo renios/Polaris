@@ -84,7 +84,8 @@ namespace AnyPortrait
 		/// <param name="curveKeyB"></param>
 		/// <param name="isTargetIsA">이 Result를 소유하고 있는 CurveKey가 Prev면 True, Next면 False</param>
 		/// <param name="isMakeCurve">Link와 함께 MakeCurve를 할 것인가</param>
-		public void Link(apAnimCurve curveKeyA, apAnimCurve curveKeyB, bool isTargetIsA, bool isMakeCurve)
+		//public void Link(apAnimCurve curveKeyA, apAnimCurve curveKeyB, bool isTargetIsA, bool isMakeCurve)
+		public void Link(apAnimCurve curveKeyA, apAnimCurve curveKeyB, bool isTargetIsA) //isMakeCurve 삭제 : 19.5.20
 		{
 			//bool isMakeCurveForce = true;
 			//if(_curveKeyA == curveKeyA && _curveKeyB == curveKeyB)
@@ -97,10 +98,14 @@ namespace AnyPortrait
 
 			_isTargetIsA = isTargetIsA;
 
-			if (isMakeCurve)
-			{
-				MakeCurve();
-			}
+			//이전
+			//if (isMakeCurve)
+			//{
+			//	MakeCurve();
+			//}
+
+			//변경 : 19.5.20 최적화 작업
+			MakeCurve();
 		}
 
 

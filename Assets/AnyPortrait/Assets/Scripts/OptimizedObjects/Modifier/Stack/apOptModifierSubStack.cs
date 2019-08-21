@@ -54,7 +54,7 @@ namespace AnyPortrait
 
 		}
 
-		public void Bake(apModifierStack modStack, apPortrait portrait)
+		public void Bake(apModifierStack modStack, apPortrait portrait, bool isUseModMesh)
 		{
 			_portrait = portrait;
 			_modifiers.Clear();
@@ -115,7 +115,7 @@ namespace AnyPortrait
 
 				if (optMod != null)
 				{
-					optMod.Bake(modifier, _portrait);
+					optMod.Bake(modifier, _portrait, isUseModMesh);
 					optMod.Link(_portrait, _parentTransform);
 
 					_modifiers.Add(optMod);
@@ -141,6 +141,27 @@ namespace AnyPortrait
 			}
 
 			_nModifiers = _modifiers.Count;
+		}
+
+		public IEnumerator LinkAsync(apPortrait portrait, apOptTransform parentTransform, apAsyncTimer asyncTimer)
+		{
+			_portrait = portrait;
+
+			//_parentTransform = _portrait.GetOptTransform(_parentTransformID);
+			_parentTransform = parentTransform;
+			
+
+			for (int i = 0; i < _modifiers.Count; i++)
+			{
+				yield return _modifiers[i].LinkAsync(portrait, _parentTransform, asyncTimer);
+			}
+
+			_nModifiers = _modifiers.Count;
+
+			if(asyncTimer.IsYield())
+			{
+				yield return asyncTimer.WaitAndRestart();
+			}
 		}
 
 
@@ -180,6 +201,8 @@ namespace AnyPortrait
 				//Modifier ->..
 				apOptModifierUnitBase modifier = _modifiers[iMod];
 
+				bool isUseModMeshSet = modifier._isUseModMeshSet;//19.5.24 추가
+
 				List<apOptParamSetGroup> paramSetGroups = modifier._paramSetGroupList;
 
 				for (int iGroup = 0; iGroup < paramSetGroups.Count; iGroup++)
@@ -197,58 +220,118 @@ namespace AnyPortrait
 						List<apOptModifiedMesh> modMeshes = paramSet._meshData;
 						List<apOptModifiedBone> modBones = paramSet._boneData;
 
-						for (int iModMesh = 0; iModMesh < modMeshes.Count; iModMesh++)
+						//추가 19.5.24 < ModMesh대신 ModMeshSet을 사용하자
+						List<apOptModifiedMeshSet> modMeshSets = paramSet._meshSetData;
+
+						//변경 19.5.24
+						//기존의 ModMesh가 불필요하게 데이터를 모두 가지고 있어서 용량이 많았다.
+						//개선된 ModMeshSet으로 변경하여 최적화
+						if (isUseModMeshSet)
 						{
-							//[핵심]
-							//Modifier -> ParamSetGroup -> ParamSet -> ModMeh 
-							//이제 이 ModMesh와 타겟 Transform을 연결하자.
-							//연결할땐 Calculated 오브젝트를 만들어서 연결
-							apOptModifiedMesh modMesh = modMeshes[iModMesh];
-
-							if (modMesh._targetTransform != null)
+							//개선된 ModMeshSet을 사용하는 경우
+							apOptModifiedMeshSet modMeshSet = null;
+							for (int iModMeshSet = 0; iModMeshSet < modMeshSets.Count; iModMeshSet++)
 							{
-								//이미 만든 Calculate Param이 있는지 확인
-								apOptCalculatedResultParam existParam = modifier.GetCalculatedResultParam(modMesh._targetTransform);
-
-								apOptParamSetGroupVertWeight weightedVertexData = null;
-								if (modMesh._targetMesh != null)
+								modMeshSet = modMeshSets[iModMeshSet];
+								if(modMeshSet._targetTransform != null)
 								{
-									weightedVertexData = paramSetGroup.GetWeightVertexData(modMesh._targetTransform);
-								}
+									//이미 만든 Calculate Param이 있는지 확인
+									apOptCalculatedResultParam existParam = modifier.GetCalculatedResultParam(modMeshSet._targetTransform);
 
-								if (existParam != null)
-								{
-									//이미 존재하는 Calculated Param이 있다.
-									existParam.AddParamSetAndModifiedValue(paramSetGroup, paramSet, modMesh, null);
+									if (existParam != null)
+									{
+										//이미 존재하는 Calculated Param이 있다.
+										existParam.AddParamSetAndModifiedValue(paramSetGroup, paramSet, null, null, modMeshSet);
 
-									//추가 12.5
-									//이미 추가된 ResultParam에 ParamKeyValue가 추가될 때 CalculateStack이 갱신되는 경우가 있다.
-									modMesh._targetTransform.CalculatedStack.OnParamKeyValueAddedOnCalculatedResultParam(existParam);
-								}
-								else
-								{
-									//새로 Calculated Param을 만들어야 한다.
-									apOptCalculatedResultParam newCalParam = new apOptCalculatedResultParam(
-										modifier._calculatedValueType,
-										modifier._calculatedSpace,
-										modifier,
-										modMesh._targetTransform,
-										modMesh._targetTransform,
-										modMesh._targetMesh,
-										null,
-										weightedVertexData);
+										//추가 12.5
+										//이미 추가된 ResultParam에 ParamKeyValue가 추가될 때 CalculateStack이 갱신되는 경우가 있다.
+										modMeshSet._targetTransform.CalculatedStack.OnParamKeyValueAddedOnCalculatedResultParam(existParam);
+									}
+									else
+									{
+										//새로 Calculated Param을 만들어야 한다.
+										apOptCalculatedResultParam newCalParam = new apOptCalculatedResultParam(
+											modifier._calculatedValueType,
+											modifier._calculatedSpace,
+											modifier,
+											modMeshSet._targetTransform,
+											modMeshSet._targetTransform,
+											modMeshSet._targetMesh,
+											null
+											//weightedVertexData//<<사용 안함 19.5.20
+											);
 
-									newCalParam.AddParamSetAndModifiedValue(paramSetGroup, paramSet, modMesh, null);
+										newCalParam.AddParamSetAndModifiedValue(paramSetGroup, paramSet, null, null, modMeshSet);
 
-									//Modifier에 등록하고
-									modifier._calculatedResultParams.Add(newCalParam);
+										//Modifier에 등록하고
+										modifier._calculatedResultParams.Add(newCalParam);
 
-									//OptTranform에도 등록하자
-									modMesh._targetTransform.CalculatedStack.AddCalculatedResultParam(newCalParam);
+										//OptTranform에도 등록하자
+										modMeshSet._targetTransform.CalculatedStack.AddCalculatedResultParam(newCalParam);
+									}
 								}
 							}
 						}
+						else
+						{
+							//기존의 ModMesh를 사용하는 경우
 
+							for (int iModMesh = 0; iModMesh < modMeshes.Count; iModMesh++)
+							{
+								//[핵심]
+								//Modifier -> ParamSetGroup -> ParamSet -> ModMeh 
+								//이제 이 ModMesh와 타겟 Transform을 연결하자.
+								//연결할땐 Calculated 오브젝트를 만들어서 연결
+								apOptModifiedMesh modMesh = modMeshes[iModMesh];
+
+								if (modMesh._targetTransform != null)
+								{
+									//이미 만든 Calculate Param이 있는지 확인
+									apOptCalculatedResultParam existParam = modifier.GetCalculatedResultParam(modMesh._targetTransform);
+
+									// 삭제 19.5.20 : apOptParamSetGroupVertWeight는 더이상 사용하지 않음
+									//apOptParamSetGroupVertWeight weightedVertexData = null;
+									//if (modMesh._targetMesh != null)
+									//{
+									//	weightedVertexData = paramSetGroup.GetWeightVertexData(modMesh._targetTransform);
+									//}
+
+									if (existParam != null)
+									{
+										//이미 존재하는 Calculated Param이 있다.
+										existParam.AddParamSetAndModifiedValue(paramSetGroup, paramSet, modMesh, null, null);
+
+										//추가 12.5
+										//이미 추가된 ResultParam에 ParamKeyValue가 추가될 때 CalculateStack이 갱신되는 경우가 있다.
+										modMesh._targetTransform.CalculatedStack.OnParamKeyValueAddedOnCalculatedResultParam(existParam);
+									}
+									else
+									{
+										//새로 Calculated Param을 만들어야 한다.
+										apOptCalculatedResultParam newCalParam = new apOptCalculatedResultParam(
+											modifier._calculatedValueType,
+											modifier._calculatedSpace,
+											modifier,
+											modMesh._targetTransform,
+											modMesh._targetTransform,
+											modMesh._targetMesh,
+											null
+											//weightedVertexData//<<사용 안함 19.5.20
+											);
+
+										newCalParam.AddParamSetAndModifiedValue(paramSetGroup, paramSet, modMesh, null, null);
+
+										//Modifier에 등록하고
+										modifier._calculatedResultParams.Add(newCalParam);
+
+										//OptTranform에도 등록하자
+										modMesh._targetTransform.CalculatedStack.AddCalculatedResultParam(newCalParam);
+									}
+								}
+							}
+
+						}
+						
 
 						//변경 10.2 :
 						//기존 : ModBone의 _meshGroup_Bone에 해당하는 OptTransform에 연결했다.
@@ -274,7 +357,7 @@ namespace AnyPortrait
 							if (existParam != null)
 							{
 								//이미 있다면 ModBone만 추가해주자
-								existParam.AddParamSetAndModifiedValue(paramSetGroup, paramSet, null, modBone);
+								existParam.AddParamSetAndModifiedValue(paramSetGroup, paramSet, null, modBone, null);
 								//Debug.LogWarning(" < Exist > - Mod Bone [" + modBone._bone._name + " << " + modBone._meshGroup_Bone._name + "]");
 							}
 							else
@@ -301,11 +384,11 @@ namespace AnyPortrait
 									rootOptTransform,//<<변경
 									modBone._meshGroup_Bone,//추가
 									modBone._meshGroup_Bone._childMesh,
-									modBone._bone,
-									null//WeightedVertex
+									modBone._bone
+									//null//WeightedVertex > 19.5.20 : 삭제
 									);
 
-								newCalParam.AddParamSetAndModifiedValue(paramSetGroup, paramSet, null, modBone);
+								newCalParam.AddParamSetAndModifiedValue(paramSetGroup, paramSet, null, modBone, null);
 
 								// Modifier에 등록하고
 								modifier._calculatedResultParams.Add(newCalParam);

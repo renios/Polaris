@@ -570,6 +570,7 @@ namespace AnyPortrait
 			if(isImportant)
 			{
 				Debug.LogWarning(strText);
+				
 			}
 			else
 			{

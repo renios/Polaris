@@ -208,6 +208,13 @@ namespace AnyPortrait
 			//_portrait.RegistUniqueID_AnimClip(_uniqueID);
 			_portrait.RegistUniqueID(apIDManager.TARGET.AnimClip, _uniqueID);
 
+			//v1.1.7 버그 수정
+			if(_endFrame <= _startFrame)
+			{	
+				UnityEngine.Debug.LogError("AnyPortrait : End Frame of Animation Clip [" + _name + "] is not set up normally. End Frame is changed from " + _endFrame + " to " + (_startFrame + 1) + ".\nThis action is temporary, so please modify the frame settings of this Animation Clip.");
+				_endFrame = _startFrame + 1;
+			}
+
 			//TODO : 멤버 추가시 값을 추가하자
 			for (int i = 0; i < _timelines.Count; i++)
 			{
@@ -252,6 +259,13 @@ namespace AnyPortrait
 
 			_targetOptTranform = _portrait.GetOptTransformAsMeshGroup(_targetMeshGroupID);
 
+			//추가 : 여기서 FPS 관련 코드 확인
+			if(_FPS < 1)
+			{
+				_FPS = 1;
+			}
+			_secPerFrame = 1.0f / (float)_FPS;
+			
 
 			if (_targetOptTranform == null)
 			{
@@ -265,6 +279,51 @@ namespace AnyPortrait
 			for (int i = 0; i < _timelines.Count; i++)
 			{
 				_timelines[i].LinkOpt(this);
+			}
+		}
+
+
+
+		public IEnumerator LinkOptAsync(apPortrait portrait, apAsyncTimer asyncTimer)
+		{
+			_portrait = portrait;
+
+			
+			if(_targetMeshGroupID < 0)
+			{
+				//연결되지 않았네요.
+				UnityEngine.Debug.LogError("AnyPortrait : Animation Clip [" + _name + "] : No MeshGroup Linked");
+				yield break;
+			}
+
+
+			_targetOptTranform = _portrait.GetOptTransformAsMeshGroup(_targetMeshGroupID);
+
+			//추가 : 여기서 FPS 관련 코드 확인
+			if(_FPS < 1)
+			{
+				_FPS = 1;
+			}
+			_secPerFrame = 1.0f / (float)_FPS;
+			
+
+			if (_targetOptTranform == null)
+			{
+				//UnityEngine.Debug.LogError("AnimClip이 적용되는 Target Opt Transform이 Null이다. [" + _targetMeshGroupID + "] (" + _name + ")");
+				//이 AnimClip을 사용하지 맙시다.
+				yield break;
+				
+			}
+
+			
+			for (int i = 0; i < _timelines.Count; i++)
+			{
+				yield return _timelines[i].LinkOptAsync(this, asyncTimer);
+			}
+
+			if(asyncTimer.IsYield())
+			{
+				yield return asyncTimer.WaitAndRestart();
 			}
 		}
 
@@ -675,14 +734,17 @@ namespace AnyPortrait
 							_curFrame = _startFrame;
 							_tUpdateTotal -= TimeLength;
 
-							//Animation 이벤트도 리셋한다.
-							if (_animEvents != null && _animEvents.Count > 0)
-							{
-								for (int i = 0; i < _animEvents.Count; i++)
-								{
-									_animEvents[i].ResetCallFlag();
-								}
-							}
+							//Animation 이벤트도 리셋한다. (루프에 의한 것이므로 전체 리셋)
+							//이전
+							//if (_animEvents != null && _animEvents.Count > 0)
+							//{
+							//	for (int i = 0; i < _animEvents.Count; i++)
+							//	{
+							//		_animEvents[i].ResetCallFlag();
+							//	}
+							//}
+							//변경
+							ResetEvents();
 						}
 						else
 						{
@@ -714,14 +776,17 @@ namespace AnyPortrait
 							_curFrame = _endFrame;
 							_tUpdateTotal += TimeLength;
 
-							//Animation 이벤트도 리셋한다.
-							if (_animEvents != null && _animEvents.Count > 0)
-							{
-								for (int i = 0; i < _animEvents.Count; i++)
-								{
-									_animEvents[i].ResetCallFlag();
-								}
-							}
+							//Animation 이벤트도 리셋한다. (루프에 의한 것이므로 전체 리셋)
+							//이전
+							//if (_animEvents != null && _animEvents.Count > 0)
+							//{
+							//	for (int i = 0; i < _animEvents.Count; i++)
+							//	{
+							//		_animEvents[i].ResetCallFlag();
+							//	}
+							//}
+							//변경
+							ResetEvents();
 						}
 						else
 						{
@@ -758,7 +823,7 @@ namespace AnyPortrait
 				for (int i = 0; i < _animEvents.Count; i++)
 				{
 					animEvent = _animEvents[i];
-					animEvent.Calculate(CurFrameFloat, CurFrame, (tDelta > 0.0f), Mathf.Abs(tDelta) > 0.0001f);
+					animEvent.Calculate(CurFrameFloat, CurFrame, (tDelta > 0.0f), Mathf.Abs(tDelta) > 0.0001f, tDelta, _speedRatio);
 					if(animEvent.IsEventCallable())
 					{
 						if(_portrait._optAnimEventListener != null)
@@ -768,9 +833,6 @@ namespace AnyPortrait
 							_portrait._optAnimEventListener.SendMessage(animEvent._eventName, animEvent.GetCalculatedParam(), SendMessageOptions.DontRequireReceiver);
 							
 						}
-
-						
-						
 					}
 				}
 			}
@@ -793,13 +855,140 @@ namespace AnyPortrait
 
 
 
+		// 변경 1.17 : 메카님은 다르게 처리해야한다.
+		public bool UpdateMecanim_Opt(float tDelta, float stateSpeed)
+		{
+			_tUpdate += tDelta;
+			_tUpdateTotal += tDelta;
+			bool isEnd = false;
+
+			
+			if (tDelta > 0)
+			{
+				//Speed Ratio가 크면 프레임이 한번에 여러개 이동할 수 있다.
+				while (_tUpdate > TimePerFrame)
+				{
+					//프레임이 증가한다.
+					_curFrame++;
+					_tUpdate -= TimePerFrame;
+
+					if (_curFrame >= _endFrame)
+					{
+						if (_isLoop)
+						{
+							//루프일 경우 -> 첫 프레임으로 돌아간다.
+							_curFrame = _startFrame;
+							_tUpdateTotal -= TimeLength;
+
+							if (stateSpeed > 0.0f)
+							{	
+								//UnityEngine.Debug.LogWarning("Frame Over the Length (Forward)");
+								//만약 밖에서 이벤트 초기화가 안되었다면 여기서 하자
+								ResetEvents();
+							}
+						}
+						else
+						{
+							//루프가 아닐 경우
+							_curFrame = _endFrame;
+							_tUpdate = 0.0f;
+							_tUpdateTotal = TimeLength;
+							isEnd = true;
+							break;
+						}
+					}
+				}
+			}
+			else if (tDelta < 0)
+			{
+				while (_tUpdate < 0.0f)
+				{
+					//프레임이 감소한다.
+					_curFrame--;
+					_tUpdate += TimePerFrame;
+
+					if (_curFrame <= _startFrame)
+					{
+						if (_isLoop)
+						{
+							//루프일 경우 -> 마지막 프레임으로 돌아간다.
+							_curFrame = _endFrame;
+							_tUpdateTotal += TimeLength;
+
+							if (stateSpeed < 0.0f)
+							{
+								//UnityEngine.Debug.LogWarning("Frame Over the Length (Backward)");
+								//만약 밖에서 이벤트 초기화가 안되었다면 여기서 하자
+								ResetEvents();
+							}
+						}
+						else
+						{
+							//루프가 아닐 경우
+							_curFrame = _startFrame;
+							_tUpdate = 0.0f;
+							_tUpdateTotal = 0.0f;
+							isEnd = true;
+							break;
+						}
+					}
+				}
+			}
+
+#if UNITY_EDITOR
+			if(!Application.isPlaying)
+			{
+				if (_parentPlayUnit == null)
+				{
+					return true;
+				}
+			}
+#endif
+
+			float unitWeight = _parentPlayUnit.UnitWeight;
+
+			UpdateControlParam(false, _parentPlayUnit._layer, unitWeight, _parentPlayUnit.BlendMethod);
+
+			//추가
+			//AnimEvent도 업데이트 하자
+			if(_animEvents != null && _animEvents.Count > 0)
+			{	
+				apAnimEvent animEvent = null;
+				for (int i = 0; i < _animEvents.Count; i++)
+				{
+					animEvent = _animEvents[i];
+					//animEvent.Calculate(CurFrameFloat, CurFrame, (tDelta > 0.0f), Mathf.Abs(tDelta) > 0.0001f, tDelta, _speedRatio);//기존
+					animEvent.Calculate(CurFrameFloat, CurFrame, (stateSpeed > 0.0f), Mathf.Abs(tDelta) > 0.0001f, tDelta, stateSpeed);//메카님용
+					if(animEvent.IsEventCallable())
+					{
+						if(_portrait._optAnimEventListener != null)
+						{
+							//애니메이션 이벤트를 호출해줍시다.
+							//UnityEngine.Debug.Log("Animation Event : " + animEvent._eventName + " / CurFrameFloat : " + CurFrameFloat + " / tDelta : " + tDelta);
+							_portrait._optAnimEventListener.SendMessage(animEvent._eventName, animEvent.GetCalculatedParam(), SendMessageOptions.DontRequireReceiver);
+							
+						}
+					}
+				}
+			}
+
+			return isEnd;
+		}
+
+
+
+
+
+
+
+
 		/// <summary>
 		/// [Opt 실행] 특정 프레임으로 이동한다.
 		/// Keyframe Weight와 Control Param Result를 만든다.
 		/// Start - End 프레임 사이의 값으로 강제된다.
 		/// </summary>
 		/// <param name="frame"></param>
-		public void SetFrame_Opt(int frame)
+		public void SetFrame_Opt(int frame, bool isResetAnimEventByFrame)
 		{
 			_curFrame = Mathf.Clamp(frame, _startFrame, _endFrame);
 			_tUpdate = 0.0f;
@@ -808,13 +997,24 @@ namespace AnyPortrait
 
 			UpdateControlParam(false, _parentPlayUnit._layer, _parentPlayUnit.UnitWeight, _parentPlayUnit.BlendMethod);
 
+			
 			//프레임 이동시에 AnimEvent를 다시 리셋한다.
-			if (_animEvents != null && _animEvents.Count > 0)
+			//이전
+			//if (_animEvents != null && _animEvents.Count > 0)
+			//{
+			//	for (int i = 0; i < _animEvents.Count; i++)
+			//	{
+			//		_animEvents[i].ResetCallFlag();
+			//	}
+			//}
+
+			if(!isResetAnimEventByFrame)
 			{
-				for (int i = 0; i < _animEvents.Count; i++)
-				{
-					_animEvents[i].ResetCallFlag();
-				}
+				ResetEvents();
+			}
+			else
+			{
+				ResetEventsBasedFrame(frame, _speedRatio > 0.0f);
 			}
 		}
 
@@ -834,14 +1034,16 @@ namespace AnyPortrait
 				UpdateControlParam(true);
 			}
 
-			//Animation 이벤트도 리셋한다.
-			if (_animEvents != null && _animEvents.Count > 0)
-			{
-				for (int i = 0; i < _animEvents.Count; i++)
-				{
-					_animEvents[i].ResetCallFlag();
-				}
-			}
+			//Animation 이벤트도 리셋한다. (전체)
+			//이전
+			//if (_animEvents != null && _animEvents.Count > 0)
+			//{
+			//	for (int i = 0; i < _animEvents.Count; i++)
+			//	{
+			//		_animEvents[i].ResetCallFlag();
+			//	}
+			//}
+			ResetEvents();
 		}
 
 		/// <summary>
@@ -866,17 +1068,7 @@ namespace AnyPortrait
 			_tUpdate = 0.0f;
 		}
 
-		public void ResetEvents()
-		{
-			//Animation 이벤트도 리셋한다.
-			if (_animEvents != null && _animEvents.Count > 0)
-			{
-				for (int i = 0; i < _animEvents.Count; i++)
-				{
-					_animEvents[i].ResetCallFlag();
-				}
-			}
-		}
+		
 
 		/// <summary>
 		/// _isPlaying 변수를 제어 한다. 단지 그뿐
@@ -894,12 +1086,26 @@ namespace AnyPortrait
 
 		// Functions
 		//---------------------------------------------
-		public void RefreshTimelines()
+		//변경 19.5.21 : 항상 모든 타임라인 레이어를 Refresh 할게 아니라, 필요한 것만 업데이트를 하자.
+		public void RefreshTimelines(apAnimTimelineLayer targetTimelineLayer)
 		{
-			for (int i = 0; i < _timelines.Count; i++)
+			if (targetTimelineLayer == null)
 			{
-				_timelines[i].RefreshLayers();
+				for (int i = 0; i < _timelines.Count; i++)
+				{
+					_timelines[i].RefreshLayers(null);
+				}
 			}
+			else
+			{
+				//타겟만 Refresh
+				if(targetTimelineLayer._parentTimeline != null
+					&& _timelines.Contains(targetTimelineLayer._parentTimeline))
+				{
+					targetTimelineLayer._parentTimeline.RefreshLayers(targetTimelineLayer);
+				}
+			}
+			
 
 			//추가
 			//Control Param Result 객체와 연결을 하자
@@ -964,6 +1170,112 @@ namespace AnyPortrait
 			});
 		}
 
+		//1.16 추가 : 속도 조절 함수
+		/// <summary>
+		/// 애니메이션의 속도를 제어하는 함수. 속도의 부호가 반전되면 애니메이션 이벤트를 갱신한다.
+		/// </summary>
+		/// <param name="speed"></param>
+		public void SetSpeed(float speed)
+		{
+			bool isSignInverted = (_speedRatio * speed) < 0.0f;
+			_speedRatio = speed;
+
+			if(isSignInverted)
+			{
+				OnSpeedSignInverted();
+			}
+		}
+
+		// 1.16 추가 : 이벤트 처리를 위한 초기화
+		//1. 그냥 전부 초기화 (ResetCallFlag 호출)
+		//public void ResetAnimEventCallFlagAll()
+		//{
+		//	//프레임 이동시에 AnimEvent를 다시 리셋한다.
+		//	if (_animEvents == null || _animEvents.Count == 0)
+		//	{
+		//		return;
+		//	}
+		//	for (int i = 0; i < _animEvents.Count; i++)
+		//	{
+		//		_animEvents[i].ResetCallFlag();
+		//	}
+		//}
+		public void ResetEvents()
+		{
+			//Animation 이벤트도 리셋한다.
+			if (_animEvents != null && _animEvents.Count > 0)
+			{
+				for (int i = 0; i < _animEvents.Count; i++)
+				{
+					_animEvents[i].ResetCallFlag();
+				}
+			}
+		}
+
+		public void ResetEventsBasedFrame(int frame, bool isForward)
+		{
+			//프레임 이동시에 AnimEvent를 다시 리셋한다.
+			if (_animEvents == null || _animEvents.Count == 0)
+			{
+				return;
+			}
+			apAnimEvent animEvent = null;
+			int minFrame = -1;
+			int maxFrame = -1;
+			for (int i = 0; i < _animEvents.Count; i++)
+			{
+				animEvent = _animEvents[i];
+				//일단 초기화
+				animEvent.ResetCallFlag();
+
+				if(animEvent._callType == apAnimEvent.CALL_TYPE.Once)
+				{
+					minFrame = animEvent._frameIndex;
+					maxFrame = animEvent._frameIndex;
+				}
+				else
+				{
+					minFrame = animEvent._frameIndex;
+					maxFrame = animEvent._frameIndex_End;
+				}
+
+				if(isForward)
+				{
+					//현재 프레임보다 작다면 모두 Lock
+					if(minFrame < frame && maxFrame < frame)
+					{
+						animEvent.Lock();
+						//UnityEngine.Debug.LogError(" >> Lock [" + animEvent._eventName + "] " + animEvent._frameIndex);
+					}
+				}
+				else
+				{
+					//현재 프레임보다 모두 크다면 모두 Lock
+					if(minFrame > frame && maxFrame > frame)
+					{
+						animEvent.Lock();
+						//UnityEngine.Debug.LogError(" >> Lock [" + animEvent._eventName + "] " + animEvent._frameIndex);
+					}
+				}
+			}
+		}
+
+		//추가 1.16 : ResetEventsBasedFrame()과 비슷한 역할의 함수이다.
+		//Speed의 방향이 바뀌었다면 강제로 이벤트가 리셋되어야 한다.
+		//AnimEvent에서 처리하자
+		public void OnSpeedSignInverted()
+		{
+			if (_animEvents == null || _animEvents.Count == 0)
+			{
+				return;
+			}
+			for (int i = 0; i < _animEvents.Count; i++)
+			{
+				_animEvents[i].OnSpeedSignInverted(_curFrame, (_speedRatio > 0.0f), 0.0f, _speedRatio);
+			}
+		}
+
+		
 
 
 		// Get / Set
@@ -1034,6 +1346,7 @@ namespace AnyPortrait
 			_targetOptTranform = null;
 
 			_FPS = srcAnimClip._FPS;
+			_secPerFrame = srcAnimClip._secPerFrame;//수정 3.31 : 이게 버그의 원인
 			_startFrame = srcAnimClip._startFrame;
 			_endFrame = srcAnimClip._endFrame;
 			_isLoop = srcAnimClip._isLoop;
@@ -1047,7 +1360,7 @@ namespace AnyPortrait
 				//Timeline을 복사하자.
 				//내부에서 차례로 Layer, Keyframe도 복사된다.
 				apAnimTimeline newTimeline = new apAnimTimeline();
-				newTimeline.CopyFromTimeline(srcTimeline);
+				newTimeline.CopyFromTimeline(srcTimeline, this);
 
 				_timelines.Add(newTimeline);
 			}

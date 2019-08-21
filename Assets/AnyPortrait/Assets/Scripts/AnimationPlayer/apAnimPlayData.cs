@@ -112,7 +112,8 @@ namespace AnyPortrait
 		{
 			if(_linkedAnimClip != null)
 			{
-				_linkedAnimClip._speedRatio = speed;
+				//_linkedAnimClip._speedRatio = speed;//이전
+				_linkedAnimClip.SetSpeed(speed);
 			}
 		}
 

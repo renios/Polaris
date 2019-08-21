@@ -234,7 +234,9 @@ namespace AnyPortrait
 					_vertWeights[i].Link(this,
 											_targetTransform,
 											_targetMesh,
-											_targetMesh.RenderVertices[_vertWeights[i]._vertIndex]);
+											//_targetMesh.RenderVertices[_vertWeights[i]._vertIndex]//이전
+											_targetMesh.RenderVertices[i]//<<변경 (이미 정렬되어 있으므로 i=vertIndex 이다.)
+											);
 				}
 			}
 

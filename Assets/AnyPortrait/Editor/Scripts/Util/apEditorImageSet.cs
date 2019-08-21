@@ -48,6 +48,7 @@ namespace AnyPortrait
 			ToolBtn_MeshVisible,
 			ToolBtn_TabOpen,
 			ToolBtn_TabFolded,
+			ToolBtn_MaterialLibrary,
 
 			Gizmo_OriginNone,
 			Gizmo_OriginAxis,
@@ -81,6 +82,11 @@ namespace AnyPortrait
 
 			Hierarchy_All,
 			Hierarchy_None,
+
+			Hierarchy_SortMode,
+			Hierarchy_SortMode_RegOrder,
+			Hierarchy_SortMode_AlphaNum,
+			Hierarchy_SortMode_Custom,
 
 			//수정 : Visible 아이콘의 기존 방식에서 새로운 출력 방식으로 변경
 			//Hierarchy_Visible,
@@ -439,6 +445,29 @@ namespace AnyPortrait
 			ExtraOption_DepthCursor,
 			ExtraOption_DepthMidCursor,
 
+			LowCPU,
+
+			MaterialSet,
+			MaterialSetIcon_Unlit,
+			MaterialSetIcon_Lit,
+			MaterialSetIcon_LitSpecular,
+			MaterialSetIcon_LitSpecularEmission,
+			MaterialSetIcon_LitRim,
+			MaterialSetIcon_LitRamp,
+			MaterialSetIcon_FX,
+			MaterialSetIcon_Cartoon,
+			MaterialSetIcon_Custom1,
+			MaterialSetIcon_Custom2,
+			MaterialSetIcon_Custom3,
+			MaterialSet_BasicSettings,
+			MaterialSet_ShaderProperties,
+			MaterialSet_Shaders,
+			MaterialSet_Reserved,
+			MaterialSet_CustomShader,
+			MaterialSet_LWRP,
+
+			RestoreTmpVisibility_ON,
+			RestoreTmpVisibility_OFF,
 		}
 
 		private Dictionary<PRESET, Texture2D> _images = new Dictionary<PRESET, Texture2D>();
@@ -515,6 +544,8 @@ namespace AnyPortrait
 			CheckImageAndLoad(PRESET.ToolBtn_MeshVisible, "ButtonIcon_Mesh", true);
 			CheckImageAndLoad(PRESET.ToolBtn_TabOpen,	"ButtonIcon_TabOpen", true);
 			CheckImageAndLoad(PRESET.ToolBtn_TabFolded,	"ButtonIcon_TabFolded", true);
+			CheckImageAndLoad(PRESET.ToolBtn_MaterialLibrary,	"ButtonIcon_MaterialLibrary", true);
+			
 
 			CheckImageAndLoad(PRESET.Gizmo_OriginNone, "Gizmo_Origin_None");
 			CheckImageAndLoad(PRESET.Gizmo_OriginAxis, "Gizmo_Origin_Axis");
@@ -548,6 +579,12 @@ namespace AnyPortrait
 
 			CheckImageAndLoad(PRESET.Hierarchy_All, "HierarchyIcon_All", true);
 			CheckImageAndLoad(PRESET.Hierarchy_None, "HierarchyIcon_None", true);
+
+			CheckImageAndLoad(PRESET.Hierarchy_SortMode, "HierarchyIcon_SortMode", true);
+			CheckImageAndLoad(PRESET.Hierarchy_SortMode_RegOrder, "HierarchyIcon_SortMode_RegOrder");
+			CheckImageAndLoad(PRESET.Hierarchy_SortMode_AlphaNum, "HierarchyIcon_SortMode_AlphaNum");
+			CheckImageAndLoad(PRESET.Hierarchy_SortMode_Custom, "HierarchyIcon_SortMode_Custom");
+			
 
 			
 			CheckImageAndLoad(PRESET.Hierarchy_Visible_Current, "HierarchyIcon_Visible_Current", true);
@@ -917,6 +954,31 @@ namespace AnyPortrait
 
 			CheckImageAndLoad(PRESET.ExtraOption_DepthCursor,		"ExtraOption_DepthCursor");
 			CheckImageAndLoad(PRESET.ExtraOption_DepthMidCursor,	"ExtraOption_DepthMidCursor");
+
+			CheckImageAndLoad(PRESET.LowCPU,					"LowCPU");
+
+			CheckImageAndLoad(PRESET.MaterialSet,				"MaterialSet");
+			CheckImageAndLoad(PRESET.MaterialSetIcon_Unlit,		"MaterialSetIcon_Unlit");
+			CheckImageAndLoad(PRESET.MaterialSetIcon_Lit,		"MaterialSetIcon_Lit");
+			CheckImageAndLoad(PRESET.MaterialSetIcon_LitSpecular,			"MaterialSetIcon_LitSpecular");
+			CheckImageAndLoad(PRESET.MaterialSetIcon_LitSpecularEmission,	"MaterialSetIcon_LitSpecularEmission");
+			CheckImageAndLoad(PRESET.MaterialSetIcon_LitRim,				"MaterialSetIcon_LitRim");
+			CheckImageAndLoad(PRESET.MaterialSetIcon_LitRamp,	"MaterialSetIcon_LitRamp");
+			CheckImageAndLoad(PRESET.MaterialSetIcon_FX,		"MaterialSetIcon_FX");
+			CheckImageAndLoad(PRESET.MaterialSetIcon_Cartoon, "MaterialSetIcon_Cartoon");
+			CheckImageAndLoad(PRESET.MaterialSetIcon_Custom1, "MaterialSetIcon_Custom1");
+			CheckImageAndLoad(PRESET.MaterialSetIcon_Custom2, "MaterialSetIcon_Custom2");
+			CheckImageAndLoad(PRESET.MaterialSetIcon_Custom3, "MaterialSetIcon_Custom3");
+			CheckImageAndLoad(PRESET.MaterialSet_BasicSettings,		"MaterialSet_BasicSettings");
+			CheckImageAndLoad(PRESET.MaterialSet_ShaderProperties,	"MaterialSet_ShaderProperties");
+			CheckImageAndLoad(PRESET.MaterialSet_Shaders,			"MaterialSet_Shaders");
+			CheckImageAndLoad(PRESET.MaterialSet_Reserved,			"MaterialSet_Reserved");
+			CheckImageAndLoad(PRESET.MaterialSet_CustomShader,		"MaterialSet_CustomShader");
+			CheckImageAndLoad(PRESET.MaterialSet_LWRP,				"MaterialSet_LWRP");
+
+			CheckImageAndLoad(PRESET.RestoreTmpVisibility_ON,	"RestoreTmpVisibility_ON");
+			CheckImageAndLoad(PRESET.RestoreTmpVisibility_OFF,	"RestoreTmpVisibility_OFF");
+			
 
 
 			if(!_isAllLoaded)

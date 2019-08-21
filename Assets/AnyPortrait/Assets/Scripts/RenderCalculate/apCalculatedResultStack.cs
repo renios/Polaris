@@ -168,9 +168,11 @@ namespace AnyPortrait
 			}
 		}
 
-		//public List<Vector2> _result_VertLocal = null;
 		public Vector2[] _result_VertLocal = null;//<<최적화를 위해 변경
-		public apMatrix _result_MeshTransform = new apMatrix();
+
+		apMatrix _result_MeshTransform = new apMatrix();
+		
+
 		public Color _result_Color = new Color(0.5f, 0.5f, 0.5f, 1f);
 		public bool _result_IsVisible = true;
 
@@ -185,10 +187,9 @@ namespace AnyPortrait
 
 		//Bone Transform
 		//값을 계속 초기화해서 사용하는 지역변수의 역할
+		
 		private apMatrix _result_BoneTransform = new apMatrix();
-		//private float _result_BoneIKWeight = 0.0f;//<<추가
-		//private bool _result_CalculatedBoneIK = false;
-
+		
 		private bool _result_CalculatedColor = false;
 
 		//추가 11.29 : Extra Option
@@ -330,10 +331,16 @@ namespace AnyPortrait
 					
 					bool isExtraEnabledParam = false;
 					apCalculatedResultParam.ParamKeyValueSet curParamKeyValue = null;
+					
 					for (int i = 0; i < resultParam._paramKeyValues.Count; i++)
 					{
 						curParamKeyValue = resultParam._paramKeyValues[i];
 						
+						//추가 3.18 : ModifiedMesh가 없는 경우가 있다. > 본을 대상으로 할 수도 있기 때문 > 본은 예외
+						if(curParamKeyValue._modifiedMesh == null)
+						{	
+							continue;
+						}
 						if(curParamKeyValue._modifiedMesh._isExtraValueEnabled
 							&&
 							(curParamKeyValue._modifiedMesh._extraValue._isDepthChanged || curParamKeyValue._modifiedMesh._extraValue._isTextureChanged))
@@ -344,6 +351,7 @@ namespace AnyPortrait
 							break;
 						}
 					}
+
 					if(isExtraEnabledParam)
 					{
 						if(!_resultParams_Extra.Contains(resultParam))
@@ -722,7 +730,9 @@ namespace AnyPortrait
 
 			_result_BoneTransform.SetIdentity();
 			_result_MeshTransform.SetIdentity();
+
 			_result_MeshTransform.MakeMatrix();
+			
 			_result_Color = _color_Default;
 			_result_IsVisible = true;
 			_result_CalculatedColor = false;
@@ -921,22 +931,12 @@ namespace AnyPortrait
 					{
 						BlendMatrix_ITP(_result_MeshTransform, resultParam._result_Matrix, curWeight_Transform);
 						prevWeight += curWeight_Transform;
-
-						//>>>> Calculated Log - VertLog
-						//resultParam.CalculatedLog.Calculate_CalParamResult(curWeight,
-						//													iCalculatedParam,
-						//													apModifierBase.BLEND_METHOD.Interpolation,
-						//													CalculateLog_3_MeshTransform);
+						
 					}
 					else
 					{
 						BlendMatrix_Add(_result_MeshTransform, resultParam._result_Matrix, curWeight_Transform);
-
-						//>>>> Calculated Log - VertLog
-						//resultParam.CalculatedLog.Calculate_CalParamResult(curWeight,
-						//													iCalculatedParam,
-						//													apModifierBase.BLEND_METHOD.Additive,
-						//													CalculateLog_3_MeshTransform);
+						
 					}
 
 					iCalculatedParam++;
@@ -1024,7 +1024,6 @@ namespace AnyPortrait
 			//5. Bone을 업데이트 하자
 			//Bone은 값 저장만 할게 아니라 직접 업데이트를 해야한다.
 			if (_isAnyBoneTransform)
-			//if(false)
 			{
 				prevWeight = 0.0f;
 				curWeight_Transform = 0.0f;
@@ -1412,7 +1411,6 @@ namespace AnyPortrait
 		}
 
 
-		//private Vector2 BlendPosition_ITP(Vector2 prevResult, Vector2 nextResult, float prevWeight, float nextWeight)
 		private Vector2 BlendPosition_ITP(Vector2 prevResult, Vector2 nextResult, float nextWeight)//<<Prev를 삭제했다.
 		{
 			//return ((prevResult * prevWeight) + (nextResult * nextWeight)) / (prevWeight + nextWeight);
@@ -1424,42 +1422,46 @@ namespace AnyPortrait
 			return prevResult + nextResult * nextWeight;
 		}
 
-		//private void BlendMatrix_ITP(apMatrix prevResult, apMatrix nextResult, float prevWeight, float nextWeight)
-		private void BlendMatrix_ITP(apMatrix prevResult, apMatrix nextResult, float nextWeight)
+
+		// 이전 : apMatrix 를 이용하는 Blend 함수
+		//private void BlendMatrix_ITP(apMatrix prevResult, apMatrix nextResult, float nextWeight)
+		//{
+		//	if (nextWeight <= 0.0f)
+		//	{
+		//		return;
+		//	}
+
+		//	prevResult.LerpMartix(nextResult, nextWeight / 1.0f);
+		//}
+
+		//private void BlendMatrix_Add(apMatrix prevResult, apMatrix nextResult, float nextWeight)
+		//{
+		//	prevResult._pos += nextResult._pos * nextWeight;
+		//	prevResult._angleDeg += nextResult._angleDeg * nextWeight;
+			
+		//	prevResult._scale.x = (prevResult._scale.x * (1.0f - nextWeight)) + (prevResult._scale.x * nextResult._scale.x * nextWeight);
+		//	prevResult._scale.y = (prevResult._scale.y * (1.0f - nextWeight)) + (prevResult._scale.y * nextResult._scale.y * nextWeight);
+			
+		//}
+
+		// 변경 3.26 : apMatrixCal을 이용하는 것으로 변경
+		private void BlendMatrix_ITP(apMatrix prevResult, apMatrixCal nextResult, float nextWeight)
 		{
-			//prevResult._pos = ((prevResult._pos * prevWeight) + (nextResult._pos * nextWeight)) / (prevWeight + nextWeight);
-			//prevResult._angleDeg = ((prevResult._angleDeg * prevWeight) + (nextResult._angleDeg * nextWeight)) / (prevWeight + nextWeight);
-			//prevResult._scale = ((prevResult._scale * prevWeight) + (nextResult._scale * nextWeight)) / (prevWeight + nextWeight);
-
-
-			//이전 방식의 ITP 처리 방식
-			//float totalWeight = prevWeight + nextWeight;
-			//if(totalWeight <= 0.0f)
-			//{
-			//	return;
-			//}
-
 			if (nextWeight <= 0.0f)
 			{
 				return;
 			}
 
-
-			//prevResult.LerpMartix(nextResult, nextWeight / totalWeight);
-			prevResult.LerpMartix(nextResult, nextWeight / 1.0f);
+			prevResult.LerpMartixCal(nextResult, nextWeight / 1.0f);
 		}
 
-		private void BlendMatrix_Add(apMatrix prevResult, apMatrix nextResult, float nextWeight)
+		private void BlendMatrix_Add(apMatrix prevResult, apMatrixCal nextResult, float nextWeight)
 		{
 			prevResult._pos += nextResult._pos * nextWeight;
 			prevResult._angleDeg += nextResult._angleDeg * nextWeight;
-			//prevResult._scale += nextResult._scale * nextWeight;
-
-			//prevResult._scale += nextResult._scale * nextWeight;//이건 오류가 있다. 100% + 100% => 200%으로 계산..
-
-			prevResult._scale.x = (prevResult._scale.x * (1.0f - nextWeight)) + (prevResult._scale.x * nextResult._scale.x * nextWeight);
-			prevResult._scale.y = (prevResult._scale.y * (1.0f - nextWeight)) + (prevResult._scale.y * nextResult._scale.y * nextWeight);
-			//prevResult._scale.z = (prevResult._scale.z * (1.0f - nextWeight)) + (prevResult._scale.z * nextResult._scale.z * nextWeight);
+			
+			prevResult._scale.x = (prevResult._scale.x * (1.0f - nextWeight)) + (prevResult._scale.x * nextResult._calculatedScale.x * nextWeight);
+			prevResult._scale.y = (prevResult._scale.y * (1.0f - nextWeight)) + (prevResult._scale.y * nextResult._calculatedScale.y * nextWeight);
 		}
 
 

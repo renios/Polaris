@@ -95,7 +95,8 @@ namespace AnyPortrait
 												PivotReturn__Bone_Default,
 												null, null, null, null, null,
 												apGizmos.TRANSFORM_UI.None,
-												FirstLink__Bone);
+												FirstLink__Bone,
+												null);
 		}
 
 		public apGizmos.GizmoEventSet GetEventSet_Bone_Default()
@@ -115,7 +116,8 @@ namespace AnyPortrait
 												PivotReturn__Bone_Default,
 												null, null, null, null, null,
 												apGizmos.TRANSFORM_UI.TRS_NoDepth,
-												FirstLink__Bone);
+												FirstLink__Bone,
+												null);
 		}
 
 
@@ -227,7 +229,7 @@ namespace AnyPortrait
 			if (prevBone != Editor.Select.Bone)
 			{
 				_isBoneSelect_MovePosReset = true;
-				Editor.RefreshControllerAndHierarchy();
+				Editor.RefreshControllerAndHierarchy(false);
 			}
 
 			if (Editor.Select.Bone != null)
@@ -282,7 +284,7 @@ namespace AnyPortrait
 			}
 
 			Editor.Select.SetBone(null);
-			Editor.RefreshControllerAndHierarchy();
+			Editor.RefreshControllerAndHierarchy(false);
 		}
 
 
@@ -1333,7 +1335,7 @@ namespace AnyPortrait
 				//Depth를 바꾸면 전체적으로 다시 정렬한다.
 				//bone._depth = depth;
 				bone._meshGroup.ChangeBoneDepth(bone, depth);
-				Editor.RefreshControllerAndHierarchy();
+				Editor.RefreshControllerAndHierarchy(false);
 			}
 		}
 

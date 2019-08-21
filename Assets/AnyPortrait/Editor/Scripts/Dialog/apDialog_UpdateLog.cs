@@ -126,15 +126,18 @@ namespace AnyPortrait
 				//홈페이지를 엽시다.
 				if(_language == apEditor.LANGUAGE.Korean)
 				{
-					Application.OpenURL("https://www.rainyrizzle.com/anyportrait-updatenote-kor");
+					//Application.OpenURL("https://www.rainyrizzle.com/anyportrait-updatenote-kor");
+					Application.OpenURL("https://www.rainyrizzle.com/ap-updatenotelist-kor");
 				}
 				else if(_language == apEditor.LANGUAGE.Japanese)
 				{
-					Application.OpenURL("https://www.rainyrizzle.com/anyportrait-updatenote-jp");
+					//Application.OpenURL("https://www.rainyrizzle.com/anyportrait-updatenote-jp");
+					Application.OpenURL("https://www.rainyrizzle.com/ap-updatenotelist-jp");
 				}
 				else
 				{
-					Application.OpenURL("https://www.rainyrizzle.com/anyportrait-updatenote-eng");
+					//Application.OpenURL("https://www.rainyrizzle.com/anyportrait-updatenote-eng");
+					Application.OpenURL("https://www.rainyrizzle.com/ap-updatenotelist-eng");
 				}
 				isClose = true;
 			}

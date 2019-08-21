@@ -185,6 +185,7 @@ namespace AnyPortrait
 			Anim_KeyframeValueChanged,
 			Anim_AddEvent,
 			Anim_RemoveEvent,
+			Anim_SortEvents,
 			Anim_EventChanged,
 
 			Anim_Gizmo_MoveTransform,
@@ -206,6 +207,10 @@ namespace AnyPortrait
 			Retarget_ImportSinglePoseToAnim,
 
 			PSDSet_AddNewPSDSet,
+
+			MaterialSetAdded,
+			MaterialSetRemoved,
+			MaterialSetChanged,
 		}
 
 
@@ -335,6 +340,7 @@ namespace AnyPortrait
 				case ACTION.Anim_AddEvent:				return "Event Added";
 				case ACTION.Anim_RemoveEvent:			return "Event Removed";
 				case ACTION.Anim_EventChanged:			return "Event Changed";
+				case ACTION.Anim_SortEvents:			return "Events Sorted";
 
 				case ACTION.Anim_Gizmo_MoveTransform:		return "Move Transform";
 				case ACTION.Anim_Gizmo_RotateTransform:		return "Rotate Transform";
@@ -354,6 +360,10 @@ namespace AnyPortrait
 				case ACTION.Retarget_ImportSinglePoseToAnim:	return "Import Pose";
 
 				case ACTION.PSDSet_AddNewPSDSet:		return "New PSD Set";
+
+				case ACTION.MaterialSetAdded:				return "Material Set Added";
+				case ACTION.MaterialSetRemoved:			return "Material Set Removed";
+				case ACTION.MaterialSetChanged:			return "Material Set Changed";
 
 				default:
 					Debug.LogError("정의되지 않은 Undo Action");

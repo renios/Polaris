@@ -129,6 +129,11 @@ namespace AnyPortrait
 				int subDataLength = _width * _height;
 				int totalDataLength = imageTotalWidth * imageTotalHeight;
 
+				//if(subDataLength == 0)
+				//{
+				//	UnityEngine.Debug.LogError("데이터 길이가 0");
+				//}
+
 				byte[] colorData_R = new byte[subDataLength];
 				byte[] colorData_G = new byte[subDataLength];
 				byte[] colorData_B = new byte[subDataLength];
@@ -146,12 +151,14 @@ namespace AnyPortrait
 					colorData_Mask[i] = 255;
 				}
 
-
+				
+				
 				for (int iChannel = 0; iChannel < psdLayer.Channels.Length; iChannel++)
 				{
 					IChannel curChannel = psdLayer.Channels[iChannel];
 					byte[] curColorData = null;
 
+					bool isValidChannel = true;
 					if (curChannel.Type == ChannelType.Mask)
 					{
 						continue;
@@ -180,6 +187,17 @@ namespace AnyPortrait
 							curColorData = colorData_Mask;
 							isMask = true;
 							break;
+
+							//추가 4.19 : 알수없는 채널이 들어오는 경우가 있다.
+						default:
+							//UnityEngine.Debug.LogError("알 수 없는 채널 : " + curChannel.Type);
+							isValidChannel = false;
+							break;
+					}
+					//유효하지 않은 채널
+					if(!isValidChannel)
+					{
+						continue;
 					}
 
 					int dataLength = curChannel.Data.Length;

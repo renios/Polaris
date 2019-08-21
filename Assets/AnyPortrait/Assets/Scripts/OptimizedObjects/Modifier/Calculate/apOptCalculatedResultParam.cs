@@ -42,17 +42,23 @@ namespace AnyPortrait
 		//타겟 Opt의 Child Mesh (존재한다면)
 		public apOptMesh _targetOptMesh = null;
 
-		//추가 : 타겟 Bone
+		//타겟 Bone
 		public apOptBone _targetBone = null;
 
 
+		//삭제 19.5.20 : 이 값을 사용하지 않음
 		//Vertex 가중치 적용 데이터
-		public apOptParamSetGroupVertWeight _weightedVertexData = null;
+		//public apOptParamSetGroupVertWeight _weightedVertexData = null;
 
 		//결과값
 		public Vector2[] _result_Positions = null;
 		public apMatrix3x3[] _result_VertMatrices = null;//<<추가. 리깅용 결과 
-		public apMatrix _result_Matrix = new apMatrix();
+
+		//변경 3.27 : apMatrix에서 apMatrixCal로 변경
+		//public apMatrix _result_Matrix = new apMatrix();
+		public apMatrixCal _result_Matrix = new apMatrixCal();
+
+
 		public Color _result_Color = new Color(0.5f, 0.5f, 0.5f, 1.0f);
 		public bool _result_IsVisible = true;
 
@@ -120,6 +126,9 @@ namespace AnyPortrait
 			public apOptModifiedMesh _modifiedMesh = null;
 			public apOptModifiedBone _modifiedBone = null;
 
+			//변경 19.5.24 : ModifiedMesh대신 ModifiedMeshSet을 사용하는 것으로 변경
+			public apOptModifiedMeshSet _modifiedMeshSet = null;
+
 			public float _dist = -1.0f;
 			public float _weight = -1.0f;
 			public bool _isCalculated = false;
@@ -135,6 +144,9 @@ namespace AnyPortrait
 			//추가 11.29
 			public AnimKeyPos _animKeyPos = AnimKeyPos.NotCalculated;
 
+			//계산용 
+			private apOptModifiedMesh_Transform _subModMesh_Transform = null;
+
 			/// <summary>
 			/// ModMesh와 연동되는 ParamKeyValue 생성
 			/// </summary>
@@ -143,6 +155,7 @@ namespace AnyPortrait
 				_keyParamSetGroup = keyParamSetGroup;
 				_paramSet = paramSet;
 				_modifiedMesh = modifiedMesh;
+				_modifiedMeshSet = null;
 				_layerIndex = _keyParamSetGroup._layerIndex;
 
 				_modifiedBone = null;
@@ -155,6 +168,27 @@ namespace AnyPortrait
 			}
 
 
+
+			/// <summary>
+			/// ModMeshSet과 연동되는 ParamKeyValue 생성 (19.5.24)
+			/// </summary>
+			public OptParamKeyValueSet(apOptParamSetGroup keyParamSetGroup, apOptParamSet paramSet, apOptModifiedMeshSet modifiedMeshSet)
+			{
+				_keyParamSetGroup = keyParamSetGroup;
+				_paramSet = paramSet;
+				_modifiedMesh = null;
+				_modifiedMeshSet = modifiedMeshSet;
+				_layerIndex = _keyParamSetGroup._layerIndex;
+
+				_modifiedBone = null;
+
+				//추가 : RotationBias
+				_isAnimRotationBias = false;
+				_animRotationBiasAngle = 0;
+				_animRotationBiasAngle_Prev = -1;
+				_animRotationBiasedMatrix = new apMatrix();
+			}
+
 			/// <summary>
 			/// ModBone과 연동되는 ParamKeyValue 생성
 			/// </summary>
@@ -163,6 +197,7 @@ namespace AnyPortrait
 				_keyParamSetGroup = keyParamSetGroup;
 				_paramSet = paramSet;
 				_modifiedMesh = null;
+				_modifiedMeshSet = null;
 				_layerIndex = _keyParamSetGroup._layerIndex;
 
 				_modifiedBone = modifiedBone;
@@ -225,6 +260,24 @@ namespace AnyPortrait
 							_modifiedMesh._transformMatrix._scale
 						);
 					}
+					else if(_modifiedMeshSet != null)
+					{
+						//추가됨 19.5.24 : ModMeshSet으로 계산하기
+						_subModMesh_Transform = _modifiedMeshSet.SubModMesh_Transform;
+						if (_subModMesh_Transform != null)
+						{
+							_animRotationBiasedMatrix.SetTRS(
+									_subModMesh_Transform._transformMatrix._pos,
+									_subModMesh_Transform._transformMatrix._angleDeg + _animRotationBiasAngle,
+									_subModMesh_Transform._transformMatrix._scale
+															);
+						}
+						else
+						{
+							Debug.LogError("TODO : 에러 : 애니메이션에 SubModMeshSet_Transform이 없다.");
+							_animRotationBiasedMatrix.SetIdentity();
+						}
+					}
 					else if(_modifiedBone != null)
 					{
 						_animRotationBiasedMatrix.SetTRS(
@@ -265,8 +318,9 @@ namespace AnyPortrait
 											apOptTransform targetOptTranform,
 											apOptTransform ownerOptTranform,
 											apOptMesh targetOptMesh,
-											apOptBone targetBone,//<<추가
-											apOptParamSetGroupVertWeight weightedVertData)
+											apOptBone targetBone
+											//,apOptParamSetGroupVertWeight weightedVertData //<< 사용안함 19.5.20
+											)
 		{
 			_calculatedValueType = calculatedValueType;
 			_calculatedSpace = calculatedSpace;
@@ -281,7 +335,8 @@ namespace AnyPortrait
 			_paramKeyValues.Clear();
 			_subParamKeyValueList.Clear();
 
-			_weightedVertexData = weightedVertData;
+			//삭제 19.5.20 : 이 변수를 더이상 사용하지 않음
+			//_weightedVertexData = weightedVertData;
 
 			_isVertexLocalMorph = false;
 			_isVertexRigging = false;
@@ -343,10 +398,11 @@ namespace AnyPortrait
 
 		}
 
-		public void LinkWeightedVertexData(apOptParamSetGroupVertWeight weightedVertData)
-		{
-			_weightedVertexData = weightedVertData;
-		}
+		//삭제 19.5.20 : 이 변수를 더이상 사용하지 않음
+		//public void LinkWeightedVertexData(apOptParamSetGroupVertWeight weightedVertData)
+		//{
+		//	_weightedVertexData = weightedVertData;
+		//}
 
 
 		/// <summary>
@@ -357,7 +413,9 @@ namespace AnyPortrait
 		public void AddParamSetAndModifiedValue(apOptParamSetGroup paramSetGroup,
 												apOptParamSet paramSet,
 												apOptModifiedMesh modifiedMesh,
-												apOptModifiedBone modifiedBone)
+												apOptModifiedBone modifiedBone,
+												apOptModifiedMeshSet modifiedMeshSet//<<추가됨 19.5.24
+												)
 		{
 			OptParamKeyValueSet existSet = GetParamKeyValue(paramSet);
 
@@ -373,6 +431,10 @@ namespace AnyPortrait
 			if (modifiedMesh != null)
 			{
 				newKeyValueSet = new OptParamKeyValueSet(paramSetGroup, paramSet, modifiedMesh);
+			}
+			else if(modifiedMeshSet != null)
+			{
+				newKeyValueSet = new OptParamKeyValueSet(paramSetGroup, paramSet, modifiedMeshSet);
 			}
 			else if (modifiedBone != null)
 			{
@@ -428,6 +490,12 @@ namespace AnyPortrait
 			
 			
 		}
+
+
+
+		
+
+
 
 		public void SortSubList()
 		{
