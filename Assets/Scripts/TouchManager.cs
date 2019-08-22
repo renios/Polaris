@@ -8,7 +8,7 @@ public class TouchManager : MonoBehaviour {
     GameObject Scope = null;
 
     private float skyRadius = 4.6f;
-    private float touchBound = 2.5f;
+    private float touchBound = 3.9f;
     private float scopeRadius = 1.5f;
 
     private bool touchOn = false;
@@ -131,7 +131,7 @@ public class TouchManager : MonoBehaviour {
     */
     public void ScopeMove()
     {
-        Vector3 center = new Vector3(-0.1f * 0.522f, 3.76f * 0.522f, -1);
+        Vector3 center = new Vector3(-0.1f * 0.522f, 4.55f * 0.522f, -1);
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (Input.GetMouseButton(0)) {

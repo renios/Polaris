@@ -22,6 +22,7 @@ public class GachaManager : MonoBehaviour {
 
     public GameObject _mn, _sc;
     public GameObject obStart, obText, obFinish;
+    public GameObject obBtn;
     public GameObject obsEff_1, obsEff_2, obsEff_3;
     public GameObject fader;
 
@@ -43,6 +44,7 @@ public class GachaManager : MonoBehaviour {
         switch(Variables.btnState)
         {
             case 0: // 관측시작
+                obBtn.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha_New/obs_mainbutton");
                 obStart.SetActive(true);
                 obText.SetActive(false);
                 obFinish.SetActive(false);
@@ -64,6 +66,7 @@ public class GachaManager : MonoBehaviour {
                 break;
 
             case 1: // 관측중
+                obBtn.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha_New/obs_mainbutton");
                 obStart.SetActive(false);
                 obText.SetActive(true);
                 obFinish.SetActive(false);
@@ -78,6 +81,7 @@ public class GachaManager : MonoBehaviour {
                 break;
 
             case 2: // 관측완료
+                obBtn.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha_New/obs_circle_completed");
                 obStart.SetActive(false);
                 obText.SetActive(false);
                 obFinish.SetActive(true);
