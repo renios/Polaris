@@ -169,6 +169,7 @@ public class TouchManager : MonoBehaviour {
             Scope.transform.position = scopePos;
         }
 
+        Variables.scopePos = Scope.transform.localPosition;
         ShotRay();
     }
     /*
