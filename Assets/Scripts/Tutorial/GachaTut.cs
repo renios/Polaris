@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GachaManager : MonoBehaviour {
+public class GachaTut : MonoBehaviour {
 
     [SerializeField]
 
@@ -25,6 +25,11 @@ public class GachaManager : MonoBehaviour {
     public GameObject obBtn;
     public GameObject obsEff_1, obsEff_2, obsEff_3;
     public GameObject fader;
+    public GameObject scope;
+    public GameObject tutTouch_1, tutArrow_1, tutTouch_2;
+    public GameObject tutEff_1, tutEff_2;
+
+    public GameObject tutText_1, tutText_2, tutText_3;
 
     private int gachaTime = 16;
     private int charIndex = 0;
@@ -37,10 +42,71 @@ public class GachaManager : MonoBehaviour {
         Color tempColor = fader.GetComponent<SpriteRenderer>().color;
         tempColor.a = 0f;
         fader.GetComponent<SpriteRenderer>().color = tempColor;
+
+
+        scope.transform.localPosition = new Vector3(-1.1f, 3.79f, -7f);
+        TouchTut.moveAble = false;
+        obBtn.transform.localPosition = new Vector3(3.48f, -0.29f, -5f);
+        tutEff_1.SetActive(false);
+
+        tutText_1.SetActive(true);
+        tutText_2.SetActive(false);
+        tutText_3.SetActive(false);
+
+        tutTouch_1.SetActive(true);
+        tutArrow_1.SetActive(true);
+        tutTouch_2.SetActive(false);
     }
 
     private void FixedUpdate()
     {
+        switch(Variables.tutState)
+        {
+            case 1:
+
+                if (Input.GetMouseButton(0))
+                    Variables.tutState = 2;
+                break;
+            case 2:
+                tutText_1.SetActive(false);
+                tutText_2.SetActive(true);
+
+                if(Input.GetMouseButton(0))
+                {
+                    tutTouch_1.SetActive(false);
+                    tutArrow_1.SetActive(false);
+                    TouchTut.moveAble = true;
+                }
+
+                if(Vector2.Distance(scope.transform.localPosition, new Vector2(-0.13f, 4.55f)) <= 0.42f)
+                {
+                    Variables.tutState = 3;
+                    TouchTut.moveAble = false;
+                    obBtn.transform.localPosition = new Vector3(3.48f, -0.29f, -7f);
+                    tutEff_1.SetActive(true);
+                    tutTouch_2.SetActive(true);
+                }
+                break;
+            case 3:
+                if (Input.GetMouseButtonDown(0))
+                {
+                    //mos = (Input.mousePosition / 100f) + new Vector3(-5.4f, -9.6f, 0f);
+                    mos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) * (1 / 0.522f);
+                    if (Vector3.Distance(mos, new Vector3(3.5f, -1.3f, 0)) <= 1.3f)
+                    {
+                        tutTouch_2.SetActive(false);
+                        tutText_2.SetActive(false);
+                        tutText_3.SetActive(true);
+                        Variables.tutState = 4;
+                        Variables._meetingTime = DateTime.Now.AddSeconds(1); // 튜토리얼은 1초 컷
+                        Variables.btnState = 1;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        
         switch(Variables.btnState)
         {
             case 0: // 관측시작
@@ -51,18 +117,6 @@ public class GachaManager : MonoBehaviour {
                 obsEff_1.SetActive(false);
                 obsEff_2.SetActive(false);
                 obsEff_3.SetActive(false);
-
-                if (Input.GetMouseButtonDown(0))
-                {
-                    //mos = (Input.mousePosition / 100f) + new Vector3(-5.4f, -9.6f, 0f);
-                    mos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) * (1 / 0.522f);
-                    if (Vector3.Distance(mos, new Vector3(3.5f, -1.3f, 0)) <= 1.3f)
-                    {
-                        Variables._meetingTime = DateTime.Now.AddSeconds(gachaTime);
-                        Variables.btnState = 1;
-                        TouchManager.moveAble = false;
-                    }
-                }
                 break;
 
             case 1: // 관측중
@@ -95,35 +149,14 @@ public class GachaManager : MonoBehaviour {
                     mos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) * (1 / 0.522f);
                     if (mos.y > -1.44f || Vector3.Distance(mos, new Vector3(3.5f, -1.3f, 0)) <= 1.3f)
                     {
-                        if (Variables.isFirst)
+                        if(Variables.tutState == 4)
                         {
-                            gachaResult = "polaris";
+                            GachaManager.gachaResult = "polaris";
                             Variables.isFirst = false;
                         }
-                        else
-                        {
-                            int probSum = 0;
-                            foreach (var key in TouchManager.charProb)
-                            {
-                                probSum += (int)key.Value;
-                            }
-
-                            var Char_desc = TouchManager.charProb.OrderByDescending(p => p.Value);
-                            int countProb = 0, i = 0;
-                            int gachaNo = UnityEngine.Random.Range(1, probSum + 1);
-                            while (countProb < gachaNo)
-                            {
-                                countProb += (int)(Char_desc.ElementAt(i).Value);
-                                gachaResult = Char_desc.ElementAt(i).Key;
-                                i++;
-                            }
-                        }
-                        whyTwotime = false;
-                        
-                        SoundManager.Play(SoundType.ClickImportant);
-                        SoundManager.FadeMusicVolume(0, 1.5f);
-                        Variables.btnState = 3;
                     }
+
+                    Variables.btnState = 3;
                 }
                 break;
 
@@ -132,7 +165,7 @@ public class GachaManager : MonoBehaviour {
                 obText.SetActive(false);
                 obFinish.SetActive(true);
 
-                Variables.returnSceneName = "GachaScene";
+                Variables.returnSceneName = "GachaTut_1";
                 StartCoroutine(GachaFadeOut(1.5f)); // 1.5f
                 
                 break;
@@ -162,6 +195,8 @@ public class GachaManager : MonoBehaviour {
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
+        Variables.tutState = 5;
+        Variables.btnState = 0;
         SceneManager.LoadScene("GachaResult");
     }
 

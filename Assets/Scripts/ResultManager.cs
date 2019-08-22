@@ -67,7 +67,7 @@ public class ResultManager : MonoBehaviour {
                 {
                     rankCharacter.Cards[0].Observed = true;
                     GameManager.Instance.SaveGame();
-                    StartStory("GachaScene", 0);
+                    StartStory(Variables.returnSceneName, 0);
                     return;
                 }
                 for (int i = 0; i < 5; i++)
@@ -94,7 +94,7 @@ public class ResultManager : MonoBehaviour {
                     //캐릭터 thumbnail
                 }
                 else
-                    SceneManager.LoadScene("GachaScene");
+                    SceneManager.LoadScene(Variables.returnSceneName);
             }
         }
         else
@@ -110,7 +110,7 @@ public class ResultManager : MonoBehaviour {
                         storyText.text = Variables.Characters[charIndex].Name + "의 새로운 대화가 열렸어요!\n대화를 지금 볼까요?";
                     }
                     else
-                        SceneManager.LoadScene("GachaScene");
+                        SceneManager.LoadScene(Variables.returnSceneName);
                 }
             }
         }
@@ -118,11 +118,11 @@ public class ResultManager : MonoBehaviour {
 
     public void YesBtnDown() //Favority 오르고 나서 뜬 팝업창 Yes일 경우
     {
-        StartStory("GachaScene", nextFav + 1);
+        StartStory(Variables.returnSceneName, nextFav + 1);
     }
     public void NoBtnDown() //Favority 오르고 나서 뜬 팝업창 Yes일 경우
     {
-        SceneManager.LoadScene("GachaScene");
+        SceneManager.LoadScene(Variables.returnSceneName);
     }
     public void StartStory(string nextScene, int storyIndex)
     {
@@ -180,13 +180,14 @@ public class ResultManager : MonoBehaviour {
         }
         
         SoundManager.FadeMusicVolume(1, 1.5f);
+
         //NameTag FadeIn
-        while (tC.a < 0.5f)
+        while (tC.a < 1f)
         {
             tC.a += Time.deltaTime;
-            if (tC.a >= 0.5f)
-                tC.a = 0.5f;
-            textColor.a = tC.a * 2;
+            if (tC.a >= 1f)
+                tC.a = 1f;
+            textColor.a = tC.a;
 
             srnT.color = tC;
             tmnT.color = textColor;
