@@ -4,9 +4,17 @@
             "Phase": 0,
             "Contents": [
                 {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "무슨 걱정이라도 있는 거야?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
                     "Type": 0,
-                    "Talker": "글리제",
-                    "DialogText": "여긴 시계가 없나?",
+                    "Talker": "명왕성",
+                    "DialogText": "아… 얼굴에 드러나 버렸네… 걱정 끼쳐서 미안.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -14,23 +22,23 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "시계는 왜?",
+                    "DialogText": "나한테도 말해줄 수 있어?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "글리제",
-                    "DialogText": "얼마나 바뀌었는지 보고 싶어서. ",
+                    "Talker": "명왕성",
+                    "DialogText": "응…",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "글리제",
-                    "DialogText": "내가 마지막으로 본 건 손안에 들어오는 크기의 회중시계였거든.",
+                    "Talker": "명왕성",
+                    "DialogText": "내가 잊혀지고 있기 때문이야.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -38,47 +46,47 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "시계가 방에 따로 있긴 하지만, 보통 갖고 다니는 기계에는 전부 시간이 나와 있어.",
+                    "DialogText": "혹시…점점 투명해지고 있는게 그것 때문이야?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "글리제",
-                    "DialogText": "...시간을 알려주는 기계가 따로 있는 게 아니라?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "(고개를 끄덕인다.)",
+                    "Talker": "명왕성",
+                    "DialogText": "응… 내가 잊혀지는건 그렇게 슬프지는 않아.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "글리제",
-                    "DialogText": "음, 바보 같은 질문을 했네. 그럼 시계는 이제 장식품에 불과한 건가.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "그, 그렇다고 시계가 쓸모없는 건 아니야.",
+                    "Talker": "명왕성",
+                    "DialogText": "나는 나를 포함해 아직은 이름이 없거나 있는 수많은 별이 모여서 아름다운 밤하늘이 된다는 걸 알거든.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "글리제",
-                    "DialogText": "시간을 알려주는 역할은 사라졌다고 봐도 무방하지.",
+                    "Talker": "명왕성",
+                    "DialogText": "다만....",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "(명왕성은 투명해져가는 토끼 인형에 얼굴을 파묻으며 말했다.)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "카론... 내가 잊혀져 갈 수록 카론도 같이 잊혀져 간다는 건 ... 역시 조금 슬퍼...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -86,8 +94,8 @@
                 {
                     "Type": 2,
                     "JuncTexts": [
-                        "......",
-                        "그 정도는 아니야."
+                        "내가 카론을 기억해줄게.",
+                        "내가 너를 기억해줄게."
                     ],
                     "Directions": [
                         -1,
@@ -97,8 +105,16 @@
                 },
                 {
                     "Type": 0,
-                    "Talker": "글리제",
-                    "DialogText": "대답하지 않아도 괜찮아. 그렇게 세상이 발전하는 거니까.",
+                    "Talker": "명왕성",
+                    "DialogText": "정말?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "응. 카론뿐만 아니라 너도.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -116,8 +132,16 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "Talker": "글리제",
-                    "DialogText": "그래? 그렇지만, 나라면 시계를 쓰지 않을 것 같아서.",
+                    "Talker": "명왕성",
+                    "DialogText": "정말?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "응. 너뿐만 아니라 카론도.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -136,15 +160,7 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "시계에 집착하는 이유는 앉아있는 시계와 관련이 있는 거야?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "글리제",
-                    "DialogText": "...미안, 못 들었네. 다시 말해줄래?",
+                    "DialogText": "밤하늘을 올려다 볼 때마다 저기 어딘가에 네가 있을 거야, 하고 너를 떠올리겠지.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -152,15 +168,23 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "...아무것도 아냐.",
+                    "DialogText": "인형을 든 귀여운 여자아이가, 카론이라는 이름의 인형을 좋아하는 친구가 나를 생각하고 있다는 생각을 하다 보면 자연스레 미소가 지어질 거야.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "글리제",
-                    "DialogText": "뭐, 꼭 나만 발명했다고 할 수는 없지만, 갖고 다닐 수 있을 정도로 작은 시계가 탄생한 건 내 덕도 있지.",
+                    "Talker": "명왕성",
+                    "DialogText": "그러면… 그때는… 나도 우주 먼 곳에서부터 널 바라보면서 미소지어 줄 거야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "고마워…",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -168,23 +192,15 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "혹시 넌 공학자야?",
+                    "DialogText": "응! 나도 고마워!",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "글리제",
-                    "DialogText": "비슷해. 막 전문적인 교육을 받은 건 아니지만, 개발한 물건은 꽤 많다고.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "글리제",
-                    "DialogText": "그래서 말인데, 혹시 나중에 관련된 책이나 자료 같은 걸 구해준다면 재밌는 이야기를 더 들려줄게. 괜찮은 조건일까?",
+                    "Talker": "명왕성",
+                    "DialogText": "헤헤...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

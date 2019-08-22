@@ -4,141 +4,153 @@
             "Phase": 0,
             "Contents": [
                 {
-                    "Type": 1,
-                    "DialogText": "아케르..?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
                     "Type": 0,
-                    "DialogText": "어? 오랜만이네.",
+                    "Talker": "",
+                    "DialogText": "(또또 다시 어둠 속...이 아닌 희미한 불빛과 함께 문지기가 모습을 드러냈다.)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "무슨 일 있어? ",
+                    "Talker": "주인공",
+                    "DialogText": "어? 등불이 새로 생겼네요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "무슨 일 없는데? 갑자기 왜?",
+                    "Talker": "다크호스",
+                    "DialogText": "이거 말인가? 얼마 전에 '불꽃 성운'이라는 보급병이 내게 가져다주었다.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "상부에서 지침으로 야간에 근무하는 기사들의 편의를 위해서라고 하더구나.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "... 갑자기 눈이 휘둥그레해져서는... 왜 그러는가?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..손에 힘이 너무 들어갔어.",
+                    "Talker": "주인공",
+                    "DialogText": "아니요... 다른 별의 이름을 얘기하시는 걸 처음 듣는 거 같아서요...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "아. 치마 다 구겨졌다.",
+                    "Talker": "다크호스",
+                    "DialogText": "항상 여기서 근무를 서다 보니 다른 별들하곤 얘기를 잘 못해서 말이다.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "생각보다는 눈치가 빠르네..",
+                    "Talker": "다크호스",
+                    "DialogText": "대화라는 걸 해본 몇 안 되는 별 중 하나긴 하지.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..전에 이야기할 때 잠깐 우울해 보이던데.",
+                    "Talker": "주인공",
+                    "DialogText": "그럼 '불꽃 성운'님하고는 친하신건가요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "..갑자기 여기 오기 전 일이 떠올라서.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "...사실 난 별이 되기 전날에 죽기로 예정되어 있었어. ",
+                    "Talker": "다크호스",
+                    "DialogText": "글쎄... 친하다고는 말 못하겠군.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "병이라도 있었던 거야?",
+                    "Talker": "주인공",
+                    "DialogText": "그럼 사이가 안 좋으신 건가요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그건 아니야. 사실.. 나는 사형일을 하루 앞둔 사형수였어. ",
+                    "Talker": "다크호스",
+                    "DialogText": "그것도 아니다.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "내 죄는 절도죄였어. 나라의 보물이나 다름없는 몹시 중요한 물건을 몰래 훔쳤거든.",
+                    "Talker": "다크호스",
+                    "DialogText": "그냥 알고 지내는 동료... 정도가 가장 잘 표현한 거겠군.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "'알고 지내는 동료'면... 같이 일하니까... 친한 거 아닌가요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "우리 아버지는 나라의 제사를 지내는 사람이었어. 우리 집 창고에는 나라에 중요한 일이 있을 때마다 사용하는, 제사용 술을 담기 위해 대대로 내려오는 술병이 있었지. ",
+                    "Talker": "다크호스",
+                    "DialogText": "네가 얘기하는 '친하다'의 기준이 '밥을 같이 먹는다' 정도면 친하다고 할 수 있지.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "나는 그게 어떤 물건인 줄 모르고 몰래 가져갔었어. 하지만 금방 필요가 없어져서 다시 돌려놓았지. ",
+                    "Talker": "다크호스",
+                    "DialogText": "흠... 생각해보니 '불꽃 성운'이랑 같이 밥을 먹은 것도 꽤 오래됐군.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "얼마나 오래 지났나요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그런데... 내가 잠시 그걸 가져갔단 걸 알아낸 오빠들이 내가 다른 나라에 술병을 몰래 팔아서 돈을 벌려고 했다는 소문을 주변에 냈어. ",
+                    "Talker": "다크호스",
+                    "DialogText": "한... 수십만년 전쯤? 너무 오래되서 기억도 잘 안 나는군.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
-                    "Type": 0,
-                    "DialogText": "그래서 아빠랑 오빠들은 나를 죽여서라도 국가에 용서를 빌려고 했대.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "..생각보다 뻔해서 재미없었지?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "생각해보면, 오빠들은 아마 그냥 내가 싫었던 것 같아. 아무래도 내가 늘 귀찮고 민폐만 끼치는 존재였으니까 그랬을 거야. ",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "..너에게마저 그런 존재가 되고 싶진 않은데..",
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "... 오래되긴 했네요...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

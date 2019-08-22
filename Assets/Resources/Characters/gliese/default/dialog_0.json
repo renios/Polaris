@@ -5,35 +5,72 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "DialogText": "안녕!",
+                    "Talker": "글리제",
+                    "DialogText": "안녕? 또래 여자애는 오랜만이네. 겉모습만 또래긴 하지만.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..?",
+                    "Talker": "주인공",
+                    "DialogText": "널 어떻게 부르면 될까?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "여자애는 오랜만에 보네. 나랑 비슷해서 좋다.",
+                    "Talker": "글리제",
+                    "DialogText": "음, 글리제가 이름이긴 한데, 다 부르긴 힘드니까 리제라고 불러도 괜찮아.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "글리제",
+                    "DialogText": "지금 지상은 어때? 아마 엄청난 기계들이 많으려나.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..반가워.",
+                    "Talker": "주인공",
+                    "DialogText": "기계?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "나는 아케르야. 방금 네가 보던 에리다누스자리에서 왔어. 막 심심해지고 있었는데 이런 새로운 곳을 볼 수 있다니 행운이네. 앞으로도 잘 부탁해!",
+                    "Talker": "글리제",
+                    "DialogText": "뭐, 막 실시간으로 별의 위치를 알려준다거나, 저 멀리서 일어나는 일을 중계한다거나 하는 기계들 말이야. 기술이 어느 정도로 발전했을지 궁금해져서.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "그런 기계라면 있어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "글리제",
+                    "DialogText": "정말? 나 때 기술은 기술도 아니었구나...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "글리제",
+                    "DialogText": "시간 나면 그런 얘기 좀 자주 해줄래?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

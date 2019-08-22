@@ -4,176 +4,202 @@
             "Phase": 0,
             "Contents": [
                 {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "오늘은 시계가 없네?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
                     "Type": 0,
-                    "DialogText": "너는 별 보는 게 좋은 거야?",
+                    "Talker": "글리제",
+                    "DialogText": "...앉을 곳이 필요할 때만 크기를 키우는 것뿐이야. 평소에는 들고 다녀.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "글리제",
+                    "DialogText": "(그녀의 손바닥 위에 작은 사이즈로 축소된 시계가 있다.)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "글리제",
+                    "DialogText": "나한텐 중요한 거라, 두고 다닐 일은 없어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "응. 계속 좋아 해왔어.",
+                    "Talker": "주인공",
+                    "DialogText": "왜 중요한지 물어봐도 될까?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그러고 보니, 하늘 위에 떠 있던 날 보고 있어서 내가 너와 만날 수 있었던 거였지. ",
+                    "Talker": "글리제",
+                    "DialogText": "...화제를 좀 돌릴까?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그러고 보니 날 보고 있었다면 주변 별자리들도 이미 봤으려나?",
+                    "Talker": "글리제",
+                    "DialogText": "아, 말해주지 않겠다는 건 아니야. 다만, 내가 좀 더 준비됐을 때 꺼내고 싶은 이야기라...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "내 주변에도 천체들이 많거든. 대부분 얼굴만 아는 사이긴 하지만, 멜리크는...",
+                    "Talker": "글리제",
+                    "DialogText": "지상에 있을 때도 말한 적은 없어서.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "글리제",
+                    "DialogText": "아, 그러고 보니 이젠 누구한테 말해도 상관없겠구나.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "멜리크?",
+                    "Talker": "주인공",
+                    "DialogText": "...무리하지 않아도 돼.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "내 친구 같은 천체야.",
+                    "Talker": "글리제",
+                    "DialogText": "아냐. 나랑 얘기하다 보면 자연스레 알게 될 일 중 하나거든.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "글리제",
+                    "DialogText": "하지만 우울한 얘기를 일찍 꺼낼 필요는 없잖아?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..그냥 친구가 아니라?",
+                    "Talker": "주인공",
+                    "DialogText": "...시계를 만들었다고 했지?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "아, 나 혼자 친구라고 생각하는 거일 수도 있으니까..",
+                    "Talker": "글리제",
+                    "DialogText": "응. 어렸을 때부터 시계에 관해서는 보고 들은 게 많았거든.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "..있잖아, 혹시, 진짜로 혹시 너는 내가 말을 거는 게 귀찮아?",
+                    "Talker": "글리제",
+                    "DialogText": "부모님도 시계에 관련된 일을 하신 분이었고.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..전혀.",
+                    "Talker": "주인공",
+                    "DialogText": "부모님도?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그렇게 대답할 거라 생각은 했어.",
+                    "Talker": "글리제",
+                    "DialogText": "응. 그래서 오빠랑 나도 그 일을 잇길 원하셨어. ",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "내가 이걸 물어본 이유는.. 내가 멜리크를 왜 친구 같은 천체로 생각하는지 설명하기 위해서야.",
+                    "Talker": "글리제",
+                    "DialogText": "하지만 그때 부모님이 다룬 건 지금처럼 톱니바퀴로 움직이는 시계가 아니라 물시계에 가까웠지. 뭐, 낮이 되면 마을 전체에 소리가 울리는 그런 시계 말이야.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "어렸을 때 내 주변 사람들은 오빠들이랑 아빠가 전부였어. ",
+                    "Talker": "글리제",
+                    "DialogText": "소형으로 시계를 만들려면 물의 흐름이 아니라 톱니바퀴를 이용해야 하거든.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
-                    "Type": 0,
-                    "DialogText": "그런데.. 오빠들은 내가 말을 걸면 핑계를 대면서 피하기 바쁘더라고.",
-                    "JuncTexts": [],
-                    "Directions": [],
+                    "Type": 2,
+                    "JuncTexts": [
+                        "...복잡한 얘기네.",
+                        "들어본 것 같아."
+                    ],
+                    "Directions": [
+                        -1,
+                        1
+                    ],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "사실 아빠가 있을 땐 그나마 괜찮았는데, 없을 때는 나를 쳐다보지도 않았어.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "아빠도 엄마를 잃고 나서는 나랑 대화하는 걸 피했고..",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "그래서 멜리크를 처음 만났을 때는.. 진짜 좋았어",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "내 말을 웃으면서 들어준 유일한 사람이니까.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "아니, 너한테 꼭 웃으면서 얘기를 들어달란 얘기는 아니라, 그냥 그렇다고...",
+                    "Talker": "글리제",
+                    "DialogText": "네가 조금만 나한테 배워도 절대 어렵지 않을 거야. 옛날 발명품의 원리는 요즘 학생들한테는 이해하기 쉬운 내용이거든.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "(아케르의 얼굴이 홍조를 띠고 있다.)",
+                    "Talker": "주인공",
+                    "DialogText": "기회가 된다면 부탁할게.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                }
+            ]
+        },
+        {
+            "Phase": 1,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "Talker": "글리제",
+                    "DialogText": "그래? 혹시 공학에 관심 있으면 언제든지 물어봐. 가르치는 건 익숙하진 않지만.. 특별히 과외해줄 수도 있어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "멜리크가 너한테는 소중한 사람인거구나",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "그렇지! 소중한 사람, 딱 좋은 표현이야. 헤헤..",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "멜리크에게는 늘 고마워하고 있어. 민폐 끼치는 건 아닐지가 걱정이야.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "(아케르의 표정이 급격하게 우울해졌다. 그렇게 대화가 끝났다.)",
+                    "Talker": "주인공",
+                    "DialogText": "나야 고맙지.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

@@ -5,77 +5,184 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "DialogText": "혹시 간식 있어?",
+                    "Talker": "",
+                    "DialogText": "(또 어둠 속에서 누군가 불쑥 튀어나왔다.)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "거기 누구!... 너였군.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "아..미안. 지금은 없어.",
+                    "Talker": "주인공",
+                    "DialogText": "아... 안녕... 하세요...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "흠, 아쉽다. 혹시 단 거 좋아해?",
+                    "Talker": "다크호스",
+                    "DialogText": "저번에 놀라게 했던 건 정식으로 사과하지.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "응, 좋아해.",
+                    "Talker": "주인공",
+                    "DialogText": "괘... 괜찮아요.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "나도! 단 게 먹고 싶은데 별이 되고 나서부터는 먹기 힘들어.",
+                    "Talker": "다크호스",
+                    "DialogText": "표정은 아닌 거 같다만... 괜찮다니 다행이군.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "그나저나 왜 계속 망원경으로 염탐하는 우리 지역을 염탐하는 것이지? 첩자라도 되는건가?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "별이 되기 전부터 좋아했던 거야?",
+                    "Talker": "주인공",
+                    "DialogText": "아니에요! 저는 그저 별을 보고 있었는걸요...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "응! 그래서 아빠랑 오빠들이 어디 다녀올 때면 아빠가 간식 같은 거 많이 사 왔었어. ",
+                    "Talker": "다크호스",
+                    "DialogText": "별이라... 그래서 망원경이 저렇게 컸던거군.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "..그때 만났으면 같이 간식 먹으면서 얘기했을 텐데,",
+                    "Talker": "다크호스",
+                    "DialogText": "알았다. 너에 대한 오해는 풀도록 하지.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "그러니 그렇게 크게 얘기하지 않아도 된다. 네 쪽에서 크게 얘기하는 순간 내가 은폐 중이라는 게 들키게 되니까 말이다.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "간식이 없어도 얘기할 상대가 있는 것만으로도 즐거워.",
+                    "Talker": "주인공",
+                    "DialogText": "은폐... 요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "진짜? 헤헤.. 나랑 대화하는 게 다른 천체들과 비교했을 때는 어때?",
+                    "Talker": "다크호스",
+                    "DialogText": "아... 그러니까 매복 말이다.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "매복... 이요? 둘 다 처음 듣는 단어인데요...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "네가 재미있게 느꼈으면 좋겠다!",
+                    "Talker": "다크호스",
+                    "DialogText": "아, 이것도 어려운 말인건가... ",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "음... 그러니까 '숨어있다가 공격하는 거' 말이다.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "공격이요? 어디로 싸우러 가시는 건가요? 저번에도 그렇고 공격하시는 거보다는 지키고 계신 거 같은데...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "아니, 내가 싸우러 가는 게 아니라... 그러니까...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "하아... 어떻게 설명을 해야할 지 잘 모르겠군.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "음... 아, 그래. '숨어서 지키는 거'. 이렇게 설명하면 이해할 수 있겠니?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "숨어있는데 어떻게 지켜요?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "휴우.... 아니다. 아무래도 내가 설명을 이상하게 한 거 같군.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "방금 내가 한 말은 잊고 그냥 말하고 싶은 목소리 크기로 말해도 된다.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

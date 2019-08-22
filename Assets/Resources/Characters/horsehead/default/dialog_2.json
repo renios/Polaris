@@ -5,175 +5,232 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "DialogText": "너는 별 보는 게 좋은 거야?",
+                    "Talker": "",
+                    "DialogText": "(또 다시 어둠 속에서 누군가 모습을 드러냈다.)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "... 역시 너였군.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "그 큰 게 보이길래 또 너일 거라고 어느 정도 예상은 하고 있었다.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "아무리 무관심하려고 해도 그 망원경이 너무 내 시선을 끄는구나.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "그걸로 똑같은 장소를 계속 바라봐서 내가 있는 위치가 드러나면 곤란해지니 말이다.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "응. 계속 좋아 해왔어.",
+                    "Talker": "주인공",
+                    "DialogText": "어디 있는지 알게 되면 안 좋나요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그러고 보니, 하늘 위에 떠 있던 날 보고 있어서 내가 너와 만날 수 있었던 거였지. ",
+                    "Talker": "다크호스",
+                    "DialogText": "그야 내가 오리온자리를 지키기 위해선 은폐...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그러고 보니 날 보고 있었다면 주변 별자리들도 이미 봤으려나?",
+                    "Talker": "다크호스",
+                    "DialogText": "... 오리온자리를 지켜야 하는데 내가 어딨는지 알 수 있으면 적이 먼저 나를 공격할 수 있으니 말이다.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "내 주변에도 천체들이 많거든. 대부분 얼굴만 아는 사이긴 하지만, 멜리크는...",
+                    "Talker": "다크호스",
+                    "DialogText": "게다가 나는 오리온자리의 입구를 지키는 문지기.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "내가 침략을 막아내지 못한다는 것은 곧 이 입구를 통해 적들이 몰려 들어올 수 있다는 걸 의미하지.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "멜리크?",
+                    "Talker": "주인공",
+                    "DialogText": "입구를 지키는 문지기라구요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "내 친구 같은 천체야.",
+                    "Talker": "다크호스",
+                    "DialogText": "그렇다. 언제 적들이 침략할지 모르기 때문에 나는 여기를 항상 지키고 있다.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..그냥 친구가 아니라?",
+                    "Talker": "주인공",
+                    "DialogText": "그럼 여기에 항상 계신건가요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "아, 나 혼자 친구라고 생각하는 거일 수도 있으니까..",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "..있잖아, 혹시, 진짜로 혹시 너는 내가 말을 거는 게 귀찮아?",
+                    "Talker": "다크호스",
+                    "DialogText": "가끔 개인적으로 필요한 물품이 떨어졌을 때 사러 가는 순간을 제외하면 항상 있는 편이다.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..전혀.",
+                    "Talker": "주인공",
+                    "DialogText": "여기 서있기만 하면 지루하거나 힘들지 않으세요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그렇게 대답할 거라 생각은 했어.",
+                    "Talker": "다크호스",
+                    "DialogText": "근무를 서다 보면 힘들다는 생각은 별로 들지 않는다.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "내가 이걸 물어본 이유는.. 내가 멜리크를 왜 친구 같은 천체로 생각하는지 설명하기 위해서야.",
+                    "Talker": "다크호스",
+                    "DialogText": "누군가에게 맡겨놓는 것보단 내가 근무를 서는게 마음이 훨씬 편하다.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "어렸을 때 내 주변 사람들은 오빠들이랑 아빠가 전부였어. ",
+                    "Talker": "다크호스",
+                    "DialogText": "너처럼 여기를 지나다니는 민간인들을 보면 그렇게 지루하다는 생각도 잘 안 들지.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그런데.. 오빠들은 내가 말을 걸면 핑계를 대면서 피하기 바쁘더라고.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "사실 아빠가 있을 땐 그나마 괜찮았는데, 없을 때는 나를 쳐다보지도 않았어.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "아빠도 엄마를 잃고 나서는 나랑 대화하는 걸 피했고..",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "그래서 멜리크를 처음 만났을 때는.. 진짜 좋았어",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "내 말을 웃으면서 들어준 유일한 사람이니까.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "아니, 너한테 꼭 웃으면서 얘기를 들어달란 얘기는 아니라, 그냥 그렇다고...",
+                    "Talker": "다크호스",
+                    "DialogText": "게다가 밤에는 노루나 멧돼지 같은 야생동물들도 많이 보여서 오히려 심심할 틈이 없더구나.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "(아케르의 얼굴이 홍조를 띠고 있다.)",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "멜리크가 너한테는 소중한 사람인거구나",
+                    "Talker": "주인공",
+                    "DialogText": "멧돼지요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그렇지! 소중한 사람, 딱 좋은 표현이야. 헤헤..",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "멜리크에게는 늘 고마워하고 있어. 민폐 끼치는 건 아닐지가 걱정이야.",
+                    "Talker": "다크호스",
+                    "DialogText": "그래. 멧돼지 말이다. 혹시 멧돼지도 설명을...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "(아케르의 표정이 급격하게 우울해졌다. 그렇게 대화가 끝났다.)",
+                    "Talker": "주인공",
+                    "DialogText": "아니요. 그게 아니라... 진짜 멧돼지를 보셨어요?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "그래. 일반 돼지들보단 확실히 몸집은 크고 털이 좀 더 거칠더구나.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "툭 튀어나오는 송곳니 같은 건 있었나요?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "아니, 없었다.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "... 진짜로 보신거 맞아요? 제가 TV에서 보던 모습과는 좀 다른 거 같은데요.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "진짜다만...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "... 아닌 거 같은데요.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "끄응... 소녀여. 이야기가 안 끝난다.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

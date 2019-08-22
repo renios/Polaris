@@ -5,35 +5,64 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "DialogText": "안녕!",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "DialogText": "..?",
+                    "Talker": "",
+                    "DialogText": "(어둠 속에서 갑자기 누군가 불쑥 튀어나왔다.)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "여자애는 오랜만에 보네. 나랑 비슷해서 좋다.",
+                    "Talker": "다크호스",
+                    "DialogText": "거기 누구냐! 염탐하고 있는 거 다 들켰으니 정체를 드러내라!",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "..반가워.",
+                    "Talker": "주인공",
+                    "DialogText": "꺄악!",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "나는 아케르야. 방금 네가 보던 에리다누스자리에서 왔어. 막 심심해지고 있었는데 이런 새로운 곳을 볼 수 있다니 행운이네. 앞으로도 잘 부탁해!",
+                    "Talker": "다크호스",
+                    "DialogText": "헛!... 뭐야, 여자아이였나.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "아아, 겁먹은건가. 미안하다. 상대가 소녀일 줄은 몰랐군.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "하지만 여긴 오리온자리의 영역이다. 적으로 오인받을 수 있으니 앞으론 조심하거라.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "다크호스",
+                    "DialogText": "진정된 것 같으니 난 다시 돌아가보겠다.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
