@@ -101,7 +101,7 @@ public class ResultManager : MonoBehaviour {
         {
             if(Input.GetMouseButtonDown(0))
             {
-                if(favorityUp.gameObject.activeSelf )
+                if(favorityUp.gameObject.activeSelf)
                 {
                     favorityUp.gameObject.SetActive(false);
                     if (levelUp)
