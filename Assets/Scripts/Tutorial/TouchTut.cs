@@ -34,8 +34,8 @@ public class TouchTut : MonoBehaviour {
 
         touchOn = false;
 
-        //characterAdd();
-        //ShotRay();
+        characterAdd();
+        ShotRay();
     }
 	
     void characterAdd()
@@ -65,11 +65,6 @@ public class TouchTut : MonoBehaviour {
     {
         if(moveAble)
             ScopeMove();
-
-        if (Input.GetKeyDown(KeyCode.Escape) && Variables.isTutorialFinished)
-        {
-            SceneChanger.Instance.ChangeScene("MainScene");
-        }
     }
 
     void LoadCharacter()
@@ -169,7 +164,7 @@ public class TouchTut : MonoBehaviour {
             Scope.transform.position = scopePos;
         }
 
-        //ShotRay();
+        ShotRay();
     }
     /*
     void DebugVector(Vector2 v, string name = null) {
