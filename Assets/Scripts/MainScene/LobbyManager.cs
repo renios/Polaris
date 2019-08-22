@@ -148,7 +148,7 @@ public class LobbyManager : MonoBehaviour
         */
 
         //TODO : 씬 바꾸는 임시 코드 개선
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "MainTut")
         {
             SceneChanger.Instance.ChangeScene("TitleScene");
         }

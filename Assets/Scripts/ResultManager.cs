@@ -33,6 +33,12 @@ public class ResultManager : MonoBehaviour {
         fader.SetActive(true);
         StartCoroutine(gachaFadeIn(3f));
         SoundManager.Play(SoundType.GachaResult);
+
+        if(Variables.tutState == 9)
+        {
+            Variables.isTutorialFinished = true;
+            Variables.tutState = 10;
+        }
     }
 	
 	// Update is called once per frame
