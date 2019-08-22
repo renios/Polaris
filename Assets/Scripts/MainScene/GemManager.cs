@@ -20,6 +20,13 @@ public class GemManager : MonoBehaviour {
         ShowState();
     }
 
+    private void Update()
+    {
+        if(Gem1 != Variables.Starlight)
+            ShowState();
+    }
+
+
     public void SaveState(int num)
     {
         int temp = Gem1 += num;
@@ -32,6 +39,8 @@ public class GemManager : MonoBehaviour {
 
     private void ShowState()
     {
+        //@Gem과 Starlight를 동기화. 이후 수정 필요할 수도
+        Gem1 = Variables.Starlight;
         GemText1.text = Gem1.ToString();
        // GemText2.text = Gem2.ToString();
     }

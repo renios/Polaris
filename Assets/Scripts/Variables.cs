@@ -39,6 +39,9 @@ public static class Variables
     public static DateTime _meetingTime;
     public static Vector3 scopePos = new Vector3(1.97f, 4.27f, -1f);
 
+    public static string returnSceneName;
+    public static int tutState = 1;
+
     #region Variables for dialogue scene
     public static int DialogCharIndex;          // 대화 씬에서 참조할 캐릭터 번호
     public static int DialogCardIndex;          // 대화 씬에서 참조할 캐릭터 내 종류 번호

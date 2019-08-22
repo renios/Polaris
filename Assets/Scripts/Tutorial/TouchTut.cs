@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TouchManager : MonoBehaviour {
+public class TouchTut : MonoBehaviour {
     GameObject Scope = null;
 
     private float skyRadius = 4.6f;
@@ -30,8 +30,8 @@ public class TouchManager : MonoBehaviour {
         //LoadCharacter();
 
         Scope = GameObject.Find("Scope");
-        Scope.transform.localPosition = Variables.scopePos;
-        
+        Scope.transform.localPosition = new Vector3(1.97f, 4.27f, -5f);
+
         touchOn = false;
 
         characterAdd();
@@ -65,11 +65,6 @@ public class TouchManager : MonoBehaviour {
     {
         if(moveAble)
             ScopeMove();
-
-        if (Input.GetKeyDown(KeyCode.Escape) && Variables.isTutorialFinished)
-        {
-            SceneChanger.Instance.ChangeScene("MainScene");
-        }
     }
 
     void LoadCharacter()
@@ -131,7 +126,7 @@ public class TouchManager : MonoBehaviour {
     */
     public void ScopeMove()
     {
-        Vector3 center = new Vector3(-0.1f * 0.522f, 4.55f * 0.522f, -1);
+        Vector3 center = new Vector3(-0.1f * 0.522f, 4.55f * 0.522f, Scope.transform.localPosition.z);
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (Input.GetMouseButton(0)) {
@@ -165,11 +160,10 @@ public class TouchManager : MonoBehaviour {
                 //startMousePos += scopePos - newScopePos;
                 scopePos = newScopePos;
             }
-            scopePos.z = -1f;
+            scopePos.z = Scope.transform.position.z;
             Scope.transform.position = scopePos;
         }
 
-        Variables.scopePos = Scope.transform.localPosition;
         ShotRay();
     }
     /*

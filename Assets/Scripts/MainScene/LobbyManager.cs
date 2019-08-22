@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class LobbyManager : MonoBehaviour
     void Awake()
     {
         sdchara = GameObject.Find("Characters").gameObject; 
-        popup = GameObject.Find("Setting").transform.Find("Setting Panel").gameObject;
+        if(SceneManager.GetActiveScene().name != "MainTut")
+            popup = GameObject.Find("Setting").transform.Find("Setting Panel").gameObject;
         /*
         //다락방 이동 시.
         if (Variables.CameraMove == true)
@@ -146,7 +148,7 @@ public class LobbyManager : MonoBehaviour
         */
 
         //TODO : 씬 바꾸는 임시 코드 개선
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "MainTut")
         {
             SceneChanger.Instance.ChangeScene("TitleScene");
         }
@@ -160,6 +162,9 @@ public class LobbyManager : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
+        if(sceneName == "GachaTut_1")
+            Variables.tutState = 7;
+
         SoundManager.Play(SoundType.ClickImportant);
         SceneChanger.Instance.ChangeScene(sceneName);
     }
