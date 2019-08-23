@@ -925,8 +925,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34013631e545d046ac009601b51e9a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GemText1: {fileID: 337524480}
-  GemText2: {fileID: 362064095}
 --- !u!222 &337524482
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -998,8 +996,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34013631e545d046ac009601b51e9a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GemText1: {fileID: 337524480}
-  GemText2: {fileID: 362064095}
 --- !u!114 &362064095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4205,8 +4201,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 21300000, guid: 394e91dec0654ac43adfc11d39d45ec8, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: ad618d04836b42f408dc2ae8106d88a9, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: f6083ee7f97314d47af120fa57c28dbd, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 676ebc5c15539a744a29c41791748e3f, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -4249,7 +4245,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: ad618d04836b42f408dc2ae8106d88a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 676ebc5c15539a744a29c41791748e3f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
