@@ -50,7 +50,7 @@ namespace Dialogue
                 {
                     case "player":
                         newContent.Type = 1;
-                        newContent.Talker = "나";
+                        newContent.Talker = "주인공";
                         newContent.DialogText = (string)list[i]["dialogue"];
                         break;
                     case "*":

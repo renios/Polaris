@@ -17,6 +17,8 @@ namespace Dialogue
 
         public DialogueData CurrentDialogue;
 
+        public string talkerNPC;
+
         private void Awake()
         {
             Instance = this;
@@ -42,6 +44,8 @@ namespace Dialogue
             Displayer.Talker.text = Variables.Characters[Variables.DialogCharIndex].Name;
             Displayer.ForeImage.sprite = Resources.Load<Sprite>(imagePath);
             Displayer.ForeImage.preserveAspect = true;
+
+            talkerNPC = Displayer.Talker.text; Debug.Log(talkerNPC);
         }
 
         private IEnumerator Start()
@@ -79,8 +83,10 @@ namespace Dialogue
                 switch(dialog.Type)
                 {
                     case 0:
+                        yield return ShowText(talkerNPC/*dialog.Talker*/, dialog.DialogText);
+                        break;
                     case 1:
-                        yield return ShowText(dialog.Talker, dialog.DialogText);
+                        yield return ShowText("주인공"/*dialog.Talker*/, dialog.DialogText);
                         break;
                     case 2:
                         yield return ShowInteraction(dialog.JuncTexts, dialog.Directions);
