@@ -38,6 +38,10 @@ namespace Dialogue
                 CurrentDialogue = JsonMapper.ToObject<DialogueData>(jsonAsset.text);
             }
             catch { CurrentDialogue = DialogueParser.ParseFromCSV(dialogPath); }
+
+            Displayer.Talker.text = Variables.Characters[Variables.DialogCharIndex].Name;
+            Displayer.ForeImage.sprite = Resources.Load<Sprite>(imagePath);
+            Displayer.ForeImage.preserveAspect = true;
         }
 
         private IEnumerator Start()

@@ -17,8 +17,8 @@ namespace Dialogue
 
         public void ClearAll()
         {
-            ForeImage.sprite = DefaultForeSprite;
-            Talker.text = "";
+            //ForeImage.sprite = DefaultForeSprite;
+            //Talker.text = "";
             Context.text = "";
             IsFullyAnimated = true;
             EndIndicator.SetActive(false);
@@ -26,7 +26,7 @@ namespace Dialogue
 
         public void ClearText()
         {
-            Talker.text = "";
+            //Talker.text = "";
             Context.text = "";
         }
 
@@ -34,7 +34,8 @@ namespace Dialogue
         {
             IsFullyAnimated = false;
 
-            Talker.text = talker;
+            if(talker != null)
+                Talker.text = talker;
             yield return TextAnimating(context);
         }
 
