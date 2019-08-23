@@ -5,114 +5,72 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "(갑자기 베가가 화난 얼굴로 다가오기 시작했다.)",
+                    "Talker": "목성",
+                    "DialogText": "...... 동생들과 오랜만에 긴 대화를 나눴어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "거기, 소녀여! 내가 방해될 정도로 쳐다보진 말라고 했을텐데?!",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 2,
-                    "JuncTexts": [
-                        "저는 지금 막 베가 님을 봤는걸요.",
-                        "죄송해요. 너무 아름다우셔서..."
-                    ],
-                    "Directions": [
-                        -1,
-                        1
-                    ],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "허튼소리 말아라!",
+                    "Talker": "목성",
+                    "DialogText": "애들이 그러는데, 내가 제일 의지가 될 때는 내가 편안한 표정으로 동생들의 이야기를 들어줄 때래.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "아무리 내가 예쁘기로서니 훔쳐보고 거짓말까지하다니!",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": -1,
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 2
-                }
-            ]
-        },
-        {
-            "Phase": 1,
-            "Contents": [
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "하! 당연한 소리를!",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": -1,
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 2
-                }
-            ]
-        },
-        {
-            "Phase": 2,
-            "Contents": [
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "지금은 무엇을 하고 계셨나요?",
+                    "Talker": "목성",
+                    "DialogText": "내가 애들을 위해 무언갈 억지로 해줄 때가 아니라.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "흥! 말 하나는 잘 돌리는구나.",
+                    "Talker": "목성",
+                    "DialogText": "그리고, 자신들에게 마음 편히 의지해달라는 말도 해줬어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "그리고 계속 봐왔으면서 어디서 시치미를 떼느냐.",
+                    "Talker": "목성",
+                    "DialogText": "난 동생들의 의견을 무시한 채 내가 하고 싶은 대로만 했던 것 같아.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "뭐, 좋다. 리라 제국의 공주로서 관용을 베풀도록 하지.",
+                    "Talker": "목성",
+                    "DialogText": "정확히는 의견을 들을 기회조차 주지 않았지.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "방금까지 검술 연습을 하는 중이었다. 어릴 때부터 재능이 있긴 했지만 연습을 게을리 해선 안되지.",
+                    "Talker": "목성",
+                    "DialogText": "네 덕분에 눈을 뜬 것 같아.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "목성",
+                    "DialogText": "나에 대한 동생들의 애정도 느껴볼 수 있는 시간이었고.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "목성",
+                    "DialogText": "(밝은 미소를 짓는다.)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -120,23 +78,31 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "검술 연습이요?",
+                    "DialogText": "뭔가 처음 만났을 때처럼 표정이 밝네요.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "그래. 이 검술로 다음 전쟁에서도 승리해야...",
+                    "Talker": "목성",
+                    "DialogText": "아, 그러고 보니 네 앞에서 이런 표정을 짓는 것도 오랜만이네.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "...",
+                    "Talker": "목성",
+                    "DialogText": "최근 이야기가 너무 어두웠던 것도 있지.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "목성",
+                    "DialogText": "그러고 보니, 아이들과 이야기하면서 깨달은 게 하나 더 있어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -144,15 +110,15 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "베가 님?",
+                    "DialogText": "그게 뭔데요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "... 승리... 해야...?",
+                    "Talker": "목성",
+                    "DialogText": "나는 이미 나보다 한참 어려보이는 사람에게 의지하고 있었다는거.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -160,39 +126,39 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "... 베가 님?",
+                    "DialogText": "동생들 중 한 명이에요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "앗! 아무 것도 아니다! 머리가 어지러운 것이 연습을 조금 격하게 한 것 같구나.",
+                    "Talker": "목성",
+                    "DialogText": "보통 이 분위기에 말하면 당연히 너라고 생각하지 않아?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "아무래도 잠깐 쉬다 가야겠다.",
+                    "Talker": "목성",
+                    "DialogText": "참 신기하지. 막냇동생 또래 정도로 보이는 너한테는 쉽게 의지했다는게.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "... 뭐냐! 전혀 이부자리가 갖춰져 있지 않지 않느냐!",
+                    "Talker": "목성",
+                    "DialogText": "앞으로 똑같은 고민은 없겠지만, 사소한 고민거리가 생기면 널 만나러 오게 될 것 같네.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "다음에 내가 왔을 때 쉴 수 있도록 이부자리 정도는 갖춰놓거라!",
+                    "Talker": "목성",
+                    "DialogText": "그때 와서 귀찮다고 하기 없기다. 네가 분명 어린 사람에게도 마음 편히 의지하라는 식으로 말했으니까. 그렇지?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

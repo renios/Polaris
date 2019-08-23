@@ -5,48 +5,8 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "Talker": "??",
-                    "DialogText": "너...구나. 나를 보고 있던 사람이.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "응! 반가워. 이름이 뭐야?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "??",
-                    "DialogText": "이름...",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "앗, 혹시 이름을 말할 수 없는 사연이 있다던가 하면 안 해도...",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "??",
-                    "DialogText": "그런 건 아니야. 난 시리우...",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "아! 네가 시리우스구나! 밤하늘에서 제일 밝은 별이랬어. 책에서 봤어. 헤헤...뭔가 나 엄청 유명한 별이랑 만난 느낌인데?",
+                    "Talker": "시리우스",
+                    "DialogText": "...정말로 날 다시 찾아준 거야?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -54,31 +14,7 @@
                 {
                     "Type": 0,
                     "Talker": "시리우스",
-                    "DialogText": "(뭔가 머뭇거리며 이쪽을 보다가 시선을 피했다)",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "앗, 미안. 내가 너무 놀라게 했어.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "시리우스",
-                    "DialogText": "아니, 아니야. 괜찮아.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "...?",
+                    "DialogText": "(시리우스는 한 구석에 걸터앉아 바닥에 고개를 떨군 채 움직이지 않고 있다)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -92,17 +28,9 @@
                     "NextPhase": 0
                 },
                 {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "나한테 뭐 이상한거 붙었어...?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
                     "Type": 0,
                     "Talker": "시리우스",
-                    "DialogText": "...아니야.",
+                    "DialogText": "...어디서부터...사과해야 할 지...모르겠어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -110,7 +38,39 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "아니면...뭐 고민되는게 있어? 가만히 서있는거 말고 편하게 있어도 돼.",
+                    "DialogText": "앗, 그 퍼즐이라면 괜찮아. 나중에 철공소 아저씨한테 부탁하면 금방 수리해주실 거고...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "아니야. 그것도 물론 내 잘못이지만...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "(시리우스는 고개를 들지 못한 채 어렵게 말을 꺼냈다)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "...처음부터 다...거짓말이었어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "내가 지금까지 널 속였어...계속...\n",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -118,7 +78,31 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "아, 그런데 이 집 밖으로는 나갈 수가 없어...그거만 빼고는 괜찮아.",
+                    "DialogText": "무슨 말이야...? 시리우스가, 계속 나한테 거짓말을 했다고?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "그래도 음...물론 계속 자랑을 할 때는 조금 지루하긴 했지만, 그게 거짓말이라고 그렇게 엄청난 잘못을 저지른건 아닌 거 같은데...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "아까 말했듯이 퍼즐이야 고쳐달라고 하면 되고. 원래 그리고 이거, 아슬아슬한 데서 힘으로 빼려고 하면 잘 부서진대.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "그러니까 그렇게 엄청 막 큰 잘못을 한 건 아닌 거 같은데...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -126,7 +110,7 @@
                 {
                     "Type": 0,
                     "Talker": "시리우스",
-                    "DialogText": "어...음...아니야. 괜찮아. 오래간만에 지구에 오니까, 사실 뭘 어떻게 해야 할지 잘 모르겠어.",
+                    "DialogText": "...네가 알고 있는, 밤하늘의 가장 밝은 별 시리우스는, 사실 내가 아니야.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -134,7 +118,23 @@
                 {
                     "Type": 0,
                     "Talker": "시리우스",
-                    "DialogText": "...오늘은 이만 가볼게.",
+                    "DialogText": "유명하고, 유능하고, 겨울 밤하늘에서 가장 푸르고 밝게 빛나는 별...그건 내 쌍둥이 동생 시리우스 '알파' 야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "난 그 옆의, 작고 잘 보이지도 않는 시리우스 '베타' 지. 이젠 겨우 희끄무레한 흰 빛으로 빛날 뿐이고. 그마저도 옆의 동생에게 가려서 사람들은 거의 날 보지 못해.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "동생이 여기 오지 않았다는 확신이 든 순간, 동생 행세를 해보고 싶었어. 지금도 하늘에서 가장 밝게 빛나고 있을 동생이...난 너무 부러웠거든.\n",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

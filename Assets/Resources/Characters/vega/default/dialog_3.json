@@ -5,8 +5,32 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "Talker": "??",
-                    "DialogText": "너...구나. 나를 보고 있던 사람이.",
+                    "Talker": "베가",
+                    "DialogText": "인간 소녀여! 기뻐하거라! ",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "이 내가 몸소 너를 만나러 와주었으니 말이다!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "당분간 할 일이 많아 지금처럼 자주 오지 못한다는 것을 알려주기 위해 왔도다.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "영광으로 알거라. 일개 소녀에게 이렇게 직접 찾아와서 일정을 알려주는 경우는 흔치 않으니 말이다.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -14,15 +38,31 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "응! 반가워. 이름이 뭐야?",
+                    "DialogText": "할 일이 많다구요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "??",
-                    "DialogText": "이름...",
+                    "Talker": "베가",
+                    "DialogText": "그래. 다른 적들을 내쫓기 위해선 총사령관으로서 대원들 훈련도 시켜야 하고, ",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "또 '여름의 대삼각형' 부대 합동 연습도...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -30,15 +70,39 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "앗, 혹시 이름을 말할 수 없는 사연이 있다던가 하면 안 해도...",
+                    "DialogText": "무슨 일 있으신가요? 안색이 안 좋아보여요.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "??",
-                    "DialogText": "그런 건 아니야. 난 시리우...",
+                    "Talker": "베가",
+                    "DialogText": "아니다, 아니야. 아무 일도 없다!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "내 직속 부대이자 나의 의남매들이 있는 '여름의 대삼각형' 부대 연습을 생각하니...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "생각하니...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -46,15 +110,23 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "아! 네가 시리우스구나! 밤하늘에서 제일 밝은 별이랬어. 책에서 봤어. 헤헤...뭔가 나 엄청 유명한 별이랑 만난 느낌인데?",
+                    "DialogText": "음... 어딘가 불편해보이시는데요.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "시리우스",
-                    "DialogText": "(뭔가 머뭇거리며 이쪽을 보다가 시선을 피했다)",
+                    "Talker": "베가",
+                    "DialogText": "누, 누가 불편해보인다는 거냐! 아무 일도 없다고 하지 않았느냐!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "그, 그런 의심도 다 병이다, 병!",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -62,79 +134,15 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "앗, 미안. 내가 너무 놀라게 했어.",
+                    "DialogText": "저는... 그냥 걱정이 되서...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "시리우스",
-                    "DialogText": "아니, 아니야. 괜찮아.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "...?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "시리우스",
-                    "DialogText": "......",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "나한테 뭐 이상한거 붙었어...?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "시리우스",
-                    "DialogText": "...아니야.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "아니면...뭐 고민되는게 있어? 가만히 서있는거 말고 편하게 있어도 돼.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "아, 그런데 이 집 밖으로는 나갈 수가 없어...그거만 빼고는 괜찮아.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "시리우스",
-                    "DialogText": "어...음...아니야. 괜찮아. 오래간만에 지구에 오니까, 사실 뭘 어떻게 해야 할지 잘 모르겠어.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "시리우스",
-                    "DialogText": "...오늘은 이만 가볼게.",
+                    "Talker": "베가",
+                    "DialogText": "얘기할 시간 없다! 지금은 바쁘니 돌아가보겠다!",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

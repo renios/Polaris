@@ -5,8 +5,16 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "흐음? 신기한 물건으로 바라보고 있구나.",
+                    "Talker": "목성",
+                    "DialogText": "(...... 누구 또래쯤 되려나?)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "목성",
+                    "DialogText": "안녕?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -14,55 +22,55 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "히익! 깜짝이야...",
+                    "DialogText": "아, 안녕하세요.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "망원경 같긴 한데... 내가 보던 망원경보단 좀 더 많이 크구나.",
+                    "Talker": "목성",
+                    "DialogText": "음, 얼굴을 보니 우리 막내 나이쯤 되려나?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "근데 그 큰 걸로 뭘 그렇게 뚫어져라 쳐다보는 것이냐?",
+                    "Talker": "목성",
+                    "DialogText": "만나서 반가워.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "혹시 너도 내 빛나는 미모에 푹 빠져버리고 만 것이냐?",
+                    "Talker": "목성",
+                    "DialogText": "혹시 간식은 뭐 좋아해? 마들렌? 아니면 컵케익? 한창 단 거 좋아할 나이지?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "... 주신다면 감사히 먹을게요.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "좋다! 곧 리라 제국의 차기 여왕이자 별들의 왕의 자리에 오를 이 '베가' 님의 용모를 특별히 감상할 기회를 주마.",
+                    "Talker": "목성",
+                    "DialogText": "하하, 고마워. 내 동생들은 만나봤으려나? 난 목성이라고 부르면 돼.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "단! 이 몸이 하는 일이 방해될 정도로 보진 말거라. 이 몸이 지금 몹시 바빠서 말이다.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "",
-                    "DialogText": "(오호호호 하는 웃음소리와 함께 여자는 저멀리 사라져버렸다.)",
+                    "Talker": "목성",
+                    "DialogText": "잘 부탁해. 자주 놀러 올 테니까.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

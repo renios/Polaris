@@ -4,115 +4,9 @@
             "Phase": 0,
             "Contents": [
                 {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "(갑자기 베가가 화난 얼굴로 다가오기 시작했다.)",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "거기, 소녀여! 내가 방해될 정도로 쳐다보진 말라고 했을텐데?!",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 2,
-                    "JuncTexts": [
-                        "저는 지금 막 베가 님을 봤는걸요.",
-                        "죄송해요. 너무 아름다우셔서..."
-                    ],
-                    "Directions": [
-                        -1,
-                        1
-                    ],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "허튼소리 말아라!",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "아무리 내가 예쁘기로서니 훔쳐보고 거짓말까지하다니!",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": -1,
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 2
-                }
-            ]
-        },
-        {
-            "Phase": 1,
-            "Contents": [
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "하! 당연한 소리를!",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": -1,
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 2
-                }
-            ]
-        },
-        {
-            "Phase": 2,
-            "Contents": [
-                {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "지금은 무엇을 하고 계셨나요?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "흥! 말 하나는 잘 돌리는구나.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "그리고 계속 봐왔으면서 어디서 시치미를 떼느냐.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "뭐, 좋다. 리라 제국의 공주로서 관용을 베풀도록 하지.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "방금까지 검술 연습을 하는 중이었다. 어릴 때부터 재능이 있긴 했지만 연습을 게을리 해선 안되지.",
+                    "DialogText": "안녕, 플레임. 오늘도 놀러왔...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -120,79 +14,167 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "검술 연습이요?",
+                    "DialogText": "...? 왜 그렇게 표정이 안 좋아?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "그래. 이 검술로 다음 전쟁에서도 승리해야...",
+                    "Talker": "플레임",
+                    "DialogText": "너... 여태까지 날 속였구나?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "뭐?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
+                    "Talker": "플레임",
+                    "DialogText": "아저씨한테 얘기하고 들어왔다는 거... 거짓말이었지?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "어... 어떻게 그걸...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "플레임",
+                    "DialogText": "그 날 근무를 섰었던 아저씨한테 물어봤어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "플레임",
+                    "DialogText": "여기를 지나다니는 여자아이 봤냐고 물어봤는데 못 봤다고 답하시더라.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "플레임",
+                    "DialogText": "게다가 너, 별도 아니었더라?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "플레임",
+                    "DialogText": "말해봐. 왜 나한테 거짓말한거야?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "그치만!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "별이라고 생각한 건 너잖아...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "플레임",
+                    "DialogText": "뭐?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "난 아무 말도 안 했어! 내가 뭐다 라고...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "게다가 이전에도 내가 아무 말도 안했는데 몰래 들어오고 싶어했던 것처럼 나한테 얘기했잖아!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "플레임",
+                    "DialogText": "그... 그건... 그렇긴 한데...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "플레임",
+                    "DialogText": "그, 그게 아니었으면! 나한테 나중에라도 그게 아니라고 얘기해줬어야지!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "나중에 언제? 언제 만날지도 모르는데 어떻게 그 때 다 기억해서 얘기해!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "플레임",
+                    "DialogText": "그럼 더더욱 그 때 얘기해줬어야지!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
                     "DialogText": "...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "베가 님?",
+                    "Type": 0,
+                    "Talker": "플레임",
+                    "DialogText": "말 못할 사정이 있는 줄 알고 내가 얼마나 배려해준건데...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "... 승리... 해야...?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "... 베가 님?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "앗! 아무 것도 아니다! 머리가 어지러운 것이 연습을 조금 격하게 한 것 같구나.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "아무래도 잠깐 쉬다 가야겠다.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "... 뭐냐! 전혀 이부자리가 갖춰져 있지 않지 않느냐!",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "다음에 내가 왔을 때 쉴 수 있도록 이부자리 정도는 갖춰놓거라!",
+                    "Talker": "플레임",
+                    "DialogText": "... 됐어. 오늘부로 날 찾아오지 마.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

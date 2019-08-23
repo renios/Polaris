@@ -1,0 +1,57 @@
+{
+    "Dialogues": [
+        {
+            "Phase": 0,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "Talker": "플레임",
+                    "DialogText": "어? 이 거울같이 빛나는 건 뭐지?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "플레임",
+                    "DialogText": "흐음...? 평소엔 주변에서 못 보던 건데...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "플레임",
+                    "DialogText": "... 어! 너, 이번에 새로 들어온 아이야?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "새로 들어온 아이? 무슨 소리를 하는 거야?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "플레임",
+                    "DialogText": "아, 아닌 것 같네... 미안. 갑자기 뜬금없게 들렸겠다.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "플레임",
+                    "DialogText": "앗! 물건 들어오는 마차다. 미안한데 나중에 다시 얘기하자.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                }
+            ]
+        }
+    ]
+}

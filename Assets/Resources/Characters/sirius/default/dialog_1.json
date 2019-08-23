@@ -4,57 +4,129 @@
             "Phase": 0,
             "Contents": [
                 {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "시리우스다! 또 와 줬어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
                     "Type": 0,
-                    "DialogText": "내 이름을 들어본 적 있다고?",
+                    "Talker": "시리우스",
+                    "DialogText": "(뭔가를 골똘히 생각하는 표정이다)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "응. 책에서 읽은 적 있어.",
+                    "Talker": "주인공",
+                    "DialogText": "왜? 뭐 궁금한거 있어?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그건...음.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "DialogText": "그건 내가 아닌데. 하하.",
+                    "Talker": "시리우스",
+                    "DialogText": "음...혹시, 여기 들럿다 간 별이 얼마나 돼?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 1,
-                    "DialogText": "...? 시리우스가 아냐?",
+                    "Talker": "주인공",
+                    "DialogText": "세어보지 않아서 잘 모르겠지만 꽤 많아! 언니, 오빠, 아저씨, 어떻게 불러야 할지 모르는 기묘한 분도 있었는데...아, 나쁜 사람은 아니었어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "그런데 그건 왜? 누구 찾는 중이야? 내가 기억나는 별이라면 최대한 찾아볼게.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "하하, 난 시리우스긴 한데...시리우스 베타. 사람들이 아는 그 엄청 크고 밝은 별의, 보잘것 없는 동생이지.",
+                    "Talker": "시리우스",
+                    "DialogText": "...아니야. 별 거 아냐.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "그래. 잘 보이지도 않고. 희멀건.",
+                    "Talker": "시리우스",
+                    "DialogText": "(시리우스는 골똘히 생각하는 것 같더니, 무언가를 결심한 듯 했다)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "DialogText": "...아. 음. 분위기 깨서 미안.",
+                    "Talker": "시리우스",
+                    "DialogText": "하핫, 너무 분위기를 어둡게 만들었나? 정말 아무것도 아니었어. ",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "(시리우스는 어깨에 어색하게 힘을 주더니 갑자기 바뀐 어조로 말하기 시작했다)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "이렇게 유명한. 나조차도. 그동안 바라봐주는 사람이 없어서 지구엔 참 오래간만에 와봤다는게, 새삼스럽게. 감회가. 새로웠거든~",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "그럼 오늘은. 이만! 다음번에도. 이 시리우스님을. 꼭 다시 찾아달라구.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "으...응? 갑자기 왜 그래? 시리우스? 엄청...음...뭐랄까...어색해. ",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "하. 하. 뭘, 나정도면. 이쯤이야. 그럼 다음에. 보자!!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "가 버렸네...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "내가 뭔가 잘못 말한게 있는 걸까?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

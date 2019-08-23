@@ -5,8 +5,8 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "Talker": "??",
-                    "DialogText": "너...구나. 나를 보고 있던 사람이.",
+                    "Talker": "플레임",
+                    "DialogText": "어! 안녕... 또 와줬구나.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -14,15 +14,15 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "응! 반가워. 이름이 뭐야?",
+                    "DialogText": "응...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "??",
-                    "DialogText": "이름...",
+                    "Talker": "플레임",
+                    "DialogText": "...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -30,15 +30,15 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "앗, 혹시 이름을 말할 수 없는 사연이 있다던가 하면 안 해도...",
+                    "DialogText": "...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "??",
-                    "DialogText": "그런 건 아니야. 난 시리우...",
+                    "Talker": "플레임",
+                    "DialogText": "... 저기...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -46,15 +46,15 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "아! 네가 시리우스구나! 밤하늘에서 제일 밝은 별이랬어. 책에서 봤어. 헤헤...뭔가 나 엄청 유명한 별이랑 만난 느낌인데?",
+                    "DialogText": "응?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "시리우스",
-                    "DialogText": "(뭔가 머뭇거리며 이쪽을 보다가 시선을 피했다)",
+                    "Talker": "플레임",
+                    "DialogText": "순서가 조금 바뀐거 같지만... 우리... 친구... 할래?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -62,15 +62,15 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "앗, 미안. 내가 너무 놀라게 했어.",
+                    "DialogText": "어? 그, 그래...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "시리우스",
-                    "DialogText": "아니, 아니야. 괜찮아.",
+                    "Talker": "플레임",
+                    "DialogText": "응, 응...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -78,15 +78,15 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "...?",
+                    "DialogText": "...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "시리우스",
-                    "DialogText": "......",
+                    "Talker": "플레임",
+                    "DialogText": "...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -94,15 +94,7 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "나한테 뭐 이상한거 붙었어...?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "시리우스",
-                    "DialogText": "...아니야.",
+                    "DialogText": "... 풉!",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -110,7 +102,15 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "아니면...뭐 고민되는게 있어? 가만히 서있는거 말고 편하게 있어도 돼.",
+                    "DialogText": "아하하하하... 뭐야, 그게!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "플레임",
+                    "DialogText": "뭐, 뭐가!",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -118,23 +118,47 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "아, 그런데 이 집 밖으로는 나갈 수가 없어...그거만 빼고는 괜찮아.",
+                    "DialogText": "'친구 할래?' 라니... 친구하자고 물어보는 사람이 어딨어!",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "시리우스",
-                    "DialogText": "어...음...아니야. 괜찮아. 오래간만에 지구에 오니까, 사실 뭘 어떻게 해야 할지 잘 모르겠어.",
+                    "Talker": "플레임",
+                    "DialogText": "야, 그러는 너는! 뭐야, 그 대답하다가 마는 듯한 건.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "그야 당연히 그런 질문을 받아본 적이 없으니까 그러지.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "시리우스",
-                    "DialogText": "...오늘은 이만 가볼게.",
+                    "Talker": "플레임",
+                    "DialogText": "그... 그런가?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "아하하하하...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "",
+                    "DialogText": "(플레임의 입가에도 미소가 번졌다.)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

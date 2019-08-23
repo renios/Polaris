@@ -5,16 +5,48 @@
             "Contents": [
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "(갑자기 베가가 화난 얼굴로 다가오기 시작했다.)",
+                    "Talker": "목성",
+                    "DialogText": "짠! 내가 뭘 가져왔는지 봐봐.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "거기, 소녀여! 내가 방해될 정도로 쳐다보진 말라고 했을텐데?!",
+                    "Talker": "",
+                    "DialogText": "(목성이 가져온 쟁반 위에 간식이 잔뜩 올려져 있다.)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "(....... 컵케이크에서 원래 보라색 연기가 나나?)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "(마들렌을 살짝 집는다.)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "(...... 마들렌이 왜 이렇게 무겁지?)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "목성",
+                    "DialogText": "뭐부터 먹어볼래?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -22,8 +54,8 @@
                 {
                     "Type": 2,
                     "JuncTexts": [
-                        "저는 지금 막 베가 님을 봤는걸요.",
-                        "죄송해요. 너무 아름다우셔서..."
+                        "(컵케이크를 먼저 먹는다)",
+                        "(마들렌을 먼저 먹는다)"
                     ],
                     "Directions": [
                         -1,
@@ -32,17 +64,17 @@
                     "NextPhase": 0
                 },
                 {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "허튼소리 말아라!",
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "(꿀꺽)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "아무리 내가 예쁘기로서니 훔쳐보고 거짓말까지하다니!",
+                    "Talker": "목성",
+                    "DialogText": "어때? 보라색을 내려고 집에 있는 보라색 양념을 다 넣었어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -59,9 +91,17 @@
             "Phase": 1,
             "Contents": [
                 {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "(덥썩)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "하! 당연한 소리를!",
+                    "Talker": "목성",
+                    "DialogText": "어때? 토성이 맛이 조금 무거웠으면 좋겠다고 해서 돌가루를 좀 넣었어.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -80,39 +120,15 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "지금은 무엇을 하고 계셨나요?",
+                    "DialogText": "... 어떻게 하면...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "흥! 말 하나는 잘 돌리는구나.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "그리고 계속 봐왔으면서 어디서 시치미를 떼느냐.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "뭐, 좋다. 리라 제국의 공주로서 관용을 베풀도록 하지.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "방금까지 검술 연습을 하는 중이었다. 어릴 때부터 재능이 있긴 했지만 연습을 게을리 해선 안되지.",
+                    "Talker": "목성",
+                    "DialogText": "응?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -120,23 +136,15 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "검술 연습이요?",
+                    "DialogText": "(그 결론에 다다를 수 있는 건지 물으려고 했으나 참았다.)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "그래. 이 검술로 다음 전쟁에서도 승리해야...",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "...",
+                    "Talker": "목성",
+                    "DialogText": "맛 어떤지 얘기해줄 수 있어?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -144,15 +152,15 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "베가 님?",
+                    "DialogText": "...새롭네요.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "... 승리... 해야...?",
+                    "Talker": "목성",
+                    "DialogText": "맛있어?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -160,39 +168,79 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "... 베가 님?",
+                    "DialogText": "... 맛은 취향을 타니까요.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "앗! 아무 것도 아니다! 머리가 어지러운 것이 연습을 조금 격하게 한 것 같구나.",
+                    "Talker": "목성",
+                    "DialogText": "음, 아이들 입맛에는 안 맞는 건가?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "아이들이요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "아무래도 잠깐 쉬다 가야겠다.",
+                    "Talker": "목성",
+                    "DialogText": "아까 수성한테도 먹여봤거든.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "(...... 또 다른 피해자......)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "... 뭐냐! 전혀 이부자리가 갖춰져 있지 않지 않느냐!",
+                    "Talker": "목성",
+                    "DialogText": "마음에 안 들어? 그럼, 다음에 다시 도전해서..",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "저도 요리를 못하긴 하지만...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
                 },
                 {
                     "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "다음에 내가 왔을 때 쉴 수 있도록 이부자리 정도는 갖춰놓거라!",
+                    "Talker": "목성",
+                    "DialogText": "하지만?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "레시피 보여주시면, 너무 이상한 부분은 고쳐드릴게요. 도움이 된다면..",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "목성",
+                    "DialogText": "진짜? 고마워. 다음에 꼭 가져올게.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

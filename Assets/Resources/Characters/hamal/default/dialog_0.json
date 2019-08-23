@@ -1,0 +1,57 @@
+{
+    "Dialogues": [
+        {
+            "Phase": 0,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "Talker": "하말",
+                    "DialogText": "어, 안녕?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "안녕.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "하말",
+                    "DialogText": "음, 여긴 어디야? 신기한 곳이네. 살아있을 때도 이런 곳은 온 적이 없는데.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "하말",
+                    "DialogText": "..구경이라도 할래?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "하말",
+                    "DialogText": "아, 아냐! 괜찮아. 나중에 할게.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "하말",
+                    "DialogText": "가끔 놀러 올 테니까, 이야기나 나누자.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                }
+            ]
+        }
+    ]
+}

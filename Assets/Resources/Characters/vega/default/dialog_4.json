@@ -6,136 +6,6 @@
                 {
                     "Type": 0,
                     "Talker": "베가",
-                    "DialogText": "(갑자기 베가가 화난 얼굴로 다가오기 시작했다.)",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "거기, 소녀여! 내가 방해될 정도로 쳐다보진 말라고 했을텐데?!",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 2,
-                    "JuncTexts": [
-                        "저는 지금 막 베가 님을 봤는걸요.",
-                        "죄송해요. 너무 아름다우셔서..."
-                    ],
-                    "Directions": [
-                        -1,
-                        1
-                    ],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "허튼소리 말아라!",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "아무리 내가 예쁘기로서니 훔쳐보고 거짓말까지하다니!",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": -1,
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 2
-                }
-            ]
-        },
-        {
-            "Phase": 1,
-            "Contents": [
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "하! 당연한 소리를!",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": -1,
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 2
-                }
-            ]
-        },
-        {
-            "Phase": 2,
-            "Contents": [
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "지금은 무엇을 하고 계셨나요?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "흥! 말 하나는 잘 돌리는구나.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "그리고 계속 봐왔으면서 어디서 시치미를 떼느냐.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "뭐, 좋다. 리라 제국의 공주로서 관용을 베풀도록 하지.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "방금까지 검술 연습을 하는 중이었다. 어릴 때부터 재능이 있긴 했지만 연습을 게을리 해선 안되지.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "검술 연습이요?",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
-                    "DialogText": "그래. 이 검술로 다음 전쟁에서도 승리해야...",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "베가",
                     "DialogText": "...",
                     "JuncTexts": [],
                     "Directions": [],
@@ -144,7 +14,7 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "베가 님?",
+                    "DialogText": "저... 괜찮으신가요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -152,7 +22,7 @@
                 {
                     "Type": 0,
                     "Talker": "베가",
-                    "DialogText": "... 승리... 해야...?",
+                    "DialogText": "... 하아...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -160,7 +30,7 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "... 베가 님?",
+                    "DialogText": "베가... 님?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -168,7 +38,23 @@
                 {
                     "Type": 0,
                     "Talker": "베가",
-                    "DialogText": "앗! 아무 것도 아니다! 머리가 어지러운 것이 연습을 조금 격하게 한 것 같구나.",
+                    "DialogText": "아앗?! 너, 너로구나, 소녀여.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "네, 베가 니...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "베가... 님? 베가 님 눈에서 눈물이...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -176,7 +62,15 @@
                 {
                     "Type": 0,
                     "Talker": "베가",
-                    "DialogText": "아무래도 잠깐 쉬다 가야겠다.",
+                    "DialogText": "누, 누가 눈물을 흘린다고 그러느냐! 그냥! 눈에 먼지가 들어갔을 뿐이다!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "한숨은 왜 쉬고 계셨나요?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -184,7 +78,7 @@
                 {
                     "Type": 0,
                     "Talker": "베가",
-                    "DialogText": "... 뭐냐! 전혀 이부자리가 갖춰져 있지 않지 않느냐!",
+                    "DialogText": "어, 언제 그건 또 봤느냐!",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -192,7 +86,119 @@
                 {
                     "Type": 0,
                     "Talker": "베가",
-                    "DialogText": "다음에 내가 왔을 때 쉴 수 있도록 이부자리 정도는 갖춰놓거라!",
+                    "DialogText": "하아... 정말. 추한 꼴은 다 보여버렸지 않았느냐.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "... 기껏 잊고 있었던 기억이 생각나버렸단 말이다.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "잊고 있었던 기억이요?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "그런 궁금하다는 표정 짓지 말거라.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "그런 표정을 지어버리면 내 치부를 드러낼 수밖에 없지 않느냐.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "나는 리라 제국에서 태어난 공주였다.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "다른 남매 별들과 달리 특출난 검술 실력과 통솔력을 태어날때부터 가지고 있었지.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "그 실력은 리라 제국을 넘어 다른 제국에도 소문이 날 정도였지. 신부감으로도 0순위였다.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "자연스럽게 나는 다른 제국들과 활발히 교류하면서 많은 인맥들을 쌓을 수 있었다.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "특히 '알타이르'와 '데네브'는 다른 제국 출신임에도 나를 친동생처럼 대해주었다.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "나도 그들과 마음이 잘 맞았고, 각 제국의 후계자였던 우리는 우리끼리의 부대를 결성하게 되었지.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "처음엔 애들 장난삼아 만든, 놀이와도 같은 부대였지만 우리가 성장하고 뜻이 생기면서 곧 정식부대 못지 않은 추진력을 얻었다.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "게다가 우리와 생각을 함께하는 사람도 많아져 곧 우리 부대는 왠만한 한 나라의 군사력 못지 않은 힘을 갖추게 되었지.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "그래. 그 때까진 모든게 좋았다. 하지만...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "베가",
+                    "DialogText": "후우... 생각을 정리해야겠구나. 다음에 다시 오마.",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
