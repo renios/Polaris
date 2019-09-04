@@ -8,7 +8,8 @@ namespace Prologue
     public class ImageFadeIn : MonoBehaviour
     {
         public Sprite[] images = new Sprite[17];
-        //time for fade 
+        //time for fade
+        [HideInInspector]
         public float fadeTime;
         private Image TargetImage;
         //for fade in

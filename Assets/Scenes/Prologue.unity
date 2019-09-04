@@ -709,9 +709,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8322403b14b37c46804d4e4b908c7eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 2
-  emptyTime: 0.5
-  fadeTime: 0
+  waitTime: 1
+  emptyTime: 0.25
+  fadeTime: 1
 --- !u!1 &1150775955
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +810,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b5f6c4a6b4cbc9843bc3ffc33c48c254, type: 3}
   - {fileID: 21300000, guid: 9ed7516e9c79ac042aa6b82a8a1db48c, type: 3}
   - {fileID: 21300000, guid: ec4a46d712c573744903ba3a83744cc2, type: 3}
-  fadeTime: 2
+  fadeTime: 1
   finished: 0
 --- !u!1 &1173390607
 GameObject:
