@@ -248,8 +248,8 @@ public class TouchManager : MonoBehaviour {
             GameObject heartBarUI = GameObject.Find("HeartBarUI_" + i.ToString());
             GameObject heart = heartBarUI.transform.Find("Heart_" + i.ToString()).gameObject;
             GameObject heartBar = heartBarUI.transform.Find("HeartBar_" + i.ToString()).gameObject;
-            GameObject nowFav = heartBar.transform.Find("Now_" + i.ToString()).gameObject;
-            GameObject totalFav = heartBar.transform.Find("Total_" + i.ToString()).gameObject;
+            GameObject nowFav = heartBarUI.transform.Find("Now_" + i.ToString()).gameObject;
+            GameObject totalFav = heartBarUI.transform.Find("Total_" + i.ToString()).gameObject;
             GameObject favLevel = heart.transform.Find("Fav_Level_" + i.ToString()).gameObject;
             GameObject charName = GameObject.Find("Name_" + i.ToString());
             
@@ -276,6 +276,11 @@ public class TouchManager : MonoBehaviour {
                     progress = favority - (cnt > 0 ? Variables.FavorityThreshold[cnt - 1] : 0);
                     required = Variables.FavorityThreshold[cnt] - (cnt > 0 ? Variables.FavorityThreshold[cnt - 1] : 0);
                 }
+
+                float barScale = (float)progress / (float)required;
+                float barX = 0.575f * barScale - 0.545f;
+                heartBar.transform.localScale = new Vector3(barScale, 1f, 1f);
+                heartBar.transform.localPosition = new Vector3(barX, 0f, -1f);
 
                 CharSprite.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Characters/" + charRank.Key + "/default/image_obs");
                 nowFav.GetComponent<TextMesh>().text = progress.ToString();

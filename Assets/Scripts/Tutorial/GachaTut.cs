@@ -166,6 +166,7 @@ public class GachaTut : MonoBehaviour {
                 obsEff_1.SetActive(true);
                 obsEff_2.SetActive(false);
                 obsEff_3.SetActive(false);
+                TouchTut.moveAble = false;
 
                 if(Input.GetKeyDown(KeyCode.Space))
                     Variables._meetingTime = DateTime.Now.AddSeconds(1);
