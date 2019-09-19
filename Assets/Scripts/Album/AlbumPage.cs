@@ -26,6 +26,7 @@ namespace Album
             }
             newObj.transform.SetParent(ElementParent);
             newObj.transform.localScale = Vector3.one;
+            newObj.transform.localPosition = Vector3.zero;
             newObj.SetActive(true);
         }
     }

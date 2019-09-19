@@ -58,6 +58,7 @@ namespace Album
                             curPage = newObj.GetComponent<AlbumPage>();
                             newObj.transform.SetParent(PageParent.transform);
                             newObj.transform.localScale = Vector3.one;
+                            newObj.transform.localPosition = Vector3.zero;
                             newObj.SetActive(true);
                             groupStart++;
                         }
