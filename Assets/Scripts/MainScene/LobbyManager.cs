@@ -22,13 +22,6 @@ public class LobbyManager : MonoBehaviour
         sdchara = GameObject.Find("Characters").gameObject; 
         if(SceneManager.GetActiveScene().name != "MainTut")
             popup = GameObject.Find("Setting").transform.Find("Setting Panel").gameObject;
-        /*
-        //다락방 이동 시.
-        if (Variables.CameraMove == true)
-        {
-            Camera.main.transform.position = new Vector3(0, 5.0119f, -10);
-        }
-        */
         ShowCharacter();
     }
 
@@ -76,7 +69,7 @@ public class LobbyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Variables.Starlight);
+        //Debug.Log(Variables.Starlight);
         // 잡고있으면 움직인다
         // 잡고있을때 떼면 떨어진다
         if (pickedCharacter != null) {
@@ -88,9 +81,9 @@ public class LobbyManager : MonoBehaviour
                 if (mousePosition.x < -2.5f) PositionX = -2.5f;
                 else if (mousePosition.x > 2.5f) PositionX = 2.5f;
                 else PositionX = mousePosition.x;
-                if (mousePosition.y > -0.5f) PositionY = -0.5f;
-                else if (mousePosition.y < -9.0f) PositionY = -9.0f;
-                else PositionY = mousePosition.y;
+                if (mousePosition.y > 0.0f) PositionY = -0.5f;
+                else if (mousePosition.y < -8.5f) PositionY = -9.0f;
+                else PositionY = mousePosition.y - 0.5f;
                 pickedCharacter.transform.position = new Vector3(PositionX, PositionY, pickedCharacter.transform.position.z) ;
             }
             else {
@@ -99,7 +92,6 @@ public class LobbyManager : MonoBehaviour
                     pickedCharacter = null;
                 }
             }
-
 
             if (Input.GetMouseButtonUp(0) && pickedCharacter != null) {
                 if (pickedCharacter.GetComponent<Move>().IsPicked()) {
@@ -115,14 +107,14 @@ public class LobbyManager : MonoBehaviour
         // 안 잡고있을때 누르면 잡는다
         if (Input.GetMouseButtonDown(0)) {
             var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+            
             RaycastHit2D hit = Physics2D.Raycast((Vector2)mousePosition, Vector2.zero, 0f);
             if(hit.collider != null && hit.collider.name.Contains("star_balloon"))
                 hit.collider.GetComponentInParent<CharacterStarlight>().OnBalloonClicked();
-
+            
             float characterHeight = 0.6f;
             int layermaskValue = (1 << 10) + (1 << 11); //10번 레이어와 11번 레이어를 체크
-
+            
             var tryPick = Physics2D.OverlapCircle((Vector2)mousePosition - Vector2.up * characterHeight, characterHeight, layermaskValue);
             if (tryPick != null)
             {
@@ -130,23 +122,9 @@ public class LobbyManager : MonoBehaviour
                 pickedPosition = mousePosition;
                 pickedTime = Time.time;
             }
+            
         }
         
-        /*
-
-        if (SwipeManager.Instance.IsSwiping(SwipeManager.SwipeDirection.Down))
-        {
-            if(!popup.activeSelf)
-                Camera.main.transform.DOMove(new Vector3(0, 5.0119f, -10), 0.75f);
-        }
-        else if (SwipeManager.Instance.IsSwiping(SwipeManager.SwipeDirection.Up))
-        {
-            if(!popup.activeSelf)
-                Camera.main.transform.DOMove(new Vector3(0, -5.0119f, -10), 0.75f);
-        }
-
-        */
-
         //TODO : 씬 바꾸는 임시 코드 개선
         if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != "MainTut")
         {
