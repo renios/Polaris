@@ -62,7 +62,8 @@ public class ResultManager : MonoBehaviour {
                 
                 int progress, required;
                 int beforeLevel = GameManager.Instance.CheckFavority(charIndex, 0, out progress, out required);
-                rankCharacter.Cards[0].Favority += 1;
+                if (required >= 0)
+                    rankCharacter.Cards[0].Favority += 1;
                 int currentLevel = GameManager.Instance.CheckFavority(charIndex, 0, out progress, out required);
                 if (currentLevel > beforeLevel)
                     levelUp = true;

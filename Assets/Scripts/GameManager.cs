@@ -90,15 +90,15 @@ public class GameManager : MonoBehaviour
     {
         var favority = Variables.Characters[charNumber].Cards[cardIndex].Favority;
         int cnt = 0;
-        for (; cnt < Variables.FavorityThreshold.Length; cnt++)
+        for (; cnt < Variables.Characters[charNumber].Cards[cardIndex].Rarity; cnt++)
         {
             if (favority < Variables.FavorityThreshold[cnt])
                 break;
         }
-        if(cnt >= Variables.FavorityThreshold.Length)
+        if(cnt >= Variables.Characters[charNumber].Cards[cardIndex].Rarity)
         {
             progress = 0;
-            required = 0;
+            required = -1;
         }
         else
         {
