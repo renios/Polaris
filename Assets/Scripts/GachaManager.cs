@@ -113,14 +113,9 @@ public class GachaManager : MonoBehaviour {
                                 var Char_desc = TouchManager.charProb.OrderByDescending(p => p.Value);
                                 int countProb = 0, i = 0;
                                 int gachaNo = UnityEngine.Random.Range(1, probSum + 1);
-
-                                Debug.Log("**** ProbSum: " + probSum);
+                                
                                 while (countProb < gachaNo)
                                 {
-                                    Debug.Log("i: " + i);
-                                    Debug.Log("Value: " + (int)(Char_desc.ElementAt(i).Value));
-                                    Debug.Log("countProb: " + countProb);
-
                                     countProb += (int)(Char_desc.ElementAt(i).Value);
                                     gachaResult = Char_desc.ElementAt(i).Key;
                                     i++;
