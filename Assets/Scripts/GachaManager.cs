@@ -108,21 +108,36 @@ public class GachaManager : MonoBehaviour {
                                 probSum += (int)key.Value;
                             }
 
-                            var Char_desc = TouchManager.charProb.OrderByDescending(p => p.Value);
-                            int countProb = 0, i = 0;
-                            int gachaNo = UnityEngine.Random.Range(1, probSum + 1);
-                            while (countProb < gachaNo)
+                            if (probSum > 0)
                             {
-                                countProb += (int)(Char_desc.ElementAt(i).Value);
-                                gachaResult = Char_desc.ElementAt(i).Key;
-                                i++;
+                                var Char_desc = TouchManager.charProb.OrderByDescending(p => p.Value);
+                                int countProb = 0, i = 0;
+                                int gachaNo = UnityEngine.Random.Range(1, probSum + 1);
+                                
+                                while (countProb < gachaNo)
+                                {
+                                    countProb += (int)(Char_desc.ElementAt(i).Value);
+                                    gachaResult = Char_desc.ElementAt(i).Key;
+                                    i++;
+                                }
                             }
+                            else
+                                gachaResult = "noStarError";
                         }
                         whyTwotime = false;
-                        
-                        SoundManager.Play(SoundType.ClickImportant);
-                        SoundManager.FadeMusicVolume(0, 1.5f);
-                        Variables.btnState = 3;
+
+                        if (gachaResult != "noStarError")
+                        {
+                            SoundManager.Play(SoundType.ClickImportant);
+                            SoundManager.FadeMusicVolume(0, 1.5f);
+                            Variables.btnState = 3;
+                        }
+                        else
+                        {
+                            Debug.Log("no Star Error");
+                            TouchManager.moveAble = true;
+                            Variables.btnState = 0;
+                        }
                     }
                 }
                 break;

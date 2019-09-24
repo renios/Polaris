@@ -277,7 +277,11 @@ public class TouchManager : MonoBehaviour {
                     required = Variables.FavorityThreshold[cnt] - (cnt > 0 ? Variables.FavorityThreshold[cnt - 1] : 0);
                 }
 
-                float barScale = (float)progress / (float)required;
+                float barScale;
+                if (required != 0)
+                    barScale = (float)progress / (float)required;
+                else
+                    barScale = 1f;
                 float barX = 0.575f * barScale - 0.545f;
                 heartBar.transform.localScale = new Vector3(barScale, 1f, 1f);
                 heartBar.transform.localPosition = new Vector3(barX, 0f, -1f);
