@@ -8,7 +8,7 @@ using UnityEngine;
 public class CharacterStarlight : MonoBehaviour
 {
     public float sps = 1; //이 값(초)당 별빛 생성
-    public float criteriaPoint = 10; //이 값보다 쌓인 별빛이 많으면 말풍선 띄움
+    public float criteriaPoint = 20; //이 값보다 쌓인 별빛이 많으면 말풍선 띄움
 
     private DateTime lastDate;
     private TimeSpan span;
