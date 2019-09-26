@@ -15,7 +15,7 @@ public class LobbyTutorial : MonoBehaviour {
         tutBackground.SetActive(true);
         tutText_1.SetActive(true);
         tutText_2.SetActive(false);
-        tutTouch.SetActive(false);
+        tutTouch.SetActive(true);
 	}
 	
 	// Update is called once per frame

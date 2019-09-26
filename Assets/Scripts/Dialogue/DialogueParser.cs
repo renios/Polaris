@@ -50,7 +50,7 @@ namespace Dialogue
                 {
                     case "player":
                         newContent.Type = 1;
-                        newContent.Talker = "주인공";
+                        newContent.Talker = "나";
                         newContent.DialogText = (string)list[i]["dialogue"];
                         break;
                     case "*":
@@ -76,13 +76,13 @@ namespace Dialogue
                     {
                         case "select":
                             newContent.Type = 2;
-                            newContent.JuncTexts = ((string)list[i]["dialogue"]).Split('@');
+                            newContent.JuncTexts = ((string)list[i]["dialogue"]).Split('|');
                             var nextList = new List<int>();
                             if (list[i]["nextPhases"] is int)
                                 nextList.Add((int)list[i]["nextPhases"]);
                             else
                             {
-                                var nextStr = ((string)list[i]["nextPhases"]).Split(',');
+                                var nextStr = ((string)list[i]["nextPhases"]).Split('|');
                                 for (int j = 0; j < nextStr.Length; j++)
                                     nextList.Add(int.Parse(nextStr[j].Replace("`", "")));
                             }

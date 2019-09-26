@@ -30,7 +30,7 @@ public class GachaTut : MonoBehaviour {
     public GameObject tutEff_1, tutEff_2;
     public GameObject tutBg_1, tutBg_2;
 
-    public GameObject tutText_1, tutText_2, tutText_3, tutText_4, tutText_5, tutText_6;
+    public GameObject tutText_1, tutText_2, tutText_3, tutText_4, tutText_5, tutText_6, tutText_7;
 
     private int gachaTime = 16;
     private int charIndex = 0;
@@ -61,7 +61,7 @@ public class GachaTut : MonoBehaviour {
                 tutText_3.SetActive(false);
 
                 tutTouch_1.SetActive(true);
-                tutArrow_1.SetActive(true);
+                tutArrow_1.SetActive(false);
                 tutTouch_2.SetActive(false);
 
                 tutBg_1.SetActive(true);
@@ -71,21 +71,27 @@ public class GachaTut : MonoBehaviour {
                     Variables.tutState = 2;
                 break;
             case 2:
+                tutArrow_1.SetActive(true);
                 tutText_1.SetActive(false);
                 tutText_2.SetActive(true);
 
                 if(Input.GetMouseButton(0))
                 {
-                    tutTouch_1.SetActive(false);
-                    tutArrow_1.SetActive(false);
+                    // 지시 손가락이 계속 떠 있도록 함
+                    // tutTouch_1.SetActive(false);
+                    // tutArrow_1.SetActive(false);
                     TouchTut.moveAble = true;
                 }
 
                 if(Vector2.Distance(scope.transform.localPosition, new Vector2(-0.13f, 4.55f)) <= 0.42f)
                 {
+                    tutTouch_1.SetActive(false);
+                    tutArrow_1.SetActive(false);
                     Variables.tutState = 3;
                     TouchTut.moveAble = false;
                     obBtn.transform.localPosition = new Vector3(3.48f, -0.29f, -7f);
+                    obBtn.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                    obStart.GetComponent<SpriteRenderer>().sortingOrder = 3;
                     tutEff_1.SetActive(true);
                     tutTouch_2.SetActive(true);
                 }
@@ -97,7 +103,7 @@ public class GachaTut : MonoBehaviour {
                     mos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) * (1 / 0.522f);
                     if (Vector3.Distance(mos, new Vector3(3.5f, -1.3f, 0)) <= 1.3f)
                     {
-                        tutTouch_2.SetActive(false);
+                        tutTouch_2.SetActive(true);
                         tutText_2.SetActive(false);
                         tutText_3.SetActive(true);
                         Variables.tutState = 4;
@@ -109,6 +115,7 @@ public class GachaTut : MonoBehaviour {
 
             case 7:
                 TouchTut.moveAble = false;
+                tutEff_1.SetActive(false);
                 tutText_3.SetActive(true);
                 tutBg_1.SetActive(false);
                 tutBg_2.SetActive(true);
@@ -119,6 +126,8 @@ public class GachaTut : MonoBehaviour {
                 if (Input.GetMouseButtonDown(0))
                 {
                     tutText_3.SetActive(false);
+                    tutText_4.SetActive(false);
+                    tutText_7.SetActive(true);
                     tutBg_2.SetActive(false);
                     Variables.tutState = 8;
                     TouchTut.moveAble = true;
@@ -133,7 +142,7 @@ public class GachaTut : MonoBehaviour {
                     if (Vector3.Distance(mos, new Vector3(3.5f, -1.3f, 0)) <= 1.3f)
                     {
                         tutTouch_2.SetActive(false);
-                        tutText_4.SetActive(false);
+                        tutText_7.SetActive(false);
                         tutText_5.SetActive(true);
                         Variables.tutState = 9;
                         Variables._meetingTime = DateTime.Now.AddSeconds(11);
@@ -150,7 +159,9 @@ public class GachaTut : MonoBehaviour {
         {
             case 0: // 관측시작
                 obBtn.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha_New/obs_mainbutton");
+                // obBtn.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 obStart.SetActive(true);
+                // obStart.GetComponent<SpriteRenderer>().sortingOrder = 3;
                 obText.SetActive(false);
                 obFinish.SetActive(false);
                 obsEff_1.SetActive(false);
@@ -176,12 +187,15 @@ public class GachaTut : MonoBehaviour {
 
             case 2: // 관측완료
                 obBtn.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Gacha_New/obs_circle_completed");
+                obBtn.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 obStart.SetActive(false);
                 obText.SetActive(false);
                 obFinish.SetActive(true);
+                obFinish.GetComponent<SpriteRenderer>().sortingOrder = 3;
                 obsEff_1.SetActive(false);
                 obsEff_2.SetActive(true);
                 obsEff_3.SetActive(false);
+                tutEff_1.SetActive(true);
 
                 if(Variables.tutState == 9)
                 {
