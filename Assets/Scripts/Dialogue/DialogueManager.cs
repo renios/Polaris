@@ -6,6 +6,8 @@ using LitJson;
 
 namespace Dialogue
 {
+    public enum DialogueFileType { JSON, TEXT }
+
     public class DialogueManager : MonoBehaviour
     {
         public static DialogueManager Instance { get; private set; }
@@ -19,6 +21,8 @@ namespace Dialogue
 
         public string talkerNPC;
         public Image nameTag;
+
+        private DialogueFileType fileType;
 
         private void Awake()
         {
@@ -39,8 +43,9 @@ namespace Dialogue
                     jsonAsset = Resources.Load<TextAsset>(dummyDialogPath);
 
                 CurrentDialogue = JsonMapper.ToObject<DialogueData>(jsonAsset.text);
+                fileType = DialogueFileType.JSON;
             }
-            catch { CurrentDialogue = DialogueParser.ParseFromCSV(dialogPath); }
+            catch { CurrentDialogue = DialogueParser.ParseFromCSV(dialogPath); fileType = DialogueFileType.TEXT; }
 
             Displayer.Talker.text = Variables.Characters[Variables.DialogCharIndex].Name;
             Displayer.ForeImage.sprite = Resources.Load<Sprite>(imagePath);
@@ -84,10 +89,10 @@ namespace Dialogue
                 switch(dialog.Type)
                 {
                     case 0:
-                        yield return ShowText(talkerNPC/*dialog.Talker*/, dialog.DialogText);
+                        yield return ShowText(fileType == DialogueFileType.JSON ? talkerNPC : dialog.Talker, dialog.DialogText);
                         break;
                     case 1:
-                        yield return ShowText("나"/*dialog.Talker*/, dialog.DialogText);
+                        yield return ShowText("나", dialog.DialogText);
                         break;
                     case 2:
                         yield return ShowInteraction(dialog.JuncTexts, dialog.Directions);
