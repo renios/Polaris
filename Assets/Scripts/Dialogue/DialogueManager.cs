@@ -18,6 +18,7 @@ namespace Dialogue
         public DialogueData CurrentDialogue;
 
         public string talkerNPC;
+        public Image nameTag;
 
         private void Awake()
         {
@@ -86,7 +87,7 @@ namespace Dialogue
                         yield return ShowText(talkerNPC/*dialog.Talker*/, dialog.DialogText);
                         break;
                     case 1:
-                        yield return ShowText("주인공"/*dialog.Talker*/, dialog.DialogText);
+                        yield return ShowText("나"/*dialog.Talker*/, dialog.DialogText);
                         break;
                     case 2:
                         yield return ShowInteraction(dialog.JuncTexts, dialog.Directions);
@@ -120,6 +121,17 @@ namespace Dialogue
 
         IEnumerator ShowText(string talker, string text)
         {
+            if (talker == "나") {
+                nameTag.enabled = true;
+                nameTag.sprite = Resources.Load<Sprite>("Images/dialogue_nametag2");
+            }
+            else if (talker == null) {
+                nameTag.enabled = false;
+            }
+            else {
+                nameTag.enabled = true;
+                nameTag.sprite = Resources.Load<Sprite>("Images/dialogue_nametag");
+            }
             yield return Displayer.DisplayText(talker, text);
         }
 
