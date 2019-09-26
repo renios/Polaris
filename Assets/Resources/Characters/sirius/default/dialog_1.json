@@ -70,7 +70,7 @@
                 {
                     "Type": 0,
                     "Talker": "시리우스",
-                    "DialogText": "하핫, 너무 분위기를 어둡게 만들었나? 정말 아무것도 아니었어. ",
+                    "DialogText": "(그리고는 지금까지 힘없이 늘어져있던 어깨에 어색하게 힘을 주더니 갑자기 바뀐 어조로 말하기 시작했다)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -78,7 +78,7 @@
                 {
                     "Type": 0,
                     "Talker": "시리우스",
-                    "DialogText": "(시리우스는 어깨에 어색하게 힘을 주더니 갑자기 바뀐 어조로 말하기 시작했다)",
+                    "DialogText": "아하하하, 이~렇게 유명한 나도 그동안 단지! 봐주는 사람이 없다는 이유로! 지구에 참 오래간만에 와봤다는 사실이 참~",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -86,15 +86,7 @@
                 {
                     "Type": 0,
                     "Talker": "시리우스",
-                    "DialogText": "이렇게 유명한. 나조차도. 그동안 바라봐주는 사람이 없어서 지구엔 참 오래간만에 와봤다는게, 새삼스럽게. 감회가. 새로웠거든~",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 0,
-                    "Talker": "시리우스",
-                    "DialogText": "그럼 오늘은. 이만! 다음번에도. 이 시리우스님을. 꼭 다시 찾아달라구.",
+                    "DialogText": "생각해보라구~ 네가 첫눈에 딱! 하고 알아볼 정도인 이 시리우스 님이! 그동안 저 하늘 위에만 있었다는 건, 지구 사람들에게도 어마어마한 손해 아니겠어?",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -110,7 +102,39 @@
                 {
                     "Type": 0,
                     "Talker": "시리우스",
-                    "DialogText": "하. 하. 뭘, 나정도면. 이쯤이야. 그럼 다음에. 보자!!",
+                    "DialogText": "그정도야 몸풀기였다는 말씀~ 아니, 입풀기라고 해야하나? 아하하하!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "(시리우스는 당황한 표정이 된 내 어깨를 툭툭 치더니 말을 이어갔다)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "괜찮아~ 릴렉스, 릴렉스! 다음번에 올 때는 말이야, 내 흥미진진한 과거 이야기를 잔뜩 해줄테니까",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "기대해도, 좋다구?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "그럼 오늘은, 이만~!",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0

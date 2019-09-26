@@ -78,15 +78,7 @@
                 {
                     "Type": 0,
                     "Talker": "시리우스",
-                    "DialogText": "헤헤, 너무 한꺼번에 다 말하려고 해서 그런가. 근데 이거 말고도 재미있는 얘기가 많으니까, 그럼 앞으로는 볼 때 마다 세 개...? 아니 다섯 개? 씩만 할게.",
-                    "JuncTexts": [],
-                    "Directions": [],
-                    "NextPhase": 0
-                },
-                {
-                    "Type": 1,
-                    "Talker": "주인공",
-                    "DialogText": "시리우스는 그만큼 대단하구나...앞으로도 말할게 그렇게 많이 있어?",
+                    "DialogText": "헤헷, 하긴, 내가 대단했던 얘기를 하자면 끝도 없으니까. 그래 그래, 그럴 수도 있어. 난 뛰어난 머리 만큼이나 넓은 마음을 가지고 있으니까 말이야~",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -94,7 +86,31 @@
                 {
                     "Type": 0,
                     "Talker": "시리우스",
-                    "DialogText": "당연하지! 괜히 유명한게 아니라고. 이게 다 노력과 실력에서 온 거야.",
+                    "DialogText": "근데 이거 말고도 재미있는 얘기가 많으니까, 그럼 앞으로는 볼 때 마다 세 개...? 아니 다섯 개? 씩만 할게.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "시리우스는...앞으로도 말할게 그렇게 많이 있어?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "당연하지! 괜히 유명한게 아니라고. 이게 다 이게 다 이몸의 반짝이는 실력! 타오르는 노력!에서 온 거라니까~",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "(나는 그 순간, 한참 전에 넣어둔 뭔가가 생각났다)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -110,7 +126,7 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "(소녀는 손을 펴 작은 무언가를 보여주었다)",
+                    "DialogText": "(수납장 서랍을 열어 쇠사슬 두 조각이 얽힌 것 같은 작은 금속공예품을 보여주었다)",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -126,7 +142,7 @@
                 {
                     "Type": 1,
                     "Talker": "주인공",
-                    "DialogText": "입체퍼즐. 저기 서랍에서 찾았어. ",
+                    "DialogText": "이건 입체퍼즐. 이라고 하는건데...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
@@ -212,6 +228,14 @@
                     "NextPhase": 0
                 },
                 {
+                    "Type": 0,
+                    "Talker": "",
+                    "DialogText": "(정적을 깨는 금속 소리와 동시에 시리우스의 양 팔이 중심을 잃고 튕겨나갔다)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
                     "Type": 1,
                     "Talker": "주인공",
                     "DialogText": "앗...!",
@@ -231,6 +255,14 @@
                     "Type": 1,
                     "Talker": "주인공",
                     "DialogText": "부서졌어...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "시리우스",
+                    "DialogText": "이...이게...이러려던게...아닌데...",
                     "JuncTexts": [],
                     "Directions": [],
                     "NextPhase": 0
