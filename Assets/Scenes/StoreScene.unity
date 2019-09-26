@@ -180,7 +180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uD604\uC7AC Lv. 1\n\uB2E4\uC74C Lv. 2"
+  m_Text: "\uC9C0\uAE08\uC740\n\uC0AC\uC6A9\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4."
 --- !u!222 &104902476
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1782,7 +1782,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "1\uAC1C\uC5D0\uC11C 2\uAC1C\uB85C\n$1000"
+  m_Text: "\uC9C0\uAE08\uC740\n\uC0AC\uC6A9\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4."
 --- !u!222 &549513898
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4075,7 +4075,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1366557074}
   m_OnClick:
     m_PersistentCalls:
@@ -5909,7 +5909,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2001321594}
   m_OnClick:
     m_PersistentCalls:
