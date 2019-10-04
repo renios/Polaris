@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 111031534}
   - component: {fileID: 111031533}
   - component: {fileID: 111031532}
+  - component: {fileID: 111031535}
   m_Layer: 5
   m_Name: Popup Canvas
   m_TagString: Untagged
@@ -281,6 +282,17 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_TargetDisplay: 0
+--- !u!114 &111031535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 111031530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e0534cdada41ad4caefbfb72bfb0e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &139165743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1559,7 +1571,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 394e91dec0654ac43adfc11d39d45ec8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad618d04836b42f408dc2ae8106d88a9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3905,6 +3917,7 @@ GameObject:
   - component: {fileID: 1345197804}
   - component: {fileID: 1345197803}
   - component: {fileID: 1345197802}
+  - component: {fileID: 1345197807}
   m_Layer: 5
   m_Name: Main UI Canvas
   m_TagString: Untagged
@@ -4003,6 +4016,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1345197807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1345197801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e0534cdada41ad4caefbfb72bfb0e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1366557071
 GameObject:
   m_ObjectHideFlags: 0
@@ -4245,7 +4269,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 676ebc5c15539a744a29c41791748e3f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f6083ee7f97314d47af120fa57c28dbd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4354,6 +4378,7 @@ GameObject:
   - component: {fileID: 1488138547}
   - component: {fileID: 1488138546}
   - component: {fileID: 1488138545}
+  - component: {fileID: 1488138549}
   m_Layer: 5
   m_Name: Main Canvas
   m_TagString: Untagged
@@ -4438,6 +4463,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1488138549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1488138544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e0534cdada41ad4caefbfb72bfb0e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1519741450
 GameObject:
   m_ObjectHideFlags: 0
@@ -5449,6 +5485,7 @@ GameObject:
   - component: {fileID: 1900291231}
   - component: {fileID: 1900291230}
   - component: {fileID: 1900291229}
+  - component: {fileID: 1900291235}
   m_Layer: 5
   m_Name: Loading Canvas
   m_TagString: Untagged
@@ -5562,6 +5599,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1900291235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1900291228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e0534cdada41ad4caefbfb72bfb0e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1923842323
 GameObject:
   m_ObjectHideFlags: 0

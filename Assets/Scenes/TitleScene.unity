@@ -572,6 +572,7 @@ GameObject:
   - component: {fileID: 588131596}
   - component: {fileID: 588131595}
   - component: {fileID: 588131594}
+  - component: {fileID: 588131598}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -657,6 +658,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &588131598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 588131593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e0534cdada41ad4caefbfb72bfb0e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &624278789
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,6 +1594,7 @@ GameObject:
   - component: {fileID: 1990797802}
   - component: {fileID: 1990797801}
   - component: {fileID: 1990797800}
+  - component: {fileID: 1990797806}
   m_Layer: 5
   m_Name: Loading Canvas
   m_TagString: Untagged
@@ -1695,6 +1708,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1990797806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1990797799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e0534cdada41ad4caefbfb72bfb0e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2142665354
 GameObject:
   m_ObjectHideFlags: 0

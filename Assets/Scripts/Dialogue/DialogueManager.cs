@@ -89,9 +89,18 @@ namespace Dialogue
                 switch(dialog.Type)
                 {
                     case 0:
+                        if (fileType == DialogueFileType.TEXT && dialog.Talker == null)
+                            nameTag.enabled = false;
+                        else
+                        {
+                            nameTag.enabled = true;
+                            nameTag.sprite = Resources.Load<Sprite>("Images/dialogue_nametag");
+                        }
                         yield return ShowText(fileType == DialogueFileType.JSON ? talkerNPC : dialog.Talker, dialog.DialogText);
                         break;
                     case 1:
+                        nameTag.enabled = true;
+                        nameTag.sprite = Resources.Load<Sprite>("Images/dialogue_nametag2");
                         yield return ShowText("나", dialog.DialogText);
                         break;
                     case 2:
@@ -126,17 +135,6 @@ namespace Dialogue
 
         IEnumerator ShowText(string talker, string text)
         {
-            if (talker == "나") {
-                nameTag.enabled = true;
-                nameTag.sprite = Resources.Load<Sprite>("Images/dialogue_nametag2");
-            }
-            else if (talker == null) {
-                nameTag.enabled = false;
-            }
-            else {
-                nameTag.enabled = true;
-                nameTag.sprite = Resources.Load<Sprite>("Images/dialogue_nametag");
-            }
             yield return Displayer.DisplayText(talker, text);
         }
 

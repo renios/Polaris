@@ -7,6 +7,8 @@ namespace Album
 {
     public class AlbumCharInfo : MonoBehaviour
     {
+        public RectTransform MasterPanel;
+
         [Header("Character/Card Status")]
         public Image ShortImage;
         public Image ConstelImage;
@@ -42,6 +44,9 @@ namespace Album
                 DownArrow.SetActive(false);
             if (!DownArrow.activeSelf && VerticalBar.value > 0)
                 DownArrow.SetActive(true);
+
+            LayoutRebuilder.MarkLayoutForRebuild(MasterPanel);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(MasterPanel);
         }
 
         public void Show(int charIndex, int cardIndex)
