@@ -86,4 +86,10 @@ public class CharacterStarlight : MonoBehaviour
         starBalloon.gameObject.SetActive(false);
         GameManager.Instance.SaveGame(); //말풍선 클릭될 때마다 수확한 별빛 데이터를 저장하기 위해 호출.
     }
+
+    public bool GetOverpoint()
+    {
+        return overPoint;
+    }
+
 }
