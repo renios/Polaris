@@ -144,7 +144,7 @@ public class ResultManager : MonoBehaviour {
     IEnumerator gachaFadeIn(float fadeInTime)
     {
         // 정보처리
-        gachaResult = GachaManager.gachaResult;
+        gachaResult = Observe.ObserveManager.PickResult;
         resultCharacter.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Characters/" + gachaResult + "/default/image_full");
 
         int charIndex = 0;

@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     #region Game Data Save/Load
     public void CreateGame()
     {
+        if (File.Exists(Application.persistentDataPath + "/obs_status"))
+            File.Delete(Application.persistentDataPath + "/obs_status");
         curSaveData = new SaveData();
         curSaveData.Create();
     }
@@ -74,6 +76,8 @@ public class GameManager : MonoBehaviour
     {
         curSaveData = null;
         File.Delete(Application.persistentDataPath + "/save");
+        if(File.Exists(Application.persistentDataPath + "/obs_status"))
+            File.Delete(Application.persistentDataPath + "/obs_status");
     }
     #endregion
 
