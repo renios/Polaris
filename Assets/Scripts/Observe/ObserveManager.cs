@@ -125,6 +125,12 @@ namespace Observe
 
                     AllowMove = false;
                     Scope.transform.position = new Vector3(status.scopePos[0], status.scopePos[1], status.scopePos[2]);
+                    var centerConstel = GetCenterConstelKey();
+                    if (centerConstel == "null")
+                        ConstelName.text = "미지의 영역";
+                    else
+                        ConstelName.text = Variables.Constels[centerConstel].Name;
+                    DisplayCharOnly();
                     break;
                 case ObserveBehaviour.Finished:
                     ScopeObservingEffect.SetActive(false);
@@ -137,7 +143,13 @@ namespace Observe
 
                     AllowMove = false;
                     Scope.transform.position = new Vector3(status.scopePos[0], status.scopePos[1], status.scopePos[2]);
+                    var centerConstel2 = GetCenterConstelKey();
+                    if (centerConstel2 == "null")
+                        ConstelName.text = "미지의 영역";
+                    else
+                        ConstelName.text = Variables.Constels[centerConstel2].Name;
                     break;
+                    DisplayCharOnly();
             }
         }
 
@@ -250,6 +262,13 @@ namespace Observe
                 return hit.collider.name;
         }
 
+        public void DisplayCharOnly()
+        {
+            var ordered = status.charProb.OrderByDescending(p => p.Value);
+            for(int i = 0; i < 4; i++)
+                CharDisplay[i].Set(ordered.ElementAt(i).Key);
+        }
+
         public void ButtonPressed()
         {
             if(status.behaviour == ObserveBehaviour.Idle)
@@ -262,6 +281,8 @@ namespace Observe
             {
                 ScopeFinishedEffect.SetActive(false);
                 ScopeClickEffect.SetActive(true);
+                SoundManager.Play(SoundType.ClickImportant);
+                SoundManager.FadeMusicVolume(0, 1.5f);
 
                 PickCharacter();
                 StartCoroutine(AfterPick(1.5f));
@@ -319,6 +340,7 @@ namespace Observe
                 yield return null;
             }
 
+            Variables.returnSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
             UnityEngine.SceneManagement.SceneManager.LoadScene("GachaResult");
         }
     }
