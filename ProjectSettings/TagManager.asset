@@ -40,6 +40,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Back Object
+    uniqueID: 2167858865
+    locked: 0
+  - name: Back Mesh
+    uniqueID: 3278300523
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -48,4 +54,7 @@ TagManager:
     locked: 0
   - name: over UI
     uniqueID: 1061435407
+    locked: 0
+  - name: Front Mesh
+    uniqueID: 461316851
     locked: 0

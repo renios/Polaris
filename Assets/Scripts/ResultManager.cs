@@ -145,7 +145,7 @@ public class ResultManager : MonoBehaviour {
     {
         // 정보처리
         gachaResult = Observe.ObserveManager.PickResult;
-        resultCharacter.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Characters/" + gachaResult + "/default/image_full");
+        resultCharacter.GetComponent<Image>().sprite = Resources.Load<Sprite>("Characters/" + gachaResult + "/default/image_full");
 
         int charIndex = 0;
         foreach (var value in Variables.Characters.Values)
@@ -153,19 +153,19 @@ public class ResultManager : MonoBehaviour {
             if (gachaResult == value.InternalName)
                 charIndex = value.CharNumber;
         }
-        nameText.GetComponent<TextMesh>().text = Variables.Characters[charIndex].Name;
+        nameText.GetComponent<Text>().text = Variables.Characters[charIndex].Name;
 
         // 초기화
         TtS.SetActive(false);
         effect.SetActive(true);
         
-        SpriteRenderer srFader = fader.GetComponent<SpriteRenderer>();
+        var srFader = fader.GetComponent<Graphic>();
         Color tempColor = srFader.color;
         tempColor.a = 1f;
         srFader.color = tempColor;
 
-        SpriteRenderer srnT = nameTag.GetComponent<SpriteRenderer>();
-        TextMesh tmnT = nameText.GetComponent<TextMesh>();
+        var srnT = nameTag.GetComponent<Graphic>();
+        var tmnT = nameText.GetComponent<Text>();
 
         Color tC = srnT.color;
         Color textColor = tmnT.color;
