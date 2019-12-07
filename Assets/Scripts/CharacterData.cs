@@ -15,6 +15,7 @@ public class CharacterData
     public string Name;
     public string InternalName;
     public string Lux;
+    public double LuxValue;
     public string LYDistance;
     public string Description;
 
@@ -30,6 +31,7 @@ public struct CharacterDataCore
     public string Name;
     public string InternalName;
     public string Lux;
+    public double LuxValue;
     public string LYDistance;
     public string Description;
     public CardDataCore[] Cards;
@@ -45,6 +47,7 @@ public struct CharacterDataCore
             Name = c.Name,
             InternalName = c.InternalName,
             Lux = c.Lux,
+            LuxValue = c.LuxValue,
             LYDistance = c.LYDistance,
             Description = c.Description
         };
