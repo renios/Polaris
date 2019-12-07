@@ -285,10 +285,13 @@ namespace Observe
                 SoundManager.FadeMusicVolume(0, 1.5f);
 
                 PickCharacter();
-                StartCoroutine(AfterPick(1.5f));
 
                 status.behaviour = ObserveBehaviour.Idle;
                 status.Save();
+
+                DimmerPanel.SetActive(true);
+                Variables.returnSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+                SceneChanger.ChangeScene("GachaResult", "GachaFadeIn", 1.5f);
             }
         }
 
@@ -326,22 +329,6 @@ namespace Observe
                 else
                     PickResult = "noStarError";
             }
-        }
-
-        IEnumerator AfterPick(float fadetime)
-        {
-            DimmerPanel.SetActive(true);
-            float time = 0;
-
-            while(time < fadetime)
-            {
-                DimmerPanel.GetComponent<Graphic>().color = new Color(0, 0, 0, time / fadetime);
-                time += Time.deltaTime;
-                yield return null;
-            }
-
-            Variables.returnSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("GachaResult");
         }
     }
 }

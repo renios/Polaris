@@ -48,7 +48,6 @@ public class ResultManager : MonoBehaviour {
             if (Input.GetMouseButtonDown(0))
             {
                 isEnd = false;
-                TouchManager.moveAble = true;
                 Variables.btnState = 0;
 
                 foreach (var value in Variables.Characters.Values)
@@ -101,7 +100,7 @@ public class ResultManager : MonoBehaviour {
                     //캐릭터 thumbnail
                 }
                 else
-                    SceneManager.LoadScene(Variables.returnSceneName);
+                    SceneChanger.Instance.ChangeScene(Variables.returnSceneName);
             }
         }
         else
@@ -117,7 +116,7 @@ public class ResultManager : MonoBehaviour {
                         storyText.text = Variables.Characters[charIndex].Name + "의 새로운 대화가 열렸어요!\n대화를 지금 볼까요?";
                     }
                     else
-                        SceneManager.LoadScene(Variables.returnSceneName);
+                        SceneChanger.Instance.ChangeScene(Variables.returnSceneName);
                 }
             }
         }
@@ -129,7 +128,7 @@ public class ResultManager : MonoBehaviour {
     }
     public void NoBtnDown() //Favority 오르고 나서 뜬 팝업창 Yes일 경우
     {
-        SceneManager.LoadScene(Variables.returnSceneName);
+        SceneChanger.Instance.ChangeScene(Variables.returnSceneName);
     }
     public void StartStory(string nextScene, int storyIndex)
     {
@@ -137,7 +136,7 @@ public class ResultManager : MonoBehaviour {
         Variables.DialogCharIndex = charIndex;
         Variables.DialogCardIndex = 0;
         Variables.DialogChapterIndex = storyIndex;
-        SceneManager.LoadScene("NewDialogScene");
+        SceneChanger.Instance.ChangeScene("NewDialogScene");
         //SceneChanger.Instance.ChangeScene("NewDialogScene");
     }
 
