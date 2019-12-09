@@ -13,6 +13,8 @@ namespace Observe
         public static bool AllowMove { get; set; }
         public static string PickResult { get; set; }
 
+        public ObserveStatus Status { get { return status; } }
+
         // Public field
         public GameObject Scope;
         public GameObject ScopeObservingEffect, ScopeFinishedEffect, ScopeClickEffect;
@@ -46,9 +48,11 @@ namespace Observe
             AssignCharaToConstel();
 
             status = ObserveStatus.Load();
-            ChangeBehaviour(status.behaviour);
+            if (status.isTutorial)
+                status.isTutorial = false;
             if (Variables.isFirst)
                 status.isTutorial = true;
+            ChangeBehaviour(status.behaviour);
 
             isTouching = false;
         }
@@ -111,7 +115,8 @@ namespace Observe
                     ObservingTimeText.gameObject.SetActive(false);
                     ButtonObj.GetComponent<Image>().sprite = ButtonNorm;
 
-                    AllowMove = true;
+                    if(!status.isTutorial)
+                        AllowMove = true;
                     ShotRay();
                     break;
                 case ObserveBehaviour.Observing:
@@ -130,7 +135,8 @@ namespace Observe
                         ConstelName.text = "미지의 영역";
                     else
                         ConstelName.text = Variables.Constels[centerConstel].Name;
-                    DisplayCharOnly();
+                    if(!status.isTutorial)
+                        DisplayCharOnly();
                     break;
                 case ObserveBehaviour.Finished:
                     ScopeObservingEffect.SetActive(false);
@@ -148,8 +154,9 @@ namespace Observe
                         ConstelName.text = "미지의 영역";
                     else
                         ConstelName.text = Variables.Constels[centerConstel2].Name;
+                    if(!status.isTutorial)
+                        DisplayCharOnly();
                     break;
-                    DisplayCharOnly();
             }
         }
 
@@ -228,15 +235,18 @@ namespace Observe
             else
                 ConstelName.text = Variables.Constels[centerConstel].Name;
 
-            var orderedCharProb = status.charProb.OrderByDescending(p => p.Value);
-            for (int i = 0; i < 4; i++)
+            if(!status.isTutorial)
             {
-                if (i >= orderedCharProb.Count())
-                    CharDisplay[i].gameObject.SetActive(false);
-                else
+                var orderedCharProb = status.charProb.OrderByDescending(p => p.Value);
+                for (int i = 0; i < 4; i++)
                 {
-                    CharDisplay[i].gameObject.SetActive(true);
-                    CharDisplay[i].Set(orderedCharProb.ElementAt(i).Key);
+                    if (i >= orderedCharProb.Count())
+                        CharDisplay[i].gameObject.SetActive(false);
+                    else
+                    {
+                        CharDisplay[i].gameObject.SetActive(true);
+                        CharDisplay[i].Set(orderedCharProb.ElementAt(i).Key);
+                    }
                 }
             }
         }
@@ -273,7 +283,12 @@ namespace Observe
         {
             if(status.behaviour == ObserveBehaviour.Idle)
             {
-                status.endTime = DateTime.Now.AddSeconds(observeTime);
+                if (status.isTutorial)
+                    status.endTime = DateTime.Now.AddSeconds(0);
+                else if (Variables.tutState == 7)
+                    status.endTime = DateTime.Now.AddSeconds(10);
+                else
+                    status.endTime = DateTime.Now.AddSeconds(observeTime);
                 status.scopePos = new[] { Scope.transform.position.x, Scope.transform.position.y, Scope.transform.position.z };
                 ChangeBehaviour(ObserveBehaviour.Observing);
             }
@@ -290,7 +305,15 @@ namespace Observe
                 status.Save();
 
                 DimmerPanel.SetActive(true);
-                Variables.returnSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+                if (Variables.isFirst)
+                {
+                    Variables.returnSceneName = "MainTut";
+                    Variables.isFirst = false;
+                }
+                else if (Variables.tutState >= 9)
+                    Variables.returnSceneName = "MainScene";
+                else
+                    Variables.returnSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
                 SceneChanger.ChangeScene("GachaResult", "GachaFadeIn", 1.5f);
             }
         }

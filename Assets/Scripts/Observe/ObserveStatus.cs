@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Observe
 {
     [Serializable]
-    public enum ObserveBehaviour { Idle, Observing, Finished }
+    public enum ObserveBehaviour { Idle, Observing, Finished, Tutorlal = 10 }
 
     [Serializable]
     public class ObserveStatus

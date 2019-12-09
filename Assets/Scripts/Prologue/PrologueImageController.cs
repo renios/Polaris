@@ -67,7 +67,7 @@ namespace Prologue {
         {
             GameManager.Instance.SaveGame();
             SoundManager.Play(SoundType.BgmMain);
-            SceneChanger.Instance.ChangeScene("GachaTut_1");
+            SceneChanger.Instance.ChangeScene("GachaTut_2");
         }
     }
 }
