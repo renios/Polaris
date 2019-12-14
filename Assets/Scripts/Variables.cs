@@ -15,7 +15,7 @@ public static class Variables
     public static Dictionary<int, CharacterData> Characters;    // 캐릭터에 대한 데이터
     public static int CharacterVersion;
     public static int Starlight;
-    public static int[] StoreUpgradeLevel;
+    public static int[] StoreUpgradeLevel; // 0: 망원경 성능 레벨, 1: 망원경 멀티-관측 레벨, 2: 로비 캐릭터 배치 수 레벨
 
     public static readonly int[] FavorityThreshold = { 2, 3, 4, 5, 6 };     // 캐릭터 호감도 문턱에 관한 배열 30 70 120 180 250
 
