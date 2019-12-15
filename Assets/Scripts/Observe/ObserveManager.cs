@@ -16,17 +16,27 @@ namespace Observe
         public ObserveStatus Status { get { return status; } }
 
         // Public field
+        [Header("Observe Field Objects")]
         public GameObject Scope;
         public GameObject ScopeObservingEffect, ScopeFinishedEffect, ScopeClickEffect;
+        [Header("Main Observe Button")]
         public Text ObservingTimeText;
         public GameObject ButtonObj;
         public Sprite ButtonNorm, ButtonShine;
         public GameObject ButtonTextNorm, ButtonTextFinish;
+        [Header("Observe Status Display")]
         public Text ConstelName;
         public ObsCharElement[] CharDisplay;
+        [Header("Observe Time Selecting")]
+        public GameObject TimeConfirmPanel;
+        public GameObject[] TimeConfirmBtn;
+        public Button TimeOkRunBtn;
+        public GameObject NoMoneyPanel;
+        [Header("Animating after pick")]
         public GameObject DimmerPanel;
 
         // Private field
+        int obsTimeIndex;
         float observeTime = 16f;
         bool isTouching;
         Vector3 startScopePos, startMousePos;
@@ -40,7 +50,7 @@ namespace Observe
         const float SCENE_SCALE = 100.224f;
         const float SKY_RADIUS = 4.6f * SCENE_SCALE;
         const float TOUCH_BOUND = 3.9f * SCENE_SCALE;
-        const float SCOPE_RADIUS = 1.5f * SCENE_SCALE;
+        const float SCOPE_RADIUS = 2.2f * SCENE_SCALE;
 
         void Start()
         {
@@ -96,6 +106,20 @@ namespace Observe
 
                 if (diff.TotalSeconds <= 0)
                     ChangeBehaviour(ObserveBehaviour.Finished);
+            }
+        }
+
+        void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            for (int i = 1; i <= SCOPE_CIRCLE_COUNT; i++)
+            {
+                for (int j = 0; j < i * SCOPE_UNIT_RAYS; j++)
+                {
+                    float r = SCOPE_RADIUS * (1f / SCOPE_CIRCLE_COUNT) * i;
+                    float theta = 2 * Mathf.PI * ((float)j / (SCOPE_UNIT_RAYS * i)) + (2 * Mathf.PI / SCOPE_UNIT_RAYS / SCOPE_CIRCLE_COUNT * (i - 1));
+                    Gizmos.DrawSphere(Scope.transform.position + new Vector3(r * Mathf.Cos(theta), r * Mathf.Sin(theta), 0), 3);
+                }
             }
         }
 
@@ -284,13 +308,25 @@ namespace Observe
             if(status.behaviour == ObserveBehaviour.Idle)
             {
                 if (status.isTutorial)
+                {
                     status.endTime = DateTime.Now.AddSeconds(0);
+                    status.scopePos = new[] { Scope.transform.position.x, Scope.transform.position.y, Scope.transform.position.z };
+                    ChangeBehaviour(ObserveBehaviour.Observing);
+                }
                 else if (Variables.tutState == 7)
+                {
                     status.endTime = DateTime.Now.AddSeconds(10);
+                    status.scopePos = new[] { Scope.transform.position.x, Scope.transform.position.y, Scope.transform.position.z };
+                    ChangeBehaviour(ObserveBehaviour.Observing);
+                }
                 else
-                    status.endTime = DateTime.Now.AddSeconds(observeTime);
-                status.scopePos = new[] { Scope.transform.position.x, Scope.transform.position.y, Scope.transform.position.z };
-                ChangeBehaviour(ObserveBehaviour.Observing);
+                {
+                    for (int i = 0; i < TimeConfirmBtn.Length; i++)
+                        TimeConfirmBtn[i].GetComponent<Image>().color = Color.white;
+                    TimeOkRunBtn.interactable = false;
+                    AllowMove = false;
+                    TimeConfirmPanel.SetActive(true);
+                }
             }
             else if(status.behaviour == ObserveBehaviour.Finished)
             {
@@ -316,6 +352,61 @@ namespace Observe
                     Variables.returnSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
                 SceneChanger.ChangeScene("GachaResult", "GachaFadeIn", 1.5f);
             }
+        }
+
+        public void SetAllowMove(bool val)
+        {
+            AllowMove = val;
+        }
+
+        public void TimeBtnClicked(int index)
+        {
+            obsTimeIndex = index;
+            for(int i = 0; i < TimeConfirmBtn.Length; i++)
+            {
+                if (i == index - 1)
+                    TimeConfirmBtn[i].GetComponent<Image>().color = new Color32(255, 192, 255, 255);
+                else
+                    TimeConfirmBtn[i].GetComponent<Image>().color = Color.white;
+            }
+            TimeOkRunBtn.interactable = true;
+        }
+
+        public void TimeOkRunBtnClicked()
+        {
+            if (Variables.Starlight < TimeConfirmBtn[obsTimeIndex - 1].GetComponentInParent<ObserveTimeButton>().SpendMoney)
+                NoMoneyPanel.SetActive(true);
+            else
+            {
+                Variables.Starlight -= TimeConfirmBtn[obsTimeIndex - 1].GetComponentInParent<ObserveTimeButton>().SpendMoney;
+                StartObserveWithTime();
+                TimeConfirmPanel.SetActive(false);
+            }
+        }
+
+        public void StartObserveWithTime()
+        {
+            switch(obsTimeIndex)
+            {
+                case 1:
+                    status.endTime = DateTime.Now.AddSeconds(UnityEngine.Random.Range(30f, 60f));
+                    break;
+                case 2:
+                    status.endTime = DateTime.Now.AddMinutes(UnityEngine.Random.Range(10f, 30f));
+                    break;
+                case 3:
+                    status.endTime = DateTime.Now.AddHours(UnityEngine.Random.Range(1f, 3f));
+                    break;
+                case 4:
+                    status.endTime = DateTime.Now.AddHours(UnityEngine.Random.Range(6f, 12f));
+                    break;
+                default:
+                    Debug.LogError("No designated time table for this index.");
+                    status.endTime = DateTime.Now.AddHours(1);
+                    break;
+            }
+            status.scopePos = new[] { Scope.transform.position.x, Scope.transform.position.y, Scope.transform.position.z };
+            ChangeBehaviour(ObserveBehaviour.Observing);
         }
 
         void PickCharacter()
