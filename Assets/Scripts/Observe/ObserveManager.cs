@@ -32,6 +32,8 @@ namespace Observe
         public GameObject[] TimeConfirmBtn;
         public Button TimeOkRunBtn;
         public GameObject NoMoneyPanel;
+        [Header("While Observing Panel")]
+        public GameObject WhileObservingPanel;
         [Header("Animating after pick")]
         public GameObject DimmerPanel;
 
@@ -102,7 +104,6 @@ namespace Observe
             {
                 var now = DateTime.Now;
                 var diff = status.endTime - now;
-                ObservingTimeText.text = diff.Minutes.ToString("D2") + ":" + diff.Seconds.ToString("D2");
 
                 if (diff.TotalSeconds <= 0)
                     ChangeBehaviour(ObserveBehaviour.Finished);
@@ -328,6 +329,10 @@ namespace Observe
                     TimeConfirmPanel.SetActive(true);
                 }
             }
+            else if(status.behaviour == ObserveBehaviour.Observing)
+            {
+                WhileObservingPanel.SetActive(true);
+            }
             else if(status.behaviour == ObserveBehaviour.Finished)
             {
                 ScopeFinishedEffect.SetActive(false);
@@ -407,6 +412,24 @@ namespace Observe
             }
             status.scopePos = new[] { Scope.transform.position.x, Scope.transform.position.y, Scope.transform.position.z };
             ChangeBehaviour(ObserveBehaviour.Observing);
+        }
+
+        public void FastComplete()
+        {
+            if (Variables.Starlight < 300)
+                NoMoneyPanel.SetActive(true);
+            else
+            {
+                Variables.Starlight -= 300;
+                ChangeBehaviour(ObserveBehaviour.Finished);
+                ButtonPressed();
+                WhileObservingPanel.SetActive(false);
+            }
+        }
+
+        public void CancelObserving()
+        {
+            ChangeBehaviour(ObserveBehaviour.Idle);
         }
 
         void PickCharacter()
