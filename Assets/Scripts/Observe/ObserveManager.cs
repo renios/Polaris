@@ -26,6 +26,7 @@ namespace Observe
         public GameObject ButtonTextNorm, ButtonTextFinish;
         [Header("Observe Status Display")]
         public Text ConstelName;
+        public GameObject ConstelImage;
         public ObsCharElement[] CharDisplay;
         [Header("Observe Time Selecting")]
         public GameObject TimeConfirmPanel;
@@ -129,7 +130,7 @@ namespace Observe
             status.behaviour = newBehaviour;
             status.Save();
 
-            switch(status.behaviour)
+            switch (status.behaviour)
             {
                 case ObserveBehaviour.Idle:
                     ScopeObservingEffect.SetActive(false);
@@ -140,7 +141,7 @@ namespace Observe
                     ObservingTimeText.gameObject.SetActive(false);
                     ButtonObj.GetComponent<Image>().sprite = ButtonNorm;
 
-                    if(!status.isTutorial)
+                    if (!status.isTutorial)
                         AllowMove = true;
                     ShotRay();
                     break;
@@ -160,7 +161,9 @@ namespace Observe
                         ConstelName.text = "미지의 영역";
                     else
                         ConstelName.text = Variables.Constels[centerConstel].Name;
-                    if(!status.isTutorial)
+                    ConstelImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Constellations/Observation/" + centerConstel);
+
+                    if (!status.isTutorial)
                         DisplayCharOnly();
                     break;
                 case ObserveBehaviour.Finished:
@@ -179,7 +182,9 @@ namespace Observe
                         ConstelName.text = "미지의 영역";
                     else
                         ConstelName.text = Variables.Constels[centerConstel2].Name;
-                    if(!status.isTutorial)
+                    ConstelImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Constellations/Observation/" + centerConstel2);
+
+                    if (!status.isTutorial)
                         DisplayCharOnly();
                     break;
             }
@@ -259,8 +264,9 @@ namespace Observe
                 ConstelName.text = "미지의 영역";
             else
                 ConstelName.text = Variables.Constels[centerConstel].Name;
+            ConstelImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Constellations/Observation/" + centerConstel);
 
-            if(!status.isTutorial)
+            if (!status.isTutorial)
             {
                 var orderedCharProb = status.charProb.OrderByDescending(p => p.Value);
                 for (int i = 0; i < 4; i++)
