@@ -111,4 +111,26 @@ public class GameManager : MonoBehaviour
         }
         return cnt + 1;
     }
+
+    public int CheckAfterFavority(int charNumber, int cardIndex, float deltaFav, out float progress, out int required)
+    {
+        var favority = Variables.Characters[charNumber].Cards[cardIndex].Favority;
+        int cnt = 0;
+        for (; cnt < Variables.Characters[charNumber].Cards[cardIndex].Rarity; cnt++)
+        {
+            if (favority + deltaFav < Variables.FavorityThreshold[cnt])
+                break;
+        }
+        if (cnt >= Variables.Characters[charNumber].Cards[cardIndex].Rarity)
+        {
+            progress = favority + deltaFav - Variables.FavorityThreshold[cnt - 1];
+            required = -1;
+        }
+        else
+        {
+            progress = favority + deltaFav - (cnt > 0 ? Variables.FavorityThreshold[cnt - 1] : 0);
+            required = Variables.FavorityThreshold[cnt] - (cnt > 0 ? Variables.FavorityThreshold[cnt - 1] : 0);
+        }
+        return cnt + 1;
+    }
 }

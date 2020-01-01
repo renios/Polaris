@@ -22,13 +22,13 @@ public static class Variables
     // 상점 처리 및 레벨에 따른 데이터 테이블입니다.
     public static readonly int[][] StoreUpgradeValue = new int[][]
     {
-        new[]{ 0, 30, 60, 90, 120, 150, 180, 210, 240, 300, 360, 420, 480, 540, 600, 660, 720, 780, 840 },
-        new[]{ 0, 1, 2, 3, 4, 5 } }
-    ;
+        new[]{ 0, 1, 30, 180, 720 },    // 망원경 최대 관측 시간. 단위는 분. 표시는 '최대 X분'
+        new[]{ 0, 1, 2, 3 }   // 망원경 최대 동시 관측 천체 수. 표시는 '최대 X명'
+    };
     public static readonly int[][] StoreUpgradeMoney = new int[][]
     {
-        new[]{ 0, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800 },
-        new[]{ 0, 500, 1000, 2000, 4000 }
+        new[]{ 0, 1000, 3000, 10000 },
+        new[]{ 0, 5000, 15000 }
     };
 
     public static bool CameraMove;
@@ -46,6 +46,7 @@ public static class Variables
     public static int DialogCharIndex;          // 대화 씬에서 참조할 캐릭터 번호
     public static int DialogCardIndex;          // 대화 씬에서 참조할 캐릭터 내 종류 번호
     public static int DialogChapterIndex;       // 대화 씬에서 참조할 해당 캐릭터 종류의 스토리 번호
+    public static bool IsDialogAppended;
     public static string DialogAfterScene;      // 대화 씬이 종료된 다음 씬의 이름
     #endregion
 }

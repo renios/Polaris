@@ -37,6 +37,8 @@ namespace Observe
         public GameObject WhileObservingPanel;
         [Header("Animating after pick")]
         public GameObject DimmerPanel;
+        [Header("Result Alert Panel")]
+        public ObsPickResultShower ResultShower;
 
         // Private field
         int obsTimeIndex;
@@ -66,6 +68,14 @@ namespace Observe
             if (Variables.isFirst)
                 status.isTutorial = true;
             ChangeBehaviour(status.behaviour);
+
+            // 저번 관측 결과 요약을 유저가 보지 못 했을 때 == 저번 결과 데이터가 반영되지 않았을 때
+            if (status.behaviour == ObserveBehaviour.Idle && !status.userChecked)
+            {
+                ResultShower.Show(status.charFavData);
+                status.userChecked = true;
+                status.Save();
+            }
 
             isTouching = false;
         }
@@ -397,25 +407,40 @@ namespace Observe
 
         public void StartObserveWithTime()
         {
+            float t = 0;
             switch(obsTimeIndex)
             {
                 case 1:
-                    status.endTime = DateTime.Now.AddSeconds(UnityEngine.Random.Range(30f, 60f));
+                    t = UnityEngine.Random.Range(30f, 60f);
+                    status.endTime = DateTime.Now.AddSeconds(t);
+                    var prob = Mathf.InverseLerp(30, 60, t);
+                    var dice = UnityEngine.Random.Range(0f, 1f);
+                    if (dice >= prob)
+                        status.favIncrement = 1;
+                    else
+                        status.favIncrement = 2;
                     break;
                 case 2:
-                    status.endTime = DateTime.Now.AddMinutes(UnityEngine.Random.Range(10f, 30f));
+                    t = UnityEngine.Random.Range(10f, 30f);
+                    status.endTime = DateTime.Now.AddMinutes(t);
+                    status.favIncrement = Mathf.RoundToInt(Mathf.Pow(2 * t, 0.7536f) * UnityEngine.Random.Range(0.8f, 1.2f));
                     break;
                 case 3:
-                    status.endTime = DateTime.Now.AddHours(UnityEngine.Random.Range(1f, 3f));
+                    t = UnityEngine.Random.Range(60f, 180f);
+                    status.endTime = DateTime.Now.AddMinutes(t);
+                    status.favIncrement = Mathf.RoundToInt(Mathf.Pow(2 * t, 0.7536f) * UnityEngine.Random.Range(0.8f, 1.2f));
                     break;
                 case 4:
-                    status.endTime = DateTime.Now.AddHours(UnityEngine.Random.Range(6f, 12f));
+                    t = UnityEngine.Random.Range(360f, 720f);
+                    status.endTime = DateTime.Now.AddMinutes(t);
+                    status.favIncrement = Mathf.RoundToInt(Mathf.Pow(2 * t, 0.7536f) * UnityEngine.Random.Range(0.8f, 1.2f));
                     break;
                 default:
                     Debug.LogError("No designated time table for this index.");
                     status.endTime = DateTime.Now.AddHours(1);
                     break;
             }
+            status.pickTryCount = Variables.StoreUpgradeValue[1][Variables.StoreUpgradeLevel[1]];
             status.scopePos = new[] { Scope.transform.position.x, Scope.transform.position.y, Scope.transform.position.z };
             ChangeBehaviour(ObserveBehaviour.Observing);
         }
@@ -440,9 +465,13 @@ namespace Observe
 
         void PickCharacter()
         {
+            status.pickResult = new Dictionary<int, int>();
+            status.charFavData = new Dictionary<int, int>();
+            status.userChecked = false;
+
             if(status.isTutorial)
             {
-                PickResult = "polaris";
+                status.pickResult.Add(1, 1);
                 status.isTutorial = false;
             }
             else
@@ -452,25 +481,51 @@ namespace Observe
                 if (sum > 0)
                 {
                     var orderedCharProb = status.charProb.OrderByDescending(p => p.Value);
-                    float rnd = UnityEngine.Random.Range(0, sum);
-                    Debug.Log("- rnd is: " + rnd);
-                    int res = -1;
-                    for (int i = 0; i < orderedCharProb.Count(); i++)
+                    
+                    for(int i = 0; i < status.pickTryCount; i++)
                     {
-                        rnd -= orderedCharProb.ElementAt(i).Value;
-                        Debug.Log("- Deducting " + orderedCharProb.ElementAt(i).Value + ". Current rnd: " + rnd);
-
-                        if (rnd <= 0.01f)
+                        Debug.Log("Operating Pick " + (i + 1));
+                        float rnd = UnityEngine.Random.Range(0, sum);
+                        Debug.Log("- rnd is: " + rnd);
+                        int res = -1;
+                        for (int j = 0; j < orderedCharProb.Count(); j++)
                         {
-                            res = orderedCharProb.ElementAt(i).Key;
-                            Debug.Log("Breaking, because it's smaller than 0.01f. Result key: " + res);
-                            break;
+                            rnd -= orderedCharProb.ElementAt(j).Value;
+                            Debug.Log("- Subtracting " + orderedCharProb.ElementAt(j).Value + ". Current rnd: " + rnd);
+
+                            if (rnd <= 0.01f)
+                            {
+                                res = orderedCharProb.ElementAt(j).Key;
+                                Debug.Log("Breaking, because it's smaller than 0.01f. Result key: " + res);
+                                break;
+                            }
                         }
+                        if (status.pickResult.ContainsKey(res))
+                            status.pickResult[res]++;
+                        else
+                            status.pickResult.Add(res, 1);
                     }
-                    PickResult = Variables.Characters[res].InternalName;
                 }
                 else
-                    PickResult = "noStarError";
+                    status.pickResult.Add(-1, 0);
+            }
+
+            var orderedRes = status.pickResult.OrderByDescending(p => p.Value);
+            for (int i = 0; i < orderedRes.Count(); i++)
+            {
+                var charKey = orderedRes.ElementAt(i).Key;
+                status.charFavData.Add(charKey, status.favIncrement * orderedRes.ElementAt(i).Value);
+
+                if (!Variables.Characters[charKey].Cards[0].Observed)
+                    status.charFavData[charKey] = 1;
+                else
+                {
+                    float temp_prog;
+                    int temp_required;
+                    var nextFav = GameManager.Instance.CheckAfterFavority(charKey, 0, status.charFavData[charKey], out temp_prog, out temp_required);
+                    if (temp_required < 0)
+                        status.charFavData[charKey] -= (int)temp_prog;
+                }
             }
         }
     }

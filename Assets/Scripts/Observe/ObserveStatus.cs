@@ -14,15 +14,26 @@ namespace Observe
     public class ObserveStatus
     {
         public bool isTutorial;
+        public bool userChecked;
+
         public ObserveBehaviour behaviour;
         public DateTime endTime;
-        public float[] scopePos;
+        public int pickTryCount;
+        public int favIncrement;
         public Dictionary<int, float> charProb;
+        public Dictionary<int, int> pickResult;
+        public Dictionary<int, int> charFavData;
+
+        public float[] scopePos;
 
         public ObserveStatus()
         {
             behaviour = ObserveBehaviour.Idle;
             charProb = new Dictionary<int, float>();
+            pickResult = new Dictionary<int, int>();
+            charFavData = new Dictionary<int, int>();
+
+            userChecked = true;
         }
 
         public static ObserveStatus Load()

@@ -65,7 +65,11 @@ namespace Dialogue
             int finalPhase = 0;
             yield return PlayDialogue(CurrentDialogue, r => finalPhase = r);
             Debug.Log("Ended. Final phase: " + finalPhase);
-            SceneChanger.Instance.ChangeScene(Variables.DialogAfterScene);
+
+            if (Variables.IsDialogAppended)
+                SceneChanger.Instance.UnloadAppendedScene("AppendDialogScene", () => { Variables.IsDialogAppended = false; });
+            else
+                SceneChanger.Instance.ChangeScene(Variables.DialogAfterScene);
         }
 
         public void Play(DialogueData data)

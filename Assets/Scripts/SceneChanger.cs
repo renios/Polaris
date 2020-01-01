@@ -59,6 +59,53 @@ public class SceneChanger : MonoBehaviour
         isChanging = false;
     }
 
+    public IEnumerator AppendScene(string sceneName, System.Func<IEnumerator> beforeSceneAnim)
+    {
+        Bar.transform.parent.gameObject.SetActive(false);
+
+        isChanging = true;
+
+        if (GetCurrentScene() != "TitleScene")
+        {
+            SoundManager.Play(SoundType.ClickImportant);
+        }
+
+        yield return beforeSceneAnim();
+
+        AsyncOperation loading = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        loading.allowSceneActivation = false;
+        while (!loading.isDone)
+        {
+            if (loading.progress >= 0.9f)
+                loading.allowSceneActivation = true;
+            yield return null;
+        }
+        isChanging = false;
+    }
+
+    public void UnloadAppendedScene(string appendedSceneName, System.Action afterUnload)
+    {
+        if(!isChanging)
+        {
+            StartCoroutine(UnloadAppendedSub(appendedSceneName, "SceneFadeOut", 0.5f, afterUnload));
+            isChanging = true;
+        }
+    }
+
+    public IEnumerator UnloadAppendedSub(string appendedSceneName, string motionName, float motionTime, System.Action afterUnload)
+    {
+        Bar.transform.parent.gameObject.SetActive(false);
+
+        Motion.Play(motionName);
+        yield return new WaitForSeconds(motionTime);
+
+        AsyncOperation loading = SceneManager.UnloadSceneAsync(appendedSceneName);
+        loading.allowSceneActivation = true;
+        isChanging = false;
+
+        afterUnload();
+    }
+
     public static string GetCurrentScene()
     {
         return SceneManager.GetActiveScene().name;
