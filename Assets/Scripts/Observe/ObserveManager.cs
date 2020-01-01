@@ -67,6 +67,11 @@ namespace Observe
                 status.isTutorial = false;
             if (Variables.isFirst)
                 status.isTutorial = true;
+
+            // Tutorial 2를 위한 초기화
+            status.pickTryCount = Variables.StoreUpgradeValue[1][Variables.StoreUpgradeLevel[1]];
+            status.favIncrement = 1;
+            
             ChangeBehaviour(status.behaviour);
 
             // 저번 관측 결과 요약을 유저가 보지 못 했을 때 == 저번 결과 데이터가 반영되지 않았을 때

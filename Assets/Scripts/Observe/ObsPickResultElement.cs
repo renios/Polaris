@@ -19,6 +19,8 @@ namespace Observe
 			var charData = Variables.Characters[charKey];
 
 			charData.Cards[0].Favority += deltaFav;
+			if (!charData.Cards[0].Observed)
+				charData.Cards[0].Observed = true;
 
 			charName.text = charData.Name;
 			for(int i = 0; i < charData.ConstelKey.Length; i++)

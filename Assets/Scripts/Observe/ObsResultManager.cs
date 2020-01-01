@@ -74,16 +74,22 @@ namespace Observe
 				touchExists = false;
 
 				// 만약 첫 획득이라면, 첫 번째 스토리를 보고 다음 루프로 넘어갑니다.
-				// 그 중에서도 만약 튜토리얼 관측이었다면, Start 코루틴을 완전히 빠져나옵니다.
+				// 그 중에서도 만약 튜토리얼 관측이었다면, 씬을 변경하고(Append가 아님) Start 코루틴을 완전히 빠져나옵니다.
 				if (Variables.Characters[charKey].Cards[0].Observed == false || Variables.Characters[charKey].Cards[0].Favority == 0)
 				{	
-					if (charKey == 1 && Variables.tutState == 5)
+					if (charKey == 1)
 					{
+						status.userChecked = true;
+						status.Save();
+						Variables.Characters[charKey].Cards[0].Observed = true;
+						Variables.Characters[charKey].Cards[0].Favority++;
+						GameManager.Instance.SaveGame();
+
 						Variables.DialogCharIndex = charKey;
 						Variables.DialogCardIndex = 0;
 						Variables.DialogChapterIndex = 0;
 						Variables.DialogAfterScene = "MainTut";
-						SceneChanger.Instance.ChangeScene("NewDialogScene");
+					    ChangeScene("NewDialogScene");
 						yield break;
 					}
 					else
