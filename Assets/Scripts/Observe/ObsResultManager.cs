@@ -104,6 +104,7 @@ namespace Observe
 				// 친밀도 증가 연출을 실행합니다.
 				favIncreasePanel.SetActive(true);
 				yield return FavIncreaseAnim(charKey, status.charFavData[charKey]);
+				favIncreasePanel.SetActive(false);
 				yield return new WaitUntil(() => touchExists);
 				touchExists = false;
 
