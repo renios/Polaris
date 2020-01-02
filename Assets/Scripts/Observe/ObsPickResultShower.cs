@@ -18,6 +18,7 @@ namespace Observe
 				var newObj = Instantiate(template);
 				newObj.transform.SetParent(elementParent);
 				newObj.transform.localScale = Vector3.one;
+				newObj.transform.localPosition = Vector3.zero;
 				var newElement = newObj.GetComponent<ObsPickResultElement>();
 				newElement.SetAndApplyData(data.Key, data.Value);
 				newObj.SetActive(true);
