@@ -81,15 +81,9 @@ namespace Album
                 FavorityGage.value = curProgress;
             }
 
-            int maxAvailable = 0;
-            for (; maxAvailable < 5; maxAvailable++)
-            {
-                if (Variables.Characters[charIndex].Cards[cardIndex].Favority < Variables.FavorityThreshold[maxAvailable])
-                    break;
-            }
             for (int i = 0; i < 6; i++)
             {
-                if (i <= maxAvailable)
+                if (i < favorLevel)
                 {
                     StoryElement[i].SetActive(true);
                     StoryElement[i].GetComponent<AlbumStoryElement>().Show(charIndex, cardIndex, i);

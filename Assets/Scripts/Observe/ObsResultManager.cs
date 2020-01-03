@@ -104,9 +104,9 @@ namespace Observe
 				// 친밀도 증가 연출을 실행합니다.
 				favIncreasePanel.SetActive(true);
 				yield return FavIncreaseAnim(charKey, status.charFavData[charKey]);
-				favIncreasePanel.SetActive(false);
 				yield return new WaitUntil(() => touchExists);
 				touchExists = false;
+				favIncreasePanel.SetActive(false);
 
 				// 이전과 이후 친밀도 레벨을 확인한 뒤, 만약 친밀도 레벨이 올라갔다면 스토리 실행 여부를 묻는 팝업을 띄워 줍니다.
 				// 그렇지 않았다면, 페이드아웃 연출 실행 후 다음 루프로 넘어갑니다.
@@ -115,10 +115,7 @@ namespace Observe
 				var prevFavLev = GameManager.Instance.CheckFavority(charKey, 0, out p2, out p3);
 				var nextFavLev = GameManager.Instance.CheckAfterFavority(charKey, 0, status.charFavData[charKey], out p1, out p2);
 				if (nextFavLev > prevFavLev)
-				{
-					favIncreasePanel.SetActive(false);
 					yield return ViewDialogAlert(charKey, prevFavLev);
-				}
 				else
 					yield return FadeoutWithoutDialog();
 
@@ -197,6 +194,7 @@ namespace Observe
 				favPanel.alpha = 1;
 			//else
 			//	oneWord.color = new Color(oneWord.color.r, oneWord.color.g, oneWord.color.b, 1);
+			yield return new WaitForSeconds(1f);
 
 			touchExists = false;
 			touchToGoText.SetActive(true);
