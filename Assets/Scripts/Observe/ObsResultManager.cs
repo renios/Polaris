@@ -137,10 +137,11 @@ namespace Observe
 			fadePanel.color = new Color(fadePanel.color.r, fadePanel.color.g, fadePanel.color.b, 0);
 			
 			// 튜토리얼 데이터를 처리합니다.
-			if (Variables.tutState == 9)
+			if (Variables.tutState == 10)
 			{
 				Variables.isTutorialFinished = true;
-				Variables.tutState = 10;
+				Variables.tutState = 11;
+				GameManager.Instance.SaveGame();
 			}
 		}
 
