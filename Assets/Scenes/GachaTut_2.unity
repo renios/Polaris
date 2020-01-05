@@ -13526,16 +13526,12 @@ MonoBehaviour:
   SkyArea:
   - {fileID: 440644499}
   - {fileID: 635577846}
-  - {fileID: 1279760677}
   SkyAreaEffects:
   - {fileID: 1116039460}
-  - {fileID: 2058921174}
   SkyAreaBtns:
   - {fileID: 443354049}
-  - {fileID: 1129149562}
   UnlockAskPanels:
   - {fileID: 1714209959}
-  - {fileID: 2033403264}
   ConstelName: {fileID: 1228487001}
   ConstelImage: {fileID: 854606186}
   CharDisplay:
@@ -16439,11 +16435,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 90fd449e2e03f49b291b54e32917294f, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &2058921174 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1811604322513648, guid: 90fd449e2e03f49b291b54e32917294f,
-    type: 2}
-  m_PrefabInternal: {fileID: 2058921173}
 --- !u!4 &2058921175 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4704944993697812, guid: 90fd449e2e03f49b291b54e32917294f,

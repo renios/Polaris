@@ -96,7 +96,7 @@ namespace Observe
 					{
 						yield return StartStory(charKey, 0);
 						if (i < orderedRes.Count() - 1)
-							SoundManager.FadeMusicVolume(0, 0.01f);
+							SoundManager.FadeMusicVolume(0, 0.03f);
 						continue;
 					}
 				}
@@ -195,7 +195,8 @@ namespace Observe
 				favPanel.alpha = 1;
 			//else
 			//	oneWord.color = new Color(oneWord.color.r, oneWord.color.g, oneWord.color.b, 1);
-			yield return new WaitForSeconds(1f);
+			if(!touchExists)
+				yield return new WaitForSeconds(1f);
 
 			touchExists = false;
 			touchToGoText.SetActive(true);
