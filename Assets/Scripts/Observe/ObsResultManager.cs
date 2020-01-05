@@ -96,7 +96,7 @@ namespace Observe
 					{
 						yield return StartStory(charKey, 0);
 						if (i < orderedRes.Count() - 1)
-							SoundManager.FadeMusicVolume(0, 0.01f);
+							SoundManager.FadeMusicVolume(0, 0.03f);
 						continue;
 					}
 				}
@@ -137,10 +137,11 @@ namespace Observe
 			fadePanel.color = new Color(fadePanel.color.r, fadePanel.color.g, fadePanel.color.b, 0);
 			
 			// 튜토리얼 데이터를 처리합니다.
-			if (Variables.tutState == 9)
+			if (Variables.tutState == 10)
 			{
 				Variables.isTutorialFinished = true;
-				Variables.tutState = 10;
+				Variables.tutState = 11;
+				GameManager.Instance.SaveGame();
 			}
 		}
 
@@ -194,7 +195,8 @@ namespace Observe
 				favPanel.alpha = 1;
 			//else
 			//	oneWord.color = new Color(oneWord.color.r, oneWord.color.g, oneWord.color.b, 1);
-			yield return new WaitForSeconds(1f);
+			if(!touchExists)
+				yield return new WaitForSeconds(1f);
 
 			touchExists = false;
 			touchToGoText.SetActive(true);

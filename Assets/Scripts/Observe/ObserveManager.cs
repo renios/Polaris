@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace Observe
 {
@@ -11,6 +12,7 @@ namespace Observe
     {
         // Static property
         public static bool AllowMove { get; set; }
+        public static bool DontApplySkyLevelAtMove { get; set; }
         public static string PickResult { get; set; }
 
         public ObserveStatus Status { get { return status; } }
@@ -24,6 +26,11 @@ namespace Observe
         public GameObject ButtonObj;
         public Sprite ButtonNorm, ButtonShine;
         public GameObject ButtonTextNorm, ButtonTextFinish;
+        [Header("Sky Area Objects")]
+        public GameObject[] SkyArea;
+        public GameObject[] SkyAreaEffects;
+        public ObsSkyAreaBtn[] SkyAreaBtns;
+        public GameObject[] UnlockAskPanels;
         [Header("Observe Status Display")]
         public Text ConstelName;
         public GameObject ConstelImage;
@@ -42,7 +49,6 @@ namespace Observe
 
         // Private field
         int obsTimeIndex;
-        float observeTime = 16f;
         bool isTouching;
         Vector3 startScopePos, startMousePos;
         ObserveStatus status;
@@ -53,9 +59,19 @@ namespace Observe
         const int SCOPE_CIRCLE_COUNT = 10;
         const int SCOPE_UNIT_RAYS = 18;
         const float SCENE_SCALE = 100.224f;
-        const float SKY_RADIUS = 4.6f * SCENE_SCALE;
+        const float SKY_RADIUS = 4.2f * SCENE_SCALE;
         const float TOUCH_BOUND = 3.9f * SCENE_SCALE;
         const float SCOPE_RADIUS = 2.2f * SCENE_SCALE;
+
+        Func<Vector2, bool>[] scopeAllowedAtPos =
+        {
+            p => Vector2.Distance(new Vector2(0, 4.53f * SCENE_SCALE), p) <= 1.1f * SCENE_SCALE,
+            p =>
+            {
+                var deltaP = p - new Vector2(0, 4.53f * SCENE_SCALE);
+                return deltaP.magnitude <= 1.1f * SCENE_SCALE || (deltaP.magnitude <= SKY_RADIUS && Vector2.Angle(Vector2.right, deltaP) >= 150 && Vector2.Angle(Vector2.right, deltaP) < 235);
+            }
+        };
 
         void Start()
         {
@@ -73,6 +89,9 @@ namespace Observe
             status.favIncrement = 1;
             
             ChangeBehaviour(status.behaviour);
+
+            if(!status.isTutorial)
+                CheckSkyAvailability();
 
             // 저번 관측 결과 요약을 유저가 보지 못 했을 때 == 저번 결과 데이터가 반영되지 않았을 때
             if (status.behaviour == ObserveBehaviour.Idle && !status.userChecked)
@@ -229,17 +248,32 @@ namespace Observe
             if(isTouching)
             {
                 var scopePos = startScopePos + (mousePos - startMousePos);
-                if(Vector2.Distance(scopePos, center) > TOUCH_BOUND)
+                if(DontApplySkyLevelAtMove && Vector2.Distance(scopePos, center) > TOUCH_BOUND)
                 {
                     var delta = scopePos - center;
                     scopePos = center + delta.normalized * TOUCH_BOUND;
                 }
+                if(!DontApplySkyLevelAtMove && !scopeAllowedAtPos[Variables.ObserveSkyLevel](scopePos))
+                    scopePos = FindScopeBorderPos(Variables.ObserveSkyLevel, scopePos, 0.5f, 1);
                 scopePos.z = -1f;
                 Scope.transform.position = scopePos;
 
-                Variables.scopePos = Scope.transform.localPosition;
                 ShotRay();
             }
+        }
+
+        Vector2 FindScopeBorderPos(int index, Vector2 targetPos, float divide_point, int iterate_count)
+        {
+            Vector2[] centerPos = { new Vector2(0, 4.53f * SCENE_SCALE), new Vector2(-1.67f * SCENE_SCALE, 4.64f * SCENE_SCALE) };
+
+            var vec = Vector2.Lerp(centerPos[index], targetPos, divide_point);
+            if (iterate_count >= 10 && scopeAllowedAtPos[index](vec))
+                return vec;
+
+            if (scopeAllowedAtPos[index](vec))
+                return FindScopeBorderPos(index, targetPos, divide_point + Mathf.Pow(0.5f, iterate_count + 1), iterate_count + 1);
+            else
+                return FindScopeBorderPos(index, targetPos, divide_point - Mathf.Pow(0.5f, iterate_count + 1), iterate_count + 1);
         }
 
         public void ShotRay()
@@ -303,7 +337,7 @@ namespace Observe
 
             if (hit.collider != null)
             {
-                if (constelHitCount.ContainsKey(hit.collider.name))
+                if (constelCharData[hit.collider.name].observable && constelHitCount.ContainsKey(hit.collider.name))
                     constelHitCount[hit.collider.name]++;
             }
         }
@@ -335,7 +369,7 @@ namespace Observe
                     status.scopePos = new[] { Scope.transform.position.x, Scope.transform.position.y, Scope.transform.position.z };
                     ChangeBehaviour(ObserveBehaviour.Observing);
                 }
-                else if (Variables.tutState == 7)
+                else if (Variables.tutState == 8)
                 {
                     status.endTime = DateTime.Now.AddSeconds(10);
                     status.scopePos = new[] { Scope.transform.position.x, Scope.transform.position.y, Scope.transform.position.z };
@@ -532,6 +566,89 @@ namespace Observe
                         status.charFavData[charKey] -= (int)temp_prog;
                 }
             }
+        }
+
+        void CheckSkyAvailability()
+        {
+            var observedCharCount = new Dictionary<int, int>();
+            foreach(var chara in Variables.Characters)
+            {
+                if(chara.Value.Cards[0].Observed)
+                {
+                    foreach(var constel in chara.Value.ConstelKey)
+                    {
+                        var groupIndex = Variables.Constels[constel].Group;
+                        if (observedCharCount.ContainsKey(groupIndex))
+                            observedCharCount[groupIndex]++;
+                        else
+                            observedCharCount.Add(groupIndex, 1);
+                    }
+                }
+            }
+
+            // 각 구역에 따른 조건 판단. 현재는 [0] 북극, [1] 겨울. parameter는 sky level. 나중에 조정 예정.
+            Func<bool>[] allowedToOpen =
+            {
+                () => observedCharCount[0] > 0,     // 북극 지역의 캐릭터를 관측했는가
+                () => observedCharCount[0] >= 4     // 북극 지역의 캐릭터를 4명 이상 관측했는가
+            };
+            for(int i = 0; i < SkyAreaBtns.Length; i++)
+            {
+                if (i <= Variables.ObserveSkyLevel)
+                {
+                    SkyAreaBtns[i].gameObject.SetActive(false);
+                    SkyArea[i + 1].SetActive(true);
+                }
+                else
+                {
+                    SkyAreaBtns[i].gameObject.SetActive(true);
+                    if (allowedToOpen[i]())
+                        SkyAreaBtns[i].pricePanel.SetActive(true);
+                    else
+                        SkyAreaBtns[i].openRulePanel.SetActive(true);
+                }
+            }
+        }
+
+        public void UnlockSky(int index)
+        {
+            switch(index)
+            {
+                case 0:
+                    Variables.Starlight -= 10;
+                    break;
+                case 1:
+                    Variables.Starlight -= 300;
+                    break;
+            }
+            StartCoroutine(SkyUnlockAnim(index));
+        }
+
+        IEnumerator SkyUnlockAnim(int index)
+        {
+            Variables.ObserveSkyLevel = index;
+            GameManager.Instance.SaveGame();
+
+            AllowMove = false;
+            Scope.gameObject.SetActive(false);
+            ButtonObj.GetComponent<Button>().interactable = false;
+
+            foreach (var cap in SkyAreaBtns)
+                cap.gameObject.SetActive(false);
+            SkyAreaEffects[index].SetActive(true);
+            yield return new WaitForSeconds(4);
+            SkyArea[index + 1].SetActive(true);
+            SkyArea[index + 1].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+            SkyArea[index + 1].GetComponent<SpriteRenderer>().DOColor(Color.white, 1.5f);
+            yield return new WaitForSeconds(1.5f);
+            SkyArea[index].SetActive(false);
+
+            CheckSkyAvailability();
+            foreach (var constel in constelCharData)
+                constel.Value.CheckObservability();
+            ButtonObj.GetComponent<Button>().interactable = true;
+            Scope.gameObject.SetActive(true);
+            AllowMove = true;
         }
     }
 }
