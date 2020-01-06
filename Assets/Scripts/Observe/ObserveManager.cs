@@ -649,6 +649,8 @@ namespace Observe
             ButtonObj.GetComponent<Button>().interactable = true;
             Scope.gameObject.SetActive(true);
             AllowMove = true;
+
+            ShotRay();
         }
     }
 }
