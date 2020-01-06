@@ -166,4 +166,10 @@ public class LobbyManager : MonoBehaviour
         }
         pickedBalloon = false; 
     }
+
+    public void CloseGame()
+    {
+        GameManager.Instance.SaveGame();
+        Application.Quit();
+    }
 }

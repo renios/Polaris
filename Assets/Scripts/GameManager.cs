@@ -59,6 +59,9 @@ public class GameManager : MonoBehaviour
         reader.Close();
 
         curSaveData.Load();
+
+        if (!curSaveData.TutorialFinished)
+            CreateGame();
     }
 
     public void SaveGame()
