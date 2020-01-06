@@ -13,6 +13,7 @@ namespace Tutorial
         public ObserveManager manager;
 
         bool canMoveTutStat;
+        float internalCount;
 
         // Use this for initialization
         void Start()
@@ -39,7 +40,11 @@ namespace Tutorial
                     break;
                 case 6:
                     if (Variables.ObserveSkyLevel == 0)
-                        ChangeState(++Variables.tutState);
+                    {
+                        internalCount += Time.deltaTime;
+                        if(internalCount >= 5.5f)
+                            ChangeState(++Variables.tutState);
+                    }
                     break;
                 case 8:
                     if (manager.Status.behaviour == ObserveBehaviour.Observing)
@@ -92,6 +97,7 @@ namespace Tutorial
                     tutText.text = "별빛이 모여서 반짝이고 있어?\n얼른 확인해보자!";
                     break;
                 case 6:
+                    internalCount = 0;
                     tut1Panel.SetActive(true);
                     tutTextPanel.SetActive(true);
                     manager.ButtonObj.GetComponent<Button>().interactable = false;
