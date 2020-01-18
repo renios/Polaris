@@ -15,6 +15,7 @@ public class LobbyManager : MonoBehaviour
     GameObject pickedCharacter;
     Vector3 pickedPosition;
     float pickedTime;
+    bool pickedBalloon;
 
     void Awake()
     {
@@ -136,7 +137,10 @@ public class LobbyManager : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast((Vector2)mousePosition, Vector2.zero, 0f);
         if (hit.collider != null && hit.collider.name.Contains("star_balloon"))
+        {
             hit.collider.GetComponentInParent<CharacterStarlight>().OnBalloonClicked();
+            pickedBalloon = true;
+        }
 
         float characterHeight = 0.6f;
         int layermaskValue = (1 << 10) + (1 << 11); //10번 레이어와 11번 레이어를 체크
@@ -155,10 +159,17 @@ public class LobbyManager : MonoBehaviour
         if(sceneName == "GachaTut_1")
             Variables.tutState = 7;
         TryPickCharacter();
-        if (pickedCharacter == null)
+        if (pickedCharacter == null && !pickedBalloon )
         {
             SoundManager.Play(SoundType.ClickImportant);
             SceneChanger.Instance.ChangeScene(sceneName);
         }
+        pickedBalloon = false; 
+    }
+
+    public void CloseGame()
+    {
+        GameManager.Instance.SaveGame();
+        Application.Quit();
     }
 }

@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 
-// Last edited 2019-07-21 by thiEFcat
+// Last edited 2020-01-04
 [System.Serializable]
 public class SaveData
 {
     public int CharVersion;
     public List<CharacterData> Characters;
+
     public int Starlight;
     public int[] StoreUpgradeLevel;
+
+    public bool TutorialFinished;
+    public int TutorialStep;
+
+    public int ObserveSkyLevel;
 
     public void Load()
     {
@@ -51,6 +57,9 @@ public class SaveData
         // 기타 변수들을 동기화시켜줍니다.
         Variables.Starlight = Starlight;
         Variables.StoreUpgradeLevel = StoreUpgradeLevel;
+        Variables.isTutorialFinished = TutorialFinished;
+        Variables.tutState = TutorialStep;
+        Variables.ObserveSkyLevel = ObserveSkyLevel;
     }
 
     public void Create()
@@ -67,8 +76,10 @@ public class SaveData
         StoreUpgradeLevel = new[] { 1, 1, 1 };
         Variables.Starlight = Starlight;
         Variables.StoreUpgradeLevel = StoreUpgradeLevel;
-
+        Variables.ObserveSkyLevel = -1;
         Variables.isFirst = true;
+        Variables.isTutorialFinished = false;
+        Variables.tutState = 1;
     }
 
     public void Save()
@@ -81,5 +92,8 @@ public class SaveData
 
         Starlight = Variables.Starlight;
         StoreUpgradeLevel = Variables.StoreUpgradeLevel;
+        ObserveSkyLevel = Variables.ObserveSkyLevel;
+        TutorialFinished = Variables.isTutorialFinished;
+        TutorialStep = Variables.tutState;
     }
 }

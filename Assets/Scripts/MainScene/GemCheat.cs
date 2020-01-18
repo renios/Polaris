@@ -9,12 +9,14 @@ public class GemCheat : MonoBehaviour {
 
     public void CoinUp()
     {
-        GemManager.Instance.SaveState(num);
+        Variables.Starlight += num;
+        GameManager.Instance.SaveGame();
     }
 
     public void CoinDown()
     {
-        GemManager.Instance.SaveState(-num);
+        Variables.Starlight -= num;
+        GameManager.Instance.SaveGame();
     }
 
 }

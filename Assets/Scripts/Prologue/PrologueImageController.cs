@@ -63,7 +63,7 @@ namespace Prologue {
         {
             imageFadeIn.StartFadeOut();
         }
-        void End()
+        public void End()
         {
             GameManager.Instance.SaveGame();
             SoundManager.Play(SoundType.BgmMain);

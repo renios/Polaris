@@ -17,6 +17,11 @@ public static class Variables
     public static int Starlight;
     public static int[] StoreUpgradeLevel; // 0: 망원경 성능 레벨, 1: 망원경 멀티-관측 레벨, 2: 로비 캐릭터 배치 수 레벨
 
+    public static int ObserveSkyLevel; // 하늘 개방 단계
+
+    public static bool isTutorialFinished = false; // 튜토리얼이 끝까지 진행 되었는지?
+    public static int tutState = 1; // 튜토리얼 진행 상태
+
     public static readonly int[] FavorityThreshold = { 2, 3, 4, 5, 6 };     // 캐릭터 호감도 문턱에 관한 배열 30 70 120 180 250
 
     // 상점 처리 및 레벨에 따른 데이터 테이블입니다.
@@ -32,15 +37,9 @@ public static class Variables
     };
 
     public static bool CameraMove;
-    public static bool isTutorialFinished = false;
 
-    public static int btnState = 0; // 0: 관측시작, 1: 관측중, 2: 관측완료, 3: 가챠결과 확인
-    public static bool isFirst = true;
-    public static DateTime _meetingTime;
-    public static Vector3 scopePos = new Vector3(1.97f, 4.27f, -1f);
-
+    public static bool isFirst;
     public static string returnSceneName;
-    public static int tutState = 1;
 
     #region Variables for dialogue scene
     public static int DialogCharIndex;          // 대화 씬에서 참조할 캐릭터 번호
