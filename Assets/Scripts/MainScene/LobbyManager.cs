@@ -31,30 +31,25 @@ public class LobbyManager : MonoBehaviour
         if (Variables.Characters == null) { Debug.Log("세이브 파일이 비정상적임"); return; }
         foreach (KeyValuePair<int, CharacterData> c in Variables.Characters)
         {
-            //var chrData = Variables.Characters[c.Key];
-            for (int i = 0; i < c.Value.Cards.Count; i++)
+            if (c.Value.Observed)
             {
-                var cardData = c.Value.Cards[i];
-                if (cardData.Observed && cardData.Observable)
+                string name = c.Value.InternalName.Substring(0, 1).ToUpper() + c.Value.InternalName.Substring(1);
+                GameObject sd = Resources.Load<GameObject>("Prefabs/" + name);
+                if (sd != null)
                 {
-                    string name = c.Value.InternalName.Substring(0, 1).ToUpper() + c.Value.InternalName.Substring(1);
-                    GameObject sd = Resources.Load<GameObject>("Prefabs/" + name);
-                    if (sd != null)
-                    {
-                        var chr = Instantiate(sd);
-                        chr.AddComponent<CharacterStarlight>();
-                        chr.GetComponent<CharacterStarlight>().CharacterData = new int[2] {c.Key, i};
-                        chr.transform.SetParent(sdchara.transform);
-                        chr.transform.localScale = new Vector3(0.25f, 0.25f, 1);
-                        float PositionX = Random.Range(-0.9f, 0.9f);
-                        float PositionY;
-                        int floor = Random.Range(0, 3);
-                        if (floor == 0) PositionY = -2.0f;
-                        else if (floor == 1) PositionY = -0.2f;
-                        else PositionY = PositionY = 1.35f;
-                        chr.transform.localPosition = new Vector3(PositionX, PositionY, PositionZ);
-                        PositionZ -= 0.1f;
-                    }
+                    var chr = Instantiate(sd);
+                    chr.AddComponent<CharacterStarlight>();
+                    chr.GetComponent<CharacterStarlight>().CharacterData = c.Key;
+                    chr.transform.SetParent(sdchara.transform);
+                    chr.transform.localScale = new Vector3(0.25f, 0.25f, 1);
+                    float PositionX = Random.Range(-0.9f, 0.9f);
+                    float PositionY;
+                    int floor = Random.Range(0, 3);
+                    if (floor == 0) PositionY = -2.0f;
+                    else if (floor == 1) PositionY = -0.2f;
+                    else PositionY = PositionY = 1.35f;
+                    chr.transform.localPosition = new Vector3(PositionX, PositionY, PositionZ);
+                    PositionZ -= 0.1f;
                 }
             }
         }

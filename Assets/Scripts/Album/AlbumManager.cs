@@ -50,21 +50,18 @@ namespace Album
                 foreach(var chr in GroupedChar[i])
                 {
                     Debug.Log("- Looping: Target = " + chr.Value.Name + " (" + chr.Key + "), cnt: " + cnt);
-                    for(int j = 0; j < chr.Value.Cards.Count; j++)
+                    if (cnt % maxPageElement == 0)
                     {
-                        if (cnt % maxPageElement == 0)
-                        {
-                            var newObj = Instantiate(Resources.Load<GameObject>("Prefabs/AlbumGridPage"));
-                            curPage = newObj.GetComponent<AlbumPage>();
-                            newObj.transform.SetParent(PageParent.transform);
-                            newObj.transform.localScale = Vector3.one;
-                            newObj.transform.localPosition = Vector3.zero;
-                            newObj.SetActive(true);
-                            groupStart++;
-                        }
-                        curPage.CreateElement(chr.Key, j);
-                        cnt++;
+                        var newObj = Instantiate(Resources.Load<GameObject>("Prefabs/AlbumGridPage"));
+                        curPage = newObj.GetComponent<AlbumPage>();
+                        newObj.transform.SetParent(PageParent.transform);
+                        newObj.transform.localScale = Vector3.one;
+                        newObj.transform.localPosition = Vector3.zero;
+                        newObj.SetActive(true);
+                        groupStart++;
                     }
+                    curPage.CreateElement(chr.Key);
+                    cnt++;
                 }
             }
             GroupStartPage.Add(int.MaxValue);

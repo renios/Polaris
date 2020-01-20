@@ -9,16 +9,15 @@ namespace Album
         public RectTransform ElementParent;
         public GameObject ElementTemplate;
 
-        public void CreateElement(int charIndex, int cardIndex)
+        public void CreateElement(int charIndex)
         {
             var newObj = Instantiate(ElementTemplate);
             var newElement = newObj.GetComponent<AlbumPageElement>();
             newElement.CharIndex = charIndex;
-            newElement.CardIndex = cardIndex;
 
-            var cardData = Variables.Characters[charIndex].Cards[cardIndex];
-            if (cardData.Observed)
-                newElement.Set(Variables.Characters[charIndex]);
+            var data = Variables.Characters[charIndex];
+            if (data.Observed)
+                newElement.Set(data);
             else
             {
                 newObj.GetComponent<UnityEngine.UI.Button>().interactable = false;

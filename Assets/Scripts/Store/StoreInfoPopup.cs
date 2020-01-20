@@ -20,13 +20,13 @@ namespace Store
 
             int curLevel = Variables.StoreUpgradeLevel[storeItemIndex];
             PrevLevel.text = "Lv. " + curLevel.ToString();
-            PrevValue.text = valueToString(Variables.StoreUpgradeValue[storeItemIndex][curLevel]);
+            PrevValue.text = valueToString(Variables.GetStoreValue(storeItemIndex, curLevel));
             NextLevel.text = "Lv. " + (curLevel + 1).ToString();
-            NextValue.text = valueToString(Variables.StoreUpgradeValue[storeItemIndex][curLevel + 1]);
-            RequireMoney.text = Variables.StoreUpgradeMoney[storeItemIndex][curLevel].ToString();
+            NextValue.text = valueToString(Variables.GetStoreValue(storeItemIndex, curLevel + 1));
+            RequireMoney.text = Variables.GetStoreReqMoney(storeItemIndex, curLevel).ToString();
             gameObject.SetActive(true);
 
-            if (Variables.Starlight < Variables.StoreUpgradeMoney[storeItemIndex][curLevel])
+            if (Variables.Starlight < Variables.GetStoreReqMoney(storeItemIndex, curLevel))
                 SureButton.interactable = false;
             else
                 SureButton.interactable = true;

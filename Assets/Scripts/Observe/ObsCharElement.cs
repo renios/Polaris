@@ -16,7 +16,7 @@ namespace Observe
         public void Set(int charKey)
         {
             var chara = Variables.Characters[charKey];
-            if(!chara.Cards[0].Observed)
+            if(!chara.Observed)
             {
                 known.SetActive(false);
                 unknown.SetActive(true);
@@ -27,8 +27,8 @@ namespace Observe
                 unknown.SetActive(false);
 
                 int fav_lev, fav_cur, fav_req;
-                image.sprite = Resources.Load<Sprite>("Characters/" + chara.InternalName + "/" + chara.Cards[0].InternalSubname + "/image_obs");
-                fav_lev = GameManager.Instance.CheckFavority(charKey, 0, out fav_cur, out fav_req);
+                image.sprite = Resources.Load<Sprite>("Characters/" + chara.InternalName + "/image_obs");
+                fav_lev = GameManager.Instance.CheckFavority(charKey, out fav_cur, out fav_req);
                 progressBar.maxValue = fav_req;
                 progressBar.value = fav_cur;
                 favLevel.text = fav_lev.ToString();

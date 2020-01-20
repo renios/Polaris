@@ -29,11 +29,10 @@ namespace Dialogue
             Instance = this;
 
             var character = Variables.Characters[Variables.DialogCharIndex].InternalName;
-            var card = Variables.Characters[Variables.DialogCharIndex].Cards[Variables.DialogCardIndex].InternalSubname;
-            var dialogPath = "Characters/" + character + "/" + card + "/dialog_" + Variables.DialogChapterIndex;
-            var imagePath = "Characters/" + character + "/" + card + "/image_dialogue";
-            ImageRootPath = "Characters/" + character + "/" + card + "/DialogueImage/";
-            var dummyDialogPath = "Characters/acher/" + card + "/dialog_" + Variables.DialogChapterIndex; // Dummy 용도로 Acher 사용
+            var dialogPath = "Characters/" + character + "/dialog_" + Variables.DialogChapterIndex;
+            var imagePath = "Characters/" + character + "/image_dialogue";
+            ImageRootPath = "Characters/" + character + "/DialogueImage/";
+            var dummyDialogPath = "Characters/acher/dialog_" + Variables.DialogChapterIndex; // Dummy 용도로 Acher 사용
 
             Debug.Log(character + " " + Variables.DialogChapterIndex);
             try
@@ -56,9 +55,9 @@ namespace Dialogue
 
         private IEnumerator Start()
         {
-            if (Variables.Characters[Variables.DialogCharIndex].Cards[Variables.DialogCardIndex].StoryProgress <= Variables.DialogChapterIndex)
+            if (Variables.Characters[Variables.DialogCharIndex].StoryProgress <= Variables.DialogChapterIndex)
             {
-                Variables.Characters[Variables.DialogCharIndex].Cards[Variables.DialogCardIndex].StoryProgress = Variables.DialogChapterIndex + 1;
+                Variables.Characters[Variables.DialogCharIndex].StoryProgress = Variables.DialogChapterIndex + 1;
                 GameManager.Instance.SaveGame();
             }
 

@@ -1,0 +1,279 @@
+{
+    "Dialogues": [
+        {
+            "Phase": 0,
+            "Contents": [
+                {
+                    "Type": 1,
+                    "DialogText": "네 주인이 그렸던 그림은 지금 네 모습 그대로인 거야?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "응, 그렇지. 이 귀랑 꼬리만 내 원래 모습과 비슷해.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "귀랑 머리 색이 똑같네?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "응? 뭔가 잘못됐어?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "혹시 눈 색은 고양이일 때랑 똑같아?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "음, 솔직히 말하면 거의 내 눈과 비슷했던 것 같아.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "너의 주인이 살던 곳에서 네 머리 색은 흔했어?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "아니. 그렇진 않았어. 대부분 검은색 머리카락을 가지고 있었거든.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 2,
+                    "JuncTexts": [
+                        "그런데 왜 이런 머리의 소녀를 친구로 그린 걸까?",
+                        "고양이인 너랑 많이 닮았네. 그치?"
+                    ],
+                    "Directions": [
+                        1,
+                        2
+                    ],
+                    "NextPhase": 0
+                }
+            ]
+        },
+        {
+            "Phase": 3,
+            "Contents": [
+                {
+                    "Type": 1,
+                    "DialogText": "그럼 애초에 네 주인은 널 그렸던 게 아닐까?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "하지만 난 고양이인걸. 사람 같은 게 아니야. 그건 그냥 날 닮은 사람이지.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "네 말대로, 꽤 많은 사람이 고양이랑 사람이 정말로 친구가 될 수 있다고 생각하진 않아.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "만약 네 주인이 고양이를 그렸다면 과연 받아 들여준 사람이 있었을까?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "..그렇다고 해도, 내가 보기에 네 주인은 꽤 용감한 사람이야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "누구도 이런 머리에 이런 눈을 가지고 있는 친구가 있다고 생각하기엔 쉽지 않잖아?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "..넌 정말 섬세한 사람이구나.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "네 주인의 친구는 너였을 거야. 너와 함께 하던 날에도, 네가 맘속으로 슬퍼하던 날에도, 네가 죽고 그 이후의 날에도.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "..너 이렇게 말 많이 하는 거 처음 듣는 것 같아.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그만큼 네가 날 많이 생각하고 있는 거라고 믿어도 될까?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "당연히.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "고양이인 내가 내 주인님과 친구였었다고 믿어도 되는 걸까? ",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "DialogText": "처음 만난 이후로 언제나 그랬잖아?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "(평소에는 절대 짓지 않던, 장난기라고는 없는 미소를 지어 보인다.)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "고마워, 정말로. 그렇게 말해줘서.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그동안 너무 불안했어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "나 혼자만 그런 감정을 느낀다고 생각했어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "네 말이 맞아. 난 고양이야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "그리고 우리 주인님의 첫 친구야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "사람이 아니어도 친구가 되기엔 충분했어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "내 위로에 미소를 지어 보이고, 내가 힘이 없을 때마다 주인님이 날 위로했어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "말은 전하지 못해도 마음은 전할 수 있었어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "DialogText": "...너에게 너무 고마워.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                }
+            ]
+        },
+        {
+            "Phase": 2,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "그러게. 눈 색도, 머리 색도, 제일 좋아하던 옷도. 너, 설마..",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 3
+                }
+            ]
+        },
+        {
+            "Phase": 1,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "DialogText": "..한 번도 생각해본 적 없어.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 3
+                }
+            ]
+        }
+    ]
+}

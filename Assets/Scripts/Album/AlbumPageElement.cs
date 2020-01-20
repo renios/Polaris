@@ -12,17 +12,17 @@ namespace Album
         public Text FavorLevel, FavorityLeft;
         public GameObject MaskObject, NewFlag;
 
-        public int CharIndex, CardIndex;
+        public int CharIndex;
 
         public void CheckNewStory()
         {
             int maxAvailable = 1;
             for (; maxAvailable <= 5; maxAvailable++)
             {
-                if (Variables.Characters[CharIndex].Cards[CardIndex].Favority < Variables.FavorityThreshold[maxAvailable - 1])
+                if (Variables.Characters[CharIndex].Favority < Variables.FavorityThreshold[maxAvailable - 1])
                     break;
             }
-            if (maxAvailable > Variables.Characters[CharIndex].Cards[CardIndex].StoryProgress)
+            if (maxAvailable > Variables.Characters[CharIndex].StoryProgress)
                 NewFlag.SetActive(true);
             else
                 NewFlag.SetActive(false);
@@ -30,13 +30,12 @@ namespace Album
 
         public void Set(CharacterData data)
         {
-            Thumbnail.sprite = Resources.Load<Sprite>("Characters/" + data.InternalName + "/" + data.Cards[CardIndex].InternalSubname + "/image_albumbutton");
-            RarityBar.value = data.Cards[CardIndex].Rarity;
+            Thumbnail.sprite = Resources.Load<Sprite>("Characters/" + data.InternalName + "/image_albumbutton");
 
             int curProgress, nextRequired;
-            var favorLevel = GameManager.Instance.CheckFavority(data.CharNumber, CardIndex, out curProgress, out nextRequired);
+            var favorLevel = GameManager.Instance.CheckFavority(data.CharNumber, out curProgress, out nextRequired);
             FavorLevel.text = favorLevel.ToString();
-            if (favorLevel > Variables.Characters[data.CharNumber].Cards[CardIndex].Rarity)
+            if (favorLevel > Variables.values.MaxFavority)
             {
                 FavorityLeft.text = "FULL";
                 FavorityGage.maxValue = 1;
@@ -55,7 +54,7 @@ namespace Album
         public void Clicked()
         {
             SoundManager.Play(SoundType.ClickNormal);
-            AlbumManager.Instance.CharPopup.Show(CharIndex, CardIndex);
+            AlbumManager.Instance.CharPopup.Show(CharIndex);
         }
     }
 }
