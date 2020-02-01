@@ -53,16 +53,16 @@ namespace Observe
 			{
 				// 캐릭터 정보를 가져옵니다.
 				var charKey = orderedRes.ElementAt(i).Key;
-				if (Variables.Characters[charKey].Cards[0].Observed)
+				if (Variables.Characters[charKey].Observed)
 					isFirst.Add(false);
 				else
 					isFirst.Add(true);
 
 				// 각종 텍스트와 이미지를 적용시킵니다.
-				charImage.sprite = Resources.Load<Sprite>("Characters/" + Variables.Characters[charKey].InternalName + "/default/image_full");
+				charImage.sprite = Resources.Load<Sprite>("Characters/" + Variables.Characters[charKey].InternalName + "/image_full");
 				nameText.text = Variables.Characters[charKey].Name;
 				favText.text = "+" + status.charFavData[charKey].ToString();
-				favPanelCharThumb.sprite = Resources.Load<Sprite>("Characters/" + Variables.Characters[charKey].InternalName + "/default/image_obspopup");
+				favPanelCharThumb.sprite = Resources.Load<Sprite>("Characters/" + Variables.Characters[charKey].InternalName + "/image_obspopup");
 				favCharText.text = Variables.Characters[charKey].Name;
 				favConstelText.text = Variables.Constels[Variables.Characters[charKey].ConstelKey[0]].Name;
 
@@ -75,18 +75,17 @@ namespace Observe
 
 				// 만약 첫 획득이라면, 첫 번째 스토리를 보고 다음 루프로 넘어갑니다.
 				// 그 중에서도 만약 튜토리얼 관측이었다면, 씬을 변경하고(Append가 아님) Start 코루틴을 완전히 빠져나옵니다.
-				if (Variables.Characters[charKey].Cards[0].Observed == false || Variables.Characters[charKey].Cards[0].Favority == 0)
+				if (Variables.Characters[charKey].Observed == false || Variables.Characters[charKey].Favority == 0)
 				{	
 					if (charKey == 1)
 					{
 						status.userChecked = true;
 						status.Save();
-						Variables.Characters[charKey].Cards[0].Observed = true;
-						Variables.Characters[charKey].Cards[0].Favority++;
+						Variables.Characters[charKey].Observed = true;
+						Variables.Characters[charKey].Favority++;
 						GameManager.Instance.SaveGame();
 
 						Variables.DialogCharIndex = charKey;
-						Variables.DialogCardIndex = 0;
 						Variables.DialogChapterIndex = 0;
 						Variables.DialogAfterScene = "MainTut";
 					    ChangeScene("NewDialogScene");
@@ -112,8 +111,8 @@ namespace Observe
 				// 그렇지 않았다면, 페이드아웃 연출 실행 후 다음 루프로 넘어갑니다.
 				float p1;
 				int p2, p3;
-				var prevFavLev = GameManager.Instance.CheckFavority(charKey, 0, out p2, out p3);
-				var nextFavLev = GameManager.Instance.CheckAfterFavority(charKey, 0, status.charFavData[charKey], out p1, out p2);
+				var prevFavLev = GameManager.Instance.CheckFavority(charKey, out p2, out p3);
+				var nextFavLev = GameManager.Instance.CheckAfterFavority(charKey, status.charFavData[charKey], out p1, out p2);
 				if (nextFavLev > prevFavLev)
 					yield return ViewDialogAlert(charKey, prevFavLev);
 				else
@@ -208,7 +207,7 @@ namespace Observe
 
 			int curFavLevel, curRequiredFav;
 			float curFavValue;
-			curFavLevel = GameManager.Instance.CheckAfterFavority(charIndex, 0, 0, out curFavValue, out curRequiredFav);
+			curFavLevel = GameManager.Instance.CheckAfterFavority(charIndex, 0, out curFavValue, out curRequiredFav);
 			
 			float t = 0;
 			while(t <= deltaFav) // '단계당 1초'
@@ -216,7 +215,7 @@ namespace Observe
 				if (touchExists)
 					break;
 
-				var localFavLevel = GameManager.Instance.CheckAfterFavority(charIndex, 0, t, out curFavValue, out curRequiredFav);
+				var localFavLevel = GameManager.Instance.CheckAfterFavority(charIndex, t, out curFavValue, out curRequiredFav);
 				if (localFavLevel > curFavLevel)
 					favIncreasedLabel.SetActive(true);
 				favLevelText.text = localFavLevel.ToString();
@@ -226,7 +225,7 @@ namespace Observe
 				yield return null;
 				t += curRequiredFav * Time.deltaTime;
 			}
-			var finalFavLevel = GameManager.Instance.CheckAfterFavority(charIndex, 0, deltaFav, out curFavValue, out curRequiredFav);
+			var finalFavLevel = GameManager.Instance.CheckAfterFavority(charIndex, deltaFav, out curFavValue, out curRequiredFav);
 			if (finalFavLevel > curFavLevel)
 				favIncreasedLabel.SetActive(true);
 			favLevelText.text = finalFavLevel.ToString();
@@ -252,7 +251,6 @@ namespace Observe
 		IEnumerator StartStory(int charIndex, int chapterIndex)
 		{
 			Variables.DialogCharIndex = charIndex;
-			Variables.DialogCardIndex = 0;
 			Variables.DialogChapterIndex = chapterIndex;
 			yield return AppendDialogScene();
 			yield return new WaitWhile(() => Variables.IsDialogAppended);

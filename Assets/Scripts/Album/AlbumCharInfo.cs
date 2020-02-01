@@ -49,26 +49,24 @@ namespace Album
             LayoutRebuilder.ForceRebuildLayoutImmediate(MasterPanel);
         }
 
-        public void Show(int charIndex, int cardIndex)
+        public void Show(int charIndex)
         {
             gameObject.SetActive(true);
 
             var character = Variables.Characters[charIndex];
-            ShortImage.sprite = Resources.Load<Sprite>("Characters/" + character.InternalName + "/" + character.Cards[cardIndex].InternalSubname + "/image_album");
-            FullImage.sprite = Resources.Load<Sprite>("Characters/" + character.InternalName + "/" + character.Cards[cardIndex].InternalSubname + "/image_full");
+            ShortImage.sprite = Resources.Load<Sprite>("Characters/" + character.InternalName + "/image_album");
+            FullImage.sprite = Resources.Load<Sprite>("Characters/" + character.InternalName + "/image_full");
             Name.text = character.Name;
-            Subname.text = character.Cards[cardIndex].Subname;
             ConstelName.text = Variables.Constels[character.ConstelKey[0]].Name;
             ConstelImage.sprite = Resources.Load<Sprite>("Constellations/Album/" + character.ConstelKey[0]);
-            RarityBar.value = character.Cards[cardIndex].Rarity;
-            Lux.text = character.Lux;
+            Lux.text = character.LuxText;
             Distance.text = character.LYDistance;
             CharDescription.text = character.Description;
 
             int curProgress, nextRequired;
-            var favorLevel = GameManager.Instance.CheckFavority(character.CharNumber, cardIndex, out curProgress, out nextRequired);
+            var favorLevel = GameManager.Instance.CheckFavority(character.CharNumber, out curProgress, out nextRequired);
             FavorityLevel.text = favorLevel.ToString();
-            if (favorLevel > Variables.Characters[character.CharNumber].Cards[cardIndex].Rarity)
+            if (favorLevel > Variables.values.MaxFavority)
             {
                 RequiredFavority.text = "FULL";
                 FavorityGage.maxValue = 1;
@@ -86,9 +84,9 @@ namespace Album
                 if (i < favorLevel)
                 {
                     StoryElement[i].SetActive(true);
-                    StoryElement[i].GetComponent<AlbumStoryElement>().Show(charIndex, cardIndex, i);
+                    StoryElement[i].GetComponent<AlbumStoryElement>().Show(charIndex, i);
                 }
-                else if (i <= character.Cards[cardIndex].Rarity)
+                else if (i <= Variables.values.MaxFavority)
                 {
                     StoryElement[i].GetComponent<AlbumStoryElement>().Mask.SetActive(true);
                     StoryElement[i].GetComponent<AlbumStoryElement>().InfoPanel.SetActive(false);
@@ -134,7 +132,6 @@ namespace Album
         {
             Variables.DialogAfterScene = SceneChanger.GetCurrentScene();
             Variables.DialogCharIndex = StoryElement[curStoryIndex].GetComponent<AlbumStoryElement>().charIndex;
-            Variables.DialogCardIndex = StoryElement[curStoryIndex].GetComponent<AlbumStoryElement>().cardIndex;
             Variables.DialogChapterIndex = StoryElement[curStoryIndex].GetComponent<AlbumStoryElement>().storyIndex;
             SceneChanger.Instance.ChangeScene("NewDialogScene");
         }

@@ -17,9 +17,8 @@ namespace Album
             int allCnt = AlbumManager.Instance.GroupedChar[GroupIndex].Count;
             int activeCnt = 0;
             foreach (var chr in AlbumManager.Instance.GroupedChar[GroupIndex])
-                foreach (var card in chr.Value.Cards)
-                    if (card.Observed)
-                        activeCnt++;
+                if (chr.Value.Observed)
+                    activeCnt++;
             GageSlider.maxValue = allCnt;
             GageSlider.value = activeCnt;
             GageText.text = activeCnt.ToString() + "/" + allCnt.ToString();

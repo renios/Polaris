@@ -85,7 +85,7 @@ namespace Observe
                 status.isTutorial = true;
 
             // Tutorial 2를 위한 초기화
-            status.pickTryCount = Variables.StoreUpgradeValue[1][Variables.StoreUpgradeLevel[1]];
+            status.pickTryCount = Variables.GetStoreValue(1, Variables.StoreUpgradeLevel[1]);
             status.favIncrement = 1;
             
             ChangeBehaviour(status.behaviour);
@@ -117,7 +117,7 @@ namespace Observe
         {
             foreach(var key in Variables.Characters.Keys)
             {
-                if(key != 1 && Variables.Characters[key].Cards[0].Observable)
+                if(key != 1 && Variables.Characters[key].Observable)
                 {
                     for(int i = 0; i < Variables.Characters[key].ConstelKey.Length; i++)
                     {
@@ -177,7 +177,8 @@ namespace Observe
 
                     if (!status.isTutorial)
                         AllowMove = true;
-                    ShotRay();
+                    if(Variables.ObserveSkyLevel >= 0)
+                        ShotRay();
                     break;
                 case ObserveBehaviour.Observing:
                     ScopeObservingEffect.SetActive(true);
@@ -253,7 +254,7 @@ namespace Observe
                     var delta = scopePos - center;
                     scopePos = center + delta.normalized * TOUCH_BOUND;
                 }
-                if(!DontApplySkyLevelAtMove && !scopeAllowedAtPos[Variables.ObserveSkyLevel](scopePos))
+                if(!DontApplySkyLevelAtMove && Variables.ObserveSkyLevel >= 0 && !scopeAllowedAtPos[Variables.ObserveSkyLevel](scopePos))
                     scopePos = FindScopeBorderPos(Variables.ObserveSkyLevel, scopePos, 0.5f, 1);
                 scopePos.z = -1f;
                 Scope.transform.position = scopePos;
@@ -479,7 +480,7 @@ namespace Observe
                     status.endTime = DateTime.Now.AddHours(1);
                     break;
             }
-            status.pickTryCount = Variables.StoreUpgradeValue[1][Variables.StoreUpgradeLevel[1]];
+            status.pickTryCount = Variables.GetStoreValue(1, Variables.StoreUpgradeLevel[1]);
             status.scopePos = new[] { Scope.transform.position.x, Scope.transform.position.y, Scope.transform.position.z };
             ChangeBehaviour(ObserveBehaviour.Observing);
         }
@@ -555,13 +556,13 @@ namespace Observe
                 var charKey = orderedRes.ElementAt(i).Key;
                 status.charFavData.Add(charKey, status.favIncrement * orderedRes.ElementAt(i).Value);
 
-                if (!Variables.Characters[charKey].Cards[0].Observed)
+                if (!Variables.Characters[charKey].Observed)
                     status.charFavData[charKey] = 1;
                 else
                 {
                     float temp_prog;
                     int temp_required;
-                    var nextFav = GameManager.Instance.CheckAfterFavority(charKey, 0, status.charFavData[charKey], out temp_prog, out temp_required);
+                    var nextFav = GameManager.Instance.CheckAfterFavority(charKey, status.charFavData[charKey], out temp_prog, out temp_required);
                     if (temp_required < 0)
                         status.charFavData[charKey] -= (int)temp_prog;
                 }
@@ -573,7 +574,7 @@ namespace Observe
             var observedCharCount = new Dictionary<int, int>();
             foreach(var chara in Variables.Characters)
             {
-                if(chara.Value.Cards[0].Observed)
+                if(chara.Value.Observed)
                 {
                     foreach(var constel in chara.Value.ConstelKey)
                     {
@@ -649,6 +650,8 @@ namespace Observe
             ButtonObj.GetComponent<Button>().interactable = true;
             Scope.gameObject.SetActive(true);
             AllowMove = true;
+
+            ShotRay();
         }
     }
 }

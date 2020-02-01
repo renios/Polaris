@@ -15,7 +15,6 @@ public class CharacterStarlight : MonoBehaviour
     private bool overPoint = false; //수확 가능한 포인트 이상 쌓였는가
     private Transform starBalloon;
     private int characterIndex;
-    private int cardIndex;
 
     /// <summary>
     /// 두 DateTime의 차 TimeSpan을 이용하여 별빛의 양을 계산합니다. "yyyy-MM-dd-hh-mm-ss"의 string 형식으로 CardData.LastReapDate 등에 저장합니다.
@@ -33,7 +32,7 @@ public class CharacterStarlight : MonoBehaviour
             else
             {
                 lastDate = DateTime.Now;
-                Variables.Characters[characterIndex].Cards[cardIndex].LastReapDate = this.LastDate;
+                Variables.Characters[characterIndex].LastReapDate = this.LastDate;
                 GameManager.Instance.SaveGame();
             }
         }
@@ -42,19 +41,18 @@ public class CharacterStarlight : MonoBehaviour
     /// <summary>
     /// CharacterStarlight클래스가 Variables.Characters[i].Cards[j]의 데이터를 가져오기 위해 { i, j }의 형식으로 사용합니다.
     /// </summary>
-    public int[] CharacterData {
+    public int CharacterData {
         get {
-            return new int[2] { characterIndex, cardIndex };
+            return characterIndex;
         }
         set {
-            characterIndex = value[0];
-            cardIndex = value[1];
+            characterIndex = value;
         }
     }
 
     void Start()
     {
-        this.LastDate = Variables.Characters[characterIndex].Cards[cardIndex].LastReapDate;
+        this.LastDate = Variables.Characters[characterIndex].LastReapDate;
         starBalloon = Instantiate(Resources.Load<Transform>("Prefabs/star_balloon"), transform.position + new Vector3(0.5f, 0.6f, 0f), Quaternion.identity);
         starBalloon.SetParent(this.transform);
         starBalloon.gameObject.SetActive(false);
@@ -82,7 +80,7 @@ public class CharacterStarlight : MonoBehaviour
         lastDate = DateTime.Now;
         int startlight = (int)(0.5 + span.TotalSeconds / sps); //반올림
         Variables.Starlight += startlight;
-        Variables.Characters[characterIndex].Cards[cardIndex].LastReapDate = this.LastDate;
+        Variables.Characters[characterIndex].LastReapDate = this.LastDate;
         starBalloon.gameObject.SetActive(false);
         GameManager.Instance.SaveGame(); //말풍선 클릭될 때마다 수확한 별빛 데이터를 저장하기 위해 호출.
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 
-// Last edited 2020-01-04
+// Last edited 2020-01-18
 [System.Serializable]
 public class SaveData
 {
@@ -37,13 +37,10 @@ public class SaveData
             {
                 if(Variables.Characters.ContainsKey(curData.CharNumber))
                 {
-                    for (int i = 0; i < curData.Cards.Count; i++)
-                    {
-                        Variables.Characters[curData.CharNumber].Cards[i].Observed = curData.Cards[i].Observed;
-                        Variables.Characters[curData.CharNumber].Cards[i].Favority = curData.Cards[i].Favority;
-                        Variables.Characters[curData.CharNumber].Cards[i].StoryProgress = curData.Cards[i].StoryProgress;
-                        Variables.Characters[curData.CharNumber].Cards[i].LastReapDate = curData.Cards[i].LastReapDate;
-                    }
+                    Variables.Characters[curData.CharNumber].Observed = curData.Observed;
+                    Variables.Characters[curData.CharNumber].Favority = curData.Favority;
+                    Variables.Characters[curData.CharNumber].StoryProgress = curData.StoryProgress;
+                    Variables.Characters[curData.CharNumber].LastReapDate = curData.LastReapDate;
                 }
             }
         }
@@ -51,7 +48,7 @@ public class SaveData
         {
             // 이 객체가 가지고 있는 데이터를 통해 Variables.Characters를 구성합니다.
             foreach (var data in Characters)
-            { Variables.Characters.Add(data.CharNumber, data); }
+                Variables.Characters.Add(data.CharNumber, data);
         }
 
         // 기타 변수들을 동기화시켜줍니다.

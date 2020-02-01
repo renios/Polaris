@@ -8,33 +8,25 @@
             "ConstelWeight":[1.0],
             "Name":"폴라리스",
             "InternalName":"polaris",
-            "Lux":"2.0",
+            "LuxText":"2.0",
             "LuxValue":2,
             "LYDistance":"431 광년",
             "Description":"작은곰자리에서 가장 밝은 별이다. 천구에서는 50번째로 밝은 별이며, 현대 시대에서 북극성은 이 별을 가리킨다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"아무 것도 보이지 않는 하늘, 그 가운데서 빛나던 유일한 별. 그 별을 보고 있을 때 하늘에서 사람이 내려왔다, 그 별의 기운과 함께.", 
-                            "Additional":["총 5개의 구성 요소를 가지는 다중성계이다"]},
-                        {"Header":"그림자", "Description":"별들의 위치를 인도하는 역할을 하는 폴라리스는 별들이 그림자에 대해 이야기하지 않으려던 것을 말하며, 나에게 그림자에 대해 물었다.", 
-                            "Additional":[]},
-                        {"Header":"--", "Description":"--", 
-                            "Additional":[]},
-                        {"Header":"--", "Description":"--", 
-                            "Additional":[]},
-                        {"Header":"--", "Description":"--", 
-                            "Additional":[]},
-                        {"Header":"--", "Description":"--", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"아무 것도 보이지 않는 하늘, 그 가운데서 빛나던 유일한 별. 그 별을 보고 있을 때 하늘에서 사람이 내려왔다, 그 별의 기운과 함께.", 
+                    "Additional":["총 5개의 구성 요소를 가지는 다중성계이다"]},
+                {"Header":"그림자", "Description":"별들의 위치를 인도하는 역할을 하는 폴라리스는 별들이 그림자에 대해 이야기하지 않으려던 것을 말하며, 나에게 그림자에 대해 물었다.", 
+                    "Additional":[]},
+                {"Header":"--", "Description":"--", 
+                    "Additional":[]},
+                {"Header":"--", "Description":"--", 
+                    "Additional":[]},
+                {"Header":"--", "Description":"--", 
+                    "Additional":[]},
+                {"Header":"--", "Description":"--", 
+                    "Additional":[]}
             ]
         },
         {
@@ -43,38 +35,30 @@
             "ConstelWeight":[1.0],
             "Name":"투반",
             "InternalName":"thuban",
-            "Lux":"3.7",
+            "LuxText":"3.7",
             "LuxValue":3.7,
             "LYDistance":"309 광년",
             "Description":"용자리 알파성이다. 약 4000년 전에는 이 별이 북극성의 역할을 하고 있었다. 지금은 주계열의 단계를 넘어 백색 거성으로 진화해, 태양의 120배가 넘는 광도로 빛나고 있다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"소녀와 투반의 첫 만남.", 
-                            "Additional":["하늘을 보던 중 갑자기 뚝 떨어진 투반은, 백색 장발을 가진 성숙해보이는 아가씨였다."]},
-                        {"Header":"총천연적 척척박사", "Description":"무척 어른스러워 보이는 겉모습과는 다르게, 그녀의 말과 생각은 그야말로 밀실에서 막 빠져나온 순수한 천재 그 자체였다.", 
-                            "Additional":["투반은 5천여 년 전 고대 이집트 시기의 북극성이었기 때문에, 이집트인들은 피라미드 내부의 구멍이 북극성을 향하도록 지었다고 한다.",
-                                          "이는 당시 사람들이 하늘의 별들이 북극성을 중심으로 일주운동을 한다는 사실을 알았다는 의미이기도 하다."]},
-                        {"Header":"조용한 고민", "Description":"그녀와의 대화를 위해 저녁에 찾아갔더니, 그녀는 세상 모르게 자고 있었다. 그런 그녀의 모습을 보니 왠지 모르게 기분이 좋아진다.", 
-                            "Additional":["용자리에는 매우 여러 전설이 전해져 내려온다. 그리스 로마 신화에서도 굉장히 많은 용이 이 용자리의 원형이라고 알려져있다.",
-                                          "아레스와 아폴론을 비롯한 신들의 이야기에도 등장하지만 가장 유명한 일화는 헤라클레스의 12시련에 등장하는 화룡이다."]},
-                        {"Header":"기술력의 집약체", "Description":"그동안 계속 무언가에 열중하던 그녀는 마침내 자칭 '기술력의 집약체'라는 것을 완성시킨다. 그것은 대체...?", 
-                            "Additional":["투반은 용자리의 알파성이지만, 일반적으로 가장 밝은 별을 알파성으로 명명하던 관례와 다르게 감마별 '엘타닌'보다 어둡다.",
-                                          "다만 비교적 밝은 별에는 속하기 때문에 광공해가 없는 곳이라면 볼 수 있다. 북두칠성의 페크다와 메그레즈를 연결하여 15 도만큼 진행한 곳에 있다."]},
-                        {"Header":"투반의 분신", "Description":"그녀의 로봇 '미니 투반'은 그녀의 장담과는 달리 매우 부자연스럽게 동작하고 있었다. 이에 대한 그녀의 대답은...?", 
-                            "Additional":["투반을 스펙트럼으로 관측하면 단성으로 관측되지만, 실제 투반은 스펙트럼에 드러나지 않는 짝별이 존재한다.",
-                                          "정밀 관측 결과 투반의 짝별은 주인별보다 좀 더 차가운 주계열성, A2형으로 드러났으며 약 1.8등급 어둡다."]},
-                        {"Header":"총천연색 피드백", "Description":"세상에 만상에, 아무래도 미니 투반과 사이가 너무 좋아져 버린 모양이다. 얼굴이 확 붉어진 채로 그녀에게 달려가 보지만...", 
-                            "Additional":["용자리 알파는 투반을 바이어 명명법으로 표기한 이름이다. 전통적으로 불려오던 이름 투반은 아랍어 단어 '투 반(뱀)'에서 유래한 것이다.",
-                                          "드물지만 '용의 꼬리' 또는 '아디브'로 불릴 때도 있다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"소녀와 투반의 첫 만남.", 
+                    "Additional":["하늘을 보던 중 갑자기 뚝 떨어진 투반은, 백색 장발을 가진 성숙해보이는 아가씨였다."]},
+                {"Header":"총천연적 척척박사", "Description":"무척 어른스러워 보이는 겉모습과는 다르게, 그녀의 말과 생각은 그야말로 밀실에서 막 빠져나온 순수한 천재 그 자체였다.", 
+                    "Additional":["투반은 5천여 년 전 고대 이집트 시기의 북극성이었기 때문에, 이집트인들은 피라미드 내부의 구멍이 북극성을 향하도록 지었다고 한다.",
+                                    "이는 당시 사람들이 하늘의 별들이 북극성을 중심으로 일주운동을 한다는 사실을 알았다는 의미이기도 하다."]},
+                {"Header":"조용한 고민", "Description":"그녀와의 대화를 위해 저녁에 찾아갔더니, 그녀는 세상 모르게 자고 있었다. 그런 그녀의 모습을 보니 왠지 모르게 기분이 좋아진다.", 
+                    "Additional":["용자리에는 매우 여러 전설이 전해져 내려온다. 그리스 로마 신화에서도 굉장히 많은 용이 이 용자리의 원형이라고 알려져있다.",
+                                    "아레스와 아폴론을 비롯한 신들의 이야기에도 등장하지만 가장 유명한 일화는 헤라클레스의 12시련에 등장하는 화룡이다."]},
+                {"Header":"기술력의 집약체", "Description":"그동안 계속 무언가에 열중하던 그녀는 마침내 자칭 '기술력의 집약체'라는 것을 완성시킨다. 그것은 대체...?", 
+                    "Additional":["투반은 용자리의 알파성이지만, 일반적으로 가장 밝은 별을 알파성으로 명명하던 관례와 다르게 감마별 '엘타닌'보다 어둡다.",
+                                    "다만 비교적 밝은 별에는 속하기 때문에 광공해가 없는 곳이라면 볼 수 있다. 북두칠성의 페크다와 메그레즈를 연결하여 15 도만큼 진행한 곳에 있다."]},
+                {"Header":"투반의 분신", "Description":"그녀의 로봇 '미니 투반'은 그녀의 장담과는 달리 매우 부자연스럽게 동작하고 있었다. 이에 대한 그녀의 대답은...?", 
+                    "Additional":["투반을 스펙트럼으로 관측하면 단성으로 관측되지만, 실제 투반은 스펙트럼에 드러나지 않는 짝별이 존재한다.",
+                                    "정밀 관측 결과 투반의 짝별은 주인별보다 좀 더 차가운 주계열성, A2형으로 드러났으며 약 1.8등급 어둡다."]},
+                {"Header":"총천연색 피드백", "Description":"세상에 만상에, 아무래도 미니 투반과 사이가 너무 좋아져 버린 모양이다. 얼굴이 확 붉어진 채로 그녀에게 달려가 보지만...", 
+                    "Additional":["용자리 알파는 투반을 바이어 명명법으로 표기한 이름이다. 전통적으로 불려오던 이름 투반은 아랍어 단어 '투 반(뱀)'에서 유래한 것이다.",
+                                    "드물지만 '용의 꼬리' 또는 '아디브'로 불릴 때도 있다."]}
             ]
         },
         {
@@ -83,38 +67,30 @@
             "ConstelWeight":[0.4],
             "Name":"고양이 눈 성운",
             "InternalName":"catseye",
-            "Lux":"9.8",
+            "LuxText":"9.8",
             "LuxValue":9.8,
             "LYDistance":"3262 광년",
             "Description":"복잡한 구조의 성운. 안쪽의 타원형 구름이 한 쌍의 원형 구름과 포개져 고양이 눈과 같은 형상을 띤 성운이다. 원인에 대해서는 많은 가설이 제기되고 있다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"유쾌하고 쾌활한 고양이 눈 성운과의 첫 만남.", 
-                            "Additional":["겉모습은 분홍 트윈테일에 고양이 귀를 가진 귀여운 소녀.",
-                                          "정식 명칭은 NGC 6543이다."]},
-                        {"Header":"장난", "Description":"주인공에게 장난을 거는 고양이 눈 성운.", 
-                            "Additional":["고양이 눈 성운은 용자리, 거의 정확히 황도의 북극 쪽에 있는 행성상 성운이다.",
-                                          "허블 우주 망원경을 이용한 고해상도 촬영을 통해 매듭·제트·거품·원호 모양 등의 주목할 만한 구조들이 발견되었다."]},
-                        {"Header":"드러난 진실", "Description":"주인공과 이야기하던 고양이 눈 성운은 자신이 이전에 고양이였다는 사실을 들켜버린다.", 
-                            "Additional":["생전에는 고양이, 지금은 별이 되어 인간의 모습을 한 그는 고양이와 인간에 대해 어떻게 생각하고 있을까?"]},
-                        {"Header":"고양이와 주인", "Description":"생전의 주인에 대해 이야기하는 고양이 눈 성운.", 
-                            "Additional":["고양이 눈 성운의 중심에는 밝고 뜨거운 항성이 있는데, 이 별은 약 1000년 전에 자신의 겉 표면을 날려버리고 성운을 형성했다.",
-                                          "1864년에는 영국의 아마추어 천문학자 윌리엄 허긴스에 의해 행성상 성운 중 최초로 분광학적 연구가 수행되었다."]},
-                        {"Header":"노란 머리 소녀", "Description":"주인공의 말을 듣고 자신의 주인이 자신을 얼마나 아꼈는지 깨닫는 고양이 눈 성운.", 
-                            "Additional":["고양이 눈 성운을 관측하기 위해서는 다양한 방법이 동원된다. 이는 항성 주변에 여러겹으로 퍼진 성운의 구성 물질이 원소에 따라 다양한 파장의 빛을 흡수하기 때문이다.",
-                                          "최근의 연구로는 성운의 중심별이 쌍성일 가능성도 제기되고 있다."]},
-                        {"Header":"새 친구", "Description":"고양이 눈 성운은 주인공과 친구로 지내자는 제안을 한다.", 
-                            "Additional":["고양이 눈 성운은 여전히 많은 수수께끼를 남기고 있다. 안쪽 성운을 둘러싸고 있는 동심원 구조는 수백년에서 수천년의 간격을 두고 뿜어져 나온 것으로 보이는데, 이런 시간 척도는 설명하기 상당히 어렵다.",
-                                          "또한 행성상 성운 형성의 원인이 된 온도의 맥동은 몇 만년의 간격을 두고 이루어진 것으로 추측되고 있는 데 비해 표면의 맥동은 수십 년에 걸쳐서 일어난 것으로 보인다. 고양이 눈 성운에 있는 동심원 구조를 형성하는 데 필요한 시간 척도 이상으로 물질을 방출하는 메커니즘은 아직 확실하게 밝혀지지 않았다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"유쾌하고 쾌활한 고양이 눈 성운과의 첫 만남.", 
+                    "Additional":["겉모습은 분홍 트윈테일에 고양이 귀를 가진 귀여운 소녀.",
+                                    "정식 명칭은 NGC 6543이다."]},
+                {"Header":"장난", "Description":"주인공에게 장난을 거는 고양이 눈 성운.", 
+                    "Additional":["고양이 눈 성운은 용자리, 거의 정확히 황도의 북극 쪽에 있는 행성상 성운이다.",
+                                    "허블 우주 망원경을 이용한 고해상도 촬영을 통해 매듭·제트·거품·원호 모양 등의 주목할 만한 구조들이 발견되었다."]},
+                {"Header":"드러난 진실", "Description":"주인공과 이야기하던 고양이 눈 성운은 자신이 이전에 고양이였다는 사실을 들켜버린다.", 
+                    "Additional":["생전에는 고양이, 지금은 별이 되어 인간의 모습을 한 그는 고양이와 인간에 대해 어떻게 생각하고 있을까?"]},
+                {"Header":"고양이와 주인", "Description":"생전의 주인에 대해 이야기하는 고양이 눈 성운.", 
+                    "Additional":["고양이 눈 성운의 중심에는 밝고 뜨거운 항성이 있는데, 이 별은 약 1000년 전에 자신의 겉 표면을 날려버리고 성운을 형성했다.",
+                                    "1864년에는 영국의 아마추어 천문학자 윌리엄 허긴스에 의해 행성상 성운 중 최초로 분광학적 연구가 수행되었다."]},
+                {"Header":"노란 머리 소녀", "Description":"주인공의 말을 듣고 자신의 주인이 자신을 얼마나 아꼈는지 깨닫는 고양이 눈 성운.", 
+                    "Additional":["고양이 눈 성운을 관측하기 위해서는 다양한 방법이 동원된다. 이는 항성 주변에 여러겹으로 퍼진 성운의 구성 물질이 원소에 따라 다양한 파장의 빛을 흡수하기 때문이다.",
+                                    "최근의 연구로는 성운의 중심별이 쌍성일 가능성도 제기되고 있다."]},
+                {"Header":"새 친구", "Description":"고양이 눈 성운은 주인공과 친구로 지내자는 제안을 한다.", 
+                    "Additional":["고양이 눈 성운은 여전히 많은 수수께끼를 남기고 있다. 안쪽 성운을 둘러싸고 있는 동심원 구조는 수백년에서 수천년의 간격을 두고 뿜어져 나온 것으로 보이는데, 이런 시간 척도는 설명하기 상당히 어렵다.",
+                                    "또한 행성상 성운 형성의 원인이 된 온도의 맥동은 몇 만년의 간격을 두고 이루어진 것으로 추측되고 있는 데 비해 표면의 맥동은 수십 년에 걸쳐서 일어난 것으로 보인다. 고양이 눈 성운에 있는 동심원 구조를 형성하는 데 필요한 시간 척도 이상으로 물질을 방출하는 메커니즘은 아직 확실하게 밝혀지지 않았다."]}
             ]
         },
         {
@@ -123,113 +99,80 @@
             "ConstelWeight":[0.4],
             "Name":"*세페우스 델타",
             "InternalName":"**d4",
-            "Lux":"--",
+            "LuxText":"--",
             "LuxValue":0,
             "LYDistance":"--",
             "Description":"--",
-            "Cards":
+            "Observable":false,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":false,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]},
-                        {"Header":"제목 1", "Description":"임시 텍스트 1", 
-                            "Additional":[]},
-                        {"Header":"제목 2", "Description":"임시 텍스트 2", 
-                            "Additional":[]},
-                        {"Header":"제목 3", "Description":"임시 텍스트 3", 
-                            "Additional":[]},
-                        {"Header":"제목 4", "Description":"임시 텍스트 4", 
-                            "Additional":[]},
-                        {"Header":"제목 5", "Description":"임시 텍스트 5", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                    "Additional":[]},
+                {"Header":"제목 1", "Description":"임시 텍스트 1", 
+                    "Additional":[]},
+                {"Header":"제목 2", "Description":"임시 텍스트 2", 
+                    "Additional":[]},
+                {"Header":"제목 3", "Description":"임시 텍스트 3", 
+                    "Additional":[]},
+                {"Header":"제목 4", "Description":"임시 텍스트 4", 
+                    "Additional":[]},
+                {"Header":"제목 5", "Description":"임시 텍스트 5", 
+                    "Additional":[]}
             ]
         },
         {
             "CharNumber":5,
             "ConstelKey":["Leo"],
             "ConstelWeight":[1.0],
-            "Cards":
+            "Observable":false,
+            "ChapterInfo":
             [
-                {
-                    "Observable":false,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                    "Additional":[]}
             ]
         },
         {
             "CharNumber":6,
             "ConstelKey":["Hydra"],
             "ConstelWeight":[1.0],
-            "Cards":
+            "Observable":false,
+            "ChapterInfo":
             [
-                {
-                    "Observable":false,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                    "Additional":[]}
             ]
         },
         {
             "CharNumber":7,
             "ConstelKey":["Virgo"],
             "ConstelWeight":[1.0],
-            "Cards":
+            "Observable":false,
+            "ChapterInfo":
             [
-                {
-                    "Observable":false,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                    "Additional":[]}
             ]
         },
         {
             "CharNumber":8,
             "ConstelKey":["Libra"],
             "ConstelWeight":[1.0],
-            "Cards":
+            "Observable":false,
+            "ChapterInfo":
             [
-                {
-                    "Observable":false,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                    "Additional":[]}
             ]
         },
         {
             "CharNumber":9,
             "ConstelKey":["Corvus"],
             "ConstelWeight":[1.0],
-            "Cards":
+            "Observable":false,
+            "ChapterInfo":
             [
-                {
-                    "Observable":false,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                    "Additional":[]}
             ]
         },
         {
@@ -252,16 +195,11 @@
             "CharNumber":11,
             "ConstelKey":["Sagittarius"],
             "ConstelWeight":[1.0],
-            "Cards":
+            "Observable":false,
+            "ChapterInfo":
             [
-                {
-                    "Observable":false,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                    "Additional":[]}
             ]
         },
         {
@@ -270,33 +208,25 @@
             "ConstelWeight":[0.4],
             "Name":"*토성",
             "InternalName":"saturn",
-            "Lux":"--",
+            "LuxText":"--",
             "LuxValue":0,
             "LYDistance":"--",
             "Description":"--",
-            "Cards":
+            "Observable":false,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":false,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]},
-                        {"Header":"제목 1", "Description":"임시 텍스트 1", 
-                            "Additional":[]},
-                        {"Header":"제목 2", "Description":"임시 텍스트 2", 
-                            "Additional":[]},
-                        {"Header":"제목 3", "Description":"임시 텍스트 3", 
-                            "Additional":[]},
-                        {"Header":"제목 4", "Description":"임시 텍스트 4", 
-                            "Additional":[]},
-                        {"Header":"제목 5", "Description":"임시 텍스트 5", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                    "Additional":[]},
+                {"Header":"제목 1", "Description":"임시 텍스트 1", 
+                    "Additional":[]},
+                {"Header":"제목 2", "Description":"임시 텍스트 2", 
+                    "Additional":[]},
+                {"Header":"제목 3", "Description":"임시 텍스트 3", 
+                    "Additional":[]},
+                {"Header":"제목 4", "Description":"임시 텍스트 4", 
+                    "Additional":[]},
+                {"Header":"제목 5", "Description":"임시 텍스트 5", 
+                    "Additional":[]}
             ]
         },
         {
@@ -305,52 +235,39 @@
             "ConstelWeight":[0.2],
             "Name":"명왕성",
             "InternalName":"pluto",
-            "Lux":"13.65 ~ 16.30",
+            "LuxText":"13.65 ~ 16.30",
             "LuxValue":13.65,
             "LYDistance":"29.65 ~ 40.35 AU",
             "Description":"태양계를 구성하는 왜행성이다. 처음 발견된 이래 계속 태양계의 행성으로 인정받아 왔으나, 학계의 계속된 연구를 통해 2006년에 왜행성으로 그 지위가 격하되었다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":3,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"명왕성과의 첫 만남.", 
-                            "Additional":["명왕성은 암석과 얼음으로 이루어져 있으며, 달 질량의 1/6으로 매우 작다.",
-                                          "1930년 미국의 클라이드 톰보에 의해 처음 발견되었다."]},
-                        {"Header":"친구", "Description":"자신의 친구, '카론'을 소개하는 명왕성.", 
-                            "Additional":["카론은 명왕성의 대표적인 위성으로, 다른 위성에 비해 모행성과의 크기 차이가 적다.",
-                                          "카론의 지름은 명왕성의 약 절반에 달하며, 따라서 명왕성과 카론은 서로의 사이에 질량 중심을 두고 돈다."]},
-                        {"Header":"이름", "Description":"자신의 이름의 유래를 알려주는 명왕성.", 
-                            "Additional":["명왕성(Pluto)라는 이름은 태양계 가장 바깥의 어둡고 추운 이미지가 저승을 떠올리게 한다는 이유로 선정되었다.",
-                                          "위성의 명칭인 카론, 닉스, 히드라, 케르베로스, 스틱스 모두 저승 또는 하데스와 연관되는 이름을 받았다."]},
-                        {"Header":"기억", "Description":"점점 잊혀지는 자신과 카론에 대해 말하는 명왕성. 주인공은 그들을 기억해줄 것을 약속한다.", 
-                            "Additional":["명왕성은 다른 태양계 천체들에 비해 궤도이심률이 크기 때문에 종종 해왕성보다 지구에 가깝게 위치하기도 한다."]},
-                        {"Header":"제목 4", "Description":"임시 텍스트 4", 
-                            "Additional":[]},
-                        {"Header":"제목 5", "Description":"임시 텍스트 5", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"명왕성과의 첫 만남.", 
+                    "Additional":["명왕성은 암석과 얼음으로 이루어져 있으며, 달 질량의 1/6으로 매우 작다.",
+                                    "1930년 미국의 클라이드 톰보에 의해 처음 발견되었다."]},
+                {"Header":"친구", "Description":"자신의 친구, '카론'을 소개하는 명왕성.", 
+                    "Additional":["카론은 명왕성의 대표적인 위성으로, 다른 위성에 비해 모행성과의 크기 차이가 적다.",
+                                    "카론의 지름은 명왕성의 약 절반에 달하며, 따라서 명왕성과 카론은 서로의 사이에 질량 중심을 두고 돈다."]},
+                {"Header":"이름", "Description":"자신의 이름의 유래를 알려주는 명왕성.", 
+                    "Additional":["명왕성(Pluto)라는 이름은 태양계 가장 바깥의 어둡고 추운 이미지가 저승을 떠올리게 한다는 이유로 선정되었다.",
+                                    "위성의 명칭인 카론, 닉스, 히드라, 케르베로스, 스틱스 모두 저승 또는 하데스와 연관되는 이름을 받았다."]},
+                {"Header":"기억", "Description":"점점 잊혀지는 자신과 카론에 대해 말하는 명왕성. 주인공은 그들을 기억해줄 것을 약속한다.", 
+                    "Additional":["명왕성은 다른 태양계 천체들에 비해 궤도이심률이 크기 때문에 종종 해왕성보다 지구에 가깝게 위치하기도 한다."]},
+                {"Header":"제목 4", "Description":"임시 텍스트 4", 
+                    "Additional":[]},
+                {"Header":"제목 5", "Description":"임시 텍스트 5", 
+                    "Additional":[]}
             ]
         },
         {
             "CharNumber":14,
             "ConstelKey":["Aquila"],
             "ConstelWeight":[1.0],
-            "Cards":
+            "Observable":false,
+            "ChapterInfo":
             [
-                {
-                    "Observable":false,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                    "Additional":[]}
             ]
         },
         {
@@ -359,52 +276,39 @@
             "ConstelWeight":[1.0],
             "Name":"수알로킨",
             "InternalName":"sualocin",
-            "Lux":"3.8",
+            "LuxText":"3.8",
             "LuxValue":3.8,
             "LYDistance":"241 광년",
             "Description":"돌고래자리의 알파성. 6중성이다. 돌고래자리 자체는 톨레미의 48개 별자리에 포함되어있을 정도로 긴 시간 알려진 별자리이다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"수알로킨과 소녀의 짧은 만남.", 
-                            "Additional":["수알로킨을 알파성으로 하는 돌고래자리는 바다위로 뛰어오른 돌고래의 모습을 하고 있다. 현대의 88개 별자리 중 69번째의 작은 별자리이다."]},
-                        {"Header":"먹을 거?", "Description":"다시 만난 주인공에게 선물을 주려는 수알로킨, 그러나 그 '선물'은 아무리봐도 망친 것 같은 초코 케이크였다...", 
-                            "Additional":["돌고래자리는 동아시아의 별자리에서는 덩굴열매를 의미하는 '포과'와 '패과'의 두 별자리에 해당되며, '여수'에 속한다."]},
-                        {"Header":"고래 친구들", "Description":"자신과 함께 다니는 고래들을 한마리씩 소개하는 수알로킨. 이번에는 제대로 만든 초코 케이크도 남겨두고 갔다.", 
-                            "Additional":["본인의 작은 키를 신경쓰고 있다.",
-                                          "고래들의 이름은 다들 수알로킨이 직접 지어준 것으로 보인다."]},
-                        {"Header":"친구?", "Description":"뜬금없이 깊은 생각에 잠긴 수알로킨. 오래전에 만났던 친구가 진짜인지 가짜인지 헷갈린다고 하는데, 대체 어떻게 된 일일까.", 
-                            "Additional":["돌고래자리와 수알로킨을 찾는 가장 빠른 방법은 독수리자리를 이용하는 법이다.",
-                                          "독수리자리 알파성인 알타이르와 독수리자리 델타성을 이어 같은 거리만큼 연장하면 다이아몬드 형태의 돌고래자리를 발견할 수 있다."]},
-                        {"Header":"놀라운 능력", "Description":"수알로킨은 무언가 떠올리더니, 놀랍게도 주인공의 집에 있는것과 똑같은 망원경을 만들어냈다. 어떻게 한 거지?", 
-                            "Additional":["사랑하는 사람에게 돌고래 인형을 주면 사랑이 이루어진다는 전설은 돌고래자리와 관련이 있다. 이는 포세이돈으로부터 순결을 지키고 싶어 도망쳤던 요정 엠피트리테의 마음을 돌린 신하가 돌고래였다는 일화로부터 기인했다."]},
-                        {"Header":"옛 친구", "Description":"옛 친구가 아마도 아주 먼 별이 됐을거라는 수알로킨. 주인공과 친해진 기념으로, 자신의 진짜 이름을 알려준다.", 
-                            "Additional":["돌고래자리의 가장 밝은 두 별인 '수알로킨'과 '로타네브'는 고대로부터의 명칭이 아니다.", 
-                                          "뒤집으면 각각 Nicolaus, Venator가 되는데 이는 천문학자 피아치의 조수가 자신의 이름을 라틴어로 바꾼 후 뒤집어 붙인 것이다. 나중에 밝혀졌으나 이미 널리 쓰이고 있어 바꿀 수 없었다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"수알로킨과 소녀의 짧은 만남.", 
+                    "Additional":["수알로킨을 알파성으로 하는 돌고래자리는 바다위로 뛰어오른 돌고래의 모습을 하고 있다. 현대의 88개 별자리 중 69번째의 작은 별자리이다."]},
+                {"Header":"먹을 거?", "Description":"다시 만난 주인공에게 선물을 주려는 수알로킨, 그러나 그 '선물'은 아무리봐도 망친 것 같은 초코 케이크였다...", 
+                    "Additional":["돌고래자리는 동아시아의 별자리에서는 덩굴열매를 의미하는 '포과'와 '패과'의 두 별자리에 해당되며, '여수'에 속한다."]},
+                {"Header":"고래 친구들", "Description":"자신과 함께 다니는 고래들을 한마리씩 소개하는 수알로킨. 이번에는 제대로 만든 초코 케이크도 남겨두고 갔다.", 
+                    "Additional":["본인의 작은 키를 신경쓰고 있다.",
+                                    "고래들의 이름은 다들 수알로킨이 직접 지어준 것으로 보인다."]},
+                {"Header":"친구?", "Description":"뜬금없이 깊은 생각에 잠긴 수알로킨. 오래전에 만났던 친구가 진짜인지 가짜인지 헷갈린다고 하는데, 대체 어떻게 된 일일까.", 
+                    "Additional":["돌고래자리와 수알로킨을 찾는 가장 빠른 방법은 독수리자리를 이용하는 법이다.",
+                                    "독수리자리 알파성인 알타이르와 독수리자리 델타성을 이어 같은 거리만큼 연장하면 다이아몬드 형태의 돌고래자리를 발견할 수 있다."]},
+                {"Header":"놀라운 능력", "Description":"수알로킨은 무언가 떠올리더니, 놀랍게도 주인공의 집에 있는것과 똑같은 망원경을 만들어냈다. 어떻게 한 거지?", 
+                    "Additional":["사랑하는 사람에게 돌고래 인형을 주면 사랑이 이루어진다는 전설은 돌고래자리와 관련이 있다. 이는 포세이돈으로부터 순결을 지키고 싶어 도망쳤던 요정 엠피트리테의 마음을 돌린 신하가 돌고래였다는 일화로부터 기인했다."]},
+                {"Header":"옛 친구", "Description":"옛 친구가 아마도 아주 먼 별이 됐을거라는 수알로킨. 주인공과 친해진 기념으로, 자신의 진짜 이름을 알려준다.", 
+                    "Additional":["돌고래자리의 가장 밝은 두 별인 '수알로킨'과 '로타네브'는 고대로부터의 명칭이 아니다.", 
+                                    "뒤집으면 각각 Nicolaus, Venator가 되는데 이는 천문학자 피아치의 조수가 자신의 이름을 라틴어로 바꾼 후 뒤집어 붙인 것이다. 나중에 밝혀졌으나 이미 널리 쓰이고 있어 바꿀 수 없었다."]}
             ]
         },
         {
             "CharNumber":16,
             "ConstelKey":["Ophiuchus"],
             "ConstelWeight":[1.0],
-            "Cards":
+            "Observable":false,
+            "ChapterInfo":
             [
-                {
-                    "Observable":false,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                    "Additional":[]}
             ]
         },
         {
@@ -413,39 +317,31 @@
             "ConstelWeight":[0.4],
             "Name":"목성",
             "InternalName":"jupiter",
-            "Lux":"-2.94",
+            "LuxText":"-2.94",
             "LuxValue":-2.94,
             "LYDistance":"약 5.20 AU",
             "Description":"태양계의 다섯번째 행성이자 가장 큰 행성. 태양계의 다른 모든 행성들을 합한 질량의 약 2.5배에 달한다. 그러나 행성의 대부분은 가벼운 수소와 헬륨으로 이루어진 가스형 행성이며, 적도 부근의 거대한 대적점이 가장 큰 특징이다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"목성과의 첫 만남.", 
-                            "Additional":["반듯하고 모범적인, 늘 웃고 다니는 인상이다.",
-                                          "애정을 표현하기 위해 동생들에게 자주 간식을 만들어준다."]},
-                        {"Header":"문제점", "Description":"주인공에게 자신이 만든 간식을 권하는 목성.", 
-                            "Additional":["목성은 고대부터 동서양을 막론하고 천문학자들에게 잘 알려져 있었다.",
-                                          "'목성'이라는 명칭은 음양오행의 오행 중 '나무'에 해당하며, 영문명 'Jupiter'는 로마 신화의 주신이다."]},
-                        {"Header":"돌가루와 후추", "Description":"주인공은 목성의 사정에 대해 듣게 된다. 요리를 계속 만드는 이유는 책임감 때문인데...", 
-                            "Additional":["요리에 대한 감각이 전혀 없다.",
-                                          "동생들이 간식을 거의 먹지 않는 문제의 원인을 전혀 모르고 있다.",
-                                          "스스로가 제대로 맏이 역할을 하지 못한다고 계속 고민중이다."]},
-                        {"Header":"의무와 선택", "Description":"주인공의 조언으로 드디어 먹을만한 요리를 만들게 된 목성.", 
-                            "Additional":["목성은 항성이 아니지만, 지구에 매우 가깝기 때문에 밤하늘에서 달과 금성 다음으로 밝은 천체이다.",
-                                          "목성의 줄무늬모양과 대적점은 빠른 자전속도로 인한 목성 대기의 난류와 거대 폭풍이다."]},
-                        {"Header":"마음", "Description":"주인공과의 대화에서 답을 찾아가는 목성.", 
-                            "Additional":["동생들에 대한 애정이 매우 강하다. 그 때문에 자신이 하는 행동의 동기가 주로 동생들이다."]},
-                        {"Header":"의지", "Description":"동생들과 마음을 터놓고 대화한 목성은 마침내 강박에서 벗어나게 된다.", 
-                            "Additional":["목성은 수십개의 크고작은 위성들을 가지고있는데, 그 중 가장 큰 4개의 위성은 발견자의 이름을 따 '갈릴레이 위성'이라 부른다.",
-                                          "이오, 가니메데, 유로파, 칼리스토로 불리는 갈릴레이 위성은 '모든 천체는 지구를 중심으로 돈다'라는 천동설의 반례가 되는 첫 발견이었다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"목성과의 첫 만남.", 
+                    "Additional":["반듯하고 모범적인, 늘 웃고 다니는 인상이다.",
+                                    "애정을 표현하기 위해 동생들에게 자주 간식을 만들어준다."]},
+                {"Header":"문제점", "Description":"주인공에게 자신이 만든 간식을 권하는 목성.", 
+                    "Additional":["목성은 고대부터 동서양을 막론하고 천문학자들에게 잘 알려져 있었다.",
+                                    "'목성'이라는 명칭은 음양오행의 오행 중 '나무'에 해당하며, 영문명 'Jupiter'는 로마 신화의 주신이다."]},
+                {"Header":"돌가루와 후추", "Description":"주인공은 목성의 사정에 대해 듣게 된다. 요리를 계속 만드는 이유는 책임감 때문인데...", 
+                    "Additional":["요리에 대한 감각이 전혀 없다.",
+                                    "동생들이 간식을 거의 먹지 않는 문제의 원인을 전혀 모르고 있다.",
+                                    "스스로가 제대로 맏이 역할을 하지 못한다고 계속 고민중이다."]},
+                {"Header":"의무와 선택", "Description":"주인공의 조언으로 드디어 먹을만한 요리를 만들게 된 목성.", 
+                    "Additional":["목성은 항성이 아니지만, 지구에 매우 가깝기 때문에 밤하늘에서 달과 금성 다음으로 밝은 천체이다.",
+                                    "목성의 줄무늬모양과 대적점은 빠른 자전속도로 인한 목성 대기의 난류와 거대 폭풍이다."]},
+                {"Header":"마음", "Description":"주인공과의 대화에서 답을 찾아가는 목성.", 
+                    "Additional":["동생들에 대한 애정이 매우 강하다. 그 때문에 자신이 하는 행동의 동기가 주로 동생들이다."]},
+                {"Header":"의지", "Description":"동생들과 마음을 터놓고 대화한 목성은 마침내 강박에서 벗어나게 된다.", 
+                    "Additional":["목성은 수십개의 크고작은 위성들을 가지고있는데, 그 중 가장 큰 4개의 위성은 발견자의 이름을 따 '갈릴레이 위성'이라 부른다.",
+                                    "이오, 가니메데, 유로파, 칼리스토로 불리는 갈릴레이 위성은 '모든 천체는 지구를 중심으로 돈다'라는 천동설의 반례가 되는 첫 발견이었다."]}
             ]
         },
         {
@@ -454,33 +350,25 @@
             "ConstelWeight":[1.0],
             "Name":"안타레스",
             "InternalName":"antares",
-            "Lux":"--",
+            "LuxText":"--",
             "LuxValue":0,
             "LYDistance":"--",
             "Description":"--",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]},
-                        {"Header":"제목 1", "Description":"임시 텍스트 1", 
-                            "Additional":[]},
-                        {"Header":"제목 2", "Description":"임시 텍스트 2", 
-                            "Additional":[]},
-                        {"Header":"제목 3", "Description":"임시 텍스트 3", 
-                            "Additional":[]},
-                        {"Header":"제목 4", "Description":"임시 텍스트 4", 
-                            "Additional":[]},
-                        {"Header":"제목 5", "Description":"임시 텍스트 5", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                    "Additional":[]},
+                {"Header":"제목 1", "Description":"임시 텍스트 1", 
+                    "Additional":[]},
+                {"Header":"제목 2", "Description":"임시 텍스트 2", 
+                    "Additional":[]},
+                {"Header":"제목 3", "Description":"임시 텍스트 3", 
+                    "Additional":[]},
+                {"Header":"제목 4", "Description":"임시 텍스트 4", 
+                    "Additional":[]},
+                {"Header":"제목 5", "Description":"임시 텍스트 5", 
+                    "Additional":[]}
             ]
         },
         {
@@ -489,33 +377,25 @@
             "ConstelWeight":[1.0],
             "Name":"*에니프",
             "InternalName":"enif",
-            "Lux":"--",
+            "LuxText":"--",
             "LuxValue":0,
             "LYDistance":"--",
             "Description":"--",
-            "Cards":
+            "Observable":false,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":false,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]},
-                        {"Header":"제목 1", "Description":"임시 텍스트 1", 
-                            "Additional":[]},
-                        {"Header":"제목 2", "Description":"임시 텍스트 2", 
-                            "Additional":[]},
-                        {"Header":"제목 3", "Description":"임시 텍스트 3", 
-                            "Additional":[]},
-                        {"Header":"제목 4", "Description":"임시 텍스트 4", 
-                            "Additional":[]},
-                        {"Header":"제목 5", "Description":"임시 텍스트 5", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                    "Additional":[]},
+                {"Header":"제목 1", "Description":"임시 텍스트 1", 
+                    "Additional":[]},
+                {"Header":"제목 2", "Description":"임시 텍스트 2", 
+                    "Additional":[]},
+                {"Header":"제목 3", "Description":"임시 텍스트 3", 
+                    "Additional":[]},
+                {"Header":"제목 4", "Description":"임시 텍스트 4", 
+                    "Additional":[]},
+                {"Header":"제목 5", "Description":"임시 텍스트 5", 
+                    "Additional":[]}
             ]
         },
         {
@@ -524,36 +404,28 @@
             "ConstelWeight":[1.0],
             "Name":"레샤",
             "InternalName":"rescha",
-            "Lux":"3.8",
+            "LuxText":"3.8",
             "LuxValue":3.8,
             "LYDistance":"139 광년",
             "Description":"모체가 된 별은 알레샤. 물고기자리 알파성이다. 알레샤라는 명칭이 표준화된 것은 2016년의 일이다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":3,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"주인공과 레샤의 첫 만남.", 
-                            "Additional":["검붉은 로브를 걸친 인자한 아주머니의 느낌. 어째선지 저절로 존대를 하게 되는 차분한 목소리의 소유자이다."]},
-                        {"Header":"이어주는 사람", "Description":"생전의 레샤는 남들을 '이어주는' 일, 중매에 능통했다고 한다.", 
-                            "Additional":["물고기자리 알파성 알레샤는 '끈'아리는 의미를 가지고 있으며, 두 물고기를 이어주는 끈의 정중앙에 위치하고 있다.",
-                                          "그러나 고대인들이 본 물고기자리가 16세기 이후에 그려진 '꼬리가 끈에 묶인 두 마리의 물고기'와 유사한지에 대해서는 논란의 여지가 있다."]},
-                        {"Header":"후회", "Description":"주인공에게서 생전에는 없었던 딸의 모습을 보는 레샤. 한편 그의 능력은 항상 좋은 결과만을 불러오는 것이 아니었던 모양이다.", 
-                            "Additional":["물고기자리는 단일 별자리로는 상당히 많은 수의 별이 포함되어 있으나 대부분 4~5등성이라 광공해가 없는 곳에서도 형태를 알아보기 쉽지 않다.",
-                                          "물고기자리에서 가장 밝은 별은 에타성 '알페르그' 이지만, 겉보기등급 3.6등급으로 알레샤와 큰 차이를 보이지 않는다."]},
-                        {"Header":"잊어서는 안 될 사람", "Description":"레샤는 생전, 사람을 찾아주길 거부했다는 이유로 고문을 당했다고 한다. 주인공에게 들려주기 위해서는 아직 시간이 필요한 모양인데...", 
-                            "Additional":["레샤에게는 가족이 없었다. 그를 키워준 사람은 어느 신전의 사제였다.",
-                                          "레샤의 통찰력은 자신과 맺어질 사람이 없다는 사실마저도 알아냈다. 그러나 그것이 통찰력인지, 그렇게 믿고 싶었는지는 알 수 없다."]},
-                        {"Header":"마지막 인사", "Description":"의뢰인이 레샤에게 원한 것은 자신 대신 죽어줄 쌍둥이였고, 레샤는 자신의 은인을 차마 넘길 수 없어 고문당하던 끝에 죽음을 결심한다.", 
-                            "Additional":["알레샤는 두 개의 항성으로 이루어진 다중성계이며, 서로 700년이 넘는 주기로 공전하는 형태를 취한다."]},
-                        {"Header":"인연의 실", "Description":"자신의 선택에 후회하지 않는 레샤. 둘을 갈라놓은 것도, 주인공과 만난 것도 인연이라 말한다.", 
-                            "Additional":["물고기자리는 어두운 별자리이지만 황도 12궁이며, 춘분점을 포함하고 있어 오래 전부터 관심의 대상이 된 별자리이다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"주인공과 레샤의 첫 만남.", 
+                    "Additional":["검붉은 로브를 걸친 인자한 아주머니의 느낌. 어째선지 저절로 존대를 하게 되는 차분한 목소리의 소유자이다."]},
+                {"Header":"이어주는 사람", "Description":"생전의 레샤는 남들을 '이어주는' 일, 중매에 능통했다고 한다.", 
+                    "Additional":["물고기자리 알파성 알레샤는 '끈'아리는 의미를 가지고 있으며, 두 물고기를 이어주는 끈의 정중앙에 위치하고 있다.",
+                                    "그러나 고대인들이 본 물고기자리가 16세기 이후에 그려진 '꼬리가 끈에 묶인 두 마리의 물고기'와 유사한지에 대해서는 논란의 여지가 있다."]},
+                {"Header":"후회", "Description":"주인공에게서 생전에는 없었던 딸의 모습을 보는 레샤. 한편 그의 능력은 항상 좋은 결과만을 불러오는 것이 아니었던 모양이다.", 
+                    "Additional":["물고기자리는 단일 별자리로는 상당히 많은 수의 별이 포함되어 있으나 대부분 4~5등성이라 광공해가 없는 곳에서도 형태를 알아보기 쉽지 않다.",
+                                    "물고기자리에서 가장 밝은 별은 에타성 '알페르그' 이지만, 겉보기등급 3.6등급으로 알레샤와 큰 차이를 보이지 않는다."]},
+                {"Header":"잊어서는 안 될 사람", "Description":"레샤는 생전, 사람을 찾아주길 거부했다는 이유로 고문을 당했다고 한다. 주인공에게 들려주기 위해서는 아직 시간이 필요한 모양인데...", 
+                    "Additional":["레샤에게는 가족이 없었다. 그를 키워준 사람은 어느 신전의 사제였다.",
+                                    "레샤의 통찰력은 자신과 맺어질 사람이 없다는 사실마저도 알아냈다. 그러나 그것이 통찰력인지, 그렇게 믿고 싶었는지는 알 수 없다."]},
+                {"Header":"마지막 인사", "Description":"의뢰인이 레샤에게 원한 것은 자신 대신 죽어줄 쌍둥이였고, 레샤는 자신의 은인을 차마 넘길 수 없어 고문당하던 끝에 죽음을 결심한다.", 
+                    "Additional":["알레샤는 두 개의 항성으로 이루어진 다중성계이며, 서로 700년이 넘는 주기로 공전하는 형태를 취한다."]},
+                {"Header":"인연의 실", "Description":"자신의 선택에 후회하지 않는 레샤. 둘을 갈라놓은 것도, 주인공과 만난 것도 인연이라 말한다.", 
+                    "Additional":["물고기자리는 어두운 별자리이지만 황도 12궁이며, 춘분점을 포함하고 있어 오래 전부터 관심의 대상이 된 별자리이다."]}
             ]
         },
         {
@@ -562,33 +434,25 @@
             "ConstelWeight":[0.4],
             "Name":"*천왕성",
             "InternalName":"uranus",
-            "Lux":"--",
+            "LuxText":"--",
             "LuxValue":0,
             "LYDistance":"--",
             "Description":"--",
-            "Cards":
+            "Observable":false,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":false,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]},
-                        {"Header":"제목 1", "Description":"임시 텍스트 1", 
-                            "Additional":[]},
-                        {"Header":"제목 2", "Description":"임시 텍스트 2", 
-                            "Additional":[]},
-                        {"Header":"제목 3", "Description":"임시 텍스트 3", 
-                            "Additional":[]},
-                        {"Header":"제목 4", "Description":"임시 텍스트 4", 
-                            "Additional":[]},
-                        {"Header":"제목 5", "Description":"임시 텍스트 5", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                    "Additional":[]},
+                {"Header":"제목 1", "Description":"임시 텍스트 1", 
+                    "Additional":[]},
+                {"Header":"제목 2", "Description":"임시 텍스트 2", 
+                    "Additional":[]},
+                {"Header":"제목 3", "Description":"임시 텍스트 3", 
+                    "Additional":[]},
+                {"Header":"제목 4", "Description":"임시 텍스트 4", 
+                    "Additional":[]},
+                {"Header":"제목 5", "Description":"임시 텍스트 5", 
+                    "Additional":[]}
             ]
         },
         {
@@ -597,37 +461,29 @@
             "ConstelWeight":[1.0],
             "Name":"멜리크",
             "InternalName":"melik",
-            "Lux":"3.0",
+            "LuxText":"3.0",
             "LuxValue":3,
             "LYDistance":"758 광년",
             "Description":"물병자리 알파성, 사달멜리크이다. 해당 별자리에서 가장 밝은 별이어야 하지만, 사실은 베타성인 사달수드에 이어 두 번째로 밝다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"멜리크와의 살짝 어색한 첫 만남", 
-                            "Additional":["'사달멜리크'라는 이름에는 '왕의 행운'이라는 의미가 있다. 물병자리 알파성은 이외에도 '엘 멜리크', '루크바', '사드라물크' 등으로 불렸다."]},
-                        {"Header":"낯섦", "Description":"주인공과의 대화가 아직은 어색한 멜리크.", 
-                            "Additional":["표정 뒤의 마음을 읽기 힘든 타입. '좋다'와 '싫지는 않다'의 경계는 무엇일까.",
-                                          "사달멜리크는 동아시아 별자리 '위수'에 속해 있다. 위수를 구성하는 별들은 사달멜리크, 페가수스자리 세타, 페가수스자리 엡실론이다. 사달멜리크 자체의 명칭은 '위수일'이며 ‘위수의 첫 번째 별’이라는 뜻이다"]},
-                        {"Header":"항아리", "Description":"항아리에 대한 질문을 받자 만들고싶은 술이 있다고 답하는 멜리크.", 
-                            "Additional":["별이 되기 전에도 술을 만드는 일을 했다.",
-                                          "아케르와 아는 사이인 모양이다. 생전? 혹은 별이 되고 나서?"]},
-                        {"Header":"한 발짝 더", "Description":"이번엔 '싫지 않다'대신 '좋다'라고 말해주는 멜리크. 주인공에 대한 거리감은 낯섦에서 온 어색함이었던 모양이다.", 
-                            "Additional":["별이 된 후에도 지금까지 쭉 아케르와 같이 술을 만들고 있다.",
-                                          "사달멜리크는 거성에 속하기 때문에, 태양과 표면 온도가 비슷해도 그 밝기는 태양의 3천 배에 이른다. 표면 온도는 거의 비슷하므로 지구에서 보기에는 태양과 유사한 연노란색으로 보인다."]},
-                        {"Header":"밤하늘이 담긴 술", "Description":"별이 되기 전부터 무척 친한 친구였던 아케르와 멜리크. 멜리크는 밤하늘색 술을 만들면 맨 처음 아케르에게 보여주고 싶다고 말한다.", 
-                            "Additional":["찬드라 X선 망원경의 관측 결과 태양과 같은 G형 주계열성에 비해 X선을 거의 방출하지 않는 것으로 확인되었는데, 이는 G형 거성의 특징이다."]},
-                        {"Header":"본심", "Description":"밤하늘빛 술을 만들고 싶었던 이유는 자신이 생전 밤하늘을 보며 위로받았던 기억 때문이었다. 멜리크의 사후, 간절한 기도 끝에 멜리크는 아케르와 하늘 위에서 다시 만난다.", 
-                            "Additional":["사달멜리크의 나이는 약 5300만년으로, 태양과 비슷한 표면 온도를 갖는 황색 초거성이다.",
-                                          "초거성의 진화과정 중 태양과 비슷한 유효온도를 보여주는 때를 '황색진화공백'으로 부르는데, 그 이유는 이 온도에서 거성은 불안정하여 오래 머무르지 않으므로 관측할 수 있는 대상이 드물기 때문이다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"멜리크와의 살짝 어색한 첫 만남", 
+                    "Additional":["'사달멜리크'라는 이름에는 '왕의 행운'이라는 의미가 있다. 물병자리 알파성은 이외에도 '엘 멜리크', '루크바', '사드라물크' 등으로 불렸다."]},
+                {"Header":"낯섦", "Description":"주인공과의 대화가 아직은 어색한 멜리크.", 
+                    "Additional":["표정 뒤의 마음을 읽기 힘든 타입. '좋다'와 '싫지는 않다'의 경계는 무엇일까.",
+                                    "사달멜리크는 동아시아 별자리 '위수'에 속해 있다. 위수를 구성하는 별들은 사달멜리크, 페가수스자리 세타, 페가수스자리 엡실론이다. 사달멜리크 자체의 명칭은 '위수일'이며 ‘위수의 첫 번째 별’이라는 뜻이다"]},
+                {"Header":"항아리", "Description":"항아리에 대한 질문을 받자 만들고싶은 술이 있다고 답하는 멜리크.", 
+                    "Additional":["별이 되기 전에도 술을 만드는 일을 했다.",
+                                    "아케르와 아는 사이인 모양이다. 생전? 혹은 별이 되고 나서?"]},
+                {"Header":"한 발짝 더", "Description":"이번엔 '싫지 않다'대신 '좋다'라고 말해주는 멜리크. 주인공에 대한 거리감은 낯섦에서 온 어색함이었던 모양이다.", 
+                    "Additional":["별이 된 후에도 지금까지 쭉 아케르와 같이 술을 만들고 있다.",
+                                    "사달멜리크는 거성에 속하기 때문에, 태양과 표면 온도가 비슷해도 그 밝기는 태양의 3천 배에 이른다. 표면 온도는 거의 비슷하므로 지구에서 보기에는 태양과 유사한 연노란색으로 보인다."]},
+                {"Header":"밤하늘이 담긴 술", "Description":"별이 되기 전부터 무척 친한 친구였던 아케르와 멜리크. 멜리크는 밤하늘색 술을 만들면 맨 처음 아케르에게 보여주고 싶다고 말한다.", 
+                    "Additional":["찬드라 X선 망원경의 관측 결과 태양과 같은 G형 주계열성에 비해 X선을 거의 방출하지 않는 것으로 확인되었는데, 이는 G형 거성의 특징이다."]},
+                {"Header":"본심", "Description":"밤하늘빛 술을 만들고 싶었던 이유는 자신이 생전 밤하늘을 보며 위로받았던 기억 때문이었다. 멜리크의 사후, 간절한 기도 끝에 멜리크는 아케르와 하늘 위에서 다시 만난다.", 
+                    "Additional":["사달멜리크의 나이는 약 5300만년으로, 태양과 비슷한 표면 온도를 갖는 황색 초거성이다.",
+                                    "초거성의 진화과정 중 태양과 비슷한 유효온도를 보여주는 때를 '황색진화공백'으로 부르는데, 그 이유는 이 온도에서 거성은 불안정하여 오래 머무르지 않으므로 관측할 수 있는 대상이 드물기 때문이다."]}
             ]
         },
         {
@@ -636,33 +492,25 @@
             "ConstelWeight":[0.4],
             "Name":"*해왕성",
             "InternalName":"neptune",
-            "Lux":"--",
+            "LuxText":"--",
             "LuxValue":0,
             "LYDistance":"--",
             "Description":"--",
-            "Cards":
+            "Observable":false,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":false,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]},
-                        {"Header":"제목 1", "Description":"임시 텍스트 1", 
-                            "Additional":[]},
-                        {"Header":"제목 2", "Description":"임시 텍스트 2", 
-                            "Additional":[]},
-                        {"Header":"제목 3", "Description":"임시 텍스트 3", 
-                            "Additional":[]},
-                        {"Header":"제목 4", "Description":"임시 텍스트 4", 
-                            "Additional":[]},
-                        {"Header":"제목 5", "Description":"임시 텍스트 5", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                    "Additional":[]},
+                {"Header":"제목 1", "Description":"임시 텍스트 1", 
+                    "Additional":[]},
+                {"Header":"제목 2", "Description":"임시 텍스트 2", 
+                    "Additional":[]},
+                {"Header":"제목 3", "Description":"임시 텍스트 3", 
+                    "Additional":[]},
+                {"Header":"제목 4", "Description":"임시 텍스트 4", 
+                    "Additional":[]},
+                {"Header":"제목 5", "Description":"임시 텍스트 5", 
+                    "Additional":[]}
             ]
         },
         {
@@ -671,36 +519,28 @@
             "ConstelWeight":[1.0],
             "Name":"하말",
             "InternalName":"hamal",
-            "Lux":"2.0",
+            "LuxText":"2.0",
             "LuxValue":2,
             "LYDistance":"66 광년",
             "Description":"양자리 알파성. 양자리는 황도 12궁에 속하는 비교적 유명한 별자리이지만, 양자리에 속하는 별들은 알파성 하말과 베타성 샤라탄을 제외하면 모두 어둡다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"하말과의 짧은 첫 만남.", 
-                            "Additional":["양자리 알파성은 '하말(Hamal)' 또는 '엘 나스(El Nath)'로 불리며, 양자리에서 가장 밝은 별이다.",
-                                          "자체 밝기로는 평범하지만, 고대에 춘분점 위치에 있던 별이기 때문에 중요하게 다루어졌다. 그러나 현재는 세차운동에 의해 물고기자리로 춘분점이 옮겨진 상태."]},
-                        {"Header":"잠꾸러기", "Description":"주인공을 만나러 와서 자고 있었던 하말.", 
-                            "Additional":["잠자는 것을 무척 좋아하는 소녀. 작은 구름 위에 늘 올라타 있다."]},
-                        {"Header":"엄마라는 칭찬", "Description":"주인공은 자신을 걱정하는 하말에게 엄마같다고 칭찬하고, 하말은 매우 기뻐한다.", 
-                            "Additional":["어머니가 동화작가였다. 어린 하말을 위한 동화를 직접 써서 읽어준 모양."]},
-                        {"Header":"이른 이별", "Description":"어린 나이에 엄마를 잃은 기억을 떠올리는 하말.", 
-                            "Additional":["'하말(Hamal)'자체가 양이라는 뜻을 가지고 있기 때문에, 아랍어로 '양의 머리'라는 좀 더 구체적인 명칭으로 불리기도 했다.",
-                                          "플램스티드 기호로는 양자리 13으로 표기하나, 잘 사용하지 않는다."]},
-                        {"Header":"아기 양을 위한 선물", "Description":"하말이 삶의 의지를 찾은 것은 엄마의 유품 덕이었다.", 
-                            "Additional":["엄마의 죽음을 잊고 살았다는 것에 대해 죄책감을 느끼고 있었다."]},
-                        {"Header":"언젠가의 만남을 고대하며", "Description":"주인공에게 고마워하는 하말.", 
-                            "Additional":["하말은 K2 IIICa-1 분광형의 오렌지색 거성에 속한다.",
-                                          "하말의 경우 변광성의 성질을 약간 지니고 있는데, 0.05등급 정도의 밝기 변화를 보인다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"하말과의 짧은 첫 만남.", 
+                    "Additional":["양자리 알파성은 '하말(Hamal)' 또는 '엘 나스(El Nath)'로 불리며, 양자리에서 가장 밝은 별이다.",
+                                    "자체 밝기로는 평범하지만, 고대에 춘분점 위치에 있던 별이기 때문에 중요하게 다루어졌다. 그러나 현재는 세차운동에 의해 물고기자리로 춘분점이 옮겨진 상태."]},
+                {"Header":"잠꾸러기", "Description":"주인공을 만나러 와서 자고 있었던 하말.", 
+                    "Additional":["잠자는 것을 무척 좋아하는 소녀. 작은 구름 위에 늘 올라타 있다."]},
+                {"Header":"엄마라는 칭찬", "Description":"주인공은 자신을 걱정하는 하말에게 엄마같다고 칭찬하고, 하말은 매우 기뻐한다.", 
+                    "Additional":["어머니가 동화작가였다. 어린 하말을 위한 동화를 직접 써서 읽어준 모양."]},
+                {"Header":"이른 이별", "Description":"어린 나이에 엄마를 잃은 기억을 떠올리는 하말.", 
+                    "Additional":["'하말(Hamal)'자체가 양이라는 뜻을 가지고 있기 때문에, 아랍어로 '양의 머리'라는 좀 더 구체적인 명칭으로 불리기도 했다.",
+                                    "플램스티드 기호로는 양자리 13으로 표기하나, 잘 사용하지 않는다."]},
+                {"Header":"아기 양을 위한 선물", "Description":"하말이 삶의 의지를 찾은 것은 엄마의 유품 덕이었다.", 
+                    "Additional":["엄마의 죽음을 잊고 살았다는 것에 대해 죄책감을 느끼고 있었다."]},
+                {"Header":"언젠가의 만남을 고대하며", "Description":"주인공에게 고마워하는 하말.", 
+                    "Additional":["하말은 K2 IIICa-1 분광형의 오렌지색 거성에 속한다.",
+                                    "하말의 경우 변광성의 성질을 약간 지니고 있는데, 0.05등급 정도의 밝기 변화를 보인다."]}
             ]
         },
         {
@@ -709,33 +549,25 @@
             "ConstelWeight":[0.4],
             "Name":"*게 성운",
             "InternalName":"**d25",
-            "Lux":"--",
+            "LuxText":"--",
             "LuxValue":0,
             "LYDistance":"--",
             "Description":"--",
-            "Cards":
+            "Observable":false,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":false,
-                    "ChapterInfo":
-                    [
-                        {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                            "Additional":[]},
-                        {"Header":"제목 1", "Description":"임시 텍스트 1", 
-                            "Additional":[]},
-                        {"Header":"제목 2", "Description":"임시 텍스트 2", 
-                            "Additional":[]},
-                        {"Header":"제목 3", "Description":"임시 텍스트 3", 
-                            "Additional":[]},
-                        {"Header":"제목 4", "Description":"임시 텍스트 4", 
-                            "Additional":[]},
-                        {"Header":"제목 5", "Description":"임시 텍스트 5", 
-                            "Additional":[]}
-                    ]
-                }
+                {"Header":"제목 0", "Description":"임시 텍스트 0", 
+                    "Additional":[]},
+                {"Header":"제목 1", "Description":"임시 텍스트 1", 
+                    "Additional":[]},
+                {"Header":"제목 2", "Description":"임시 텍스트 2", 
+                    "Additional":[]},
+                {"Header":"제목 3", "Description":"임시 텍스트 3", 
+                    "Additional":[]},
+                {"Header":"제목 4", "Description":"임시 텍스트 4", 
+                    "Additional":[]},
+                {"Header":"제목 5", "Description":"임시 텍스트 5", 
+                    "Additional":[]}
             ]
         },
         {
@@ -744,39 +576,31 @@
             "ConstelWeight":[1.0],
             "Name":"아케르",
             "InternalName":"acher",
-            "Lux":"0.5",
+            "LuxText":"0.5",
             "LuxValue":0.5,
             "LYDistance":"144 광년",
             "Description":"모체가 된 별은 아케르나르. 에리다누스자리에서 가장 밝은 별이자 천구에서 아홉 번째로 밝은 별이다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"아케르와 소녀의 첫 만남.", 
-                            "Additional":["'아케르나르'라는 이름은 아랍어로 '강가의 끝'이라는 의미를 담고 있다. 이는 에리다누스자리의 가장 끝에 있는 별이기 때문이다.",
-                                          "그러나 과거 에리다누스자리의 가장 끝 별은 '아카마' 였다. 이윽고 사람들이 더 먼 곳으로 항해하면서 지평선 아래까지 이어져있는 에리다누스 자리를 보았고, 이때 현재의 아케르나르의 위치까지 별자리가 확장되었다."]},
-                        {"Header":"가족", "Description":"아빠와 오빠에 대한 추억을 떠올리는 아케르.", 
-                            "Additional":["아케르나르는 지구의 자전축이 움직이는 '세차 운동'에 의해 기원전 3000년 경에는 남극성의 위치에 있었다.",
-                                          "기원전 1500년 경에는 북위 18도 이하에서만 관측이 가능했으므로 고대 이집트의 기록에 남지 않았으며, 서기 100년의 알렉산드리아에서도 관측이 불가능했기 때문에 프톨레마이오스도 이 별에 대해 기록을 남기지 않았다."]},
-                        {"Header":"친구", "Description":"자신에게 특별했던 친구, 멜리크와의 이야기.", 
-                            "Additional":["아케르는 멜리크를 정말 특별한 친구로 생각했던 모양이다.",
-                                          "서기 1600년이 되어서야 아케르나르는 알렉산드리아에서 관측할 수 있게 되었다. 1603년 요한 바이어의 성도 '우라노메트리아'에 아케르나르가 에리다누스자리의 일부로 최초로 수록된다.",
-                                          "그러나 당시 요한 바이어도 독일에서 아케르나르를 볼 수 없었으며, 한국에서는 현재도 관측이 불가능하다."]},
-                        {"Header":"과거", "Description":"별이 되기 전 일을 떠올리던 중, 우울한 기억을 마주하게 된 아케르.", 
-                            "Additional":["아케르나르의 표면 온도는 17000K로 매우 고온이며, 이때문에 청백색으로 빛난다. 또한 태양의 3천배 이상 밝아 멀리서도 매우 잘 보인다."]},
-                        {"Header":"위로", "Description":"주인공과 멜리크의 위로 덕에 다시 감정을 추스리고 과거의 이야기를 해주는 아케르.", 
-                            "Additional":["생전에도, 별이 되어서도 특별한 친구인 둘이지만 아직 아케르는 멜리크의 진짜 꿈에 대해 모르고 있다.",
-                                          "아케르나르는 태양의 100배가 넘는 맹렬한 속도로 자전하고 있기 때문에 적도의 반지름이 극 반지름보다 50퍼센트나 더 크다. 이는 지금까지 관측된 별들 중 가장 평평한 형태에 가까운 사례이며, 아무리 항성이 빨리 자전해도 극과 적도 반지름 차이는 20 ~ 30퍼센트를 넘지 않을 것이라는 기존의 이론을 재검토하게 만들었다."]},
-                        {"Header":"이해", "Description":"지금까지의 자신을 돌아보며, 자신도 누군가를 행복하게 해줄 수 있을거라 생각하는 아케르.", 
-                            "Additional":["고대인들이 이 별자리에 이승과 저승을 나누는 죽음의 강의 이름을 붙인 이유는 아마도 별자리의 끝이 지평선과 길게 접해있었기 때문이라고 보여진다.",
-                                          "이 외에, 밝기의 변화는 적지만 규칙적인 광도 변화에 의해 에리다누스자리 람다형 변광성으로 분류되기도 한다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"아케르와 소녀의 첫 만남.", 
+                    "Additional":["'아케르나르'라는 이름은 아랍어로 '강가의 끝'이라는 의미를 담고 있다. 이는 에리다누스자리의 가장 끝에 있는 별이기 때문이다.",
+                                    "그러나 과거 에리다누스자리의 가장 끝 별은 '아카마' 였다. 이윽고 사람들이 더 먼 곳으로 항해하면서 지평선 아래까지 이어져있는 에리다누스 자리를 보았고, 이때 현재의 아케르나르의 위치까지 별자리가 확장되었다."]},
+                {"Header":"가족", "Description":"아빠와 오빠에 대한 추억을 떠올리는 아케르.", 
+                    "Additional":["아케르나르는 지구의 자전축이 움직이는 '세차 운동'에 의해 기원전 3000년 경에는 남극성의 위치에 있었다.",
+                                    "기원전 1500년 경에는 북위 18도 이하에서만 관측이 가능했으므로 고대 이집트의 기록에 남지 않았으며, 서기 100년의 알렉산드리아에서도 관측이 불가능했기 때문에 프톨레마이오스도 이 별에 대해 기록을 남기지 않았다."]},
+                {"Header":"친구", "Description":"자신에게 특별했던 친구, 멜리크와의 이야기.", 
+                    "Additional":["아케르는 멜리크를 정말 특별한 친구로 생각했던 모양이다.",
+                                    "서기 1600년이 되어서야 아케르나르는 알렉산드리아에서 관측할 수 있게 되었다. 1603년 요한 바이어의 성도 '우라노메트리아'에 아케르나르가 에리다누스자리의 일부로 최초로 수록된다.",
+                                    "그러나 당시 요한 바이어도 독일에서 아케르나르를 볼 수 없었으며, 한국에서는 현재도 관측이 불가능하다."]},
+                {"Header":"과거", "Description":"별이 되기 전 일을 떠올리던 중, 우울한 기억을 마주하게 된 아케르.", 
+                    "Additional":["아케르나르의 표면 온도는 17000K로 매우 고온이며, 이때문에 청백색으로 빛난다. 또한 태양의 3천배 이상 밝아 멀리서도 매우 잘 보인다."]},
+                {"Header":"위로", "Description":"주인공과 멜리크의 위로 덕에 다시 감정을 추스리고 과거의 이야기를 해주는 아케르.", 
+                    "Additional":["생전에도, 별이 되어서도 특별한 친구인 둘이지만 아직 아케르는 멜리크의 진짜 꿈에 대해 모르고 있다.",
+                                    "아케르나르는 태양의 100배가 넘는 맹렬한 속도로 자전하고 있기 때문에 적도의 반지름이 극 반지름보다 50퍼센트나 더 크다. 이는 지금까지 관측된 별들 중 가장 평평한 형태에 가까운 사례이며, 아무리 항성이 빨리 자전해도 극과 적도 반지름 차이는 20 ~ 30퍼센트를 넘지 않을 것이라는 기존의 이론을 재검토하게 만들었다."]},
+                {"Header":"이해", "Description":"지금까지의 자신을 돌아보며, 자신도 누군가를 행복하게 해줄 수 있을거라 생각하는 아케르.", 
+                    "Additional":["고대인들이 이 별자리에 이승과 저승을 나누는 죽음의 강의 이름을 붙인 이유는 아마도 별자리의 끝이 지평선과 길게 접해있었기 때문이라고 보여진다.",
+                                    "이 외에, 밝기의 변화는 적지만 규칙적인 광도 변화에 의해 에리다누스자리 람다형 변광성으로 분류되기도 한다."]}
             ]
         },
         {
@@ -785,37 +609,29 @@
             "ConstelWeight":[0.4],
             "Name":"로제",
             "InternalName":"roze",
-            "Lux":"9.0",
+            "LuxText":"9.0",
             "LuxValue":9,
             "LYDistance":"5200 광년",
             "Description":"장미 성운은 외뿔소자리에 위치한다. 마치 장미처럼 붉게 보이는 모습이 특징적이라 이러한 이름을 얻었다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"장미를 닮은 소녀와의 첫 만남.", 
-                            "Additional":["부스스한 머리카락과 장미같은 드레스를 입은 '로제'는 어딘지 모르게 무뚝뚝해 보였다."]},
-                        {"Header":"칭찬", "Description":"로제의 의상과 외모를 호평하는 주인공. 그러나 로제는 칭찬에 익숙하지 않아 보인다.", 
-                            "Additional":["뮤지컬 배우 출신이며, 그가 입고 있는 옷은 뮤지컬 <카르멘>의 의상이다.",
-                                          "눈매에 대한 콤플렉스를 가지고 있는 듯 하다."]},
-                        {"Header":"별명", "Description":"어릴적 로제는 수많은 좋지않은 별명을 달고 다녔다.", 
-                            "Additional":["장미 성운 영역은 NGC 목록에 2237, 2238, 2239, 2244, 2246으로 등록되어 있다. 그러나 이는 관측 기술의 한계 때문에 동일한 성운을 서로 다르게 본 적으로, 최근에는 중심부 산개 성단을 나타낼 때눈 NGC 2244, 성운 전체를 나타낼 때는 NGC 2237을 주로 사용한다."]},
-                        {"Header":"계기", "Description":"주인공의 물음에, 로제는 자신이 왜 뮤지컬 배우를 꿈꾸게 되었는지 알려준다.", 
-                            "Additional":["어릴 적 가정형편이 좋지 않았다.",
-                                          "마을의 무대를 보고 감명받아 뮤지컬 배우가 되려 상경했지만, 외모 때문에 배우 지원에서 떨어진 것을 알고 난 후 외모에 대한 콤플렉스가 더 심해졌다."]},
-                        {"Header":"비록 조금 더 먼 길일지라도", "Description":"뮤지컬 배우가 되겠다는 꿈을 버리지 않은 로제는 결국 어느 소극장에서 배우로 설 수 있게 되고, 한 창작가의 도움으로 각색한 내용의 <카르멘>을 연기해 유명해지기 시작한다.", 
-                            "Additional":["로제는 자신을 비난하는 어렸을 적의 별명도, 데뷔한 뒤의 별명도 별로 좋아하지 않는다.",
-                                          "장미 성운 영역은 H II 영역으로, '에이치 투 리전'으로 읽는다. '전리수소영역'으로 번역하는 경우도 있다.",
-                                          "H II 영역은 발광성운의 일종으로, 부분적으로 이온화된 기체로 이루어진 거대하고 밀도가 낮은 구름이다. 내부에서는 항성이 태어난다. 대표적인 예시로는 오리온자리의 말머리성운이 있다."]},
-                        {"Header":"수많은 카르멘들", "Description":"로제는 지금까지 보았던 <카르멘>의 주역들이 어떤 의미를 갖는지를 다시금 떠올리고, 자신의 진정한 소망과 마주하게 된다.", 
-                            "Additional":["과거의 로제는 자신을 카르멘에게 반영하여 지신의 외모에 대한 평가로부터 벗어나고 싶어했다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"장미를 닮은 소녀와의 첫 만남.", 
+                    "Additional":["부스스한 머리카락과 장미같은 드레스를 입은 '로제'는 어딘지 모르게 무뚝뚝해 보였다."]},
+                {"Header":"칭찬", "Description":"로제의 의상과 외모를 호평하는 주인공. 그러나 로제는 칭찬에 익숙하지 않아 보인다.", 
+                    "Additional":["뮤지컬 배우 출신이며, 그가 입고 있는 옷은 뮤지컬 <카르멘>의 의상이다.",
+                                    "눈매에 대한 콤플렉스를 가지고 있는 듯 하다."]},
+                {"Header":"별명", "Description":"어릴적 로제는 수많은 좋지않은 별명을 달고 다녔다.", 
+                    "Additional":["장미 성운 영역은 NGC 목록에 2237, 2238, 2239, 2244, 2246으로 등록되어 있다. 그러나 이는 관측 기술의 한계 때문에 동일한 성운을 서로 다르게 본 적으로, 최근에는 중심부 산개 성단을 나타낼 때눈 NGC 2244, 성운 전체를 나타낼 때는 NGC 2237을 주로 사용한다."]},
+                {"Header":"계기", "Description":"주인공의 물음에, 로제는 자신이 왜 뮤지컬 배우를 꿈꾸게 되었는지 알려준다.", 
+                    "Additional":["어릴 적 가정형편이 좋지 않았다.",
+                                    "마을의 무대를 보고 감명받아 뮤지컬 배우가 되려 상경했지만, 외모 때문에 배우 지원에서 떨어진 것을 알고 난 후 외모에 대한 콤플렉스가 더 심해졌다."]},
+                {"Header":"비록 조금 더 먼 길일지라도", "Description":"뮤지컬 배우가 되겠다는 꿈을 버리지 않은 로제는 결국 어느 소극장에서 배우로 설 수 있게 되고, 한 창작가의 도움으로 각색한 내용의 <카르멘>을 연기해 유명해지기 시작한다.", 
+                    "Additional":["로제는 자신을 비난하는 어렸을 적의 별명도, 데뷔한 뒤의 별명도 별로 좋아하지 않는다.",
+                                    "장미 성운 영역은 H II 영역으로, '에이치 투 리전'으로 읽는다. '전리수소영역'으로 번역하는 경우도 있다.",
+                                    "H II 영역은 발광성운의 일종으로, 부분적으로 이온화된 기체로 이루어진 거대하고 밀도가 낮은 구름이다. 내부에서는 항성이 태어난다. 대표적인 예시로는 오리온자리의 말머리성운이 있다."]},
+                {"Header":"수많은 카르멘들", "Description":"로제는 지금까지 보았던 <카르멘>의 주역들이 어떤 의미를 갖는지를 다시금 떠올리고, 자신의 진정한 소망과 마주하게 된다.", 
+                    "Additional":["과거의 로제는 자신을 카르멘에게 반영하여 지신의 외모에 대한 평가로부터 벗어나고 싶어했다."]}
             ]
         },
         {
@@ -824,41 +640,33 @@
             "ConstelWeight":[0.2],
             "Name":"글리제",
             "InternalName":"gliese",
-            "Lux":"13.0",
+            "LuxText":"13.0",
             "LuxValue":13,
             "LYDistance":"12.08 광년",
             "Description":"글리제-야레이스 1061. 시계자리에 위치한 적색 거성이다. 매우 어두운 편에 속해 맨눈으로는 관측이 불가능하다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"글리제와의 첫 만남", 
-                            "Additional":["시계자리는 남반구에 속한 별자리로, 북반구 고위도 지역일수록 관측이 어렵다.",
-                                          "이웃한 별자리로는 에리다누스 자리가 있다."]},
-                        {"Header":"시간을 알려주는 기계", "Description":"근처에 시계가 없음에 의아해하는 글리제. 주인공은 시계가 이제 장식품이 되어간다는 것을 알려준다.", 
-                            "Additional":["원래 명칭은 'Horologium Oscillitorium'으로, 추시계를 고안한 크리스티안 하위언스를 기념하기 위한 의미가 담겨있다.",
-                                          "자신이 갖고 다니는 거대한 시계가 대화 도중 언급되면 몹시 예민한 반응을 보인다."]},
-                        {"Header":"가족", "Description":"글리제는 시계를 만들던 가족들에 대해 언급한다.", 
-                            "Additional":["글리제의 부모님 또한 시계와 관련된 직업을 갖고 있었다.",
-                                          "종종 시계를 축소한 채로 가지고 다닌다.", 
-                                          "글리제에게는 오빠가 있었다."]},
-                        {"Header":"미련", "Description":"부모님의 이야기가 나오자 원망과 눈물을 보이는 글리제.", 
-                            "Additional":["글리제의 부모님은 이른 나이에 돌아가셨다.",
-                                          "시계자리에는 은하단이 존재한다. 은하단이란 은하의 집합으로, 시계자리 은하단은 약 5천계의 은하계를 포함한다."]},
-                        {"Header":"이별", "Description":"글리제와 그의 가족에 대한 이야기.", 
-                            "Additional":["글리제의 아버지는 추락사고로, 어머니는 과로사로 돌아가셨다.",
-                                          "글리제는 어머니의 죽음 후 집을 떠났다."]},
-                        {"Header":"유품", "Description":"오빠의 부고를 듣고 집으로 돌아온 글리제는, 오빠가 남긴 편지를 발견한다.", 
-                            "Additional":["글리제의 시계는 오빠의 유품이다.",
-                                          "글리제는 스스로 그 시계를 분해해 연구했고, 그때문에 더이상 시계는 작동하지 않는다.",
-                                          "가족에 대한 특별한 감정을 갖고 있다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"글리제와의 첫 만남", 
+                    "Additional":["시계자리는 남반구에 속한 별자리로, 북반구 고위도 지역일수록 관측이 어렵다.",
+                                    "이웃한 별자리로는 에리다누스 자리가 있다."]},
+                {"Header":"시간을 알려주는 기계", "Description":"근처에 시계가 없음에 의아해하는 글리제. 주인공은 시계가 이제 장식품이 되어간다는 것을 알려준다.", 
+                    "Additional":["원래 명칭은 'Horologium Oscillitorium'으로, 추시계를 고안한 크리스티안 하위언스를 기념하기 위한 의미가 담겨있다.",
+                                    "자신이 갖고 다니는 거대한 시계가 대화 도중 언급되면 몹시 예민한 반응을 보인다."]},
+                {"Header":"가족", "Description":"글리제는 시계를 만들던 가족들에 대해 언급한다.", 
+                    "Additional":["글리제의 부모님 또한 시계와 관련된 직업을 갖고 있었다.",
+                                    "종종 시계를 축소한 채로 가지고 다닌다.", 
+                                    "글리제에게는 오빠가 있었다."]},
+                {"Header":"미련", "Description":"부모님의 이야기가 나오자 원망과 눈물을 보이는 글리제.", 
+                    "Additional":["글리제의 부모님은 이른 나이에 돌아가셨다.",
+                                    "시계자리에는 은하단이 존재한다. 은하단이란 은하의 집합으로, 시계자리 은하단은 약 5천계의 은하계를 포함한다."]},
+                {"Header":"이별", "Description":"글리제와 그의 가족에 대한 이야기.", 
+                    "Additional":["글리제의 아버지는 추락사고로, 어머니는 과로사로 돌아가셨다.",
+                                    "글리제는 어머니의 죽음 후 집을 떠났다."]},
+                {"Header":"유품", "Description":"오빠의 부고를 듣고 집으로 돌아온 글리제는, 오빠가 남긴 편지를 발견한다.", 
+                    "Additional":["글리제의 시계는 오빠의 유품이다.",
+                                    "글리제는 스스로 그 시계를 분해해 연구했고, 그때문에 더이상 시계는 작동하지 않는다.",
+                                    "가족에 대한 특별한 감정을 갖고 있다."]}
             ]
         },
         {
@@ -867,36 +675,28 @@
             "ConstelWeight":[1.0],
             "Name":"리겔루스",
             "InternalName":"rigeleuse",
-            "Lux":"0.2",
+            "LuxText":"0.2",
             "LuxValue":0.2,
             "LYDistance":"773 광년",
             "Description":"오리온자리 베타성. 베타성이지만 알파성인 베텔게우스보다 더 밝다. 리겔이라는 이름은 아랍어 '리즐 자우자 알 유스라(자우자의 왼발)'에서 왔다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"눈 먼 손님", "Description":"리겔루스라 자신을 소개한 별. 그러나 그는 앞이 안 보이는 것 같은데...", 
-                            "Additional":["리겔은 하늘에서 일곱번째로 밝은 별이며, 이는 1등성 이상 별들 중 데네브, 베텔게우스 다음으로 세 번째이다.",
-                                          "또한 천구의 적도 근처에 있어서 북위 82도 아래의 거의 모든 지역에서 보이는데, 이 때문에 항해사들에게 매우 중요한 별이었다."]},
-                        {"Header":"농담?", "Description":"친해지려고 하지만, 뭔가 무서운 단어를 쓰는 리겔루스...무슨 일이 있었던 걸까?", 
-                            "Additional":["관측의 용이성에 의해 리겔은 다양한 문화권에서 다양한 이름으로 불렸다. 어원이 된 아랍어에서는 오리온자리를 '자우자' 라고 불렀다. 이외에 '리글 알-갑바르(거대한 자의 발)'라는 명칭도 있는데, 리겔을 부르는 다른 명칭인 '알게바', 혹은 '엘게바'의 어원이 되었다.",
-                                          "북유럽 신화에서는 리겔을 '아우르반딜의 발가락'으로 불렀으며, 과거 중국에서는 리겔을 '삼수칠(삼수에서 일곱 번째 별)'로 불렀다."]},
-                        {"Header":"과거", "Description":"자신을 비관하고 있는 리겔루스에게 위로의 말을 건네는 소녀.", 
-                            "Additional":["리겔은 지구에서 볼 때 하나로 보이지만 실제로는 삼중성계이다. 일반적으로 리겔이라 불리는 리겔 A는 태양 밝기의 12만배, 태양 반지름의 79배의 청백색 초거성이며, 그 옆에 리겔의 약 500분의 1에 해당하는 리겔 B 쌍성이 있다."]},
-                        {"Header":"인연", "Description":"리겔루스가 이렇게 된 것은 과거의 일 때문인 것 같다. 대체 어떤 일이 있었던걸까?", 
-                            "Additional":["리겔이 속한 오리온자리는 신화속의 유명한 사냥꾼에서 유래했다. 에우리알레의 딸이자 최고의 사냥꾼, 활 하나로 수많은 생명을 구하고 또 빼앗았던 전설의 영웅. 그러나 자만으로 인해 신의 벌을 받게 된다."]},
-                        {"Header":"달빛", "Description":"지금까지의 어두운 분위기에서 약간 벗어난듯한 모습을 보이는 리겔루스.", 
-                            "Additional":["1943년부터 리겔은 항성 분광형을 정하는 기준 스펙트럼으로 지정되어 지금까지 활용되어 오고 있다. 분광형은 항성(별)의 표면 온도와 그에 따른 색으로 정의되는 특성이다."]},
-                        {"Header":"좋아하는 일", "Description":"차분하게 과거 이야기를 해주는 리겔루스. 이전의 무서운 모습과는 사뭇 달라진 목소리로 소녀를 축복해주었다.", 
-                            "Additional":["지금까지의 패턴으로 볼 때, 리겔은 최후에 II형 초신성이 될 것이며 지구에서 가장 가까운 초신성 후보에 속한다.",
-                                          "한편 리겔은 조금씩 움직이고 있는데, 이동경로를 역추적하면 오리온 성운 근처가 되므로 오리온 OB1이라 불리는 젊은 항성 묶음에 포함시킬수도 있다는 주장이 제기되고 있다."]}
-                    ]
-                }
+                {"Header":"눈 먼 손님", "Description":"리겔루스라 자신을 소개한 별. 그러나 그는 앞이 안 보이는 것 같은데...", 
+                    "Additional":["리겔은 하늘에서 일곱번째로 밝은 별이며, 이는 1등성 이상 별들 중 데네브, 베텔게우스 다음으로 세 번째이다.",
+                                    "또한 천구의 적도 근처에 있어서 북위 82도 아래의 거의 모든 지역에서 보이는데, 이 때문에 항해사들에게 매우 중요한 별이었다."]},
+                {"Header":"농담?", "Description":"친해지려고 하지만, 뭔가 무서운 단어를 쓰는 리겔루스...무슨 일이 있었던 걸까?", 
+                    "Additional":["관측의 용이성에 의해 리겔은 다양한 문화권에서 다양한 이름으로 불렸다. 어원이 된 아랍어에서는 오리온자리를 '자우자' 라고 불렀다. 이외에 '리글 알-갑바르(거대한 자의 발)'라는 명칭도 있는데, 리겔을 부르는 다른 명칭인 '알게바', 혹은 '엘게바'의 어원이 되었다.",
+                                    "북유럽 신화에서는 리겔을 '아우르반딜의 발가락'으로 불렀으며, 과거 중국에서는 리겔을 '삼수칠(삼수에서 일곱 번째 별)'로 불렀다."]},
+                {"Header":"과거", "Description":"자신을 비관하고 있는 리겔루스에게 위로의 말을 건네는 소녀.", 
+                    "Additional":["리겔은 지구에서 볼 때 하나로 보이지만 실제로는 삼중성계이다. 일반적으로 리겔이라 불리는 리겔 A는 태양 밝기의 12만배, 태양 반지름의 79배의 청백색 초거성이며, 그 옆에 리겔의 약 500분의 1에 해당하는 리겔 B 쌍성이 있다."]},
+                {"Header":"인연", "Description":"리겔루스가 이렇게 된 것은 과거의 일 때문인 것 같다. 대체 어떤 일이 있었던걸까?", 
+                    "Additional":["리겔이 속한 오리온자리는 신화속의 유명한 사냥꾼에서 유래했다. 에우리알레의 딸이자 최고의 사냥꾼, 활 하나로 수많은 생명을 구하고 또 빼앗았던 전설의 영웅. 그러나 자만으로 인해 신의 벌을 받게 된다."]},
+                {"Header":"달빛", "Description":"지금까지의 어두운 분위기에서 약간 벗어난듯한 모습을 보이는 리겔루스.", 
+                    "Additional":["1943년부터 리겔은 항성 분광형을 정하는 기준 스펙트럼으로 지정되어 지금까지 활용되어 오고 있다. 분광형은 항성(별)의 표면 온도와 그에 따른 색으로 정의되는 특성이다."]},
+                {"Header":"좋아하는 일", "Description":"차분하게 과거 이야기를 해주는 리겔루스. 이전의 무서운 모습과는 사뭇 달라진 목소리로 소녀를 축복해주었다.", 
+                    "Additional":["지금까지의 패턴으로 볼 때, 리겔은 최후에 II형 초신성이 될 것이며 지구에서 가장 가까운 초신성 후보에 속한다.",
+                                    "한편 리겔은 조금씩 움직이고 있는데, 이동경로를 역추적하면 오리온 성운 근처가 되므로 오리온 OB1이라 불리는 젊은 항성 묶음에 포함시킬수도 있다는 주장이 제기되고 있다."]}
             ]
         },
         {
@@ -905,37 +705,29 @@
             "ConstelWeight":[0.4],
             "Name":"말머리 성운",
             "InternalName":"horsehead",
-            "Lux":"10.0",
+            "LuxText":"10.0",
             "LuxValue":10,
             "LYDistance":"약 1500 광년",
             "Description":"오리온자리의 암흑 성운. 성운의 모양이 말의 머리 부분을 닮아 이러한 이름이 붙었다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"갑작스런 만남", "Description":"갑자기 어둠속에서 나타난 그림자. 그 정체는 말머리 성운 '다크호스' 였다.", 
-                            "Additional":["말머리 성운이 유달리 어둡게 보이는 것은 뒤쪽의 발광 성운 IC434에서 오는 빛을 차단하고 있기 때문이다.",
-                                          "하늘에서 가장 알아보기 쉬운 성운 중 하나."]},
-                        {"Header":"만남, 한번 더?", "Description":"다시 주인공과 만난 다크호스 경. 어려운 단어를 못 알아듣는 주인공의 질문에 당황해한다.", 
-                            "Additional":["일반적으로 '말머리 성운'은 이 성운을 뜻하지만, 전갈자리의 '푸른 말머리 성운'도 있다.",
-                                          "오리온자리의 변두리에서 문지기 역할을 하고 있다.",
-                                          "오랜시간 묵묵히 문지기 일을 해온 그를 마을 사람들은 '다크호스 경'이라 부르고 있다."]},
-                        {"Header":"문지기가 하는 일", "Description":"다크호스 경에게 궁금한 것들을 질문하는 주인공.", 
-                            "Additional":["말머리 성운의 실제 위치는 오리온자리의 벨트를 이루는 3개의 별 중 가장 동쪽 별인 오리온자리 제타(알니탁) 바로 아래이다."]},
-                        {"Header":"등불", "Description":"간만에 만난 다크호스 경은 전에는 본 적 없는 등불을 들고 있었다.", 
-                            "Additional":["보급병인 '불꽃 성운'과 아는 사이인 듯 하다."]},
-                        {"Header":"암호", "Description":"경계를 삼엄하게 하라는 상부의 지시에 따라, 다크호스 경은 주인공에게 한 가지 부탁을 한다.", 
-                            "Additional":["전문가들은 천체 관측 시 붉은색 손수건이나 렌즈 등으로 빛이 최대한 덜 새어나가게 하기도 한다.",
-                                          "이러한 방법은 어두운 천체를 관측하기 위해 '암적응'된 눈을 갑작스런 빛으로부터 보호해준다."]},
-                        {"Header":"문지기의 사명", "Description":"다크호스 경은 주인공에게 문지기 일을 하는 동안 어려웠던 점을 말하면서도 자신의 사명을 되새긴다.", 
-                            "Additional":["실제로, 군대의 야간 훈련 시 붉은색 필터를 씌운 손전등을 지참하도록 하는데 이는 최소한의 피아 식별만을 가능하게 하기 위해서이다."]}
-                    ]
-                }
+                {"Header":"갑작스런 만남", "Description":"갑자기 어둠속에서 나타난 그림자. 그 정체는 말머리 성운 '다크호스' 였다.", 
+                    "Additional":["말머리 성운이 유달리 어둡게 보이는 것은 뒤쪽의 발광 성운 IC434에서 오는 빛을 차단하고 있기 때문이다.",
+                                    "하늘에서 가장 알아보기 쉬운 성운 중 하나."]},
+                {"Header":"만남, 한번 더?", "Description":"다시 주인공과 만난 다크호스 경. 어려운 단어를 못 알아듣는 주인공의 질문에 당황해한다.", 
+                    "Additional":["일반적으로 '말머리 성운'은 이 성운을 뜻하지만, 전갈자리의 '푸른 말머리 성운'도 있다.",
+                                    "오리온자리의 변두리에서 문지기 역할을 하고 있다.",
+                                    "오랜시간 묵묵히 문지기 일을 해온 그를 마을 사람들은 '다크호스 경'이라 부르고 있다."]},
+                {"Header":"문지기가 하는 일", "Description":"다크호스 경에게 궁금한 것들을 질문하는 주인공.", 
+                    "Additional":["말머리 성운의 실제 위치는 오리온자리의 벨트를 이루는 3개의 별 중 가장 동쪽 별인 오리온자리 제타(알니탁) 바로 아래이다."]},
+                {"Header":"등불", "Description":"간만에 만난 다크호스 경은 전에는 본 적 없는 등불을 들고 있었다.", 
+                    "Additional":["보급병인 '불꽃 성운'과 아는 사이인 듯 하다."]},
+                {"Header":"암호", "Description":"경계를 삼엄하게 하라는 상부의 지시에 따라, 다크호스 경은 주인공에게 한 가지 부탁을 한다.", 
+                    "Additional":["전문가들은 천체 관측 시 붉은색 손수건이나 렌즈 등으로 빛이 최대한 덜 새어나가게 하기도 한다.",
+                                    "이러한 방법은 어두운 천체를 관측하기 위해 '암적응'된 눈을 갑작스런 빛으로부터 보호해준다."]},
+                {"Header":"문지기의 사명", "Description":"다크호스 경은 주인공에게 문지기 일을 하는 동안 어려웠던 점을 말하면서도 자신의 사명을 되새긴다.", 
+                    "Additional":["실제로, 군대의 야간 훈련 시 붉은색 필터를 씌운 손전등을 지참하도록 하는데 이는 최소한의 피아 식별만을 가능하게 하기 위해서이다."]}
             ]
         },
         {
@@ -944,36 +736,28 @@
             "ConstelWeight":[0.2],
             "Name":"불꽃 성운",
             "InternalName":"flame",
-            "Lux":"2.0",
+            "LuxText":"2.0",
             "LuxValue":2,
             "LYDistance":"약 900 광년",
             "Description":"오리온자리 제타성 근처에 위치한 발광 성운이다. 말머리 성운 바로 옆에 위치한다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"등불을 든 아이, 플레임과의 첫 만남.", 
-                            "Additional":["오리온자리 내부의 보급창고를 지키는 역할을 하고 있다.",
-                                          "어려서부터 남을 생각하고 배려를 서슴치 않는 성격이지만 또래들을 만날 수 없는 자신의 처지를 아쉬워하고 있다."]},
-                        {"Header":"재회", "Description":"주인공을 다시 만나 반가워하는 플레임.", 
-                            "Additional":["겉보기 등급 2.0으로 비교적 밝고, 크기도 큰 편인 성운이지만 오리온자리 제타성에 가려 지구에서는 관측이 어렵다."]},
-                        {"Header":"오해", "Description":"주인공을 자기 또래의 별로 착각하는 플레임. 주인공은 해명하려 하지만 기회를 잡지 못한다.", 
-                            "Additional":["동양에서는 '태미원'에 속하는 '삼태성'에서 가장 밝은 별 근처에 있는 성운이다.",
-                                          "이 별은 서양에서는 '알니타크'라 불리며, 불꽃 성운 우측에서 강력한 빛을 전달해 불꽃 성운을 밝혀주고 있다."]},
-                        {"Header":"거짓말", "Description":"주인공에게 속았다며 화내는 플레임.", 
-                            "Additional":["불꽃 성운은 말머리 성운과 함께, 오리온자리 분자운 복합체의 일부이다.",
-                                          "오리온자리 분자운 복합체는 오리온자리에 위치한 무정형성운, 암흑성운, 젊은 항성들로 이루어진 커다란 집단이다. 복합체는 지구에서 1500 ~ 1600 광년 떨어져 있으며, 그 크기는 수백 광년에 달한다."]},
-                        {"Header":"후회", "Description":"자신의 잘못을 후회하고 있던 플레임 앞에 주인공이 다시 나타난다.", 
-                            "Additional":["불꽃 성운이라는 이름 외에, NGC 2024라는 명칭으로도 불린다."]},
-                        {"Header":"친구", "Description":"오해를 풀고 주인공과 친구가 되자고 제안하는 플레임.", 
-                            "Additional":["오리온자리 분자운 복합체 내의 성운에서는 새로운 별이 활발하게 생성되고 있으며, 이는 불꽃 성운에서도 마찬가지이다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"등불을 든 아이, 플레임과의 첫 만남.", 
+                    "Additional":["오리온자리 내부의 보급창고를 지키는 역할을 하고 있다.",
+                                    "어려서부터 남을 생각하고 배려를 서슴치 않는 성격이지만 또래들을 만날 수 없는 자신의 처지를 아쉬워하고 있다."]},
+                {"Header":"재회", "Description":"주인공을 다시 만나 반가워하는 플레임.", 
+                    "Additional":["겉보기 등급 2.0으로 비교적 밝고, 크기도 큰 편인 성운이지만 오리온자리 제타성에 가려 지구에서는 관측이 어렵다."]},
+                {"Header":"오해", "Description":"주인공을 자기 또래의 별로 착각하는 플레임. 주인공은 해명하려 하지만 기회를 잡지 못한다.", 
+                    "Additional":["동양에서는 '태미원'에 속하는 '삼태성'에서 가장 밝은 별 근처에 있는 성운이다.",
+                                    "이 별은 서양에서는 '알니타크'라 불리며, 불꽃 성운 우측에서 강력한 빛을 전달해 불꽃 성운을 밝혀주고 있다."]},
+                {"Header":"거짓말", "Description":"주인공에게 속았다며 화내는 플레임.", 
+                    "Additional":["불꽃 성운은 말머리 성운과 함께, 오리온자리 분자운 복합체의 일부이다.",
+                                    "오리온자리 분자운 복합체는 오리온자리에 위치한 무정형성운, 암흑성운, 젊은 항성들로 이루어진 커다란 집단이다. 복합체는 지구에서 1500 ~ 1600 광년 떨어져 있으며, 그 크기는 수백 광년에 달한다."]},
+                {"Header":"후회", "Description":"자신의 잘못을 후회하고 있던 플레임 앞에 주인공이 다시 나타난다.", 
+                    "Additional":["불꽃 성운이라는 이름 외에, NGC 2024라는 명칭으로도 불린다."]},
+                {"Header":"친구", "Description":"오해를 풀고 주인공과 친구가 되자고 제안하는 플레임.", 
+                    "Additional":["오리온자리 분자운 복합체 내의 성운에서는 새로운 별이 활발하게 생성되고 있으며, 이는 불꽃 성운에서도 마찬가지이다."]}
             ]
         },
         {
@@ -982,38 +766,30 @@
             "ConstelWeight":[1.0],
             "Name":"시리우스",
             "InternalName":"sirius",
-            "Lux":"-1.5",
+            "LuxText":"-1.5",
             "LuxValue":-1.5,
             "LYDistance":"8.6 광년",
             "Description":"큰개자리 알파성. 하늘에서 가장 밝은 별로 알려져있다. 작은개자리의 프로키온, 오리온자리의 베텔게우스와 함께 겨울철의 대삼각형으로 유명하다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"시리우스와의 첫 만남.", 
-                            "Additional":["시리우스에 관한 이야기는 여러 문명에서 전해져 내려온다.",
-                                          "'시리우스(Sirius)'에는 '눈부시게 빛난다', '불태운다' 라는 뜻이 있다."]},
-                        {"Header":"갑작스런 어색함", "Description":"다시 만난 시리우스는 자신을 '시리우스'라 부르는 주인공을 보고 말투가 급변한다.", 
-                            "Additional":["동양에서는 시리우스를 '천랑성'. 하늘의 늑대별이라 불렀는데, 푸르게 빛나는 시리우스가 늑대의 눈을 닮았기 때문이라 한다.",
-                                          "고대 이집트에서는 시리우스가 새벽녘 떠오르는 시기를 계산해 나일강의 범람을 예측했다. 그들은 시리우스를 '나일강의 별' 이라 부르며 숭배했다."]},
-                        {"Header":"끝나지 않는 자랑", "Description":"주인공에게 자신의 화려한 과거를 자랑하는 시리우스. 그러나 주인공은 슬슬 지겨워한다.", 
-                            "Additional":["일반적으로 1등성이라 하면 밤하늘에서 가장 밝은 별이지만, 시리우스는 1등성보다 약 10배 밝다.", 
-                                          "크기로는 태양보다 2배 크며, 맨눈으로 보이는 별 중 켄타우루스자리 알파성에 이어 두 번째로 가까이 있는 별이다."]},
-                        {"Header":"진실", "Description":"주인공 앞에서 계속 미안해하며 고개를 들지 못하는 시리우스.", 
-                            "Additional":["근래들어 시리우스는 2개의 별로 이루어진 쌍성계임이 밝혀졌다. 본래 시리우스라 알려진 밝은 별 옆에서 발견된 백색 왜성은 시리우스 B라 명명되었다.",
-                                          "시리우스 B의 경우 상대적으로 크고 밝은 짝별 옆에 위치하며 자체적으로 빛을 거의 내지 못하는 백색 왜성이기 때문에 관측이 매우 어렵다."]},
-                        {"Header":"부러움과 열등감", "Description":"시리우스는 자신의 동생에 대해, 그리고 동생에게 느꼈던 감정에 대해 털어놓는다.", 
-                            "Additional":["시리우스 A와 B는 거의 동시에 생성된 쌍성이나, 상대적으로 질량이 큰 시리우스 B의 경우 약 1.2억년 전 이미 적색 거성을 지나 백색 왜성이 되었다고 추측된다."]},
-                        {"Header":"두 명의 시리우스", "Description":"지난 일에 대한 사과로 인형을 선물하는 시리우스와 그를 격려하는 주인공.", 
-                            "Additional":["시리우스 B는 최초로 발견된 고밀도 천체로, 고밀도 천체에 대한 연구의 시발점이 되었다.",
-                                          "시리우스 B의 질량은 태양과 거의 같으나 그 질량이 지구만한 크기로 압축되어, 밀도와 중력이 비정상적으로 높다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"시리우스와의 첫 만남.", 
+                    "Additional":["시리우스에 관한 이야기는 여러 문명에서 전해져 내려온다.",
+                                    "'시리우스(Sirius)'에는 '눈부시게 빛난다', '불태운다' 라는 뜻이 있다."]},
+                {"Header":"갑작스런 어색함", "Description":"다시 만난 시리우스는 자신을 '시리우스'라 부르는 주인공을 보고 말투가 급변한다.", 
+                    "Additional":["동양에서는 시리우스를 '천랑성'. 하늘의 늑대별이라 불렀는데, 푸르게 빛나는 시리우스가 늑대의 눈을 닮았기 때문이라 한다.",
+                                    "고대 이집트에서는 시리우스가 새벽녘 떠오르는 시기를 계산해 나일강의 범람을 예측했다. 그들은 시리우스를 '나일강의 별' 이라 부르며 숭배했다."]},
+                {"Header":"끝나지 않는 자랑", "Description":"주인공에게 자신의 화려한 과거를 자랑하는 시리우스. 그러나 주인공은 슬슬 지겨워한다.", 
+                    "Additional":["일반적으로 1등성이라 하면 밤하늘에서 가장 밝은 별이지만, 시리우스는 1등성보다 약 10배 밝다.", 
+                                    "크기로는 태양보다 2배 크며, 맨눈으로 보이는 별 중 켄타우루스자리 알파성에 이어 두 번째로 가까이 있는 별이다."]},
+                {"Header":"진실", "Description":"주인공 앞에서 계속 미안해하며 고개를 들지 못하는 시리우스.", 
+                    "Additional":["근래들어 시리우스는 2개의 별로 이루어진 쌍성계임이 밝혀졌다. 본래 시리우스라 알려진 밝은 별 옆에서 발견된 백색 왜성은 시리우스 B라 명명되었다.",
+                                    "시리우스 B의 경우 상대적으로 크고 밝은 짝별 옆에 위치하며 자체적으로 빛을 거의 내지 못하는 백색 왜성이기 때문에 관측이 매우 어렵다."]},
+                {"Header":"부러움과 열등감", "Description":"시리우스는 자신의 동생에 대해, 그리고 동생에게 느꼈던 감정에 대해 털어놓는다.", 
+                    "Additional":["시리우스 A와 B는 거의 동시에 생성된 쌍성이나, 상대적으로 질량이 큰 시리우스 B의 경우 약 1.2억년 전 이미 적색 거성을 지나 백색 왜성이 되었다고 추측된다."]},
+                {"Header":"두 명의 시리우스", "Description":"지난 일에 대한 사과로 인형을 선물하는 시리우스와 그를 격려하는 주인공.", 
+                    "Additional":["시리우스 B는 최초로 발견된 고밀도 천체로, 고밀도 천체에 대한 연구의 시발점이 되었다.",
+                                    "시리우스 B의 질량은 태양과 거의 같으나 그 질량이 지구만한 크기로 압축되어, 밀도와 중력이 비정상적으로 높다."]}
             ]
         },
         {
@@ -1022,36 +798,28 @@
             "ConstelWeight":[1.0],
             "Name":"베가",
             "InternalName":"vega",
-            "Lux":"0.0",
+            "LuxText":"0.0",
             "LuxValue":0,
             "LYDistance":"25 광년",
             "Description":"거문고자리의 알파성이며, 여름철의 별 중 가장 밝게 빛난다. 우리나라에서는 '직녀성' 이라는 이름으로 더 유명하다. 백조자리의 데네브, 독수리자리의 알타이르와 더불어 여름철의 대삼각형이라 불린다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"베가와의 첫 만남.", 
-                            "Additional":["리라 제국의 차기 여왕이자 장차 별들의 왕의 자리에 오를 별이다.",
-                                          "지구의 자전축이 움직이는 '세차 운동'에 의해 북극성은 종종 다른 별로 바뀌어간다. 베가는 기원전 1만 2천년 무렵까지 북극성이었으며, 서기 1만 4천년 경 다시 북극성이 된다."]},
-                        {"Header":"관용", "Description":"자신을 방해될 정도로 쳐다본다고 화내는 베가. 이번만은 봐준다는 말로 넘어가게 된다.", 
-                            "Additional":["거문고자리에는 '고리 성운'이라 불리는 행성상성운이 있다. 메시에 번호 57번이 부여된 이 성운은 1779년 발견되었다.",
-                                          "베가의 남쪽, 거문고자리 베타성과 감마성 사이쯤에 위치하고 있으며 작은 망원경 정도로도 관측할 수 있다."]},
-                        {"Header":"놀이", "Description":"무료함을 달래기 위한 놀이를 제안해보라는 베가.", 
-                            "Additional":["이전 천문학자들은 겉보기 등급 척도의 기준으로 베가를 설정하였다. 베가의 겉보기 등급이 0.0인 이유는 이 때문이다."]},
-                        {"Header":"의심", "Description":"다시 만난 베가. 그러나 직속 부대에 대해 언급하자 수수께끼의 언동을 보인다.", 
-                            "Additional":["'여름의 대삼각형'부대는 베가의 직속 부대이자 그의 의남매들이 소속된 부대이기도 하다."]},
-                        {"Header":"과거", "Description":"갑자기 눈물을 보이는 베가와 당황하는 주인공.", 
-                            "Additional":["'알타이르'와 '데네브'는 다른 제국 출신임에도 베가와 의남매를 맺을 정도의 친우였다."]},
-                        {"Header":"비극", "Description":"마음을 정리하고 주인공에게 과거의 비극을 털어놓는 베가.", 
-                            "Additional":["'베가(vega)'라는 이름은 아랍어 '와키'에서 왔으며, 이 단어에는 '추락'이라는 뜻이 있다.",
-                                          "현대 천문학자들의 겉보기 등급의 표준을 '특정 수치의 플럭스(Flux)로 정하면서 베가의 겉보기 등급은 0.03으로 약간 조정되었다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"베가와의 첫 만남.", 
+                    "Additional":["리라 제국의 차기 여왕이자 장차 별들의 왕의 자리에 오를 별이다.",
+                                    "지구의 자전축이 움직이는 '세차 운동'에 의해 북극성은 종종 다른 별로 바뀌어간다. 베가는 기원전 1만 2천년 무렵까지 북극성이었으며, 서기 1만 4천년 경 다시 북극성이 된다."]},
+                {"Header":"관용", "Description":"자신을 방해될 정도로 쳐다본다고 화내는 베가. 이번만은 봐준다는 말로 넘어가게 된다.", 
+                    "Additional":["거문고자리에는 '고리 성운'이라 불리는 행성상성운이 있다. 메시에 번호 57번이 부여된 이 성운은 1779년 발견되었다.",
+                                    "베가의 남쪽, 거문고자리 베타성과 감마성 사이쯤에 위치하고 있으며 작은 망원경 정도로도 관측할 수 있다."]},
+                {"Header":"놀이", "Description":"무료함을 달래기 위한 놀이를 제안해보라는 베가.", 
+                    "Additional":["이전 천문학자들은 겉보기 등급 척도의 기준으로 베가를 설정하였다. 베가의 겉보기 등급이 0.0인 이유는 이 때문이다."]},
+                {"Header":"의심", "Description":"다시 만난 베가. 그러나 직속 부대에 대해 언급하자 수수께끼의 언동을 보인다.", 
+                    "Additional":["'여름의 대삼각형'부대는 베가의 직속 부대이자 그의 의남매들이 소속된 부대이기도 하다."]},
+                {"Header":"과거", "Description":"갑자기 눈물을 보이는 베가와 당황하는 주인공.", 
+                    "Additional":["'알타이르'와 '데네브'는 다른 제국 출신임에도 베가와 의남매를 맺을 정도의 친우였다."]},
+                {"Header":"비극", "Description":"마음을 정리하고 주인공에게 과거의 비극을 털어놓는 베가.", 
+                    "Additional":["'베가(vega)'라는 이름은 아랍어 '와키'에서 왔으며, 이 단어에는 '추락'이라는 뜻이 있다.",
+                                    "현대 천문학자들의 겉보기 등급의 표준을 '특정 수치의 플럭스(Flux)로 정하면서 베가의 겉보기 등급은 0.03으로 약간 조정되었다."]}
             ]
         },
         {
@@ -1060,41 +828,33 @@
             "ConstelWeight":[1.0],
             "Name":"수성",
             "InternalName":"mercury",
-            "Lux":"-1.9",
+            "LuxText":"-1.9",
             "LuxValue":-1.9,
             "LYDistance":"0.30 ~ 0.46 AU",
             "Description":"태양계의 행성 중 태양과 가장 가까이에 위치한 천체. 태양과 가까이에 있기 때문에 기체들은 대부분 날아가버리고 암석 위주의 '지구형 행성'이 되었다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"소년", "Description":"주인공은 자신을 수성이라 소개하는 소년을 만난다.", 
-                            "Additional":["수성은 태양계 가족 중 가장 막내로, 장난치는 것을 좋아하는 개구쟁이다.",
-                                          "태양의 영향을 강하게 받아 대기가 거의 없기 때문에, 표면에는 달과 비슷하게 수많은 크레이터가 있다."]},
-                        {"Header":"숨바꼭질", "Description":"심심한 수성은 주인공과 숨바꼭질을 한다.", 
-                            "Additional":["고대 그리스인들은 가장 빨리 공전하는 수성을 보고 발이 빠른 헤르메스의 이미지를 붙였다고 한다.",
-                                          "또한, 수성은 태양에 매우 가까이 붙어있기 때문에 태양이 뜨기 직전이나 진 직후 짧은 시간동안만 관측이 가능하다."]},
-                        {"Header":"태양", "Description":"수성은 억울한 표정으로 주인공을 찾아온다.", 
-                            "Additional":["철없는 수성은 자기의 잘못은 쏙 뺀 채 손윗남매들이 놀아주지 않는다고 일러바쳤다.",
-                                          "수성의 궤도 이심율은 0.21로 모든 행성들 중 가장 크다.",
-                                          "수성은 달처럼 태양과 항상 같은 면을 마주하고 있는데, 이는 궤도 공명 현상 때문이다. 수성은 3번 자전하는 동안 2번 공전한다."]},
-                        {"Header":"몰래카메라", "Description":"몰래카메라를 당한 화성이 단단히 화가 난 모습을 처음 본 수성은 걱정에 빠진다.", 
-                            "Additional":["수성에 대한 가장 오래된 기록은 기원전 14세기까지 거슬러 올라간다. 이들은 수성을 점프하는 행성이라고 기록했다.",
-                                          "기원전 1세기 바빌로니아에서는 '나부'라 불렀으며 마야 문명에서는 이승과 저승을 오가는 올빼미와 동일시했다.",
-                                          "고대 중국에서는 '진성'이라 불렀는데, 이는 오행과 연관된다. 인도 신화에서는 수요일을 관장하는 '부다'와 동일시했으며, 북유럽 신화에서도 오딘, 수성, 수요일은 밀접한 관련이 있다."]},
-                        {"Header":"사과", "Description":"수성은 화성에게 사과를 했으나 화성의 반응을 보고 혼란에 빠진다.", 
-                            "Additional":["수성은 화성을 무서운 형이라 생각하고 있지만, 결국 장난을 치는 걸 보면 꼭 그렇지도 않은 것 같다.",
-                                          "수성 탐사는 태양계 바깥쪽으로의 탐사보다 기술적으로 더 큰 도전을 요구한다. 태양의 영향력을 정확히 계산해야 하며 때로는 태양 반대편으로의 추진이 필요하기 때문이다."]},
-                        {"Header":"진심", "Description":"수성은 화성의 진심을 듣고 다시 활기를 되찾는다.", 
-                            "Additional":["화성과 금성에게 장난을 자주 쳐 혼나기도 하지만, 이들이 수성에게 진심으로 화냈던 적은 한 번도 없다.",
-                                          "수성과 금성은 수 세기마다 서로를 엄폐하는데, 이는 천문학에서 매우 드문 현상이다. 역사적으로는 1737년 5월에 일어났으며 다음번 엄폐 현상은 2133년 12월 3일에 일어날 것이다."]}
-                    ]
-                }
+                {"Header":"소년", "Description":"주인공은 자신을 수성이라 소개하는 소년을 만난다.", 
+                    "Additional":["수성은 태양계 가족 중 가장 막내로, 장난치는 것을 좋아하는 개구쟁이다.",
+                                    "태양의 영향을 강하게 받아 대기가 거의 없기 때문에, 표면에는 달과 비슷하게 수많은 크레이터가 있다."]},
+                {"Header":"숨바꼭질", "Description":"심심한 수성은 주인공과 숨바꼭질을 한다.", 
+                    "Additional":["고대 그리스인들은 가장 빨리 공전하는 수성을 보고 발이 빠른 헤르메스의 이미지를 붙였다고 한다.",
+                                    "또한, 수성은 태양에 매우 가까이 붙어있기 때문에 태양이 뜨기 직전이나 진 직후 짧은 시간동안만 관측이 가능하다."]},
+                {"Header":"태양", "Description":"수성은 억울한 표정으로 주인공을 찾아온다.", 
+                    "Additional":["철없는 수성은 자기의 잘못은 쏙 뺀 채 손윗남매들이 놀아주지 않는다고 일러바쳤다.",
+                                    "수성의 궤도 이심율은 0.21로 모든 행성들 중 가장 크다.",
+                                    "수성은 달처럼 태양과 항상 같은 면을 마주하고 있는데, 이는 궤도 공명 현상 때문이다. 수성은 3번 자전하는 동안 2번 공전한다."]},
+                {"Header":"몰래카메라", "Description":"몰래카메라를 당한 화성이 단단히 화가 난 모습을 처음 본 수성은 걱정에 빠진다.", 
+                    "Additional":["수성에 대한 가장 오래된 기록은 기원전 14세기까지 거슬러 올라간다. 이들은 수성을 점프하는 행성이라고 기록했다.",
+                                    "기원전 1세기 바빌로니아에서는 '나부'라 불렀으며 마야 문명에서는 이승과 저승을 오가는 올빼미와 동일시했다.",
+                                    "고대 중국에서는 '진성'이라 불렀는데, 이는 오행과 연관된다. 인도 신화에서는 수요일을 관장하는 '부다'와 동일시했으며, 북유럽 신화에서도 오딘, 수성, 수요일은 밀접한 관련이 있다."]},
+                {"Header":"사과", "Description":"수성은 화성에게 사과를 했으나 화성의 반응을 보고 혼란에 빠진다.", 
+                    "Additional":["수성은 화성을 무서운 형이라 생각하고 있지만, 결국 장난을 치는 걸 보면 꼭 그렇지도 않은 것 같다.",
+                                    "수성 탐사는 태양계 바깥쪽으로의 탐사보다 기술적으로 더 큰 도전을 요구한다. 태양의 영향력을 정확히 계산해야 하며 때로는 태양 반대편으로의 추진이 필요하기 때문이다."]},
+                {"Header":"진심", "Description":"수성은 화성의 진심을 듣고 다시 활기를 되찾는다.", 
+                    "Additional":["화성과 금성에게 장난을 자주 쳐 혼나기도 하지만, 이들이 수성에게 진심으로 화냈던 적은 한 번도 없다.",
+                                    "수성과 금성은 수 세기마다 서로를 엄폐하는데, 이는 천문학에서 매우 드문 현상이다. 역사적으로는 1737년 5월에 일어났으며 다음번 엄폐 현상은 2133년 12월 3일에 일어날 것이다."]}
             ]
         },
         {
@@ -1103,45 +863,37 @@
             "ConstelWeight":[1.0],
             "Name":"목성",
             "InternalName":"jupiter",
-            "Lux":"−1.6 ~ −2.94",
+            "LuxText":"−1.6 ~ −2.94",
             "LuxValue":-1.6,
             "LYDistance":"4.95 ~ 5.45 AU",
             "Description":"태양계에서 다섯번째에 위치한 천체. 태양계의 천체들 중 태양을 제외하면 가장 크다. 태양 질량의 1/1000, 태양을 제외한 다른 모든 태양계 천체를 합한 질량의 2.5배에 이른다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"목성과의 첫 만남.", 
-                            "Additional":["반듯하고 모범적인, 늘 웃고 다니는 인상이다. 태양계 가족의 맏이이다.",
-                                          "목성은 밤하늘에서 평균적으로 달과 금성 다음으로 세번째로 밝은 천체에 해당한다. 최대 겉보기 등급인 -2.94는 반사광이 그림자를 형성할 수 있을 정도의 밝기이다."]},
-                        {"Header":"마음을 가득 담아 묵직한", "Description":"목성이 가져온 마들렌은 수상한 보라색 연기가 나고 있었다. 그리고 속에는...", 
-                            "Additional":["요리에 대한 감각이 전혀 없다.",
-                                          "목성의 대기는 질량비로 봤을 때 약 75%의 수소와 24%의 헬륨으로 이루어져 있다. 이외에 미량의 메테인, 수증기, 암모니아, 규소화합물, 탄소, 에테인, 황화수소, 네온, 산소, 포스핀, 황, 벤젠, 탄화수소 등을 포함한다.",
-                                          "목성의 내부로 갈 수록 기타 물질들의 비율이 높아져 약 5% 까지 올라간다."]},
-                        {"Header":"좋은 맏이가 되고 싶어", "Description":"요리뿐만 아니라 청소를 비롯한 가사일에 늘 실수연발인 목성.", 
-                            "Additional":["스스로가 제대로 맏이 역할을 하지 못한다고 생각한다. 그러나 책임감에 손댄 가사일은 늘 동생들이 뒷수습을 하고 있다.",
-                                          "우리가 목성의 모습으로 알고 있는 외부 색상은 암모니아 결정과 황화수소암모늄으로 구성된 구름에 의한 것으로, 여기에 인, 황, 탄화수소등이 섞이며 오렌지색과 갈색을 띤다고 여겨진다.",
-                                        "목성의 가장 큰 외형적 특징인 대적점은 거대한 폭풍에 해당하며, 지구 2~3개가 들어갈만한 크기이다. 대적점은 약 6일 주기로 반시계방향으로 회전한다."]},
-                        {"Header":"자격", "Description":"아끼는 마음만으로는 충분하지 않다는 목성. 늘 민폐를 끼친다고 생각하고 있다.", 
-                            "Additional":["목성은 자신이 의지가 되는 맏이가 돼야 한다는 강박에 사로잡혀있다.",
-                                          "강력한 중력에 의해 79개에 달하는 위성이 존재한다. 이 중 가장 유명한 것이 '갈릴레이 위성'이라 불리는 '이오', '유로파', '가니메데', '칼리스토'이다.",
-                                          "이들 '갈릴레이 위성'이 목성 주위를 도는 모습은 모든 천체가 지구를 중심으로 돈다는 천동설을 반증하는 사례가 되었다.",
-                                          "목성에도 여러 겹의 고리가 존재하나, 상대적으로 희미해 잘 보이지 않는다. 목성의 위성들 중에는 고리 주변에 위치해 고리의 형태를 유지해주는 '양치기 위성'의 역할을 하는 위성들이 많다."]},
-                        {"Header":"마음이 전달된다면", "Description":"목성은 주인공과 이야기 한 후, 동생들과 이야기 해 볼 마음을 굳힌다.", 
-                            "Additional":["자신이 갖고 있던 강박에서 약간 벗어난 것 같다.",
-                                          "동생들에 대한 애정이 몹시 강하다. 그 때문에 자신이 하는 행동의 동기가 주로 동생들이다.",
-                                          "목성의 자기장은 지구보다 14배나 강하며, 태양계에서 태양의 흑점을 제외하고 가장 강력하다. 목성의 액상 금속성 수소핵 속 물질들의 소용돌이 운동이 발생원으로 여겨진다."]},
-                        {"Header":"서로가 서로에게", "Description":"동생들과의 진심어린 대화로 서로의 마음을 확인한 남매들. 목성은 주인공에게 감사를 전한다.", 
-                            "Additional":["동생들의 이야기를 들으며 자신의 잘못된 생각을 고친 것 같다. 동시에 소녀를 매우 의지하고 있었던 것을 인정하게 되었다.",
-                                          "목성의 자전주기는 10시간으로 태양계 행성들 중 가장 빠르며, 이로인해 목성의 적도 부근은 불룩하게 튀어나와 있다.",
-                                          "또한 목성은 고체가 아니기 때문에 위도에 따라 자전속도가 다르다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"목성과의 첫 만남.", 
+                    "Additional":["반듯하고 모범적인, 늘 웃고 다니는 인상이다. 태양계 가족의 맏이이다.",
+                                    "목성은 밤하늘에서 평균적으로 달과 금성 다음으로 세번째로 밝은 천체에 해당한다. 최대 겉보기 등급인 -2.94는 반사광이 그림자를 형성할 수 있을 정도의 밝기이다."]},
+                {"Header":"마음을 가득 담아 묵직한", "Description":"목성이 가져온 마들렌은 수상한 보라색 연기가 나고 있었다. 그리고 속에는...", 
+                    "Additional":["요리에 대한 감각이 전혀 없다.",
+                                    "목성의 대기는 질량비로 봤을 때 약 75%의 수소와 24%의 헬륨으로 이루어져 있다. 이외에 미량의 메테인, 수증기, 암모니아, 규소화합물, 탄소, 에테인, 황화수소, 네온, 산소, 포스핀, 황, 벤젠, 탄화수소 등을 포함한다.",
+                                    "목성의 내부로 갈 수록 기타 물질들의 비율이 높아져 약 5% 까지 올라간다."]},
+                {"Header":"좋은 맏이가 되고 싶어", "Description":"요리뿐만 아니라 청소를 비롯한 가사일에 늘 실수연발인 목성.", 
+                    "Additional":["스스로가 제대로 맏이 역할을 하지 못한다고 생각한다. 그러나 책임감에 손댄 가사일은 늘 동생들이 뒷수습을 하고 있다.",
+                                    "우리가 목성의 모습으로 알고 있는 외부 색상은 암모니아 결정과 황화수소암모늄으로 구성된 구름에 의한 것으로, 여기에 인, 황, 탄화수소등이 섞이며 오렌지색과 갈색을 띤다고 여겨진다.",
+                                "목성의 가장 큰 외형적 특징인 대적점은 거대한 폭풍에 해당하며, 지구 2~3개가 들어갈만한 크기이다. 대적점은 약 6일 주기로 반시계방향으로 회전한다."]},
+                {"Header":"자격", "Description":"아끼는 마음만으로는 충분하지 않다는 목성. 늘 민폐를 끼친다고 생각하고 있다.", 
+                    "Additional":["목성은 자신이 의지가 되는 맏이가 돼야 한다는 강박에 사로잡혀있다.",
+                                    "강력한 중력에 의해 79개에 달하는 위성이 존재한다. 이 중 가장 유명한 것이 '갈릴레이 위성'이라 불리는 '이오', '유로파', '가니메데', '칼리스토'이다.",
+                                    "이들 '갈릴레이 위성'이 목성 주위를 도는 모습은 모든 천체가 지구를 중심으로 돈다는 천동설을 반증하는 사례가 되었다.",
+                                    "목성에도 여러 겹의 고리가 존재하나, 상대적으로 희미해 잘 보이지 않는다. 목성의 위성들 중에는 고리 주변에 위치해 고리의 형태를 유지해주는 '양치기 위성'의 역할을 하는 위성들이 많다."]},
+                {"Header":"마음이 전달된다면", "Description":"목성은 주인공과 이야기 한 후, 동생들과 이야기 해 볼 마음을 굳힌다.", 
+                    "Additional":["자신이 갖고 있던 강박에서 약간 벗어난 것 같다.",
+                                    "동생들에 대한 애정이 몹시 강하다. 그 때문에 자신이 하는 행동의 동기가 주로 동생들이다.",
+                                    "목성의 자기장은 지구보다 14배나 강하며, 태양계에서 태양의 흑점을 제외하고 가장 강력하다. 목성의 액상 금속성 수소핵 속 물질들의 소용돌이 운동이 발생원으로 여겨진다."]},
+                {"Header":"서로가 서로에게", "Description":"동생들과의 진심어린 대화로 서로의 마음을 확인한 남매들. 목성은 주인공에게 감사를 전한다.", 
+                    "Additional":["동생들의 이야기를 들으며 자신의 잘못된 생각을 고친 것 같다. 동시에 소녀를 매우 의지하고 있었던 것을 인정하게 되었다.",
+                                    "목성의 자전주기는 10시간으로 태양계 행성들 중 가장 빠르며, 이로인해 목성의 적도 부근은 불룩하게 튀어나와 있다.",
+                                    "또한 목성은 고체가 아니기 때문에 위도에 따라 자전속도가 다르다."]}
             ]
         },
         {
@@ -1150,45 +902,37 @@
             "ConstelWeight":[1.0],
             "Name":"금성",
             "InternalName":"venus",
-            "Lux":"−1.6 ~ −2.94",
+            "LuxText":"−1.6 ~ −2.94",
             "LuxValue":-1.6,
             "LYDistance":"0.72 AU",
             "Description":"태양계에서 두 번째, 수성과 지구 사이에 위치한 천체. 지구에서 관측이 쉬운 편인 태양계 천체 중 하나로, 과거부터 많은 이름으로 불려왔다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"금성과의 첫 만남.", 
-                            "Additional":["주인공보다 훨씬 나이가 많지만, '언니'라고 불러주기를 바란다.",
-                                          "자주 입고 다니는 옷은 연한 분홍색 자켓과 스커트, 프릴이 달린 주황색 상의이다.",
-                                          "샛별, 새별로 불리며, 달에 이어 밤하늘에서 두 번째로 밝은 천체이다. 이 때의 등급은 -4.5등급."]},
-                        {"Header":"사진", "Description":"주인공과 셀카를 찍는 금성.", 
-                            "Additional":["사진 찍는 것을 가장 좋아한다.",
-                                          "정상이라고 여기기 어려울 정도로 사진을 많이 찍는 편이다.",
-                                          "'금성'이라는 명칭은 오행 중 금에서 유래했으며, 태백성이라고도 불렸다. 또한 저녁 무렵에 나타나는 금성을 장경성, 새벽 무렵에 나타나는 금성을 샛별 혹은 (계)명성이라 구분하기도 했다."]},
-                        {"Header":"위성", "Description":"주인공이 엄청나게 많은 사진에 대해 묻자 자신의 습관이라 말하는 금성.", 
-                            "Additional":["금성은 대부분이 암석으로 이루어진 지구형 행성이다.",
-                                          "크기와 화학 조성이 지구와 매우 비슷하여 지구의 '자매 행성'으로 불리기도 한다.",
-                                          "그러나 금성의 표면을 관측하는 것은 매우 어려운데, 그 이유는 95기압에 달하는 농밀한 대기를 가지고 있으며 반사도가 높은 불투명한 구름으로 덮여있기 때문이다.",
-                                          "이러한 특징 때문에, 금성의 표면 온도는 약 400도에 달한다."]},
-                        {"Header":"아련한 추억", "Description":"오래 전 있었던 자신의 꼬마 위성에 대해 말해주는 금성.", 
-                            "Additional":["아주 예전에는 자신의 위성을 가지고 있었다. 깊은 애정을 가졌고, 아직도 그리워하고 있다.",
-                                          "하나의 가설에 의하면 금성은 수십억년 전 대충돌로 인해 형성된 최소 하나의 위성을 가지고있었지만, 천만년 정도 후 또 다른 대충돌로 인해 자전축이 뒤집히고 운석이 금성에 충돌하며 사라졌다고 한다.",
-                                          "정식 위성은 아니지만, 소행성 2002 VE68은 현재 금성과 유사위성궤도 관계를 유지하고 있다."]},
-                        {"Header":"과거", "Description":"금성은 위성과 갑자기 이별한 이후, 사소한 것 하나도 기억하기 위해 사진을 찍기 시작했다.", 
-                            "Additional":["금성의 공전 궤도는 224.7일, 자전 궤도는 243일이다. 태양계 행성 중에서는 가장 느린 속도이며, 금성에서의 하루는 1년과 거의 비슷하다.",
-                                          "특이할만한 사항으로, 금성은 다른 행성들과 다르게 북반구 기준 시계방향으로 자전한다. 따라서 금성에서 태양은 서쪽에서 떠서 동쪽으로 진다."]},
-                        {"Header":"지금 이 순간", "Description":"사진을 내려놓고 가족들과의 만남을 즐긴 금성. 단순한 기록과 마음에 새겨진 추억의 차이를 깨닫게 된다.", 
-                            "Additional":["금성은 지구와 유사하게 핵, 맨틀, 지각이 있을거라 추측되지만 판 구조론적인 활동이 보이지 않는 것이 큰 차이점이다.",
-                                          "최대 1억년 정도면 해구 아래로 사라지는 지구의 표면과 달리, 금성의 표면은 적어도 5억년 이상 되었을 것으로 추측된다.",
-                                          "금성의 지표면이 변화하는 것은 풍화작용과 더불어, 판 구조 활동에 의해 맨틀의 열이 빠져나가지 못해 지각이 한꺼번에 섭입 후 새 지각이 만들어지기 때문이다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"금성과의 첫 만남.", 
+                    "Additional":["주인공보다 훨씬 나이가 많지만, '언니'라고 불러주기를 바란다.",
+                                    "자주 입고 다니는 옷은 연한 분홍색 자켓과 스커트, 프릴이 달린 주황색 상의이다.",
+                                    "샛별, 새별로 불리며, 달에 이어 밤하늘에서 두 번째로 밝은 천체이다. 이 때의 등급은 -4.5등급."]},
+                {"Header":"사진", "Description":"주인공과 셀카를 찍는 금성.", 
+                    "Additional":["사진 찍는 것을 가장 좋아한다.",
+                                    "정상이라고 여기기 어려울 정도로 사진을 많이 찍는 편이다.",
+                                    "'금성'이라는 명칭은 오행 중 금에서 유래했으며, 태백성이라고도 불렸다. 또한 저녁 무렵에 나타나는 금성을 장경성, 새벽 무렵에 나타나는 금성을 샛별 혹은 (계)명성이라 구분하기도 했다."]},
+                {"Header":"위성", "Description":"주인공이 엄청나게 많은 사진에 대해 묻자 자신의 습관이라 말하는 금성.", 
+                    "Additional":["금성은 대부분이 암석으로 이루어진 지구형 행성이다.",
+                                    "크기와 화학 조성이 지구와 매우 비슷하여 지구의 '자매 행성'으로 불리기도 한다.",
+                                    "그러나 금성의 표면을 관측하는 것은 매우 어려운데, 그 이유는 95기압에 달하는 농밀한 대기를 가지고 있으며 반사도가 높은 불투명한 구름으로 덮여있기 때문이다.",
+                                    "이러한 특징 때문에, 금성의 표면 온도는 약 400도에 달한다."]},
+                {"Header":"아련한 추억", "Description":"오래 전 있었던 자신의 꼬마 위성에 대해 말해주는 금성.", 
+                    "Additional":["아주 예전에는 자신의 위성을 가지고 있었다. 깊은 애정을 가졌고, 아직도 그리워하고 있다.",
+                                    "하나의 가설에 의하면 금성은 수십억년 전 대충돌로 인해 형성된 최소 하나의 위성을 가지고있었지만, 천만년 정도 후 또 다른 대충돌로 인해 자전축이 뒤집히고 운석이 금성에 충돌하며 사라졌다고 한다.",
+                                    "정식 위성은 아니지만, 소행성 2002 VE68은 현재 금성과 유사위성궤도 관계를 유지하고 있다."]},
+                {"Header":"과거", "Description":"금성은 위성과 갑자기 이별한 이후, 사소한 것 하나도 기억하기 위해 사진을 찍기 시작했다.", 
+                    "Additional":["금성의 공전 궤도는 224.7일, 자전 궤도는 243일이다. 태양계 행성 중에서는 가장 느린 속도이며, 금성에서의 하루는 1년과 거의 비슷하다.",
+                                    "특이할만한 사항으로, 금성은 다른 행성들과 다르게 북반구 기준 시계방향으로 자전한다. 따라서 금성에서 태양은 서쪽에서 떠서 동쪽으로 진다."]},
+                {"Header":"지금 이 순간", "Description":"사진을 내려놓고 가족들과의 만남을 즐긴 금성. 단순한 기록과 마음에 새겨진 추억의 차이를 깨닫게 된다.", 
+                    "Additional":["금성은 지구와 유사하게 핵, 맨틀, 지각이 있을거라 추측되지만 판 구조론적인 활동이 보이지 않는 것이 큰 차이점이다.",
+                                    "최대 1억년 정도면 해구 아래로 사라지는 지구의 표면과 달리, 금성의 표면은 적어도 5억년 이상 되었을 것으로 추측된다.",
+                                    "금성의 지표면이 변화하는 것은 풍화작용과 더불어, 판 구조 활동에 의해 맨틀의 열이 빠져나가지 못해 지각이 한꺼번에 섭입 후 새 지각이 만들어지기 때문이다."]}
             ]
         },
         {
@@ -1197,44 +941,36 @@
             "ConstelWeight":[1.0],
             "Name":"천왕성",
             "InternalName":"uranus",
-            "Lux":"5.32 ~ 5.9",
+            "LuxText":"5.32 ~ 5.9",
             "LuxValue":5.32,
             "LYDistance":"18.28 ~ 20.09 AU",
             "Description":"태양계 행성들 중 근대 들어 발견된 최초의 행성이다. 또한 맨눈이 아닌 망원경으로 발견한 최초의 행성이기도 하다.",
-            "Cards":
+            "Observable":true,
+            "ChapterInfo":
             [
-                {
-                    "Subname":"[별의 정령]",
-                    "InternalSubname":"default",
-                    "Rarity":5,
-                    "Observable":true,
-                    "ChapterInfo":
-                    [
-                        {"Header":"첫 만남", "Description":"다소 지나칠 정도로 외향적인, 천왕성과의 첫 만남.", 
-                            "Additional":["해왕성과는 쌍둥이. 서로 오랜 시간을 보내던 예전과 달리 놀러 다니기를 좋아하는 자신 때문에 해왕성이 외로워하진 않을지 걱정하고 있다.",
-                                          "늘 새로운 별들을 만나러 돌아다니는 외향적인 성격이다.",
-                                          "천왕성과 해왕성은 그 구성물질이 비슷한 반면 목성, 토성과는 다르기 때문에, 천문학자들은 종종 이 둘을 '얼음 거대 행성'으로 분류한다."]},
-                        {"Header":"자기소개", "Description":"주인공의 이야기를 들어주다가 자기소개를 하게 된 천왕성.", 
-                            "Additional":["천왕성은 대부분이 기체로 이루어진 '목성형 행성'에 속한다. 태양계에서는 일곱번째, 토성과 천왕성의 사이에 위치한다.",
-                                          "영어 이름 '우라노스(Uranus)'는 크로노스의 아버지이자 제우스의 할아버지인 하늘의 신에서 따왔다.",
-                                          "천왕성은 특이하게도 자전축이 약 98도정도로 크게 기울어있어, 공전면과 거의 맞닿을 정도이다.",
-                                          "자전축의 기울기 때문에, 지구에서 볼 때 천왕성의 고리는 종종 천왕성을 중심으로 한 과녁 모양으로 보인다."]},
-                        {"Header":"차이", "Description":"해왕성과 함께 놀러나가자고 했지만 거절당한 이야기를 하는 천왕성.", 
-                            "Additional":["쌍둥이 오빠인 해왕성과 사이가 별로 좋지 않아 보인다. 푸른 머리카락을 양갈래로 묶은 헤어스타일이 특징이다.",
-                                          "해왕성과 달리, 동생 명왕성은 각별하게 아끼고 있다.",
-                                          "혼자 있으려는 해왕성의 성격을 이해하지 못하는 것이 갈등의 원인이다."]},
-                        {"Header":"충격", "Description":"자신이 준비한 사탕보다 해왕성이 준비한 책에 더 빠져드는 명왕성을 보고 상심해 주인공을 찾아온 천왕성.", 
-                            "Additional":["천왕성은 해왕성과의 유사성이 많지만, 대기에서는 큰 차이를 보인다. 다른 목성형 행성과 달리 고요하며, 특이할만한 구름도 손에 꼽을 정도였다.",
-                                          "이러한 이유는 천왕성의 내부열이 현저히 낮기 때문이다. 천왕성의 대류권 계면에서 가장 낮은 온도는 49K로, 이는 해왕성보다도 낮은 온도이다.",
-                                          "그러나 특정한 주기로 천왕성에는 커다란 구름이 나타나고 격렬한 뇌우가 발견되는데, 천문학자들은 천왕성의 극단적인 자전축 기울기에서 그 원인을 찾으려 하고 있다."]},
-                        {"Header":"이해", "Description":"해왕성과 직접 이야기를 나눈 끝에 서로의 차이를 인정하게 된 천왕성.", 
-                            "Additional":["천왕성은 총 27개의 위성을 가지고 있으며, 중요한 5개의 위성으로는 '미란다', '아리엘', '움브리엘', '티타니아', '오베론'을 들 수 있다. 셰익스피어의 희곡과 알렉산더 포프의 시에 등장하는 요정들의 이름을 따서 지어졌다."]},
-                        {"Header":"때로는 친구, 때로는 남매", "Description":"서로의 마음을 확인하고 좀 더 친한 사이가 된 것에 기뻐하는 천왕성.", 
-                            "Additional":["해왕성과 좀 더 편한 사이가 됐지만, 해왕성을 '오빠'라고 부르지는 않을 모양이다.",
-                                          "천왕성은 자전축이 98도 틀어졌기 때문에 한쪽의 극은 42년동안 태양 쪽을 향하고, 반대쪽은 42년동안 어둠에 놓인다. 그러나 천왕성의 적도가 극보다 따뜻한데, 이러한 기현상은 대기의 열 저장량과 관련있을 것이라 추정된다.",
-                                          "미국의 한 연구팀에 따르면, 해왕성과 천왕성의 내부에는 유체만이 존재하며, 이 바다는 다이아몬드 바다이고 그 위에 다이아몬드 덩어리들이 떠다닐 것이라고 한다."]}
-                    ]
-                }
+                {"Header":"첫 만남", "Description":"다소 지나칠 정도로 외향적인, 천왕성과의 첫 만남.", 
+                    "Additional":["해왕성과는 쌍둥이. 서로 오랜 시간을 보내던 예전과 달리 놀러 다니기를 좋아하는 자신 때문에 해왕성이 외로워하진 않을지 걱정하고 있다.",
+                                    "늘 새로운 별들을 만나러 돌아다니는 외향적인 성격이다.",
+                                    "천왕성과 해왕성은 그 구성물질이 비슷한 반면 목성, 토성과는 다르기 때문에, 천문학자들은 종종 이 둘을 '얼음 거대 행성'으로 분류한다."]},
+                {"Header":"자기소개", "Description":"주인공의 이야기를 들어주다가 자기소개를 하게 된 천왕성.", 
+                    "Additional":["천왕성은 대부분이 기체로 이루어진 '목성형 행성'에 속한다. 태양계에서는 일곱번째, 토성과 천왕성의 사이에 위치한다.",
+                                    "영어 이름 '우라노스(Uranus)'는 크로노스의 아버지이자 제우스의 할아버지인 하늘의 신에서 따왔다.",
+                                    "천왕성은 특이하게도 자전축이 약 98도정도로 크게 기울어있어, 공전면과 거의 맞닿을 정도이다.",
+                                    "자전축의 기울기 때문에, 지구에서 볼 때 천왕성의 고리는 종종 천왕성을 중심으로 한 과녁 모양으로 보인다."]},
+                {"Header":"차이", "Description":"해왕성과 함께 놀러나가자고 했지만 거절당한 이야기를 하는 천왕성.", 
+                    "Additional":["쌍둥이 오빠인 해왕성과 사이가 별로 좋지 않아 보인다. 푸른 머리카락을 양갈래로 묶은 헤어스타일이 특징이다.",
+                                    "해왕성과 달리, 동생 명왕성은 각별하게 아끼고 있다.",
+                                    "혼자 있으려는 해왕성의 성격을 이해하지 못하는 것이 갈등의 원인이다."]},
+                {"Header":"충격", "Description":"자신이 준비한 사탕보다 해왕성이 준비한 책에 더 빠져드는 명왕성을 보고 상심해 주인공을 찾아온 천왕성.", 
+                    "Additional":["천왕성은 해왕성과의 유사성이 많지만, 대기에서는 큰 차이를 보인다. 다른 목성형 행성과 달리 고요하며, 특이할만한 구름도 손에 꼽을 정도였다.",
+                                    "이러한 이유는 천왕성의 내부열이 현저히 낮기 때문이다. 천왕성의 대류권 계면에서 가장 낮은 온도는 49K로, 이는 해왕성보다도 낮은 온도이다.",
+                                    "그러나 특정한 주기로 천왕성에는 커다란 구름이 나타나고 격렬한 뇌우가 발견되는데, 천문학자들은 천왕성의 극단적인 자전축 기울기에서 그 원인을 찾으려 하고 있다."]},
+                {"Header":"이해", "Description":"해왕성과 직접 이야기를 나눈 끝에 서로의 차이를 인정하게 된 천왕성.", 
+                    "Additional":["천왕성은 총 27개의 위성을 가지고 있으며, 중요한 5개의 위성으로는 '미란다', '아리엘', '움브리엘', '티타니아', '오베론'을 들 수 있다. 셰익스피어의 희곡과 알렉산더 포프의 시에 등장하는 요정들의 이름을 따서 지어졌다."]},
+                {"Header":"때로는 친구, 때로는 남매", "Description":"서로의 마음을 확인하고 좀 더 친한 사이가 된 것에 기뻐하는 천왕성.", 
+                    "Additional":["해왕성과 좀 더 편한 사이가 됐지만, 해왕성을 '오빠'라고 부르지는 않을 모양이다.",
+                                    "천왕성은 자전축이 98도 틀어졌기 때문에 한쪽의 극은 42년동안 태양 쪽을 향하고, 반대쪽은 42년동안 어둠에 놓인다. 그러나 천왕성의 적도가 극보다 따뜻한데, 이러한 기현상은 대기의 열 저장량과 관련있을 것이라 추정된다.",
+                                    "미국의 한 연구팀에 따르면, 해왕성과 천왕성의 내부에는 유체만이 존재하며, 이 바다는 다이아몬드 바다이고 그 위에 다이아몬드 덩어리들이 떠다닐 것이라고 한다."]}
             ]
         }
     ]

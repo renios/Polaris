@@ -19,7 +19,7 @@ namespace Store
         {
             for(int i = 0; i < UpgradeBtns.Length; i++)
             {
-                if(Variables.StoreUpgradeLevel[i] > Variables.StoreUpgradeValue[i].Length)
+                if(Variables.StoreUpgradeLevel[i] > Variables.GetStoreMaxLevel(i))
                 {
                     UpgradeBtns[i].interactable = false;
                     UpgradeBtns[i].GetComponentInChildren<Text>().text = "현재 Lv. " + Variables.StoreUpgradeLevel[i].ToString() + "\n최대 레벨입니다.";
@@ -63,7 +63,7 @@ namespace Store
             yield return InfoPopup.Show(title, desc, index, valueToString, (r) => { res = r; });
             if(res == true)
             {
-                Variables.Starlight -= Variables.StoreUpgradeMoney[index][Variables.StoreUpgradeLevel[index]];
+                Variables.Starlight -= Variables.GetStoreReqMoney(index, Variables.StoreUpgradeLevel[index]);
                 Variables.StoreUpgradeLevel[index]++;
             }
 

@@ -1,0 +1,211 @@
+{
+    "Dialogues": [
+        {
+            "Phase": 0,
+            "Contents": [
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "무슨 걱정이라도 있는 거야?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "아… 얼굴에 드러나 버렸네… 걱정 끼쳐서 미안.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "나한테도 말해줄 수 있어?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "응…",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "내가 잊혀지고 있기 때문이야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "혹시…점점 투명해지고 있는게 그것 때문이야?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "응… 내가 잊혀지는건 그렇게 슬프지는 않아.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "나는 나를 포함해 아직은 이름이 없거나 있는 수많은 별이 모여서 아름다운 밤하늘이 된다는 걸 알거든.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "다만....",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "(명왕성은 투명해져가는 토끼 인형에 얼굴을 파묻으며 말했다.)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "카론... 내가 잊혀져 갈 수록 카론도 같이 잊혀져 간다는 건 ... 역시 조금 슬퍼...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 2,
+                    "JuncTexts": [
+                        "내가 카론을 기억해줄게.",
+                        "내가 너를 기억해줄게."
+                    ],
+                    "Directions": [
+                        -1,
+                        1
+                    ],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "정말?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "응. 카론뿐만 아니라 너도.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 2
+                }
+            ]
+        },
+        {
+            "Phase": 1,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "정말?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "응. 너뿐만 아니라 카론도.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": -1,
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 2
+                }
+            ]
+        },
+        {
+            "Phase": 2,
+            "Contents": [
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "밤하늘을 올려다 볼 때마다 저기 어딘가에 네가 있을 거야, 하고 너를 떠올리겠지.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "인형을 든 귀여운 여자아이가, 카론이라는 이름의 인형을 좋아하는 친구가 나를 생각하고 있다는 생각을 하다 보면 자연스레 미소가 지어질 거야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "그러면… 그때는… 나도 우주 먼 곳에서부터 널 바라보면서 미소지어 줄 거야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "고마워…",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "응! 나도 고마워!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "헤헤...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                }
+            ]
+        }
+    ]
+}

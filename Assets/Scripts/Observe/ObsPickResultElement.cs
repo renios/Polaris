@@ -18,9 +18,9 @@ namespace Observe
 		{
 			var charData = Variables.Characters[charKey];
 
-			charData.Cards[0].Favority += deltaFav;
-			if (!charData.Cards[0].Observed)
-				charData.Cards[0].Observed = true;
+			charData.Favority += deltaFav;
+			if (!charData.Observed)
+				charData.Observed = true;
 
 			charName.text = charData.Name;
 			for(int i = 0; i < charData.ConstelKey.Length; i++)
@@ -30,10 +30,10 @@ namespace Observe
 				else
 					constelName.text += ", " + Variables.Constels[charData.ConstelKey[i]].Name;
 			}
-			charThumb.sprite = Resources.Load<Sprite>("Characters/" + charData.InternalName + "/default/image_obspopup");
+			charThumb.sprite = Resources.Load<Sprite>("Characters/" + charData.InternalName + "/image_obspopup");
 			
 			int progress, required;
-			int level = GameManager.Instance.CheckFavority(charKey, 0, out progress, out required);
+			int level = GameManager.Instance.CheckFavority(charKey, out progress, out required);
 			favLevel.text = level.ToString();
 			favText.text = required < 0 ? "FULL" : progress.ToString() + "/" + required.ToString();
 			favBar.maxValue = required < 0 ? 1 : required;

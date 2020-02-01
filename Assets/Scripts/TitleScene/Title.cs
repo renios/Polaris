@@ -128,11 +128,8 @@ public class Title : MonoBehaviour {
 
         foreach(var data in Variables.Characters)
         {
-            foreach(var card in data.Value.Cards)
-            {
-                if (card.Observable)
-                    card.Observed = true;
-            }
+            if (data.Value.Observable)
+                data.Value.Observed = true;
         }
         GameManager.Instance.SaveGame();
 

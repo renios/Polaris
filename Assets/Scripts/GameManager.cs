@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 60;
+
         if (Instance != null)
             Destroy(gameObject);
         else
@@ -27,6 +29,9 @@ public class GameManager : MonoBehaviour
 
     public void Initialize()
     {
+        var valueRaw = Resources.Load<TextAsset>("Data/Values");
+        Variables.values = JsonMapper.ToObject<Values>(valueRaw.text);
+
         var constelRaw = Resources.Load<TextAsset>("Data/Constels");
         var constelGroup = JsonMapper.ToObject(constelRaw.text);
 
@@ -90,16 +95,16 @@ public class GameManager : MonoBehaviour
     /// <param name="progress"></param>
     /// <param name="required"></param>
     /// <returns></returns>
-    public int CheckFavority(int charNumber, int cardIndex, out int progress, out int required)
+    public int CheckFavority(int charNumber, out int progress, out int required)
     {
-        var favority = Variables.Characters[charNumber].Cards[cardIndex].Favority;
+        var favority = Variables.Characters[charNumber].Favority;
         int cnt = 0;
-        for (; cnt < Variables.Characters[charNumber].Cards[cardIndex].Rarity; cnt++)
+        for (; cnt < Variables.values.MaxFavority; cnt++)
         {
             if (favority < Variables.FavorityThreshold[cnt])
                 break;
         }
-        if(cnt >= Variables.Characters[charNumber].Cards[cardIndex].Rarity)
+        if(cnt >= Variables.values.MaxFavority)
         {
             progress = 0;
             required = -1;
@@ -112,16 +117,16 @@ public class GameManager : MonoBehaviour
         return cnt + 1;
     }
 
-    public int CheckAfterFavority(int charNumber, int cardIndex, float deltaFav, out float progress, out int required)
+    public int CheckAfterFavority(int charNumber, float deltaFav, out float progress, out int required)
     {
-        var favority = Variables.Characters[charNumber].Cards[cardIndex].Favority;
+        var favority = Variables.Characters[charNumber].Favority;
         int cnt = 0;
-        for (; cnt < Variables.Characters[charNumber].Cards[cardIndex].Rarity; cnt++)
+        for (; cnt < Variables.values.MaxFavority; cnt++)
         {
             if (favority + deltaFav < Variables.FavorityThreshold[cnt])
                 break;
         }
-        if (cnt >= Variables.Characters[charNumber].Cards[cardIndex].Rarity)
+        if (cnt >= Variables.values.MaxFavority)
         {
             progress = favority + deltaFav - Variables.FavorityThreshold[cnt - 1];
             required = -1;

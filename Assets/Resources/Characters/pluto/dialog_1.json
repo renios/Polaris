@@ -1,0 +1,122 @@
+{
+    "Dialogues": [
+        {
+            "Phase": 0,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "또 불러줬구나! 기뻐!...에헤헤...",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "응!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "이렇게 만나서 이야기할 수 있다는 건 멋진 일이야.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "만남은 항상 헤어짐과 함께하지만 헤어짐이 있기에 만남이라는 그 순간은 더 별처럼",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "그럼 넌 혼자 있을 땐 뭘 해?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "혼자 공상을 하거나 카론이랑 놀아.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 1,
+                    "Talker": "주인공",
+                    "DialogText": "이 인형의 이름이 카론이야?",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "응! 내 첫번째 친구.",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 2,
+                    "JuncTexts": [
+                        "인형이 널 닮아서 귀여워!",
+                        "나도 인형 좋아해!"
+                    ],
+                    "Directions": [
+                        -1,
+                        1
+                    ],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "흐…흐아앗!!…",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "(명왕성은 얼굴이 붉어지더니 푱 하고 도망갔다.)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                }
+            ]
+        },
+        {
+            "Phase": 1,
+            "Contents": [
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "카론도 네가 좋대!",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                },
+                {
+                    "Type": 0,
+                    "Talker": "명왕성",
+                    "DialogText": "(명왕성은 기뻐하는 얼굴로 카론을 꼭 안았다.)",
+                    "JuncTexts": [],
+                    "Directions": [],
+                    "NextPhase": 0
+                }
+            ]
+        }
+    ]
+}
