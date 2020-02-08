@@ -81,7 +81,7 @@ namespace Observe
             status = ObserveStatus.Load();
             if (status.isTutorial)
                 status.isTutorial = false;
-            if (Variables.isFirst)
+            if (!Variables.TutorialFinished && Variables.TutorialStep == 1)
                 status.isTutorial = true;
 
             // Tutorial 2를 위한 초기화
@@ -366,13 +366,7 @@ namespace Observe
             {
                 if (status.isTutorial)
                 {
-                    status.endTime = DateTime.Now.AddSeconds(0);
-                    status.scopePos = new[] { Scope.transform.position.x, Scope.transform.position.y, Scope.transform.position.z };
-                    ChangeBehaviour(ObserveBehaviour.Observing);
-                }
-                else if (Variables.tutState == 8)
-                {
-                    status.endTime = DateTime.Now.AddSeconds(10);
+                    status.endTime = DateTime.Now.AddSeconds(3);
                     status.scopePos = new[] { Scope.transform.position.x, Scope.transform.position.y, Scope.transform.position.z };
                     ChangeBehaviour(ObserveBehaviour.Observing);
                 }
@@ -402,15 +396,6 @@ namespace Observe
                 status.Save();
 
                 DimmerPanel.SetActive(true);
-                if (Variables.isFirst)
-                {
-                    Variables.returnSceneName = "MainTut";
-                    Variables.isFirst = false;
-                }
-                else if (Variables.tutState >= 9)
-                    Variables.returnSceneName = "MainScene";
-                else
-                    Variables.returnSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
                 SceneChanger.ChangeScene("GachaResult", "GachaFadeIn", 1.5f);
             }
         }

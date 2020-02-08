@@ -8,7 +8,8 @@ namespace Tutorial
 {
     public class TutorialGacha : MonoBehaviour
     {
-        public GameObject tutTextPanel, tut1Panel, tut2Anim, tut3Panel, tut3Eff, hider;
+        public GameObject tutTextPanel, uiDimmerPanel, fingerAnim, buttonFingerPanel, buttonAuraEff, hider;
+        public GameObject helpPanel1, helpPanel2, helpPanel3;
         public Text tutText;
         public ObserveManager manager;
 
@@ -18,50 +19,47 @@ namespace Tutorial
         // Use this for initialization
         void Start()
         {
-            ChangeState(Variables.tutState);
+            ChangeState(Variables.TutorialStep);
         }
 
         // Update is called once per frame
         void Update()
         {
-            switch(Variables.tutState)
+            switch(Variables.TutorialStep)
             {
                 case 2:
                     if (Vector2.Distance(manager.Scope.transform.position, new Vector3(0.2f * 100.224f, 4.6f * 100.224f, -1)) < 15f)
-                        ChangeState(++Variables.tutState);
+                        ChangeState(++Variables.TutorialStep);
                     break;
                 case 3:
-                    if(manager.Status.behaviour == ObserveBehaviour.Finished)
-                        ChangeState(++Variables.tutState);
+                    if(manager.Status.behaviour == ObserveBehaviour.Observing)
+                        ChangeState(++Variables.TutorialStep);
                     break;
                 case 4:
-                    if (manager.Status.behaviour == ObserveBehaviour.Idle)
-                        Variables.tutState++;
-                    break;
-                case 6:
-                    if (Variables.ObserveSkyLevel == 0)
-                    {
-                        internalCount += Time.deltaTime;
-                        if(internalCount >= 5.5f)
-                            ChangeState(++Variables.tutState);
-                    }
+                    if (manager.Status.behaviour == ObserveBehaviour.Finished)
+                        ChangeState(++Variables.TutorialStep);
                     break;
                 case 8:
-                    if (manager.Status.behaviour == ObserveBehaviour.Observing)
-                        ChangeState(++Variables.tutState);
+                    if (Variables.ObserveSkyLevel == 0)
+                        ChangeState(++Variables.TutorialStep);
                     break;
                 case 9:
-                    if (manager.Status.behaviour == ObserveBehaviour.Finished)
-                        ChangeState(++Variables.tutState);
+                    internalCount += Time.deltaTime;
+                    if (internalCount >= 4)
+                        ChangeState(++Variables.TutorialStep);
                     break;
                 case 10:
-                    if (manager.Status.behaviour == ObserveBehaviour.Idle)
-                        Variables.tutState++;
+                    if (manager.Status.behaviour == ObserveBehaviour.Observing)
+                        ChangeState(++Variables.TutorialStep);
+                    break;
+                case 11:
+                    if (manager.Status.behaviour == ObserveBehaviour.Finished)
+                        ChangeState(++Variables.TutorialStep);
                     break;
             }
 
             if (canMoveTutStat && Input.GetMouseButtonDown(0))
-                ChangeState(++Variables.tutState);
+                ChangeState(++Variables.TutorialStep);
         }
 
         public void ChangeState(int state)
@@ -69,63 +67,92 @@ namespace Tutorial
             switch(state)
             {
                 case 1:
+                    // 1단계: 첫 번째 튜토리얼 관측 씬 진입
+                    // 다음 단계 이동: 터치 시
                     tutTextPanel.SetActive(true);
-                    tut1Panel.SetActive(true);
+                    uiDimmerPanel.SetActive(true);
                     hider.SetActive(true);
                     manager.SkyArea[0].SetActive(false);
                     ObserveManager.AllowMove = false;
                     ObserveManager.DontApplySkyLevelAtMove = true;
                     tutText.text = "망원경으로 봐도 정말 까맣네...\n앗! 저기 뭔가가 반짝인다!";
                     manager.ButtonObj.GetComponent<Button>().interactable = false;
+
                     canMoveTutStat = true;
                     break;
                 case 2:
+                    // 2단계: 첫 번째 튜토리얼 관측 이동 진행
+                    // 다음 단계 이동: 망원경을 가운데 뒀을 시 (Update func)
+                    fingerAnim.SetActive(true);
+                    tutText.text = "조금 더 망원경을 가운데 두고\n뭔지 확인해보자.";
                     ObserveManager.AllowMove = true;
-                    tut2Anim.SetActive(true);
-                    tutText.text = "조금 더 망원경 가운데 두고\n뭔지 확인해보자.";
-                    ObserveManager.AllowMove = true;
+
                     canMoveTutStat = false;
                     break;
                 case 3:
-                    tut2Anim.SetActive(false);
-                    tut3Panel.SetActive(true);
-                    tut3Eff.SetActive(true);
+                    // 3단계: 첫 번째 튜토리얼 관측 시작 준비 (시작 버튼 강조)
+                    // 다음 단계 이동: 시작 버튼이 눌렸을 때 == 관측 상태가 Observing이 되었을 때 (Update func)
+                    fingerAnim.SetActive(false);
+                    buttonFingerPanel.SetActive(true);
+                    buttonAuraEff.SetActive(true);
                     manager.ButtonObj.GetComponent<Button>().interactable = true;
                     ObserveManager.AllowMove = false;
                     break;
                 case 4:
-                    tutText.text = "별빛이 모여서 반짝이고 있어?\n얼른 확인해보자!";
+                    // 4단계: 첫 번째 튜토리얼 관측 중...
+                    // 다음 단계 이동: 관측이 완료 되었을 때 == 관측 상태가 Finished가 되었을 때 (Update func)
+                    buttonFingerPanel.SetActive(false);
+                    buttonAuraEff.SetActive(false);
+                    tutText.text = "시간이 좀 걸리는 건가......?";
                     break;
-                case 6:
+                case 5:
+                    // 5단계: 첫 번째 튜토리얼 관측 완료 및 관측(1) 안내창
+                    // 다음 단계 이동: -
+                    buttonFingerPanel.SetActive(true);
+                    buttonAuraEff.SetActive(true);
+                    helpPanel1.SetActive(true);
+                    tutText.text = "별빛이 모여서 반짝이고 있어!\n얼른 확인해보자!";
+                    break;
+                case 8:
+                    // 8단계: 두 번째 튜토리얼 관측 씬 진입
+                    // 다음 단계 이동: 하늘이 열리기 시작하는 시점
                     internalCount = 0;
-                    tut1Panel.SetActive(true);
+                    uiDimmerPanel.SetActive(true);
                     tutTextPanel.SetActive(true);
                     manager.ButtonObj.GetComponent<Button>().interactable = false;
                     manager.Scope.transform.position = new Vector3(0, 4.53f * 100.224f, 0);
                     ObserveManager.AllowMove = false;
                     ObserveManager.DontApplySkyLevelAtMove = false;
-                    Variables.Starlight += 110;
                     tutText.text = "밤하늘이 다시 깜깜해졌네...\n어? 하늘에 뭔가 있어! 눌러보자.";
-                    break;
-                case 7:
-                    tutText.text = "밤하늘에 별들이 생겼어!\n이제 어쩌면 다른 별도 만날 수 있을 거야.";
-                    canMoveTutStat = true;
-                    break;
-                case 8:
-                    tut1Panel.SetActive(false);
-                    tutTextPanel.SetActive(false);
-                    ObserveManager.AllowMove = true;
-                    manager.ButtonObj.GetComponent<Button>().interactable = true;
+
                     canMoveTutStat = false;
                     break;
                 case 9:
-                    tutTextPanel.SetActive(true);
-                    tutText.text = "이번엔 조금 더 시간이 필요한 건가?\n잠시 기다려보자.";
+                    // 9단계: 두 번째 튜토리얼 관측 하늘 개방 중...
+                    // 다음 단계 이동: 하늘이 다 열렸을 때
+                    tutTextPanel.SetActive(false);
                     break;
                 case 10:
+                    // 10단계: 두 번째 튜토리얼 하늘이 열렸다 & 관측(2) 안내창
+                    // 다음 단계 이동: 관측이 시작 되었을 때
+                    helpPanel2.SetActive(true);
+                    tutTextPanel.SetActive(true);
+                    tutText.text = "하늘에 별들이 더 많이 보여!\n이번엔 원하는 위치로 움직여서\n마음에 드는 곳을 관측해보자.";
+                    ObserveManager.AllowMove = true;
+                    manager.ButtonObj.GetComponent<Button>().interactable = true;
+                    break;
+                case 11:
+                    // 11단계: 두 번째 튜토리얼 관측 시작! & 관측(3) 안내창
+                    // 다음 단계 이동: 관측이 끝났을 때
+                    tutTextPanel.SetActive(false);
+                    helpPanel3.SetActive(true);
+                    break;
+                case 12:
+                    // 12단계: 두 번째 튜토리얼 관측 끝
+                    tutTextPanel.SetActive(true);
                     tutText.text = "별빛이 다 모인 것 같아!\n이번에도 별을 만날 수 있겠지?";
-                    tut3Panel.SetActive(true);
-                    tut3Eff.SetActive(true);
+                    buttonFingerPanel.SetActive(true);
+                    buttonAuraEff.SetActive(true);
                     break;
             }
         }

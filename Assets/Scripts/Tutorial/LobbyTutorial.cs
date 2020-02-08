@@ -10,7 +10,8 @@ public class LobbyTutorial : MonoBehaviour {
     public GameObject tutTouch;
 
 	// Use this for initialization
-	void Start () {
+	void Start() 
+    {
         scopeEff.SetActive(false);
         tutBackground.SetActive(true);
         tutText_1.SetActive(true);
@@ -19,14 +20,15 @@ public class LobbyTutorial : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		switch(Variables.tutState)
+	void Update() 
+    {
+		switch(Variables.TutorialStep)
         {
             case 5:
+                // 
                 if (Input.GetMouseButton(0))
                 {
                     tutBackground.SetActive(false);
-                    Variables.tutState = 6;
                 }
                 break;
             case 6:

@@ -7,25 +7,38 @@ using UnityEngine;
 public static class Variables
 {
     public static bool HasSave { get { return File.Exists(Application.persistentDataPath + "/save"); } }
-    public static int[] FavorityThreshold { get { return values.accumFavTable; } }     // 캐릭터 호감도 문턱에 관한 배열 30 70 120 180 250
+    public static int[] FavorityThreshold { get { return values.accumFavTable; } }
+
+    #region Data from SaveData.Now
+    public static Dictionary<int, CharacterData> Characters { get { return SaveData.Now.charData; } }
+    public static int[] StoreUpgradeLevel { get { return SaveData.Now.storeUpgradeLevel; } } // 0: 망원경 성능 레벨, 1: 망원경 멀티-관측 레벨, 2: 로비 캐릭터 배치 수 레벨
+    public static int Starlight 
+    { 
+        get { return SaveData.Now.starlight; }
+        set { SaveData.Now.starlight = value; }
+    }
+    public static int ObserveSkyLevel
+    {
+        get { return SaveData.Now.observeSkyLevel; }
+        set { SaveData.Now.observeSkyLevel = value; }
+    }
+    public static int TutorialStep
+    {
+        get { return SaveData.Now.tutorialStep; }
+        set { SaveData.Now.tutorialStep = value; }
+    }
+    public static bool TutorialFinished
+    {
+        get { return SaveData.Now.tutorialFinished; }
+        set { SaveData.Now.tutorialFinished = value; }
+    }
+    #endregion
 
     public static Values values;
 
     public static Dictionary<string, ConstelData> Constels;     // 별자리에 대한 데이터
-    public static Dictionary<int, CharacterData> Characters;    // 캐릭터에 대한 데이터
-    public static int CharacterVersion;
-    public static int Starlight;
-    public static int[] StoreUpgradeLevel; // 0: 망원경 성능 레벨, 1: 망원경 멀티-관측 레벨, 2: 로비 캐릭터 배치 수 레벨
-
-    public static int ObserveSkyLevel; // 하늘 개방 단계
-
-    public static bool isTutorialFinished = false; // 튜토리얼이 끝까지 진행 되었는지?
-    public static int tutState = 1; // 튜토리얼 진행 상태
 
     public static bool CameraMove;
-
-    public static bool isFirst;
-    public static string returnSceneName;
 
     #region Variables for dialogue scene
     public static int DialogCharIndex;          // 대화 씬에서 참조할 캐릭터 번호

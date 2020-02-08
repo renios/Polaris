@@ -50,37 +50,18 @@ public class GameManager : MonoBehaviour
     #region Game Data Save/Load
     public void CreateGame()
     {
-        if (File.Exists(Application.persistentDataPath + "/obs_status"))
-            File.Delete(Application.persistentDataPath + "/obs_status");
-        curSaveData = new SaveData();
-        curSaveData.Create();
-    }
-
-    public void LoadGame()
-    {
-        var reader = new FileStream(Application.persistentDataPath + "/save", FileMode.Open);
-        var formatter = new BinaryFormatter();
-        curSaveData = (SaveData)formatter.Deserialize(reader);
-        reader.Close();
-
-        curSaveData.Load();
+        DeleteGame();
+        SaveData.Load();
     }
 
     public void SaveGame()
     {
-        curSaveData.Save();
-
-        var writer = new FileStream(Application.persistentDataPath + "/save", FileMode.Create);
-        var formatter = new BinaryFormatter();
-        formatter.Serialize(writer, curSaveData);
-        writer.Close();
+        SaveData.Save();
     }
 
-    // FOR DEBUG PURPOSE ONLY
     public void DeleteGame()
     {
-        curSaveData = null;
-        File.Delete(Application.persistentDataPath + "/save");
+        SaveData.Delete();
         if(File.Exists(Application.persistentDataPath + "/obs_status"))
             File.Delete(Application.persistentDataPath + "/obs_status");
     }

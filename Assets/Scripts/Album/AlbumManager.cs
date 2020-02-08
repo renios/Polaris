@@ -16,9 +16,10 @@ namespace Album
         public GameObject[] AlbumGroupInfo;
         public HorizontalScrollSnap AlbumSnap;
         public Text PageNumber;
-        [HideInInspector]
-        public List<int> GroupStartPage;
-        public Dictionary<int, Dictionary<int, CharacterData>> GroupedChar;
+        public GameObject TutorialObj;
+
+        [HideInInspector] public List<int> GroupStartPage;
+        [HideInInspector] public Dictionary<int, Dictionary<int, CharacterData>> GroupedChar;
 
         private readonly int maxPageElement = 9;
 
@@ -27,6 +28,9 @@ namespace Album
             Instance = this;
 
             ConstructAlbum();
+
+            if (!Variables.TutorialFinished)
+                TutorialObj.SetActive(true);
         }
 
         public void ConstructAlbum()
@@ -98,7 +102,7 @@ namespace Album
         void Update()
         {
             //TODO : 씬 바꾸는 임시 코드 개선
-            if (Input.GetKeyDown(KeyCode.Escape) && Variables.isTutorialFinished)
+            if (Input.GetKeyDown(KeyCode.Escape) && Variables.TutorialFinished)
             {
                 SceneChanger.Instance.ChangeScene("MainScene");
             }

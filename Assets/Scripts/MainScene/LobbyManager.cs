@@ -151,8 +151,6 @@ public class LobbyManager : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
-        if(sceneName == "GachaTut_1")
-            Variables.tutState = 7;
         TryPickCharacter();
         if (pickedCharacter == null && !pickedBalloon )
         {

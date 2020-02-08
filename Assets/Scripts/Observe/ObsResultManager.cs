@@ -83,7 +83,7 @@ namespace Observe
 						status.Save();
 						Variables.Characters[charKey].Observed = true;
 						Variables.Characters[charKey].Favority++;
-						GameManager.Instance.SaveGame();
+						SaveData.Save();
 
 						Variables.DialogCharIndex = charKey;
 						Variables.DialogChapterIndex = 0;
@@ -136,11 +136,10 @@ namespace Observe
 			fadePanel.color = new Color(fadePanel.color.r, fadePanel.color.g, fadePanel.color.b, 0);
 			
 			// 튜토리얼 데이터를 처리합니다.
-			if (Variables.tutState == 10)
+			if (Variables.TutorialStep == 12)
 			{
-				Variables.isTutorialFinished = true;
-				Variables.tutState = 11;
-				GameManager.Instance.SaveGame();
+				Variables.TutorialFinished = true;
+				SaveData.Save();
 			}
 		}
 
