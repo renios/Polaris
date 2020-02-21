@@ -41,11 +41,14 @@ public static class Variables
     public static bool CameraMove;
 
     #region Variables for dialogue scene
-    public static int DialogCharIndex;          // 대화 씬에서 참조할 캐릭터 번호
-    public static int DialogChapterIndex;       // 대화 씬에서 참조할 해당 캐릭터 종류의 스토리 번호
     public static bool IsDialogAppended;
     public static string DialogAfterScene;      // 대화 씬이 종료된 다음 씬의 이름
     #endregion
+
+    public static string GetCharacterRootFolder(int charIndex)
+    {
+        return "Characters/" + Characters[charIndex].InternalName + "/";
+    }
 
     public static int GetStoreValue(int speci, int index)
     {

@@ -11,7 +11,11 @@ namespace Dialogue
     public class DialogueManager : MonoBehaviour
     {
         public static DialogueManager Instance { get; private set; }
-        public static string ImageRootPath { get; private set; }
+
+        public static string DialogRoot { get; set; }
+        public static string DialogFilePath { get; set; }
+        public static string DefaultTalkerName { get; set; }
+        public static string ImageRootPath { get { return DialogRoot + "DialogueImage/"; } }
 
         public DialogueDisplayer Displayer;
         public DialogueInteractor Interactor;
@@ -19,48 +23,47 @@ namespace Dialogue
 
         public DialogueData CurrentDialogue;
 
-        public string talkerNPC;
         public Image nameTag;
 
         private DialogueFileType fileType;
+
+        public static void PrepareCharacterDialog(int charIndex, int chapter)
+        {
+            DialogRoot = Variables.GetCharacterRootFolder(charIndex);
+            DialogFilePath = Variables.GetCharacterRootFolder(charIndex) + "dialog_" + chapter;
+            DefaultTalkerName = Variables.Characters[charIndex].Name;
+
+            if (Variables.Characters[charIndex].StoryProgress <= chapter)
+            {
+                Variables.Characters[charIndex].StoryProgress = chapter + 1;
+                GameManager.Instance.SaveGame();
+            }
+        }
 
         private void Awake()
         {
             Instance = this;
 
-            var character = Variables.Characters[Variables.DialogCharIndex].InternalName;
-            var dialogPath = "Characters/" + character + "/dialog_" + Variables.DialogChapterIndex;
-            var imagePath = "Characters/" + character + "/image_dialogue";
-            ImageRootPath = "Characters/" + character + "/DialogueImage/";
-            var dummyDialogPath = "Characters/acher/dialog_" + Variables.DialogChapterIndex; // Dummy 용도로 Acher 사용
+            var defaultImage = DialogRoot + "image_dialogue";
 
-            Debug.Log(character + " " + Variables.DialogChapterIndex);
             try
             {
-                var jsonAsset = Resources.Load<TextAsset>(dialogPath);
+                var jsonAsset = Resources.Load<TextAsset>(DialogFilePath);
                 if (jsonAsset == null)
-                    jsonAsset = Resources.Load<TextAsset>(dummyDialogPath);
+                    jsonAsset = Resources.Load<TextAsset>("Dialogues/ErrorDialog");
 
                 CurrentDialogue = JsonMapper.ToObject<DialogueData>(jsonAsset.text);
                 fileType = DialogueFileType.JSON;
             }
-            catch { CurrentDialogue = DialogueParser.ParseFromCSV(dialogPath); fileType = DialogueFileType.TEXT; }
+            catch { CurrentDialogue = DialogueParser.ParseFromCSV(DialogFilePath); fileType = DialogueFileType.TEXT; }
 
-            Displayer.Talker.text = Variables.Characters[Variables.DialogCharIndex].Name;
-            Displayer.ForeImage.sprite = Resources.Load<Sprite>(imagePath);
+            Displayer.Talker.text = DefaultTalkerName;
+            Displayer.ForeImage.sprite = Resources.Load<Sprite>(defaultImage);
             Displayer.ForeImage.preserveAspect = true;
-
-            talkerNPC = Displayer.Talker.text; Debug.Log(talkerNPC);
         }
 
         private IEnumerator Start()
         {
-            if (Variables.Characters[Variables.DialogCharIndex].StoryProgress <= Variables.DialogChapterIndex)
-            {
-                Variables.Characters[Variables.DialogCharIndex].StoryProgress = Variables.DialogChapterIndex + 1;
-                GameManager.Instance.SaveGame();
-            }
-
             int finalPhase = 0;
             yield return PlayDialogue(CurrentDialogue, r => finalPhase = r);
             Debug.Log("Ended. Final phase: " + finalPhase);
@@ -99,7 +102,7 @@ namespace Dialogue
                             nameTag.enabled = true;
                             nameTag.sprite = Resources.Load<Sprite>("Images/dialogue_nametag");
                         }
-                        yield return ShowText(fileType == DialogueFileType.JSON ? talkerNPC : dialog.Talker, dialog.DialogText);
+                        yield return ShowText(fileType == DialogueFileType.JSON ? DefaultTalkerName : dialog.Talker, dialog.DialogText);
                         break;
                     case 1:
                         nameTag.enabled = true;

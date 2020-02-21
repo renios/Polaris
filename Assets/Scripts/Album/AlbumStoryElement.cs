@@ -46,8 +46,7 @@ namespace Album
         public void StartStory()
         {
             Variables.DialogAfterScene = SceneChanger.GetCurrentScene();
-            Variables.DialogCharIndex = charIndex;
-            Variables.DialogChapterIndex = storyIndex;
+            Dialogue.DialogueManager.PrepareCharacterDialog(charIndex, storyIndex);
             SceneChanger.Instance.ChangeScene("NewDialogScene");
         }
     }

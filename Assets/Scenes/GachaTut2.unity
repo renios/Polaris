@@ -4966,7 +4966,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1809278064}
         m_MethodName: TimeBtnClicked
         m_Mode: 3
         m_Arguments:
@@ -6662,7 +6662,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1809278064}
         m_MethodName: TimeBtnClicked
         m_Mode: 3
         m_Arguments:
@@ -10186,7 +10186,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1809278064}
         m_MethodName: TimeBtnClicked
         m_Mode: 3
         m_Arguments:
@@ -11859,7 +11859,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1809278064}
         m_MethodName: TimeOkRunBtnClicked
         m_Mode: 1
         m_Arguments:
@@ -15192,7 +15192,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1809278064}
         m_MethodName: TimeBtnClicked
         m_Mode: 3
         m_Arguments:
@@ -17094,10 +17094,10 @@ MonoBehaviour:
   - {fileID: 790991171}
   TimeConfirmPanel: {fileID: 1760201001}
   TimeConfirmBtn:
-  - {fileID: 1658498539}
-  - {fileID: 2130115549}
-  - {fileID: 697064308}
-  - {fileID: 2096028315}
+  - {fileID: 1634937161}
+  - {fileID: 738549316}
+  - {fileID: 594312370}
+  - {fileID: 1056066467}
   TimeOkRunBtn: {fileID: 1227039474}
   NoMoneyPanel: {fileID: 0}
   WhileObservingPanel: {fileID: 1200953376}

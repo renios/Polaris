@@ -85,9 +85,8 @@ namespace Observe
 						Variables.Characters[charKey].Favority++;
 						SaveData.Save();
 
-						Variables.DialogCharIndex = charKey;
-						Variables.DialogChapterIndex = 0;
-						Variables.DialogAfterScene = "MainTut";
+						Dialogue.DialogueManager.PrepareCharacterDialog(charKey, 0);
+						Variables.DialogAfterScene = "MainScene";
 					    ChangeScene("NewDialogScene");
 						yield break;
 					}
@@ -249,8 +248,7 @@ namespace Observe
 
 		IEnumerator StartStory(int charIndex, int chapterIndex)
 		{
-			Variables.DialogCharIndex = charIndex;
-			Variables.DialogChapterIndex = chapterIndex;
+			Dialogue.DialogueManager.PrepareCharacterDialog(charIndex, chapterIndex);
 			yield return AppendDialogScene();
 			yield return new WaitWhile(() => Variables.IsDialogAppended);
 		}

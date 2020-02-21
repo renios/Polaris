@@ -6,11 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
-    private int currentCamera;
     private GameObject sdchara;
-    public GameObject popup;
     private float PositionX;
     private float PositionY;
+    public GameObject tutorialObj;
 
     GameObject pickedCharacter;
     Vector3 pickedPosition;
@@ -20,9 +19,10 @@ public class LobbyManager : MonoBehaviour
     void Awake()
     {
         sdchara = GameObject.Find("Characters").gameObject; 
-        if(SceneManager.GetActiveScene().name != "MainTut")
-            popup = GameObject.Find("Setting").transform.Find("Setting Panel").gameObject;
         ShowCharacter();
+
+        if (!Variables.TutorialFinished)
+            tutorialObj.SetActive(true);
     }
 
     void ShowCharacter()
@@ -58,7 +58,6 @@ public class LobbyManager : MonoBehaviour
     void Start()
     {
         SoundManager.Play(SoundType.BgmMain);
-        currentCamera = -1;
     }
 
     // Update is called once per frame
