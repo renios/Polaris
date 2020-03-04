@@ -24,6 +24,7 @@ namespace Dialogue
         public DialogueData CurrentDialogue;
 
         public Image nameTag;
+        public GameObject tutorialObj;
 
         private DialogueFileType fileType;
 
@@ -110,6 +111,8 @@ namespace Dialogue
                         yield return ShowText("나", dialog.DialogText);
                         break;
                     case 2:
+                        if (!Variables.TutorialFinished && Variables.TutorialStep == 5)
+                            tutorialObj.SetActive(true);
                         yield return ShowInteraction(dialog.JuncTexts, dialog.Directions);
                         if (dialog.Directions[Interactor.Result] > -1)
                         {
