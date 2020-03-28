@@ -21,6 +21,7 @@ namespace Reading
 				newObj.transform.SetParent(charParent);
 				newObj.transform.localScale = Vector3.one;
 				newObj.GetComponent<ReadingCharListToggle>().Set(character);
+				newObj.SetActive(true);
 			}
 		}
 

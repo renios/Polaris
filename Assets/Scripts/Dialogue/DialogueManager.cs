@@ -26,7 +26,8 @@ namespace Dialogue
         public Image nameTag;
         public GameObject tutorialObj;
 
-        private DialogueFileType fileType;
+        [HideInInspector] public DialogueFileType fileType;
+        Dictionary<int, System.Action<DialogueContent>> customTypeAction;
 
         public static void PrepareCharacterDialog(int charIndex, int chapter)
         {
@@ -45,43 +46,11 @@ namespace Dialogue
         {
             Instance = this;
 
-            var defaultImage = DialogRoot + "image_dialogue";
-
-            try
-            {
-                var jsonAsset = Resources.Load<TextAsset>(DialogFilePath);
-                if (jsonAsset == null)
-                    jsonAsset = Resources.Load<TextAsset>("Dialogues/ErrorDialog");
-
-                CurrentDialogue = JsonMapper.ToObject<DialogueData>(jsonAsset.text);
-                fileType = DialogueFileType.JSON;
-            }
-            catch { CurrentDialogue = DialogueParser.ParseFromCSV(DialogFilePath); fileType = DialogueFileType.TEXT; }
-
-            Displayer.Talker.text = DefaultTalkerName;
-            Displayer.ForeImage.sprite = Resources.Load<Sprite>(defaultImage);
+            customTypeAction = new Dictionary<int, System.Action<DialogueContent>>();
             Displayer.ForeImage.preserveAspect = true;
         }
 
-        private IEnumerator Start()
-        {
-            int finalPhase = 0;
-            yield return PlayDialogue(CurrentDialogue, r => finalPhase = r);
-            Debug.Log("Ended. Final phase: " + finalPhase);
-
-            if (Variables.IsDialogAppended)
-                SceneChanger.Instance.UnloadAppendedScene("AppendDialogScene", () => { Variables.IsDialogAppended = false; });
-            else
-                SceneChanger.Instance.ChangeScene(Variables.DialogAfterScene);
-        }
-
-        public void Play(DialogueData data)
-        {
-            int finalPhase;
-            StartCoroutine(PlayDialogue(data, r => finalPhase = r));
-        }
-
-        IEnumerator PlayDialogue(DialogueData data, System.Action<int> result)
+        public IEnumerator Play(DialogueData data, System.Action<int> result)
         {
             Displayer.ClearAll();
 
@@ -136,7 +105,9 @@ namespace Dialogue
                         }
                         break;
                     default:
-                        Debug.LogError("Oops, unknown type.");
+                        foreach (var action in customTypeAction)
+                            if (action.Key == dialog.Type)
+                                action.Value.Invoke(dialog);
                         break;
                 }
             }
@@ -152,6 +123,11 @@ namespace Dialogue
             Interactor.gameObject.SetActive(true);
             yield return Interactor.Show(texts, nexts);
             Interactor.gameObject.SetActive(false);
+        }
+
+        public void AssignCustomType(int typeNum, System.Action<DialogueContent> commandAction)
+        {
+            customTypeAction.Add(typeNum, commandAction);
         }
     }
 }

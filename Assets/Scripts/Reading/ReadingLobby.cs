@@ -17,12 +17,8 @@ namespace Reading
 		void Start()
 		{
 			charPicker.LoadCharacter();
-		}
 
-		// Update is called once per frame
-		void Update()
-		{
-
+			LoadSelectedCharacter(1);
 		}
 
 		public void SelectCharacter()
@@ -40,6 +36,12 @@ namespace Reading
 			selectedChar = index;
 			selectedCharImg.sprite = Resources.Load<Sprite>("Characters/" + Variables.Characters[index].InternalName + "/image_album");
 			selectedCharName.text = Variables.Characters[index].Name;
+		}
+
+		public void StartReading()
+		{
+			Dialogue.DialogueManager.DialogRoot = "Characters/" + Variables.Characters[selectedChar].InternalName + "/";
+			SceneChanger.Instance.ChangeScene("ReadingIngame");
 		}
 	}
 }
