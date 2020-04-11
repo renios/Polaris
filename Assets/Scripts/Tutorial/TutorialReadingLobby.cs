@@ -7,8 +7,8 @@ namespace Tutorial
 {
 	public class TutorialReadingLobby : MonoBehaviour
 	{
-		public GameObject popupPanel, dimmerFull, dimmer1, dimmer2, dimmer3;
-		public GameObject tutMsgPanel, tutIndicateObj1, tutIndicateObj2, tutIndicateObj3;
+		public GameObject popupPanel, dimmerFull, dimmer1;
+		public GameObject tutMsgPanel;
 		public Text tutText;
 
 		bool allowMoveState = false;
@@ -30,7 +30,6 @@ namespace Tutorial
 					break;
 				case 9:
 					tutText.text = "지금은 폴라리스와 같이 책을 읽어 보자.";
-					tutIndicateObj1.SetActive(true);
 					dimmerFull.SetActive(false);
 					dimmer1.SetActive(true);
 					break;
@@ -50,12 +49,19 @@ namespace Tutorial
 						ChangeState(++Variables.TutorialStep);
 					break;
 				case 9:
-					if (allowMoveState)
-						SceneChanger.Instance.ChangeScene("ReadingIngame");
+                    if (allowMoveState)
+                    {
+                        Variables.TutorialStep += 2;
+                        SceneChanger.Instance.ChangeScene("ReadingIngame");
+                        allowMoveState = false;
+                    }
 					break;
 				case 11:
-					if (allowMoveState)
-						SceneChanger.Instance.ChangeScene("GachaTut2");
+                    if (allowMoveState)
+                    {
+                        SceneChanger.Instance.ChangeScene("GachaTut2");
+                        allowMoveState = false;
+                    }
 					break;
 			}
 		}
