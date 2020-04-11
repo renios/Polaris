@@ -22,19 +22,31 @@ namespace Reading
 				questionSolution.Add(dialog.DialogText);
 			});
 
+			// ROOT : 독서로비에서 고른 캐릭터 폴더
+			var initDialog = DialogueParser.ParseFromCSV(DialogueManager.DialogRoot + "quiz_init");
+			int levelRes = 0;
+			yield return DialogueManager.Instance.Play(initDialog, r => { levelRes = r; });
+
+			// Quiz 폴더로부터, 관측된 캐릭터에 관한 문제를 추가
+			// 1: 쉬움, 2: 보통, 3: 어려움
 			var quizList = new List<DialogueData>();
-
-			for(int i = 0; ; i++)
+			foreach(var chr in Variables.Characters)
 			{
-				var filePath = DialogueManager.DialogRoot + "Quizs/quiz_" + i.ToString();
-				// 파일이 존재하는가?
-				var fileData = Resources.Load<TextAsset>(filePath);
-				if (fileData == null)
-					break;
+				if(chr.Value.Observed)
+				{
+					for(int i = 0; ; i++)
+					{
+						var filePath = "Quizs/" + chr.Value.InternalName + "_" + levelRes.ToString() + "_" + i.ToString();
+						// 파일이 존재하는가?
+						var fileData = Resources.Load<TextAsset>(filePath);
+						if (fileData == null)
+							break;
 
-				// 여기까지 왔으면 존재한다는 소리
-				var quizData = DialogueParser.ParseFromCSV(filePath);
-				quizList.Add(quizData);
+						// 여기까지 왔으면 존재한다는 소리
+						var quizData = DialogueParser.ParseFromCSV(filePath);
+						quizList.Add(quizData);
+					}
+				}
 			}
 
 			// 5개 체리피킹
@@ -104,7 +116,12 @@ namespace Reading
 				yield return quizDisplayer.Show(questionContext, answerContent, selectedAns);
 			}
 
-			// 다 끝나면 결과화면 보여주기
+			// 다 끝나면 결과 텍스트 출력 후 결과화면 보여주기
+			//var finDialog = DialogueParser.ParseFromCSV(DialogueManager.DialogRoot + "quiz_fin");
+			//var finText = finDialog.Dialogues[0].Contents[0].DialogText;
+			//finDialog.Dialogues[0].Contents[0].DialogText = finText.Replace("#", (rightCount + wrongCount).ToString()).Replace("%", rightCount.ToString());
+			//yield return DialogueManager.Instance.Play(finDialog, r => { });
+
 			resultDisplayer.Show(quizResult, questionSolution);
 		}
 	}
