@@ -10,6 +10,7 @@ namespace Reading
 		public Image selectedCharImg;
 		public Text selectedCharName;
 		public ReadingCharPicker charPicker;
+        public GameObject tutorialObj;
 
 		int selectedChar;
 
@@ -19,6 +20,9 @@ namespace Reading
 			charPicker.LoadCharacter();
 
 			LoadSelectedCharacter(1);
+
+            if (!Variables.TutorialFinished)
+                tutorialObj.SetActive(true);
 		}
 
 		public void SelectCharacter()

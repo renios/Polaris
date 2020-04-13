@@ -37,7 +37,7 @@ namespace Tutorial
 					// Scene change to Dialogue Scene
 					Dialogue.DialogueManager.DialogRoot = "Dialogues/TutorialReading/";
 					Dialogue.DialogueManager.DialogFilePath = "Dialogues/TutorialReading/dialog1";
-					Variables.DialogAfterScene = "GachaTut2"; // 임시. 나중에 독서 씬으로 바꿔야 함
+					Variables.DialogAfterScene = "ReadingLobby"; // 임시. 나중에 독서 씬으로 바꿔야 함
 					SceneChanger.Instance.ChangeScene("NewDialogScene");
 					break;
 			}

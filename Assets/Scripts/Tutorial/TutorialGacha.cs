@@ -39,20 +39,20 @@ namespace Tutorial
                     if (manager.Status.behaviour == ObserveBehaviour.Finished)
                         ChangeState(++Variables.TutorialStep);
                     break;
-                case 8:
+                case 11:
                     if (Variables.ObserveSkyLevel == 0)
                         ChangeState(++Variables.TutorialStep);
                     break;
-                case 9:
+                case 12:
                     internalCount += Time.deltaTime;
                     if (internalCount >= 4)
                         ChangeState(++Variables.TutorialStep);
                     break;
-                case 10:
+                case 13:
                     if (manager.Status.behaviour == ObserveBehaviour.Observing)
                         ChangeState(++Variables.TutorialStep);
                     break;
-                case 11:
+                case 14:
                     if (manager.Status.behaviour == ObserveBehaviour.Finished)
                         ChangeState(++Variables.TutorialStep);
                     break;
@@ -113,7 +113,7 @@ namespace Tutorial
                     helpPanel1.SetActive(true);
                     tutText.text = "별빛이 모여서 반짝이고 있어!\n얼른 확인해보자!";
                     break;
-                case 8:
+                case 11:
                     // 8단계: 두 번째 튜토리얼 관측 씬 진입
                     // 다음 단계 이동: 하늘이 열리기 시작하는 시점
                     internalCount = 0;
@@ -127,12 +127,12 @@ namespace Tutorial
 
                     canMoveTutStat = false;
                     break;
-                case 9:
+                case 12:
                     // 9단계: 두 번째 튜토리얼 관측 하늘 개방 중...
                     // 다음 단계 이동: 하늘이 다 열렸을 때
                     tutTextPanel.SetActive(false);
                     break;
-                case 10:
+                case 13:
                     // 10단계: 두 번째 튜토리얼 하늘이 열렸다 & 관측(2) 안내창
                     // 다음 단계 이동: 관측이 시작 되었을 때
                     helpPanel2.SetActive(true);
@@ -141,13 +141,13 @@ namespace Tutorial
                     ObserveManager.AllowMove = true;
                     manager.ButtonObj.GetComponent<Button>().interactable = true;
                     break;
-                case 11:
+                case 14:
                     // 11단계: 두 번째 튜토리얼 관측 시작! & 관측(3) 안내창
                     // 다음 단계 이동: 관측이 끝났을 때
                     tutTextPanel.SetActive(false);
                     helpPanel3.SetActive(true);
                     break;
-                case 12:
+                case 15:
                     // 12단계: 두 번째 튜토리얼 관측 끝
                     tutTextPanel.SetActive(true);
                     tutText.text = "별빛이 다 모인 것 같아!\n이번에도 별을 만날 수 있겠지?";

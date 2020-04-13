@@ -96,9 +96,7 @@ namespace Dialogue
                         SoundManager.Play(dialog.BgmKey);
                         break;
                     case -1:
-                        if (dialog.NextPhase == -1)
-                            result(curPhase);
-                        else
+                        if (dialog.NextPhase > -1)
                         {
                             curPhase = dialog.NextPhase;
                             i = -1;
@@ -111,6 +109,7 @@ namespace Dialogue
                         break;
                 }
             }
+            result(curPhase);
         }
 
         IEnumerator ShowText(string talker, string text)
