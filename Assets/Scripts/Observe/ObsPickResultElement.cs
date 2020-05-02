@@ -20,7 +20,11 @@ namespace Observe
 
 			charData.Favority += deltaFav;
 			if (!charData.Observed)
+			{
 				charData.Observed = true;
+				if (Variables.LobbyCharList.Count < Variables.GetStoreValue(2))
+					Variables.LobbyCharList.Add(charKey);
+			}
 
 			charName.text = charData.Name;
 			for(int i = 0; i < charData.ConstelKey.Length; i++)

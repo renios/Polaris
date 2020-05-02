@@ -11,6 +11,8 @@ public static class Variables
 
     #region Data from SaveData.Now
     public static Dictionary<int, CharacterData> Characters { get { return SaveData.Now.charData; } }
+    public static List<int> LobbyCharList { get { return SaveData.Now.lobbyCharList; } }
+
     public static int[] StoreUpgradeLevel { get { return SaveData.Now.storeUpgradeLevel; } } // 0: 망원경 성능 레벨, 1: 망원경 멀티-관측 레벨, 2: 로비 캐릭터 배치 수 레벨
     public static int Starlight 
     { 
@@ -49,6 +51,13 @@ public static class Variables
     {
         return "Characters/" + Characters[charIndex].InternalName + "/";
     }
+
+    /// <summary>
+    /// 0: 망원경 최소관측 시간, 1: 망원경 동시관측 캐릭터 수, 2: 로비 캐릭터 배치 수
+    /// </summary>
+    /// <param name="speci"></param>
+    /// <returns></returns>
+    public static int GetStoreValue(int speci) { return GetStoreValue(speci, StoreUpgradeLevel[speci]); }
 
     public static int GetStoreValue(int speci, int index)
     {

@@ -13,6 +13,7 @@ public class SaveData
 
     public int charVersion;
     public Dictionary<int, CharacterData> charData;
+    public List<int> lobbyCharList;
 
     public int starlight, memorialPiece;
     public int[] storeUpgradeLevel;
@@ -25,6 +26,7 @@ public class SaveData
     public SaveData()
     {
         charData = new Dictionary<int, CharacterData>();
+        lobbyCharList = new List<int>();
 
         var raw = Resources.Load<TextAsset>("Data/Characters");
         var charGroup = JsonMapper.ToObject<CharacterDataGroup>(raw.text);
