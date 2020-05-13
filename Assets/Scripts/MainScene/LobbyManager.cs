@@ -10,35 +10,60 @@ public class LobbyManager : MonoBehaviour
     private float PositionX;
     private float PositionY;
     public GameObject tutorialObj;
+    public CharacterPicker charPicker;
 
     GameObject pickedCharacter;
     Vector3 pickedPosition;
     float pickedTime;
     bool pickedBalloon;
+    List<GameObject> charObjList;
 
     void Awake()
     {
+        charPicker.LoadCharacter();
+        
         sdchara = GameObject.Find("Characters").gameObject; 
-        ShowCharacter();
+        
+        charObjList = new List<GameObject>();
+        PlaceSDCharacters();
 
         if (!Variables.TutorialFinished)
             tutorialObj.SetActive(true);
     }
 
-    void ShowCharacter()
+    public void SelectCharacter()
     {
-        float PositionZ = 0f;
-        if (Variables.Characters == null) { Debug.Log("세이브 파일이 비정상적임"); return; }
+        StartCoroutine(SelectCharacter_Routine());
+    }
 
-        foreach(var idx in Variables.LobbyCharList)
+    IEnumerator SelectCharacter_Routine()
+    {
+        yield return charPicker.Show(Variables.GetStoreValue(2), false, Variables.LobbyCharList, pickResult =>
+        {
+            Variables.LobbyCharList.Clear();
+            foreach (var charIndex in pickResult)
+                Variables.LobbyCharList.Add(charIndex);
+            GameManager.Instance.SaveGame();
+            
+            PlaceSDCharacters();
+        });
+    }
+
+    public void PlaceSDCharacters()
+    {
+        foreach (var obj in charObjList)
+            Destroy(obj);
+        charObjList.Clear();
+
+        foreach (var idx in Variables.LobbyCharList)
         {
             var c = Variables.Characters[idx];
 
-            string name = c.InternalName.Substring(0, 1).ToUpper() + c.InternalName.Substring(1);
-            GameObject sd = Resources.Load<GameObject>("Prefabs/" + name);
-            if (sd != null)
+            var prefabName = c.InternalName.Substring(0, 1).ToUpper() + c.InternalName.Substring(1);
+            var prefab = Resources.Load<GameObject>("Prefabs/" + prefabName);
+            if (prefab != null)
             {
-                var chr = Instantiate(sd);
+                var chr = Instantiate(prefab);
                 chr.AddComponent<CharacterStarlight>();
                 chr.GetComponent<CharacterStarlight>().CharacterData = idx;
                 chr.transform.SetParent(sdchara.transform);
@@ -46,11 +71,15 @@ public class LobbyManager : MonoBehaviour
                 float PositionX = Random.Range(-0.9f, 0.9f);
                 float PositionY;
                 int floor = Random.Range(0, 3);
-                if (floor == 0) PositionY = -2.0f;
-                else if (floor == 1) PositionY = -0.2f;
-                else PositionY = PositionY = 1.35f;
-                chr.transform.localPosition = new Vector3(PositionX, PositionY, PositionZ);
-                PositionZ -= 0.1f;
+                if (floor == 0) 
+                    PositionY = -2.0f;
+                else if (floor == 1) 
+                    PositionY = -0.2f;
+                else 
+                    PositionY = 1.35f;
+                chr.transform.localPosition = new Vector3(PositionX, PositionY, -0.1f);
+
+                charObjList.Add(chr);
             }
         }
     }

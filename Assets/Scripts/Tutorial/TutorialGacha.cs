@@ -153,6 +153,8 @@ namespace Tutorial
                     tutText.text = "별빛이 다 모인 것 같아!\n이번에도 별을 만날 수 있겠지?";
                     buttonFingerPanel.SetActive(true);
                     buttonAuraEff.SetActive(true);
+                    // 임시 튜토리얼 종료 플래그
+                    Variables.TutorialFinished = true;
                     break;
             }
         }
