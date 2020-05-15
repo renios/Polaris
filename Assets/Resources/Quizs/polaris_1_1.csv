@@ -1,8 +1,6 @@
-﻿phase,talker,behaviour,dialogue,nextPhases
-0,*,Solution,그 찐따같던 나루토가 맞나? 진짜 나루토는 전설이다… 진짜 옛날에 맨날 나루토 봤는데 왕같은 존재인 호카게 되서 세계최강 전설적인 영웅이 된거 보면,
-0,폴라리스,,테스트 질문 2,
-0,*,Select,삽|낚싯대|잠자리채|새총,2|3|4|1
-1,*,Next,,-1
-2,*,Next,,-1
-3,*,Next,,-1
-4,*,Next,,-1
+구분번호,phase,talker,behavior,dialogue,nextPhase,
+,0,*,Solution,폴라리스는 작은곰자리에서 가장 밝은 별이다.,,
+,0,,,폴라리스가 속한 별자리는 어디일까?,,
+,0,*,Select,,큰곰자리|작은곰자리|북극곰자리,2|1|2
+,1,*,Next,,,-1
+,2,*,Next,,,-1
