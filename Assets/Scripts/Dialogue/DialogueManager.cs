@@ -11,7 +11,11 @@ namespace Dialogue
     public class DialogueManager : MonoBehaviour
     {
         public static DialogueManager Instance { get; private set; }
-        public static string ImageRootPath { get; private set; }
+
+        public static string DialogRoot { get; set; }
+        public static string DialogFilePath { get; set; }
+        public static string DefaultTalkerName { get; set; }
+        public static string ImageRootPath { get { return DialogRoot + "DialogueImage/"; } }
 
         public DialogueDisplayer Displayer;
         public DialogueInteractor Interactor;
@@ -19,65 +23,34 @@ namespace Dialogue
 
         public DialogueData CurrentDialogue;
 
-        public string talkerNPC;
         public Image nameTag;
+        public GameObject tutorialObj;
 
-        private DialogueFileType fileType;
+        [HideInInspector] public DialogueFileType fileType;
+        Dictionary<int, System.Action<DialogueContent>> customTypeAction;
+
+        public static void PrepareCharacterDialog(int charIndex, int chapter)
+        {
+            DialogRoot = Variables.GetCharacterRootFolder(charIndex);
+            DialogFilePath = Variables.GetCharacterRootFolder(charIndex) + "dialog_" + chapter;
+            DefaultTalkerName = Variables.Characters[charIndex].Name;
+
+            if (Variables.Characters[charIndex].StoryProgress <= chapter)
+            {
+                Variables.Characters[charIndex].StoryProgress = chapter + 1;
+                GameManager.Instance.SaveGame();
+            }
+        }
 
         private void Awake()
         {
             Instance = this;
 
-            var character = Variables.Characters[Variables.DialogCharIndex].InternalName;
-            var dialogPath = "Characters/" + character + "/dialog_" + Variables.DialogChapterIndex;
-            var imagePath = "Characters/" + character + "/image_dialogue";
-            ImageRootPath = "Characters/" + character + "/DialogueImage/";
-            var dummyDialogPath = "Characters/acher/dialog_" + Variables.DialogChapterIndex; // Dummy 용도로 Acher 사용
-
-            Debug.Log(character + " " + Variables.DialogChapterIndex);
-            try
-            {
-                var jsonAsset = Resources.Load<TextAsset>(dialogPath);
-                if (jsonAsset == null)
-                    jsonAsset = Resources.Load<TextAsset>(dummyDialogPath);
-
-                CurrentDialogue = JsonMapper.ToObject<DialogueData>(jsonAsset.text);
-                fileType = DialogueFileType.JSON;
-            }
-            catch { CurrentDialogue = DialogueParser.ParseFromCSV(dialogPath); fileType = DialogueFileType.TEXT; }
-
-            Displayer.Talker.text = Variables.Characters[Variables.DialogCharIndex].Name;
-            Displayer.ForeImage.sprite = Resources.Load<Sprite>(imagePath);
+            customTypeAction = new Dictionary<int, System.Action<DialogueContent>>();
             Displayer.ForeImage.preserveAspect = true;
-
-            talkerNPC = Displayer.Talker.text; Debug.Log(talkerNPC);
         }
 
-        private IEnumerator Start()
-        {
-            if (Variables.Characters[Variables.DialogCharIndex].StoryProgress <= Variables.DialogChapterIndex)
-            {
-                Variables.Characters[Variables.DialogCharIndex].StoryProgress = Variables.DialogChapterIndex + 1;
-                GameManager.Instance.SaveGame();
-            }
-
-            int finalPhase = 0;
-            yield return PlayDialogue(CurrentDialogue, r => finalPhase = r);
-            Debug.Log("Ended. Final phase: " + finalPhase);
-
-            if (Variables.IsDialogAppended)
-                SceneChanger.Instance.UnloadAppendedScene("AppendDialogScene", () => { Variables.IsDialogAppended = false; });
-            else
-                SceneChanger.Instance.ChangeScene(Variables.DialogAfterScene);
-        }
-
-        public void Play(DialogueData data)
-        {
-            int finalPhase;
-            StartCoroutine(PlayDialogue(data, r => finalPhase = r));
-        }
-
-        IEnumerator PlayDialogue(DialogueData data, System.Action<int> result)
+        public IEnumerator Play(DialogueData data, System.Action<int> result)
         {
             Displayer.ClearAll();
 
@@ -99,7 +72,7 @@ namespace Dialogue
                             nameTag.enabled = true;
                             nameTag.sprite = Resources.Load<Sprite>("Images/dialogue_nametag");
                         }
-                        yield return ShowText(fileType == DialogueFileType.JSON ? talkerNPC : dialog.Talker, dialog.DialogText);
+                        yield return ShowText(fileType == DialogueFileType.JSON ? DefaultTalkerName : dialog.Talker, dialog.DialogText);
                         break;
                     case 1:
                         nameTag.enabled = true;
@@ -107,6 +80,8 @@ namespace Dialogue
                         yield return ShowText("나", dialog.DialogText);
                         break;
                     case 2:
+                        if (!Variables.TutorialFinished && Variables.TutorialStep == 5)
+                            tutorialObj.SetActive(true);
                         yield return ShowInteraction(dialog.JuncTexts, dialog.Directions);
                         if (dialog.Directions[Interactor.Result] > -1)
                         {
@@ -121,19 +96,20 @@ namespace Dialogue
                         SoundManager.Play(dialog.BgmKey);
                         break;
                     case -1:
-                        if (dialog.NextPhase == -1)
-                            result(curPhase);
-                        else
+                        if (dialog.NextPhase > -1)
                         {
                             curPhase = dialog.NextPhase;
                             i = -1;
                         }
                         break;
                     default:
-                        Debug.LogError("Oops, unknown type.");
+                        foreach (var action in customTypeAction)
+                            if (action.Key == dialog.Type)
+                                action.Value.Invoke(dialog);
                         break;
                 }
             }
+            result(curPhase);
         }
 
         IEnumerator ShowText(string talker, string text)
@@ -146,6 +122,11 @@ namespace Dialogue
             Interactor.gameObject.SetActive(true);
             yield return Interactor.Show(texts, nexts);
             Interactor.gameObject.SetActive(false);
+        }
+
+        public void AssignCustomType(int typeNum, System.Action<DialogueContent> commandAction)
+        {
+            customTypeAction.Add(typeNum, commandAction);
         }
     }
 }

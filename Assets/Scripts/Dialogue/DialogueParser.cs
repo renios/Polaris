@@ -72,7 +72,8 @@ namespace Dialogue
                 }
                 if(newContent.Type == -10)
                 {
-                    switch(((string)list[i]["behaviour"]).ToLower())
+                    var behaviour = ((string)list[i]["behaviour"]).ToLower();
+                    switch (behaviour)
                     {
                         case "select":
                             newContent.Type = 2;
@@ -99,6 +100,10 @@ namespace Dialogue
                         case "next":
                             newContent.Type = -1;
                             newContent.NextPhase = (int)list[i]["nextPhases"];
+                            break;
+                        case "solution":    // 독서 화면에서 문제에 대한 해설값. 독서 화면에서만 실제로 실행됨.
+                            newContent.Type = 20;
+                            newContent.DialogText = (string)list[i]["dialogue"];
                             break;
                     }
                 }

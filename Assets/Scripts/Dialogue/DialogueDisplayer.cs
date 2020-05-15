@@ -41,7 +41,11 @@ namespace Dialogue
 
         public void DisplayForeImage(string imageKey)
         {
-            ForeImage.sprite = Resources.Load<Sprite>(DialogueManager.ImageRootPath + imageKey);
+            //ForeImage.sprite = Resources.Load<Sprite>(DialogueManager.ImageRootPath + imageKey);
+            if (imageKey == "default")
+                ForeImage.sprite = Resources.Load<Sprite>(DialogueManager.DialogRoot + "image_dialogue");
+            else
+                ForeImage.sprite = Resources.Load<Sprite>(DialogueManager.DialogRoot + "image_dialogue_" + imageKey);
         }
 
         IEnumerator TextAnimating(string context)

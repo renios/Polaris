@@ -51,6 +51,7 @@ namespace Album
 
         public void Show(int charIndex)
         {
+            AlbumManager.Instance.TutorialObj.GetComponent<Tutorial.TutorialAlbum>().ProceedState();
             gameObject.SetActive(true);
 
             var character = Variables.Characters[charIndex];
@@ -130,12 +131,12 @@ namespace Album
 
         public void RunStory()
         {
+            Dialogue.DialogueManager.PrepareCharacterDialog
+                (StoryElement[curStoryIndex].GetComponent<AlbumStoryElement>().charIndex,
+                StoryElement[curStoryIndex].GetComponent<AlbumStoryElement>().storyIndex);
             Variables.DialogAfterScene = SceneChanger.GetCurrentScene();
-            Variables.DialogCharIndex = StoryElement[curStoryIndex].GetComponent<AlbumStoryElement>().charIndex;
-            Variables.DialogChapterIndex = StoryElement[curStoryIndex].GetComponent<AlbumStoryElement>().storyIndex;
+
             SceneChanger.Instance.ChangeScene("NewDialogScene");
         }
-
-        
     }
 }

@@ -6,51 +6,80 @@ using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
-    private int currentCamera;
     private GameObject sdchara;
-    public GameObject popup;
     private float PositionX;
     private float PositionY;
+    public GameObject tutorialObj;
+    public CharacterPicker charPicker;
 
     GameObject pickedCharacter;
     Vector3 pickedPosition;
     float pickedTime;
     bool pickedBalloon;
+    List<GameObject> charObjList;
 
     void Awake()
     {
+        charPicker.LoadCharacter();
+        
         sdchara = GameObject.Find("Characters").gameObject; 
-        if(SceneManager.GetActiveScene().name != "MainTut")
-            popup = GameObject.Find("Setting").transform.Find("Setting Panel").gameObject;
-        ShowCharacter();
+        
+        charObjList = new List<GameObject>();
+        PlaceSDCharacters();
+
+        if (!Variables.TutorialFinished)
+            tutorialObj.SetActive(true);
     }
 
-    void ShowCharacter()
+    public void SelectCharacter()
     {
-        float PositionZ = 0f;
-        if (Variables.Characters == null) { Debug.Log("세이브 파일이 비정상적임"); return; }
-        foreach (KeyValuePair<int, CharacterData> c in Variables.Characters)
+        StartCoroutine(SelectCharacter_Routine());
+    }
+
+    IEnumerator SelectCharacter_Routine()
+    {
+        yield return charPicker.Show(Variables.GetStoreValue(2), false, Variables.LobbyCharList, pickResult =>
         {
-            if (c.Value.Observed)
+            Variables.LobbyCharList.Clear();
+            foreach (var charIndex in pickResult)
+                Variables.LobbyCharList.Add(charIndex);
+            GameManager.Instance.SaveGame();
+            
+            PlaceSDCharacters();
+        });
+    }
+
+    public void PlaceSDCharacters()
+    {
+        foreach (var obj in charObjList)
+            Destroy(obj);
+        charObjList.Clear();
+
+        foreach (var idx in Variables.LobbyCharList)
+        {
+            var c = Variables.Characters[idx];
+
+            var prefabName = c.InternalName.Substring(0, 1).ToUpper() + c.InternalName.Substring(1);
+            var prefab = Resources.Load<GameObject>("Prefabs/" + prefabName);
+            if (prefab != null)
             {
-                string name = c.Value.InternalName.Substring(0, 1).ToUpper() + c.Value.InternalName.Substring(1);
-                GameObject sd = Resources.Load<GameObject>("Prefabs/" + name);
-                if (sd != null)
-                {
-                    var chr = Instantiate(sd);
-                    chr.AddComponent<CharacterStarlight>();
-                    chr.GetComponent<CharacterStarlight>().CharacterData = c.Key;
-                    chr.transform.SetParent(sdchara.transform);
-                    chr.transform.localScale = new Vector3(0.25f, 0.25f, 1);
-                    float PositionX = Random.Range(-0.9f, 0.9f);
-                    float PositionY;
-                    int floor = Random.Range(0, 3);
-                    if (floor == 0) PositionY = -2.0f;
-                    else if (floor == 1) PositionY = -0.2f;
-                    else PositionY = PositionY = 1.35f;
-                    chr.transform.localPosition = new Vector3(PositionX, PositionY, PositionZ);
-                    PositionZ -= 0.1f;
-                }
+                var chr = Instantiate(prefab);
+                chr.AddComponent<CharacterStarlight>();
+                chr.GetComponent<CharacterStarlight>().CharacterData = idx;
+                chr.transform.SetParent(sdchara.transform);
+                chr.transform.localScale = new Vector3(0.25f, 0.25f, 1);
+                float PositionX = Random.Range(-0.9f, 0.9f);
+                float PositionY;
+                int floor = Random.Range(0, 3);
+                if (floor == 0) 
+                    PositionY = -2.0f;
+                else if (floor == 1) 
+                    PositionY = -0.2f;
+                else 
+                    PositionY = 1.35f;
+                chr.transform.localPosition = new Vector3(PositionX, PositionY, -0.1f);
+
+                charObjList.Add(chr);
             }
         }
     }
@@ -58,7 +87,6 @@ public class LobbyManager : MonoBehaviour
     void Start()
     {
         SoundManager.Play(SoundType.BgmMain);
-        currentCamera = -1;
     }
 
     // Update is called once per frame
@@ -151,8 +179,6 @@ public class LobbyManager : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
-        if(sceneName == "GachaTut_1")
-            Variables.tutState = 7;
         TryPickCharacter();
         if (pickedCharacter == null && !pickedBalloon )
         {

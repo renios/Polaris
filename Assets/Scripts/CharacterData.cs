@@ -24,6 +24,20 @@ public class CharacterData
     public int Favority;
     public int StoryProgress;
     public string LastReapDate;
+
+    public void AppendFrom(CharacterDataCore c)
+    {
+        ConstelKey = c.ConstelKey;
+        ConstelWeight = c.ConstelWeight;
+        Name = c.Name;
+        InternalName = c.InternalName;
+        Observable = c.Observable;
+        LuxText = c.LuxText;
+        LuxValue = c.LuxValue;
+        LYDistance = c.LYDistance;
+        Description = c.Description;
+        ChapterInfo = c.ChapterInfo;
+    }
 }
 
 public struct CharacterDataCore
@@ -60,20 +74,6 @@ public struct CharacterDataCore
             ChapterInfo = c.ChapterInfo
         };
         return d;
-    }
-
-    public void AppendTo(ref CharacterData existing)
-    {
-        existing.ConstelKey = ConstelKey;
-        existing.ConstelWeight = ConstelWeight;
-        existing.Name = Name;
-        existing.InternalName = InternalName;
-        existing.Observable = Observable;
-        existing.LuxText = LuxText;
-        existing.LuxValue = LuxValue;
-        existing.LYDistance = LYDistance;
-        existing.Description = Description;
-        existing.ChapterInfo = ChapterInfo;
     }
 }
 

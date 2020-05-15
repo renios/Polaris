@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Nansae\.Rider2019.1\config\extensions" t="IncludeRecursive" />
-    <e p="C:\Users\Nansae\.Rider2019.1\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Nansae\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_Polaris.-881647135.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Nansae\.Rider2019.3\config\extensions" t="IncludeRecursive" />
+    <e p="C:\Users\Nansae\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Nansae\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Polaris.-881647135.00" t="ExcludeRecursive" />
     <e p="C:\Users\Nansae\Desktop\Polaris" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
@@ -830,7 +830,7 @@
         </e>
         <e p="Balloon.cs" t="Include" />
         <e p="ButtonClickSound.cs" t="Include" />
-        <e p="CardData.cs" t="Include" />
+        <e p="CameraAspectFitter.cs" t="Include" />
         <e p="CharacterData.cs" t="Include" />
         <e p="ClickableObject.cs" t="Include" />
         <e p="ConstelData.cs" t="Include" />
@@ -842,15 +842,19 @@
           <e p="DialogueInteractor.cs" t="Include" />
           <e p="DialogueManager.cs" t="Include" />
           <e p="DialogueParser.cs" t="Include" />
+          <e p="DialogueSceneManager.cs" t="Include" />
           <e p="RichTextHelper.cs" t="Include" />
+          <e p="Test" t="Include">
+            <e p="DialogTestManager.cs" t="Include" />
+          </e>
         </e>
         <e p="DialogueSelectButtonManager.cs" t="Include" />
         <e p="DialogueSelector.cs" t="Include" />
         <e p="DialogueText.cs" t="Include" />
         <e p="DoTweenHelper.cs" t="Include" />
         <e p="Enums.cs" t="Include" />
-        <e p="GachaManager.cs" t="Include" />
         <e p="GameManager.cs" t="Include" />
+        <e p="Letterbox.cs" t="Include" />
         <e p="LoadingBar.cs" t="Include" />
         <e p="MainMenu.cs" t="Include" />
         <e p="MainMenuPannel.cs" t="Include" />
@@ -868,6 +872,18 @@
         <e p="MoneyDisplayer.cs" t="Include" />
         <e p="MouseEffectManager.cs" t="Include" />
         <e p="NormalBalloon.cs" t="Include" />
+        <e p="Observe" t="Include">
+          <e p="ConstelObsData.cs" t="Include" />
+          <e p="ObsCharElement.cs" t="Include" />
+          <e p="ObserveManager.cs" t="Include" />
+          <e p="ObserveStatus.cs" t="Include" />
+          <e p="ObserveTimeButton.cs" t="Include" />
+          <e p="ObsPickResultElement.cs" t="Include" />
+          <e p="ObsPickResultShower.cs" t="Include" />
+          <e p="ObsResultManager.cs" t="Include" />
+          <e p="ObsSkyAreaBtn.cs" t="Include" />
+          <e p="ObsTimeDisplayer.cs" t="Include" />
+        </e>
         <e p="Opening.cs" t="Include" />
         <e p="Prologue" t="Include">
           <e p="BalloonController.cs" t="Include" />
@@ -876,8 +892,18 @@
           <e p="PrologueImageController.cs" t="Include" />
           <e p="TextController.cs" t="Include" />
         </e>
-        <e p="ResultManager.cs" t="Include" />
+        <e p="Reading" t="Include">
+          <e p="ReadingCharListToggle.cs" t="Include" />
+          <e p="ReadingCharPicker.cs" t="Include" />
+          <e p="ReadingIngameManager.cs" t="Include" />
+          <e p="ReadingLobby.cs" t="Include" />
+          <e p="ReadingQuizAnswerElement.cs" t="Include" />
+          <e p="ReadingQuizDisplayer.cs" t="Include" />
+          <e p="ReadingResultDisplayer.cs" t="Include" />
+          <e p="ReadingResultElement.cs" t="Include" />
+        </e>
         <e p="SaveData.cs" t="Include" />
+        <e p="ScalerFitter.cs" t="Include" />
         <e p="SceneChanger.cs" t="Include" />
         <e p="SelectBalloon.cs" t="Include" />
         <e p="SelectedDialogueData.cs" t="Include" />
@@ -890,13 +916,17 @@
         <e p="TitleScene" t="Include">
           <e p="Title.cs" t="Include" />
         </e>
-        <e p="TouchManager.cs" t="Include" />
         <e p="Tutorial" t="Include">
-          <e p="GachaTut.cs" t="Include" />
           <e p="LobbyTutorial.cs" t="Include" />
-          <e p="TouchTut.cs" t="Include" />
+          <e p="TutorialAlbum.cs" t="Include" />
+          <e p="TutorialDialogue.cs" t="Include" />
+          <e p="TutorialGacha.cs" t="Include" />
         </e>
+        <e p="Values.cs" t="Include" />
         <e p="Variables.cs" t="Include" />
+      </e>
+      <e p="Assets\Shaders" t="Include">
+        <e p="LetterboxShader.shader" t="Include" />
       </e>
       <e p="Assets\SuperScrollView" t="Include">
         <e p="Demo" t="Include">

@@ -2965,6 +2965,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1623933902}
   - component: {fileID: 1623933901}
+  - component: {fileID: 1623933903}
   m_Layer: 0
   m_Name: Dialogue Manager
   m_TagString: Untagged
@@ -2986,8 +2987,9 @@ MonoBehaviour:
   Displayer: {fileID: 1502631395}
   Interactor: {fileID: 748840242}
   Receiver: {fileID: 195710993}
-  talkerNPC: 
   nameTag: {fileID: 1649590138}
+  tutorialObj: {fileID: 0}
+  fileType: 0
 --- !u!4 &1623933902
 Transform:
   m_ObjectHideFlags: 0
@@ -3001,6 +3003,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1623933903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1623933900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b3d57e6c1c4f084e9a25e66d656f20e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1641573244
 GameObject:
   m_ObjectHideFlags: 0

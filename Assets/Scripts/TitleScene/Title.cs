@@ -32,7 +32,6 @@ public class Title : MonoBehaviour {
         TitleText.color = new Color(1, 1, 1, 0);
         TitleSubText.color = new Color(1, 1, 1, 0);
         TouchText.color = new Color(1, 1, 1, 0);
-        Variables.isTutorialFinished = false;
 
         SoundManager.Play(SoundType.BgmTitle);
     }
@@ -103,9 +102,15 @@ public class Title : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         if(Variables.HasSave)
         {
-            GameManager.Instance.LoadGame();
-            SceneChanger.Instance.ChangeScene("MainScene");
-            Variables.isTutorialFinished = true;
+            SaveData.Load();
+
+            if (!Variables.TutorialFinished)
+            {
+                GameManager.Instance.CreateGame();
+                SceneChanger.Instance.ChangeScene("Prologue");
+            }
+            else
+                SceneChanger.Instance.ChangeScene("MainScene");
         }
         else
         {
