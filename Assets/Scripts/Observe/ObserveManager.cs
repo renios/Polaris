@@ -42,6 +42,7 @@ namespace Observe
         public GameObject NoMoneyPanel;
         [Header("While Observing Panel")]
         public GameObject WhileObservingPanel;
+        public Text fastCompleteMoneyLabel;
         [Header("Animating after pick")]
         public GameObject DimmerPanel;
         [Header("Result Alert Panel")]
@@ -381,6 +382,8 @@ namespace Observe
             }
             else if(status.behaviour == ObserveBehaviour.Observing)
             {
+                if (fastCompleteMoneyLabel != null)
+                    fastCompleteMoneyLabel.text = Variables.values.fastCompleteCost[status.timeIndex].ToString();
                 WhileObservingPanel.SetActive(true);
             }
             else if(status.behaviour == ObserveBehaviour.Finished)
@@ -420,13 +423,24 @@ namespace Observe
 
         public void TimeOkRunBtnClicked()
         {
-            if (Variables.Starlight < TimeConfirmBtn[obsTimeIndex - 1].GetComponentInParent<ObserveTimeButton>().SpendMoney)
-                NoMoneyPanel.SetActive(true);
-            else
+            StartCoroutine(TimeOkRunBtnClicked_Routine());
+        }
+
+        IEnumerator TimeOkRunBtnClicked_Routine()
+        {
+            var cost = TimeConfirmBtn[obsTimeIndex - 1].GetComponentInParent<ObserveTimeButton>().SpendMoney;
+            bool res = false;
+            yield return MessageSet.Now.ShowMoneySpendAsk("별빛을 사용하여\n관측을 시작하시겠습니까?", MoneyType.Starlight, cost, result => { res = result;});
+            if (res)
             {
-                Variables.Starlight -= TimeConfirmBtn[obsTimeIndex - 1].GetComponentInParent<ObserveTimeButton>().SpendMoney;
-                StartObserveWithTime();
-                TimeConfirmPanel.SetActive(false);
+                if (Variables.Starlight < cost)
+                    yield return MessageSet.Now.ShowNoMoneyAlert(MoneyType.Starlight);
+                else
+                {
+                    Variables.Starlight -= cost;
+                    StartObserveWithTime();
+                    TimeConfirmPanel.SetActive(false);
+                }
             }
         }
 
@@ -465,21 +479,34 @@ namespace Observe
                     status.endTime = DateTime.Now.AddHours(1);
                     break;
             }
+
+            status.timeIndex = obsTimeIndex;
             status.pickTryCount = Variables.GetStoreValue(1, Variables.StoreUpgradeLevel[1]);
             status.scopePos = new[] { Scope.transform.position.x, Scope.transform.position.y, Scope.transform.position.z };
             ChangeBehaviour(ObserveBehaviour.Observing);
         }
 
-        public void FastComplete()
+        public void AskFastComplete()
         {
-            if (Variables.Starlight < 300)
-                NoMoneyPanel.SetActive(true);
-            else
+            StartCoroutine(AskFastComplete_Routine());
+        }
+
+        IEnumerator AskFastComplete_Routine()
+        {
+            var cost = Variables.values.fastCompleteCost[status.timeIndex];
+            bool res = false;
+            yield return MessageSet.Now.ShowMoneySpendAsk("별빛을 사용하여\n관측을 즉시 완료하시겠습니까?", MoneyType.Starlight, cost, result => { res = result;});
+            if (res)
             {
-                Variables.Starlight -= 300;
-                ChangeBehaviour(ObserveBehaviour.Finished);
-                ButtonPressed();
-                WhileObservingPanel.SetActive(false);
+                if (Variables.Starlight < cost)
+                    yield return MessageSet.Now.ShowNoMoneyAlert(MoneyType.Starlight);
+                else
+                {
+                    Variables.Starlight -= cost;
+                    ChangeBehaviour(ObserveBehaviour.Finished);
+                    ButtonPressed();
+                    WhileObservingPanel.SetActive(false);
+                }
             }
         }
 

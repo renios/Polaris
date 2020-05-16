@@ -36,7 +36,7 @@ public class SaveData
 
         starlight = 1000;
         memorialPiece = 1;
-        storeUpgradeLevel = new[] { 2, 0, 0 };
+        storeUpgradeLevel = new[] { 2, 1, 1 };
         tutorialFinished = false;
         tutorialStep = 1;
         observeSkyLevel = -1;
