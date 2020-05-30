@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,10 @@ namespace Reading
 		public ReadingCharPicker charPicker;
         public GameObject tutorialObj;
 
+        public Button changeCharBtn, diaryBtn;
+
 		int selectedChar;
+		Sprite diaryState;
 
 		// Use this for initialization
 		void Start()
@@ -23,6 +27,18 @@ namespace Reading
 
             if (!Variables.TutorialFinished)
                 tutorialObj.SetActive(true);
+		}
+
+		void Update()
+		{
+			var curDiarySprite = diaryBtn.image.overrideSprite;
+			
+			if(curDiarySprite != diaryState && curDiarySprite == diaryBtn.spriteState.pressedSprite)
+				changeCharBtn.transform.SetAsFirstSibling();
+			else if(curDiarySprite != diaryState)
+				diaryBtn.transform.SetAsFirstSibling();
+
+			diaryState = curDiarySprite;
 		}
 
 		public void SelectCharacter()
@@ -39,7 +55,7 @@ namespace Reading
 		{
 			selectedChar = index;
 			selectedCharImg.sprite = Resources.Load<Sprite>("Characters/" + Variables.Characters[index].InternalName + "/image_album");
-			selectedCharName.text = Variables.Characters[index].Name;
+			//selectedCharName.text = Variables.Characters[index].Name;
 		}
 
 		public void StartReading()
