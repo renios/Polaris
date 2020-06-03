@@ -31,8 +31,8 @@
         },
         {
             "CharNumber":2,
-            "ConstelKey":["Draco","UrsaMajor","Camelopardalis","Cepheus"],
-            "ConstelWeight":[1.0,0.8,0.4,0.4],
+            "ConstelKey":["Draco","UrsaMajor"],
+            "ConstelWeight":[1.0,0.2],
             "Name":"투반",
             "InternalName":"thuban",
             "LuxText":"3.7",
@@ -63,8 +63,8 @@
         },
         {
             "CharNumber":3,
-            "ConstelKey":["Draco","Cepheus","Camelopardalis","Cassiopeia"],
-            "ConstelWeight":[0.8,0.7,0.3,0.4],
+            "ConstelKey":["Draco","Cepheus"],
+            "ConstelWeight":[0.5,0.4],
             "Name":"고양이 눈 성운",
             "InternalName":"catseye",
             "LuxText":"9.8",
@@ -95,8 +95,8 @@
         },
         {
             "CharNumber":4,
-            "ConstelKey":["Hydra","Sextans","Taurus","Cancer","Leo","Crater"],
-            "ConstelWeight":[1.0,0.8,0.3,0.5,0.6,0.4],
+            "ConstelKey":["Hydra"],
+            "ConstelWeight":[1.0],
             "Name":"알파드",
             "InternalName":"alphard",
             "LuxText":"2.0",
@@ -129,8 +129,8 @@
         },
         {
             "CharNumber":5,
-            "ConstelKey":["Taurus","Gemini","Aries","Auriga","Perseus"],
-            "ConstelWeight":[0.8,0.5,0.5,0.2,0.2],
+            "ConstelKey":["Taurus","Gemini","Aries"],
+            "ConstelWeight":[0.4,0.2,0.2],
             "Name":"천왕성",
             "InternalName":"uranus",
             "LuxText":"5.32 ~ 5.9",
@@ -168,8 +168,8 @@
         },
         {
             "CharNumber":6,
-            "ConstelKey":["Corvus","Hydra","Crater","Virgo"],
-            "ConstelWeight":[1.0,0.4,0.4,0.4],
+            "ConstelKey":["Corvus"],
+            "ConstelWeight":[1.0],
             "Name":"크라즈",
             "InternalName":"kraz",
             "LuxText":"2.6",
@@ -204,15 +204,15 @@
         },
         {
             "CharNumber":7,
-            "ConstelKey":["Virgo","Hydra","Corvus","Leo","ComaBerenices","Bootes","Libra","Serpens"],
-            "ConstelWeight":[1.0,0.3,0.4,0.2,0.4,0.3,0.3,0.2],
+            "ConstelKey":["Virgo"],
+            "ConstelWeight":[1.0],
             "Name":"스피카",
             "InternalName":"spica",
             "LuxText":"1.0",
             "LuxValue":1.0,
             "LYDistance":"250 광년",
             "Description":"처녀자리 알파성. 처녀자리에서 가장 밝은 별이자 밤하늘에서 15번째로 밝은 별이다. 쌍성임이 확인되기도 했다.",
-            "Observable":false,
+            "Observable":true,
             "ChapterInfo":
             [
                 {"Header":"첫 만남", "Description":"주인공을 친근하게 대해주는 스피카.", 
@@ -245,8 +245,8 @@
         },
         {
             "CharNumber":8,
-            "ConstelKey":["Libra","Scorpius","Hydra","Virgo","Serpens","Ophiuchus","Leo"],
-            "ConstelWeight":[1.0,0.6,0.3,0.5,0.5,0.3,0.4],
+            "ConstelKey":["Libra","Serpens"],
+            "ConstelWeight":[1.0,0.2],
             "Name":"주벤엘게누비",
             "InternalName":"zubenelgenubi",
             "LuxText":"2.8",
@@ -280,8 +280,8 @@
         },
         {
             "CharNumber":9,
-            "ConstelKey":["Leo","Virgo","ComaBerenices","LeoMinor","CanesVenatici","Bootes","Lynx","UrsaMajor","Sextans","Crater"],
-            "ConstelWeight":[0.9,0.6,0.7,0.7,0.5,0.3,0.3,0.4,0.4,0.4],
+            "ConstelKey":["Leo","CanesVenatici"],
+            "ConstelWeight":[0.8,0.2],
             "Name":"데네볼라",
             "InternalName":"denebola",
             "LuxText":"2.1",
@@ -315,8 +315,8 @@
         },
         {
             "CharNumber":10,
-            "ConstelKey":["Lyra"],
-            "ConstelWeight":[0.4],
+            "ConstelKey":["Lyra","Aquila"],
+            "ConstelWeight":[0.5, 0.2],
             "Name":"고리 성운",
             "InternalName":"ring",
             "LuxText":"8.8",
@@ -353,26 +353,19 @@
         },
         {
             "CharNumber":11,
-            "ConstelKey":["Sagittarius"],
-            "ConstelWeight":[1.0],
-            "Observable":false,
-            "ChapterInfo":
-            [
-                {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                    "Additional":[]}
-            ]
+            
         },
         {
             "CharNumber":12,
-            "ConstelKey":["Sagittarius"],
-            "ConstelWeight":[0.4],
+            "ConstelKey":["Capricornus","Aquarius","Pisces"],
+            "ConstelWeight":[0.5,0.2,0.2],
             "Name":"토성",
             "InternalName":"saturn",
             "LuxText":"-0.2~1.2",
             "LuxValue":-0.2,
             "LYDistance":"8.5 AU",
             "Description":"태양계의 6번째 행성. 뚜렷하고 큰 고리가 눈에 띄는 가스형 행성이다.",
-            "Observable":false,
+            "Observable":true,
             "ChapterInfo":
             [
                 {"Header":"첫 만남", "Description":"주인공과 토성의 첫 만남.", 
@@ -404,7 +397,7 @@
         },
         {
             "CharNumber":13,
-            "ConstelKey":["Taurus"],
+            "ConstelKey":["Capricornus"],
             "ConstelWeight":[0.2],
             "Name":"명왕성",
             "InternalName":"pluto",
@@ -441,7 +434,7 @@
             "LuxText":"-0.0",
             "LuxValue":0.0,
             "LYDistance":"37 광년",
-            "Description":"아크투루스는 목동자리 알파별로, 시리우스와 카노푸스 다음으로 세 번째로 밝은 별이다(혹자는 쌍성인 알파 센타우리를 3위에 놓기도 한다).",
+            "Description":"아크투루스는 목동자리 알파별로, 시리우스와 카노푸스 다음으로 세 번째로 밝은 별이다. (쌍성인 알파 센타우리를 3위에 놓기도 한다)",
             "Observable":true,
             "ChapterInfo":
             [
@@ -501,19 +494,12 @@
         },
         {
             "CharNumber":16,
-            "ConstelKey":["Ophiuchus"],
-            "ConstelWeight":[1.0],
-            "Observable":false,
-            "ChapterInfo":
-            [
-                {"Header":"제목 0", "Description":"임시 텍스트 0", 
-                    "Additional":[]}
-            ]
+            
         },
         {
             "CharNumber":17,
-            "ConstelKey":["Ophiuchus"],
-            "ConstelWeight":[0.4],
+            "ConstelKey":["Sagittarius","Capricornus","Aquarius"],
+            "ConstelWeight":[0.5,0.2,0.2],
             "Name":"목성",
             "InternalName":"jupiter",
             "LuxText":"-2.94",
@@ -545,8 +531,8 @@
         },
         {
             "CharNumber":18,
-            "ConstelKey":["Scorpius"],
-            "ConstelWeight":[1.0],
+            "ConstelKey":["Scorpius","Ophiuchus"],
+            "ConstelWeight":[1.0,0.2],
             "Name":"안타레스",
             "InternalName":"antares",
             "LuxText":"-5.3",
@@ -582,8 +568,8 @@
         },
         {
             "CharNumber":19,
-            "ConstelKey":["Pegasus"],
-            "ConstelWeight":[1.0],
+            "ConstelKey":["Pegasus","Andromeda"],
+            "ConstelWeight":[1.0,0.2],
             "Name":"마르카브",
             "InternalName":"markab",
             "LuxText":"2.5",
@@ -617,8 +603,8 @@
         },
         {
             "CharNumber":20,
-            "ConstelKey":["Pisces"],
-            "ConstelWeight":[1.0],
+            "ConstelKey":["Pisces","Cetus"],
+            "ConstelWeight":[1.0,0.2],
             "Name":"레샤",
             "InternalName":"rescha",
             "LuxText":"3.8",
@@ -691,8 +677,8 @@
         },
         {
             "CharNumber":22,
-            "ConstelKey":["Aquarius"],
-            "ConstelWeight":[1.0],
+            "ConstelKey":["Aquarius","Cetus"],
+            "ConstelWeight":[1.0,0.2],
             "Name":"멜리크",
             "InternalName":"melik",
             "LuxText":"3.0",
@@ -722,8 +708,8 @@
         },
         {
             "CharNumber":23,
-            "ConstelKey":["Aquarius"],
-            "ConstelWeight":[0.4],
+            "ConstelKey":["Aquarius","Pisces","Aries"],
+            "ConstelWeight":[0.3,0.1,0.1],
             "Name":"해왕성",
             "InternalName":"neptune",
             "LuxText":"7.7",
@@ -762,8 +748,8 @@
         },
         {
             "CharNumber":24,
-            "ConstelKey":["Aries"],
-            "ConstelWeight":[1.0],
+            "ConstelKey":["Aries","Perseus"],
+            "ConstelWeight":[1.0,0.2],
             "Name":"하말",
             "InternalName":"hamal",
             "LuxText":"2.0",
@@ -792,8 +778,8 @@
         },
         {
             "CharNumber":25,
-            "ConstelKey":["Leo"],
-            "ConstelWeight":[1.0],
+            "ConstelKey":["Leo","Lynx"],
+            "ConstelWeight":[1.0,0.2],
             "Name":"레굴루스",
             "InternalName":"Regulus",
             "LuxText":"1.4",
@@ -829,8 +815,8 @@
         },
         {
             "CharNumber":26,
-            "ConstelKey":["Eridanus"],
-            "ConstelWeight":[1.0],
+            "ConstelKey":["Eridanus","Cetus"],
+            "ConstelWeight":[1.0,0.1],
             "Name":"아케르",
             "InternalName":"acher",
             "LuxText":"0.5",
@@ -863,7 +849,7 @@
         {
             "CharNumber":27,
             "ConstelKey":["Monoceros"],
-            "ConstelWeight":[0.4],
+            "ConstelWeight":[0.5],
             "Name":"로제",
             "InternalName":"roze",
             "LuxText":"9.0",
@@ -928,8 +914,8 @@
         },
         {
             "CharNumber":29,
-            "ConstelKey":["Orion"],
-            "ConstelWeight":[1.0],
+            "ConstelKey":["Orion","Lepus"],
+            "ConstelWeight":[1.0,0.2],
             "Name":"리겔루스",
             "InternalName":"rigeleuse",
             "LuxText":"0.2",
@@ -1051,8 +1037,8 @@
         },
         {
             "CharNumber":33,
-            "ConstelKey":["Lyra"],
-            "ConstelWeight":[1.0],
+            "ConstelKey":["Lyra","Hercules","Aquila","Cygnus"],
+            "ConstelWeight":[1.0,0.2,0.2,0.2],
             "Name":"베가",
             "InternalName":"vega",
             "LuxText":"0.0",
@@ -1116,42 +1102,7 @@
         },
         {
             "CharNumber":35,
-            "ConstelKey":["Cassiopeia"],
-            "ConstelWeight":[1.0],
-            "Name":"목성",
-            "InternalName":"jupiter",
-            "LuxText":"−1.6 ~ −2.94",
-            "LuxValue":-1.6,
-            "LYDistance":"4.95 ~ 5.45 AU",
-            "Description":"태양계에서 다섯번째에 위치한 천체. 태양계의 천체들 중 태양을 제외하면 가장 크다. 태양 질량의 1/1000, 태양을 제외한 다른 모든 태양계 천체를 합한 질량의 2.5배에 이른다.",
-            "Observable":true,
-            "ChapterInfo":
-            [
-                {"Header":"첫 만남", "Description":"목성과의 첫 만남.", 
-                    "Additional":["반듯하고 모범적인, 늘 웃고 다니는 인상이다. 태양계 가족의 맏이이다.",
-                                    "목성은 밤하늘에서 평균적으로 달과 금성 다음으로 세번째로 밝은 천체에 해당한다. 최대 겉보기 등급인 -2.94는 반사광이 그림자를 형성할 수 있을 정도의 밝기이다."]},
-                {"Header":"마음을 가득 담아 묵직한", "Description":"목성이 가져온 마들렌은 수상한 보라색 연기가 나고 있었다. 그리고 속에는...", 
-                    "Additional":["요리에 대한 감각이 전혀 없다.",
-                                    "목성의 대기는 질량비로 봤을 때 약 75%의 수소와 24%의 헬륨으로 이루어져 있다. 이외에 미량의 메테인, 수증기, 암모니아, 규소화합물, 탄소, 에테인, 황화수소, 네온, 산소, 포스핀, 황, 벤젠, 탄화수소 등을 포함한다.",
-                                    "목성의 내부로 갈 수록 기타 물질들의 비율이 높아져 약 5% 까지 올라간다."]},
-                {"Header":"좋은 맏이가 되고 싶어", "Description":"요리뿐만 아니라 청소를 비롯한 가사일에 늘 실수연발인 목성.", 
-                    "Additional":["스스로가 제대로 맏이 역할을 하지 못한다고 생각한다. 그러나 책임감에 손댄 가사일은 늘 동생들이 뒷수습을 하고 있다.",
-                                    "우리가 목성의 모습으로 알고 있는 외부 색상은 암모니아 결정과 황화수소암모늄으로 구성된 구름에 의한 것으로, 여기에 인, 황, 탄화수소등이 섞이며 오렌지색과 갈색을 띤다고 여겨진다.",
-                                "목성의 가장 큰 외형적 특징인 대적점은 거대한 폭풍에 해당하며, 지구 2~3개가 들어갈만한 크기이다. 대적점은 약 6일 주기로 반시계방향으로 회전한다."]},
-                {"Header":"자격", "Description":"아끼는 마음만으로는 충분하지 않다는 목성. 늘 민폐를 끼친다고 생각하고 있다.", 
-                    "Additional":["목성은 자신이 의지가 되는 맏이가 돼야 한다는 강박에 사로잡혀있다.",
-                                    "강력한 중력에 의해 79개에 달하는 위성이 존재한다. 이 중 가장 유명한 것이 '갈릴레이 위성'이라 불리는 '이오', '유로파', '가니메데', '칼리스토'이다.",
-                                    "이들 '갈릴레이 위성'이 목성 주위를 도는 모습은 모든 천체가 지구를 중심으로 돈다는 천동설을 반증하는 사례가 되었다.",
-                                    "목성에도 여러 겹의 고리가 존재하나, 상대적으로 희미해 잘 보이지 않는다. 목성의 위성들 중에는 고리 주변에 위치해 고리의 형태를 유지해주는 '양치기 위성'의 역할을 하는 위성들이 많다."]},
-                {"Header":"마음이 전달된다면", "Description":"목성은 주인공과 이야기 한 후, 동생들과 이야기 해 볼 마음을 굳힌다.", 
-                    "Additional":["자신이 갖고 있던 강박에서 약간 벗어난 것 같다.",
-                                    "동생들에 대한 애정이 몹시 강하다. 그 때문에 자신이 하는 행동의 동기가 주로 동생들이다.",
-                                    "목성의 자기장은 지구보다 14배나 강하며, 태양계에서 태양의 흑점을 제외하고 가장 강력하다. 목성의 액상 금속성 수소핵 속 물질들의 소용돌이 운동이 발생원으로 여겨진다."]},
-                {"Header":"서로가 서로에게", "Description":"동생들과의 진심어린 대화로 서로의 마음을 확인한 남매들. 목성은 주인공에게 감사를 전한다.", 
-                    "Additional":["동생들의 이야기를 들으며 자신의 잘못된 생각을 고친 것 같다. 동시에 소녀를 매우 의지하고 있었던 것을 인정하게 되었다.",
-                                    "목성의 자전주기는 10시간으로 태양계 행성들 중 가장 빠르며, 이로인해 목성의 적도 부근은 불룩하게 튀어나와 있다.",
-                                    "또한 목성은 고체가 아니기 때문에 위도에 따라 자전속도가 다르다."]}
-            ]
+            
         },
         {
             "CharNumber":36,
@@ -1194,8 +1145,7 @@
         },
         {
             "CharNumber":37,
-            "ConstelKey":["Lepus"],
-            "ConstelWeight":[1.0]
+           
             
         }
     ]
