@@ -18,6 +18,7 @@ namespace Observe
 
         public ObserveBehaviour behaviour;
         public DateTime endTime;
+        public int timeIndex;
         public int pickTryCount;
         public int favIncrement;
         public Dictionary<int, float> charProb;
