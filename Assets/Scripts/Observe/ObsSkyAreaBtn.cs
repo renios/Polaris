@@ -26,10 +26,21 @@ namespace Observe
 
 		public void Clicked()
 		{
-			if (Variables.Starlight < price)
-				manager.NoMoneyPanel.SetActive(true);
-			else
-				manager.UnlockAskPanels[index].SetActive(true);
+			StartCoroutine(Clicked_Routine());
+		}
+
+		IEnumerator Clicked_Routine()
+		{
+			yield return MessageSet.Now.ShowMoneySpendAsk("해당 구역을 개방할까요?", MoneyType.Starlight, price, result =>
+			{
+				if (result)
+				{
+					if (Variables.Starlight < price)
+						MessageSet.Now.ShowNoMoneyAlert(MoneyType.Starlight);
+					else
+						manager.UnlockSky(index);
+				}
+			});
 		}
 	}
 }

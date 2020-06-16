@@ -353,10 +353,6 @@
         },
         {
             "CharNumber":11,
-            
-        },
-        {
-            "CharNumber":12,
             "ConstelKey":["Capricornus","Aquarius","Pisces"],
             "ConstelWeight":[0.5,0.2,0.2],
             "Name":"토성",
@@ -396,7 +392,7 @@
             ]
         },
         {
-            "CharNumber":13,
+            "CharNumber":12,
             "ConstelKey":["Capricornus"],
             "ConstelWeight":[0.2],
             "Name":"명왕성",
@@ -426,7 +422,7 @@
             ]
         },
         {
-            "CharNumber":14,
+            "CharNumber":13,
             "ConstelKey":["Bootes"],
             "ConstelWeight":[1.0],
             "Name":"아크투루스",
@@ -463,7 +459,7 @@
             ]
         },
         {
-            "CharNumber":15,
+            "CharNumber":14,
             "ConstelKey":["Delphinus"],
             "ConstelWeight":[1.0],
             "Name":"수알로킨",
@@ -493,11 +489,7 @@
             ]
         },
         {
-            "CharNumber":16,
-            
-        },
-        {
-            "CharNumber":17,
+            "CharNumber":15,
             "ConstelKey":["Sagittarius","Capricornus","Aquarius"],
             "ConstelWeight":[0.5,0.2,0.2],
             "Name":"목성",
@@ -530,7 +522,7 @@
             ]
         },
         {
-            "CharNumber":18,
+            "CharNumber":16,
             "ConstelKey":["Scorpius","Ophiuchus"],
             "ConstelWeight":[1.0,0.2],
             "Name":"안타레스",
@@ -567,7 +559,7 @@
             ]
         },
         {
-            "CharNumber":19,
+            "CharNumber":17,
             "ConstelKey":["Pegasus","Andromeda"],
             "ConstelWeight":[1.0,0.2],
             "Name":"마르카브",
@@ -602,7 +594,7 @@
             ]
         },
         {
-            "CharNumber":20,
+            "CharNumber":18,
             "ConstelKey":["Pisces","Cetus"],
             "ConstelWeight":[1.0,0.2],
             "Name":"레샤",
@@ -632,7 +624,7 @@
             ]
         },
         {
-            "CharNumber":21,
+            "CharNumber":19,
             "ConstelKey":["Gemini","Taurus","Aries","Pisces","Aquarius","Capricornus","Sagittarius","Scorpius","Libra","Virgo","Leo","Cancer","Ophiuchus"],
             "ConstelWeight":[0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.2],
             "Name":"화성",
@@ -676,7 +668,7 @@
             ]
         },
         {
-            "CharNumber":22,
+            "CharNumber":20,
             "ConstelKey":["Aquarius","Cetus"],
             "ConstelWeight":[1.0,0.2],
             "Name":"멜리크",
@@ -707,7 +699,7 @@
             ]
         },
         {
-            "CharNumber":23,
+            "CharNumber":21,
             "ConstelKey":["Aquarius","Pisces","Aries"],
             "ConstelWeight":[0.3,0.1,0.1],
             "Name":"해왕성",
@@ -747,7 +739,7 @@
             ]
         },
         {
-            "CharNumber":24,
+            "CharNumber":22,
             "ConstelKey":["Aries","Perseus"],
             "ConstelWeight":[1.0,0.2],
             "Name":"하말",
@@ -777,7 +769,7 @@
             ]
         },
         {
-            "CharNumber":25,
+            "CharNumber":23,
             "ConstelKey":["Leo","Lynx"],
             "ConstelWeight":[1.0,0.2],
             "Name":"레굴루스",
@@ -814,7 +806,7 @@
             ]
         },
         {
-            "CharNumber":26,
+            "CharNumber":24,
             "ConstelKey":["Eridanus","Cetus"],
             "ConstelWeight":[1.0,0.1],
             "Name":"아케르",
@@ -847,7 +839,7 @@
             ]
         },
         {
-            "CharNumber":27,
+            "CharNumber":25,
             "ConstelKey":["Monoceros"],
             "ConstelWeight":[0.5],
             "Name":"로제",
@@ -878,7 +870,7 @@
             ]
         },
         {
-            "CharNumber":28,
+            "CharNumber":26,
             "ConstelKey":["Eridanus"],
             "ConstelWeight":[0.2],
             "Name":"글리제",
@@ -913,7 +905,7 @@
             ]
         },
         {
-            "CharNumber":29,
+            "CharNumber":27,
             "ConstelKey":["Orion","Lepus"],
             "ConstelWeight":[1.0,0.2],
             "Name":"리겔루스",
@@ -943,7 +935,7 @@
             ]
         },
         {
-            "CharNumber":30,
+            "CharNumber":28,
             "ConstelKey":["Orion"],
             "ConstelWeight":[0.4],
             "Name":"말머리 성운",
@@ -974,7 +966,7 @@
             ]
         },
         {
-            "CharNumber":31,
+            "CharNumber":29,
             "ConstelKey":["Orion"],
             "ConstelWeight":[0.2],
             "Name":"불꽃 성운",
@@ -1004,7 +996,7 @@
             ]
         },
         {
-            "CharNumber":32,
+            "CharNumber":30,
             "ConstelKey":["CanisMajor"],
             "ConstelWeight":[1.0],
             "Name":"시리우스",
@@ -1036,7 +1028,7 @@
             ]
         },
         {
-            "CharNumber":33,
+            "CharNumber":31,
             "ConstelKey":["Lyra","Hercules","Aquila","Cygnus"],
             "ConstelWeight":[1.0,0.2,0.2,0.2],
             "Name":"베가",
@@ -1066,7 +1058,7 @@
             ]
         },
         {
-            "CharNumber":34,
+            "CharNumber":32,
             "ConstelKey":["Gemini","Taurus","Aries","Pisces","Aquarius","Capricornus","Sagittarius","Scorpius","Libra","Virgo","Leo","Cancer","Ophiuchus"],
             "ConstelWeight":[0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.2],
             "Name":"수성",
@@ -1101,11 +1093,7 @@
             ]
         },
         {
-            "CharNumber":35,
-            
-        },
-        {
-            "CharNumber":36,
+            "CharNumber":33,
             "ConstelKey":["Gemini","Taurus","Aries","Pisces","Aquarius","Capricornus","Sagittarius","Scorpius","Libra","Virgo","Leo","Cancer","Ophiuchus"],
             "ConstelWeight":[0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.2],
             "Name":"금성",
@@ -1142,11 +1130,6 @@
                                     "최대 1억년 정도면 해구 아래로 사라지는 지구의 표면과 달리, 금성의 표면은 적어도 5억년 이상 되었을 것으로 추측된다.",
                                     "금성의 지표면이 변화하는 것은 풍화작용과 더불어, 판 구조 활동에 의해 맨틀의 열이 빠져나가지 못해 지각이 한꺼번에 섭입 후 새 지각이 만들어지기 때문이다."]}
             ]
-        },
-        {
-            "CharNumber":37,
-           
-            
         }
     ]
 }

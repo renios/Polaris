@@ -28,7 +28,7 @@ namespace Tutorial
             switch(Variables.TutorialStep)
             {
                 case 2:
-                    if (Vector2.Distance(manager.Scope.transform.position, new Vector3(0.2f * 100.224f, 4.6f * 100.224f, -1)) < 15f)
+                    if (Vector2.Distance(manager.Scope.transform.position, new Vector3(0.23f * 100.224f, 4.62f * 100.224f, -1)) < 15f)
                         ChangeState(++Variables.TutorialStep);
                     break;
                 case 3:
@@ -45,7 +45,7 @@ namespace Tutorial
                     break;
                 case 12:
                     internalCount += Time.deltaTime;
-                    if (internalCount >= 4)
+                    if (internalCount >= 6)
                         ChangeState(++Variables.TutorialStep);
                     break;
                 case 13:
