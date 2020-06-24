@@ -39,6 +39,7 @@ public static class Variables
     public static Values values;
 
     public static Dictionary<string, ConstelData> Constels;     // 별자리에 대한 데이터
+    public static Dictionary<int, string> ConstelGroupName;     // 별자리 그룹 이름.
 
     public static bool CameraMove;
 

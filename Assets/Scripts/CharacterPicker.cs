@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class CharacterPicker : MonoBehaviour 
 {
-
 	public GameObject charTemplate;
 	public RectTransform charParent;
 	public Text countText;
