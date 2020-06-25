@@ -48,6 +48,8 @@ public static class Variables
     public static string DialogAfterScene;      // 대화 씬이 종료된 다음 씬의 이름
     #endregion
 
+    public static int QuizSelectedCharacter;
+
     public static string GetCharacterRootFolder(int charIndex)
     {
         return "Characters/" + Characters[charIndex].InternalName + "/";

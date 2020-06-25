@@ -10,6 +10,7 @@ namespace Reading
         public GameObject observedPanel, notObservedPanel;
         public Image thumbImage;
         public Text nameText;
+        public GameObject hasNewAnsImage;
         public ReadingDiary diary;
 
         int index;
@@ -24,6 +25,9 @@ namespace Reading
                 observedPanel.SetActive(true);
                 thumbImage.sprite = Resources.Load<Sprite>("Characters/" + character.InternalName + "/image_albumbutton");
                 nameText.text = character.Name;
+                
+                if(character.HasNewQuizAns)
+                    hasNewAnsImage.SetActive(true);
             }
 
             index = charIndex;
@@ -32,6 +36,9 @@ namespace Reading
         public void Pressed()
         {
             diary.ShowDetail(index);
+            
+            if(hasNewAnsImage.activeSelf)
+                hasNewAnsImage.SetActive(false);
         }
     }
 }

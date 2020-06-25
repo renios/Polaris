@@ -9,6 +9,7 @@ namespace Reading
         public GameObject popupBody;
         public GameObject pageTemplate;
         public RectTransform pageParent;
+        public ReadingDiaryDetailPopup detailPopup;
 
         [HideInInspector] public bool isAnimating;
 
@@ -159,7 +160,7 @@ namespace Reading
 
         public void ShowDetail(int charIndex)
         {
-            
+            detailPopup.Show(charIndex);
         }
 
         public void Hide()
