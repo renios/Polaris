@@ -39,6 +39,7 @@ public static class Variables
     public static Values values;
 
     public static Dictionary<string, ConstelData> Constels;     // 별자리에 대한 데이터
+    public static Dictionary<int, string> ConstelGroupName;     // 별자리 그룹 이름.
 
     public static bool CameraMove;
 
@@ -46,6 +47,8 @@ public static class Variables
     public static bool IsDialogAppended;
     public static string DialogAfterScene;      // 대화 씬이 종료된 다음 씬의 이름
     #endregion
+
+    public static int QuizSelectedCharacter;
 
     public static string GetCharacterRootFolder(int charIndex)
     {

@@ -20,10 +20,21 @@ public class CharacterData
 
     public CharacterStoryData[] ChapterInfo;
 
+    // 여기서부터 내부 데이터 필드
     public bool Observed;
     public int Favority;
     public int StoryProgress;
     public string LastReapDate;
+
+    public Dictionary<int, bool> QuizUnlockTable;
+    public bool HasNewQuizAns;
+    public List<int> NewQuizAnsIndex;
+
+    public CharacterData()
+    {
+        QuizUnlockTable = new Dictionary<int, bool>();
+        NewQuizAnsIndex = new List<int>();
+    }
 
     public void AppendFrom(CharacterDataCore c)
     {

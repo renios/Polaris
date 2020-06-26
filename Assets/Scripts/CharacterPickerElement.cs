@@ -13,6 +13,7 @@ public class CharacterPickerElement : MonoBehaviour
 	public CharacterPicker picker;
 	
 	[HideInInspector] public bool picked;
+	[HideInInspector] public bool toggledByCode;
 
 	int index;
 
@@ -36,6 +37,12 @@ public class CharacterPickerElement : MonoBehaviour
 
     public void Pick()
     {
+	    if (toggledByCode)
+	    {
+		    toggledByCode = false;
+		    return;
+	    }
+	    
 	    if (picker.waiting)
 	    {
 		    if (!picked)
@@ -48,8 +55,11 @@ public class CharacterPickerElement : MonoBehaviour
 		    }
 		    else
 		    {
-			    picker.RemoveCharacter(index);
-			    picked = false;
+			    var succeed = picker.RemoveCharacter(index);
+			    if (succeed)
+				    picked = false;
+			    else
+				    toggle.isOn = true;
 		    }
 	    }
     }

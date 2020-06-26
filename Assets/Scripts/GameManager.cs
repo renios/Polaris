@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
         var constelGroup = JsonMapper.ToObject(constelRaw.text);
 
         Variables.Constels = new Dictionary<string, ConstelData>();
+        Variables.ConstelGroupName = new Dictionary<int, string>();
         foreach (JsonData data in constelGroup["constels"])
         {
             var index = (int)data["groupIndex"];
@@ -42,6 +43,8 @@ public class GameManager : MonoBehaviour
                 var newConstel = new ConstelData((string)constel["key"], (string)constel["name"], index);
                 Variables.Constels.Add(newConstel.InternalName, newConstel);
             }
+
+            Variables.ConstelGroupName.Add(index, (string) data["groupName"]);
         }
     }
 

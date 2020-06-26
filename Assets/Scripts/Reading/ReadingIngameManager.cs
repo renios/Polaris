@@ -24,19 +24,18 @@ namespace Reading
 
 			// ROOT : 독서로비에서 고른 캐릭터 폴더
 			var initDialog = DialogueParser.ParseFromCSV(DialogueManager.DialogRoot + "quiz_init");
-			int levelRes = 0;
-			yield return DialogueManager.Instance.Play(initDialog, r => { levelRes = r; });
+			yield return DialogueManager.Instance.Play(initDialog, r => { });
 
 			// Quiz 폴더로부터, 관측된 캐릭터에 관한 문제를 추가
-			// 1: 쉬움, 2: 보통, 3: 어려움
 			var quizList = new List<DialogueData>();
+			var quizCharIdxDic = new List<KeyValuePair<int, int>>();
 			foreach(var chr in Variables.Characters)
 			{
 				if(chr.Value.Observed)
 				{
 					for(int i = 0; ; i++)
 					{
-						var filePath = "Quizs/" + chr.Value.InternalName + "_" + levelRes.ToString() + "_" + i.ToString();
+						var filePath = "Quizs/" + chr.Value.InternalName + "_" + i.ToString();
 						// 파일이 존재하는가?
 						var fileData = Resources.Load<TextAsset>(filePath);
 						if (fileData == null)
@@ -45,28 +44,35 @@ namespace Reading
 						// 여기까지 왔으면 존재한다는 소리
 						var quizData = DialogueParser.ParseFromCSV(filePath);
 						quizList.Add(quizData);
+						quizCharIdxDic.Add(new KeyValuePair<int, int>(chr.Key, i));
 					}
 				}
 			}
 
 			// 5개 체리피킹
 			var pickedQuizs = new List<DialogueData>();
+			var pickedCharIdxDic = new List<KeyValuePair<int, int>>();
 			var pickCount = quizList.Count < 5 ? quizList.Count : 5;
 			for(int i = 0; i < pickCount; i++)
 			{
 				int r = Random.Range(0, quizList.Count);
 				pickedQuizs.Add(quizList[r]);
+				pickedCharIdxDic.Add(quizCharIdxDic[r]);
 				quizList.RemoveAt(r);
+				quizCharIdxDic.RemoveAt(r);
 			}
 
 			int rightCount = 0, wrongCount = 0;
 			var quizResult = new List<bool>();
 			
 			// 순차대로 재생
-			foreach(var quiz in pickedQuizs)
+			for(int i = 0; i < pickedQuizs.Count; i++)
 			{
 				int selectedAns = 0;
 				bool isRightAns = false;
+
+				var quiz = pickedQuizs[i];
+				var charIdxDic = pickedCharIdxDic[i];
 				yield return DialogueManager.Instance.Play(quiz, r =>
 				{
 					selectedAns = r;
@@ -75,12 +81,28 @@ namespace Reading
 						// 정답
 						isRightAns = true;
 						rightCount++;
+
+						if (!Variables.Characters[charIdxDic.Key].QuizUnlockTable.ContainsKey(charIdxDic.Value))
+						{
+							Variables.Characters[charIdxDic.Key].QuizUnlockTable.Add(charIdxDic.Value, true);
+							Variables.Characters[charIdxDic.Key].HasNewQuizAns = true;
+							Variables.Characters[charIdxDic.Key].NewQuizAnsIndex.Add(charIdxDic.Value);
+						}
+						else if (Variables.Characters[charIdxDic.Key].QuizUnlockTable[charIdxDic.Value] == false)
+						{
+							Variables.Characters[charIdxDic.Key].QuizUnlockTable[charIdxDic.Value] = true;
+							Variables.Characters[charIdxDic.Key].HasNewQuizAns = true;
+							Variables.Characters[charIdxDic.Key].NewQuizAnsIndex.Add(charIdxDic.Value);
+						}
 					}
 					else
 					{
 						// 오답
 						isRightAns = false;
 						wrongCount++;
+						
+						if(!Variables.Characters[charIdxDic.Key].QuizUnlockTable.ContainsKey(charIdxDic.Value))
+							Variables.Characters[charIdxDic.Key].QuizUnlockTable.Add(charIdxDic.Value, false);
 					}
 					quizResult.Add(isRightAns);
 				});
@@ -103,13 +125,13 @@ namespace Reading
 				// 문제 선택지 리스트 구축 및 표시
 				string questionContext = "";
 				var answerContent = new DialogueContent();
-				for(int i = 0; i < quiz.Dialogues[0].Contents.Length; i++)
+				for(int j = 0; j < quiz.Dialogues[0].Contents.Length; j++)
 				{
-					if (quiz.Dialogues[0].Contents[i].Type == 0) // 문제 내용
-						questionContext += (i == 1 ? "" : "\n") + quiz.Dialogues[0].Contents[i].DialogText;
-					else if(quiz.Dialogues[0].Contents[i].Type == 2) // 선택지
+					if (quiz.Dialogues[0].Contents[j].Type == 0) // 문제 내용
+						questionContext += (j == 1 ? "" : "\n") + quiz.Dialogues[0].Contents[j].DialogText;
+					else if(quiz.Dialogues[0].Contents[j].Type == 2) // 선택지
 					{
-						answerContent = quiz.Dialogues[0].Contents[i];
+						answerContent = quiz.Dialogues[0].Contents[j];
 						break;
 					}
 				}
@@ -122,6 +144,8 @@ namespace Reading
 			//finDialog.Dialogues[0].Contents[0].DialogText = finText.Replace("#", (rightCount + wrongCount).ToString()).Replace("%", rightCount.ToString());
 			//yield return DialogueManager.Instance.Play(finDialog, r => { });
 
+			//Variables.Characters[Variables.QuizSelectedCharacter].Favority += 1;
+			GameManager.Instance.SaveGame();
 			resultDisplayer.Show(quizResult, questionSolution);
 		}
 	}

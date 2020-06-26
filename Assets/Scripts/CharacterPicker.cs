@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class CharacterPicker : MonoBehaviour 
 {
-
 	public GameObject charTemplate;
 	public RectTransform charParent;
 	public Text countText;
@@ -32,6 +31,7 @@ public class CharacterPicker : MonoBehaviour
 			var newObj = Instantiate(charTemplate);
 			newObj.transform.SetParent(charParent);
 			newObj.transform.localScale = Vector3.one;
+			newObj.transform.localPosition = Vector3.zero;
 			newObj.GetComponent<CharacterPickerElement>().Set(character);
 			newObj.SetActive(true);
 			objList.Add(newObj.GetComponent<CharacterPickerElement>());
@@ -47,12 +47,14 @@ public class CharacterPicker : MonoBehaviour
 
 		foreach (var obj in objList)
 		{
+			//obj.toggledByCode = true;
 			obj.picked = false;
 			obj.toggle.isOn = false;
 		}
 		foreach (var charIndex in prePickedChars)
 		{
 			pickedCharList.Add(charIndex);
+			//objList[charObjLinker[charIndex]].toggledByCode = true;
 			objList[charObjLinker[charIndex]].picked = true;
 			objList[charObjLinker[charIndex]].toggle.isOn = true;
 		}
@@ -69,25 +71,31 @@ public class CharacterPicker : MonoBehaviour
 
 	public bool TryAddCharacter(int index)
 	{
+		//Debug.Log("List Count: " + pickedCharList.Count + ", Adding " + index);
 		if (pickedCharList.Count == maxCharCount)
 		{
 			if (!queuedSelect)
 				return false;
 
+			var prevIdx = pickedCharList[0];
+			//Debug.Log("- Removing " + prevIdx);
+			objList[charObjLinker[prevIdx]].toggledByCode = true;
+			objList[charObjLinker[prevIdx]].picked = false;
+			objList[charObjLinker[prevIdx]].toggle.isOn = false;
 			pickedCharList.RemoveAt(0);
-			objList[charObjLinker[index]].picked = false;
-			objList[charObjLinker[index]].toggle.isOn = false;
-			pickedCharList.Add(index);
-			return true;
 		} 
 		
 		pickedCharList.Add(index);
 		return true;
 	}
 
-	public void RemoveCharacter(int index)
+	public bool RemoveCharacter(int index)
 	{
+		if (maxCharCount == 1)
+			return false;
+		
 		pickedCharList.Remove(index);
+		return true;
 	}
 
 	public void EndSelect()
