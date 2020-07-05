@@ -83,10 +83,12 @@ namespace Observe
 						status.Save();
 						Variables.Characters[charKey].Observed = true;
 						Variables.Characters[charKey].Favority++;
+						SaveData.Now.lastObservedChar = 1;
 						SaveData.Save();
 
 						Dialogue.DialogueManager.PrepareCharacterDialog(charKey, 0);
-						Variables.DialogAfterScene = "MainScene";
+						Variables.DialogAfterScene = "Cutscene1";
+						Variables.CutsceneAfterScene = "MainScene";
 					    ChangeScene("NewDialogScene");
 						yield break;
 					}
