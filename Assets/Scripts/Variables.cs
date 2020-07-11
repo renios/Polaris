@@ -19,6 +19,11 @@ public static class Variables
         get { return SaveData.Now.starlight; }
         set { SaveData.Now.starlight = value; }
     }
+    public static int MemorialPiece
+    {
+        get { return SaveData.Now.memorialPiece; }
+        set { SaveData.Now.memorialPiece = value; }
+    }
     public static int ObserveSkyLevel
     {
         get { return SaveData.Now.observeSkyLevel; }
@@ -49,6 +54,7 @@ public static class Variables
     #endregion
 
     public static int QuizSelectedCharacter;
+    public static string CutsceneAfterScene;
 
     public static string GetCharacterRootFolder(int charIndex)
     {

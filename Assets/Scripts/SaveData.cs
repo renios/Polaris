@@ -22,6 +22,11 @@ public class SaveData
     public int tutorialStep;
 
     public int observeSkyLevel;
+    
+    public int lastObservedChar;
+    public int lastReadingChar;
+    public int lastReadingRank;
+    public bool hasReadingResult;
 
     public SaveData()
     {

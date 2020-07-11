@@ -138,15 +138,55 @@ namespace Reading
 				yield return quizDisplayer.Show(questionContext, answerContent, selectedAns);
 			}
 
-			// 다 끝나면 결과 텍스트 출력 후 결과화면 보여주기
-			//var finDialog = DialogueParser.ParseFromCSV(DialogueManager.DialogRoot + "quiz_fin");
-			//var finText = finDialog.Dialogues[0].Contents[0].DialogText;
-			//finDialog.Dialogues[0].Contents[0].DialogText = finText.Replace("#", (rightCount + wrongCount).ToString()).Replace("%", rightCount.ToString());
-			//yield return DialogueManager.Instance.Play(finDialog, r => { });
-
-			//Variables.Characters[Variables.QuizSelectedCharacter].Favority += 1;
+			int rank;
+			if (rightCount == 5)
+				rank = 4;
+			else if (rightCount == 3 || rightCount == 4)
+				rank = 3;
+			else if (rightCount == 1 || rightCount == 2)
+				rank = 2;
+			else
+				rank = 1;
+			
+			SaveData.Now.lastReadingChar = Variables.QuizSelectedCharacter;
+			SaveData.Now.lastReadingRank = rank;
+			SaveData.Now.hasReadingResult = true;
 			GameManager.Instance.SaveGame();
+			
+			// 결과 텍스트 출력. 대화 파일 해체분석 뒤 결과에 맞게 재창조.
+			var finRawDialog = DialogueParser.ParseFromCSV(DialogueManager.DialogRoot + "quiz_fin");
+			var finRawPhaseDic = new Dictionary<int, DialogueContent>();
+			foreach (var phase in finRawDialog.Dialogues)
+				finRawPhaseDic.Add(phase.Phase, phase.Contents[0]);
+
+			var finDialog = new DialogueData();
+			finDialog.Dialogues = new[] { new DialoguePhase()
+			{
+				Contents = new[] { finRawPhaseDic[0], finRawPhaseDic[rank] }
+			} };
+			var finText = finDialog.Dialogues[0].Contents[0].DialogText;
+			finDialog.Dialogues[0].Contents[0].DialogText = finText.Replace("#", (rightCount + wrongCount).ToString()).Replace("$", rightCount.ToString());
+			yield return DialogueManager.Instance.Play(finDialog, r => { });
+			
 			resultDisplayer.Show(quizResult, questionSolution);
+		}
+
+		public void Exit()
+		{
+			if (!Variables.TutorialFinished && Variables.TutorialStep == 9)
+			{
+				Variables.TutorialStep += 2;
+				Variables.CutsceneAfterScene = "NewDialogScene";
+				DialogueManager.DialogRoot = "Dialogues/TutorialReading/";
+				DialogueManager.DialogFilePath = "Dialogues/TutorialReading/dialog2";
+				Variables.DialogAfterScene = "ReadingLobby";
+
+				SceneChanger.ChangeScene("Cutscene2", hideBar: true);
+			}
+			else
+			{
+				SceneChanger.Instance.ChangeScene("ReadingLobby");
+			}
 		}
 	}
 }

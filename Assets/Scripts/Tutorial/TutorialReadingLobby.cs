@@ -51,16 +51,20 @@ namespace Tutorial
 				case 9:
                     if (allowMoveState)
                     {
-                        Variables.TutorialStep += 2;
-                        SceneChanger.Instance.ChangeScene("ReadingIngame");
+	                    SceneChanger.Instance.ChangeScene("ReadingIngame");
                         allowMoveState = false;
                     }
 					break;
 				case 11:
                     if (allowMoveState)
                     {
-                        SceneChanger.Instance.ChangeScene("GachaTut2");
-                        allowMoveState = false;
+	                    allowMoveState = false;
+	                    
+	                    Dialogue.DialogueManager.DialogRoot = "Dialogues/TutorialReading/";
+	                    Dialogue.DialogueManager.DialogFilePath = "Dialogues/TutorialReading/dialog3";
+	                    Variables.DialogAfterScene = "Cutscene3";
+	                    Variables.CutsceneAfterScene = "GachaTut2";
+                        SceneChanger.Instance.ChangeScene("NewDialogScene");
                     }
 					break;
 			}
