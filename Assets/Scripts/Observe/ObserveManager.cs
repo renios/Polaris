@@ -399,7 +399,7 @@ namespace Observe
                 status.Save();
 
                 DimmerPanel.SetActive(true);
-                SceneChanger.ChangeScene("GachaResult", "GachaFadeIn", 1.5f);
+                SceneChanger.ChangeScene("GachaResult", "GachaFadeIn", motionTime: 1.5f);
             }
         }
 

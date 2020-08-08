@@ -10,7 +10,9 @@ namespace Reading
 	{
 		public Image selectedCharImg;
 		public Text selectedCharName;
-		public ReadingCharPicker charPicker;
+		public CharacterPicker picker;
+		public ReadingDiary diary;
+		public ReadingRewardPanel rewardPanel;
         public GameObject tutorialObj;
 
         public Button changeCharBtn, diaryBtn;
@@ -21,12 +23,16 @@ namespace Reading
 		// Use this for initialization
 		void Start()
 		{
-			charPicker.LoadCharacter();
+			picker.LoadCharacter(true);
+			diary.ConstructDiary();
 
-			LoadSelectedCharacter(1);
+			LoadSelectedCharacter(new List<int>{SaveData.Now.lastObservedChar});
 
             if (!Variables.TutorialFinished)
                 tutorialObj.SetActive(true);
+
+            if (SaveData.Now.hasReadingResult)
+	            rewardPanel.Show();
 		}
 
 		void Update()
@@ -48,13 +54,14 @@ namespace Reading
 
 		public IEnumerator SelectCharacterInternal()
 		{
-			yield return charPicker.Show(LoadSelectedCharacter);
+			yield return picker.Show(1, true, new List<int> {selectedChar}, LoadSelectedCharacter);
 		}
 
-		public void LoadSelectedCharacter(int index)
+		public void LoadSelectedCharacter(List<int> index)
 		{
-			selectedChar = index;
-			selectedCharImg.sprite = Resources.Load<Sprite>("Characters/" + Variables.Characters[index].InternalName + "/image_album");
+			selectedChar = index[0];
+			selectedCharImg.sprite = Resources.Load<Sprite>("Characters/" + Variables.Characters[index[0]].InternalName + "/image_album");
+			Variables.QuizSelectedCharacter = selectedChar;
 			//selectedCharName.text = Variables.Characters[index].Name;
 		}
 

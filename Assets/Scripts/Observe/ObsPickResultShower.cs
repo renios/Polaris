@@ -22,6 +22,8 @@ namespace Observe
 				var newElement = newObj.GetComponent<ObsPickResultElement>();
 				newElement.SetAndApplyData(data.Key, data.Value);
 				newObj.SetActive(true);
+
+				SaveData.Now.lastObservedChar = data.Key;
 			}
 			gameObject.SetActive(true);
 			GameManager.Instance.SaveGame();

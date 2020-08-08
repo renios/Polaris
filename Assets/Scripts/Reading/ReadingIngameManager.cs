@@ -24,19 +24,18 @@ namespace Reading
 
 			// ROOT : 독서로비에서 고른 캐릭터 폴더
 			var initDialog = DialogueParser.ParseFromCSV(DialogueManager.DialogRoot + "quiz_init");
-			int levelRes = 0;
-			yield return DialogueManager.Instance.Play(initDialog, r => { levelRes = r; });
+			yield return DialogueManager.Instance.Play(initDialog, r => { });
 
 			// Quiz 폴더로부터, 관측된 캐릭터에 관한 문제를 추가
-			// 1: 쉬움, 2: 보통, 3: 어려움
 			var quizList = new List<DialogueData>();
+			var quizCharIdxDic = new List<KeyValuePair<int, int>>();
 			foreach(var chr in Variables.Characters)
 			{
 				if(chr.Value.Observed)
 				{
 					for(int i = 0; ; i++)
 					{
-						var filePath = "Quizs/" + chr.Value.InternalName + "_" + levelRes.ToString() + "_" + i.ToString();
+						var filePath = "Quizs/" + chr.Value.InternalName + "_" + i.ToString();
 						// 파일이 존재하는가?
 						var fileData = Resources.Load<TextAsset>(filePath);
 						if (fileData == null)
@@ -45,28 +44,35 @@ namespace Reading
 						// 여기까지 왔으면 존재한다는 소리
 						var quizData = DialogueParser.ParseFromCSV(filePath);
 						quizList.Add(quizData);
+						quizCharIdxDic.Add(new KeyValuePair<int, int>(chr.Key, i));
 					}
 				}
 			}
 
 			// 5개 체리피킹
 			var pickedQuizs = new List<DialogueData>();
+			var pickedCharIdxDic = new List<KeyValuePair<int, int>>();
 			var pickCount = quizList.Count < 5 ? quizList.Count : 5;
 			for(int i = 0; i < pickCount; i++)
 			{
 				int r = Random.Range(0, quizList.Count);
 				pickedQuizs.Add(quizList[r]);
+				pickedCharIdxDic.Add(quizCharIdxDic[r]);
 				quizList.RemoveAt(r);
+				quizCharIdxDic.RemoveAt(r);
 			}
 
 			int rightCount = 0, wrongCount = 0;
 			var quizResult = new List<bool>();
 			
 			// 순차대로 재생
-			foreach(var quiz in pickedQuizs)
+			for(int i = 0; i < pickedQuizs.Count; i++)
 			{
 				int selectedAns = 0;
 				bool isRightAns = false;
+
+				var quiz = pickedQuizs[i];
+				var charIdxDic = pickedCharIdxDic[i];
 				yield return DialogueManager.Instance.Play(quiz, r =>
 				{
 					selectedAns = r;
@@ -75,12 +81,28 @@ namespace Reading
 						// 정답
 						isRightAns = true;
 						rightCount++;
+
+						if (!Variables.Characters[charIdxDic.Key].QuizUnlockTable.ContainsKey(charIdxDic.Value))
+						{
+							Variables.Characters[charIdxDic.Key].QuizUnlockTable.Add(charIdxDic.Value, true);
+							Variables.Characters[charIdxDic.Key].HasNewQuizAns = true;
+							Variables.Characters[charIdxDic.Key].NewQuizAnsIndex.Add(charIdxDic.Value);
+						}
+						else if (Variables.Characters[charIdxDic.Key].QuizUnlockTable[charIdxDic.Value] == false)
+						{
+							Variables.Characters[charIdxDic.Key].QuizUnlockTable[charIdxDic.Value] = true;
+							Variables.Characters[charIdxDic.Key].HasNewQuizAns = true;
+							Variables.Characters[charIdxDic.Key].NewQuizAnsIndex.Add(charIdxDic.Value);
+						}
 					}
 					else
 					{
 						// 오답
 						isRightAns = false;
 						wrongCount++;
+						
+						if(!Variables.Characters[charIdxDic.Key].QuizUnlockTable.ContainsKey(charIdxDic.Value))
+							Variables.Characters[charIdxDic.Key].QuizUnlockTable.Add(charIdxDic.Value, false);
 					}
 					quizResult.Add(isRightAns);
 				});
@@ -103,26 +125,68 @@ namespace Reading
 				// 문제 선택지 리스트 구축 및 표시
 				string questionContext = "";
 				var answerContent = new DialogueContent();
-				for(int i = 0; i < quiz.Dialogues[0].Contents.Length; i++)
+				for(int j = 0; j < quiz.Dialogues[0].Contents.Length; j++)
 				{
-					if (quiz.Dialogues[0].Contents[i].Type == 0) // 문제 내용
-						questionContext += (i == 1 ? "" : "\n") + quiz.Dialogues[0].Contents[i].DialogText;
-					else if(quiz.Dialogues[0].Contents[i].Type == 2) // 선택지
+					if (quiz.Dialogues[0].Contents[j].Type == 0) // 문제 내용
+						questionContext += (j == 1 ? "" : "\n") + quiz.Dialogues[0].Contents[j].DialogText;
+					else if(quiz.Dialogues[0].Contents[j].Type == 2) // 선택지
 					{
-						answerContent = quiz.Dialogues[0].Contents[i];
+						answerContent = quiz.Dialogues[0].Contents[j];
 						break;
 					}
 				}
 				yield return quizDisplayer.Show(questionContext, answerContent, selectedAns);
 			}
 
-			// 다 끝나면 결과 텍스트 출력 후 결과화면 보여주기
-			//var finDialog = DialogueParser.ParseFromCSV(DialogueManager.DialogRoot + "quiz_fin");
-			//var finText = finDialog.Dialogues[0].Contents[0].DialogText;
-			//finDialog.Dialogues[0].Contents[0].DialogText = finText.Replace("#", (rightCount + wrongCount).ToString()).Replace("%", rightCount.ToString());
-			//yield return DialogueManager.Instance.Play(finDialog, r => { });
+			int rank;
+			if (rightCount == 5)
+				rank = 4;
+			else if (rightCount == 3 || rightCount == 4)
+				rank = 3;
+			else if (rightCount == 1 || rightCount == 2)
+				rank = 2;
+			else
+				rank = 1;
+			
+			SaveData.Now.lastReadingChar = Variables.QuizSelectedCharacter;
+			SaveData.Now.lastReadingRank = rank;
+			SaveData.Now.hasReadingResult = true;
+			GameManager.Instance.SaveGame();
+			
+			// 결과 텍스트 출력. 대화 파일 해체분석 뒤 결과에 맞게 재창조.
+			var finRawDialog = DialogueParser.ParseFromCSV(DialogueManager.DialogRoot + "quiz_fin");
+			var finRawPhaseDic = new Dictionary<int, DialogueContent>();
+			foreach (var phase in finRawDialog.Dialogues)
+				finRawPhaseDic.Add(phase.Phase, phase.Contents[0]);
 
+			var finDialog = new DialogueData();
+			finDialog.Dialogues = new[] { new DialoguePhase()
+			{
+				Contents = new[] { finRawPhaseDic[0], finRawPhaseDic[rank] }
+			} };
+			var finText = finDialog.Dialogues[0].Contents[0].DialogText;
+			finDialog.Dialogues[0].Contents[0].DialogText = finText.Replace("#", (rightCount + wrongCount).ToString()).Replace("$", rightCount.ToString());
+			yield return DialogueManager.Instance.Play(finDialog, r => { });
+			
 			resultDisplayer.Show(quizResult, questionSolution);
+		}
+
+		public void Exit()
+		{
+			if (!Variables.TutorialFinished && Variables.TutorialStep == 9)
+			{
+				Variables.TutorialStep += 2;
+				Variables.CutsceneAfterScene = "NewDialogScene";
+				DialogueManager.DialogRoot = "Dialogues/TutorialReading/";
+				DialogueManager.DialogFilePath = "Dialogues/TutorialReading/dialog2";
+				Variables.DialogAfterScene = "ReadingLobby";
+
+				SceneChanger.ChangeScene("Cutscene2", hideBar: true);
+			}
+			else
+			{
+				SceneChanger.Instance.ChangeScene("ReadingLobby");
+			}
 		}
 	}
 }

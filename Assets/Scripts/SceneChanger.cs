@@ -17,11 +17,11 @@ public class SceneChanger : MonoBehaviour
         isChanging = false;
     }
 
-    public static void ChangeScene(string sceneName, string motionName = "SceneFadeOut", float motionTime = 0.5f)
+    public static void ChangeScene(string sceneName, string motionName = "SceneFadeOut", bool hideBar = false, float motionTime = 0.5f)
     {
         if (!Instance.isChanging)
         {
-            Instance.StartCoroutine(Instance.ChangeSceneSub(sceneName, motionName, motionTime));
+            Instance.StartCoroutine(Instance.ChangeSceneSub(sceneName, motionName, hideBar, motionTime));
             Instance.isChanging = true;
         }
     }
@@ -30,12 +30,12 @@ public class SceneChanger : MonoBehaviour
     {
         if (!isChanging)
         {
-            StartCoroutine(Instance.ChangeSceneSub(sceneName, "SceneFadeOut", 0.5f));
+            StartCoroutine(Instance.ChangeSceneSub(sceneName, "SceneFadeOut", false, 0.5f));
             isChanging = true;
         }
     }
 
-    public IEnumerator ChangeSceneSub(string sceneName, string motionName, float motionTime)
+    public IEnumerator ChangeSceneSub(string sceneName, string motionName, bool hideBar, float motionTime)
     {
         if (GetCurrentScene() != "TitleScene")
         {
@@ -45,6 +45,9 @@ public class SceneChanger : MonoBehaviour
         Motion.Play(motionName);
         yield return new WaitForSeconds(motionTime);
 
+        if(hideBar)
+            Bar.transform.parent.gameObject.SetActive(false);
+        
         AsyncOperation loading = SceneManager.LoadSceneAsync(sceneName);
         loading.allowSceneActivation = false;
         while (!loading.isDone)
