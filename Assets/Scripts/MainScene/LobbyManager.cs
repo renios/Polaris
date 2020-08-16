@@ -67,16 +67,14 @@ public class LobbyManager : MonoBehaviour
                 chr.AddComponent<CharacterStarlight>();
                 chr.GetComponent<CharacterStarlight>().CharacterData = idx;
                 chr.transform.SetParent(sdchara.transform);
-                chr.transform.localScale = new Vector3(0.25f, 0.25f, 1);
+                chr.transform.localScale = new Vector3(0.9f, 0.9f, 1);
                 float PositionX = Random.Range(-0.9f, 0.9f);
                 float PositionY;
-                int floor = Random.Range(0, 3);
+                int floor = Random.Range(0, 2);
                 if (floor == 0) 
-                    PositionY = -2.0f;
-                else if (floor == 1) 
-                    PositionY = -0.2f;
-                else 
-                    PositionY = 1.35f;
+                    PositionY = -1f;
+                else
+                    PositionY = 6.5f;
                 chr.transform.localPosition = new Vector3(PositionX, PositionY, -0.1f);
 
                 charObjList.Add(chr);
@@ -98,7 +96,7 @@ public class LobbyManager : MonoBehaviour
         if (pickedCharacter != null) {
             CharacterStarlight starlight = pickedCharacter.GetComponent<CharacterStarlight>();
             var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (Vector2.Distance(mousePosition, pickedPosition) >= 0.25f) {
+            if (Vector2.Distance(mousePosition, pickedPosition) >= 0.5f) {
                 if (starlight.GetOverpoint())
                 {
                     starlight.OnBalloonClicked();
@@ -111,13 +109,13 @@ public class LobbyManager : MonoBehaviour
                     {
                         pickedCharacter.GetComponent<Move>().Pick();
                     }
-                    if (mousePosition.x < -2.5f) PositionX = -2.5f;
-                    else if (mousePosition.x > 2.5f) PositionX = 2.5f;
+                    if (mousePosition.x < -4.8f) PositionX = -4.8f;
+                    else if (mousePosition.x > 4.8f) PositionX = 4.8f;
                     else PositionX = mousePosition.x;
-                    if (mousePosition.y > 0.0f) PositionY = -0.5f;
+                    if (mousePosition.y > 8.5f) PositionY = 8f;
                     else if (mousePosition.y < -8.5f) PositionY = -9.0f;
                     else PositionY = mousePosition.y - 0.5f;
-                    pickedCharacter.transform.position = new Vector3(PositionX, PositionY, pickedCharacter.transform.position.z);
+                    pickedCharacter.transform.position = new Vector3(PositionX, PositionY, -9.5f);
                 }
             }
             else {
@@ -165,11 +163,11 @@ public class LobbyManager : MonoBehaviour
             pickedBalloon = true;
         }
 
-        float characterHeight = 0.6f;
+        float characterHeight = 1.2f;
         int layermaskValue = (1 << 10) + (1 << 11); //10번 레이어와 11번 레이어를 체크
 
         var tryPick = Physics2D.OverlapCircle((Vector2)mousePosition - Vector2.up * characterHeight, characterHeight, layermaskValue);
-        if (tryPick != null)
+        if (tryPick != null && tryPick.gameObject.GetComponent<Move>().allowTouch)
         {
             pickedCharacter = tryPick.gameObject;
             pickedPosition = mousePosition;

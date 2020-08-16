@@ -53,7 +53,7 @@ public class CharacterStarlight : MonoBehaviour
     void Start()
     {
         this.LastDate = Variables.Characters[characterIndex].LastReapDate;
-        starBalloon = Instantiate(Resources.Load<Transform>("Prefabs/star_balloon"), transform.position + new Vector3(0.5f, 0.6f, 0f), Quaternion.identity);
+        starBalloon = Instantiate(Resources.Load<Transform>("Prefabs/star_balloon"), transform.position + new Vector3(0.9f, 1f, 0f), Quaternion.identity);
         starBalloon.SetParent(this.transform);
         starBalloon.gameObject.SetActive(false);
     }
