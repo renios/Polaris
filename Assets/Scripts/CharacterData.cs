@@ -5,6 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class CharacterData
 {
+    public string MainConstel
+    {
+        get { return ConstelKey[0]; }
+    }
+    
     public int CharNumber;
     public string[] ConstelKey;
     public double[] ConstelWeight;

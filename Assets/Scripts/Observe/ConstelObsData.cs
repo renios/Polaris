@@ -35,12 +35,7 @@ namespace Observe
         public void CheckObservability()
         {
             var groupKey = Variables.Constels[name].Group;
-            if (Variables.ObserveSkyLevel >= 0 && groupKey == 0)
-                observable = true;
-            else if (Variables.ObserveSkyLevel >= 1 && groupKey == 4)
-                observable = true;
-            else
-                observable = false;
+            observable =  Variables.ObserveSkyLevel >= groupKey;
         }
     }
 }

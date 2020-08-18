@@ -30,7 +30,6 @@ namespace Observe
         public GameObject[] SkyArea;
         public GameObject[] SkyAreaEffects;
         public ObsSkyAreaBtn[] SkyAreaBtns;
-        public GameObject[] UnlockAskPanels;
         [Header("Observe Status Display")]
         public Text ConstelName;
         public GameObject ConstelImage;
@@ -39,7 +38,6 @@ namespace Observe
         public GameObject TimeConfirmPanel;
         public GameObject[] TimeConfirmBtn;
         public Button TimeOkRunBtn;
-        public GameObject NoMoneyPanel;
         [Header("While Observing Panel")]
         public GameObject WhileObservingPanel;
         public Text fastCompleteMoneyLabel;
@@ -66,12 +64,23 @@ namespace Observe
 
         Func<Vector2, bool>[] scopeAllowedAtPos =
         {
-            p => Vector2.Distance(new Vector2(0, 4.53f * SCENE_SCALE), p) <= 1.1f * SCENE_SCALE,
+            p => Vector2.Distance(new Vector2(0, 4.53f * SCENE_SCALE), p) <= 1.1f * SCENE_SCALE, // North
             p =>
             {
                 var deltaP = p - new Vector2(0, 4.53f * SCENE_SCALE);
-                return deltaP.magnitude <= 1.1f * SCENE_SCALE || (deltaP.magnitude <= SKY_RADIUS && Vector2.Angle(Vector2.right, deltaP) >= 150 && Vector2.Angle(Vector2.right, deltaP) < 235);
-            }
+                return deltaP.magnitude <= 1.1f * SCENE_SCALE || (deltaP.magnitude <= SKY_RADIUS && Vector2.SignedAngle(Vector2.right, deltaP) >= 40 && Vector2.SignedAngle(Vector2.right, deltaP) < 140);
+            }, // North + Spring
+            p =>
+            {
+                var deltaP = p - new Vector2(0, 4.53f * SCENE_SCALE);
+                return deltaP.magnitude <= 1.1f * SCENE_SCALE || (deltaP.magnitude <= SKY_RADIUS && Vector2.SignedAngle(Vector2.right, deltaP) >= -30 && Vector2.SignedAngle(Vector2.right, deltaP) < 140);
+            }, // North + Spring + Summer
+            p =>
+            {
+                var deltaP = p - new Vector2(0, 4.53f * SCENE_SCALE);
+                return deltaP.magnitude <= 1.1f * SCENE_SCALE || (deltaP.magnitude <= SKY_RADIUS && Vector2.SignedAngle(Vector2.right, deltaP) >= -130 && Vector2.SignedAngle(Vector2.right, deltaP) < 140);
+            }, // North + Spring + Summer + Autumn
+            p => Vector2.Distance(new Vector2(0, 4.53f * SCENE_SCALE), p) <= SKY_RADIUS // Full Area
         };
 
         void Start()
@@ -116,9 +125,16 @@ namespace Observe
 
         public void AssignCharaToConstel()
         {
+            foreach (var constel in constelCharData)
+            {
+                constel.Value.charas.Clear();
+                constel.Value.charWeights.Clear();
+            }
+            
             foreach(var key in Variables.Characters.Keys)
             {
-                if(key != 1 && Variables.Characters[key].Observable)
+                // 캐릭터의 관측 가능 여부를 그 캐릭터의 메인 별자리의 해금 여부에 따라 결정
+                if (key != 1 && constelCharData[Variables.Characters[key].MainConstel].observable)
                 {
                     for(int i = 0; i < Variables.Characters[key].ConstelKey.Length; i++)
                     {
@@ -266,10 +282,17 @@ namespace Observe
 
         Vector2 FindScopeBorderPos(int index, Vector2 targetPos, float divide_point, int iterate_count)
         {
-            Vector2[] centerPos = { new Vector2(0, 4.53f * SCENE_SCALE), new Vector2(-1.67f * SCENE_SCALE, 4.64f * SCENE_SCALE) };
+            Vector2[] centerPos =
+            {
+                new Vector2(0, 4.53f * SCENE_SCALE),
+                new Vector2(0.15f * SCENE_SCALE, 6.66f * SCENE_SCALE),
+                new Vector2(0.92f * SCENE_SCALE, 5.92f * SCENE_SCALE),
+                new Vector2(0.85f * SCENE_SCALE, 4.53f * SCENE_SCALE),
+                new Vector2(0, 4.53f * SCENE_SCALE)
+            };
 
             var vec = Vector2.Lerp(centerPos[index], targetPos, divide_point);
-            if (iterate_count >= 10 && scopeAllowedAtPos[index](vec))
+            if ((iterate_count >= 10 && scopeAllowedAtPos[index](vec)))
                 return vec;
 
             if (scopeAllowedAtPos[index](vec))
@@ -583,27 +606,28 @@ namespace Observe
 
         void CheckSkyAvailability()
         {
-            var observedCharCount = new Dictionary<int, int>();
+            var observedCharCount = new Dictionary<int, int>
+            {
+                {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}
+            };
             foreach(var chara in Variables.Characters)
             {
                 if(chara.Value.Observed)
                 {
-                    foreach(var constel in chara.Value.ConstelKey)
-                    {
-                        var groupIndex = Variables.Constels[constel].Group;
-                        if (observedCharCount.ContainsKey(groupIndex))
-                            observedCharCount[groupIndex]++;
-                        else
-                            observedCharCount.Add(groupIndex, 1);
-                    }
+                    var groupIndex = Variables.Constels[chara.Value.MainConstel].Group;
+                    if (observedCharCount.ContainsKey(groupIndex))
+                        observedCharCount[groupIndex]++;
                 }
             }
 
-            // 각 구역에 따른 조건 판단. 현재는 [0] 북극, [1] 겨울. parameter는 sky level. 나중에 조정 예정.
+            // 각 구역에 따른 조건 판단. [0] 북극, [1] 봄, [2] 여름, [3] 가을, [4] 갸울. parameter는 sky level.
             Func<bool>[] allowedToOpen =
             {
-                () => observedCharCount[0] > 0,     // 북극 지역의 캐릭터를 관측했는가
-                () => observedCharCount[0] >= 4     // 북극 지역의 캐릭터를 4명 이상 관측했는가
+                () => observedCharCount[0] > 0,     // 북극 지역 해금:    북극 지역의 캐릭터 한 명 ( == 폴라리스 ) 을 관측했는가
+                () => observedCharCount[0] >= 3,    // 봄 지역 해금:      북극 지역의 캐릭터를 3명 이상 관측했는가 ( == 전부 만났는가 )
+                () => observedCharCount[1] >= 6,    // 여름 지역 해금:    봄 지역의 캐릭터를 6명 이상 관측했는가
+                () => observedCharCount[2] >= 5,    // 가을 지역 해금:    여름 지역의 캐릭터를 5명 이상 관측했는가
+                () => observedCharCount[3] >= 6     // 겨울 지역 해금:    가을 지역의 캐릭터를 6명 이상 관측했는가
             };
             for(int i = 0; i < SkyAreaBtns.Length; i++)
             {
@@ -627,11 +651,20 @@ namespace Observe
         {
             switch(index)
             {
-                case 0:
+                case 0: // 북극 열 때 비용
                     Variables.Starlight -= 10;
                     break;
-                case 1:
+                case 1: // 봄 열 때 비용
                     Variables.Starlight -= 300;
+                    break;
+                case 2: // 여름 열 때 비용
+                    Variables.Starlight -= 6000;
+                    break;
+                case 3: // 가을 열 때 비용
+                    Variables.Starlight -= 50000;
+                    break;
+                case 4: // 겨울 열 때 비용
+                    Variables.Starlight -= 100000;
                     break;
             }
             StartCoroutine(SkyUnlockAnim(index));
@@ -659,6 +692,7 @@ namespace Observe
             CheckSkyAvailability();
             foreach (var constel in constelCharData)
                 constel.Value.CheckObservability();
+            AssignCharaToConstel();
             ButtonObj.GetComponent<Button>().interactable = true;
             Scope.gameObject.SetActive(true);
             AllowMove = true;
