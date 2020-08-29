@@ -99,6 +99,7 @@ namespace Reading
 
         IEnumerator Navigate(bool directionFlag, float waitSecond)
         {
+            SoundManager.Play(SoundType.AlbumPage);
             // True: Increment, False: Decrement
             if (directionFlag)
             {

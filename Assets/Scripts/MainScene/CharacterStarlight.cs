@@ -78,8 +78,8 @@ public class CharacterStarlight : MonoBehaviour
         overPoint = false;
         span = DateTime.Now - lastDate;
         lastDate = DateTime.Now;
-        int startlight = (int)(0.5 + span.TotalSeconds / sps); //반올림
-        Variables.Starlight += startlight;
+        int starlight = (int)(0.5 + span.TotalSeconds / sps); //반올림
+        GameManager.Instance.IncreaseMoney(MoneyType.Starlight, starlight);
         Variables.Characters[characterIndex].LastReapDate = this.LastDate;
         starBalloon.gameObject.SetActive(false);
         GameManager.Instance.SaveGame(); //말풍선 클릭될 때마다 수확한 별빛 데이터를 저장하기 위해 호출.

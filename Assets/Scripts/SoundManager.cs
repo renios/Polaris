@@ -10,7 +10,7 @@ public enum SoundType{
 	Default,
 	BgmTitle, BgmMain,
 	ClickImportant, ClickNormal, ClickDialogue,
-	BgmDark, AlbumPage, GachaResult
+	BgmDark, AlbumPage, GachaResult, Stardust
 }
 public class SoundManager : MonoBehaviour {
 

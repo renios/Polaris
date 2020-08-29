@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Dialogue;
 
 namespace Observe
 {
@@ -30,6 +31,10 @@ namespace Observe
         public GameObject[] SkyArea;
         public GameObject[] SkyAreaEffects;
         public ObsSkyAreaBtn[] SkyAreaBtns;
+        [Header("Sky Unlock Animation")] 
+        public List<GameObject> ObjsToDisable;
+        public GameObject SkyUnlockEff1, SkyUnlockEff2;
+        public CanvasGroup PolarisSprite;
         [Header("Observe Status Display")]
         public Text ConstelName;
         public GameObject ConstelImage;
@@ -48,7 +53,7 @@ namespace Observe
 
         // Private field
         int obsTimeIndex;
-        bool isTouching;
+        bool isTouching, waitForPolarisInput;
         Vector3 startScopePos, startMousePos;
         ObserveStatus status;
         Dictionary<string, ConstelObsData> constelCharData = new Dictionary<string, ConstelObsData>();
@@ -148,6 +153,12 @@ namespace Observe
         {
             if (AllowMove)
                 MoveScope();
+
+            if (waitForPolarisInput)
+            {
+                if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
+                    waitForPolarisInput = false;
+            }
         }
 
         void FixedUpdate()
@@ -380,8 +391,16 @@ namespace Observe
         public void DisplayCharOnly()
         {
             var ordered = status.charProb.OrderByDescending(p => p.Value);
-            for(int i = 0; i < 4; i++)
-                CharDisplay[i].Set(ordered.ElementAt(i).Key);
+            for (int i = 0; i < 4; i++)
+            {
+                if (i >= ordered.Count())
+                    CharDisplay[i].gameObject.SetActive(false);
+                else
+                {
+                    CharDisplay[i].gameObject.SetActive(true);
+                    CharDisplay[i].Set(ordered.ElementAt(i).Key);
+                }
+            }
         }
 
         public void ButtonPressed()
@@ -453,17 +472,17 @@ namespace Observe
         {
             var cost = TimeConfirmBtn[obsTimeIndex - 1].GetComponentInParent<ObserveTimeButton>().SpendMoney;
             bool res = false;
-            yield return MessageSet.Now.ShowMoneySpendAsk("별빛을 사용하여\n관측을 시작하시겠습니까?", MoneyType.Starlight, cost, result => { res = result;});
+            yield return MessageSet.Now.ShowMoneySpendAsk("관측을 시작하시겠습니까?", MoneyType.Starlight, cost, result => { res = result;});
             if (res)
             {
-                if (Variables.Starlight < cost)
-                    yield return MessageSet.Now.ShowNoMoneyAlert(MoneyType.Starlight);
-                else
+                var payed = GameManager.Instance.PayMoney(MoneyType.Starlight, cost);
+                if (payed)
                 {
-                    Variables.Starlight -= cost;
                     StartObserveWithTime();
                     TimeConfirmPanel.SetActive(false);
                 }
+                else
+                    yield return MessageSet.Now.ShowNoMoneyAlert(MoneyType.Starlight);
             }
         }
 
@@ -518,18 +537,18 @@ namespace Observe
         {
             var cost = Variables.values.fastCompleteCost[status.timeIndex];
             bool res = false;
-            yield return MessageSet.Now.ShowMoneySpendAsk("별빛을 사용하여\n관측을 즉시 완료하시겠습니까?", MoneyType.Starlight, cost, result => { res = result;});
+            yield return MessageSet.Now.ShowMoneySpendAsk("관측을 즉시 완료하시겠습니까?", MoneyType.Starlight, cost, result => { res = result;});
             if (res)
             {
-                if (Variables.Starlight < cost)
-                    yield return MessageSet.Now.ShowNoMoneyAlert(MoneyType.Starlight);
-                else
+                var payed = GameManager.Instance.PayMoney(MoneyType.Starlight, cost);
+                if (payed)
                 {
-                    Variables.Starlight -= cost;
                     ChangeBehaviour(ObserveBehaviour.Finished);
                     ButtonPressed();
                     WhileObservingPanel.SetActive(false);
                 }
+                else
+                    yield return MessageSet.Now.ShowNoMoneyAlert(MoneyType.Starlight);
             }
         }
 
@@ -638,35 +657,24 @@ namespace Observe
                 }
                 else
                 {
-                    SkyAreaBtns[i].gameObject.SetActive(true);
-                    if (allowedToOpen[i]())
-                        SkyAreaBtns[i].pricePanel.SetActive(true);
+                    if (i == Variables.ObserveSkyLevel + 1)
+                    {
+                        SkyAreaBtns[i].gameObject.SetActive(true);
+                        if (allowedToOpen[i]())
+                            SkyAreaBtns[i].pricePanel.SetActive(true);
+                        else
+                            SkyAreaBtns[i].openRulePanel.SetActive(true);
+                    }
                     else
-                        SkyAreaBtns[i].openRulePanel.SetActive(true);
+                    {
+                        SkyAreaBtns[i].gameObject.SetActive(false);
+                    }
                 }
             }
         }
 
         public void UnlockSky(int index)
         {
-            switch(index)
-            {
-                case 0: // 북극 열 때 비용
-                    Variables.Starlight -= 10;
-                    break;
-                case 1: // 봄 열 때 비용
-                    Variables.Starlight -= 300;
-                    break;
-                case 2: // 여름 열 때 비용
-                    Variables.Starlight -= 6000;
-                    break;
-                case 3: // 가을 열 때 비용
-                    Variables.Starlight -= 50000;
-                    break;
-                case 4: // 겨울 열 때 비용
-                    Variables.Starlight -= 100000;
-                    break;
-            }
             StartCoroutine(SkyUnlockAnim(index));
         }
 
@@ -678,6 +686,8 @@ namespace Observe
             AllowMove = false;
             Scope.gameObject.SetActive(false);
             ButtonObj.GetComponent<Button>().interactable = false;
+            foreach(var obj in ObjsToDisable)
+                obj.SetActive(false);
 
             foreach (var cap in SkyAreaBtns)
                 cap.gameObject.SetActive(false);
@@ -686,18 +696,44 @@ namespace Observe
             SkyArea[index + 1].SetActive(true);
             SkyArea[index + 1].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
             SkyArea[index + 1].GetComponent<SpriteRenderer>().DOColor(Color.white, 1.5f);
+            SoundManager.Play(SoundType.Stardust);
             yield return new WaitForSeconds(1.5f);
             SkyArea[index].SetActive(false);
 
-            CheckSkyAvailability();
-            foreach (var constel in constelCharData)
-                constel.Value.CheckObservability();
-            AssignCharaToConstel();
-            ButtonObj.GetComponent<Button>().interactable = true;
-            Scope.gameObject.SetActive(true);
-            AllowMove = true;
+            // Polaris 등장 애니메이션
+            SkyUnlockEff1.SetActive(true);
+            yield return new WaitForSeconds(4);
+            SkyUnlockEff1.SetActive(false);
+            SoundManager.Play(SoundType.ClickImportant);
+            SkyUnlockEff2.SetActive(true);
+            yield return new WaitForSeconds(1.25f);
+            SkyUnlockEff2.SetActive(false);
+            PolarisSprite.gameObject.SetActive(true);
+            PolarisSprite.DOFade(1, 1.25f);
+            yield return new WaitForSeconds(1.25f);
 
-            ShotRay();
+            waitForPolarisInput = true;
+            yield return new WaitWhile(() => waitForPolarisInput);
+            
+            // 폴라리스의 친밀도를 1 올린다.
+            int prog, req;
+            var pLev = GameManager.Instance.CheckFavority(1, out prog, out req);
+            Variables.Characters[1].Favority += req;
+            
+            // 폴라리스의 대화를 본다 (완전한 씬 전환). 본 뒤에는 이 씬으로 돌아온다.
+            DialogueManager.PrepareCharacterDialog(1, index);
+            Variables.DialogAfterScene = "GachaScene";
+            SceneChanger.Instance.ChangeScene("NewDialogScene");
+
+            // CheckSkyAvailability();
+            // foreach (var constel in constelCharData)
+            //     constel.Value.CheckObservability();
+            // AssignCharaToConstel();
+            // ButtonObj.GetComponent<Button>().interactable = true;
+            // Scope.gameObject.SetActive(true);
+            // AllowMove = true;
+            //
+            // ShotRay();
         }
     }
 }

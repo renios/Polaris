@@ -34,7 +34,7 @@ namespace Reading
             favIncreaseText.text = "+" + favDelta;
 
             var pieceDelta = rank;
-            Variables.MemorialPiece += pieceDelta;
+            GameManager.Instance.IncreaseMoney(MoneyType.MemorialPiece, pieceDelta);
             pieceIncreaseText.text = "+" + pieceDelta;
 
             SaveData.Now.hasReadingResult = false;

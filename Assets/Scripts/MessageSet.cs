@@ -29,8 +29,19 @@ public class MessageSet : MonoBehaviour
     public IEnumerator ShowMoneySpendAsk(string text, MoneyType type, int cost, Action<bool> afterResult)
     {
         hasResult = false;
-        
-        targetLabel.text = text;
+
+        string moneyTypeString = "";
+        switch (type)
+        {
+            case MoneyType.Starlight:
+                moneyTypeString = "별빛을 사용하여";
+                break;
+            case MoneyType.MemorialPiece:
+                moneyTypeString = "기억의 조각을 사용하여";
+                break;
+        }
+
+        targetLabel.text = moneyTypeString + Environment.NewLine + text;
         moneyTypeImage.sprite = moneyTypeSprites[(int) type];
         moneyLabel.text = cost.ToString();
         moneySpendAskPanel.SetActive(true);

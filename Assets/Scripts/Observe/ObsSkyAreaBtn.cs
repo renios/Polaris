@@ -35,10 +35,11 @@ namespace Observe
 			{
 				if (result)
 				{
-					if (Variables.Starlight < price)
-						MessageSet.Now.ShowNoMoneyAlert(MoneyType.Starlight);
-					else
+					var payed = GameManager.Instance.PayMoney(MoneyType.Starlight, price);
+					if (payed)
 						manager.UnlockSky(index);
+					else
+						MessageSet.Now.ShowNoMoneyAlert(MoneyType.Starlight);
 				}
 			});
 		}

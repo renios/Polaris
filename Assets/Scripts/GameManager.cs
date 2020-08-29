@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    const int MAX_STARLIGHT = 9999999;
+    const int MAX_MEMORIAL_PIECE = 99;
+
     private void Awake()
     {
         Application.targetFrameRate = 60;
@@ -25,6 +28,7 @@ public class GameManager : MonoBehaviour
         Initialize();
     }
 
+    // Internal JSON-based data load
     public void Initialize()
     {
         var valueRaw = Resources.Load<TextAsset>("Data/Values");
@@ -68,6 +72,8 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region Favority Control Function
+    
     /// <summary>
     /// 친밀도를 체크하는 함수입니다.
     /// 직접적으로는 친밀도 레벨을 반환하며 (1 ~ 6), 간접적으로 현재 친밀도 진행 정도와 다음 레벨까지의 요구 친밀도를 반환합니다.
@@ -120,4 +126,66 @@ public class GameManager : MonoBehaviour
         }
         return cnt + 1;
     }
+    
+    #endregion
+    
+    #region Money Control Functions
+
+    public int GetCurrentMoney(MoneyType type)
+    {
+        switch (type)
+        {
+            case MoneyType.Starlight:
+                return Variables.Starlight;
+            case MoneyType.MemorialPiece:
+                return Variables.MemorialPiece;
+        }
+
+        return 0;
+    }
+
+    public bool MoneyPayable(MoneyType type, int price)
+    {
+        switch (type)
+        {
+            case MoneyType.Starlight:
+                return Variables.Starlight - price >= 0;
+            case MoneyType.MemorialPiece:
+                return Variables.MemorialPiece - price >= 0;
+        }
+
+        return false;
+    }
+
+    public bool PayMoney(MoneyType type, int price)
+    {
+        if (!MoneyPayable(type, price))
+            return false;
+        
+        switch (type)
+        {
+            case MoneyType.Starlight:
+                Variables.Starlight -= price;
+                break;
+            case MoneyType.MemorialPiece:
+                Variables.MemorialPiece -= price;
+                break;
+        }
+        return true;
+    }
+
+    public void IncreaseMoney(MoneyType type, int value)
+    {
+        switch (type)
+        {
+            case MoneyType.Starlight:
+                Variables.Starlight = Mathf.Clamp(Variables.Starlight + value, 0, MAX_STARLIGHT);
+                break;
+            case MoneyType.MemorialPiece:
+                Variables.MemorialPiece = Mathf.Clamp(Variables.MemorialPiece + value, 0, MAX_MEMORIAL_PIECE);
+                break;
+        }
+    }
+    
+    #endregion
 }
