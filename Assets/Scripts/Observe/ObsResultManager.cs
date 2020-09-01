@@ -64,7 +64,7 @@ namespace Observe
 				favText.text = "+" + status.charFavData[charKey].ToString();
 				favPanelCharThumb.sprite = Resources.Load<Sprite>("Characters/" + Variables.Characters[charKey].InternalName + "/image_obspopup");
 				favCharText.text = Variables.Characters[charKey].Name;
-				favConstelText.text = Variables.Constels[Variables.Characters[charKey].ConstelKey[0]].Name;
+				favConstelText.text = Variables.Constels[Variables.Characters[charKey].MainConstel].Name;
 
 				// 캐릭터 팝업 연출을 실행합니다.
 				obsEffect.SetActive(true);

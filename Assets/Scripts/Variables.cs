@@ -68,6 +68,12 @@ public static class Variables
     /// <returns></returns>
     public static int GetStoreValue(int speci) { return GetStoreValue(speci, StoreUpgradeLevel[speci]); }
 
+    public static int GetStoreValue(int speci, out int level)
+    {
+        level = StoreUpgradeLevel[speci];
+        return GetStoreValue(speci, StoreUpgradeLevel[speci]);
+    }
+
     public static int GetStoreValue(int speci, int index)
     {
         switch(speci)
@@ -101,11 +107,11 @@ public static class Variables
         switch (speci)
         {
             case 0:
-                return values.scopeTimeTable.Length;
+                return values.scopeTimeTable.Length - 1;
             case 1:
-                return values.scopeCharCount.Length;
+                return values.scopeCharCount.Length - 1;
             case 2:
-                return values.lobbyCharCount.Length;
+                return values.lobbyCharCount.Length - 1;
         }
         return -1;
     }

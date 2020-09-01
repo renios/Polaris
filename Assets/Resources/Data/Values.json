@@ -1,14 +1,14 @@
 {
     "accumFavTable": [30, 90, 180, 330, 570],
 
-    "scopeTimeUpCost": [0, 1000, 3000, 10000],
+    "scopeTimeUpCost": [0, 100, 10000, 50000],
     "scopeTimeTable": [0, 1, 30, 180, 720],
     "observeCost": [0, 10, 500, 4000, 10000],
     "fastCompleteCost": [0, 300, 15000, 120000, 300000],
 
-    "scopeCharUpCost": [0, 5000, 15000],
+    "scopeCharUpCost": [0, 30000, 150000],
     "scopeCharCount": [0, 1, 2, 3],
 
-    "lobbyCharUpCost": [0, 2000, 7000],
-    "lobbyCharCount": [0, 3, 4, 5]
+    "lobbyCharUpCost": [0, 100, 4000, 50000, 100000],
+    "lobbyCharCount": [0, 3, 5, 8, 11, 15]
 }

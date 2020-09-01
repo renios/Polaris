@@ -58,7 +58,7 @@ namespace Album
             ShortImage.sprite = Resources.Load<Sprite>("Characters/" + character.InternalName + "/image_album");
             FullImage.sprite = Resources.Load<Sprite>("Characters/" + character.InternalName + "/image_full");
             Name.text = character.Name;
-            ConstelName.text = Variables.Constels[character.ConstelKey[0]].Name;
+            ConstelName.text = Variables.Constels[character.MainConstel].Name;
             ConstelImage.sprite = Resources.Load<Sprite>("Constellations/Album/" + character.ConstelKey[0]);
             Lux.text = character.LuxText;
             Distance.text = character.LYDistance;

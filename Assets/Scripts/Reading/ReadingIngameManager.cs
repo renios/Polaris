@@ -120,22 +120,27 @@ namespace Reading
 					wrongEffect.SetActive(true);
 					yield return new WaitForSeconds(1.5f);
 					wrongEffect.SetActive(false);
-				}
-
-				// 문제 선택지 리스트 구축 및 표시
-				string questionContext = "";
-				var answerContent = new DialogueContent();
-				for(int j = 0; j < quiz.Dialogues[0].Contents.Length; j++)
-				{
-					if (quiz.Dialogues[0].Contents[j].Type == 0) // 문제 내용
-						questionContext += (j == 1 ? "" : "\n") + quiz.Dialogues[0].Contents[j].DialogText;
-					else if(quiz.Dialogues[0].Contents[j].Type == 2) // 선택지
+					
+					// 문제와 그 정답 표시 (오답 노트의 개념으로)
+					string questionContext = "", answerContext = "";
+					for(int j = 0; j < quiz.Dialogues[0].Contents.Length; j++)
 					{
-						answerContent = quiz.Dialogues[0].Contents[j];
-						break;
+						if (quiz.Dialogues[0].Contents[j].Type == 0) // 문제 내용
+							questionContext += (j == 1 ? "" : "\n") + quiz.Dialogues[0].Contents[j].DialogText;
+						else if(quiz.Dialogues[0].Contents[j].Type == 2) // 선택지
+						{
+							for (int k = 0; k < quiz.Dialogues[0].Contents[j].Directions.Length; k++)
+							{
+								if (quiz.Dialogues[0].Contents[j].Directions[k] == 1)
+								{
+									answerContext = quiz.Dialogues[0].Contents[j].JuncTexts[k];
+									break;
+								}
+							}
+						}
 					}
+					yield return quizDisplayer.Show(questionContext, answerContext);
 				}
-				yield return quizDisplayer.Show(questionContext, answerContent, selectedAns);
 			}
 
 			int rank;

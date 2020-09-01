@@ -9,39 +9,16 @@ namespace Reading
 	public class ReadingQuizDisplayer : MonoBehaviour
 	{
 		public Text question;
-		public GameObject answerTemplate;
-		public RectTransform answerParent;
+		public Text answer;
 		public RectTransform popupBody;
 
 		[HideInInspector] public bool showing;
 
-		List<GameObject> answerObjs;
-
-		public IEnumerator Show(string context, DialogueContent answers, int selectedPhase)
+		public IEnumerator Show(string q, string a)
 		{
-			if (answerObjs == null)
-				answerObjs = new List<GameObject>();
-			else
-			{
-				foreach (var obj in answerObjs)
-					Destroy(obj);
-				answerObjs.Clear();
-			}
-
-			question.text = context;
-
-			for(int i = 0; i < answers.JuncTexts.Length; i++)
-			{
-				var newObj = Instantiate(answerTemplate);
-				newObj.transform.SetParent(answerParent);
-				newObj.transform.localScale = Vector3.one;
-
-				var phase = answers.Directions[i];
-				newObj.GetComponent<ReadingQuizAnswerElement>().Set(answers.JuncTexts[i], phase == selectedPhase, phase == 1);
-				newObj.SetActive(true);
-				answerObjs.Add(newObj);
-			}
-
+			question.text = q;
+			answer.text = a;
+			
 			showing = true;
 			gameObject.SetActive(true);
 			LayoutRebuilder.MarkLayoutForRebuild(popupBody);

@@ -27,13 +27,7 @@ namespace Observe
 			}
 
 			charName.text = charData.Name;
-			for(int i = 0; i < charData.ConstelKey.Length; i++)
-			{
-				if (i == 0)
-					constelName.text = Variables.Constels[charData.ConstelKey[i]].Name;
-				else
-					constelName.text += ", " + Variables.Constels[charData.ConstelKey[i]].Name;
-			}
+			constelName.text = Variables.Constels[charData.MainConstel].Name;
 			charThumb.sprite = Resources.Load<Sprite>("Characters/" + charData.InternalName + "/image_obspopup");
 			
 			int progress, required;
