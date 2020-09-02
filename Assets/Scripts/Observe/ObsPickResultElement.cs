@@ -39,6 +39,9 @@ namespace Observe
 			favIncrement.text = "(+" +  deltaFav.ToString() + ")";
 			if (progress - deltaFav < 0)
 				favIncreased.SetActive(true);
+
+			if (level > charData.StoryUnlocked)
+				charData.StoryUnlocked = level;
 		}
 	}
 }

@@ -699,8 +699,23 @@ namespace Observe
             SoundManager.Play(SoundType.Stardust);
             yield return new WaitForSeconds(1.5f);
             SkyArea[index].SetActive(false);
+            
+            // 북극이 열렸을 때는 그냥 진행한다.
+            if (index == 0)
+            {
+                CheckSkyAvailability();
+                foreach (var constel in constelCharData)
+                    constel.Value.CheckObservability();
+                AssignCharaToConstel();
+                ButtonObj.GetComponent<Button>().interactable = true;
+                Scope.gameObject.SetActive(true);
+                AllowMove = true;
 
-            // Polaris 등장 애니메이션
+                ShotRay();
+                yield break;
+            }
+            
+            // Polaris 등장 애니메이션 (북극이 열렸을 때는 빼고!!)
             SkyUnlockEff1.SetActive(true);
             yield return new WaitForSeconds(4);
             SkyUnlockEff1.SetActive(false);
@@ -725,15 +740,7 @@ namespace Observe
             Variables.DialogAfterScene = "GachaScene";
             SceneChanger.Instance.ChangeScene("NewDialogScene");
 
-            // CheckSkyAvailability();
-            // foreach (var constel in constelCharData)
-            //     constel.Value.CheckObservability();
-            // AssignCharaToConstel();
-            // ButtonObj.GetComponent<Button>().interactable = true;
-            // Scope.gameObject.SetActive(true);
-            // AllowMove = true;
-            //
-            // ShotRay();
+            
         }
     }
 }

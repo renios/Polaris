@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,11 +11,16 @@ namespace Album
     public class AlbumStoryElement : MonoBehaviour
     {
         public Text StoryHeader, StoryDescription;
+        public Text priceText;
         public GameObject AddiInfoTemplate;
         public RectTransform AddiInfoParent;
-        public int charIndex, storyIndex;
-        public GameObject InfoPanel, Mask;
+        public GameObject InfoPanel, BuyButton, Mask;
+        public AlbumCharInfo page;
+        
+        [HideInInspector] public int charIndex, storyIndex;
 
+        int unlockPrice;
+        
         private List<GameObject> addis = new List<GameObject>();
 
         public void Show(int chI, int stI)
@@ -40,14 +46,46 @@ namespace Album
                 newObj.SetActive(true);
                 addis.Add(newObj);
             }
+            BuyButton.SetActive(false);
             Mask.SetActive(false);
         }
 
-        public void StartStory()
+        public void SetBuyable(int chI, int stI)
         {
-            Variables.DialogAfterScene = SceneChanger.GetCurrentScene();
-            Dialogue.DialogueManager.PrepareCharacterDialog(charIndex, storyIndex);
-            SceneChanger.Instance.ChangeScene("NewDialogScene");
+            charIndex = chI;
+            storyIndex = stI;
+
+            unlockPrice = Variables.StoryUnlockCost[storyIndex];
+            priceText.text = unlockPrice.ToString();
+            
+            BuyButton.SetActive(true);
+            InfoPanel.SetActive(false);
+            Mask.SetActive(false);
+        }
+
+        public void UnlockStory()
+        {
+            StartCoroutine(UnlockStory_Routine());
+        }
+
+        IEnumerator UnlockStory_Routine()
+        {
+            if (!GameManager.Instance.MoneyPayable(MoneyType.MemorialPiece, unlockPrice))
+                yield return MessageSet.Now.ShowNoMoneyAlert(MoneyType.MemorialPiece);
+            else
+            {
+                var accepted = false;
+                yield return MessageSet.Now.ShowMoneySpendAsk("스토리를 개방하시겠습니까?", MoneyType.MemorialPiece,
+                    unlockPrice, r => { accepted = r; });
+                if (accepted)
+                {
+                    GameManager.Instance.PayMoney(MoneyType.MemorialPiece, unlockPrice);
+                    Variables.Characters[charIndex].StoryUnlocked++;
+                    GameManager.Instance.SaveGame();
+                    
+                    page.UpdateStoryList(charIndex);
+                }
+            }
         }
     }
 }

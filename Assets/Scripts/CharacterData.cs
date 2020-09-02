@@ -28,6 +28,7 @@ public class CharacterData
     // 여기서부터 내부 데이터 필드
     public bool Observed;
     public int Favority;
+    public int StoryUnlocked;
     public int StoryProgress;
     public string LastReapDate;
 

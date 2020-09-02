@@ -48,6 +48,7 @@ namespace Reading
 					}
 				}
 			}
+			Debug.Log(quizList.Count + " available quizs found.");
 
 			// 5개 체리피킹
 			var pickedQuizs = new List<DialogueData>();

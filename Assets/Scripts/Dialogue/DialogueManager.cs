@@ -65,11 +65,11 @@ namespace Dialogue
                 switch(dialog.Type)
                 {
                     case 0:
-                        if (fileType == DialogueFileType.TEXT && dialog.Talker == null)
-                            nameTag.enabled = false;
+                        if (fileType == DialogueFileType.TEXT && dialog.Talker == "")
+                            nameTag.gameObject.SetActive(false);
                         else
                         {
-                            nameTag.enabled = true;
+                            nameTag.gameObject.SetActive(true);
                             nameTag.sprite = Resources.Load<Sprite>("Images/dialogue_nametag");
                         }
                         yield return ShowText(fileType == DialogueFileType.JSON ? DefaultTalkerName : dialog.Talker, dialog.DialogText);

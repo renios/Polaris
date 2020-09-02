@@ -13,4 +13,6 @@
 
     public int[] lobbyCharUpCost;
     public int[] lobbyCharCount;
+
+    public int[] storyUnlockCost;
 }

@@ -80,22 +80,7 @@ namespace Album
                 FavorityGage.value = curProgress;
             }
 
-            for (int i = 0; i < 6; i++)
-            {
-                if (i < favorLevel)
-                {
-                    StoryElement[i].SetActive(true);
-                    StoryElement[i].GetComponent<AlbumStoryElement>().Show(charIndex, i);
-                }
-                else if (i <= Variables.values.MaxFavority)
-                {
-                    StoryElement[i].GetComponent<AlbumStoryElement>().Mask.SetActive(true);
-                    StoryElement[i].GetComponent<AlbumStoryElement>().InfoPanel.SetActive(false);
-                    StoryElement[i].SetActive(true);
-                }
-                else
-                    StoryElement[i].SetActive(false);
-            }
+            UpdateStoryList(charIndex);
             VerticalBar.value = 1;
             LayoutRebuilder.MarkLayoutForRebuild(StoryElement[0].transform.parent as RectTransform);
             LayoutRebuilder.ForceRebuildLayoutImmediate(StoryElement[0].transform.parent as RectTransform);
@@ -117,6 +102,35 @@ namespace Album
         {
             SoundManager.Play(SoundType.ClickDialogue);
             FullIllust.gameObject.SetActive(false);
+        }
+
+        public void UpdateStoryList(int charIndex)
+        {
+            var storyLevel = Variables.Characters[charIndex].StoryUnlocked;
+            for (int i = 0; i < 6; i++)
+            {
+                if (i < storyLevel)
+                {
+                    StoryElement[i].SetActive(true);
+                    StoryElement[i].GetComponent<AlbumStoryElement>().Show(charIndex, i);
+                }
+                else if (i == storyLevel && charIndex != 1) // 폴라리스의 스토리는 기억의 조각으로도 살 수 없어요.
+                {
+                    StoryElement[i].SetActive(true);
+                    StoryElement[i].GetComponent<AlbumStoryElement>().SetBuyable(charIndex, i);
+                }
+                else if (i <= Variables.values.MaxFavority)
+                {
+                    StoryElement[i].GetComponent<AlbumStoryElement>().Mask.SetActive(true);
+                    StoryElement[i].GetComponent<AlbumStoryElement>().InfoPanel.SetActive(false);
+                    StoryElement[i].GetComponent<AlbumStoryElement>().BuyButton.SetActive(false);
+                    StoryElement[i].SetActive(true);
+                }
+                else
+                    StoryElement[i].SetActive(false);
+            }
+            LayoutRebuilder.MarkLayoutForRebuild(StoryElement[0].transform.parent as RectTransform);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(StoryElement[0].transform.parent as RectTransform);
         }
 
         int curStoryIndex = -1;

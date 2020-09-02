@@ -1,6 +1,6 @@
-﻿구분번호,phase,talker,behavior,dialogue,nextPhase,
-,0,*,Solution,아랍어로 '투 반'은 용이라는 뜻을 가지고 있다. 투반이라는 이름은 여기서 유래했다.,,
-,0,,,투반'이라는 이름은 무엇에서 유래했을까?,,
-,0,*,Select,,하늘|나침반|용,2|2|1
-,1,*,Next,,,-1
-,2,*,Next,,,-1
+phase,talker,behaviour,dialogue,nextPhases,
+0,*,Solution,아랍어로 '투반'은 용이라는 뜻을 가지고 있다. 투반이라는 이름은 여기서 유래했다.,,
+0,,,투반'이라는 이름은 무엇에서 유래했을까?,,
+0,*,Select,하늘|나침반|용,2|2|1,
+1,*,Next,,-1,
+2,*,Next,,-1,

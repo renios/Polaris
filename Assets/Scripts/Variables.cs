@@ -8,6 +8,7 @@ public static class Variables
 {
     public static bool HasSave { get { return File.Exists(Application.persistentDataPath + "/save"); } }
     public static int[] FavorityThreshold { get { return values.accumFavTable; } }
+    public static int[] StoryUnlockCost { get { return values.storyUnlockCost; } }
 
     #region Data from SaveData.Now
     public static Dictionary<int, CharacterData> Characters { get { return SaveData.Now.charData; } }
