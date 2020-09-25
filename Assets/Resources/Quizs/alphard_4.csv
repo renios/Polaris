@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,태양을 제외하고 가장 크게 보이는 항성은 황새치자리 S이고 두번째로 큰 항성은 오리온자리 알파이며 알파드는 세번째로 큰 항성이다.,
+0,,,알파드는 밤하늘에서 가장 크게 보이는 별이다,
+0,*,Select,O|X,2|1
+1,*,Next,,-1
+2,*,Next,,-1

@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,레굴루스는 사자자리 알파성이다.,
+0,,,레굴루스가 속해있는 별자리는 어디일까?,
+0,*,Select,독수리자리|사자자리|큰곰자리,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

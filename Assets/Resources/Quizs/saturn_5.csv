@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,티타니아는 천왕성의 위성이다.,
+0,,,토성에는 매우 많은 위성이 있다. 다음중 토성의 위성이 아닌것은 무엇일까?,
+0,*,Select,타이탄|엔셀라두스|티타니아,2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,아케르나르는 에리다누스자리의 알파성이다.,
+0,,,아케르나르가 속한 별자리는 무엇일까?,
+0,*,Select,에리다누스자리|오리온자리|물병자리,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

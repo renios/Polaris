@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,태양계에서 목성과 토성은 대부분이 가스로 이루어진 가스 행성이다.,
+0,,,토성은 암석형 행성과 가스형 행성 중 어느 쪽으로 분류될까?,
+0,*,Select,암석형 행성|가스형 행성,2|1
+1,*,Next,,-1
+2,*,Next,,-1

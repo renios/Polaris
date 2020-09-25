@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"아크투루스는 오렌지색 거성으로, 대표적인 적색 거성에 속한다.",
+0,,,아크투루스는 별의 생애주기 중 어느 형태에 속해있을까?,
+0,*,Select,적색 거성|청색 거성|중성자별|백색 왜성,1|2|2|2
+1,*,Next,,-1
+2,*,Next,,-1

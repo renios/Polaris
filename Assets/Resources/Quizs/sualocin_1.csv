@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,수알로킨은 돌고래자리 알파성이다.,
+0,,,수알로킨이 속한 별자리는 어디일까?,
+0,*,Select,고래자리|돌고래자리|물고기자리,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

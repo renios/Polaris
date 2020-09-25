@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,베가는 거문고자리 알파성이다.,
+0,,,베가가 속해있는 별자리는 어디일까?,
+0,*,Select,삼각형자리|거문고자리|물병자리,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

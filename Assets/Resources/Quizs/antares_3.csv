@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,전갈자리와 궁수자리는 은하수의 중심 방향에 해당한다.,
+0,,,전갈자리는 궁수자리와 더불어 이것의 중심 방향에 위치한다. 이것은 무엇일까?,
+0,*,Select,북극성|은하수|여름의 대삼각형,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

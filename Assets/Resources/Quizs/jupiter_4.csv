@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,태양계의 위성중 가장 큰것은 목성의 위성인 가니메데이다.,
+0,,,태양계의 위성중 가장 큰 위성은 무엇일까?,
+0,*,Select,달|가니메데|이오|타이탄,2|1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

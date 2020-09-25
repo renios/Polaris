@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,하말은 양자리의 알파성이다.,
+0,,,하말이 속한 별자리는 무엇일까?,
+0,*,Select,양자리|삼각형자리|물고기자리,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,데네볼라는 점성학에서 불행과 불운의 상징이었다.,
+0,,,데네볼라는 점성학에서 '이것'을 상징했다. 이것은 무엇일까?,
+0,*,Select,"불행, 불운|인연|정해진 운명",1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

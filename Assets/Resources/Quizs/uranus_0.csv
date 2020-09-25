@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,칼리스토는 목성의 위성이다.,
+0,,,다음 중 천왕성의 위성이 아닌 것은 무엇일까?,
+0,*,Select,아리엘|미란다|움브리엘|칼리스토,2|2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

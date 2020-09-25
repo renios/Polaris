@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,수알로킨(Sualocin)이라는 이름은 천문학자의 조수 니콜로가 자신의 라틴어식 이름 '니콜라우스(Nicolaus)'를 거꾸로 하여 붙인 것이다.,
+0,,,수알로킨이라는 이름은 어디에서 유래했을까?,
+0,*,Select,사람의 이름|고대 이집트 신화|천문학자들의 투표,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

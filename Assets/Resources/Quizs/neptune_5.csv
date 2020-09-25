@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,가니메데는 목성의 위성이다.,
+0,,,다음 중 해왕성의 위성이 아닌 것은 무엇일까?,
+0,*,Select,가니메데|트리톤|네레이드,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

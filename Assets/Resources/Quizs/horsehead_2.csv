@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,베텔게우스와 리겔은 각각 오리온자리의 알파성과 베타성이다. 시리우스는 큰개자리 알파성이다.,
+0,,,다음 중 오리온자리에 속하지 않은 별은 무엇일까?,
+0,*,Select,베텔기우스|리겔|시리우스,2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

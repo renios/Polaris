@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,견우성은 독수리자리의 알타이르이며 베가는 직녀성에 해당한다.,
+0,,,베가는 '견우와 직녀' 설화에 등장하는 별이다. 견우성과 직녀성 중 어떤 별일까?,
+0,*,Select,견우성|직녀성,2|1
+1,*,Next,,-1
+2,*,Next,,-1

@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,장미성운은 외뿔소자리에 속해있다.,
+0,,,장미 성운이 속한 별자리는 무엇일까?,
+0,*,Select,외뿔소자리|오리온자리|쌍둥이자리,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

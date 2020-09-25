@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"화성은 포보스와 데이모스, 두 개의 위성을 가지고있다.",
+0,,,다음 중 화성의 위성이 아닌것은?,
+0,*,Select,엔셀라두스|포보스|데이모스,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

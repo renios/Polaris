@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"수알로킨은 근대에 와서 등재된 별이며, 팔레르모 별 목록에 처음 등장한다.",
+0,,,수알로킨이 처음 등장하는 별 목록은 무엇일까?,
+0,*,Select,팔레르모 별 목록|히파르코스 목록|헨리 드레이퍼 목록,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

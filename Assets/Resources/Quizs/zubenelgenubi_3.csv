@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,천칭자리는 한 때 전갈자리의 집게발이었다.,
+0,,,천칭자리는 과거에는 전갈자리의 일부에 속해있었다. 이때 천칭자리의 위치는 전갈의 어디쯤이었을까?,
+0,*,Select,집게발|꼬리|몸통,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

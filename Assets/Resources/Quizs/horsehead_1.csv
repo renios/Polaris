@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"말머리성운은 뒤쪽의 발광성운을 가리는 어두운 형상으로, 이러한 성운을 암흑 성운이라 부른다.",
+0,,,말머리성운은 어떤 종류의 성운으로 분류될까?,
+0,*,Select,암흑성운|반사성운|발광성운,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

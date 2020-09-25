@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"레굴루스는 사자자리 알파성으로, 사자자리에서 가장 밝은 별이다.",
+0,,,사자자리에서 가장 밝은 별은 무엇일까?,
+0,*,Select,레굴루스|데네볼라|코르트|알테르프,1|2|2|2
+1,*,Next,,-1
+2,*,Next,,-1

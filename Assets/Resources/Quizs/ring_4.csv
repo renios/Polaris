@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,고리성운의 중심부에서 백색 왜성을 관측할 수 있다.,
+0,,,고리성운의 중심부에 있는 별은 어떤 상태일까?,
+0,*,Select,블랙홀|백색 왜성|갈색 왜성,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

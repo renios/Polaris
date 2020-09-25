@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,스피카는 처녀자리 알파성이다.,
+0,,,스피카가 속해있는 별자리는 어디일까?,
+0,*,Select,백조자리|천칭자리|처녀자리,2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

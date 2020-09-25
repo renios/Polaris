@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"오베론은 천왕성의 위성이고, 포보스는 화성의 위성이다.",
+0,,,다음 중 명왕성의 위성은 무엇일까?,
+0,*,Select,오베론|카론|포보스,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

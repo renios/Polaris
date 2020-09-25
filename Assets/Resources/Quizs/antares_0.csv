@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,안타레스는 전갈자리의 알파성이다.,
+0,,,안타레스가 속한 별자리는 어디일까?,
+0,*,Select,사자자리|돌고래자리|전갈자리,2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

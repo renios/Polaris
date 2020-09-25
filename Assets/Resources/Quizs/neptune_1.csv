@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"해왕성은 목성, 토성, 천왕성과 함께 가스형 행성으로 분류된다.",
+0,,,해왕성은 다음 중 어떤 그룹에 속할까?,
+0,*,Select,암석형 행성|가스형 행성,2|1
+1,*,Next,,-1
+2,*,Next,,-1

@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,해왕성의 영문명 '넵튠(Neptune)'은 그리스 신화에 등장하는 바다의 신 포세이돈의 로마식 표기이다.,
+0,,,해왕성이라는 이름은 어디에서 유래했을까?,
+0,*,Select,제우스|포세이돈|하데스,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

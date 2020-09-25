@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,아크투루스는 목동자리 알파성이다.,
+0,,,아크투루스가 속한 별자리는 어디일까?,
+0,*,Select,목동자리|처녀자리|사자자리,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,글리제는 시계자리에 속한 별이다.,
+0,,,글리제가 속한 별자리는 무엇일까?,
+0,*,Select,삼각형자리|물병자리|시계자리,2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

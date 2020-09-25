@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,크라즈는 베타성이라는 이름에서 알 수 있듯이 까마귀자리에서 두 번째로 밝다.,
+0,,,크라즈는 까마귀자리에서 첫번째로 밝은 별일까?,
+0,*,Select,O|X,2|1
+1,*,Next,,-1
+2,*,Next,,-1

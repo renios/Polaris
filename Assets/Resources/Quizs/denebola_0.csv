@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,데네볼라는 사자자리 베타성이다.,
+0,,,데네볼라가 속해있는 별자리는 어디일까?,
+0,*,Select,사자자리|작은사자자리|살쾡이자리,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

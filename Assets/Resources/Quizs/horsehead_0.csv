@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,말머리성운은 오리온자리 제타성 바로 아래 위치한 암흑성운이다.,
+0,,,말머리성운이 속한 별자리는 무엇일까?,
+0,*,Select,쌍둥이자리|오리온자리|페르세우스자리,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

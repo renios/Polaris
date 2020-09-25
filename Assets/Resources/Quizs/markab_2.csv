@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,마르카브는 아랍어로 '말의 안장' 이라는 의미이다.,
+0,,,마르카브라는 명칭은 무엇을 의미할까?,
+0,*,Select,말의 꼬리|말의 발굽|말의 인장,2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

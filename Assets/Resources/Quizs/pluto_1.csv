@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,샛별은 금성의 다른 이름이다.,
+0,,,다음 중 가리키는 것이 다른 하나는 무엇일까?,
+0,*,Select,명왕성|왜소행성134340|샛별,2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

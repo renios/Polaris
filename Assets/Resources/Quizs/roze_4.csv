@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"HII 영역은 전리수소영역 이라고도 불린다. 이온화된 수소 원자들이 주로 분포하고 있기 때문에 수소 원자의 원소기호인 H가 붙었다.",
+0,,,장미 성운을 이르는 말 중 'HII 영역' 이라는 명칭이 있다. 이때 H는 무엇을 의미할까?,
+0,*,Select,수소|헬륨|산소,2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

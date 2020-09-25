@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,사달멜리크는 물병자리 알파성이다.,
+0,,,사달멜리크가 속한 별자리는 무엇일까?,
+0,*,Select,물병자리|물고기자리|에리다누스자리,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

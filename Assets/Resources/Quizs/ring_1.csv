@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,고리성운은 거문고자리의 행성상성운이다.,
+0,,,고리성운이 속해있는 별자리는 어디일까?,
+0,*,Select,거문고자리|물뱀자리|전갈자리,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"화성은 수성, 금성, 지구와 함께 암석형 행성으로 분류된다.",
+0,,,화성은 다음 중 어떤 그룹에 속할까?,
+0,*,Select,암석형 행성|가스형 행성,1|2
+1,*,Next,,-1
+2,*,Next,,-1

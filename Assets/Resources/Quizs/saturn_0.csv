@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,토성은 태양계의 6번째 행성이다.,
+0,,,토성은 태양계의 몇번째 행성일까?,
+0,*,Select,4|5|6,2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

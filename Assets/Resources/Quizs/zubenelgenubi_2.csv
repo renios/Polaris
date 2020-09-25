@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,천칭자리에는 1등급의 별이 없다.,
+0,,,천칭자리에 대한 설명으로 옳은 것은 다음 중 무엇일까?,
+0,*,Select,밝은 별이 많다|대부분 어두운 별이다,2|1
+1,*,Next,,-1
+2,*,Next,,-1

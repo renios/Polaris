@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,토성은 태양계에서 가장 큰 고리를 자기고 있다.,
+0,,,토성은 태양계 행성 중 가장 큰 이것을 가지고 있다. 이것은 무엇일까?,
+0,*,Select,고리|반지름|온도차,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

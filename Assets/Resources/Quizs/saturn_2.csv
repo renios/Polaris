@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"토성의 평균 밀도는 약 0.7g/cm3 로, 밀도가 1인 물보다 작다.",
+0,,,토성은 태양계 행성 중 가장 이것이 작은 행성이다. 이것은 무엇일까?,
+0,*,Select,밀도|부피|평균온도,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

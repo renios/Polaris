@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"해왕성은 천왕성보다 더 멀리 떨어져있지만, 천왕성의 대기 온도가 더 낮다.",
+0,,,태양계의 행성 중 대기 온도가 가장 낮은 행성은 무엇일까?,
+0,*,Select,토성|천왕성|해왕성,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

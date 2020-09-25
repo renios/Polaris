@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"베가는 거문고자리 알파성으로, 거문고자리에서 가장 밝은 별이다.",
+0,,,베가는 거문고자리에서 가장 밝은 별일까?,
+0,*,Select,O|X,1|2
+1,*,Next,,-1
+2,*,Next,,-1

@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,명왕성은 암석과 얼음으로 이루어져있다.,
+0,,,명왕성을 이루는 주 성분은 무엇일까?,
+0,*,Select,수소와 헬륨|암석과 얼음|귀여움,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

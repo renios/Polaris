@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,안타레스는 전갈자리의 중심부에 위치해 전갈의 심장으로 불리기도 한다.,
+0,,,안타레스는 전갈자리에서 무엇에 비유될까?,
+0,*,Select,전갈의 꼬리끝|전갈의 심장|전갈의 눈,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,크라즈는 까마귀자리 베타성이다.,
+0,,,크라즈가 속해있는 별자리는 어디일까?,
+0,*,Select,컵자리|까마귀자리|바다뱀자리,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

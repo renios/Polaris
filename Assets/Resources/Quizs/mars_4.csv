@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"보이저 1호는 목성, 토성을 지나쳤다. 화성을 관측하거나 화성에 착륙한 적은 없다.",
+0,,,다음 중 화성을 지나가지 않은 탐사선은 무엇일까?,
+0,*,Select,매리너 9호|보이저 1호|바이킹 호,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

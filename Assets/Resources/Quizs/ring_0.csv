@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"고리성운의 다른 이름으로는 메시에 57, NGC 6720이 있다.",
+0,,,고리성운의 다른 이름이 아닌 것은 무엇일까?,
+0,*,Select,메시에 57|NGC 6720|호수의 반지,2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,알레샤는 두 물고기를 잇는 끈의 매듭 부분에 위치한다.,
+0,,,알레샤는 물고기자리의 어느 부분에 해당할까?,
+0,*,Select,물고기의 눈|물고기의 꼬리|물고기들을 잇는 매듭,2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"'품 알 사마카'는 서쪽 물고기의 앞에 있다는 뜻으로, 물고기자리 베타성을 의미한다.",
+0,,,다음 중 알레샤를 부르는 다른 이름은 무엇일까?,
+0,*,Select,M74|물고기자리 알파|품 알 사마카,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

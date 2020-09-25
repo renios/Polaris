@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,고리성운의 베가의 남쪽에 있으며 거문고자리 베타와 감마의 사이에 있다.,
+0,,,고리성운은 여름철 대삼각형의 이 별 근처에서 찾을 수 있다. 이 별은 무엇일까?,
+0,*,Select,베가|데네브|알타이르,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

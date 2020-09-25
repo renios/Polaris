@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,바다뱀자리는 현대의 88개 별자리들중 가장 크다.,
+0,,,"현대에 분류한 88개의 별자리 중, 가장 큰 별자리는 무엇일까?",
+0,*,Select,고래자리|에리다누스자리|바다뱀자리,2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

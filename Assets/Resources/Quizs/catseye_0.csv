@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,고양이 눈 성운은 용자리에 속해있다.,
+0,,,고양이 눈 성운이 속해있는 별자리는 어디일까?,
+0,*,Select,용자리|기린자리|뱀주인자리,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

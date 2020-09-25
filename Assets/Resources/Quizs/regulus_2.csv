@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,레굴루스는 라틴어로 '왕자' 또는 '작은 왕'을 의미한다.,
+0,,,레굴루스'라는 이름은 라틴어에서 유래했다. 원래 의미는 무엇일까?,
+0,*,Select,"용기|보물, 재보|왕자, 작은 왕",2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

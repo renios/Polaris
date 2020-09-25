@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,알레샤는 물고기자리의 알파성이다.,
+0,,,알레샤가 속한 별자리는 무엇일까?,
+0,*,Select,카시오페이아자리|기린자리|물고기자리,2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

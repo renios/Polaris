@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,금성 대기는 두꺼운 이산화탄소로 이루어져있다. 이때문에 온실효과가 극심해져 금성 표면의 온도는 매우 높다.,
+0,,,금성의 두꺼운 대기의 주성분은 무엇일까?,
+0,*,Select,이산화탄소|질소|산소,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

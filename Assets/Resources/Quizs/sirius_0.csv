@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,시리우스는 큰개자리의 알파성이다.,
+0,,,시리우스가 속한 별자리는 무엇일까?,
+0,*,Select,큰개자리|작은개자리|사냥개자리,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

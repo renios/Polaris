@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,천왕성의 이름은 그리스 신화에서 크로노스의 아버지이자 제우스의 할아버지인 우라노스(Uranus) 신의 이름에서 따온 것이다.,
+0,,,천왕성의 영문명은 어디서 유래했을까?,
+0,*,Select,크로노스|우라노스|포세이돈,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

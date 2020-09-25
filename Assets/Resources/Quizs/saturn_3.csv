@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,목성(유피테르) 보다 밖에 있는 별이기 때문에 유피테르의 아버지인 천공신 크로노스(사투르누스)의 이름을 따왔다.,
+0,,,토성의 영문명 'Saturn'은 어디서 온 것일까?,
+0,*,Select,제우스|크로노스|우라누스,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,목성 표면에 보이는 암적색의 타원형 무늬는 대적점이다.,
+0,,,목성 표면에 보이는 암적색의 타원형 무늬는 굉장히 유명하다. 이 무늬의 이름은 무엇일까?,
+0,*,Select,플레어|대적점|카이퍼 벨트,2|1|2
+1,*,Next,,-1
+2,*,Next,,-1

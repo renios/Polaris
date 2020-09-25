@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,고대 이집트인들은 안타레스를 전갈의 여신 세르케트의 상징으로 여겼다.,
+0,,,고대 이집트에서 안타레스가 상징하던 신은 무엇일까?,
+0,*,Select,호루스|오시리스|세르케트,2|2|1
+1,*,Next,,-1
+2,*,Next,,-1

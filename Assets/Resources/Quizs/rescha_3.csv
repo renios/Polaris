@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,"알레샤(Alrecsha)는 아랍어로 우물 끈, 또는 줄을 일컫는 '알리사'에서 유래했다.",
+0,,,알레샤라는 이름의 의미는 무엇일까?,
+0,*,Select,끈|물고기|지느러미,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1

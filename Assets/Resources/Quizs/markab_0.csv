@@ -1,0 +1,6 @@
+phase,talker,behaviour,dialogue,nextPhases
+0,*,Solution,마르카브는 페가수스자리의 알파성이다.,
+0,,,마르카브가 속한 별자리는 무엇일까?,
+0,*,Select,페가수스자리|쌍둥이자리|염소자리,1|2|2
+1,*,Next,,-1
+2,*,Next,,-1
