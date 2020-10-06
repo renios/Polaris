@@ -1,6 +1,7 @@
 ﻿public class Values
 {
-    public int MaxFavority { get { return accumFavTable.Length; } }
+    public int MaxFavorityLevel { get { return accumFavTable.Length; } }
+    public int MaxFavorityValue { get { return accumFavTable[MaxFavorityLevel - 1]; } }
 
     public int[] accumFavTable;
 

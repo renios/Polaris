@@ -87,12 +87,12 @@ public class GameManager : MonoBehaviour
     {
         var favority = Variables.Characters[charNumber].Favority;
         int cnt = 0;
-        for (; cnt < Variables.values.MaxFavority; cnt++)
+        for (; cnt < Variables.values.MaxFavorityLevel; cnt++)
         {
             if (favority < Variables.FavorityThreshold[cnt])
                 break;
         }
-        if(cnt >= Variables.values.MaxFavority)
+        if(cnt >= Variables.values.MaxFavorityLevel)
         {
             progress = 0;
             required = -1;
@@ -109,12 +109,12 @@ public class GameManager : MonoBehaviour
     {
         var favority = Variables.Characters[charNumber].Favority;
         int cnt = 0;
-        for (; cnt < Variables.values.MaxFavority; cnt++)
+        for (; cnt < Variables.values.MaxFavorityLevel; cnt++)
         {
             if (favority + deltaFav < Variables.FavorityThreshold[cnt])
                 break;
         }
-        if (cnt >= Variables.values.MaxFavority)
+        if (cnt >= Variables.values.MaxFavorityLevel)
         {
             progress = favority + deltaFav - Variables.FavorityThreshold[cnt - 1];
             required = -1;
@@ -125,6 +125,16 @@ public class GameManager : MonoBehaviour
             required = Variables.FavorityThreshold[cnt] - (cnt > 0 ? Variables.FavorityThreshold[cnt - 1] : 0);
         }
         return cnt + 1;
+    }
+
+    public int IncreaseFavority(int charNumber, int increment)
+    {
+        var actual = Variables.Characters[charNumber].Favority + increment > Variables.values.MaxFavorityValue
+            ? Variables.values.MaxFavorityValue - Variables.Characters[charNumber].Favority
+            : increment;
+
+        Variables.Characters[charNumber].Favority += actual;
+        return actual;
     }
     
     #endregion

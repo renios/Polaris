@@ -83,7 +83,7 @@ namespace Observe
 						status.Save();
 						Variables.Characters[charKey].Observed = true;
 						Variables.Characters[charKey].Favority++;
-						Variables.Characters[charKey].StoryUnlocked = 1;
+						Variables.Characters[charKey].StoryUnlocked = 0;
 						SaveData.Now.lastObservedChar = 1;
 						SaveData.Save();
 
@@ -109,15 +109,15 @@ namespace Observe
 				touchExists = false;
 				favIncreasePanel.SetActive(false);
 				
-				// (2020. 09. 02.) 증가한 친밀도와 이전 스토리 해금 정도를 비교한 후, 친밀도의 값이 더 높으면 친밀도 값까지 스토리 해금을 끌어올립니다.
+				// (2020. 09. 02.) 증가한 친밀도와 이전 스토리 해금 정도를 비교한 후,
 				// 그 뒤, 스토리 실행 여부를 묻는 팝업을 띄워 줍니다. 이 때, 해금된 스토리 중 가장 낮은 단계의 스토리로 이동합니다.
 				// ...한편 위 조건을 만족하지 않았다면, 페이드아웃 연출 실행 후 다음 루프로 넘어갑니다.
 				float p1;
 				int p2;
 				var prevStoryLev = Variables.Characters[charKey].StoryUnlocked;
 				var nextFavLev = GameManager.Instance.CheckAfterFavority(charKey, status.charFavData[charKey], out p1, out p2);
-				if (nextFavLev > prevStoryLev)
-					yield return ViewDialogAlert(charKey, prevStoryLev);
+				if (nextFavLev > prevStoryLev + 1 && prevStoryLev < 4)
+					yield return ViewDialogAlert(charKey, prevStoryLev + 1);
 				else
 					yield return FadeoutWithoutDialog();
 

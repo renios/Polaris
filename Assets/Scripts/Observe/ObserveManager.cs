@@ -724,16 +724,18 @@ namespace Observe
             yield return new WaitForSeconds(1.25f);
             SkyUnlockEff2.SetActive(false);
             PolarisSprite.gameObject.SetActive(true);
-            PolarisSprite.DOFade(1, 1.25f);
-            yield return new WaitForSeconds(1.25f);
+            PolarisSprite.DOFade(1, 2.5f).SetEase(Ease.Linear);
+            yield return new WaitForSeconds(2.5f);
 
             waitForPolarisInput = true;
             yield return new WaitWhile(() => waitForPolarisInput);
             
             // 폴라리스의 친밀도를 1 올린다.
             int prog, req;
-            var pLev = GameManager.Instance.CheckFavority(1, out prog, out req);
+            GameManager.Instance.CheckFavority(1, out prog, out req);
             Variables.Characters[1].Favority += req;
+            Variables.Characters[1].StoryUnlocked++;
+            GameManager.Instance.SaveGame();
             
             // 폴라리스의 대화를 본다 (완전한 씬 전환). 본 뒤에는 이 씬으로 돌아온다.
             DialogueManager.PrepareCharacterDialog(1, index);

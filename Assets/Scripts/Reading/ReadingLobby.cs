@@ -23,7 +23,7 @@ namespace Reading
 		// Use this for initialization
 		void Start()
 		{
-			picker.LoadCharacter(true);
+			picker.LoadCharacter(!SaveData.Now.tutorialFinished);
 			diary.ConstructDiary();
 
 			LoadSelectedCharacter(new List<int>{SaveData.Now.lastObservedChar});

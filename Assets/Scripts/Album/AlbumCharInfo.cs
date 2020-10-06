@@ -67,7 +67,7 @@ namespace Album
             int curProgress, nextRequired;
             var favorLevel = GameManager.Instance.CheckFavority(character.CharNumber, out curProgress, out nextRequired);
             FavorityLevel.text = favorLevel.ToString();
-            if (favorLevel > Variables.values.MaxFavority)
+            if (favorLevel > Variables.values.MaxFavorityLevel)
             {
                 RequiredFavority.text = "FULL";
                 FavorityGage.maxValue = 1;
@@ -106,20 +106,25 @@ namespace Album
 
         public void UpdateStoryList(int charIndex)
         {
+            int curProgress, nextRequired;
+            var favorLevel = GameManager.Instance.CheckFavority(charIndex, out curProgress, out nextRequired);
             var storyLevel = Variables.Characters[charIndex].StoryUnlocked;
             for (int i = 0; i < 6; i++)
             {
-                if (i < storyLevel)
+                // 해금된 스토리 레벨일 경우 내용을 그대로 보여줍니다.
+                if (i <= storyLevel)
                 {
                     StoryElement[i].SetActive(true);
                     StoryElement[i].GetComponent<AlbumStoryElement>().Show(charIndex, i);
                 }
-                else if (i == storyLevel && charIndex != 1) // 폴라리스의 스토리는 기억의 조각으로도 살 수 없어요.
+                // 스토리 레벨보다 캐릭터 레벨이 높을 때, 최초 한 단락만 구매 창을 띄웁니다.
+                else if (charIndex != 1 && i == storyLevel + 1 && storyLevel + 1 < favorLevel) // 폴라리스의 스토리는 기억의 조각으로도 살 수 없어요.
                 {
                     StoryElement[i].SetActive(true);
                     StoryElement[i].GetComponent<AlbumStoryElement>().SetBuyable(charIndex, i);
                 }
-                else if (i <= Variables.values.MaxFavority)
+                // 그렇지 않으면 잠급니다.
+                else if (i <= Variables.values.MaxFavorityLevel)
                 {
                     StoryElement[i].GetComponent<AlbumStoryElement>().Mask.SetActive(true);
                     StoryElement[i].GetComponent<AlbumStoryElement>().InfoPanel.SetActive(false);
