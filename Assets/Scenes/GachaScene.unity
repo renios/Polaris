@@ -7075,9 +7075,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 648873190}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 648873191}
+        m_MethodName: Close
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -18351,7 +18351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 4
   price: 100000
-  openRule: "\uAC1C\uBC29 \uC870\uAC74:\n\uAC00\uC744 \uD558\uB298\uC5D0\uC11C\n6\uBA85
+  openRule: "\uAC1C\uBC29 \uC870\uAC74:\n\uAC00\uC744 \uD558\uB298\uC5D0\uC11C\n4\uBA85
     \uC774\uC0C1 \uB9CC\uB098\uAE30"
   priceLabel: {fileID: 1619526481}
   openRuleLabel: {fileID: 1391633581}

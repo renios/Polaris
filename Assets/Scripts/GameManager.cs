@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    const int MAX_STARLIGHT = 9999999;
-    const int MAX_MEMORIAL_PIECE = 99;
+    const int MAX_STARLIGHT = 10000000;
+    const int MAX_MEMORIAL_PIECE = 100;
 
     private void Awake()
     {
@@ -198,4 +198,19 @@ public class GameManager : MonoBehaviour
     }
     
     #endregion
+
+    public bool CheckGameEnd()
+    {
+        var result = true;
+        foreach (var character in Variables.Characters.Values)
+        {
+            if (character.CharNumber != 1 && character.Favority < Variables.values.MaxFavorityValue)
+            {
+                result = false;
+                break;
+            }
+        }
+
+        return result;
+    }
 }

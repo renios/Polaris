@@ -646,7 +646,7 @@ namespace Observe
                 () => observedCharCount[0] >= 3,    // 봄 지역 해금:      북극 지역의 캐릭터를 3명 이상 관측했는가 ( == 전부 만났는가 )
                 () => observedCharCount[1] >= 6,    // 여름 지역 해금:    봄 지역의 캐릭터를 6명 이상 관측했는가
                 () => observedCharCount[2] >= 5,    // 가을 지역 해금:    여름 지역의 캐릭터를 5명 이상 관측했는가
-                () => observedCharCount[3] >= 6     // 겨울 지역 해금:    가을 지역의 캐릭터를 6명 이상 관측했는가
+                () => observedCharCount[3] >= 4     // 겨울 지역 해금:    가을 지역의 캐릭터를 4명 이상 관측했는가
             };
             for(int i = 0; i < SkyAreaBtns.Length; i++)
             {
@@ -733,7 +733,7 @@ namespace Observe
             // 폴라리스의 친밀도를 1 올린다.
             int prog, req;
             GameManager.Instance.CheckFavority(1, out prog, out req);
-            Variables.Characters[1].Favority += req;
+            GameManager.Instance.IncreaseFavority(1, req - prog);
             Variables.Characters[1].StoryUnlocked++;
             GameManager.Instance.SaveGame();
             

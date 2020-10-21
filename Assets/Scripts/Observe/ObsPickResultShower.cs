@@ -31,5 +31,24 @@ namespace Observe
 			LayoutRebuilder.MarkLayoutForRebuild(totalParent);
 			LayoutRebuilder.ForceRebuildLayoutImmediate(totalParent);
 		}
+
+		public void Close()
+        {
+			bool allObserved = true;
+			if(!SaveData.Now.endingVisited)
+            {
+				foreach (var chr in Variables.Characters.Values)
+				{
+					allObserved = chr.Observed;
+					if (!allObserved)
+						break;
+				}
+			}
+
+			if (allObserved && !SaveData.Now.endingVisited)
+				SceneChanger.ChangeScene("EndgameScene", "GachaFadeIn");
+			else
+				gameObject.SetActive(false);
+        }
 	}
 }

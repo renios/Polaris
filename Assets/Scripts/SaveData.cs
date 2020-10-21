@@ -28,6 +28,8 @@ public class SaveData
     public int lastReadingRank;
     public bool hasReadingResult;
 
+    public bool endingVisited;
+
     public SaveData()
     {
         charData = new Dictionary<int, CharacterData>();
@@ -45,6 +47,7 @@ public class SaveData
         tutorialFinished = false;
         tutorialStep = 1;
         observeSkyLevel = -1;
+        endingVisited = false;
     }
 
     public static void Load()

@@ -101,8 +101,9 @@ namespace Observe
 						continue;
 					}
 				}
-				
+
 				// 친밀도 증가 연출을 실행합니다.
+				favIncreasedLabel.SetActive(false);
 				favIncreasePanel.SetActive(true);
 				yield return FavIncreaseAnim(charKey, status.charFavData[charKey]);
 				yield return new WaitUntil(() => touchExists);
@@ -116,7 +117,7 @@ namespace Observe
 				int p2;
 				var prevStoryLev = Variables.Characters[charKey].StoryUnlocked;
 				var nextFavLev = GameManager.Instance.CheckAfterFavority(charKey, status.charFavData[charKey], out p1, out p2);
-				if (nextFavLev > prevStoryLev + 1 && prevStoryLev < 4)
+				if (nextFavLev > prevStoryLev + 1 && prevStoryLev < 3)
 					yield return ViewDialogAlert(charKey, prevStoryLev + 1);
 				else
 					yield return FadeoutWithoutDialog();
@@ -307,7 +308,21 @@ namespace Observe
 
 		public void ChangeScene(string sceneName)
 		{
-			StartCoroutine(LoadNextScene(sceneName));
+			bool allObserved = true;
+			if(!SaveData.Now.endingVisited)
+            {
+				foreach (var chr in Variables.Characters.Values)
+				{
+					allObserved = chr.Observed;
+					if (!allObserved)
+						break;
+				}
+			}
+
+			if (allObserved && !SaveData.Now.endingVisited)
+				StartCoroutine(LoadNextScene("EndgameScene"));
+			else
+				StartCoroutine(LoadNextScene(sceneName));
 		}
 	}
 }
