@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    const int MAX_STARLIGHT = 9999999;
-    const int MAX_MEMORIAL_PIECE = 99;
+    const int MAX_STARLIGHT = 10000000;
+    const int MAX_MEMORIAL_PIECE = 100;
 
     private void Awake()
     {
@@ -87,12 +87,12 @@ public class GameManager : MonoBehaviour
     {
         var favority = Variables.Characters[charNumber].Favority;
         int cnt = 0;
-        for (; cnt < Variables.values.MaxFavority; cnt++)
+        for (; cnt < Variables.values.MaxFavorityLevel; cnt++)
         {
             if (favority < Variables.FavorityThreshold[cnt])
                 break;
         }
-        if(cnt >= Variables.values.MaxFavority)
+        if(cnt >= Variables.values.MaxFavorityLevel)
         {
             progress = 0;
             required = -1;
@@ -109,12 +109,12 @@ public class GameManager : MonoBehaviour
     {
         var favority = Variables.Characters[charNumber].Favority;
         int cnt = 0;
-        for (; cnt < Variables.values.MaxFavority; cnt++)
+        for (; cnt < Variables.values.MaxFavorityLevel; cnt++)
         {
             if (favority + deltaFav < Variables.FavorityThreshold[cnt])
                 break;
         }
-        if (cnt >= Variables.values.MaxFavority)
+        if (cnt >= Variables.values.MaxFavorityLevel)
         {
             progress = favority + deltaFav - Variables.FavorityThreshold[cnt - 1];
             required = -1;
@@ -125,6 +125,16 @@ public class GameManager : MonoBehaviour
             required = Variables.FavorityThreshold[cnt] - (cnt > 0 ? Variables.FavorityThreshold[cnt - 1] : 0);
         }
         return cnt + 1;
+    }
+
+    public int IncreaseFavority(int charNumber, int increment)
+    {
+        var actual = Variables.Characters[charNumber].Favority + increment > Variables.values.MaxFavorityValue
+            ? Variables.values.MaxFavorityValue - Variables.Characters[charNumber].Favority
+            : increment;
+
+        Variables.Characters[charNumber].Favority += actual;
+        return actual;
     }
     
     #endregion
@@ -188,4 +198,19 @@ public class GameManager : MonoBehaviour
     }
     
     #endregion
+
+    public bool CheckGameEnd()
+    {
+        var result = true;
+        foreach (var character in Variables.Characters.Values)
+        {
+            if (character.CharNumber != 1 && character.Favority < Variables.values.MaxFavorityValue)
+            {
+                result = false;
+                break;
+            }
+        }
+
+        return result;
+    }
 }

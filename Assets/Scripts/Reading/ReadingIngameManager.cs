@@ -155,7 +155,7 @@ namespace Reading
 				rank = 1;
 			
 			SaveData.Now.lastReadingChar = Variables.QuizSelectedCharacter;
-			SaveData.Now.lastReadingRank = rank;
+			SaveData.Now.lastReadingRank = rightCount;
 			SaveData.Now.hasReadingResult = true;
 			GameManager.Instance.SaveGame();
 			

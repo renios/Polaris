@@ -35,7 +35,7 @@ namespace Album
             int curProgress, nextRequired;
             var favorLevel = GameManager.Instance.CheckFavority(data.CharNumber, out curProgress, out nextRequired);
             FavorLevel.text = favorLevel.ToString();
-            if (favorLevel > Variables.values.MaxFavority)
+            if (favorLevel > Variables.values.MaxFavorityLevel)
             {
                 FavorityLeft.text = "FULL";
                 FavorityGage.maxValue = 1;

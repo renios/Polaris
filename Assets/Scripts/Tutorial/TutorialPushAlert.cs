@@ -9,6 +9,7 @@ namespace Tutorial
     [RequireComponent(typeof(CanvasGroup))]
     public class TutorialPushAlert : MonoBehaviour
     {
+        public float fadeinTime;
         public float displayTime;
         public float fadeoutTime;
 
@@ -18,9 +19,11 @@ namespace Tutorial
         {
             if (internalClock <= displayTime + fadeoutTime)
             {
-                if (internalClock <= displayTime)
+                if (internalClock <= fadeinTime)
+                    GetComponent<CanvasGroup>().alpha = Mathf.InverseLerp(0, fadeinTime, internalClock);
+                else if (fadeinTime < internalClock && internalClock <= displayTime)
                     GetComponent<CanvasGroup>().alpha = 1;
-                else
+                else if (internalClock > displayTime)
                     GetComponent<CanvasGroup>().alpha = Mathf.InverseLerp(displayTime + fadeoutTime, displayTime, internalClock);
                 internalClock += Time.deltaTime;
                 

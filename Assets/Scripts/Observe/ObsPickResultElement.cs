@@ -18,7 +18,7 @@ namespace Observe
 		{
 			var charData = Variables.Characters[charKey];
 
-			charData.Favority += deltaFav;
+			var actualDelta = GameManager.Instance.IncreaseFavority(charKey, deltaFav);
 			if (!charData.Observed)
 			{
 				charData.Observed = true;
@@ -36,12 +36,12 @@ namespace Observe
 			favText.text = required < 0 ? "FULL" : progress.ToString() + "/" + required.ToString();
 			favBar.maxValue = required < 0 ? 1 : required;
 			favBar.value = required < 0 ? 1 : progress;
-			favIncrement.text = "(+" +  deltaFav.ToString() + ")";
-			if (progress - deltaFav < 0)
+			favIncrement.text = "(+" +  actualDelta.ToString() + ")";
+			if (progress - actualDelta < 0)
 				favIncreased.SetActive(true);
 
-			if (level > charData.StoryUnlocked)
-				charData.StoryUnlocked = level;
+			if (level < 5 || charData.StoryUnlocked < 4)
+				charData.StoryUnlocked = level < 5 ? level - 1 : 3;
 		}
 	}
 }

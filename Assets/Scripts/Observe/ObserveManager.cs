@@ -646,7 +646,7 @@ namespace Observe
                 () => observedCharCount[0] >= 3,    // 봄 지역 해금:      북극 지역의 캐릭터를 3명 이상 관측했는가 ( == 전부 만났는가 )
                 () => observedCharCount[1] >= 6,    // 여름 지역 해금:    봄 지역의 캐릭터를 6명 이상 관측했는가
                 () => observedCharCount[2] >= 5,    // 가을 지역 해금:    여름 지역의 캐릭터를 5명 이상 관측했는가
-                () => observedCharCount[3] >= 6     // 겨울 지역 해금:    가을 지역의 캐릭터를 6명 이상 관측했는가
+                () => observedCharCount[3] >= 4     // 겨울 지역 해금:    가을 지역의 캐릭터를 4명 이상 관측했는가
             };
             for(int i = 0; i < SkyAreaBtns.Length; i++)
             {
@@ -724,16 +724,18 @@ namespace Observe
             yield return new WaitForSeconds(1.25f);
             SkyUnlockEff2.SetActive(false);
             PolarisSprite.gameObject.SetActive(true);
-            PolarisSprite.DOFade(1, 1.25f);
-            yield return new WaitForSeconds(1.25f);
+            PolarisSprite.DOFade(1, 2.5f).SetEase(Ease.Linear);
+            yield return new WaitForSeconds(2.5f);
 
             waitForPolarisInput = true;
             yield return new WaitWhile(() => waitForPolarisInput);
             
             // 폴라리스의 친밀도를 1 올린다.
             int prog, req;
-            var pLev = GameManager.Instance.CheckFavority(1, out prog, out req);
-            Variables.Characters[1].Favority += req;
+            GameManager.Instance.CheckFavority(1, out prog, out req);
+            GameManager.Instance.IncreaseFavority(1, req - prog);
+            Variables.Characters[1].StoryUnlocked++;
+            GameManager.Instance.SaveGame();
             
             // 폴라리스의 대화를 본다 (완전한 씬 전환). 본 뒤에는 이 씬으로 돌아온다.
             DialogueManager.PrepareCharacterDialog(1, index);

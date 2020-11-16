@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GemCheat : MonoBehaviour {
+public class GemCheat : MonoBehaviour 
+{
 
     //증감량
-    public int num;
+    public int starlight;
+    public int piece;
 
-    public void CoinUp()
+    public void CheatStaright()
     {
-        Variables.Starlight += num;
+        GameManager.Instance.IncreaseMoney(MoneyType.Starlight, starlight);
         GameManager.Instance.SaveGame();
     }
 
-    public void CoinDown()
+    public void CheatPiece()
     {
-        Variables.Starlight -= num;
+        GameManager.Instance.IncreaseMoney(MoneyType.MemorialPiece, piece);
         GameManager.Instance.SaveGame();
     }
 
