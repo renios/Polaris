@@ -26,6 +26,7 @@ namespace Observe
 				SaveData.Now.lastObservedChar = data.Key;
 			}
 			gameObject.SetActive(true);
+			SaveData.Now.allowPresent = true;
 			GameManager.Instance.SaveGame();
 
 			LayoutRebuilder.MarkLayoutForRebuild(totalParent);

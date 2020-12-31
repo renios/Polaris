@@ -10393,6 +10393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f7a7cf3db93044fab868cfe6306233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeinTime: 0
   displayTime: 2
   fadeoutTime: 0.5
 --- !u!225 &1525265657
@@ -12142,7 +12143,10 @@ MonoBehaviour:
   - {fileID: 440644499}
   SkyAreaEffects: []
   SkyAreaBtns: []
-  UnlockAskPanels: []
+  ObjsToDisable: []
+  SkyUnlockEff1: {fileID: 0}
+  SkyUnlockEff2: {fileID: 0}
+  PolarisSprite: {fileID: 0}
   ConstelName: {fileID: 1228487001}
   ConstelImage: {fileID: 854606186}
   CharDisplay:
@@ -12153,7 +12157,6 @@ MonoBehaviour:
   TimeConfirmPanel: {fileID: 0}
   TimeConfirmBtn: []
   TimeOkRunBtn: {fileID: 0}
-  NoMoneyPanel: {fileID: 0}
   WhileObservingPanel: {fileID: 1525265652}
   fastCompleteMoneyLabel: {fileID: 0}
   DimmerPanel: {fileID: 969071512}
@@ -13140,7 +13143,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cc3967c4dc44b7a4cb1b25f4fcc88adc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 57c02996f8968c840997632249970dc0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

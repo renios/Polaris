@@ -5,7 +5,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using LitJson;
 
-// Last edited 2020-01-18
 [System.Serializable]
 public class SaveData
 {
@@ -21,6 +20,7 @@ public class SaveData
     public bool tutorialFinished;
     public int tutorialStep;
 
+    public bool allowPresent;
     public int observeSkyLevel;
     
     public int lastObservedChar;

@@ -14,20 +14,15 @@ public class Move : MonoBehaviour
 	
 	enum State {Idle, Walk, Fly, Falling, Hold, Touched}
 	State state = State.Idle;
-	float delay;
 	Vector2 direction;
-	float originalGravity;
-	bool picked;
 	
 	byte floor;
 	bool isInGround;
-	bool isInWall;
 
 	RaycastHit2D[] hits = new RaycastHit2D[5];
 	
 	void Start()
 	{
-		picked = false;
 		// Idle 상태에서 시작.
 		StartCoroutine(Idle(true));
 	}
@@ -36,7 +31,7 @@ public class Move : MonoBehaviour
 	{
 		if (collision.collider.CompareTag("Wall"))
 		{
-			Debug.Log(gameObject.name + ": Wall Collided.");
+			//Debug.Log(gameObject.name + ": Wall Collided.");
 			direction.x *= -1;
 			
 			if (direction.x < 0) 
@@ -46,7 +41,7 @@ public class Move : MonoBehaviour
 		}
 		else if (collision.collider.CompareTag("Ceiling"))
 		{
-			Debug.Log(gameObject.name + ": Ceiling Collided.");
+			//Debug.Log(gameObject.name + ": Ceiling Collided.");
 			direction.y *= -1;
 		}
 	}
@@ -63,12 +58,12 @@ public class Move : MonoBehaviour
 	{
 		state = State.Idle;
 		GetComponent<Rigidbody2D>().gravityScale = 0;
-		Debug.Log(gameObject.name + " State: IDLE");
+		//Debug.Log(gameObject.name + " State: IDLE");
 
 		// 현재 좌표에 대한 정보를 얻어온다. 지금 몇 층에 있는가? 지금 서 있는가 아니면 떠 있는가?
 		GetCurrentPosInfo();
 		transform.position = new Vector3(transform.position.x, transform.position.y, GetZPos(transform.position.y));
-		Debug.Log(gameObject.name + " is now in floor " + floor + ", while " + (isInGround ? "" : "not ") + "on the ground.");
+		//Debug.Log(gameObject.name + " is now in floor " + floor + ", while " + (isInGround ? "" : "not ") + "on the ground.");
 		
 		// 만약 캐릭터가 (최초 스폰, 유저에 의한 이동 등으로) 떠 있거나 땅이 아닌 곳에 있다면,
 		// 층에 따라 지정된 y좌표까지 중력을 이용하여 땅으로 떨어뜨리거나 밀어낸다
@@ -89,7 +84,7 @@ public class Move : MonoBehaviour
 
 		// 2~4초 동안 대기. 중간에 입력이 있으면 빠져나온다
 		float time = Random.Range(2f, 4f);
-		Debug.Log(gameObject.name + " will wait for " + time + " seconds.");
+		//Debug.Log(gameObject.name + " will wait for " + time + " seconds.");
 		float t = 0;
 		while (t < time)
 		{
@@ -119,7 +114,7 @@ public class Move : MonoBehaviour
 	IEnumerator Fall(float originX)
 	{
 		state = State.Falling;
-		Debug.Log(gameObject.name + " State: FALLING");
+		//Debug.Log(gameObject.name + " State: FALLING");
 
 		// 터치를 막고, 층마다 지정된 지점까지 떨어뜨린다
 		allowTouch = false;
@@ -136,13 +131,13 @@ public class Move : MonoBehaviour
 
 		allowTouch = true;
 		state = State.Idle;
-		Debug.Log(gameObject.name + " State: IDLE");
+		//Debug.Log(gameObject.name + " State: IDLE");
 	}
 
 	IEnumerator Walk()
 	{
 		state = State.Walk;
-		Debug.Log(gameObject.name + " State: WALK");
+		//Debug.Log(gameObject.name + " State: WALK");
 		
 		// 애니메이션 재생
 		gameObject.layer = LayerMask.NameToLayer("GroundedCharacter");
@@ -151,7 +146,7 @@ public class Move : MonoBehaviour
 		// 3~7초 동안 걷는다. 중간에 입력이 있으면 빠져나온다.
 		var time = Random.Range(3f, 7f);
 		float t = 0;
-		Debug.Log(gameObject.name + " will walk " + time + " seconds in direction " + direction);
+		//Debug.Log(gameObject.name + " will walk " + time + " seconds in direction " + direction);
 		while (t < time)
 		{
 			if (state != State.Walk)
@@ -175,7 +170,7 @@ public class Move : MonoBehaviour
 	IEnumerator Fly()
 	{
 		state = State.Fly;
-		Debug.Log(gameObject.name + " State: FLY");
+		//Debug.Log(gameObject.name + " State: FLY");
 		
 		// 애니메이션 재생
 		gameObject.layer = LayerMask.NameToLayer("FlyingCharacter");
@@ -186,7 +181,7 @@ public class Move : MonoBehaviour
 		// 8~10초 동안 난다. 중간에 입력이 있을 경우 빠져나온다.
 		direction = new Vector2(transform.localScale.x > 0 ? 0.3f : -0.3f, 0.5f).normalized;
 		var time = Random.Range(8f, 10f);
-		Debug.Log(gameObject.name + " will fly " + time + " seconds in direction " + direction);
+		//Debug.Log(gameObject.name + " will fly " + time + " seconds in direction " + direction);
 		float t = 0;
 		while (t < time)
 		{
@@ -269,9 +264,8 @@ public class Move : MonoBehaviour
 	}
 	public void Pick() 
 	{
-		picked = true;
 		state = State.Hold;
-		Debug.Log(gameObject.name + " State: HOLD");
+		//Debug.Log(gameObject.name + " State: HOLD");
 		
 		// 애니메이션 재생
 		gameObject.layer = LayerMask.NameToLayer("FlyingCharacter");
@@ -281,7 +275,6 @@ public class Move : MonoBehaviour
 
 	public void Drop() 
 	{
-		picked = false;
 		StartCoroutine(Idle(false));
 	}
 	public void Touch()

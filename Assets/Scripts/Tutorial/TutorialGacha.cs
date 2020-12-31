@@ -28,7 +28,7 @@ namespace Tutorial
             switch(Variables.TutorialStep)
             {
                 case 2:
-                    if (Vector2.Distance(manager.Scope.transform.position, new Vector3(0.23f * 100.224f, 4.62f * 100.224f, -1)) < 15f)
+                    if (Vector2.Distance(manager.Scope.transform.position, new Vector3(-0.15f * 100.224f, 4.52f * 100.224f, -1)) < 15f)
                         ChangeState(++Variables.TutorialStep);
                     break;
                 case 3:

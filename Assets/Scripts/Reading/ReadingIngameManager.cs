@@ -23,6 +23,7 @@ namespace Reading
 			});
 
 			// ROOT : 독서로비에서 고른 캐릭터 폴더
+			DialogueManager.Instance.Displayer.ForeImage.sprite = Resources.Load<Sprite>(DialogueManager.DialogRoot + "image_dialogue");
 			var initDialog = DialogueParser.ParseFromCSV(DialogueManager.DialogRoot + "quiz_init");
 			yield return DialogueManager.Instance.Play(initDialog, r => { });
 
